@@ -41,7 +41,7 @@ miclTextField.initialize(document.querySelector('.micl-textfield-filled'));
 ```
 
 ### Demo
-A live example of the [Select componen]() is available for you to interact with.
+A live example of the [Select component](https://henkpb.github.io/micl/select.html) is available for you to interact with.
 
 ## Variants
 To display extra information for an option, add the `aria-description` attribute to the `<option>` element. In a two-line list item (`micl-list-item-two`), this displays the attribute's content as supporting text. Do not add a separate text element to the `<option>`, as this will change the text of the selected option.

@@ -33,6 +33,9 @@ Import the side sheet styles into your project:
 ### TypeScript
 No custom TypeScript is required for the core functionality of the side sheet component.
 
+### Demo
+A live example of the [Side sheet component](https://henkpb.github.io/micl/sidesheet.html) is available for you to interact with.
+
 ## Variants
 A **modal** side sheet blocks access to the rest of the page and must be dismissed explicitly by the user. This is suitable for critical tasks or information that requires a user's full attention.
 

@@ -32,6 +32,9 @@ import miclBottomSheet from 'micl/components/bottomsheet';
 miclBottomSheet.initialize(document.querySelector('.micl-bottomsheet'));
 ```
 
+### Demo
+A live example of the [Bottom sheet component](https://henkpb.github.io/micl/bottomsheet.html) is available for you to interact with.
+
 ## Variants
 A **modal** bottom sheet blocks access to the rest of the page and must be dismissed explicitly by the user. This is suitable for critical tasks or information that requires a user's full attention.
 

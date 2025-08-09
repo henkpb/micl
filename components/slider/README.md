@@ -28,6 +28,9 @@ import miclSlider from 'micl/components/slider';
 miclSlider.initialize(document.querySelector('.micl-slider-m'));
 ```
 
+### Demo
+A live example of the [Slider component](https://henkpb.github.io/micl/slider.html) is available for you to interact with.
+
 ## Variants
 Sliders come in **five different sizes**: extra small (`xs`), small (`s`), medium (`m`), large (`l`), and extra large (`xl`). To set a specific size, append the appropriate postfix to the `micl-slider` CSS class name:
 

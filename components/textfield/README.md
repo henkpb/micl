@@ -33,6 +33,9 @@ miclTextField.initialize(document.querySelector('.micl-textfield-filled'));
 document.querySelector('.micl-textfield-outlined').addEventListener('input', miclTextField.input);
 ```
 
+### Demo
+A live example of the [Text field component](https://henkpb.github.io/micl/textfield.html) is available for you to interact with.
+
 ## Variants
 The following example shows a text field with every available feature. You can include any combination of these elements. The order of elements inside the `<div>` does not change the layout.
 
