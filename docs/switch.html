@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MICL Switches</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode&display=block">
+    <link rel="stylesheet" href="../themes/citrine/theme.css" id="theme-link">
+    <link rel="stylesheet" href="../dist/micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        label {
+            color: var(--md-sys-color-on-surface);
+        }
+        .micl-card-filled .micl-card__content,
+        .micl-card-outlined.unselectedicon .micl-card__content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .switch {
+            display: flex;
+            align-items: center;
+            column-gap: 16px;
+            height: 48px;
+        }
+        .micl-card-outlined.unselectedicon .switch {
+            width: 100%;
+            justify-content: space-between;
+        }
+        .noicons input[type=checkbox].micl-switch {
+            --md-sys-switch-selected-icon: "";
+            --md-sys-switch-unselected-icon: "";
+        }
+        .selectedicon input[type=checkbox].micl-switch {
+            --md-sys-switch-unselected-icon: "";
+        }
+        .unselectedicon input[type=checkbox].micl-switch {
+            --md-sys-switch-selected-icon: "";
+        }
+    </style>
+</head>
+<body class="light">
+    <div class="headline">
+        <h1 class="md-sys-typescale-emphasized-display-small">Switches</h1>
+        <div id="settings-placeholder"></div>
+    </div>
+
+    <div class="cards">
+        <div class="micl-card-elevated">
+            <div class="micl-card__headline-s">
+                <h2>Switches with icons</h2>
+            </div>
+            <div class="micl-card__content">
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch1" checked value="c1" role="switch">
+                    <label for="myswitch1" class="md-sys-typescale-body-medium">First Choice</label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch2" value="c2" role="switch">
+                    <label for="myswitch2" class="md-sys-typescale-body-medium">Second Choice</label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch3" value="c3" disabled role="switch">
+                    <label for="myswitch3" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch4" value="c4" checked disabled role="switch">
+                    <label for="myswitch4" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="micl-card-filled noicons">
+            <div class="micl-card__headline-s">
+                <h2>Switches without icons</h2>
+            </div>
+            <div class="micl-card__content">
+                <div class="switch">
+                    <label for="myswitch5" class="md-sys-typescale-body-medium">First Choice</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch5" checked value="c1" role="switch">
+                </div>
+                <div class="switch">
+                    <label for="myswitch6" class="md-sys-typescale-body-medium">Second Choice</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch6" value="c2" role="switch">
+                </div>
+                <div class="switch">
+                    <label for="myswitch7" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch7" value="c3" disabled role="switch">
+                </div>
+                <div class="switch">
+                    <label for="myswitch8" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch8" value="c4" checked disabled role="switch">
+                </div>
+            </div>
+        </div>
+
+        <div class="micl-card-outlined selectedicon">
+            <div class="micl-card__headline-s">
+                <h2>Switches with selected icon</h2>
+            </div>
+            <div class="micl-card__content">
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch9" checked value="c1" role="switch">
+                    <label for="myswitch9" class="md-sys-typescale-body-medium">First Choice</label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch10" value="c2" role="switch">
+                    <label for="myswitch10" class="md-sys-typescale-body-medium">Second Choice</label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch11" value="c3" disabled role="switch">
+                    <label for="myswitch11" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                </div>
+                <div class="switch">
+                    <input type="checkbox" class="micl-switch" id="myswitch12" value="c4" checked disabled role="switch">
+                    <label for="myswitch12" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="micl-card-outlined unselectedicon">
+            <div class="micl-card__headline-s">
+                <h2>Switches with unselected icon</h2>
+            </div>
+            <div class="micl-card__content">
+                <div class="switch">
+                    <label for="myswitch13" class="md-sys-typescale-body-medium">First Choice</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch13" checked value="c1" role="switch">
+                </div>
+                <div class="switch">
+                    <label for="myswitch14" class="md-sys-typescale-body-medium">Second Choice</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch14" value="c2" role="switch">
+                </div>
+                <div class="switch">
+                    <label for="myswitch15" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch15" value="c3" disabled role="switch">
+                </div>
+                <div class="switch">
+                    <label for="myswitch16" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                    <input type="checkbox" class="micl-switch" id="myswitch16" value="c4" checked disabled role="switch">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

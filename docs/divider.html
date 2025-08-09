@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MICL Dividers</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode&display=block">
+    <link rel="stylesheet" href="../themes/citrine/theme.css" id="theme-link">
+    <link rel="stylesheet" href="../dist/micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        p {
+            color: var(--md-sys-color-on-surface);
+        }
+        .micl-card__content {
+            padding-inline: 0;
+        }
+        p.md-sys-typescale-label-large {
+            margin: 3rem 2rem 1rem;
+        }
+        .verticalbox {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    </style>
+</head>
+<body class="light">
+    <div class="headline">
+        <h1 class="md-sys-typescale-emphasized-display-small">Dividers</h1>
+        <div id="settings-placeholder"></div>
+    </div>
+
+    <div class="cards">
+        <div class="micl-card-elevated">
+            <div class="micl-card__content">
+                <p class="md-sys-typescale-label-large">Full width:</p>
+                <hr class="micl-divider">
+                <p class="md-sys-typescale-label-large">Inset:</p>
+                <hr class="micl-divider-inset">
+                <p class="md-sys-typescale-label-large">Inset start:</p>
+                <hr class="micl-divider-inset--start">
+                <p class="md-sys-typescale-label-large">Inset end:</p>
+                <hr class="micl-divider-inset--end">
+                <p></p>
+            </div>
+        </div>
+        <div class="micl-card-filled">
+            <div class="micl-card__content">
+                <p class="md-sys-typescale-label-large">Full width:</p>
+                <hr class="micl-divider">
+                <p class="md-sys-typescale-label-large">Inset:</p>
+                <hr class="micl-divider-inset">
+                <p class="md-sys-typescale-label-large">Inset start:</p>
+                <hr class="micl-divider-inset--start">
+                <p class="md-sys-typescale-label-large">Inset end:</p>
+                <hr class="micl-divider-inset--end">
+                <p></p>
+            </div>
+        </div>
+        <div class="micl-card-outlined">
+            <div class="micl-card__content">
+                <p class="md-sys-typescale-label-large">Full width:</p>
+                <hr class="micl-divider">
+                <p class="md-sys-typescale-label-large">Inset:</p>
+                <hr class="micl-divider-inset">
+                <p class="md-sys-typescale-label-large">Inset start:</p>
+                <hr class="micl-divider-inset--start">
+                <p class="md-sys-typescale-label-large">Inset end:</p>
+                <hr class="micl-divider-inset--end">
+                <p></p>
+            </div>
+        </div>
+        <div class="micl-card-elevated">
+            <div class="micl-card__content">
+                <div class="verticalbox">
+                    <p class="md-sys-typescale-label-large">Full height:</p>
+                    <hr class="micl-divider-vertical">
+                </div>
+            </div>
+        </div>
+        <div class="micl-card-filled">
+            <div class="micl-card__content">
+                <div class="verticalbox">
+                    <p class="md-sys-typescale-label-large">Full height:</p>
+                    <hr class="micl-divider-vertical">
+                </div>
+            </div>
+        </div>
+        <div class="micl-card-outlined">
+            <div class="micl-card__content">
+                <div class="verticalbox">
+                    <p class="md-sys-typescale-label-large">Full height:</p>
+                    <hr class="micl-divider-vertical">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

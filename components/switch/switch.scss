@@ -1,0 +1,176 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+
+input[type=checkbox].micl-switch {
+    --md-sys-switch-target-height: 32px;
+    --md-sys-switch-target-width: 52px;
+    --md-sys-switch-state-layer-size: 40px;
+    --md-sys-switch-handle-size: 16px;
+    --md-sys-switch-handle-selected-size: 24px;
+    --md-sys-switch-handle-pressed-size: 28px;
+    --md-sys-switch-unselected-icon: "+";
+    --md-sys-switch-selected-icon: "\AC";
+    --md-sys-switch-outline-width: 2px;
+
+    appearance: none;
+    position: relative;
+    width: var(--md-sys-switch-target-width);
+    height: var(--md-sys-target-size);
+    margin: 0;
+    border-radius: calc(var(--md-sys-switch-target-height) / 2);
+    outline: none;
+
+    &::before {
+        content: "";
+        box-sizing: border-box;
+        display: block;
+        width: var(--md-sys-switch-target-width);
+        height: var(--md-sys-switch-target-height);
+        margin-block: calc((var(--md-sys-target-size) - var(--md-sys-switch-target-height)) / 2);
+        border: var(--md-sys-switch-outline-width) solid var(--md-sys-color-outline);
+        border-radius: inherit;
+        background-color: var(--md-sys-color-surface-container-highest);
+        transition: background-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized;
+    }
+    &::after {
+        content: var(--md-sys-switch-unselected-icon);
+        box-sizing: border-box;
+        position: absolute;
+        width: var(--md-sys-switch-state-layer-size);
+        height: var(--md-sys-switch-state-layer-size);
+        inset: 0;
+        inset-inline-start: -4px;
+        margin: auto 0;
+        font: 300 1rem/1rem var(--md-ref-typeface-plain);
+        color: var(--md-sys-color-surface-container-highest);
+        text-align: center;
+        background-color: var(--md-sys-color-outline);
+        background-clip: content-box;
+        border: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-size)) / 2) solid transparent;
+        border-radius: var(--md-sys-shape-corner-full);
+        transform: rotate(135deg);
+        transition:
+            inset-inline-start var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
+            border-width var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
+            font-size var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
+            line-height var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
+            color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized,
+            border-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized,
+            background-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized;
+    }
+    &:checked {
+        &::before {
+            background-color: var(--md-sys-color-primary);
+        }
+        &::after {
+            content: var(--md-sys-switch-selected-icon);
+            inset-inline-start: 16px;
+            font-size: 2rem;
+            line-height: 1.4rem;
+            border: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-selected-size)) / 2) solid transparent;
+            color: var(--md-sys-color-on-primary-container);
+            background-color: var(--md-sys-color-on-primary);
+        }
+    }
+    &:not(:disabled) {
+        cursor: pointer;
+
+        &:hover {
+            &::after {
+                border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity), transparent);
+                background-color: var(--md-sys-color-on-surface-variant);
+            }
+            &:checked::after {
+                border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity), transparent);
+                background-color: var(--md-sys-color-primary-container);
+            }
+        }
+        &:focus-visible {
+            &::after {
+                border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity), transparent);
+            }
+            &::before {
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline-offset: 2px;
+            }
+            &:checked::after {
+                border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-focus-state-layer-opacity), transparent);
+                background-color: var(--md-sys-color-primary-container);
+            }
+            &:not(:checked)::after {
+                background-color: var(--md-sys-color-on-surface-variant);
+            }
+        }
+        &:active {
+            &::after {
+                font-size: 2rem;
+                line-height: 1.7rem;
+                border: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-pressed-size)) / 2) solid transparent;
+                background-color: var(--md-sys-color-on-surface-variant);
+            }
+            &:checked::after {
+                line-height: 1.7rem;
+                border-width: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-pressed-size)) / 2);
+                border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-pressed-state-layer-opacity), transparent);
+                background-color: var(--md-sys-color-primary-container);
+            }
+            &:not(:checked)::after {
+                inset-inline-start: -4px;
+                border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity), transparent);
+            }
+        }
+    }
+    &:disabled {
+        &::before {
+            border-color: var(--md-sys-color-on-surface);
+            background-color: var(--md-sys-color-surface-container-highest);
+            opacity: 12%;
+        }
+        &:checked::before {
+            background-color: var(--md-sys-color-on-surface);
+            opacity: 12%;
+        }
+        &::after {
+            color: color-mix(in srgb, var(--md-sys-color-surface-container-highest) 38%, transparent);
+            background-color: var(--md-sys-color-on-surface);
+            opacity: 38%;
+        }
+        &:checked::after {
+            color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+            background-color: var(--md-sys-color-surface);
+            opacity: 100%;
+        }
+    }
+}
+
+input[type=checkbox].micl-switch:not(:disabled) + label,
+label:has(+ input[type=checkbox].micl-switch:not(:disabled)) {
+    cursor: pointer;
+}
+input[type=checkbox].micl-switch + label,
+label:has(+ input[type=checkbox].micl-switch) {
+    color: var(--md-sys-color-on-surface);
+}
+[dir=rtl] input[type=checkbox].micl-switch::after {
+    transform: rotate(45deg) scaleY(-1);
+}

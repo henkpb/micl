@@ -1,0 +1,59 @@
+{
+  "name": "material-inspired-component-library",
+  "version": "1.0.0",
+  "description": "The Material-Inspired Component Library (MICL) offers a collection of beautifully crafted components leveraging native HTML markup, designed to align with the Material Design 3 guidelines.",
+  "author": "MICL Hermana <micl.hermana@proton.me> (https://github.com/henkpb/micl)",
+  "license": "ISC",
+  "keywords": [
+    "Material Design",
+    "component library",
+    "web components",
+    "front-end",
+    "UI",
+    "UX",
+    "accordion",
+    "bottomsheet",
+    "button",
+    "card",
+    "checkbox",
+    "dialog",
+    "divider",
+    "iconbutton",
+    "list",
+    "menu",
+    "radio button",
+    "sidesheet",
+    "slider",
+    "switch",
+    "textfield"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/henkpb/micl"
+  },
+  "homepage": "https://github.com/henkpb/micl",
+  "bugs": {
+    "url": "https://github.com/henkpb/micl/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "echo 'No start script yet'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "css-loader": "^7.1.2",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "glob": "^11.0.3",
+    "mini-css-extract-plugin": "^2.9.3",
+    "postcss-loader": "^8.1.1",
+    "sass": "^1.89.1",
+    "sass-loader": "^16.0.5",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99",
+    "webpack-cli": "^6.0"
+  }
+}

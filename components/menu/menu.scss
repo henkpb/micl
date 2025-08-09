@@ -1,0 +1,124 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/ripple';
+
+.micl-menu[popover] {
+    position: absolute;
+    inset: unset;
+    inset-block-start: anchor(end);
+    inset-inline-start: anchor(start);
+    position-try-fallbacks: flip-block, flip-inline;
+    min-width: 112px;
+    max-width: 280px;
+    padding-block: 8px;
+    padding-inline: 0;
+    border: none;
+    border-radius: var(--md-sys-shape-corner-extra-small);
+    background-color: var(--md-sys-color-surface-container);
+    box-shadow: var(--md-sys-elevation-level2);
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top left;
+    transition:
+        opacity var(--md-sys-motion-duration-medium1),
+        transform var(--md-sys-motion-duration-medium1),
+        overlay var(--md-sys-motion-duration-medium1) allow-discrete,
+        display var(--md-sys-motion-duration-medium1) allow-discrete;
+
+    &:popover-open {
+        opacity: 1;
+        transform: scaleY(1);
+        transition:
+            opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate,
+            transform var(--md-sys-motion-duration-long2) linear(motion.$md-sys-motion-spring-default-spatial),
+            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
+            display var(--md-sys-motion-duration-long2) linear allow-discrete;
+
+        @position-try-on {
+            transform-origin: bottom left;
+        }
+
+        @starting-style {
+            opacity: 0;
+            transform: scaleY(0);
+
+            @position-try-on {
+                transform-origin: bottom left;
+            }
+        }
+        &::backdrop {
+            background-color: rgba(0, 0, 0, 0.2);
+
+            @starting-style {
+                background-color: rgba(0, 0, 0, 0);
+            }
+        }
+    }
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0);
+        transition:
+            background-color var(--md-sys-motion-duration-long2),
+            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
+            display var(--md-sys-motion-duration-long2) linear allow-discrete;
+    }
+
+    .micl-list {
+        --md-sys-list-item-one-height: 48px;
+        --md-sys-list-item-one-padding: 0;
+        --md-sys-list-item-two-padding: 0;
+        --md-sys-list-item-space: 12px;
+        --md-sys-list-item-background-color: var(--md-sys-color-surface-container);
+
+        .micl-list-item-one,
+        .micl-list-item-two,
+        .micl-list-item-three {
+            &:not(.micl-list-item--disabled) {
+                --miclripple: 1;
+
+                @include ripple.effect;
+
+                cursor: pointer;
+
+                &:focus-visible {
+                    outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness));
+                    z-index: 1;
+                }
+            }
+            &.micl-list-item__divider {
+                position: relative;
+                margin-block-start: 16px;
+                overflow: clip;
+                overflow-clip-margin: 8px;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset-block-start: -8px;
+                    inset-inline-start: 0;
+                    width: 100%;
+                    border-top: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,515 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/ripple';
+@use '../../styles/typography';
+
+button.micl-button-text-xs,
+button.micl-button-text-s,
+button.micl-button-text-m,
+button.micl-button-text-l,
+button.micl-button-text-xl,
+button.micl-button-elevated-xs,
+button.micl-button-elevated-s,
+button.micl-button-elevated-m,
+button.micl-button-elevated-l,
+button.micl-button-elevated-xl,
+button.micl-button-filled-xs,
+button.micl-button-filled-s,
+button.micl-button-filled-m,
+button.micl-button-filled-l,
+button.micl-button-filled-xl,
+button.micl-button-tonal-xs,
+button.micl-button-tonal-s,
+button.micl-button-tonal-m,
+button.micl-button-tonal-l,
+button.micl-button-tonal-xl,
+button.micl-button-outlined-xs,
+button.micl-button-outlined-s,
+button.micl-button-outlined-m,
+button.micl-button-outlined-l,
+button.micl-button-outlined-xl {
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    transition: border-radius var(--md-sys-motion-duration-extra-long4) linear(motion.$md-sys-motion-spring-fast-spatial);
+
+    &:disabled {
+        background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
+        color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        box-shadow: var(--md-sys-elevation-level0);
+        cursor: default;
+    }
+    &:not(:disabled):focus-visible {
+        outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+        outline-offset: 3px;
+    }
+    .micl-button__icon {
+        font-variation-settings: 'FILL' 0;
+        transition: font-variation-settings 600ms;
+    }
+}
+
+button.micl-button-text-xs,
+button.micl-button-elevated-xs,
+button.micl-button-filled-xs,
+button.micl-button-tonal-xs,
+button.micl-button-outlined-xs {
+    @include typography.label-large;
+
+    min-width: var(--md-sys-target-size);
+    height: var(--md-sys-target-size);
+    padding-inline: 12px;
+    border: 8px solid transparent;
+    border-radius: calc(var(--md-sys-target-size) / 2);
+    background-clip: padding-box;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-medium);
+    }
+    &.micl-button--square {
+        &.micl-button-elevated-xs {
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+        &:not(.micl-button-elevated-xs) {
+            border-radius: calc(var(--md-sys-shape-corner-medium) + 8px);
+        }
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: calc(var(--md-sys-target-size) / 2);
+        }
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active {
+            &.micl-button-elevated-xs {
+                border-radius: var(--md-sys-shape-corner-small);
+            }
+            &:not(.micl-button-elevated-xs) {
+                border-radius: calc(var(--md-sys-shape-corner-small) + 8px);
+            }
+        }
+        &:not(.micl-button-elevated-xs):focus-visible {
+            outline-offset: -6px;
+        }
+    }
+    .micl-button__icon {
+        font-size: 20px;
+        width: 20px;
+        margin-right: 8px;
+        vertical-align: text-bottom;
+    }
+}
+
+button.micl-button-text-s,
+button.micl-button-elevated-s,
+button.micl-button-filled-s,
+button.micl-button-tonal-s,
+button.micl-button-outlined-s {
+    @include typography.label-large;
+
+    min-width: var(--md-sys-target-size);
+    height: var(--md-sys-target-size);
+    padding-inline: 16px;
+    border: 4px solid transparent;
+    border-radius: calc(var(--md-sys-target-size) / 2);
+    background-clip: padding-box;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-medium);
+    }
+    &.micl-button--square {
+        &.micl-button-elevated-s {
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+        &:not(.micl-button-elevated-s) {
+            border-radius: calc(var(--md-sys-shape-corner-medium) + 4px);
+        }
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: calc(var(--md-sys-target-size) / 2);
+        }
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active:not(:disabled) {
+            &.micl-button-elevated-s {
+                border-radius: var(--md-sys-shape-corner-small);
+            }
+            &:not(.micl-button-elevated-s) {
+                border-radius: calc(var(--md-sys-shape-corner-small) + 4px);
+            }
+        }
+        &:not(.micl-button-elevated-s):focus-visible {
+            outline-offset: -2px;
+        }
+    }
+    .micl-button__icon {
+        font-size: 20px;
+        width: 20px;
+        margin-right: 8px;
+        vertical-align: text-bottom;
+    }
+}
+
+button.micl-button-text-m,
+button.micl-button-elevated-m,
+button.micl-button-filled-m,
+button.micl-button-tonal-m,
+button.micl-button-outlined-m {
+    @include typography.title-medium;
+
+    min-width: 56px;
+    height: 56px;
+    padding-inline: 24px;
+    border-radius: 28px;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-large);
+    }
+    &.micl-button--square {
+        border-radius: var(--md-sys-shape-corner-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: 28px;
+        }
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active:not(:disabled) {
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+    }
+    .micl-button__icon {
+        font-size: 24px;
+        width: 24px;
+        margin-right: 8px;
+        vertical-align: text-bottom;
+    }
+}
+
+button.micl-button-text-l,
+button.micl-button-elevated-l,
+button.micl-button-filled-l,
+button.micl-button-tonal-l,
+button.micl-button-outlined-l {
+    @include typography.headline-small;
+
+    min-width: 96px;
+    height: 96px;
+    padding-inline: 48px;
+    border-radius: 48px;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+    }
+    &.micl-button--square {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: 48px;
+        }
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active:not(:disabled) {
+            border-radius: var(--md-sys-shape-corner-large);
+        }
+    }
+    .micl-button__icon {
+        font-size: 32px;
+        width: 32px;
+        margin-right: 12px;
+        vertical-align: text-bottom;
+    }
+}
+
+button.micl-button-text-xl,
+button.micl-button-elevated-xl,
+button.micl-button-filled-xl,
+button.micl-button-tonal-xl,
+button.micl-button-outlined-xl {
+    @include typography.headline-large;
+
+    min-width: 136px;
+    height: 136px;
+    padding-inline: 64px;
+    border-radius: 68px;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+    }
+    &.micl-button--square {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: 68px;;
+        }
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active:not(:disabled) {
+            border-radius: var(--md-sys-shape-corner-large);
+        }
+    }
+    .micl-button__icon {
+        font-size: 40px;
+        width: 40px;
+        margin-right: 16px;
+        vertical-align: text-bottom;
+    }
+}
+
+button.micl-button-text-xs,
+button.micl-button-text-s,
+button.micl-button-text-m,
+button.micl-button-text-l,
+button.micl-button-text-xl {
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:focus-visible {
+            background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
+        }
+        &:active {
+            background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+        }
+    }
+}
+
+button.micl-button-elevated-xs,
+button.micl-button-elevated-s,
+button.micl-button-elevated-m,
+button.micl-button-elevated-l,
+button.micl-button-elevated-xl {
+    background-color: var(--md-sys-color-surface-container-low);
+    color: var(--md-sys-color-primary);
+    box-shadow: var(--md-sys-elevation-level1);
+
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-primary), var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-hover-state-layer-opacity));
+            }
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-primary), var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-primary), var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+button.micl-button-elevated-xs {
+    height: 32px;
+    border: none;
+}
+button.micl-button-elevated-s {
+    height: 40px;
+    border: none;
+}
+
+button.micl-button-filled-xs,
+button.micl-button-filled-s,
+button.micl-button-filled-m,
+button.micl-button-filled-l,
+button.micl-button-filled-xl {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &.micl-button--toggle:not(.micl-button--selected) {
+            background-color: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle:not(.micl-button--selected) {
+                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover-state-layer-opacity));
+            }
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle:not(.micl-button--selected) {
+                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle:not(.micl-button--selected) {
+                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+
+button.micl-button-tonal-xs,
+button.micl-button-tonal-s,
+button.micl-button-tonal-m,
+button.micl-button-tonal-l,
+button.micl-button-tonal-xl {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            background-color: var(--md-sys-color-secondary);
+            color: var(--md-sys-color-on-secondary);
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-hover-state-layer-opacity));
+            }
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+
+button.micl-button-outlined-xs,
+button.micl-button-outlined-s,
+button.micl-button-outlined-m,
+button.micl-button-outlined-l,
+button.micl-button-outlined-xl {
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            background-color: var(--md-sys-color-inverse-surface);
+            color: var(--md-sys-color-inverse-on-surface);
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:hover {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+            }
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &:focus-visible {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+button.micl-button-outlined-xs,
+button.micl-button-outlined-s {
+    box-shadow: inset 1px 0px var(--md-sys-color-outline-variant),
+                inset -1px 0px var(--md-sys-color-outline-variant),
+                inset 0px -1px var(--md-sys-color-outline-variant),
+                inset 0px 1px var(--md-sys-color-outline-variant);
+}
+button.micl-button-outlined-m {
+    border: 1px solid var(--md-sys-color-outline-variant);
+}
+button.micl-button-outlined-l {
+    border: 2px solid var(--md-sys-color-outline-variant);
+}
+button.micl-button-outlined-xl {
+    border: 3px solid var(--md-sys-color-outline-variant);
+}

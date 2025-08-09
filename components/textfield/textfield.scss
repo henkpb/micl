@@ -1,0 +1,387 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/typography';
+
+.micl-textfield-filled,
+.micl-textfield-outlined {
+    --md-sys-textfield-icon-size: 24px;
+    --md-sys-textfield-icon-space: 12px;
+    --md-sys-textfield-input-space: 16px;
+    --md-sys-textfield-prefix-space: 1em;
+    --md-sys-textfield-suffix-space: 1em;
+
+    display: grid;
+    grid-template-areas: "textfield" "supporting";
+    align-items: center;
+    background-color: inherit;
+
+    &> label {
+        @include typography.body-large;
+
+        box-sizing: content-box;
+        grid-area: textfield;
+        width: fit-content;
+        line-height: 1;
+        padding-inline: 4px;
+        margin-block-start: 0px;
+        margin-inline-start: 12px;
+        border-radius: 4px;
+        background-color: inherit;
+        color: var(--md-sys-color-on-surface-variant);
+        z-index: 1;
+        transition:
+            margin-block-start var(--md-sys-motion-duration-long1) var(--md-sys-motion-duration-short3) linear(motion.$md-sys-motion-spring-default-spatial),
+            margin-inline-start var(--md-sys-motion-duration-long1) var(--md-sys-motion-duration-short3) linear(motion.$md-sys-motion-spring-default-spatial),
+            font-size var(--md-sys-motion-duration-long1),
+            letter-spacing var(--md-sys-motion-duration-long1);
+    }
+    &> input,
+    &> select {
+        @include typography.body-large;
+
+        box-sizing: border-box;
+        grid-area: textfield;
+        height: 56px;
+        margin: 0;
+        padding-block: 0;
+        padding-inline: var(--md-sys-textfield-input-space);
+        border: none;
+        border-block-end: 1px solid var(--md-sys-color-on-surface-variant);
+        border-radius: var(--md-sys-shape-corner-extra-small);
+        outline: none;
+        color: var(--md-sys-color-on-surface);
+        background-color: transparent;
+        text-overflow: ellipsis;
+        caret-color: var(--md-sys-color-primary);
+
+        &:disabled {
+            border-color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        }
+        &::placeholder {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        &[type=number] {
+            -moz-appearance: textfield;
+        }
+    }
+    &> .micl-textfield__prefix,
+    &> .micl-textfield__suffix {
+        @include typography.body-large;
+
+        grid-area: textfield;
+        align-content: center;
+        height: 56px;
+        color: var(--md-sys-color-on-surface-variant);
+        opacity: 0;
+        z-index: 1;
+        transition: opacity var(--md-sys-motion-duration-long1);
+    }
+    &> .micl-textfield__prefix {
+        width: var(--md-sys-textfield-prefix-space);
+        padding-inline-start: var(--md-sys-textfield-input-space);
+    }
+    &> .micl-textfield__suffix {
+        width: var(--md-sys-textfield-suffix-space);
+        padding-inline-end: var(--md-sys-textfield-input-space);
+        margin-inline: auto 0;
+    }
+    &> .micl-textfield__icon-leading,
+    &> .micl-textfield__icon-trailing {
+        grid-area: textfield;
+        width: 1em;
+        margin-inline: var(--md-sys-textfield-icon-space) auto;
+        font-size: var(--md-sys-textfield-icon-size);
+        color: var(--md-sys-color-on-surface-variant);
+        z-index: 1;
+    }
+    &> .micl-textfield__icon-trailing {
+        margin-inline: auto var(--md-sys-textfield-icon-space);
+    }
+    &:has(> .micl-textfield__prefix) {
+        &> input {
+            padding-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-prefix-space));
+        }
+    }
+    &:has(> .micl-textfield__suffix) {
+        &> input {
+            padding-inline-end: calc(var(--md-sys-textfield-suffix-space) + var(--md-sys-textfield-input-space));
+        }
+    }
+    &:has(> .micl-textfield__icon-leading) {
+        &> label {
+            margin-inline-start: calc(var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-input-space));
+        }
+        &> .micl-textfield__prefix,
+        &> input {
+            padding-inline-start: calc(var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-input-space));
+        }
+        &:has(> .micl-textfield__prefix) > input {
+            padding-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-prefix-space));
+        }
+    }
+    &:has(> .micl-textfield__icon-trailing) {
+        &> .micl-textfield__suffix,
+        &> input {
+            padding-inline-end: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space));
+        }
+        &:has(> .micl-textfield__suffix) > input {
+            padding-inline-end: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-prefix-space) + var(--md-sys-textfield-icon-space));
+        }
+    }
+    &> .micl-textfield__supporting-text,
+    &> .micl-textfield__character-counter {
+        @include typography.body-small;
+
+        grid-area: supporting;
+        padding-block: 4px 0;
+        padding-inline: 16px;
+        color: var(--md-sys-color-on-surface-variant);
+    }
+    &> .micl-textfield__character-counter {
+        justify-self: flex-end;
+    }
+    &:has(> input:active),
+    &:has(> select:active),
+    &:has(> input:focus),
+    &:has(> select:focus),
+    &:has(> input:focus-visible),
+    &:has(> select:focus-visible) {
+        &> label {
+            color: var(--md-sys-color-primary);
+        }
+        &> .micl-textfield__icon-leading,
+        &> .micl-textfield__icon-trailing,
+        &> .micl-textfield__supporting-text,
+        &> .micl-textfield__character-counter {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+    }
+    &:has(> input:disabled),
+    &:has(> select:disabled) {
+        &> label {
+            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        }
+        &> .micl-textfield__icon-leading,
+        &> .micl-textfield__icon-trailing,
+        &> .micl-textfield__supporting-text {
+            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        }
+        &> .micl-textfield__character-counter {
+            display: none;
+        }
+    }
+    &:has(> input:not([maxlength])) {
+        &> .micl-textfield__character-counter {
+            display: none;
+        }
+    }
+    &:has(> input[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) {
+        &> .micl-textfield__supporting-text {
+            padding-inline-end: 64px;
+        }
+    }
+}
+
+.micl-textfield-filled {
+    &> label {
+        background-color: transparent;
+    }
+    &:hover {
+        &> input:not(:disabled),
+        &> select:not(:disabled) {
+            border-color: var(--md-sys-color-on-surface);
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+        }
+    }
+    &> input,
+    &> select {
+        padding-block-start: 16px;
+        background-color: var(--md-sys-color-surface-container-highest);
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
+        outline: none;
+
+        &:disabled {
+            background-color: rgb(from var(--md-sys-color-on-surface) r g b / 4%);
+        }
+        &:not(:disabled):focus,
+        &:not(:disabled):focus-visible,
+        &:not(:disabled):active {
+            padding-block-start: 18px;
+            border-width: 3px;
+            border-color: var(--md-sys-color-primary);
+        }
+    }
+    &> select {
+        line-height: 28px;
+    }
+    &:has(
+        > input:focus,
+        > input[value]:not([value='']):not([data-miclinitialized]),
+        > input[data-miclvalue],
+        > input[type=date],
+        > input[type=datetime-local],
+        > input[type=month],
+        > input[type=time],
+        > input[type=week],
+        > select:focus,
+        > select[value]:not([value='']):not([data-miclinitialized]),
+        > select[data-miclvalue]
+    ) {
+        &> label {
+            @include typography.body-small;
+
+            margin-block-start: -24px;
+            margin-inline-start: 12px;
+        }
+        &:has(> .micl-textfield__icon-leading) > label {
+            margin-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space) - 4px);
+        }
+        &> .micl-textfield__prefix,
+        &> .micl-textfield__suffix {
+            height: 40px;
+            margin-block-start: 16px;
+            opacity: 1;
+        }
+    }
+}
+.micl-textfield-outlined {
+    margin-block-start: 0.375rem;
+
+    &:hover {
+        &> label {
+            color: var(--md-sys-color-on-surface);
+        }
+        &> input:not(:disabled),
+        &> select:not(:disabled) {
+            outline-color: var(--md-sys-color-on-surface);
+            color: var(--md-sys-color-on-surface);
+        }
+    }
+    &> input,
+    &> select {
+        border: none;
+        outline: 1px solid var(--md-sys-color-outline);
+
+        &:disabled {
+            outline-color: rgb(from var(--md-sys-color-on-surface) r g b / 12%);
+        }
+        &:not(:disabled):focus,
+        &:not(:disabled):focus-visible,
+        &:not(:disabled):active {
+            outline-width: 3px;
+            outline-color: var(--md-sys-color-primary);
+        }
+    }
+    &> select {
+        line-height: 56px;
+    }
+    &:has(
+        > input:focus,
+        > input[value]:not([value='']):not([data-miclinitialized]),
+        > input[data-miclvalue],
+        > input[type=date],
+        > input[type=datetime-local],
+        > input[type=month],
+        > input[type=time],
+        > input[type=week],
+        > select:focus,
+        > select[value]:not([value='']):not([data-miclinitialized]),
+        > select[data-miclvalue]
+    ) {
+        &> label {
+            @include typography.body-small;
+
+            margin-block-start: -56px;
+            margin-inline-start: 12px;
+        }
+        &> .micl-textfield__prefix,
+        &> .micl-textfield__suffix {
+            opacity: 1;
+        }
+    }
+}
+
+.micl-textfield-filled.micl-textfield--error,
+.micl-textfield-outlined.micl-textfield--error {
+    &> label,
+    &> .micl-textfield__icon-trailing,
+    &> .micl-textfield__supporting-text,
+    &> .micl-textfield__character-counter {
+        color: var(--md-sys-color-error);
+    }
+    &> input {
+        border-color: var(--md-sys-color-error);
+        outline-color: var(--md-sys-color-error);
+        color: var(--md-sys-color-on-surface);
+        caret-color: var(--md-sys-color-error);
+
+        &:active,
+        &:focus,
+        &:focus-visible {
+            border-color: var(--md-sys-color-error);
+            outline-color: var(--md-sys-color-error);
+            color: var(--md-sys-color-on-surface);
+        }
+    }
+    &:hover {
+        &> label,
+        &> .micl-textfield__icon-trailing {
+            color: var(--md-sys-color-on-error-container);
+        }
+        &> input {
+            border-color: var(--md-sys-color-on-error-container);
+            outline-color: var(--md-sys-color-on-error-container);
+        }
+        &> .micl-textfield__supporting-text,
+        &> .micl-textfield__character-counter {
+            color: var(--md-sys-color-error);
+        }
+    }
+    &:has(> input:active),
+    &:has(> input:focus),
+    &:has(> input:focus-visible) {
+        &> label,
+        &> .micl-textfield__icon-trailing,
+        &> .micl-textfield__supporting-text,
+        &> .micl-textfield__character-counter {
+            color: var(--md-sys-color-error);
+        }
+    }
+}
+
+[dir=rtl] .micl-textfield-filled,
+[dir=rtl] .micl-textfield-outlined {
+    &> .micl-textfield__icon-leading {
+        margin-inline: auto var(--md-sys-textfield-icon-space);
+    }
+    &> .micl-textfield__icon-trailing {
+        margin-inline: var(--md-sys-textfield-icon-space) auto;
+    }
+}

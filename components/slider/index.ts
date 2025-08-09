@@ -1,0 +1,114 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+export const sliderSelector = 'input[type=range].micl-slider-xs,input[type=range].micl-slider-s,input[type=range].micl-slider-m,input[type=range].micl-slider-l,input[type=range].micl-slider-xl';
+export default (() =>
+{
+    const
+        tick  = String.fromCharCode(8226),
+        blank = String.fromCharCode(8201),
+        getTickValues = (element: HTMLInputElement): number[] =>
+        {
+            const
+                values: number[] = [],
+                max  = parseFloat(element.max),
+                min  = parseFloat(element.min);
+
+            if (!!element.list && !isNaN(max) && !isNaN(min) && (max > min)) {
+                element.list.querySelectorAll<HTMLOptionElement>('option[value]').forEach(option =>
+                {
+                    let value = parseFloat(option.value);
+                    if (!isNaN(value) && (value >= min) && (value <= max)) {
+                        values.push(value);
+                    }
+                });
+            }
+            return values;
+        };
+
+    return {
+        initialize: (element: HTMLInputElement) =>
+        {
+            element.style.setProperty('--md-sys-slider-max', element.max || '100');
+            element.style.setProperty('--md-sys-slider-min', element.min || '0');
+            element.style.setProperty('--md-sys-slider-value', element.value);
+            element.style.setProperty('--md-sys-slider-tip', JSON.stringify(element.value + ''));
+
+            const rect = element.getBoundingClientRect(),
+                  e    = document.elementFromPoint(Math.max(rect.x - 1, 0), Math.max(rect.y - 1, 0));
+            if (e) {
+                element.style.color = window.getComputedStyle(e).getPropertyValue('background-color');
+            }
+
+            const
+                max = parseFloat(element.max),
+                min = parseFloat(element.min),
+                percentages = getTickValues(element).sort((a, b) => a - b).map(value => {
+                    return Math.round(100 * (value - min) / (max - min));
+                });
+            if (percentages.length > 0) {
+                const
+                    canvas = document.createElement('canvas'),
+                    ctx    = canvas.getContext('2d');
+                if (ctx) {
+                    ctx.font = window.getComputedStyle(element).getPropertyValue('font');
+                    let blankWidth   = ctx.measureText(blank).width,
+                        tickWidth    = ctx.measureText(tick).width,
+                        totalWidth   = rect.width - 10,
+                        currentWidth = 0,
+                        tickString   = '';
+
+                    percentages.forEach(percentage =>
+                    {
+                        let position = (totalWidth * percentage) / 100,
+                            nrBlanks = Math.round((position - currentWidth) / blankWidth) - 1;
+                        for (let i = 0; i < nrBlanks; i++) {
+                            tickString   += blank;
+                            currentWidth += blankWidth;
+                        }
+                        tickString += tick;
+                        currentWidth += tickWidth;
+                    });
+                    element.dataset.miclsliderticks = tickString;
+                }
+                canvas.remove();
+            }
+            else {
+                element.dataset.miclsliderticks = tick;
+            }
+        },
+        input: (event: Event) =>
+        {
+            if (
+                !(event.target as Element).matches(
+                    '.micl-slider-xs,.micl-slider-s,.micl-slider-m,.micl-slider-l,.micl-slider-xl'
+                )
+                || !(event.target instanceof HTMLInputElement)
+                || (event.target as HTMLInputElement).disabled
+            ) {
+                return;
+            }
+
+            event.target.style.setProperty('--md-sys-slider-value', event.target.value);
+            event.target.style.setProperty('--md-sys-slider-tip', JSON.stringify(event.target.value + ''));
+        }
+    };
+})();

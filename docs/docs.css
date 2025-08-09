@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 16px;
+    background-color: var(--md-sys-color-background);
+}
+.headline {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+}
+h1 {
+    color: var(--md-sys-color-on-surface);
+}
+#settings-theme {
+    padding-block: 16px;
+
+    label {
+        color: var(--md-sys-color-on-surface);
+    }
+}
+#settings-directionality {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+    margin-block: 24px 4px;
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.micl-card-elevated, .micl-card-filled, .micl-card-outlined {
+    width: 360px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MICL Sliders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,volume_up&display=block">
+    <link rel="stylesheet" href="../themes/citrine/theme.css" id="theme-link">
+    <link rel="stylesheet" href="../dist/micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .micl-card-elevated, .micl-card-filled, .micl-card-outlined {
+            padding: 0 16px;
+            text-align: center;
+        }
+        .range {
+            margin: 64px 8px;
+        }
+        .micl-card-elevated input[type=range] {
+            width: 100%;
+        }
+        .micl-card-filled input[type=range] {
+            height: 360px;
+        }
+    </style>
+</head>
+<body class="light">
+    <div class="headline">
+        <h1 class="md-sys-typescale-emphasized-display-small">Sliders</h1>
+        <div id="settings-placeholder"></div>
+    </div>
+
+    <div class="cards">
+        <div class="micl-card-elevated">
+            <div class="range">
+                <input type="range" class="micl-slider-xs" min="1" max="10" value="6">
+            </div>
+            <div class="range">
+                <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="markers">
+                <datalist id="markers">
+                  <option value="0"></option>
+                  <option value="25"></option>
+                  <option value="50"></option>
+                  <option value="75"></option>
+                  <option value="100"></option>
+                </datalist>
+            </div>
+            <div class="range micl-slider__container">
+                <span class="micl-slider__icon material-symbols-outlined">volume_up</span>
+                <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5">
+            </div>
+            <div class="range">
+                <input type="range" class="micl-slider-l" value="0">
+            </div>
+            <div class="range">
+                <input type="range" class="micl-slider-xl" disabled>
+            </div>
+        </div>
+        <div class="micl-card-filled">
+            <div class="range">
+                <input type="range" class="micl-slider-xl micl-slider--vertical">
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/ripple';
+
+:root {
+    --md-sys-radio-border-width: 2px;
+    --md-sys-radio-container-size: 20px;
+    --md-sys-radio-state-layer-size: 40px;
+}
+
+input[type=radio].micl-radio {
+    --md-sys-ripple-background-color: var(--md-sys-color-primary);
+
+    appearance: none;
+    box-sizing: border-box;
+    position: relative;
+    width: var(--md-sys-target-size);
+    height: var(--md-sys-target-size);
+    margin: 0;
+    border: calc((var(--md-sys-target-size) - var(--md-sys-radio-state-layer-size)) / 2) solid transparent;
+    background-clip: content-box;
+    background-color: transparent;
+    border-radius: var(--md-sys-shape-corner-full);
+    outline-offset: -7px;
+    transition: background-color var(--md-sys-motion-duration-long2);
+
+    &::after {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        width: var(--md-sys-radio-container-size);
+        height: var(--md-sys-radio-container-size);
+        inset: 0;
+        margin: auto;
+        padding: calc((var(--md-sys-radio-container-size) / 2) - var(--md-sys-radio-border-width));
+        border: var(--md-sys-radio-border-width) solid var(--md-sys-color-on-surface-variant);
+        background-color: var(--md-sys-color-primary);
+        background-clip: content-box;
+        border-radius: var(--md-sys-shape-corner-full);
+        transition:
+            padding var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized,
+            border-color var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized;
+    }
+    &:checked::after {
+        border-color: var(--md-sys-color-primary);
+        padding: 3px;
+        transition:
+            padding var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
+            border-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized;
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+
+        @include ripple.effect;
+
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-hover-state-layer-opacity));
+
+            &:checked {
+                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
+            }
+            &::after {
+                border-color: var(--md-sys-color-on-surface);
+            }
+            &:checked::after {
+                border-color: var(--md-sys-color-primary);
+            }
+        }
+        &:focus-visible {
+            background-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-focus-state-layer-opacity));
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+
+            &:checked {
+                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
+            }
+            &::after {
+                border-color: var(--md-sys-color-on-surface);
+            }
+            &:checked::after {
+                border-color: var(--md-sys-color-primary);
+            }
+        }
+        &:active {
+            background-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+
+            &:checked {
+                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            }
+            &::after {
+                border-color: var(--md-sys-color-on-surface);
+            }
+            &:checked::after {
+                border-color: var(--md-sys-color-primary);
+            }
+        }
+    }
+    &:disabled {
+        opacity: 38%;
+
+        &::after {
+            border-color: var(--md-sys-color-on-surface);
+        }
+        &:checked::after {
+            background-color: var(--md-sys-color-on-surface);
+        }
+    }
+}
+
+input[type=radio].micl-radio:not(:disabled) + label,
+label:has(+ input[type=radio].micl-radio:not(:disabled)) {
+    cursor: pointer;
+}
+input[type=radio].micl-radio + label,
+label + input[type=radio].micl-radio {
+    color: var(--md-sys-color-on-surface);
+}

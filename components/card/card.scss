@@ -1,0 +1,261 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/ripple';
+@use '../../styles/typography';
+
+:root {
+    --md-sys-card-margin: 8px;
+    --md-sys-card-padding-inline: 16px;
+}
+
+.micl-card-elevated,
+.micl-card-filled,
+.micl-card-outlined {
+    height: fit-content;
+    margin: var(--md-sys-card-margin);
+    border-radius: var(--md-sys-shape-corner-medium);
+    overflow: hidden;
+    interpolate-size: allow-keywords;
+
+    &[tabindex='0']:not(.micl-card--disabled) {
+        --miclripple: 1;
+
+        @include ripple.effect;
+
+        &:hover {
+            box-shadow: var(--md-sys-elevation-level1);
+            cursor: pointer;
+        }
+        &:focus-visible {
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
+            box-shadow: var(--md-sys-elevation-level1);
+        }
+    }
+    &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:focus-visible) {
+        outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+        outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
+    }
+    &::details-content {
+        height: 0;
+        overflow: hidden;
+        transition:
+            content-visibility var(--md-sys-motion-duration-medium4) allow-discrete,
+            height var(--md-sys-motion-duration-medium4) linear(motion.$md-sys-motion-spring-default-spatial);
+    }
+    &[open]::details-content {
+        height: auto;
+    }
+    &> summary {
+        padding-block-end: 8px;
+        outline: none;
+        list-style: none;
+        cursor: pointer
+    }
+}
+
+.micl-card-elevated {
+    background-color: var(--md-sys-color-surface-container-low);
+    box-shadow: var(--md-sys-elevation-level1);
+
+    &[tabindex='0']:not(.micl-card--disabled) {
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level2);
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level1);
+        }
+        &.micl-card--dragging {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-dragged-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level4);
+            cursor: grabbing;
+        }
+    }
+}
+.micl-card-filled {
+    background-color: var(--md-sys-color-surface-container-highest);
+    box-shadow: var(--md-sys-elevation-level0);
+
+    &[tabindex='0']:not(.micl-card--disabled) {
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level0);
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level0);
+        }
+        &.micl-card--dragging {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-dragged-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level3);
+            cursor: grabbing;
+        }
+    }
+}
+.micl-card-outlined {
+    background-color: var(--md-sys-color-surface);
+    box-shadow: var(--md-sys-elevation-level0);
+    border: 1px solid var(--md-sys-color-outline-variant);
+
+    &[tabindex='0']:not(.micl-card--disabled) {
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+        }
+        &:focus-visible {
+            border-color: var(--md-sys-color-on-surface);
+            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level0);
+        }
+        &:active {
+            border-color: var(--md-sys-color-outline-variant);
+            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level0);
+        }
+        &.micl-card--dragging {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-dragged-state-layer-opacity));
+            box-shadow: var(--md-sys-elevation-level3);
+            cursor: grabbing;
+        }
+    }
+}
+
+.micl-card--disabled {
+    opacity: 38%;
+    pointer-events: none;
+
+    &.micl-card-elevated {
+        background-color: var(--md-sys-color-surface);
+    }
+    &.micl-card-filled {
+        background-color: var(--md-sys-color-surface-variant);
+    }
+    &.micl-card-outlined {
+        box-shadow: var(--md-sys-elevation-level0);
+        border-color: rgb(from var(--md-sys-color-outline) r g b / 12%);
+    }
+}
+
+.micl-card__image {
+    width: 100%;
+    border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.micl-card__headline-s,
+.micl-card__headline-m,
+.micl-card__headline-l {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    margin-block: 8px;
+    color: var(--md-sys-color-on-surface-variant);
+
+    h1, h2, h3, h4, h5, h6, .micl-heading {
+        flex: 1 2 fit-content;
+        margin: 0;
+        padding-inline: var(--md-sys-card-padding-inline);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &:has(+ button) {
+            padding-inline-end: 0;
+        }
+    }
+    &:has(button) {
+        margin-block: 0;
+    }
+}
+.micl-card__headline-s {
+    h1, h2, h3, h4, h5, h6, .micl-heading {
+        @include typography.headline-small;
+    }
+}
+.micl-card__headline-m {
+    h1, h2, h3, h4, h5, h6, .micl-heading {
+        @include typography.headline-medium;
+    }
+}
+.micl-card__headline-l {
+    h1, h2, h3, h4, h5, h6, .micl-heading {
+        @include typography.headline-large;
+    }
+}
+
+.micl-card__subhead {
+    @include typography.title-medium;
+
+    display: block;
+    margin-block: 0 8px;
+    padding-inline: var(--md-sys-card-padding-inline);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.micl-card__supporting-text {
+    @include typography.body-small;
+
+    display: block;
+    margin-block: 0 8px;
+    padding-inline: var(--md-sys-card-padding-inline);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.micl-card-elevated[tabindex='0']:not(.micl-card--disabled),
+.micl-card-filled[tabindex='0']:not(.micl-card--disabled),
+.micl-card-outlined[tabindex='0']:not(.micl-card--disabled) {
+    &:hover,
+    &:focus-visible,
+    &:active,
+    &.micl-card--dragging {
+        .micl-card__headline-s,
+        .micl-card__headline-m,
+        .micl-card__headline-l {
+            color: var(--md-sys-color-on-surface);
+
+            button {
+                color: var(--md-sys-color-on-surface);
+            }
+        }
+        .micl-card__subhead,
+        .micl-card__supporting-text {
+            color: var(--md-sys-color-on-surface);
+        }
+    }
+}
+
+.micl-card__content {
+    box-sizing: border-box;
+    padding-inline: var(--md-sys-card-padding-inline);
+    background-color: inherit;
+    overflow: hidden;
+}

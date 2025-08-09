@@ -1,0 +1,122 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/ripple';
+@use '../../styles/statelayer';
+@use '../../styles/typography';
+
+.micl-textfield-filled > select,
+.micl-textfield-outlined > select {
+    --md-sys-option-one-height: var(--md-sys-list-item-one-height);
+    --md-sys-option-one-padding: var(--md-sys-list-item-one-padding);
+    --md-sys-option-two-padding: 8px;
+    --md-sys-option-three-padding: 12px;
+    --md-sys-option-space: 16px;
+    --md-sys-option-padding-inline: 16px;
+
+    appearance: base-select;
+
+    &::picker-icon {
+      color: var(--md-sys-color-on-surface-variant);
+      transition: 0.4s rotate;
+    }
+    &:open::picker-icon {
+      rotate: 180deg;
+    }
+    &::picker(select) {
+        appearance: base-select;
+        min-inline-size: max(anchor-size(self-inline), 112px);
+        max-inline-size: 280px;
+        padding-block: 8px;
+        padding-inline: 0;
+        border: none;
+        border-radius: var(--md-sys-shape-corner-extra-small);
+        background-color: var(--md-sys-color-surface-container);
+        box-shadow: var(--md-sys-elevation-level2);
+    }
+
+    option {
+        --md-sys-list-item-one-height: 48px;
+        --md-sys-list-item-two-height: 64px;
+        --md-sys-list-item-one-padding: 0;
+        --md-sys-list-item-two-padding: 0;
+        --md-sys-list-item-space: 12px;
+        --md-sys-list-item-padding-inline: 16px;
+        --md-sys-list-item-background-color: var(--md-sys-color-surface-container);
+        --md-sys-motion-duration-long2: 500ms;
+        --md-sys-state-hover-state-layer-opacity: #{statelayer.$md-sys-state-hover-state-layer-opacity};
+        --md-sys-state-focus-state-layer-opacity: #{statelayer.$md-sys-state-focus-state-layer-opacity};
+        --md-sys-state-pressed-state-layer-opacity: #{statelayer.$md-sys-state-pressed-state-layer-opacity};
+        --md-sys-state-focus-indicator-thickness: #{statelayer.$md-sys-state-focus-indicator-thickness};
+
+        border-radius: 0px;
+
+        &:not(:disabled) {
+            cursor: pointer;
+        }
+        &:checked {
+            background-color: var(--md-sys-color-secondary-container);
+
+            .micl-list-item__text {
+                color: var(--md-sys-color-on-secondary-container);
+
+                &::after {
+                    color: var(--md-sys-color-on-surface);
+                }
+            }
+        }
+        &:focus-visible {
+            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness));
+            z-index: 1;
+        }
+
+        .micl-list-item__text {
+            @include typography.body-large;
+
+            color: var(--md-sys-color-on-surface);
+        }
+        .micl-list-item__text::after {
+            @include typography.body-medium;
+
+            content: attr(aria-description);
+            display: block;
+            color: var(--md-sys-color-on-surface-variant);
+            white-space: normal;
+        }
+    }
+}
+
+dialog.micl-dialog:has(.micl-textfield-filled > select),
+dialog.micl-dialog:has(.micl-textfield-outlined > select),
+dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select),
+dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select) {
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    margin: auto;
+    transform: scale(50%);
+}
+dialog.micl-dialog:has(.micl-textfield-filled > select):popover-open,
+dialog.micl-dialog:has(.micl-textfield-outlined > select):popover-open,
+dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select):popover-open,
+dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select):popover-open {
+    transform: scale(100%);
+}

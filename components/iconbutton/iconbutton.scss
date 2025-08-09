@@ -1,0 +1,461 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/ripple';
+
+button.micl-iconbutton-standard-xs,
+button.micl-iconbutton-standard-s,
+button.micl-iconbutton-standard-m,
+button.micl-iconbutton-standard-l,
+button.micl-iconbutton-standard-xl,
+button.micl-iconbutton-filled-xs,
+button.micl-iconbutton-filled-s,
+button.micl-iconbutton-filled-m,
+button.micl-iconbutton-filled-l,
+button.micl-iconbutton-filled-xl,
+button.micl-iconbutton-tonal-xs,
+button.micl-iconbutton-tonal-s,
+button.micl-iconbutton-tonal-m,
+button.micl-iconbutton-tonal-l,
+button.micl-iconbutton-tonal-xl,
+button.micl-iconbutton-outlined-xs,
+button.micl-iconbutton-outlined-s,
+button.micl-iconbutton-outlined-m,
+button.micl-iconbutton-outlined-l,
+button.micl-iconbutton-outlined-xl {
+    padding: 0;
+    border: none;
+    border-radius: var(--md-sys-shape-corner-full);
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    font-variation-settings: 'FILL' 0;
+    transition:
+        font-variation-settings 600ms,
+        border-radius var(--md-sys-motion-duration-extra-long4) linear(motion.$md-sys-motion-spring-fast-spatial);
+
+    &:disabled {
+        background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
+        color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        box-shadow: var(--md-sys-elevation-level0);
+        cursor: default;
+    }
+    &:not(:disabled):focus-visible {
+        outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+        outline-offset: 3px;
+    }
+    &:hover:not(:disabled),
+    &.micl-button--toggle.micl-button--selected {
+        font-variation-settings: 'FILL' 1;
+    }
+}
+
+button.micl-iconbutton-standard-xs,
+button.micl-iconbutton-filled-xs,
+button.micl-iconbutton-tonal-xs,
+button.micl-iconbutton-outlined-xs {
+    width: var(--md-sys-target-size);
+    min-width: var(--md-sys-target-size);
+    height: var(--md-sys-target-size);
+    font-size: 20px;
+    border: 8px solid transparent;
+    background-clip: content-box;
+
+    &.micl-button--toggle.micl-button--selected {
+        // border-radius: var(--md-sys-shape-corner-medium);
+        border-radius: var(--md-sys-shape-corner-large);
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active {
+            // border-radius: var(--md-sys-shape-corner-small);
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+        &:focus-visible {
+            outline-offset: -6px;
+        }
+    }
+    &.micl-iconbutton--narrow {
+        height: calc(var(--md-sys-target-size) + 10px);
+        border-width: 10px;
+        border-radius: calc(var(--md-sys-target-size) / 2);
+
+        &:focus-visible {
+            outline-offset: -8px;
+        }
+    }
+    &.micl-iconbutton--wide {
+        width: calc(var(--md-sys-target-size) + 8px);
+        border-radius: calc(var(--md-sys-target-size) / 2);
+
+        &:focus-visible {
+            outline-offset: -6px;
+        }
+    }
+    &.micl-button--square {
+        // border-radius: var(--md-sys-shape-corner-medium);
+        border-radius: var(--md-sys-shape-corner-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: var(--md-sys-shape-corner-full);
+        }
+    }
+}
+
+button.micl-iconbutton-standard-s,
+button.micl-iconbutton-filled-s,
+button.micl-iconbutton-tonal-s,
+button.micl-iconbutton-outlined-s {
+    width: var(--md-sys-target-size);
+    min-width: var(--md-sys-target-size);
+    height: var(--md-sys-target-size);
+    font-size: 24px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+
+    &.micl-button--toggle.micl-button--selected {
+        // border-radius: var(--md-sys-shape-corner-medium);
+        border-radius: var(--md-sys-shape-corner-large);
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active {
+            // border-radius: var(--md-sys-shape-corner-small);
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+        &:focus-visible {
+            outline-offset: -2px;
+        }
+    }
+    &.micl-iconbutton--narrow {
+        height: calc(var(--md-sys-target-size) + 8px);
+        border-width: 8px;
+        border-radius: calc(var(--md-sys-target-size) / 2);
+
+        &:focus-visible {
+            outline-offset: -6px;
+        }
+    }
+    &.micl-iconbutton--wide {
+        width: calc(var(--md-sys-target-size) + 12px);
+        border-radius: 26px;
+
+        &:focus-visible {
+            outline-offset: -2px;
+        }
+    }
+    &.micl-button--square {
+        // border-radius: var(--md-sys-shape-corner-medium);
+        border-radius: var(--md-sys-shape-corner-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: var(--md-sys-shape-corner-full);
+        }
+    }
+}
+
+button.micl-iconbutton-standard-m,
+button.micl-iconbutton-filled-m,
+button.micl-iconbutton-tonal-m,
+button.micl-iconbutton-outlined-m {
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    font-size: 24px;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-large);
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active {
+            // border-radius: var(--md-sys-shape-corner-small);
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+    }
+    &.micl-iconbutton--narrow {
+        width: var(--md-sys-target-size);
+        min-width: var(--md-sys-target-size);
+        border-radius: calc(var(--md-sys-target-size) / 2);
+    }
+    &.micl-iconbutton--wide {
+        width: 72px;
+        min-width: 72px;
+        border-radius: 36px;
+    }
+    &.micl-button--square {
+        border-radius: var(--md-sys-shape-corner-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: var(--md-sys-shape-corner-full);
+        }
+    }
+}
+
+button.micl-iconbutton-standard-l,
+button.micl-iconbutton-filled-l,
+button.micl-iconbutton-tonal-l,
+button.micl-iconbutton-outlined-l {
+    width: 96px;
+    min-width: 96px;
+    height: 96px;
+    font-size: 32px;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active {
+            border-radius: var(--md-sys-shape-corner-large);
+        }
+    }
+    &.micl-iconbutton--narrow {
+        width: 64px;
+        min-width: 64px;
+        border-radius: 32px;
+    }
+    &.micl-iconbutton--wide {
+        width: 128px;
+        min-width: 128px;
+        border-radius: 64px;
+    }
+    &.micl-button--square {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: var(--md-sys-shape-corner-full);
+        }
+    }
+}
+
+button.micl-iconbutton-standard-xl,
+button.micl-iconbutton-filled-xl,
+button.micl-iconbutton-tonal-xl,
+button.micl-iconbutton-outlined-xl {
+    width: 136px;
+    min-width: 136px;
+    height: 136px;
+    font-size: 40px;
+
+    &.micl-button--toggle.micl-button--selected {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+    }
+    &:not(:disabled) {
+        --miclripple: 1;
+        @include ripple.effect;
+
+        &:active {
+            border-radius: var(--md-sys-shape-corner-large);
+        }
+    }
+    &.micl-iconbutton--narrow {
+        width: 104px;
+        min-width: 104px;
+        border-radius: 52px;
+    }
+    &.micl-iconbutton--wide {
+        width: 184px;
+        min-width: 184px;
+        border-radius: 92px;
+    }
+    &.micl-button--square {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+
+        &.micl-button--toggle.micl-button--selected {
+            border-radius: var(--md-sys-shape-corner-full);
+        }
+    }
+}
+
+button.micl-iconbutton-standard-xs,
+button.micl-iconbutton-standard-s,
+button.micl-iconbutton-standard-m,
+button.micl-iconbutton-standard-l,
+button.micl-iconbutton-standard-xl {
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            color: var(--md-sys-color-primary);
+        }
+        &:hover {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
+            }
+        }
+        &:focus-visible {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+
+
+button.micl-iconbutton-filled-xs,
+button.micl-iconbutton-filled-s,
+button.micl-iconbutton-filled-m,
+button.micl-iconbutton-filled-l,
+button.micl-iconbutton-filled-xl {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+
+    &:not(:disabled) {
+        &.micl-button--toggle:not(.micl-button--selected) {
+            background-color: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle:not(.micl-button--selected) {
+                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover-state-layer-opacity));
+            }
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle:not(.micl-button--selected) {
+                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle:not(.micl-button--selected) {
+                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+
+button.micl-iconbutton-tonal-xs,
+button.micl-iconbutton-tonal-s,
+button.micl-iconbutton-tonal-m,
+button.micl-iconbutton-tonal-l,
+button.micl-iconbutton-tonal-xl {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            background-color: var(--md-sys-color-secondary);
+            color: var(--md-sys-color-on-secondary);
+        }
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-hover-state-layer-opacity));
+            }
+        }
+        &:focus-visible {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}
+
+button.micl-iconbutton-outlined-xs,
+button.micl-iconbutton-outlined-s,
+button.micl-iconbutton-outlined-m,
+button.micl-iconbutton-outlined-l,
+button.micl-iconbutton-outlined-xl {
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+
+    &.micl-iconbutton-outlined-xs,
+    &.micl-iconbutton-outlined-s {
+        // border-color: var(--md-sys-color-outline);
+        box-shadow: inset 1px 0px var(--md-sys-color-outline-variant),
+                    inset -1px 0px var(--md-sys-color-outline-variant),
+                    inset 0px -1px var(--md-sys-color-outline-variant),
+                    inset 0px 1px var(--md-sys-color-outline-variant);
+    }
+    &.micl-iconbutton-outlined-m {
+        // border: 1px solid var(--md-sys-color-outline);
+        border: 1px solid var(--md-sys-color-outline-variant);
+    }
+    &.micl-iconbutton-outlined-l {
+        // border: 2px solid var(--md-sys-color-outline);
+        border: 2px solid var(--md-sys-color-outline-variant);
+    }
+    &.micl-iconbutton-outlined-xl {
+        // border: 3px solid var(--md-sys-color-outline);
+        border: 3px solid var(--md-sys-color-outline-variant);
+    }
+    &:not(:disabled) {
+        &.micl-button--toggle.micl-button--selected {
+            background-color: var(--md-sys-color-inverse-surface);
+            color: var(--md-sys-color-inverse-on-surface);
+        }
+        &:hover {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-hover-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+            }
+        }
+        &:focus-visible {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-focus-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-focus-state-layer-opacity));
+            }
+        }
+        &:active {
+            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+
+            &.micl-button--toggle.micl-button--selected {
+                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            }
+        }
+    }
+}

@@ -1,0 +1,262 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/typography';
+
+:root {
+    --md-sys-dialog-padding: 24px;
+    --md-sys-dialog-dir-factor: 1;
+}
+
+[dir=rtl] {
+    --md-sys-dialog-dir-factor: -1;
+}
+
+dialog.micl-dialog,
+dialog.micl-dialog-fullscreen {
+    box-sizing: border-box;
+    display: none;
+    flex-direction: column;
+    min-width: 280px;
+    max-width: 560px;
+    max-height: 100vh;
+    inset-block-start: anchor(start);
+    inset-inline-start: anchor(start);
+    transform: translate(calc(var(--md-sys-dialog-dir-factor) * -50%), -50%) scale(50%);
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    background-color: var(--md-sys-color-surface-container-high);
+    box-shadow: var(--md-sys-elevation-level3);
+    opacity: 0;
+    overflow: hidden;
+    interpolate-size: allow-keywords;
+    transition:
+        display var(--md-sys-motion-duration-medium1) allow-discrete,
+        overlay var(--md-sys-motion-duration-medium1) allow-discrete,
+        inset-block-start var(--md-sys-motion-duration-medium1) linear,
+        inset-inline-start var(--md-sys-motion-duration-medium1) linear,
+        opacity var(--md-sys-motion-duration-medium1) motion.$md-sys-motion-easing-emphasized-decelerate,
+        transform var(--md-sys-motion-duration-medium1) linear;
+
+    @starting-style {
+        height: fit-content;
+        width: fit-content;
+        inset-block-start: anchor(start);
+        inset-inline-start: anchor(start);
+        opacity: 0;
+        transform: translate(calc(var(--md-sys-dialog-dir-factor) * -50%), -50%) scale(50%);
+    }
+
+    &:popover-open,
+    &[open] {
+        display: flex;
+        inset-block-start: 50%;
+        inset-inline-start: 50%;
+        opacity: 1;
+        transform: translate(calc(var(--md-sys-dialog-dir-factor) * -50%), -50%) scale(100%);
+        transition:
+            display var(--md-sys-motion-duration-medium2) linear allow-discrete,
+            overlay var(--md-sys-motion-duration-medium2) linear allow-discrete,
+            inset-block-start var(--md-sys-motion-duration-medium2) linear,
+            inset-inline-start var(--md-sys-motion-duration-medium2) linear,
+            width var(--md-sys-motion-duration-medium2) linear,
+            height var(--md-sys-motion-duration-medium2) linear,
+            opacity var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized-accelerate,
+            transform var(--md-sys-motion-duration-medium2) linear;
+
+        @starting-style {
+            inset-block-start: anchor(start);
+            inset-inline-start: anchor(start);
+            opacity: 0;
+            transform: translate(calc(var(--md-sys-dialog-dir-factor) * -50%), -50%) scale(50%);
+        }
+        &::backdrop {
+            @starting-style {
+                background-color: rgba(0, 0, 0, 0);
+            }
+        }
+    }
+    &:not([popover]) {
+        inset-block-start: 50%;
+        inset-inline-start: 50%;
+
+        @starting-style {
+            inset-block-start: 50%;
+            inset-inline-start: 50%;
+        }
+
+        &:popover-open,
+        &[open] {
+            @starting-style {
+                inset-block-start: 50%;
+                inset-inline-start: 50%;
+            }
+        }
+    }
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0);
+        transition:
+            display var(--md-sys-motion-duration-long2) linear allow-discrete,
+            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
+            background-color var(--md-sys-motion-duration-long2) linear;
+    }
+    &[open]::backdrop {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    &:hover {
+        background-color: color-mix(in srgb, var(--md-sys-color-surface-container-high), var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity));
+    }
+
+    .micl-dialog__headline {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        align-items: flex-start;
+        gap: 16px;
+        padding: var(--md-sys-dialog-padding);
+        background-color: transparent;
+
+        h1, h2, h3, h4, h5, h6, .micl-heading {
+            @include typography.headline-small;
+
+            flex: 1 1 100%;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--md-sys-color-on-surface);
+        }
+        .micl-dialog__icon {
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            color: var(--md-sys-color-secondary);
+        }
+        button {
+            display: none;
+        }
+        &+ .micl-dialog__actions {
+            padding-block-start: 0;
+        }
+    }
+    .micl-dialog__headline:has(> .micl-dialog__icon) {
+        align-items: center;
+    }
+    .micl-dialog__subhead {
+        @include typography.title-medium;
+
+        padding-inline: var(--md-sys-dialog-padding);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--md-sys-color-on-surface)
+    }
+    .micl-dialog__supporting-text {
+        @include typography.body-medium;
+
+        color: var(--md-sys-color-on-surface-variant);
+    }
+    .micl-dialog__content {
+        flex-shrink: 1;
+        padding-inline: var(--md-sys-dialog-padding);
+        background-color: inherit;
+        overflow-y: auto;
+    }
+    .micl-dialog__actions {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: flex-end;
+        column-gap: 8px;
+        padding: var(--md-sys-dialog-padding);
+        opacity: 1;
+        transition: opacity var(--md-sys-motion-duration-medium1) linear;
+    }
+}
+
+dialog.micl-dialog-fullscreen {
+    @media (max-width: 560px) {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        border-radius: var(--md-sys-shape-corner-none);
+        background-color: var(--md-sys-color-surface);
+        box-shadow: var(--md-sys-elevation-level0);
+        timeline-scope: --headlineTimeline;
+
+        &:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity));
+        }
+        .micl-dialog__headline {
+            height: 56px;
+            flex-direction: row;
+            align-items: center;
+            gap: 4px;
+            padding: 4px;
+            animation-name: headlineScroll;
+            animation-duration: 1ms;
+            animation-timeline: --headlineTimeline;
+            animation-fill-mode: forwards;
+            animation-range: 0% 20%;
+            z-index: 1;
+
+            h1, h2, h3, h4, h5, h6, .micl-heading {
+                @include typography.title-large;
+
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .micl-dialog__icon {
+                display:none;
+            }
+            button {
+                display: inline-block;
+
+                &.micl-button {
+                    margin-right: 16px;
+                }
+            }
+        }
+        .micl-dialog__content {
+            scroll-timeline: --headlineTimeline block;
+            scroll-timeline: --headlineTimeline vertical;
+        }
+        .micl-dialog__actions {
+            opacity: 0;
+        }
+    }
+}
+
+@keyframes headlineScroll {
+    from {
+        background-color: transparent;
+        box-shadow: var(--md-sys-elevation-level0);
+    }
+    to {
+        background-color: var(--md-sys-color-surface-container);
+        box-shadow: var(--md-sys-elevation-level2);
+    }
+}

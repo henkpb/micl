@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MICL Side Sheets</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_back,close,dark_mode&display=block">
+    <link rel="stylesheet" href="../themes/citrine/theme.css" id="theme-link">
+    <link rel="stylesheet" href="../dist/micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .micl-card__content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-block: 32px;
+            row-gap: 32px;
+        }
+        p {
+            color: var(--md-sys-color-on-surface);
+        }
+        .switch {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            height: 48px;
+        }
+        input[type=checkbox].micl-switch {
+            --md-sys-switch-unselected-icon: "";
+        }
+        #mysidesheet2 {
+            --md-sys-divider-thickness: 0;
+        }
+    </style>
+</head>
+<body class="light">
+    <div class="headline">
+        <h1 class="md-sys-typescale-emphasized-display-small">Side sheets</h1>
+        <div id="settings-placeholder"></div>
+    </div>
+
+    <div class="cards">
+        <div class="micl-card-filled">
+            <div class="micl-card__content">
+                <dialog id="mysidesheet1" class="micl-sidesheet" closedby="any" popover>
+                    <div class="micl-sidesheet__headline">
+                        <h2>Title</h2>
+                        <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet1">close</button>
+                    </div>
+                    <div class="micl-sidesheet__content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                        <p>Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                        <p>Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
+                        <p>Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
+                    </div>
+                </dialog>
+                <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet1">Open Standard Sheet</button>
+
+                <dialog id="mysidesheet2" class="micl-sidesheet" closedby="any" popover>
+                    <div class="micl-sidesheet__headline">
+                        <h2>Title</h2>
+                        <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet2">close</button>
+                    </div>
+                    <div class="micl-sidesheet__content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                        <p>Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                        <p>Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
+                        <p>Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
+                    </div>
+                </dialog>
+                <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet2">Open Standard Sheet without dividers</button>
+
+                <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest">
+                    <div class="micl-sidesheet__headline">
+                        <button class="micl-iconbutton-standard-s material-symbols-outlined">arrow_back</button>
+                        <h2>Title</h2>
+                        <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet3">close</button>
+                    </div>
+                    <div class="micl-sidesheet__content">
+                        <p class="md-sys-typescale-body-medium" style="padding-top:1rem">Make your selection:</p>
+                        <div class="switch">
+                            <label for="cb01" class="md-sys-typescale-body-medium">Selection A</label>
+                            <input type="checkbox" id="cb01" class="micl-switch">
+                        </div>
+                        <div class="switch">
+                            <label for="cb02" class="md-sys-typescale-body-medium">Selection B</label>
+                            <input type="checkbox" id="cb02" class="micl-switch" checked>
+                        </div>
+                        <div class="switch">
+                            <label for="cb03" class="md-sys-typescale-body-medium">Selection C</label>
+                            <input type="checkbox" id="cb03" class="micl-switch">
+                        </div>
+                        <div class="switch">
+                            <label for="cb04" class="md-sys-typescale-body-medium">Selection D</label>
+                            <input type="checkbox" id="cb04" class="micl-switch" checked>
+                        </div>
+                        <div class="switch">
+                            <label for="cb05" class="md-sys-typescale-body-medium">Selection E</label>
+                            <input type="checkbox" id="cb05" class="micl-switch">
+                        </div>
+                    </div>
+                    <div class="micl-sidesheet__actions">
+                    </div>
+                </dialog>
+                <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet3">Open Modal Sheet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

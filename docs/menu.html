@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MICL Menus</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,confirmation_number,dark_mode,group,home,newspaper,person,settings&display=block">
+    <link rel="stylesheet" href="../themes/citrine/theme.css" id="theme-link">
+    <link rel="stylesheet" href="../dist/micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .micl-list-item-three:has(.micl-checkbox) .micl-list-item__icon {
+            visibility: hidden;
+        }
+        .micl-list-item-three:has(.micl-checkbox:checked) .micl-list-item__icon {
+            visibility: visible;
+        }
+        .micl-card__content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-block: 32px;
+            row-gap: 32px;
+        }
+    </style>
+</head>
+<body class="light">
+    <div class="headline">
+        <h1 class="md-sys-typescale-emphasized-display-small">Menus</h1>
+        <div id="settings-placeholder"></div>
+    </div>
+
+    <div class="cards">
+        <div class="micl-card-outlined">
+            <div class="micl-card__content">
+                <div style="position:relative">
+                    <button type="button" class="micl-button-tonal-m micl-button--square" popovertarget="mymenu1">Open Basic Menu</button>
+                    <nav id="mymenu1" class="micl-menu" popover>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one" tabindex="0">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Home</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-one">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">About</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-one micl-list-item--disabled">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Contact</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div style="position:relative">
+                    <button type="button" class="micl-button-tonal-m micl-button--square" popovertarget="mymenu2">Open Menu</button>
+                    <nav id="mymenu2" class="micl-menu" popover>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-two" tabindex="0">
+                                <span class="micl-list-item__icon material-symbols-outlined">home</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Home</span>
+                                    <span class="micl-list-item__supporting-text">Click here to go home</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-two">
+                                <span class="micl-list-item__icon material-symbols-outlined">person</span>
+                                <label for="cb1" class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Person</span>
+                                    <span class="micl-list-item__supporting-text">Are you an administrator?</span>
+                                </label>
+                                <input type="checkbox" id="cb1" class="micl-checkbox" value="c1" tabindex="-1">
+                            </li>
+                            <li class="micl-list-item-two">
+                                <span class="micl-list-item__icon material-symbols-outlined">settings</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">About</span>
+                                    <span class="micl-list-item__supporting-text">Change everything in the system</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-two micl-list-item__divider">
+                                <span class="micl-list-item__icon material-symbols-outlined">confirmation_number</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Contact</span>
+                                    <span class="micl-list-item__supporting-text">Call me!</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div style="position:relative">
+                    <button type="button" class="micl-button-tonal-m micl-button--square" popovertarget="mymenu3">Open Big Menu</button>
+                    <nav id="mymenu3" class="micl-menu" popover>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-three" tabindex="0">
+                                <span class="micl-list-item__icon material-symbols-outlined">group</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Number of employees</span>
+                                    <span class="micl-list-item__supporting-text">Currently + those who have signed a contract</span>
+                                </span>
+                                <span class="micl-list-item__trailing-text">381</span>
+                            </li>
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/1928_Model_A_Ford.jpg/330px-1928_Model_A_Ford.jpg)"></span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Company cars</span>
+                                    <span class="micl-list-item__supporting-text">Available to our wonderful employees</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-three">
+                                <a href="https://www.nytimes.com" tabindex="-1">
+                                    <span class="micl-list-item__icon material-symbols-outlined">newspaper</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">The New York Times</span>
+                                        <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__icon material-symbols-outlined">check</span>
+                                <label for="cb2" class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Select or Unselect</span>
+                                    <span class="micl-list-item__supporting-text">A check-mark before this text if the item is selected.</span>
+                                </label>
+                                <input type="checkbox" id="cb2" class="micl-checkbox" style="display:none" value="c2" tabindex="-1">
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

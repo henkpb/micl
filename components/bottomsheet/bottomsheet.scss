@@ -1,0 +1,134 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+
+dialog.micl-bottomsheet {
+    --md-sys-bottomsheet-height: max-content;
+    --md-sys-bottomsheet-margin: 56px;
+    --md-sys-bottomsheet-padding: 24px;
+    --md-sys-bottomsheet-handle-width: 32px;
+    --md-sys-bottomsheet-handle-height: 4px;
+
+    box-sizing: border-box;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    height: 0;
+    max-height: 50vh;
+    width: 100%;
+    min-width: 100%;
+    margin: 72px 0 0 0 ;
+    padding: 0;
+    border: none;
+    border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) 0 0;
+    background-color: var(--md-sys-color-surface-container-low);
+    box-shadow: var(--md-sys-elevation-level1);
+    opacity: 0;
+    overflow-y: hidden;
+    interpolate-size: allow-keywords;
+
+    &:not(.micl-bottomsheet--resizing) {
+        transition:
+            display var(--md-sys-motion-duration-medium1) allow-discrete,
+            overlay var(--md-sys-motion-duration-medium1) allow-discrete,
+            height var(--md-sys-motion-duration-medium1) linear(motion.$md-sys-motion-spring-default-spatial),
+            opacity var(--md-sys-motion-duration-medium1) motion.$md-sys-motion-easing-emphasized-accelerate;
+    }
+    &.micl-bottomsheet--resizing .micl-bottomsheet__headline {
+        cursor: grabbing;
+    }
+    .micl-bottomsheet__headline {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: var(--md-sys-target-size);
+        justify-content: center;
+        cursor: grab;
+
+        .micl-bottomsheet__draghandle {
+            box-sizing: content-box;
+            width: var(--md-sys-bottomsheet-handle-width);
+            height: var(--md-sys-bottomsheet-handle-height);
+            padding: 16px calc((var(--md-sys-target-size) - var(--md-sys-bottomsheet-handle-width)) / 2);
+            border: none;
+            border-radius: var(--md-sys-shape-corner-small);
+            background-color: var(--md-sys-color-on-surface-variant);
+            background-clip: content-box;
+            cursor: pointer;
+
+            &:focus-visible {
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
+            }
+        }
+    }
+
+    .micl-bottomsheet__content {
+        padding: 0 var(--md-sys-bottomsheet-padding) var(--md-sys-bottomsheet-padding) var(--md-sys-bottomsheet-padding);
+    }
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0);
+        transition:
+            display var(--md-sys-motion-duration-long2) linear allow-discrete,
+            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
+            background-color var(--md-sys-motion-duration-long2) linear;
+    }
+    &:popover-open,
+    &[open] {
+        height: var(--md-sys-bottomsheet-height);
+        opacity: 1;
+        // overflow-y: auto;
+
+        &:not(.micl-bottomsheet--resizing) {
+            transition:
+                display var(--md-sys-motion-duration-long2) linear allow-discrete,
+                overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
+                height var(--md-sys-motion-duration-long2) linear(motion.$md-sys-motion-spring-default-spatial),
+                opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+        }
+        @starting-style {
+            height: 0;
+            opacity: 0;
+        }
+        &::backdrop {
+            @starting-style {
+                background-color: rgba(0, 0, 0, 0);
+            }
+        }
+    }
+    &[open]::backdrop {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media (min-width: 641px) {
+    dialog.micl-bottomsheet {
+        width: min(100vw - (2 * var(--md-sys-bottomsheet-margin)), 640px);
+        max-width: 640px;
+        min-width: min(100vw - (2 * var(--md-sys-bottomsheet-margin)), 640px);
+        inset-inline-start: calc(((100vw - min(100vw - (2 * var(--md-sys-bottomsheet-margin)), 640px)) / 2) - var(--md-sys-bottomsheet-margin));
+        margin: var(--md-sys-bottomsheet-margin);
+        margin-bottom: 0;
+    }
+}
