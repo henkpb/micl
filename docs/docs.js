@@ -58,7 +58,7 @@ document.getElementById('settings-placeholder').innerHTML =
 document.getElementById('theme').addEventListener('change', event => {
     const themelink = document.getElementById('theme-link');
     if (themelink) {
-        themelink.href = `../themes/${event.target.value}/theme.css`
+        themelink.href = `https://henkpb.github.io/micl/themes/${event.target.value}/theme.css`
     }
 });
 document.getElementById('mode').addEventListener('change', event => {
