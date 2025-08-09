@@ -40,7 +40,7 @@ miclMenu.initialize(document.querySelector('.micl-menu'));
 ```
 
 ### Demo
-A live example of the [Menu component]() is available for you to interact with.
+A live example of the [Menu component](https://henkpb.github.io/micl/menu.html) is available for you to interact with.
 
 ## Variants
 Since the Menu component is based on the **List component**, all of its list item variants and content features can be used. You can incorporate icons, avatars, images, multiple lines of text, and more.

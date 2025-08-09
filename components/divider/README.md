@@ -20,6 +20,9 @@ Import the divider styles into your project:
 ### TypeScript
 No custom TypeScript is required for the core functionality of this component.
 
+### Demo
+A live example of the [Divider component](https://henkpb.github.io/micl/divider.html) is available for you to interact with.
+
 ## Variants
 The Divider component offers five CSS classes for different divider styles:
 

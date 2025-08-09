@@ -28,6 +28,9 @@ import miclButton from 'micl/components/button';
 miclButton.initialize(document.querySelector('.micl-button-text-s'));
 ```
 
+### Demo
+A live example of the [Button component](https://henkpb.github.io/micl/button.html) is available for you to interact with.
+
 ## Variants
 Buttons come in **five sizes**: extra small (`xs`), small (`s`), medium (`m`), large (`l`), and extra large (`xl`). To specify a size, append the appropriate postfix to the button's style class:
 

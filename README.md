@@ -14,7 +14,7 @@ The Material-Inspired Component Library (MICL) offers a free and open-source col
 ## Demo & Documentation 📖
 Explore the components in a live environment and see how they work.
 
-- **Live Demo:** [The MICL Showcase]()
+- **Live Demo:** [The MICL Showcase](https://henkpb.github.io/micl/)
 - **Component Documentation:** [View all component documentation](components/README.md)
 
 ## Quick start 🚀
