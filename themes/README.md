@@ -48,7 +48,7 @@ The MICL package includes several example color schemes that you can use as a st
 To use the "Olive Green" light theme, for instance, simply import it into your main stylesheet:
 
 ```CSS
-@use "micl/themes/olivegreen/light.css";
+@use "material-inspired-component-library/themes/olivegreen/light.css";
 ```
 
 You can then apply this theme to your <body> or another root element in your application.

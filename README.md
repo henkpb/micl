@@ -30,18 +30,18 @@ npm install material-inspired-component-library
 
 To import the styles for a single component:
 ```SCSS
-@use "micl/components/card";
+@use "material-inspired-component-library/components/card";
 ```
 To import all component styles:
 ```SCSS
-@use "micl/styles";
+@use "material-inspired-component-library/styles";
 ```
 
 **Plain CSS**
 
 Add the main CSS file to your project:
 ```HTML
-<link rel="stylesheet" href="node_modules/micl/dist/micl.css">
+<link rel="stylesheet" href="node_modules/material-inspired-component-library/dist/micl.css">
 ```
 
 ### 3. Add the HTML & JavaScript
@@ -61,22 +61,22 @@ Some components, list the **List**, require a small amount of JavaScript to hand
 
 ```TypeScript
 // For components with interactive behaviour
-import list from "micl/components/lists";
+import list from "material-inspired-component-library/components/lists";
 
 // To import TypeScript for all components
-import components from "micl/components";
+import components from "material-inspired-component-library/components";
 ```
 
 To import all the TypeScript into your project:
 ```TypeScript
-import components from "micl/components";
+import components from "material-inspired-component-library/components";
 ```
 
 **Plain JavaScript**
 
 Add the main JavaScript file to your project:
 ```HTML
-<script src="node_modules/micl/dist/micl.js"></script>
+<script src="node_modules/material-inspired-component-library/dist/micl.js"></script>
 ```
 
 ## Available components ✅

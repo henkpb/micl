@@ -27,7 +27,7 @@ To create a standard side sheet, use the `<dialog>` element with the `popover` a
 Import the side sheet styles into your project:
 
 ```CSS
-@use "micl/components/sidesheet";
+@use "material-inspired-component-library/components/sidesheet";
 ```
 
 ### TypeScript

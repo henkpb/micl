@@ -14,7 +14,7 @@ To add a basic divider, use the `<hr>` element with the `micl-divider` class:
 Import the divider styles into your project:
 
 ```CSS
-@use "micl/components/divider";
+@use "material-inspired-component-library/components/divider";
 ```
 
 ### TypeScript

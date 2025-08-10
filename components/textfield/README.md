@@ -17,7 +17,7 @@ A basic text field can be either `filled` or `outlined`. To create one, use the 
 Import the text field styles into your project:
 
 ```CSS
-@use "micl/components/textfield";
+@use "material-inspired-component-library/components/textfield";
 ```
 
 ### TypeScript
@@ -26,7 +26,7 @@ This component requires a TypeScript module for interactive features like the **
 To manually initialize the component and attach an event listener for the `input` event:
 
 ```TypeScript
-import miclTextField from 'micl/components/textfield';
+import miclTextField from 'material-inspired-component-library/components/textfield';
 
 miclTextField.initialize(document.querySelector('.micl-textfield-filled'));
 

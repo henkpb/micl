@@ -24,8 +24,8 @@ The Menu component is an extension of the [List component](../list/README.md). I
 Import the styles for both the menu and list components into your project:
 
 ```CSS
-@use "micl/components/list";
-@use "micl/components/menu";
+@use "material-inspired-component-library/components/list";
+@use "material-inspired-component-library/components/menu";
 ```
 
 ### TypeScript
@@ -34,7 +34,7 @@ This component requires the **Menu** TypeScript module for functionality. You ca
 To manually initialize the component:
 
 ```TypeScript
-import miclMenu from 'micl/components/menu';
+import miclMenu from 'material-inspired-component-library/components/menu';
 
 miclMenu.initialize(document.querySelector('.micl-menu'));
 ```

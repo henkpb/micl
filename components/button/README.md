@@ -14,7 +14,7 @@ To create a basic button, use the `<button>` element with a class that specifies
 Import the button styles into your project:
 
 ```CSS
-@use "micl/components/button";
+@use "material-inspired-component-library/components/button";
 ```
 
 ### TypeScript
@@ -23,7 +23,7 @@ This component requires a TypeScript module for interactive features like the **
 To manually initialize the component:
 
 ```TypeScript
-import miclButton from 'micl/components/button';
+import miclButton from 'material-inspired-component-library/components/button';
 
 miclButton.initialize(document.querySelector('.micl-button-text-s'));
 ```

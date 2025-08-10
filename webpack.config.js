@@ -6,7 +6,7 @@ const distDir = path.resolve(__dirname, 'dist');
 
 const scssFiles = glob.sync('./components/**/*.scss');
 const scssEntries = scssFiles.reduce((entries, filePath) => {
-    const componentName = path.basename(filePath, '.scss');
+    const componentName = path.dirname(filePath).split('\\').pop();
     entries[componentName] = './' + filePath;
     return entries;
 }, {});

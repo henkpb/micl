@@ -31,7 +31,7 @@ The Accordion component is an extension of the [**List** component](../list/READ
 Import the list styles into your project:
 
 ```CSS
-@use "micl/components/list";
+@use "material-inspired-component-library/components/list";
 ```
 
 ### TypeScript
@@ -40,7 +40,7 @@ This component requires a TypeScript module to support keyboard navigation. You 
 To manually initialize the component:
 
 ```TypeScript
-import miclAccordion from 'micl/components/list';
+import miclAccordion from 'material-inspired-component-library/components/list';
 
 miclAccordion.initialize(document.querySelector('.micl-list'));
 ```

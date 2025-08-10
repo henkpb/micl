@@ -24,7 +24,7 @@ To create a basic list, use the `<ul>` element with the `micl-list` class and in
 Import the list styles into your project:
 
 ```CSS
-@use "micl/components/list";
+@use "material-inspired-component-library/components/list";
 ```
 
 ### TypeScript
@@ -33,7 +33,7 @@ This component requires a TypeScript module to support keyboard navigation. You 
 To manually initialize the component:
 
 ```TypeScript
-import miclList from 'micl/components/list';
+import miclList from 'material-inspired-component-library/components/list';
 
 miclList.initialize(document.querySelector('.micl-list'));
 ```

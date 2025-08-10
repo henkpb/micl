@@ -16,7 +16,7 @@ To add a basic card, use a `<div>` element with one of the primary card style cl
 Import the card styles into your project:
 
 ```CSS
-@use "micl/components/card";
+@use "material-inspired-component-library/components/card";
 ```
 
 ### TypeScript

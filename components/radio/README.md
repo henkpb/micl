@@ -15,7 +15,7 @@ To add a basic radio button, use the `<input type="radio">` element with the `mi
 Import the radio button styles into your project:
 
 ```CSS
-@use "micl/components/radio";
+@use "material-inspired-component-library/components/radio";
 ```
 
 ### TypeScript

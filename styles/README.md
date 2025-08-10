@@ -8,7 +8,7 @@ Elevation represents the distance between surfaces on the z-axis, creating a sen
 Import the elevation styles into your project:
 
 ```CSS
-@use "micl/styles/elevation";
+@use "material-inspired-component-library/styles/elevation";
 ```
 
 ### Customizations
@@ -31,7 +31,7 @@ Motion brings your UI to life, making it expressive and intuitive to use. The mo
 Import the motion styles into your project:
 
 ```CSS
-@use "micl/styles/motion";
+@use "material-inspired-component-library/styles/motion";
 ```
 
 
@@ -42,7 +42,7 @@ Shapes add decorative flair and help emphasize elements. These styles adhere to 
 Import the shape styles into your project:
 
 ```CSS
-@use "micl/styles/shapes";
+@use "material-inspired-component-library/styles/shapes";
 ```
 
 ### Customizations
@@ -65,7 +65,7 @@ State layers are visual overlays that communicate the interaction status of a co
 Import the state layer styles into your project:
 
 ```CSS
-@use "micl/styles/statelayer";
+@use "material-inspired-component-library/styles/statelayer";
 ```
 
 ### Customizations
@@ -86,7 +86,7 @@ Typography is the foundation of text styling. The typography styles in this libr
 Import the typography styles into your project:
 
 ```CSS
-@use "micl/styles/typography";
+@use "material-inspired-component-library/styles/typography";
 ```
 
 ### Customizations
