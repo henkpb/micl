@@ -21,7 +21,7 @@ Explore the components in a live environment and see how they work.
 
 ### 1. Install via NPM
 ```shell
-npm install micl
+npm install material-inspired-component-library
 ```
 
 ### 2. Add the CSS
