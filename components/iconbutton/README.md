@@ -16,7 +16,7 @@ To create a basic icon button, use the `<button>` element with a class that spec
 Import the icon button styles into your project:
 
 ```CSS
-@use "micl/components/iconbutton";
+@use "material-inspired-component-library/components/iconbutton";
 ```
 
 ### TypeScript
@@ -25,7 +25,7 @@ This component requires a TypeScript module for interactive features like the **
 To manually initialize the component:
 
 ```TypeScript
-import miclIconButton from 'micl/components/button';
+import miclIconButton from 'material-inspired-component-library/components/button';
 
 miclIconButton.initialize(document.querySelector('.micl-iconbutton-standard-s'));
 ```

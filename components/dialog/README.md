@@ -25,7 +25,7 @@ To create a basic dialog, use the `<dialog>` element with the `micl-dialog` clas
 Import the dialog styles into your project:
 
 ```CSS
-@use "micl/components/dialog";
+@use "material-inspired-component-library/components/dialog";
 ```
 
 ### TypeScript

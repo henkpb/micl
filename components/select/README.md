@@ -24,9 +24,9 @@ The Select component is an extension of the [Text field](../textfield/README.md)
 The Select component relies on styles from the text field and list components. Be sure to import all three styles into your project.
 
 ```CSS
-@use "micl/components/list";
-@use "micl/components/textfield";
-@use "micl/components/select";
+@use "material-inspired-component-library/components/list";
+@use "material-inspired-component-library/components/textfield";
+@use "material-inspired-component-library/components/select";
 ```
 
 ### TypeScript
@@ -35,7 +35,7 @@ This component requires the **Text field** TypeScript module for functionality. 
 To manually initialize the component:
 
 ```TypeScript
-import miclTextField from 'micl/components/textfield';
+import miclTextField from 'material-inspired-component-library/components/textfield';
 
 miclTextField.initialize(document.querySelector('.micl-textfield-filled'));
 ```

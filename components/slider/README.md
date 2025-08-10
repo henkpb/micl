@@ -14,7 +14,7 @@ To add a basic slider, use the `<input type="range">` element with one of the pr
 Import the slider styles into your project:
 
 ```CSS
-@use "micl/components/slider";
+@use "material-inspired-component-library/components/slider";
 ```
 
 ### TypeScript
@@ -23,7 +23,7 @@ This component requires the **Slider** TypeScript module for functionality. You 
 To manually initialize the component:
 
 ```TypeScript
-import miclSlider from 'micl/components/slider';
+import miclSlider from 'material-inspired-component-library/components/slider';
 
 miclSlider.initialize(document.querySelector('.micl-slider-m'));
 ```

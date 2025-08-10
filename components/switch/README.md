@@ -15,7 +15,7 @@ To add a basic switch, use the `<input type="checkbox">` element with the `micl-
 Import the switch styles into your project:
 
 ```CSS
-@use "micl/components/switch";
+@use "material-inspired-component-library/components/switch";
 ```
 
 ### TypeScript
