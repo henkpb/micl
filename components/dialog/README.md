@@ -31,6 +31,9 @@ Import the dialog styles into your project:
 ### TypeScript
 No custom TypeScript is required for the core functionality of this component, as the native popover attribute handles the open/close behavior.
 
+### Demo
+A live example of the [Dialog component](https://henkpb.github.io/micl/dialog.html) is available for you to interact with.
+
 ## Variants
 When dialogs with the `popover` attribute are opened, they animate from the control element to the center of the screen. They can be easily dismissed by clicking outside or pressing <kbd>Esc</kbd>.
 

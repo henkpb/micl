@@ -30,6 +30,9 @@ import miclIconButton from 'material-inspired-component-library/components/butto
 miclIconButton.initialize(document.querySelector('.micl-iconbutton-standard-s'));
 ```
 
+### Demo
+A live example of the [Icon button component](https://henkpb.github.io/micl/iconbutton.html) is available for you to interact with.
+
 ## Variants
 Icon buttons come in **five sizes**: extra small (`xs`), small (`s`), medium (`m`), large (`l`), and extra large (`xl`). To specify a size, append the appropriate postfix to the button's style class:
 

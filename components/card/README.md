@@ -22,6 +22,9 @@ Import the card styles into your project:
 ### TypeScript
 No custom TypeScript is required for the core functionality of this component.
 
+### Demo
+A live example of the [Card component](https://henkpb.github.io/micl/card.html) is available for you to interact with.
+
 ## Variants
 Cards come in **three distinct styles**:
 

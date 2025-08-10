@@ -45,6 +45,9 @@ import miclAccordion from 'material-inspired-component-library/components/list';
 miclAccordion.initialize(document.querySelector('.micl-list'));
 ```
 
+### Demo
+A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available for you to interact with.
+
 ## Variants
 To ensure that only one accordion item within a group can be open at a time, add a matching `name` attribute to all the `<details>` elements you want to group together.
 

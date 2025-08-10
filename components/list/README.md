@@ -38,6 +38,9 @@ import miclList from 'material-inspired-component-library/components/list';
 miclList.initialize(document.querySelector('.micl-list'));
 ```
 
+### Demo
+A live example of the [List component](https://henkpb.github.io/micl/list.html) is available for you to interact with.
+
 ## Variants
 The List component offers three CSS classes to control the height and content capacity of individual list items:
 

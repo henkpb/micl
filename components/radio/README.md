@@ -21,6 +21,9 @@ Import the radio button styles into your project:
 ### TypeScript
 No custom TypeScript is required for the core functionality of this component. However, to enable the ripple effect on interaction, include the Ripple TypeScript in your project.
 
+### Demo
+A live example of the [Radio button component](https://henkpb.github.io/micl/radio.html) is available for you to interact with.
+
 ## Variants
 A radio button can be disabled by adding the `disabled` attribute to the `<input>` element.
 

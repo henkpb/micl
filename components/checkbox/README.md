@@ -29,6 +29,9 @@ import miclCheckbox from 'material-inspired-component-library/components/checkbo
 miclCheckbox.initialize(document.querySelector('.micl-checkbox'));
 ```
 
+### Demo
+A live example of the [Checkbox component](https://henkpb.github.io/micl/checkbox.html) is available for you to interact with.
+
 ## Variants
 Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification.
 
