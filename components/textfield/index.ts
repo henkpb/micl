@@ -21,13 +21,14 @@
 
 export const textfieldSelector = '.micl-textfield-outlined > input,.micl-textfield-filled > input';
 export const selectSelector    = '.micl-textfield-outlined > select,.micl-textfield-filled > select';
+export const textareaSelector  = '.micl-textfield-outlined > textarea,.micl-textfield-filled > textarea';
 
 export default (() =>
 {
-    const counterSelector = '.micl-textfield-character-counter';
+    const counterSelector = '.micl-textfield__character-counter';
 
     return {
-        initialize: (element: HTMLInputElement | HTMLSelectElement): void =>
+        initialize: (element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
         {
             if (element.dataset.miclinitialized) {
                 return;
@@ -39,21 +40,25 @@ export default (() =>
             }
 
             if (
-                (element instanceof HTMLInputElement)
-                && !!element.maxLength
+                (element instanceof HTMLSelectElement)
+                || !element.maxLength
             ) {
-                const counter = element.parentElement?.querySelector(counterSelector);
-                if (counter) {
-                    counter.textContent = `${element.value.length}/${element.maxLength}`;
-                }
+                return;
+            }
+
+            const counter = element.parentElement?.querySelector(counterSelector);
+            if (counter) {
+                counter.textContent = `${element.value.length}/${element.maxLength}`;
             }
         },
 
         input: (event: Event): void =>
         {
             if (
-                !(event.target as Element).matches(`${textfieldSelector},${selectSelector}`)
-                || !((event.target instanceof HTMLInputElement) || (event.target instanceof HTMLSelectElement))
+                !(event.target as Element).matches(`${textfieldSelector},${selectSelector},${textareaSelector}`)
+                || !((event.target instanceof HTMLInputElement)
+                    || (event.target instanceof HTMLSelectElement)
+                    || (event.target instanceof HTMLTextAreaElement))
                 || !event.target.dataset.miclinitialized
                 || event.target.disabled
             ) {
@@ -68,13 +73,15 @@ export default (() =>
             }
 
             if (
-                (event.target instanceof HTMLInputElement)
-                && !!event.target.maxLength
+                (event.target instanceof HTMLSelectElement)
+                || !event.target.maxLength
             ) {
-                const counter = event.target.parentElement?.querySelector(counterSelector);
-                if (counter) {
-                    counter.textContent = `${event.target.value.length}/${event.target.maxLength}`;
-                }
+                return;
+            }
+
+            const counter = event.target.parentElement?.querySelector(counterSelector);
+            if (counter) {
+                counter.textContent = `${event.target.value.length}/${event.target.maxLength}`;
             }
         }
     };

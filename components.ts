@@ -25,7 +25,7 @@ import _checkbox, { checkboxSelector } from './components/checkbox';
 import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _slider, { sliderSelector } from './components/slider';
-import _textfield, { textfieldSelector, selectSelector } from './components/textfield';
+import _textfield, { textfieldSelector, selectSelector, textareaSelector } from './components/textfield';
 
 interface ComponentEntry<T extends HTMLElement> {
     component: {
@@ -47,6 +47,7 @@ export default (() =>
         [menuSelector]       : { component: _menu, type: HTMLElement },
         [selectSelector]     : { component: _textfield, type: HTMLSelectElement },
         [sliderSelector]     : { component: _slider, type: HTMLInputElement },
+        [textareaSelector]   : { component: _textfield, type: HTMLTextAreaElement },
         [textfieldSelector]  : { component: _textfield, type: HTMLInputElement }
     };
 

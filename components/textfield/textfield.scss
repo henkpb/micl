@@ -24,6 +24,7 @@
 
 .micl-textfield-filled,
 .micl-textfield-outlined {
+    --md-sys-textfield-height: 56px;
     --md-sys-textfield-icon-size: 24px;
     --md-sys-textfield-icon-space: 12px;
     --md-sys-textfield-input-space: 16px;
@@ -40,30 +41,29 @@
 
         box-sizing: content-box;
         grid-area: textfield;
+        align-self: flex-start;
         width: fit-content;
-        line-height: 1;
         padding-inline: 4px;
-        margin-block-start: 0px;
+        margin-block-start: calc((var(--md-sys-textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
         margin-inline-start: 12px;
         border-radius: 4px;
         background-color: inherit;
         color: var(--md-sys-color-on-surface-variant);
         z-index: 1;
         transition:
-            margin-block-start var(--md-sys-motion-duration-long1) var(--md-sys-motion-duration-short3) linear(motion.$md-sys-motion-spring-default-spatial),
-            margin-inline-start var(--md-sys-motion-duration-long1) var(--md-sys-motion-duration-short3) linear(motion.$md-sys-motion-spring-default-spatial),
-            font-size var(--md-sys-motion-duration-long1),
-            letter-spacing var(--md-sys-motion-duration-long1);
+            margin-block-start var(--md-sys-motion-duration-medium2) var(--md-sys-motion-duration-short3),
+            margin-inline-start var(--md-sys-motion-duration-medium2) var(--md-sys-motion-duration-short3),
+            font-size var(--md-sys-motion-duration-medium2),
+            letter-spacing var(--md-sys-motion-duration-medium2);
     }
     &> input,
-    &> select {
+    &> select,
+    &> textarea {
         @include typography.body-large;
 
         box-sizing: border-box;
         grid-area: textfield;
-        height: 56px;
         margin: 0;
-        padding-block: 0;
         padding-inline: var(--md-sys-textfield-input-space);
         border: none;
         border-block-end: 1px solid var(--md-sys-color-on-surface-variant);
@@ -75,7 +75,7 @@
         caret-color: var(--md-sys-color-primary);
 
         &:disabled {
-            border-color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            border-block-end-color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
             color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
         }
         &::placeholder {
@@ -90,13 +90,32 @@
             -moz-appearance: textfield;
         }
     }
+    &> input,
+    &> select {
+        height: var(--md-sys-textfield-height);
+        padding-block: 0;
+    }
+    &> textarea {
+        min-height: var(--md-sys-textfield-height);
+        padding-block: calc((var(--md-sys-textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+        resize: none;
+
+        &[rows] {
+            padding-block-start: 0;
+            border-block-start: 8px solid transparent;
+            overflow: hidden;
+        }
+        &:not([rows]) {
+            field-sizing: content;
+        }
+    }
     &> .micl-textfield__prefix,
     &> .micl-textfield__suffix {
         @include typography.body-large;
 
         grid-area: textfield;
         align-content: center;
-        height: 56px;
+        height: var(--md-sys-textfield-height);
         color: var(--md-sys-color-on-surface-variant);
         opacity: 0;
         z-index: 1;
@@ -124,12 +143,14 @@
         margin-inline: auto var(--md-sys-textfield-icon-space);
     }
     &:has(> .micl-textfield__prefix) {
-        &> input {
+        &> input,
+        &> textarea {
             padding-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-prefix-space));
         }
     }
     &:has(> .micl-textfield__suffix) {
-        &> input {
+        &> input,
+        &> textarea {
             padding-inline-end: calc(var(--md-sys-textfield-suffix-space) + var(--md-sys-textfield-input-space));
         }
     }
@@ -138,19 +159,23 @@
             margin-inline-start: calc(var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-input-space));
         }
         &> .micl-textfield__prefix,
-        &> input {
+        &> input,
+        &> textarea {
             padding-inline-start: calc(var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-input-space));
         }
-        &:has(> .micl-textfield__prefix) > input {
+        &:has(> .micl-textfield__prefix) > input,
+        &:has(> .micl-textfield__prefix) > textarea {
             padding-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-prefix-space));
         }
     }
     &:has(> .micl-textfield__icon-trailing) {
         &> .micl-textfield__suffix,
-        &> input {
+        &> input,
+        &> textarea {
             padding-inline-end: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space));
         }
-        &:has(> .micl-textfield__suffix) > input {
+        &:has(> .micl-textfield__suffix) > input,
+        &:has(> .micl-textfield__suffix) > textarea {
             padding-inline-end: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-prefix-space) + var(--md-sys-textfield-icon-space));
         }
     }
@@ -162,28 +187,33 @@
         padding-block: 4px 0;
         padding-inline: 16px;
         color: var(--md-sys-color-on-surface-variant);
+
+        &.micl-textfield__supporting-text--focus {
+            visibility: hidden;
+        }
     }
     &> .micl-textfield__character-counter {
         justify-self: flex-end;
     }
     &:has(> input:active),
     &:has(> select:active),
+    &:has(> textarea:active),
     &:has(> input:focus),
     &:has(> select:focus),
+    &:has(> textarea:focus),
     &:has(> input:focus-visible),
-    &:has(> select:focus-visible) {
+    &:has(> select:focus-visible),
+    &:has(> textarea:focus-visible) {
         &> label {
             color: var(--md-sys-color-primary);
         }
-        &> .micl-textfield__icon-leading,
-        &> .micl-textfield__icon-trailing,
-        &> .micl-textfield__supporting-text,
-        &> .micl-textfield__character-counter {
-            color: var(--md-sys-color-on-surface-variant);
+        &> .micl-textfield__supporting-text.micl-textfield__supporting-text--focus {
+            visibility: visible;
         }
     }
     &:has(> input:disabled),
-    &:has(> select:disabled) {
+    &:has(> select:disabled),
+    &:has(> textarea:disabled) {
         &> label {
             color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
         }
@@ -196,12 +226,14 @@
             display: none;
         }
     }
-    &:has(> input:not([maxlength])) {
+    &:has(> input:not([maxlength])),
+    &:has(> textarea:not([maxlength])) {
         &> .micl-textfield__character-counter {
             display: none;
         }
     }
-    &:has(> input[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) {
+    &:has(> input[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter),
+    &:has(> textarea[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) {
         &> .micl-textfield__supporting-text {
             padding-inline-end: 64px;
         }
@@ -214,14 +246,17 @@
     }
     &:hover {
         &> input:not(:disabled),
-        &> select:not(:disabled) {
-            border-color: var(--md-sys-color-on-surface);
+        &> select:not(:disabled),
+        &> textarea:not(:disabled) {
+            border-block-end-color: var(--md-sys-color-on-surface);
             background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
         }
     }
     &> input,
-    &> select {
-        padding-block-start: 16px;
+    &> select,
+    &> textarea {
+        padding-block-start: 18px;
+        padding-block-end: 2px;
         background-color: var(--md-sys-color-surface-container-highest);
         border-end-start-radius: 0;
         border-end-end-radius: 0;
@@ -233,13 +268,16 @@
         &:not(:disabled):focus,
         &:not(:disabled):focus-visible,
         &:not(:disabled):active {
-            padding-block-start: 18px;
-            border-width: 3px;
-            border-color: var(--md-sys-color-primary);
+            padding-block-end: 0px;
+            border-block-end-width: 3px;
+            border-block-end-color: var(--md-sys-color-primary);
         }
     }
     &> select {
         line-height: 28px;
+    }
+    &> textarea {
+        padding-block-start: 24px;
     }
     &:has(
         > input:focus,
@@ -252,12 +290,15 @@
         > input[type=week],
         > select:focus,
         > select[value]:not([value='']):not([data-miclinitialized]),
-        > select[data-miclvalue]
+        > select[data-miclvalue],
+        > textarea:focus,
+        > textarea:not(:empty):not([data-miclinitialized]),
+        > textarea[data-miclvalue]
     ) {
         &> label {
             @include typography.body-small;
 
-            margin-block-start: -24px;
+            margin-block-start: 8px;
             margin-inline-start: 12px;
         }
         &:has(> .micl-textfield__icon-leading) > label {
@@ -279,13 +320,15 @@
             color: var(--md-sys-color-on-surface);
         }
         &> input:not(:disabled),
-        &> select:not(:disabled) {
+        &> select:not(:disabled),
+        &> textarea:not(:disabled) {
             outline-color: var(--md-sys-color-on-surface);
             color: var(--md-sys-color-on-surface);
         }
     }
     &> input,
-    &> select {
+    &> select,
+    &> textarea {
         border: none;
         outline: 1px solid var(--md-sys-color-outline);
 
@@ -300,7 +343,7 @@
         }
     }
     &> select {
-        line-height: 56px;
+        line-height: var(--md-sys-textfield-height);
     }
     &:has(
         > input:focus,
@@ -313,12 +356,15 @@
         > input[type=week],
         > select:focus,
         > select[value]:not([value='']):not([data-miclinitialized]),
-        > select[data-miclvalue]
+        > select[data-miclvalue],
+        > textarea:focus,
+        > textarea:not(:empty):not([data-miclinitialized]),
+        > textarea[data-miclvalue]
     ) {
         &> label {
             @include typography.body-small;
 
-            margin-block-start: -56px;
+            margin-block-start: calc(-2px - var(--md-sys-typescale-body-small-line-height) / 2);
             margin-inline-start: 12px;
         }
         &> .micl-textfield__prefix,
@@ -336,18 +382,17 @@
     &> .micl-textfield__character-counter {
         color: var(--md-sys-color-error);
     }
-    &> input {
-        border-color: var(--md-sys-color-error);
+    &> input,
+    &> textarea {
+        border-block-end-color: var(--md-sys-color-error);
         outline-color: var(--md-sys-color-error);
-        color: var(--md-sys-color-on-surface);
         caret-color: var(--md-sys-color-error);
 
         &:active,
         &:focus,
         &:focus-visible {
-            border-color: var(--md-sys-color-error);
+            border-block-end-color: var(--md-sys-color-error);
             outline-color: var(--md-sys-color-error);
-            color: var(--md-sys-color-on-surface);
         }
     }
     &:hover {
@@ -355,22 +400,20 @@
         &> .micl-textfield__icon-trailing {
             color: var(--md-sys-color-on-error-container);
         }
-        &> input {
-            border-color: var(--md-sys-color-on-error-container);
+        &> input,
+        &> textarea {
+            border-block-end-color: var(--md-sys-color-on-error-container);
             outline-color: var(--md-sys-color-on-error-container);
-        }
-        &> .micl-textfield__supporting-text,
-        &> .micl-textfield__character-counter {
-            color: var(--md-sys-color-error);
         }
     }
     &:has(> input:active),
     &:has(> input:focus),
-    &:has(> input:focus-visible) {
+    &:has(> input:focus-visible),
+    &:has(> textarea:active),
+    &:has(> textarea:focus),
+    &:has(> textarea:focus-visible) {
         &> label,
-        &> .micl-textfield__icon-trailing,
-        &> .micl-textfield__supporting-text,
-        &> .micl-textfield__character-counter {
+        &> .micl-textfield__icon-trailing {
             color: var(--md-sys-color-error);
         }
     }
