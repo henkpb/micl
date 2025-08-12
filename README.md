@@ -97,3 +97,9 @@ The library currently consists of the following components:
 - [x] [Slider](components/slider/README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)
+
+## Change Log
+
+#### 1.1.0 (12.08.2025)
+**Features**
+- **Text field**: Added support for multi-line text fields.
