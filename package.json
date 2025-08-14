@@ -35,12 +35,14 @@
   "bugs": {
     "url": "https://github.com/henkpb/micl/issues"
   },
-  "main": "index.js",
+  "main": "dist/micl.js",
+  "types": "dist/micl.d.ts",
   "scripts": {
     "build": "webpack",
     "start": "echo 'No start script yet'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "sideEffects": false,
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "css-loader": "^7.1.2",

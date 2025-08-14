@@ -20,6 +20,9 @@
 // SOFTWARE.
 
 @use '../../styles/motion';
+@use '../../styles/shapes';
+@use '../../styles/statelayer';
+@use '../../styles/typography';
 
 input[type=checkbox].micl-switch {
     --md-sys-switch-target-height: 32px;

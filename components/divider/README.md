@@ -14,11 +14,11 @@ To add a basic divider, use the `<hr>` element with the `micl-divider` class:
 Import the divider styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/divider";
+@use "material-inspired-component-library/dist/divider";
 ```
 
-### TypeScript
-No custom TypeScript is required for the core functionality of this component.
+### JavaScript
+No custom JavaScript is required for the core functionality of this component.
 
 ### Demo
 A live example of the [Divider component](https://henkpb.github.io/micl/divider.html) is available for you to interact with.

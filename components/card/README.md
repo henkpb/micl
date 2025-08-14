@@ -16,11 +16,11 @@ To add a basic card, use a `<div>` element with one of the primary card style cl
 Import the card styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/card";
+@use "material-inspired-component-library/dist/card";
 ```
 
-### TypeScript
-No custom TypeScript is required for the core functionality of this component.
+### JavaScript
+No custom JavaScript is required for the core functionality of this component.
 
 ### Demo
 A live example of the [Card component](https://henkpb.github.io/micl/card.html) is available for you to interact with.

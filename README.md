@@ -27,25 +27,28 @@ npm install material-inspired-component-library
 ### 2. Add the CSS
 
 **Sass/SCSS**
-
-To import the styles for a single component:
+To import the styles for a single component (e.g., the [Card component](components/card/README.md)):
 ```SCSS
-@use "material-inspired-component-library/components/card";
+@use "material-inspired-component-library/dist/card";
 ```
 To import all component styles:
 ```SCSS
 @use "material-inspired-component-library/styles";
 ```
+Remember to import your [theme file](themes/README.md) as well:
+```SCSS
+@use "path/to/mytheme";
+```
 
 **Plain CSS**
-
-Add the main CSS file to your project:
+Copy the main `micl.css` file to your distribution folder and include it in your application. Include your [theme file](themes/README.md) as well:
 ```HTML
-<link rel="stylesheet" href="node_modules/material-inspired-component-library/dist/micl.css">
+<link rel="stylesheet" type="text/css" href="path/to/dist/mytheme.css">
+<link rel="stylesheet" type="text/css" href="path/to/dist/micl.css">
 ```
 
 ### 3. Add the HTML & JavaScript
-Here is a simple example of a **Card** component.
+Here is a simple example of a [Card component](components/card/README.md).
 
 ```HTML
 <div class="micl-card-outlined">
@@ -57,27 +60,18 @@ Here is a simple example of a **Card** component.
 </div>
 ```
 
-Some components, list the **List**, require a small amount of JavaScript to handle interactive behaviour.
-
-```TypeScript
-// For components with interactive behaviour
-import list from "material-inspired-component-library/components/lists";
-
-// To import TypeScript for all components
-import components from "material-inspired-component-library/components";
+Some components, like the [List](components/list/README.md), require a small amount of JavaScript to handle interactive behaviour. Because the JavaScript footprint in MICL is so small, you can import the code for all components at once.
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
-
-To import all the TypeScript into your project:
-```TypeScript
-import components from "material-inspired-component-library/components";
-```
+This will initialize all MICL components, including those that will be added to the DOM later on.
 
 **Plain JavaScript**
-
-Add the main JavaScript file to your project:
+Copy the main `micl.js` file to your distribution folder and include it in your application:
 ```HTML
-<script src="node_modules/material-inspired-component-library/dist/micl.js"></script>
+<script src="path/to/dist/micl.js"></script>
 ```
+This will initialize all MICL components, including those that will be added to the DOM later on.
 
 ## Available components ✅
 The library currently consists of the following components:

@@ -25,11 +25,11 @@ To create a basic dialog, use the `<dialog>` element with the `micl-dialog` clas
 Import the dialog styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/dialog";
+@use "material-inspired-component-library/dist/dialog";
 ```
 
-### TypeScript
-No custom TypeScript is required for the core functionality of this component, as the native popover attribute handles the open/close behavior.
+### JavaScript
+No custom JavaScript is required for the core functionality of this component, as the native popover attribute handles the open/close behavior.
 
 ### Demo
 A live example of the [Dialog component](https://henkpb.github.io/micl/dialog.html) is available for you to interact with.

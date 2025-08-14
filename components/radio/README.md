@@ -15,11 +15,11 @@ To add a basic radio button, use the `<input type="radio">` element with the `mi
 Import the radio button styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/radio";
+@use "material-inspired-component-library/dist/radio";
 ```
 
-### TypeScript
-No custom TypeScript is required for the core functionality of this component. However, to enable the ripple effect on interaction, include the Ripple TypeScript in your project.
+### JavaScript
+No custom JavaScript is required for the core functionality of this component.
 
 ### Demo
 A live example of the [Radio button component](https://henkpb.github.io/micl/radio.html) is available for you to interact with.

@@ -14,19 +14,17 @@ To add a basic slider, use the `<input type="range">` element with one of the pr
 Import the slider styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/slider";
+@use "material-inspired-component-library/dist/slider";
 ```
 
-### TypeScript
-This component requires the **Slider** TypeScript module for functionality. You can import the specific module and handle initialization manually, or use the main MICL library for automatic initialization.
+### JavaScript
+This component requires JavaScript for functionality:
 
-To manually initialize the component:
-
-```TypeScript
-import miclSlider from 'material-inspired-component-library/components/slider';
-
-miclSlider.initialize(document.querySelector('.micl-slider-m'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any Slider component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [Slider component](https://henkpb.github.io/micl/slider.html) is available for you to interact with.

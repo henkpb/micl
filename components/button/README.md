@@ -14,19 +14,17 @@ To create a basic button, use the `<button>` element with a class that specifies
 Import the button styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/button";
+@use "material-inspired-component-library/dist/button";
 ```
 
-### TypeScript
-This component requires a TypeScript module for interactive features like the **ripple effect** and **toggle logic**. You can import the specific button module or use the main MICL TypeScript library, which handles initialization automatically.
+### JavaScript
+This component requires JavaScript for interactive features like the **ripple effect** and **toggle logic**:
 
-To manually initialize the component:
-
-```TypeScript
-import miclButton from 'material-inspired-component-library/components/button';
-
-miclButton.initialize(document.querySelector('.micl-button-text-s'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any Button component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [Button component](https://henkpb.github.io/micl/button.html) is available for you to interact with.

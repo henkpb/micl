@@ -31,19 +31,17 @@ The Accordion component is an extension of the [**List** component](../list/READ
 Import the list styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/list";
+@use "material-inspired-component-library/dist/list";
 ```
 
-### TypeScript
-This component requires a TypeScript module to support keyboard navigation. You can import the specific module or use the main MICL TypeScript library, which handles initialization automatically.
+### JavaScript
+This component requires JavaScript to support keyboard navigation:
 
-To manually initialize the component:
-
-```TypeScript
-import miclAccordion from 'material-inspired-component-library/components/list';
-
-miclAccordion.initialize(document.querySelector('.micl-list'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any List component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available for you to interact with.

@@ -15,7 +15,7 @@ module.exports = [{
     mode: 'production',
     entry: {
         ...scssEntries,
-        micl: ['./styles.scss', './components.ts']
+        micl: ['./styles.scss', './micl.ts']
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
@@ -23,7 +23,11 @@ module.exports = [{
     output: {
         path: distDir,
         filename: '[name].js',
-        clean: true
+        clean: true,
+        library: {
+            name: 'micl',
+            type: 'umd'
+        }
     },
     module: {
         rules: [{
@@ -34,8 +38,7 @@ module.exports = [{
                 'postcss-loader',
                 'sass-loader'
             ]
-        },
-        {
+        }, {
             test: /\.tsx?$/,
             use: 'ts-loader',
             exclude: /node_modules/
