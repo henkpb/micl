@@ -27,6 +27,7 @@ npm install material-inspired-component-library
 ### 2. Add the CSS
 
 **Sass/SCSS**
+
 To import the styles for a single component (e.g., the [Card component](components/card/README.md)):
 ```SCSS
 @use "material-inspired-component-library/dist/card";
@@ -41,6 +42,7 @@ Remember to import your [theme file](themes/README.md) as well:
 ```
 
 **Plain CSS**
+
 Copy the main `micl.css` file to your distribution folder and include it in your application. Include your [theme file](themes/README.md) as well:
 ```HTML
 <link rel="stylesheet" type="text/css" href="path/to/dist/mytheme.css">
@@ -67,6 +69,7 @@ import micl from "material-inspired-component-library/dist/micl";
 This will initialize all MICL components, including those that will be added to the DOM later on.
 
 **Plain JavaScript**
+
 Copy the main `micl.js` file to your distribution folder and include it in your application:
 ```HTML
 <script src="path/to/dist/micl.js"></script>
@@ -94,6 +97,6 @@ The library currently consists of the following components:
 
 ## Change Log
 
-#### 1.1.0 (12.08.2025)
+### 1.1.0 (12.08.2025)
 **Features**
 - **Text field**: Added support for multi-line text fields.
