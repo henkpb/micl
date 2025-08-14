@@ -21,6 +21,8 @@
 
 @use '../../styles/motion';
 @use '../../styles/ripple';
+@use '../../styles/statelayer';
+@use '../../styles/typography';
 
 :root {
     --md-sys-checkbox-container-size: 18px;

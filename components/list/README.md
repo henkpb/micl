@@ -24,19 +24,17 @@ To create a basic list, use the `<ul>` element with the `micl-list` class and in
 Import the list styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/list";
+@use "material-inspired-component-library/dist/list";
 ```
 
-### TypeScript
-This component requires a TypeScript module to support keyboard navigation. You can import the specific module or use the main MICL TypeScript library, which handles initialization automatically.
+### JavaScript
+This component requires JavaScript to support keyboard navigation:
 
-To manually initialize the component:
-
-```TypeScript
-import miclList from 'material-inspired-component-library/components/list';
-
-miclList.initialize(document.querySelector('.micl-list'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any List component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [List component](https://henkpb.github.io/micl/list.html) is available for you to interact with.

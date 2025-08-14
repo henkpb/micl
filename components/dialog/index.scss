@@ -19,7 +19,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../styles/elevation';
 @use '../../styles/motion';
+@use '../../styles/shapes';
+@use '../../styles/statelayer';
 @use '../../styles/typography';
 
 :root {

@@ -18,19 +18,17 @@ To create a standard bottom sheet, use the `<dialog>` element with the `popover`
 Import the bottom sheet styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/bottomsheet";
+@use "material-inspired-component-library/dist/bottomsheet";
 ```
 
-### TypeScript
-This component requires a TypeScript module to support **modal** and **resizable** bottom sheets. You can import the specific bottom sheet module or use the main MICL TypeScript library, which handles initialization automatically.
+### JavaScript
+This component requires JavaScript to support **modal** and **resizable** bottom sheets:
 
-To manually initialize the component:
-
-```TypeScript
-import miclBottomSheet from 'material-inspired-component-library/components/bottomsheet';
-
-miclBottomSheet.initialize(document.querySelector('.micl-bottomsheet'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any Bottom sheet component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [Bottom sheet component](https://henkpb.github.io/micl/bottomsheet.html) is available for you to interact with.

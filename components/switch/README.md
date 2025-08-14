@@ -15,11 +15,11 @@ To add a basic switch, use the `<input type="checkbox">` element with the `micl-
 Import the switch styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/switch";
+@use "material-inspired-component-library/dist/switch";
 ```
 
-### TypeScript
-No custom TypeScript is required for the core functionality of this component.
+### JavaScript
+No custom JavaScript is required for the core functionality of this component.
 
 ### Demo
 A live example of the [Switch component](https://henkpb.github.io/micl/switch.html) is available for you to interact with.

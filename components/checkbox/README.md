@@ -15,19 +15,17 @@ To add a basic checkbox, use the `<input type="checkbox">` element with the `mic
 Import the checkbox styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/checkbox";
+@use "material-inspired-component-library/dist/checkbox";
 ```
 
-### TypeScript
-This component requires a TypeScript module to support checking and unchecking using a keyboard. You can import the specific module or use the main MICL TypeScript library, which handles initialization automatically.
+### JavaScript
+This component requires JavaScript to support checking and unchecking using a keyboard:
 
-To manually initialize the component:
-
-```TypeScript
-import miclCheckbox from 'material-inspired-component-library/components/checkbox';
-
-miclCheckbox.initialize(document.querySelector('.micl-checkbox'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any Checkbox component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [Checkbox component](https://henkpb.github.io/micl/checkbox.html) is available for you to interact with.

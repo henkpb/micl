@@ -16,19 +16,17 @@ To create a basic icon button, use the `<button>` element with a class that spec
 Import the icon button styles into your project:
 
 ```CSS
-@use "material-inspired-component-library/components/iconbutton";
+@use "material-inspired-component-library/dist/iconbutton";
 ```
 
-### TypeScript
-This component requires a TypeScript module for interactive features like the **ripple effect** and **toggle logic**. You can import the specific module and handle initialization manually, or use the main MICL library for automatic initialization.
+### JavaScript
+This component requires JavaScript for interactive features like the **ripple effect** and **toggle logic**:
 
-To manually initialize the component:
-
-```TypeScript
-import miclIconButton from 'material-inspired-component-library/components/button';
-
-miclIconButton.initialize(document.querySelector('.micl-iconbutton-standard-s'));
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
 ```
+
+This will initialize any Icon button component, including those that will be added to the DOM later on.
 
 ### Demo
 A live example of the [Icon button component](https://henkpb.github.io/micl/iconbutton.html) is available for you to interact with.

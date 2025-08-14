@@ -67,11 +67,11 @@ export default (() =>
         }
     };
 
-    const initializeComponents = () =>
+    const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
     {
-        document.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
+        parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
 
-        document.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element => {
+        parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element => {
             if (window.getComputedStyle(element).getPropertyValue('--miclripple')) {
                 element.addEventListener('pointerdown', e => {
                     if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
@@ -104,67 +104,88 @@ export default (() =>
         }
     };
 
-    const observer = new MutationObserver(mutations =>
+    const cleanupComponents = (parent: HTMLDocument | HTMLElement): void =>
     {
-        mutations.forEach(mutation =>
+        parent.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
+    };
+
+    const activate = () =>
+    {
+        const observer = new MutationObserver(mutations =>
         {
-            if (mutation.type !== 'childList') {
-                return;
-            }
-            mutation.addedNodes.forEach(node =>
+            mutations.forEach(mutation =>
             {
-                if (node instanceof HTMLElement) {
-                    if (node.matches(selector)) {
-                        initializeComponent(node);
-                    }
-                    node.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
+                if (mutation.type !== 'childList') {
+                    return;
                 }
-            });
-            mutation.removedNodes.forEach(node =>
-            {
-                if (node instanceof HTMLElement) {
-                    if (node.matches(selector)) {
-                        cleanupComponent(node);
+                mutation.addedNodes.forEach(node =>
+                {
+                    if (node instanceof HTMLElement) {
+                        if (node.matches(selector)) {
+                            initializeComponent(node);
+                        }
+                        node.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
                     }
-                    node.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
-                }
+                });
+                mutation.removedNodes.forEach(node =>
+                {
+                    if (node instanceof HTMLElement) {
+                        if (node.matches(selector)) {
+                            cleanupComponent(node);
+                        }
+                        cleanupComponents(node);
+                    }
+                });
             });
         });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, { childList: true, subtree: true });
 
-    initializeComponents();
+        initializeComponents(document);
 
-    // Delegated Event Handlers
-    document.addEventListener('input', event =>
-    {
-        for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (
-                (event.target as Element).matches(selector)
-                && event.target instanceof type
-                && typeof component.input === 'function'
-            ) {
-                component.input(event);
-                return;
+        // Delegated Event Handlers
+        document.addEventListener('input', event =>
+        {
+            for (const [selector, { component, type }] of Object.entries(componentMap)) {
+                if (
+                    (event.target as Element).matches(selector)
+                    && event.target instanceof type
+                    && typeof component.input === 'function'
+                ) {
+                    component.input(event);
+                    return;
+                }
             }
-        }
-    });
-    document.addEventListener('keydown', event =>
-    {
-        for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (
-                (event.target as Element).matches(selector)
-                && event.target instanceof type
-                && typeof component.keydown === 'function'
-            ) {
-                component.keydown(event);
-                return;
+        });
+        document.addEventListener('keydown', event =>
+        {
+            for (const [selector, { component, type }] of Object.entries(componentMap)) {
+                if (
+                    (event.target as Element).matches(selector)
+                    && event.target instanceof type
+                    && typeof component.keydown === 'function'
+                ) {
+                    component.keydown(event);
+                    return;
+                }
             }
-        }
-    });
+        });
+    };
+
+    const loaded = () =>
+    {
+        document.removeEventListener('DOMContentLoaded', loaded);
+        activate();
+    };
+
+    if (document.readyState !== 'loading') {
+        activate();
+    }
+    else {
+        document.addEventListener('DOMContentLoaded', loaded);
+    }
 
     return {
-        initialize: () => initializeComponents(),
-        cleanup   : () => document.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent)
+        initialize: () => initializeComponents(document),
+        cleanup   : () => cleanupComponents(document)
     };
 })();
