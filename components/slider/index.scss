@@ -20,11 +20,14 @@
 // SOFTWARE.
 
 @use '../../styles/motion';
+@use '../../styles/shapes';
+@use '../../styles/statelayer';
 @use '../../styles/typography';
 
 @mixin slider-track() {
     block-size: var(--md-sys-slider-track-height);
     border-radius: var(--md-sys-slider-track-radius);
+    background-color: inherit;
     background-image: linear-gradient(
         var(--md-sys-slider-track-direction),
         var(--md-sys-color-primary) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
@@ -48,18 +51,38 @@
     appearance: none;
     box-sizing: content-box;
     position: relative;
-    inline-size: 4px;
+    inline-size: 16px;
     block-size: var(--md-sys-slider-handle-height);
     inset: 0;
-    inset-block-start: calc(-1 * (var(--md-sys-slider-handle-height) + 2 * var(--md-sys-slider-thumb-space) - var(--md-sys-slider-track-height)) / 2);
-    border: var(--md-sys-slider-thumb-space) solid currentColor;
+    inset-block-start: calc(-1 * (var(--md-sys-slider-handle-height) - var(--md-sys-slider-track-height) + 8px) / 2);
+    padding-block: 4px;
+    border: none;
     border-radius: 8px;
-    background-color: var(--md-sys-color-primary);
+    background-color: inherit;
+    background-image: linear-gradient(
+        var(--md-sys-slider-track-direction),
+        transparent 0px,
+        transparent var(--md-sys-slider-thumb-space),
+        var(--md-sys-color-primary) var(--md-sys-slider-thumb-space),
+        var(--md-sys-color-primary) 10px,
+        transparent 10px,
+        transparent 16px
+    );
+    background-clip: content-box;
     cursor: pointer;
     z-index: 2;
 }
 @mixin slider-thumb-disabled() {
-    background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, var(--md-sys-color-surface));
+    background-color: inherit;
+    background-image: linear-gradient(
+        var(--md-sys-slider-track-direction),
+        transparent 0px,
+        transparent var(--md-sys-slider-thumb-space),
+        color-mix(in srgb, var(--md-sys-color-on-surface) 38%, var(--md-sys-color-surface)) var(--md-sys-slider-thumb-space),
+        color-mix(in srgb, var(--md-sys-color-on-surface) 38%, var(--md-sys-color-surface)) 10px,
+        transparent 10px,
+        transparent 16px
+    );
     cursor: default;
 }
 @mixin slider-progress() {
@@ -102,10 +125,11 @@ input[type=range].micl-slider-xl {
 
     appearance: none;
     position: relative;
+    block-size: var(--md-sys-slider-track-height);
     margin: 0;
     outline: none;
     color: var(--md-sys-color-surface-container-low);
-    background-color: transparent;
+    background-color: inherit;
     accent-color: var(--md-sys-color-primary);
 
     &::before {
@@ -124,8 +148,9 @@ input[type=range].micl-slider-xl {
         text-wrap-mode: nowrap;
     }
     &::after {
-        --md-sys-slider-tip-space: 4px;
         @include typography.label-medium;
+        --md-sys-slider-tip-space: 4px;
+
         content: var(--md-sys-slider-tip);
         box-sizing: border-box;
         position: absolute;
@@ -144,6 +169,9 @@ input[type=range].micl-slider-xl {
         opacity: 0;
         z-index: 3;
         transition: opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+    }
+    &::-webkit-slider-container {
+        background-color: inherit;
     }
     &::-webkit-slider-runnable-track {
         @include slider-track;
@@ -176,59 +204,80 @@ input[type=range].micl-slider-xl {
     }
     &.micl-slider--vertical {
         --md-sys-slider-track-direction: to top;
+
         writing-mode: sideways-lr;
+
         &::after {
             --md-sys-slider-tip-space: 8px;
+
             transform: rotate(90deg);
         }
     }
-    &:not(:disabled):focus-visible {
-        &::after {
+    &:not(:disabled) {
+        &:active::after,
+        &:focus::after,
+        &:focus-visible::after {
             opacity: 1;
+            transition: opacity var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized-accelerate;
         }
-        &::-webkit-slider-thumb {
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+        &:focus-visible {
+            &::-webkit-slider-thumb {
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            }
+            &::-moz-range-thumb {
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            }
         }
-        &::-moz-range-thumb {
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-        }
-    }
-    &:not(:disabled):active {
-        &::-webkit-slider-thumb {
-            inline-size: 2px;
-            outline: none;
-            cursor: grabbing;
-        }
-        &::-moz-range-thumb {
-            inline-size: 2px;
-            outline: none;
-            cursor: grabbing;
-        }
-        &::after {
-            opacity: 1;
+        &:active {
+            &::-webkit-slider-thumb {
+                background-image: linear-gradient(
+                    var(--md-sys-slider-track-direction),
+                    transparent 0px,
+                    transparent calc(var(--md-sys-slider-thumb-space) + 1px),
+                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 1px),
+                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 3px),
+                    transparent calc(var(--md-sys-slider-thumb-space) + 3px),
+                    transparent calc(2 * var(--md-sys-slider-thumb-space) + 4px)
+                );
+                outline: none;
+                cursor: grabbing;
+            }
+            &::-moz-range-thumb {
+                background-image: linear-gradient(
+                    var(--md-sys-slider-track-direction),
+                    transparent 0px,
+                    transparent calc(var(--md-sys-slider-thumb-space) + 1px),
+                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 1px),
+                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 3px),
+                    transparent calc(var(--md-sys-slider-thumb-space) + 3px),
+                    transparent calc(2 * var(--md-sys-slider-thumb-space) + 4px)
+                );
+                outline: none;
+                cursor: grabbing;
+            }
         }
     }
 }
 
-.micl-slider__container:has(.micl-slider-m,.micl-slider-l,.micl-slider-xl) {
+.micl-slider__container {
     display: grid;
     grid-template-areas: "slidericon";
     flex-shrink: 0;
     align-items: center;
     justify-items: flex-start;
+    background-color: inherit;
 
-    .micl-slider__icon {
-        grid-area: slidericon;
-        inset: 0;
-        margin: 6px;
-        font-size: 24px;
-        color: var(--md-sys-color-on-primary);
-        z-index: 1;
-
+    &:has(> .micl-slider-m,> .micl-slider-l,> .micl-slider-xl) {
+        .micl-slider__icon {
+            grid-area: slidericon;
+            inset: 0;
+            margin: 6px;
+            font-size: 24px;
+            color: var(--md-sys-color-on-primary);
+            z-index: 1;
+        }
     }
-    input[type=range].micl-slider-m,
-    input[type=range].micl-slider-l,
-    input[type=range].micl-slider-xl {
+    &> input[type=range] {
         grid-area: slidericon;
     }
     .micl-slider__icon:has(+ input[type=range].micl-slider-xl),
@@ -238,21 +287,66 @@ input[type=range].micl-slider-xl {
     }
 }
 
-[dir=rtl] input[type=range].micl-slider-xs.micl-slider--vertical,
-[dir=rtl] input[type=range].micl-slider-s.micl-slider--vertical,
-[dir=rtl] input[type=range].micl-slider-m.micl-slider--vertical,
-[dir=rtl] input[type=range].micl-slider-l.micl-slider--vertical,
-[dir=rtl] input[type=range].micl-slider-xl.micl-slider--vertical {
-    writing-mode: sideways-rl;
-    &::after {
-        transform: rotate(-90deg);
+@supports (-moz-appearance:none) {
+    .micl-slider__container {
+        &:has(> input[type=range]) {
+            position: relative;
+
+            &::after {
+                @include typography.label-medium;
+                --md-sys-slider-tip-space: 4px;
+
+                content: var(--md-sys-slider-tip);
+                box-sizing: border-box;
+                position: absolute;
+                inline-size: fit-content;
+                min-inline-size: 48px;
+                block-size: 40px;
+                inset: 0;
+                inset-block-start: calc(-1 * ((var(--md-sys-slider-handle-height) - var(--md-sys-slider-track-height)) / 2) - 40px - var(--md-sys-slider-tip-space));
+                inset-inline-start: calc(-16px + (100% - 16px) * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min)));
+                padding-block: 12px;
+                padding-inline: 16px;
+                border-radius: 20px;
+                background-color: var(--md-sys-color-inverse-surface);
+                color: var(--md-sys-color-inverse-on-surface);
+                text-align: center;
+                opacity: 0;
+                z-index: 3;
+                transition: opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+            }
+        }
+        &:has(> input[type=range]:not(:disabled):active)::after,
+        &:has(> input[type=range]:not(:disabled):focus)::after,
+        &:has(> input[type=range]:not(:disabled):focus-visible)::after {
+            opacity: 1;
+        }
+        &:has(> input[type=range].micl-slider--vertical) {
+            --md-sys-slider-track-direction: to top;
+            writing-mode: sideways-lr;
+
+            &::after {
+                --md-sys-slider-tip-space: 8px;
+                transform: rotate(90deg);
+            }
+        }
     }
 }
 
-[dir=rtl] input[type=range].micl-slider-xs:not(.micl-slider--vertical),
-[dir=rtl] input[type=range].micl-slider-s:not(.micl-slider--vertical),
-[dir=rtl] input[type=range].micl-slider-m:not(.micl-slider--vertical),
-[dir=rtl] input[type=range].micl-slider-l:not(.micl-slider--vertical),
-[dir=rtl] input[type=range].micl-slider-xl:not(.micl-slider--vertical) {
-    --md-sys-slider-track-direction: to left;
+[dir=rtl] {
+    input[type=range].micl-slider--vertical,
+    .micl-slider__container:has(> input[type=range].micl-slider--vertical) {
+        writing-mode: sideways-rl;
+
+        &::after {
+            transform: rotate(-90deg);
+        }
+    }
+    input[type=range].micl-slider-xs:not(.micl-slider--vertical),
+    input[type=range].micl-slider-s:not(.micl-slider--vertical),
+    input[type=range].micl-slider-m:not(.micl-slider--vertical),
+    input[type=range].micl-slider-l:not(.micl-slider--vertical),
+    input[type=range].micl-slider-xl:not(.micl-slider--vertical) {
+        --md-sys-slider-track-direction: to left;
+    }
 }
