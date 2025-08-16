@@ -20,19 +20,17 @@
 // SOFTWARE.
 
 export const sliderSelector = 'input[type=range].micl-slider-xs,input[type=range].micl-slider-s,input[type=range].micl-slider-m,input[type=range].micl-slider-l,input[type=range].micl-slider-xl';
+
 export default (() =>
 {
     const
         tick  = String.fromCharCode(8226),
         blank = String.fromCharCode(8201),
-        getTickValues = (element: HTMLInputElement): number[] =>
+        getTickValues = (element: HTMLInputElement, max: number, min: number): number[] =>
         {
-            const
-                values: number[] = [],
-                max  = parseFloat(element.max),
-                min  = parseFloat(element.min);
+            const values: number[] = [];
 
-            if (!!element.list && !isNaN(max) && !isNaN(min) && (max > min)) {
+            if (!!element.list && (max > min)) {
                 element.list.querySelectorAll<HTMLOptionElement>('option[value]').forEach(option =>
                 {
                     let value = parseFloat(option.value);
@@ -42,28 +40,71 @@ export default (() =>
                 });
             }
             return values;
+        },
+        getWrapper = (element: HTMLInputElement): null | HTMLElement =>
+        {
+            return element.parentElement?.classList.contains('micl-slider__container') ?
+                   element.parentElement : null;
+        },
+        setMax = (element: HTMLInputElement): void =>
+        {
+            let max = element.max || '100';
+            getWrapper(element)?.style.setProperty('--md-sys-slider-max', max);
+            element.style.setProperty('--md-sys-slider-max', max);
+        },
+        setMin = (element: HTMLInputElement): void =>
+        {
+            let min = element.min || '0';
+            getWrapper(element)?.style.setProperty('--md-sys-slider-min', min);
+            element.style.setProperty('--md-sys-slider-min', min);
+        },
+        setTickString = (element: HTMLInputElement, tickString: string): void =>
+        {
+            // getWrapper(element)?.dataset.miclsliderticks = tickString;
+            element.dataset.miclsliderticks = tickString;
+        },
+        setValue = (element: HTMLInputElement): void =>
+        {
+            let tip = JSON.stringify(element.value + ''),
+                wrapper = getWrapper(element);
+            if (wrapper) {
+                wrapper.style.setProperty('--md-sys-slider-value', element.value);
+                wrapper.style.setProperty('--md-sys-slider-tip', tip);
+            }
+            element.style.setProperty('--md-sys-slider-value', element.value);
+            element.style.setProperty('--md-sys-slider-tip', tip);
+        },
+        setVars = (element: HTMLInputElement): void =>
+        {
+            let wrapper = getWrapper(element);
+            if (wrapper) {
+                const computedStyles = window.getComputedStyle(element);
+                ['--md-sys-slider-handle-height', '--md-sys-slider-track-height'].forEach(name => {
+                    wrapper.style.setProperty(name, computedStyles.getPropertyValue(name));
+                });
+            }
         };
 
     return {
-        initialize: (element: HTMLInputElement) =>
+        initialize: (element: HTMLInputElement): void =>
         {
-            element.style.setProperty('--md-sys-slider-max', element.max || '100');
-            element.style.setProperty('--md-sys-slider-min', element.min || '0');
-            element.style.setProperty('--md-sys-slider-value', element.value);
-            element.style.setProperty('--md-sys-slider-tip', JSON.stringify(element.value + ''));
-
-            const rect = element.getBoundingClientRect(),
-                  e    = document.elementFromPoint(Math.max(rect.x - 1, 0), Math.max(rect.y - 1, 0));
-            if (e) {
-                element.style.color = window.getComputedStyle(e).getPropertyValue('background-color');
+            if (!element.matches(sliderSelector)) {
+                return;
             }
 
+            setMax(element);
+            setMin(element);
+            setValue(element);
+            setVars(element);
+
             const
-                max = parseFloat(element.max),
-                min = parseFloat(element.min),
-                percentages = getTickValues(element).sort((a, b) => a - b).map(value => {
+                max  = parseFloat(element.max),
+                min  = parseFloat(element.min),
+                rect = element.getBoundingClientRect(),
+                percentages = getTickValues(element, max, min).sort((a, b) => a - b).map(value => {
                     return Math.round(100 * (value - min) / (max - min));
                 });
+
             if (percentages.length > 0) {
                 const
                     canvas = document.createElement('canvas'),
@@ -87,28 +128,23 @@ export default (() =>
                         tickString += tick;
                         currentWidth += tickWidth;
                     });
-                    element.dataset.miclsliderticks = tickString;
+                    setTickString(element, tickString);
                 }
                 canvas.remove();
             }
             else {
-                element.dataset.miclsliderticks = tick;
+                setTickString(element, tick);
             }
         },
-        input: (event: Event) =>
+        input: (event: Event): void =>
         {
             if (
-                !(event.target as Element).matches(
-                    '.micl-slider-xs,.micl-slider-s,.micl-slider-m,.micl-slider-l,.micl-slider-xl'
-                )
-                || !(event.target instanceof HTMLInputElement)
-                || (event.target as HTMLInputElement).disabled
+                (event.target as Element).matches(sliderSelector)
+                && event.target instanceof HTMLInputElement
+                && !event.target.disabled
             ) {
-                return;
+                setValue(event.target);
             }
-
-            event.target.style.setProperty('--md-sys-slider-value', event.target.value);
-            event.target.style.setProperty('--md-sys-slider-tip', JSON.stringify(event.target.value + ''));
         }
     };
 })();

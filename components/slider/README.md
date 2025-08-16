@@ -65,3 +65,11 @@ The Slider component is aware of the `dir` global attribute that indicates the d
 
 ## Compatibility
 This component uses the `color-mix` CSS functional notation, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix#browser_compatibility) for details.
+
+> [!NOTE]
+> **Gecko browsers** The Slider component uses the `::after` pseudo-element to display the value indicator. For this to work on **Gecko** browsers, like Mozilla Firefox, wrap the Slider component inside a slider container:
+```HTML
+<div class="micl-slider__container">
+  <input type="range" class="micl-slider-l" value="0">
+</div>
+```
