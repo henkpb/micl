@@ -72,7 +72,11 @@ export default (() =>
         parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
 
         parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element => {
-            if (window.getComputedStyle(element).getPropertyValue('--miclripple')) {
+            if (
+                element.parentElement
+                && !window.getComputedStyle(element.parentElement).getPropertyValue('--miclripple')
+                && window.getComputedStyle(element).getPropertyValue('--miclripple')
+            ) {
                 element.addEventListener('pointerdown', e => {
                     if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
                         return;

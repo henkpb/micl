@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MICL Lists</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=confirmation_number,dark_mode,person,search,settings&display=block">
-    <link rel="stylesheet" href="themes/citrine/theme.css" id="theme-link">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=confirmation_number,dark_mode,keyboard_arrow_right,more_horiz,person,search,settings&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
     <style>
@@ -15,6 +15,10 @@
             flex-direction: column;
             row-gap: 8px;
             padding-block: 16px;
+        }
+        input[type=checkbox].micl-switch {
+            --md-sys-switch-selected-icon: "";
+            --md-sys-switch-unselected-icon: "";
         }
     </style>
 </head>
@@ -62,6 +66,7 @@
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline</span>
                         </span>
+                        <span class="material-symbols-outlined micl-list-item__icon">more_horiz</span>
                     </li>
                 </ul>
                 <ul class="micl-list" role="listbox">
@@ -71,6 +76,7 @@
                             <span class="micl-list-item__headline">Headline</span>
                             <span class="micl-list-item__supporting-text">Supporting text</span>
                         </span>
+                        <span class="material-symbols-outlined micl-list-item__icon">keyboard_arrow_right</span>
                     </li>
                 </ul>
                 <ul class="micl-list" role="listbox">
@@ -95,7 +101,7 @@
             <div class="micl-card__content">
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-one" tabindex="0">
-                        <span class="material-symbols-outlined micl-list-item__avatar">settings</span>
+                        <span class="micl-list-item__avatar">3</span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline</span>
                         </span>
@@ -103,7 +109,7 @@
                 </ul>
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-two" tabindex="0">
-                        <span class="material-symbols-outlined micl-list-item__avatar">person</span>
+                        <span class="micl-list-item__avatar">17</span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline</span>
                             <span class="micl-list-item__supporting-text">Supporting text</span>
@@ -112,14 +118,16 @@
                 </ul>
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-three" tabindex="0">
-                        <span class="material-symbols-outlined micl-list-item__avatar">search</span>
-                        <span class="micl-list-item__text">
-                            <span class="micl-list-item__headline">Headline 1</span>
-                            <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                        </span>
+                        <a href="https://www.thetimes.com/" tabindex="-1">
+                            <span class="micl-list-item__avatar">T</span>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">The Times</span>
+                                <span class="micl-list-item__supporting-text">Selecting this item opens the front page of The Times.</span>
+                            </span>
+                        </a>
                     </li>
                     <li class="micl-list-item-three micl-list-item--disabled">
-                        <span class="material-symbols-outlined micl-list-item__avatar">confirmation_number</span>
+                        <span class="micl-list-item__avatar">H</span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline 2</span>
                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
@@ -128,7 +136,7 @@
                 </ul>
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-one" tabindex="0">
-                        <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Large_cloud_over_Mexican_landscape.jpg/330px-Large_cloud_over_Mexican_landscape.jpg)"></span>
+                        <span class="micl-list-item__image" style="background-image:url(card-city.webp)"></span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline</span>
                         </span>
@@ -137,23 +145,26 @@
                 </ul>
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-two" tabindex="0">
-                        <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg/330px-Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg)"></span>
-                        <span class="micl-list-item__text">
-                            <span class="micl-list-item__headline">Headline</span>
-                            <span class="micl-list-item__supporting-text">Supporting text</span>
-                        </span>
+                        <label>
+                            <span class="micl-list-item__image" style="background-image:url(card-holiday.webp)"></span>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">Headline</span>
+                                <span class="micl-list-item__supporting-text">Supporting text</span>
+                            </span>
+                            <input type="checkbox" class="micl-switch" id="myswitch" value="c1" tabindex="-1">
+                        </label>
                     </li>
                 </ul>
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-three" tabindex="0">
-                        <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/San_Juan_River_at_Pagosa_Springs_with_balloons.jpg/330px-San_Juan_River_at_Pagosa_Springs_with_balloons.jpg)"></span>
+                        <span class="micl-list-item__image" style="background-image:url(card-cabinet.webp)"></span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline 1</span>
                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
                         </span>
                     </li>
                     <li class="micl-list-item-three">
-                        <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg/330px-Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg)"></span>
+                        <span class="micl-list-item__image" style="background-image:url(card-awards.webp)"></span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline 2</span>
                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
@@ -166,7 +177,7 @@
             <div class="micl-card__content">
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-one" tabindex="0">
-                        <span class="micl-list-item__thumbnail" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Large_cloud_over_Mexican_landscape.jpg/330px-Large_cloud_over_Mexican_landscape.jpg)"></span>
+                        <span class="micl-list-item__thumbnail" style="background-image:url(card-city.webp)"></span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline</span>
                         </span>
@@ -174,24 +185,26 @@
                 </ul>
                 <ul class="micl-list" role="listbox">
                     <li class="micl-list-item-two" tabindex="0">
-                        <span class="micl-list-item__thumbnail" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg/330px-Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg)"></span>
-                        <label for="cb1" class="micl-list-item__text">
-                            <span class="micl-list-item__headline">Headline</span>
-                            <span class="micl-list-item__supporting-text">Supporting text</span>
+                        <label>
+                            <span class="micl-list-item__thumbnail" style="background-image:url(card-holiday.webp)"></span>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">Headline</span>
+                                <span class="micl-list-item__supporting-text">Supporting text</span>
+                            </span>
+                            <input type="checkbox" id="cb1" class="micl-checkbox" value="c1" tabindex="-1">
                         </label>
-                        <input type="checkbox" id="cb1" class="micl-checkbox" value="c1" tabindex="-1">
                     </li>
                 </ul>
                 <ul class="micl-list micl-list__divider" role="listbox">
                     <li class="micl-list-item-three" tabindex="0">
-                        <span class="micl-list-item__thumbnail" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/San_Juan_River_at_Pagosa_Springs_with_balloons.jpg/330px-San_Juan_River_at_Pagosa_Springs_with_balloons.jpg)"></span>
+                        <span class="micl-list-item__thumbnail" style="background-image:url(card-cabinet.webp)"></span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline 1</span>
                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
                         </span>
                     </li>
                     <li class="micl-list-item-three">
-                        <span class="micl-list-item__thumbnail" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg/330px-Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg)"></span>
+                        <span class="micl-list-item__thumbnail" style="background-image:url(card-awards.webp)"></span>
                         <span class="micl-list-item__text">
                             <span class="micl-list-item__headline">Headline 2</span>
                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
@@ -200,18 +213,22 @@
                 </ul>
                 <ul class="micl-list micl-list__divider" role="listbox">
                     <li class="micl-list-item-three" tabindex="0">
-                        <label for="cb2" class="micl-list-item__text">
-                            <span class="micl-list-item__headline">Headline 1</span>
-                            <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                        <label>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">Headline 1</span>
+                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                            </span>
+                            <input type="checkbox" id="cb2" class="micl-checkbox" value="c2" tabindex="-1">
                         </label>
-                        <input type="checkbox" id="cb2" class="micl-checkbox" value="c2" tabindex="-1">
                     </li>
                     <li class="micl-list-item-three">
-                        <label for="cb3" class="micl-list-item__text">
-                            <span class="micl-list-item__headline">Headline 2</span>
-                            <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                        <label>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">Headline 2</span>
+                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                            </span>
+                            <input type="checkbox" id="cb3" class="micl-checkbox" value="c3" tabindex="-1">
                         </label>
-                        <input type="checkbox" id="cb3" class="micl-checkbox" value="c3" tabindex="-1">
                     </li>
                 </ul>
             </div>

@@ -33,13 +33,13 @@
     position-try-fallbacks: flip-block, flip-inline;
     min-width: 112px;
     max-width: 280px;
-    padding-block: 8px;
     padding-inline: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-extra-small);
     background-color: var(--md-sys-color-surface-container);
     box-shadow: var(--md-sys-elevation-level2);
     opacity: 0;
+    overflow: hidden;
     transform: scaleY(0);
     transform-origin: top left;
     transition:
@@ -90,7 +90,7 @@
         --md-sys-list-item-one-padding: 0;
         --md-sys-list-item-two-padding: 0;
         --md-sys-list-item-space: 12px;
-        --md-sys-list-item-background-color: var(--md-sys-color-surface-container);
+        --md-sys-list-item-container-color: var(--md-sys-color-surface-container);
 
         .micl-list-item-one,
         .micl-list-item-two,
