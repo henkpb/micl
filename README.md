@@ -100,3 +100,7 @@ The library currently consists of the following components:
 ### 1.1.0 (12.08.2025)
 **Features**
 - **Text field**: Added support for multi-line text fields.
+
+### 1.2.0 (17.08.2025)
+**Features**
+- **List**: Added support for switches inside list items.
