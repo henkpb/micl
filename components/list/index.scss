@@ -37,10 +37,10 @@
 }
 
 .micl-list {
-    --md-sys-list-item-background-color: var(--md-sys-color-surface);
+    --md-sys-list-item-container-color: var(--md-sys-color-surface);
 
     margin: 0;
-    padding: 0;
+    padding: 8px 0;
     interpolate-size: allow-keywords;
     list-style-type: none;
 
@@ -68,8 +68,8 @@
                 pointer-events: none;
             }
             &:not(.micl-list-item--disabled) {
-                --miclripple: 1;
                 @include ripple.effect;
+                --miclripple: 1;
 
                 cursor: pointer;
             }
@@ -77,7 +77,7 @@
         .micl-list-item__content {
             box-sizing: border-box;
             padding-inline: var(--md-sys-list-item-padding-inline);
-            background-color: var(--md-sys-list-item-background-color);
+            background-color: var(--md-sys-list-item-container-color);
             overflow: hidden;
         }
     }
@@ -95,16 +95,33 @@
 .micl-list-item-one,
 .micl-list-item-two,
 .micl-list-item-three {
+    --md-sys-list-item-thumbnail-aspect-ratio: 1.778;
+
     box-sizing: border-box;
     display: flex;
     align-items: center;
     column-gap: var(--md-sys-list-item-space);
     padding-inline: var(--md-sys-list-item-space);
     border-radius: var(--md-sys-shape-corner-none);
-    background-color: var(--md-sys-list-item-background-color);
+    background-color: var(--md-sys-list-item-container-color);
     list-style: none;
     transition: background-color var(--md-sys-motion-duration-long2) linear;
 
+    &> a,
+    &> label {
+        display: inherit;
+        align-items: inherit;
+        column-gap: inherit;
+        border-radius: inherit;
+        background-color: inherit;
+        inline-size: 100%;
+        padding-inline: var(--md-sys-list-item-space);
+        text-decoration: none;
+        cursor: pointer;
+    }
+    &:has(> a,> label) {
+        padding-inline: 0;
+    }
     &:disabled,
     &.micl-list-item--disabled {
         .micl-list-item__icon,
@@ -119,12 +136,16 @@
         .micl-list-item__thumbnail {
             opacity: 38%;
         }
+        a, label {
+            pointer-events: none;
+            cursor: auto;
+        }
     }
     &:not(:disabled):not(.micl-list-item--disabled) {
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-list-item-background-color), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+            background-color: color-mix(in srgb, var(--md-sys-list-item-container-color), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
 
-            &:has(input[type=checkbox].micl-checkbox) {
+            &:has(input[type=checkbox]) {
                 cursor: pointer;
             }
             .micl-list-item__icon {
@@ -133,26 +154,26 @@
         }
         &:focus-visible {
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-            background-color: color-mix(in srgb, var(--md-sys-list-item-background-color), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
-            z-index: 1;
+            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness));
+            background-color: color-mix(in srgb, var(--md-sys-list-item-container-color), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
 
             .micl-list-item__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-list-item-background-color), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            background-color: color-mix(in srgb, var(--md-sys-list-item-container-color), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
 
             .micl-list-item__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
-        &:has(input[type=checkbox].micl-checkbox) {
+        &:has(input[type=checkbox]) {
+            @include ripple.effect;
             --miclripple: 1;
             --md-sys-ripple-background-color: var(--md-sys-color-primary);
-            @include ripple.effect;
         }
-        &:has(input[type=checkbox].micl-checkbox:checked) {
+        &:has(input[type=checkbox]:checked) {
             background-color: var(--md-sys-color-secondary-container);
 
             .micl-list-item__headline {
@@ -163,45 +184,70 @@
             .micl-list-item__trailing-text {
                 color: var(--md-sys-color-on-surface);
             }
+            &:focus-visible {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
+            }
+            &:active {
+                background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            }
         }
-        input[type=checkbox].micl-checkbox:not(:disabled):hover,
-        input[type=checkbox].micl-checkbox:not(:disabled):active {
+        input[type=checkbox]:not(:disabled):hover,
+        input[type=checkbox]:not(:disabled):active {
             --checkbox-state-layer-color: initial;
             --checkbox-outline-color: initial;
             --md-sys-ripple-background-color: transparent;
         }
     }
-    &> a {
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        align-self: normal;
-        width: 100%;
-        column-gap: var(--md-sys-list-item-space);
-        text-decoration: none;
-    }
 }
 
 .micl-list-item-one {
     min-height: var(--md-sys-list-item-one-height);
-    padding-block-start: var(--md-sys-list-item-one-padding);
-    padding-block-end: var(--md-sys-list-item-one-padding);
 
-    &:has(.micl-list-item__thumbnail) {
-        padding-block-start: var(--md-sys-list-item-three-padding);
-        padding-block-end: var(--md-sys-list-item-three-padding);
-        padding-inline-start: 0px;
+    &:not(:has(> a,> label)) {
+        padding-block-start: var(--md-sys-list-item-one-padding);
+        padding-block-end: var(--md-sys-list-item-one-padding);
+
+        &:has(.micl-list-item__thumbnail) {
+            padding-block-start: var(--md-sys-list-item-three-padding);
+            padding-block-end: var(--md-sys-list-item-three-padding);
+            padding-inline-start: 0px;
+        }
+    }
+    &> a,
+    &> label {
+        padding-block-start: var(--md-sys-list-item-one-padding);
+        padding-block-end: var(--md-sys-list-item-one-padding);
+
+        &:has(.micl-list-item__thumbnail) {
+            padding-block-start: var(--md-sys-list-item-three-padding);
+            padding-block-end: var(--md-sys-list-item-three-padding);
+            padding-inline-start: 0px;
+        }
     }
 }
 .micl-list-item-two {
     min-height: var(--md-sys-list-item-two-height);
-    padding-block-start: var(--md-sys-list-item-two-padding);
-    padding-block-end: var(--md-sys-list-item-two-padding);
 
-    &:has(.micl-list-item__thumbnail) {
-        padding-inline-start: 0px;
-        padding-block-start: 12px;
-        padding-block-end: 12px;
+    &:not(:has(> a, > label)) {
+        padding-block-start: var(--md-sys-list-item-two-padding);
+        padding-block-end: var(--md-sys-list-item-two-padding);
+
+        &:has(.micl-list-item__thumbnail) {
+            padding-inline-start: 0px;
+            padding-block-start: 12px;
+            padding-block-end: 12px;
+        }
+    }
+    &> a,
+    &> label {
+        padding-block-start: var(--md-sys-list-item-two-padding);
+        padding-block-end: var(--md-sys-list-item-two-padding);
+
+        &:has(.micl-list-item__thumbnail) {
+            padding-inline-start: 0px;
+            padding-block-start: 12px;
+            padding-block-end: 12px;
+        }
     }
     .micl-list-item__supporting-text {
         white-space: nowrap;
@@ -211,13 +257,27 @@
 }
 .micl-list-item-three {
     min-height: var(--md-sys-list-item-three-height);
-    padding-block-start: var(--md-sys-list-item-three-padding);
-    padding-block-end: var(--md-sys-list-item-three-padding);
 
-    &:has(.micl-list-item__thumbnail) {
+    &:not(:has(> a, > label)) {
         padding-block-start: var(--md-sys-list-item-three-padding);
         padding-block-end: var(--md-sys-list-item-three-padding);
-        padding-inline-start: 0px;
+
+        &:has(.micl-list-item__thumbnail) {
+            padding-block-start: var(--md-sys-list-item-three-padding);
+            padding-block-end: var(--md-sys-list-item-three-padding);
+            padding-inline-start: 0px;
+        }
+    }
+    &> a,
+    &> label {
+        padding-block-start: var(--md-sys-list-item-three-padding);
+        padding-block-end: var(--md-sys-list-item-three-padding);
+
+        &:has(.micl-list-item__thumbnail) {
+            padding-block-start: var(--md-sys-list-item-three-padding);
+            padding-block-end: var(--md-sys-list-item-three-padding);
+            padding-inline-start: 0px;
+        }
     }
     .micl-list-item__icon,
     .micl-list-item__avatar,
@@ -230,7 +290,7 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
     }
-    input[type=checkbox].micl-checkbox {
+    input[type=checkbox] {
         align-self: flex-start;
         margin-block-start: -12px;
     }
@@ -238,37 +298,39 @@
 
 .micl-list-item__icon {
     color: var(--md-sys-color-on-surface-variant);
+    font-size: 24px;
     font-variation-settings: 'FILL' 0;
     transition: font-variation-settings var(--md-sys-motion-duration-long2) linear;
 }
 .micl-list-item__avatar {
-    font-size: 40px;
-    border-radius: var(--md-sys-shape-corner-full);
-    color: var(--md-sys-color-primary-container);
-}
-.micl-list-item__avatar-text {
     @include typography.title-medium;
 
-    color: var(--md-sys-on-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 40px;
+    min-inline-size: 40px;
+    border-radius: var(--md-sys-shape-corner-full);
+    color: var(--md-sys-color-on-primary-container);
+    background-color: var(--md-sys-color-primary-container);
 }
 .micl-list-item__image {
     display: inline-block;
-    width: 56px;
     height: 56px;
     min-width: 56px;
-    min-height: 56px;
     border-radius: var(--md-sys-shape-corner-none);
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 .micl-list-item__thumbnail {
     display: inline-block;
-    width: auto;
     height: 64px;
-    min-height: 64px;
-    aspect-ratio: 1.5;
+    min-width: calc(64px * var(--md-sys-list-item-thumbnail-aspect-ratio));
     border-radius: var(--md-sys-shape-corner-none);
-    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .micl-list-item__text {

@@ -59,6 +59,20 @@ The List component offers three CSS classes to control the height and content ca
 </ul>
 ```
 
+Use the anchor element to convert a list item to a hyperlink:
+
+```HTML
+<ul class="micl-list" role="listbox">
+  <li class="micl-list-item-one" tabindex="0">
+    <a href="https://www.thetimes.com" tabindex="-1">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">The Times</span>
+      </span>
+    </a>
+  </li>
+</ul>
+```
+
 Adding the `micl-list-item--disabled` class to the `<li>` element causes the list item to be displayed in a disabled state.
 
 Add the `micl-list__divider` class to the `<ul>` element to automatically place a divider between each list item.
@@ -77,10 +91,10 @@ The text content of a list item can be preceded by various media elements:
   </li>
   ```
 
-- **Avatar**: Use `micl-list-item__avatar` with an avatar image (or icon).
+- **Avatar**: Use `micl-list-item__avatar` with a text.
   ```HTML
   <li class="micl-list-item-two" tabindex="0">
-    <span class="material-symbols-outlined micl-list-item__avatar">account_circle</span>
+    <span class="micl-list-item__avatar">BJ</span>
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">Bill Jones</span>
       <span class="micl-list-item__supporting-text">bill.jones@email.com</span>
@@ -111,35 +125,51 @@ The text content of a list item can be preceded by various media elements:
   ```
 
 ### Trailing Content
-The text of a list item may be followed by a trailing text or other elements (like a checkbox).
+The text of a list item may be followed by a trailing text, imagery or other elements (like a checkbox).
 
-```HTML
-<li class="micl-list-item-one" tabindex="0">
-  <span class="micl-list-item__text">
-    <span class="micl-list-item__headline">To-do items</span>
-  </span>
-  <span class="micl-list-item__trailing-text">100+</span>
-</li>
-````
+- **Icon**: Use `micl-list-item__icon` with a (Material Symbols) icon.
+  ```HTML
+  <li class="micl-list-item-two" tabindex="0">
+    <span class="micl-list-item__text">
+      <span class="micl-list-item__headline">Date and time</span>
+      <span class="micl-list-item__supporting-text">Timezones, calendar display</span>
+    </span>
+    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">more_horiz</span>
+  </li>
+  ```
+
+- **Text**: Use `micl-list-item__trailing-text` with a short text.
+  ```HTML
+  <li class="micl-list-item-one" tabindex="0">
+    <span class="micl-list-item__text">
+      <span class="micl-list-item__headline">To-do items</span>
+    </span>
+    <span class="micl-list-item__trailing-text">100+</span>
+  </li>
+  ````
 
 ### Selecting List Items
-To enable selection of list items, integrate a checkbox component within the `<li>` element. The `micl-list-item__text` should typically wrap the headline and supporting text, acting as the label for the checkbox.
+To enable selection of list items, integrate a checkbox or switch component within the `<li>` element.
 
 ```HTML
 <ul class="micl-list micl-list__divider" role="listbox">
   <li class="micl-list-item-two" tabindex="0">
-    <label for="checkbox1" class="micl-list-item__text">
-      <span class="micl-list-item__headline">Blue car</span>
-      <span class="micl-list-item__supporting-text">A blue car with four wheels.</span>
-    </label>
-    <input type="checkbox" id="checkbox1" class="micl-checkbox" value="cb1" tabindex="-1">
+    <label>
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Blue car</span>
+        <span class="micl-list-item__supporting-text">A blue car with four wheels.</span>
+      </label>
+      <input type="checkbox" id="mycheckbox" class="micl-checkbox" value="cb1" tabindex="-1">
+    </span>
   </li>
   <li class="micl-list-item-two" tabindex="0">
-    <label for="checkbox2" class="micl-list-item__text">
-      <span class="micl-list-item__headline">Red car</span>
-      <span class="micl-list-item__supporting-text">A red car with tinted windows.</span>
+    <label>
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Red car</span>
+        <span class="micl-list-item__supporting-text">A red car with tinted windows.</span>
+      </label>
+      <input type="checkbox" id="checkbox2" class="micl-switch" value="cb2" tabindex="-1">
     </label>
-    <input type="checkbox" id="checkbox2" class="micl-checkbox" value="cb2" tabindex="-1">
   </li>
 </ul>
 ```

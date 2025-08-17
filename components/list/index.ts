@@ -91,7 +91,7 @@ export default (() =>
                     break;
                 case 'Enter':
                 case ' ':
-                    const cb = (event.target as Element).querySelector('input[type=checkbox].micl-checkbox');
+                    const cb = (event.target as Element).querySelector('input[type=checkbox]');
                     if (cb instanceof HTMLInputElement) {
                         cb.checked = !cb.checked;
                     }
