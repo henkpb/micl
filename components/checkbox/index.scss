@@ -53,6 +53,7 @@
 }
 
 input[type=checkbox].micl-checkbox {
+    --md-sys-checkbox-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
     --md-sys-ripple-background-color: var(--md-sys-color-primary);
     --checkbox-container-color: transparent;
     --checkbox-container-border-color: var(--md-sys-color-on-surface-variant);
@@ -119,10 +120,10 @@ input[type=checkbox].micl-checkbox {
         var(--md-sys-checkbox-container-size) var(--md-sys-checkbox-container-size);
     clip-path: circle(var(--md-sys-checkbox-state-layer-radius));
     transition:
-        --checkbox-outline-color var(--md-sys-motion-duration-medium2),
-        --checkbox-state-layer-color var(--md-sys-motion-duration-medium2),
-        --checkbox-container-color var(--md-sys-motion-duration-medium2) var(--md-sys-motion-duration-short4),
-        --checkbox-container-border-color var(--md-sys-motion-duration-medium2);
+        --checkbox-outline-color var(--md-sys-checkbox-motion-duration),
+        --checkbox-state-layer-color var(--md-sys-checkbox-motion-duration),
+        --checkbox-container-color var(--md-sys-checkbox-motion-duration) var(--md-sys-motion-duration-short4),
+        --checkbox-container-border-color var(--md-sys-checkbox-motion-duration);
 
     &.micl-checkbox--error {
         --md-sys-ripple-background-color: var(--md-sys-color-error);

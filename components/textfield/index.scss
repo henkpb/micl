@@ -32,6 +32,9 @@
     --md-sys-textfield-input-space: 16px;
     --md-sys-textfield-prefix-space: 1em;
     --md-sys-textfield-suffix-space: 1em;
+    --md-sys-textfield-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
+    --md-sys-textfield-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+    --md-sys-textfield-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
 
     display: grid;
     grid-template-areas: "textfield" "supporting";
@@ -53,10 +56,10 @@
         color: var(--md-sys-color-on-surface-variant);
         z-index: 1;
         transition:
-            margin-block-start var(--md-sys-motion-duration-medium2) var(--md-sys-motion-duration-short3),
-            margin-inline-start var(--md-sys-motion-duration-medium2) var(--md-sys-motion-duration-short3),
-            font-size var(--md-sys-motion-duration-medium2),
-            letter-spacing var(--md-sys-motion-duration-medium2);
+            margin-block-start var(--md-sys-textfield-motion-duration) var(--md-sys-textfield-motion-effects),
+            margin-inline-start var(--md-sys-textfield-motion-duration) var(--md-sys-textfield-motion-effects),
+            font-size var(--md-sys-textfield-motion-duration) linear,
+            letter-spacing var(--md-sys-textfield-motion-duration) linear;
     }
     &> input,
     &> select,
@@ -121,7 +124,7 @@
         color: var(--md-sys-color-on-surface-variant);
         opacity: 0;
         z-index: 1;
-        transition: opacity var(--md-sys-motion-duration-long1);
+        transition: opacity var(--md-sys-textfield-motion-duration-reverse) linear;
     }
     &> .micl-textfield__prefix {
         width: var(--md-sys-textfield-prefix-space);

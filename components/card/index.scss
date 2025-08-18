@@ -34,6 +34,9 @@
 .micl-card-elevated,
 .micl-card-filled,
 .micl-card-outlined {
+    --md-sys-card-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-sys-card-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+
     height: fit-content;
     margin: var(--md-sys-card-margin);
     border-radius: var(--md-sys-shape-corner-medium);
@@ -63,8 +66,8 @@
         height: 0;
         overflow: hidden;
         transition:
-            content-visibility var(--md-sys-motion-duration-medium4) allow-discrete,
-            height var(--md-sys-motion-duration-medium4) linear(motion.$md-sys-motion-spring-default-spatial);
+            height var(--md-sys-card-motion-duration) var(--md-sys-card-motion-spatial),
+            content-visibility var(--md-sys-card-motion-duration) linear allow-discrete;
     }
     &[open]::details-content {
         height: auto;

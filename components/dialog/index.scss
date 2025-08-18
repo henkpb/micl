@@ -36,6 +36,10 @@
 
 dialog.micl-dialog,
 dialog.micl-dialog-fullscreen {
+    --md-sys-dialog-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-sys-dialog-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-sys-dialog-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -55,12 +59,14 @@ dialog.micl-dialog-fullscreen {
     overflow: hidden;
     interpolate-size: allow-keywords;
     transition:
-        display var(--md-sys-motion-duration-medium1) allow-discrete,
-        overlay var(--md-sys-motion-duration-medium1) allow-discrete,
-        inset-block-start var(--md-sys-motion-duration-medium1) linear,
-        inset-inline-start var(--md-sys-motion-duration-medium1) linear,
-        opacity var(--md-sys-motion-duration-medium1) motion.$md-sys-motion-easing-emphasized-decelerate,
-        transform var(--md-sys-motion-duration-medium1) linear;
+        inset-block-start var(--md-sys-dialog-motion-duration-reverse) linear,
+        inset-inline-start var(--md-sys-dialog-motion-duration-reverse) linear,
+        width var(--md-sys-dialog-motion-duration-reverse) linear,
+        height var(--md-sys-dialog-motion-duration-reverse) linear,
+        transform var(--md-sys-dialog-motion-duration-reverse) linear,
+        opacity var(--md-sys-dialog-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized-decelerate,
+        overlay var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete,
+        display var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete;
 
     @starting-style {
         height: fit-content;
@@ -79,25 +85,20 @@ dialog.micl-dialog-fullscreen {
         opacity: 1;
         transform: translate(calc(var(--md-sys-dialog-dir-factor) * -50%), -50%) scale(100%);
         transition:
-            display var(--md-sys-motion-duration-medium2) linear allow-discrete,
-            overlay var(--md-sys-motion-duration-medium2) linear allow-discrete,
-            inset-block-start var(--md-sys-motion-duration-medium2) linear,
-            inset-inline-start var(--md-sys-motion-duration-medium2) linear,
-            width var(--md-sys-motion-duration-medium2) linear,
-            height var(--md-sys-motion-duration-medium2) linear,
-            opacity var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized-accelerate,
-            transform var(--md-sys-motion-duration-medium2) linear;
+            inset-block-start var(--md-sys-dialog-motion-duration) linear,
+            inset-inline-start var(--md-sys-dialog-motion-duration) linear,
+            width var(--md-sys-dialog-motion-duration) linear,
+            height var(--md-sys-dialog-motion-duration) linear,
+            transform var(--md-sys-dialog-motion-duration) linear,
+            opacity var(--md-sys-dialog-motion-duration) motion.$md-sys-motion-easing-emphasized-accelerate,
+            overlay var(--md-sys-dialog-motion-duration) linear allow-discrete,
+            display var(--md-sys-dialog-motion-duration) linear allow-discrete;
 
         @starting-style {
             inset-block-start: anchor(start);
             inset-inline-start: anchor(start);
             opacity: 0;
             transform: translate(calc(var(--md-sys-dialog-dir-factor) * -50%), -50%) scale(50%);
-        }
-        &::backdrop {
-            @starting-style {
-                background-color: rgba(0, 0, 0, 0);
-            }
         }
     }
     &:not([popover]) {
@@ -121,12 +122,16 @@ dialog.micl-dialog-fullscreen {
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            display var(--md-sys-motion-duration-long2) linear allow-discrete,
-            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-            background-color var(--md-sys-motion-duration-long2) linear;
+            background-color var(--md-sys-dialog-motion-duration) linear,
+            overlay var(--md-sys-dialog-motion-duration) linear allow-discrete,
+            display var(--md-sys-dialog-motion-duration) linear allow-discrete;
     }
     &[open]::backdrop {
         background-color: rgba(0, 0, 0, 0.2);
+
+        @starting-style {
+            background-color: rgba(0, 0, 0, 0);
+        }
     }
     &:hover {
         background-color: color-mix(in srgb, var(--md-sys-color-surface-container-high), var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity));
@@ -194,7 +199,7 @@ dialog.micl-dialog-fullscreen {
         column-gap: 8px;
         padding: var(--md-sys-dialog-padding);
         opacity: 1;
-        transition: opacity var(--md-sys-motion-duration-medium1) linear;
+        transition: opacity var(--md-sys-dialog-motion-duration) linear;
     }
 }
 

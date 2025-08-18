@@ -59,7 +59,7 @@ The List component offers three CSS classes to control the height and content ca
 </ul>
 ```
 
-Use the anchor element to convert a list item to a hyperlink:
+Use the anchor element to convert a list item into a hyperlink:
 
 ```HTML
 <ul class="micl-list" role="listbox">

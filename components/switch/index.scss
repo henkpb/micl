@@ -34,6 +34,9 @@ input[type=checkbox].micl-switch {
     --md-sys-switch-unselected-icon: "+";
     --md-sys-switch-selected-icon: "\AC";
     --md-sys-switch-outline-width: 2px;
+    --md-sys-switch-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
+    --md-sys-switch-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+    --md-sys-switch-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
 
     appearance: none;
     position: relative;
@@ -53,7 +56,7 @@ input[type=checkbox].micl-switch {
         border: var(--md-sys-switch-outline-width) solid var(--md-sys-color-outline);
         border-radius: inherit;
         background-color: var(--md-sys-color-surface-container-highest);
-        transition: background-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized;
+        transition: background-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &::after {
         content: var(--md-sys-switch-unselected-icon);
@@ -73,13 +76,13 @@ input[type=checkbox].micl-switch {
         border-radius: var(--md-sys-shape-corner-full);
         transform: rotate(135deg);
         transition:
-            inset-inline-start var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
-            border-width var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
-            font-size var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
-            line-height var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
-            color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized,
-            border-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized,
-            background-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized;
+            inset-inline-start var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
+            border-width var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
+            font-size var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
+            line-height var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
+            color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
+            border-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
+            background-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &:checked {
         &::before {
