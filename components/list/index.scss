@@ -38,6 +38,9 @@
 
 .micl-list {
     --md-sys-list-item-container-color: var(--md-sys-color-surface);
+    --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-sys-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-sys-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
     margin: 0;
     padding: 8px 0;
@@ -49,8 +52,8 @@
             height: 0;
             overflow: hidden;
             transition:
-                content-visibility var(--md-sys-motion-duration-medium4) allow-discrete,
-                height var(--md-sys-motion-duration-medium4) linear(motion.$md-sys-motion-spring-default-spatial);
+                height var( --md-sys-accordion-motion-duration) var(--md-sys-accordion-motion-spatial),
+                content-visibility var(--md-sys-accordion-motion-duration) linear allow-discrete;
         }
         &[open]::details-content {
             height: auto;
@@ -105,7 +108,7 @@
     border-radius: var(--md-sys-shape-corner-none);
     background-color: var(--md-sys-list-item-container-color);
     list-style: none;
-    transition: background-color var(--md-sys-motion-duration-long2) linear;
+    transition: background-color var(--md-sys-list-motion-duration) linear;
 
     &> a,
     &> label {
@@ -300,7 +303,7 @@
     color: var(--md-sys-color-on-surface-variant);
     font-size: 24px;
     font-variation-settings: 'FILL' 0;
-    transition: font-variation-settings var(--md-sys-motion-duration-long2) linear;
+    transition: font-variation-settings var(--md-sys-list-motion-duration) linear;
 }
 .micl-list-item__avatar {
     @include typography.title-medium;

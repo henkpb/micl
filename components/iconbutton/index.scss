@@ -45,6 +45,10 @@ button.micl-iconbutton-outlined-s,
 button.micl-iconbutton-outlined-m,
 button.micl-iconbutton-outlined-l,
 button.micl-iconbutton-outlined-xl {
+    --md-sys-iconbutton-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-sys-iconbutton-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-full);
@@ -53,8 +57,8 @@ button.micl-iconbutton-outlined-xl {
     cursor: pointer;
     font-variation-settings: 'FILL' 0;
     transition:
-        font-variation-settings 600ms,
-        border-radius var(--md-sys-motion-duration-extra-long4) linear(motion.$md-sys-motion-spring-fast-spatial);
+        border-radius var(--md-sys-iconbutton-motion-duration) var(--md-sys-iconbutton-motion-effects),
+        font-variation-settings var(--md-sys-iconbutton-motion-duration) linear;
 
     &:disabled {
         background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);

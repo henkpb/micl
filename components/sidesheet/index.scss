@@ -30,6 +30,9 @@ dialog.micl-sidesheet {
     --md-sys-sidesheet-spring-buffer: 200px;
     --md-sys-sidesheet-padding-standard: 24px;
     --md-sys-sidesheet-padding-modal: 16px;
+    --md-sys-sidesheet-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
+    --md-sys-sidesheet-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
+    --md-sys-sidesheet-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
     box-sizing: border-box;
     display: none;
@@ -53,10 +56,10 @@ dialog.micl-sidesheet {
     opacity: 0;
     overflow: hidden;
     transition:
-        display var(--md-sys-motion-duration-medium1) allow-discrete,
-        overlay var(--md-sys-motion-duration-medium1) allow-discrete,
-        opacity var(--md-sys-motion-duration-medium1),
-        margin-inline-end var(--md-sys-motion-duration-medium1);
+        opacity var(--md-sys-sidesheet-motion-duration-reverse) linear,
+        margin-inline-end var(--md-sys-sidesheet-motion-duration-reverse) var(--md-sys-sidesheet-motion-spatial),
+        overlay var(--md-sys-sidesheet-motion-duration-reverse) linear allow-discrete,
+        display var(--md-sys-sidesheet-motion-duration-reverse) linear allow-discrete;
 
     .micl-sidesheet__headline {
         display: flex;
@@ -109,9 +112,9 @@ dialog.micl-sidesheet {
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            display var(--md-sys-motion-duration-long2) linear allow-discrete,
-            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-            background-color var(--md-sys-motion-duration-long2);
+            background-color var(--md-sys-sidesheet-motion-duration) linear,
+            overlay var(--md-sys-sidesheet-motion-duration) linear allow-discrete,
+            display var(--md-sys-sidesheet-motion-duration) linear allow-discrete;
     }
     &[open] {
         background-color: var(--md-sys-color-surface-container-low);
@@ -132,23 +135,22 @@ dialog.micl-sidesheet {
         margin-inline-end: calc(-1 * var(--md-sys-sidesheet-spring-buffer));
         opacity: 1;
         transition:
-            display var(--md-sys-motion-duration-long2) linear allow-discrete,
-            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-            opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate,
-            margin-inline-end var(--md-sys-motion-duration-long2) linear(motion.$md-sys-motion-spring-default-spatial);
+            opacity var(--md-sys-sidesheet-motion-duration) linear,
+            margin-inline-end var(--md-sys-sidesheet-motion-duration) var(--md-sys-sidesheet-motion-spatial),
+            overlay var(--md-sys-sidesheet-motion-duration) linear allow-discrete,
+            display var(--md-sys-sidesheet-motion-duration) linear allow-discrete;
 
         @starting-style {
-            opacity: 0;
             margin-inline-end: calc(-1 * (var(--md-sys-sidesheet-maxwidth) + var(--md-sys-sidesheet-spring-buffer)));
-        }
-        &::backdrop {
-            @starting-style {
-                background-color: rgba(0, 0, 0, 0);
-            }
+            opacity: 0;
         }
     }
     &[open]::backdrop {
         background-color: rgba(0, 0, 0, 0.2);
+
+        @starting-style {
+            background-color: rgba(0, 0, 0, 0);
+        }
     }
 }
 
@@ -156,9 +158,9 @@ body:has(dialog.micl-sidesheet[popover]) {
     box-sizing: border-box;
     max-width: 100%;
     margin: 0;
-    transition: max-width var(--md-sys-motion-duration-medium1);
+    transition: max-width var(--md-sys-sidesheet-motion-duration-reverse);
 }
 body:has(dialog.micl-sidesheet:popover-open) {
     max-width: calc(100vw - 400px);
-    transition: max-width var(--md-sys-motion-duration-long2) linear(motion.$md-sys-motion-spring-default-spatial);
+    transition: max-width var(--md-sys-sidesheet-motion-duration) var(--md-sys-sidesheet-motion-spatial);
 }

@@ -30,6 +30,9 @@ dialog.micl-bottomsheet {
     --md-sys-bottomsheet-padding: 24px;
     --md-sys-bottomsheet-handle-width: 32px;
     --md-sys-bottomsheet-handle-height: 4px;
+    --md-sys-bottomsheet-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
+    --md-sys-bottomsheet-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
+    --md-sys-bottomsheet-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
     box-sizing: border-box;
     position: fixed;
@@ -51,10 +54,10 @@ dialog.micl-bottomsheet {
 
     &:not(.micl-bottomsheet--resizing) {
         transition:
-            display var(--md-sys-motion-duration-medium1) allow-discrete,
-            overlay var(--md-sys-motion-duration-medium1) allow-discrete,
-            height var(--md-sys-motion-duration-medium1) linear(motion.$md-sys-motion-spring-default-spatial),
-            opacity var(--md-sys-motion-duration-medium1) motion.$md-sys-motion-easing-emphasized-accelerate;
+            opacity var(--md-sys-bottomsheet-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized-accelerate,
+            height var(--md-sys-bottomsheet-motion-duration-reverse) var(--md-sys-bottomsheet-motion-spatial),
+            overlay var(--md-sys-bottomsheet-motion-duration-reverse) linear allow-discrete,
+            display var(--md-sys-bottomsheet-motion-duration-reverse) linear allow-discrete;
     }
     &.micl-bottomsheet--resizing .micl-bottomsheet__headline {
         cursor: grabbing;
@@ -93,9 +96,9 @@ dialog.micl-bottomsheet {
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            display var(--md-sys-motion-duration-long2) linear allow-discrete,
-            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-            background-color var(--md-sys-motion-duration-long2) linear;
+            overlay var(--md-sys-bottomsheet-motion-duration) linear allow-discrete,
+            display var(--md-sys-bottomsheet-motion-duration) linear allow-discrete,
+            background-color var(--md-sys-bottomsheet-motion-duration) linear;
     }
     &:popover-open,
     &[open] {
@@ -105,23 +108,22 @@ dialog.micl-bottomsheet {
 
         &:not(.micl-bottomsheet--resizing) {
             transition:
-                display var(--md-sys-motion-duration-long2) linear allow-discrete,
-                overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-                height var(--md-sys-motion-duration-long2) linear(motion.$md-sys-motion-spring-default-spatial),
-                opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+                opacity var(--md-sys-bottomsheet-motion-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
+                height var(--md-sys-bottomsheet-motion-duration) var(--md-sys-bottomsheet-motion-spatial),
+                overlay var(--md-sys-bottomsheet-motion-duration) linear allow-discrete,
+                display var(--md-sys-bottomsheet-motion-duration) linear allow-discrete;
         }
         @starting-style {
             height: 0;
             opacity: 0;
         }
-        &::backdrop {
-            @starting-style {
-                background-color: rgba(0, 0, 0, 0);
-            }
-        }
     }
     &[open]::backdrop {
         background-color: rgba(0, 0, 0, 0.2);
+
+        @starting-style {
+            background-color: rgba(0, 0, 0, 0);
+        }
     }
 }
 

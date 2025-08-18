@@ -26,6 +26,10 @@
 @use '../../styles/statelayer';
 
 .micl-menu[popover] {
+    --md-sys-menu-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-sys-menu-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-sys-menu-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+
     position: absolute;
     inset: unset;
     inset-block-start: anchor(end);
@@ -43,19 +47,19 @@
     transform: scaleY(0);
     transform-origin: top left;
     transition:
-        opacity var(--md-sys-motion-duration-medium1),
-        transform var(--md-sys-motion-duration-medium1),
-        overlay var(--md-sys-motion-duration-medium1) allow-discrete,
-        display var(--md-sys-motion-duration-medium1) allow-discrete;
+        opacity var(--md-sys-menu-motion-duration-reverse) linear,
+        transform var(--md-sys-menu-motion-duration-reverse) var(--md-sys-menu-motion-spatial),
+        overlay var(--md-sys-menu-motion-duration-reverse) linear allow-discrete,
+        display var(--md-sys-menu-motion-duration-reverse) linear allow-discrete;
 
     &:popover-open {
         opacity: 1;
         transform: scaleY(1);
         transition:
-            opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate,
-            transform var(--md-sys-motion-duration-long2) linear(motion.$md-sys-motion-spring-default-spatial),
-            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-            display var(--md-sys-motion-duration-long2) linear allow-discrete;
+            opacity var(--md-sys-menu-motion-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
+            transform var(--md-sys-menu-motion-duration) var(--md-sys-menu-motion-spatial),
+            overlay var(--md-sys-menu-motion-duration) linear allow-discrete,
+            display var(--md-sys-menu-motion-duration) linear allow-discrete;
 
         @position-try-on {
             transform-origin: bottom left;
@@ -80,9 +84,9 @@
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            background-color var(--md-sys-motion-duration-long2),
-            overlay var(--md-sys-motion-duration-long2) linear allow-discrete,
-            display var(--md-sys-motion-duration-long2) linear allow-discrete;
+            background-color var(--md-sys-menu-motion-duration) linear,
+            overlay var(--md-sys-menu-motion-duration) linear allow-discrete,
+            display var(--md-sys-menu-motion-duration) linear allow-discrete;
     }
 
     .micl-list {

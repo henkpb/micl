@@ -31,6 +31,9 @@
 }
 
 input[type=radio].micl-radio {
+    --md-sys-radio-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
+    --md-sys-radio-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+    --md-sys-radio-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-sys-ripple-background-color: var(--md-sys-color-primary);
 
     appearance: none;
@@ -44,7 +47,7 @@ input[type=radio].micl-radio {
     background-color: transparent;
     border-radius: var(--md-sys-shape-corner-full);
     outline-offset: -7px;
-    transition: background-color var(--md-sys-motion-duration-long2);
+    transition: background-color var(--md-sys-radio-motion-duration) linear;
 
     &::after {
         content: "";
@@ -60,15 +63,15 @@ input[type=radio].micl-radio {
         background-clip: content-box;
         border-radius: var(--md-sys-shape-corner-full);
         transition:
-            padding var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized,
-            border-color var(--md-sys-motion-duration-medium2) motion.$md-sys-motion-easing-emphasized;
+            padding var(--md-sys-radio-motion-duration-reverse) var(--md-sys-radio-motion-effects),
+            border-color var(--md-sys-radio-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized;
     }
     &:checked::after {
         border-color: var(--md-sys-color-primary);
         padding: 3px;
         transition:
-            padding var(--md-sys-motion-duration-long4) linear(motion.$md-sys-motion-spring-slow-spatial),
-            border-color var(--md-sys-motion-duration-long4) motion.$md-sys-motion-easing-emphasized;
+            padding var(--md-sys-radio-motion-duration) var(--md-sys-radio-motion-effects),
+            border-color var(--md-sys-radio-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &:not(:disabled) {
         --miclripple: 1;
