@@ -68,6 +68,7 @@ Since the Menu component is based on the **List component**, all of its list ite
 ```
 
 **Example: A menu with a link**
+
 To make a menu item function as a link, wrap its content in an `<a>` tag and set the `tabindex` to `-1`. This ensures the link is clickable but does not interfere with menu navigation.
 
 ```HTML
@@ -87,6 +88,7 @@ To make a menu item function as a link, wrap its content in an `<a>` tag and set
 ```
 
 **Example: A menu with a submenu**
+
 A menu item may trigger opening a submenu when invoked by a button. Wrap the menu item content in a `<button>` tag, set its `tabindex` to `-1` and add the `popovertarget` attribute that points to the submenu. The button acts then as the control element for the submenu.
 
 ```HTML
