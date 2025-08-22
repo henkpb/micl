@@ -58,14 +58,9 @@ export default (() =>
                 return;
             }
 
-            let currentIndex = items.findIndex(item => isSelected(item));
-            if (currentIndex === -1) {
-                currentIndex = items.findIndex(item => item.tabIndex === 0);
-            }
-            if (currentIndex === -1) {
-                currentIndex = 0;
-            }
-            let nextIndex = currentIndex;
+            let selectedIndex = items.findIndex(item => isSelected(item)),
+                currentIndex  = items.findIndex(item => item.tabIndex === 0),
+                nextIndex     = currentIndex;
 
             switch (event.key) {
                 case 'ArrowDown':
@@ -77,7 +72,6 @@ export default (() =>
                     event.preventDefault();
                     break;
                 case 'Tab':
-                    let selectedIndex = items.findIndex(item => isSelected(item));
                     if (selectedIndex === -1) {
                         if (currentIndex !== 0) {
                             items[currentIndex].tabIndex = -1;
@@ -102,6 +96,13 @@ export default (() =>
                 items[currentIndex].tabIndex = -1;
                 items[nextIndex].tabIndex = 0;
                 items[nextIndex].focus();
+
+                const btn = items[nextIndex].querySelector(':scope > button');
+                btn?.dispatchEvent(new MouseEvent('mouseenter', {
+                    bubbles   : true,
+                    cancelable: true,
+                    view      : window
+                }));
             }
         }
     };
