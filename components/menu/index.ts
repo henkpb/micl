@@ -21,27 +21,15 @@
 
 export const menuSelector = '.micl-menu[popover]';
 
-/**
- * Set the origin for menu transformations just before transitions start.
- * By default, the origin is "top left" (the menu opens just below the invoker, left aligned),
- * but could also be "top right", "bottom left" or "bottom right".
- * When the browser needs to apply a position-try-fallbacks, because there is not enough space
- * for the menu in the default location, then the reverse transformation will be applied from
- * the wrong origin.
- * Therefore, when the menu is open, calculate the transformation origin just before the
- * transitions start. When the menu is closed, do the same just after the 'display:none' has
- * been removed by the browser (the 'toggle' event has then been triggered).
- */
 export default (() =>
 {
     const getOrigin = (invoker: Element, popover: Element): string =>
     {
-        const invokerY  = invoker.getBoundingClientRect().y,
-              popoverY  = popover.getBoundingClientRect().y,
-              oldOrigin = window.getComputedStyle(popover).getPropertyValue('transform-origin');
+        const invokerRect = invoker.getBoundingClientRect(),
+              popoverRect = popover.getBoundingClientRect();
 
-        return ((invokerY > popoverY) ? 'bottom ' : 'top ') +
-               ((parseInt(oldOrigin) > 0) ? 'right' : 'left');
+        return ((invokerRect.x > popoverRect.x) ? 'right ' : 'left ') +
+               ((invokerRect.y > popoverRect.y) ? 'bottom' : 'top');
     };
 
     return {
@@ -72,6 +60,50 @@ export default (() =>
                 }
             });
 
+            element.querySelectorAll<HTMLButtonElement>(
+                ':scope > ul.micl-list > li > button[popovertarget]'
+            ).forEach(submenuinvoker =>
+            {
+                if (submenuinvoker.popoverTargetElement?.matches('.micl-menu[popover]')) {
+                    let hoverTimeout: any,
+                        id = `--${submenuinvoker.popoverTargetElement.id}`;
+
+                    if (submenuinvoker.popoverTargetElement instanceof HTMLElement) {
+                        submenuinvoker.style.setProperty('anchor-name', id);
+                        submenuinvoker.popoverTargetElement.style.insetBlockStart = `anchor(${id} start)`;
+                        submenuinvoker.popoverTargetElement.style.insetInlineStart = `anchor(${id} end)`;
+                    }
+                    submenuinvoker.classList.add('micl-forripple');
+
+                    submenuinvoker.addEventListener('mouseenter', () =>
+                    {
+                        if (submenuinvoker.popoverTargetElement instanceof HTMLElement) {
+                            submenuinvoker.popoverTargetElement.showPopover();
+                        }
+                    });
+                    submenuinvoker.addEventListener('mouseleave', () =>
+                    {
+                        hoverTimeout = setTimeout(() => {
+                            if (
+                                submenuinvoker.popoverTargetElement instanceof HTMLElement
+                                && !submenuinvoker.popoverTargetElement.matches(':hover')
+                            ) {
+                                submenuinvoker.popoverTargetElement.hidePopover();
+                            }
+                        }, 100);
+                    });
+                    submenuinvoker.popoverTargetElement.addEventListener('mouseenter', () =>
+                    {
+                        clearTimeout(hoverTimeout);
+                    });
+                    submenuinvoker.popoverTargetElement.addEventListener('mouseleave', () =>
+                    {
+                        if (submenuinvoker.popoverTargetElement instanceof HTMLElement) {
+                            submenuinvoker.popoverTargetElement.hidePopover();
+                        }
+                    });
+                }
+            });
         }
     };
 })();

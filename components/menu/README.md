@@ -4,7 +4,7 @@ This component implements the [Material Design 3 Expressive Menu](https://m3.mat
 ## Basic Usage
 
 ### HTML
-The Menu component is an extension of the [List component](../list/README.md). It consists of a `<nav>` element with the `micl-menu` class, which acts as the container for a `<ul>` with the `micl-list` class. The menu can be opened and closed using a control element with the `popovertarget` attribute.
+The Menu component is an extension of the [List component](../list/README.md). It consists of a `<nav>` element with the `micl-menu` class, which acts as the container for a `<ul>` with the `micl-list` class. The menu can be opened and closed using a control element with the `popovertarget` attribute, where the value of the attribute matches the `id` of the menu's `<nav>` element.
 
 ```HTML
 <nav id="mymenu" class="micl-menu" popover>
@@ -17,7 +17,7 @@ The Menu component is an extension of the [List component](../list/README.md). I
   </ul>
 </nav>
 
-<button type="button" popovertarget="mymenu">Open Basic Menu</button>
+<button type="button" popovertarget="mymenu">Open Menu</button>
 ```
 
 ### CSS
@@ -68,19 +68,58 @@ Since the Menu component is based on the **List component**, all of its list ite
 ```
 
 **Example: A menu with a link**
+
 To make a menu item function as a link, wrap its content in an `<a>` tag and set the `tabindex` to `-1`. This ensures the link is clickable but does not interfere with menu navigation.
 
 ```HTML
 <nav id="mymenu" class="micl-menu" popover>
   <ul class="micl-list">
-    <li class="micl-list-item-two micl-list-item__divider">
+    <li class="micl-list-item-two" tabindex="0">
       <a href="https://www.nytimes.com" tabindex="-1">
         <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
         <span class="micl-list-item__text">
           <span class="micl-list-item__headline">The New York Times</span>
-          <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
+          <span class="micl-list-item__supporting-text">Open the front page of The New York Times</span>
         </span>
       </a>
+    </li>
+  </ul>
+</nav>
+```
+
+**Example: A menu with a submenu**
+
+A menu item may trigger opening a submenu when invoked by a button. Wrap the menu item content in a `<button>` tag, set its `tabindex` to `-1` and add the `popovertarget` attribute that points to the submenu. The button acts then as the control element for the submenu.
+
+```HTML
+<nav id="mymenu" class="micl-menu" popover>
+  <ul class="micl-list">
+    <li class="micl-list-item-one" tabindex="0">
+      <button popovertarget="mysubmenu" tabindex="-1">
+        <span class="micl-list-item__text">
+          <span class="micl-list-item__headline">Item 1</span>
+        </span>
+        <span class="micl-list-item__icon material-symbols-outlined">arrow_right</span>
+      </button>
+      <nav id="mysubmenu" class="micl-menu" popover>
+        <ul class="micl-list">
+          <li class="micl-list-item-one" tabindex="0">
+            <span class="micl-list-item__text">
+              <span class="micl-list-item__headline">Item 1-1</span>
+            </span>
+          </li>
+          <li class="micl-list-item-one" tabindex="0">
+            <span class="micl-list-item__text">
+              <span class="micl-list-item__headline">Item 1-2</span>
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </li>
+    <li class="micl-list-item-one" tabindex="0">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Item 2</span>
+      </span>
     </li>
   </ul>
 </nav>
@@ -89,6 +128,30 @@ To make a menu item function as a link, wrap its content in an `<a>` tag and set
 Adding the `micl-list-item--disabled` class to a menu item causes the item to be displayed in a disabled state.
 
 Add the `micl-list-item__divider` class to a menu item to create a divider between the item and the previous menu item.
+
+## Customizations
+You can customize the appearance of the Menu component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child menus.
+
+| Variable name | Default Value | Description |
+| ------------- | ----- | ----------- |
+| --md-sys-menu-width-max | 280px | The maximum width allowed for a menu |
+| --md-sys-menu-width-min | 112px | The minimum allowed width for a menu |
+
+**Example: Changing the maximum width**
+
+```HTML
+<div style="--md-sys-menu-width-max:320px">
+  <nav id="mymenu" class="micl-menu" popover>
+    <ul class="micl-list">
+      <li class="micl-list-item-one" tabindex="0">
+        <span class="micl-list-item__text">
+          <span class="micl-list-item__headline">Menu item</span>
+        </span>
+      </li>
+    </ul>
+  </nav>
+</div>
+```
 
 ## Compatibility
 This component uses **popover anchor positioning** to place the menu next to its invoker. This is a modern CSS feature that may not be fully supported in all browsers. To ensure the menu works in browsers that do not support anchor positioning, wrap the menu and its invoker in a `<div>` element with `position:relative`. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/anchor#browser_compatibility) for details.
