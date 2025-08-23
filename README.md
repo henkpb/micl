@@ -88,6 +88,7 @@ The library currently consists of the following components:
 - [x] [Icon button](components/iconbutton/README.md)
 - [x] [List](components/list/README.md)
 - [x] [Menu](components/menu/README.md)
+- [ ] [Navigation rail](components/navigationrail/README.md)
 - [x] [Radio button](components/radio/README.md)
 - [x] [Select](components/select/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
@@ -97,10 +98,19 @@ The library currently consists of the following components:
 
 ## Change Log
 
+### 1.3.0 (23.08.2025)
+**Features**
+
+- **Menu**: Added support for submenus.
+- **Ripple**: The ripple-effect does not use a pseudo-element anymore.
+- **State layer**: Rewrite for simpler styling.
+
 ### 1.2.0 (17.08.2025)
 **Features**
+
 - **List**: Added support for switches inside list items.
 
 ### 1.1.0 (12.08.2025)
 **Features**
+
 - **Text field**: Added support for multi-line text fields.
