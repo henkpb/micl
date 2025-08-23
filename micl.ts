@@ -81,14 +81,16 @@ export default (() =>
                     if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
                         return;
                     }
-                    const
-                        x = e.clientX,
-                        y = e.clientY,
-                        r = element.getBoundingClientRect(),
-                        d = Math.sqrt(Math.pow(r.width, 2) + Math.pow(r.height, 2)) * 2;
-                    element.style.cssText = `--s:0;--o:1;`;
-                    element.offsetTop;
-                    element.style.cssText = `--t:1;--o:0;--d:${d};--x:${x - r.left};--y:${y - r.top}`;
+                    let r      = element.getBoundingClientRect(),
+                        i      = 0,
+                        name   = '',
+                        styles = '';
+                    while ((name = element.style.item(i++)) && name) {
+                        if ((name != '--x') && (name != '--y')) {
+                            styles += `${name}:${element.style.getPropertyValue(name)};`;
+                        }
+                    }
+                    element.style.cssText = styles + `--x:${e.clientX - r.left}px;--y:${e.clientY - r.top}px`;
                 });
             }
         });

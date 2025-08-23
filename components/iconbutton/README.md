@@ -20,7 +20,7 @@ Import the icon button styles into your project:
 ```
 
 ### JavaScript
-This component requires JavaScript for interactive features like the **ripple effect** and **toggle logic**:
+This component requires JavaScript for interactive features like the **toggle logic**:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";

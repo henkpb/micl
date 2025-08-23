@@ -8,13 +8,13 @@ document.getElementById('settings-placeholder').innerHTML =
         <div class="micl-textfield-outlined">
             <label for="theme">Theme</label>
             <select id="theme">
-                <option class="micl-list-item-one" value="airblue">
+                <option class="micl-list-item-one" selected value="airblue">
                     <span class="micl-list-item__text">Air blue</span>
                 </option>
                 <option class="micl-list-item-one" value="barnred">
                     <span class="micl-list-item__text">Barn red</span>
                 </option>
-                <option class="micl-list-item-one" selected value="citrine">
+                <option class="micl-list-item-one" value="citrine">
                     <span class="micl-list-item__text">Citrine</span>
                 </option>
                 <option class="micl-list-item-one" value="olivegreen">

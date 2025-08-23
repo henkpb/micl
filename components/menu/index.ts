@@ -73,7 +73,6 @@ export default (() =>
                         submenuinvoker.popoverTargetElement.style.insetBlockStart = `anchor(${id} start)`;
                         submenuinvoker.popoverTargetElement.style.insetInlineStart = `anchor(${id} end)`;
                     }
-                    submenuinvoker.classList.add('micl-forripple');
 
                     submenuinvoker.addEventListener('mouseenter', () =>
                     {

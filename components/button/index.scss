@@ -21,7 +21,6 @@
 
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/ripple';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
@@ -54,11 +53,20 @@ button.micl-button-outlined-xl {
     --md-sys-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-button-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --miclripple: 1;
 
     padding: 0;
     border: none;
+    background-image:
+        radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
+    background-size: 10000%, 100%;
     cursor: pointer;
-    transition: border-radius var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects);
+    transition:
+        border-radius var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects),
+        background-size 3000ms,
+        --statelayer-opacity var(--md-sys-button-motion-duration) linear;
 
     &:disabled {
         background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
@@ -66,9 +74,15 @@ button.micl-button-outlined-xl {
         box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }
-    &:not(:disabled):focus-visible {
-        outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-        outline-offset: 3px;
+    &:not(:disabled) {
+        &:focus-visible {
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline-offset: 3px;
+        }
+        &:active {
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
+        }
     }
     .micl-button__icon {
         font-variation-settings: 'FILL' 0;
@@ -105,9 +119,6 @@ button.micl-button-outlined-xs {
         }
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active {
             &.micl-button-elevated-xs {
                 border-radius: var(--md-sys-shape-corner-small);
@@ -157,9 +168,6 @@ button.micl-button-outlined-s {
         }
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active:not(:disabled) {
             &.micl-button-elevated-s {
                 border-radius: var(--md-sys-shape-corner-small);
@@ -203,9 +211,6 @@ button.micl-button-outlined-m {
         }
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active:not(:disabled) {
             border-radius: var(--md-sys-shape-corner-medium);
         }
@@ -241,9 +246,6 @@ button.micl-button-outlined-l {
         }
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active:not(:disabled) {
             border-radius: var(--md-sys-shape-corner-large);
         }
@@ -279,9 +281,6 @@ button.micl-button-outlined-xl {
         }
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active:not(:disabled) {
             border-radius: var(--md-sys-shape-corner-large);
         }
@@ -299,22 +298,24 @@ button.micl-button-text-s,
 button.micl-button-text-m,
 button.micl-button-text-l,
 button.micl-button-text-xl {
+    --statelayer-color: var(--md-sys-color-primary);
+
     background-color: transparent;
     color: var(--md-sys-color-primary);
 
     &:not(:disabled) {
         &:hover {
-            background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -324,12 +325,16 @@ button.micl-button-elevated-s,
 button.micl-button-elevated-m,
 button.micl-button-elevated-l,
 button.micl-button-elevated-xl {
+    --statelayer-color: var(--md-sys-color-primary);
+
     background-color: var(--md-sys-color-surface-container-low);
     color: var(--md-sys-color-primary);
     box-shadow: var(--md-sys-elevation-level1);
 
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
+            --statelayer-color: var(--md-sys-color-on-primary);
+
             background-color: var(--md-sys-color-primary);
             color: var(--md-sys-color-on-primary);
 
@@ -338,28 +343,17 @@ button.micl-button-elevated-xl {
             }
         }
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-primary), var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-hover-state-layer-opacity));
-            }
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-primary), var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-primary), var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -377,6 +371,8 @@ button.micl-button-filled-s,
 button.micl-button-filled-m,
 button.micl-button-filled-l,
 button.micl-button-filled-xl {
+    --statelayer-color: var(--md-sys-color-on-primary);
+
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
 
@@ -387,32 +383,23 @@ button.micl-button-filled-xl {
             }
         }
         &.micl-button--toggle:not(.micl-button--selected) {
+            --statelayer-color: var(--md-sys-color-on-surface-variant);
+
             background-color: var(--md-sys-color-surface-container);
             color: var(--md-sys-color-on-surface-variant);
         }
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
-            &.micl-button--toggle:not(.micl-button--selected) {
-                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover-state-layer-opacity));
-            }
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle:not(.micl-button--selected) {
-                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle:not(.micl-button--selected) {
-                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -422,11 +409,15 @@ button.micl-button-tonal-s,
 button.micl-button-tonal-m,
 button.micl-button-tonal-l,
 button.micl-button-tonal-xl {
+    --statelayer-color: var(--md-sys-color-on-secondary-container);
+
     background-color: var(--md-sys-color-secondary-container);
     color: var(--md-sys-color-on-secondary-container);
 
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
+            --statelayer-color: var(--md-sys-color-on-secondary);
+
             background-color: var(--md-sys-color-secondary);
             color: var(--md-sys-color-on-secondary);
 
@@ -435,28 +426,17 @@ button.micl-button-tonal-xl {
             }
         }
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-hover-state-layer-opacity));
-            }
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -466,11 +446,15 @@ button.micl-button-outlined-s,
 button.micl-button-outlined-m,
 button.micl-button-outlined-l,
 button.micl-button-outlined-xl {
+    --statelayer-color: var(--md-sys-color-on-surface-variant);
+
     background-color: transparent;
     color: var(--md-sys-color-on-surface-variant);
 
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
+            --statelayer-color: var(--md-sys-color-inverse-on-surface);
+
             background-color: var(--md-sys-color-inverse-surface);
             color: var(--md-sys-color-inverse-on-surface);
 
@@ -479,28 +463,17 @@ button.micl-button-outlined-xl {
             }
         }
         &:hover {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-hover-state-layer-opacity));
-            }
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }

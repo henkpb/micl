@@ -42,3 +42,15 @@ $md-sys-state-focus-indicator-thickness: 3px;
     --md-sys-state-focus-indicator-outer-offset: #{$md-sys-state-focus-indicator-outer-offset};
     --md-sys-state-focus-indicator-thickness: #{$md-sys-state-focus-indicator-thickness};
 }
+
+@property --statelayer-color {
+    syntax: '<color>';
+    initial-value: transparent;
+    inherits: false;
+}
+
+@property --statelayer-opacity {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
