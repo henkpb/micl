@@ -253,19 +253,25 @@
         &> input:not(:disabled),
         &> select:not(:disabled),
         &> textarea:not(:disabled) {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+
             border-block-end-color: var(--md-sys-color-on-surface);
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
         }
     }
     &> input,
     &> select,
     &> textarea {
+        --statelayer-color: var(--md-sys-color-on-surface);
+
         padding-block-start: 18px;
         padding-block-end: 2px;
-        background-color: var(--md-sys-color-surface-container-highest);
         border-end-start-radius: 0;
         border-end-end-radius: 0;
         outline: none;
+        background-color: var(--md-sys-color-surface-container-highest);
+        background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+        background-repeat: no-repeat;
+        transition: --statelayer-opacity var(--md-sys-textfield-motion-duration) linear;
 
         &:disabled {
             background-color: rgb(from var(--md-sys-color-on-surface) r g b / 4%);

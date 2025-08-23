@@ -36,6 +36,7 @@
 
 dialog.micl-dialog,
 dialog.micl-dialog-fullscreen {
+    --statelayer-color: var(--md-sys-color-primary);
     --md-sys-dialog-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-dialog-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-dialog-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
@@ -54,6 +55,8 @@ dialog.micl-dialog-fullscreen {
     border: none;
     border-radius: var(--md-sys-shape-corner-extra-large);
     background-color: var(--md-sys-color-surface-container-high);
+    background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
     box-shadow: var(--md-sys-elevation-level3);
     opacity: 0;
     overflow: hidden;
@@ -66,7 +69,8 @@ dialog.micl-dialog-fullscreen {
         transform var(--md-sys-dialog-motion-duration-reverse) linear,
         opacity var(--md-sys-dialog-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized-decelerate,
         overlay var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete,
-        display var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete;
+        display var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete,
+        --statelayer-opacity var(--md-sys-dialog-motion-duration) linear;
 
     @starting-style {
         height: fit-content;
@@ -133,9 +137,9 @@ dialog.micl-dialog-fullscreen {
             background-color: rgba(0, 0, 0, 0);
         }
     }
-    &:hover {
-        background-color: color-mix(in srgb, var(--md-sys-color-surface-container-high), var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity));
-    }
+//    &:hover {
+//        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+//    }
 
     .micl-dialog__headline {
         display: flex;
@@ -213,9 +217,9 @@ dialog.micl-dialog-fullscreen {
         box-shadow: var(--md-sys-elevation-level0);
         timeline-scope: --headlineTimeline;
 
-        &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity));
-        }
+//        &:hover {
+//            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+//        }
         .micl-dialog__headline {
             height: 56px;
             flex-direction: row;

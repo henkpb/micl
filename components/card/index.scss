@@ -21,7 +21,6 @@
 
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/ripple';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
@@ -45,17 +44,44 @@
 
     &[tabindex='0']:not(.micl-card--disabled) {
         --miclripple: 1;
+        --statelayer-color: var(--md-sys-color-on-surface);
 
-        @include ripple.effect;
+        background-image:
+            radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+            linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+        background-repeat: no-repeat;
+        background-size: 10000%, 100%;
+        transition:
+            background-size 3000ms,
+            --statelayer-opacity var(--md-sys-card-motion-duration) linear;
 
         &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+
             box-shadow: var(--md-sys-elevation-level1);
             cursor: pointer;
         }
         &:focus-visible {
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
             outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
             box-shadow: var(--md-sys-elevation-level1);
+        }
+        &:active {
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
+        }
+        &.micl-card--dragging {
+            --statelayer-opacity: var(--md-sys-state-dragged-state-layer-opacity);
+
+            box-shadow: var(--md-sys-elevation-level3);
+            cursor: grabbing;
+        }
+        .micl-card__content {
+            background-color: transparent;
         }
     }
     &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:focus-visible) {
@@ -86,20 +112,13 @@
 
     &[tabindex='0']:not(.micl-card--disabled) {
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level2);
         }
-        &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
-        }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level1);
         }
         &.micl-card--dragging {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-low), var(--md-sys-color-on-surface) var(--md-sys-state-dragged-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level4);
-            cursor: grabbing;
         }
     }
 }
@@ -108,21 +127,11 @@
     box-shadow: var(--md-sys-elevation-level0);
 
     &[tabindex='0']:not(.micl-card--disabled) {
-        &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
-        }
         &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level0);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level0);
-        }
-        &.micl-card--dragging {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface-container-highest), var(--md-sys-color-on-surface) var(--md-sys-state-dragged-state-layer-opacity));
-            box-shadow: var(--md-sys-elevation-level3);
-            cursor: grabbing;
         }
     }
 }
@@ -132,23 +141,13 @@
     border: 1px solid var(--md-sys-color-outline-variant);
 
     &[tabindex='0']:not(.micl-card--disabled) {
-        &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
-        }
         &:focus-visible {
             border-color: var(--md-sys-color-on-surface);
-            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level0);
         }
         &:active {
             border-color: var(--md-sys-color-outline-variant);
-            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
             box-shadow: var(--md-sys-elevation-level0);
-        }
-        &.micl-card--dragging {
-            background-color: color-mix(in srgb, var(--md-sys-color-surface), var(--md-sys-color-on-surface) var(--md-sys-state-dragged-state-layer-opacity));
-            box-shadow: var(--md-sys-elevation-level3);
-            cursor: grabbing;
         }
     }
 }

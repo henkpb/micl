@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 @use '../../styles/motion';
-@use '../../styles/ripple';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
@@ -34,7 +33,6 @@ input[type=radio].micl-radio {
     --md-sys-radio-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
     --md-sys-radio-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
     --md-sys-radio-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-sys-ripple-background-color: var(--md-sys-color-primary);
 
     appearance: none;
     box-sizing: border-box;
@@ -47,7 +45,6 @@ input[type=radio].micl-radio {
     background-color: transparent;
     border-radius: var(--md-sys-shape-corner-full);
     outline-offset: -7px;
-    transition: background-color var(--md-sys-radio-motion-duration) linear;
 
     &::after {
         content: "";
@@ -76,15 +73,22 @@ input[type=radio].micl-radio {
     &:not(:disabled) {
         --miclripple: 1;
 
-        @include ripple.effect;
-
+        background-image:
+            radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+            linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+        background-repeat: no-repeat;
+        background-size: 10000%, 100%;
         cursor: pointer;
+        transition:
+            background-size 3000ms,
+            --statelayer-opacity var(--md-sys-radio-motion-duration) linear;
 
         &:hover {
-            background-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-color: var(--md-sys-color-on-surface);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
             &:checked {
-                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
+                --statelayer-color: var(--md-sys-color-primary);
             }
             &::after {
                 border-color: var(--md-sys-color-on-surface);
@@ -94,11 +98,13 @@ input[type=radio].micl-radio {
             }
         }
         &:focus-visible {
-            background-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-focus-state-layer-opacity));
+            --statelayer-color: var(--md-sys-color-on-surface);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
 
             &:checked {
-                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
+                --statelayer-color: var(--md-sys-color-primary);
             }
             &::after {
                 border-color: var(--md-sys-color-on-surface);
@@ -108,10 +114,14 @@ input[type=radio].micl-radio {
             }
         }
         &:active {
-            background-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            --statelayer-color: var(--md-sys-color-on-surface);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
 
             &:checked {
-                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+                --statelayer-color: var(--md-sys-color-primary);
             }
             &::after {
                 border-color: var(--md-sys-color-on-surface);

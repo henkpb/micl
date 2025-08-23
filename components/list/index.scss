@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 @use '../../styles/motion';
-@use '../../styles/ripple';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
@@ -72,9 +71,6 @@
                 pointer-events: none;
             }
             &:not(.micl-list-item--disabled) {
-                @include ripple.effect;
-                --miclripple: 1;
-
                 cursor: pointer;
             }
         }
@@ -99,6 +95,7 @@
 .micl-list-item-one,
 .micl-list-item-two,
 .micl-list-item-three {
+    --statelayer-color: var(--md-sys-color-on-surface);
     --md-sys-list-item-thumbnail-aspect-ratio: 1.778;
 
     box-sizing: border-box;
@@ -109,9 +106,19 @@
     border: none;
     border-radius: var(--md-sys-shape-corner-none);
     background-color: var(--md-sys-list-item-container-color);
+    background-image:
+        radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
+    background-size: 10000%, 100%;
     list-style: none;
-    transition: background-color var(--md-sys-list-motion-duration) linear;
+    transition:
+        background-size 3000ms,
+        --statelayer-opacity var(--md-sys-list-motion-duration) linear;
 
+    &:not(:has(> button)) {
+        --miclripple: 1;
+    }
     &> a,
     &> button,
     &> label {
@@ -124,7 +131,7 @@
         padding-inline: var(--md-sys-list-item-space);
         border: none;
         border-radius: inherit;
-        background-color: inherit;
+        background-color: transparent;
         text-decoration: none;
         cursor: pointer;
     }
@@ -152,7 +159,7 @@
     }
     &:not(:disabled):not(.micl-list-item--disabled) {
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-list-item-container-color), var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
             &:has(input[type=checkbox]) {
                 cursor: pointer;
@@ -162,26 +169,24 @@
             }
         }
         &:focus-visible {
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
             outline-offset: var(--md-sys-state-focus-indicator-inner-offset);
-            background-color: color-mix(in srgb, var(--md-sys-list-item-container-color), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
 
             .micl-list-item__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-list-item-container-color), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
 
             .micl-list-item__icon {
                 font-variation-settings: 'FILL' 1;
             }
-        }
-        &:has(input[type=checkbox]),
-        &> button {
-            @include ripple.effect;
-            --miclripple: 1;
-            --md-sys-ripple-background-color: var(--md-sys-color-primary);
         }
         &:has(input[type=checkbox]:checked) {
             background-color: var(--md-sys-color-secondary-container);
@@ -194,18 +199,11 @@
             .micl-list-item__trailing-text {
                 color: var(--md-sys-color-on-surface);
             }
-            &:focus-visible {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity));
-            }
-            &:active {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
-            }
         }
         input[type=checkbox]:not(:disabled):hover,
         input[type=checkbox]:not(:disabled):active {
             --checkbox-state-layer-color: initial;
             --checkbox-outline-color: initial;
-            --md-sys-ripple-background-color: transparent;
         }
     }
 }

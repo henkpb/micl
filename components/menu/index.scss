@@ -21,9 +21,7 @@
 
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/ripple';
 @use '../../styles/shapes';
-@use '../../styles/statelayer';
 
 :root {
     --md-sys-menu-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};

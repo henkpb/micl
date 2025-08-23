@@ -21,7 +21,6 @@
 
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/ripple';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
@@ -48,17 +47,25 @@ button.micl-iconbutton-outlined-xl {
     --md-sys-iconbutton-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-iconbutton-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --miclripple: 1;
 
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-full);
     background-color: transparent;
+    background-image:
+        radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
+    background-size: 10000%, 100%;
     color: var(--md-sys-color-on-surface-variant);
     cursor: pointer;
     font-variation-settings: 'FILL' 0;
     transition:
         border-radius var(--md-sys-iconbutton-motion-duration) var(--md-sys-iconbutton-motion-effects),
-        font-variation-settings var(--md-sys-iconbutton-motion-duration) linear;
+        font-variation-settings var(--md-sys-iconbutton-motion-duration) linear,
+        background-size 3000ms,
+        --statelayer-opacity var(--md-sys-iconbutton-motion-duration) linear;
 
     &:disabled {
         background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
@@ -66,9 +73,15 @@ button.micl-iconbutton-outlined-xl {
         box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }
-    &:not(:disabled):focus-visible {
-        outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-        outline-offset: 3px;
+    &:not(:disabled) {
+        &:focus-visible {
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline-offset: 3px;
+        }
+        &:active {
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
+        }
     }
     &:hover:not(:disabled),
     &.micl-button--toggle.micl-button--selected {
@@ -92,9 +105,6 @@ button.micl-iconbutton-outlined-xs {
         border-radius: var(--md-sys-shape-corner-large);
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active {
             // border-radius: var(--md-sys-shape-corner-small);
             border-radius: var(--md-sys-shape-corner-medium);
@@ -146,9 +156,6 @@ button.micl-iconbutton-outlined-s {
         border-radius: var(--md-sys-shape-corner-large);
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active {
             // border-radius: var(--md-sys-shape-corner-small);
             border-radius: var(--md-sys-shape-corner-medium);
@@ -197,9 +204,6 @@ button.micl-iconbutton-outlined-m {
         border-radius: var(--md-sys-shape-corner-large);
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active {
             // border-radius: var(--md-sys-shape-corner-small);
             border-radius: var(--md-sys-shape-corner-medium);
@@ -237,9 +241,6 @@ button.micl-iconbutton-outlined-l {
         border-radius: var(--md-sys-shape-corner-extra-large);
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active {
             border-radius: var(--md-sys-shape-corner-large);
         }
@@ -276,9 +277,6 @@ button.micl-iconbutton-outlined-xl {
         border-radius: var(--md-sys-shape-corner-extra-large);
     }
     &:not(:disabled) {
-        --miclripple: 1;
-        @include ripple.effect;
-
         &:active {
             border-radius: var(--md-sys-shape-corner-large);
         }
@@ -307,30 +305,22 @@ button.micl-iconbutton-standard-s,
 button.micl-iconbutton-standard-m,
 button.micl-iconbutton-standard-l,
 button.micl-iconbutton-standard-xl {
+    --statelayer-color: var(--md-sys-color-on-surface-variant);
+
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
+            --statelayer-color: var(--md-sys-color-primary);
+
             color: var(--md-sys-color-primary);
         }
         &:hover {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-hover-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
         }
         &:focus-visible {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -341,34 +331,26 @@ button.micl-iconbutton-filled-s,
 button.micl-iconbutton-filled-m,
 button.micl-iconbutton-filled-l,
 button.micl-iconbutton-filled-xl {
+    --statelayer-color: var(--md-sys-color-on-primary);
+
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
 
     &:not(:disabled) {
         &.micl-button--toggle:not(.micl-button--selected) {
+            --statelayer-color: var(--md-sys-color-on-surface-variant);
+
             background-color: var(--md-sys-color-surface-container);
             color: var(--md-sys-color-on-surface-variant);
         }
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-hover-state-layer-opacity));
-
-            &.micl-button--toggle:not(.micl-button--selected) {
-                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-hover-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
         }
         &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle:not(.micl-button--selected) {
-                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle:not(.micl-button--selected) {
-                background-color: color-mix(in srgb, var(--md-sys-color-surface-container), var(--md-sys-color-on-surface-variant) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -378,34 +360,26 @@ button.micl-iconbutton-tonal-s,
 button.micl-iconbutton-tonal-m,
 button.micl-iconbutton-tonal-l,
 button.micl-iconbutton-tonal-xl {
+    --statelayer-color: var(--md-sys-color-on-secondary-container);
+
     background-color: var(--md-sys-color-secondary-container);
     color: var(--md-sys-color-on-secondary-container);
 
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
+            --statelayer-color: var(--md-sys-color-on-secondary);
+
             background-color: var(--md-sys-color-secondary);
             color: var(--md-sys-color-on-secondary);
         }
         &:hover {
-            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-hover-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-hover-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
         }
         &:focus-visible {
-            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container), var(--md-sys-color-on-secondary-container) var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-secondary), var(--md-sys-color-on-secondary) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
@@ -415,6 +389,8 @@ button.micl-iconbutton-outlined-s,
 button.micl-iconbutton-outlined-m,
 button.micl-iconbutton-outlined-l,
 button.micl-iconbutton-outlined-xl {
+    --statelayer-color: var(--md-sys-color-on-surface-variant);
+
     background-color: transparent;
     color: var(--md-sys-color-on-surface-variant);
 
@@ -440,29 +416,19 @@ button.micl-iconbutton-outlined-xl {
     }
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
+            --statelayer-color: var(--md-sys-color-inverse-on-surface);
+
             background-color: var(--md-sys-color-inverse-surface);
             color: var(--md-sys-color-inverse-on-surface);
         }
         &:hover {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-hover-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-hover-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
         }
         &:focus-visible {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-focus-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-focus-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
         }
         &:active {
-            background-color: rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-
-            &.micl-button--toggle.micl-button--selected {
-                background-color: color-mix(in srgb, var(--md-sys-color-inverse-surface), var(--md-sys-color-inverse-on-surface) var(--md-sys-state-pressed-state-layer-opacity));
-            }
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
         }
     }
 }
