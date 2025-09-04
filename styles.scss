@@ -38,5 +38,23 @@
 @use 'components/select';
 @use 'components/card';
 @use 'components/dialog';
+@use 'components/badge';
 @use 'components/sidesheet';
 @use 'components/bottomsheet';
+@use 'components/navigationrail';
+
+@property --micl-ripple {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+}
+@property --micl-x {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: -100000px;
+}
+@property --micl-y {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: -100000px;
+}

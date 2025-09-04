@@ -79,6 +79,7 @@ This will initialize all MICL components, including those that will be added to 
 ## Available components ✅
 The library currently consists of the following components:
 - [x] [Accordion](components/accordion/README.md)
+- [x] [Badge](components/badge/README.md)
 - [x] [Bottom sheet](components/bottomsheet/README.md)
 - [x] [Button](components/button/README.md)
 - [x] [Card](components/card/README.md)
@@ -88,7 +89,7 @@ The library currently consists of the following components:
 - [x] [Icon button](components/iconbutton/README.md)
 - [x] [List](components/list/README.md)
 - [x] [Menu](components/menu/README.md)
-- [ ] [Navigation rail](components/navigationrail/README.md)
+- [x] [Navigation rail](components/navigationrail/README.md)
 - [x] [Radio button](components/radio/README.md)
 - [x] [Select](components/select/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
@@ -97,6 +98,13 @@ The library currently consists of the following components:
 - [x] [Text field](components/textfield/README.md)
 
 ## Change Log
+
+### 2.0.0 (04.09.2025)
+**Features**
+
+- **Navigation rail**: New component.
+- **Badge**: New component.
+- **Ripple**: Now uses custom CSS properties.
 
 ### 1.3.0 (23.08.2025)
 **Features**

@@ -37,7 +37,12 @@ export default (() =>
             }
         }
         if (event.target.classList.contains('micl-button--toggle')) {
+            event.target.classList.add('micl-button--toggled');
             event.target.classList.toggle('micl-button--selected');
+            if (!!event.target.dataset.miclalt) {
+                [event.target.textContent, event.target.dataset.miclalt] = 
+                [event.target.dataset.miclalt, event.target.textContent];
+            }
         }
     };
 

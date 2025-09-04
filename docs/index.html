@@ -6,7 +6,7 @@
     <meta name="description" content="The Material-Inspired Component Library (MICL) Showcase">
     <title>MICL Showcase</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,edit,globe,link,more_vert,newspaper,person,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,favorite,globe,inbox,link,menu,menu_open,more_vert,newspaper,outbox,person,share&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -20,6 +20,37 @@
     </style>
 </head>
 <body class="light">
+    <div id="mynavigationrail" class="micl-navigationrail">
+        <div class="micl-navigationrail__headline">
+            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" popovertarget="mynavigationrail" data-miclalt="menu_open" aria-label="Toggle navigation rail">menu</button>
+        </div>
+        <div class="micl-navigationrail__content">
+            <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
+            <label for="item1" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox">inbox</span>
+                <span class="micl-navigationrail__text">Inbox</span>
+            </label>
+            <input type="radio" id="item2" name="navitem" value="email_outbox">
+            <label for="item2" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined">outbox</span>
+                <span class="micl-navigationrail__text">Outbox</span>
+            </label>
+            <input type="radio" id="item3" name="navitem" value="email_favorites">
+            <label for="item3" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites">favorite</span>
+                <span class="micl-navigationrail__text">Favorites</span>
+            </label>
+            <input type="radio" id="item4" name="navitem" value="email_trash">
+            <label for="item4" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined">delete</span>
+                <span class="micl-navigationrail__text">Trash</span>
+            </label>
+        </div>
+
+        <span class="micl-badge-large" style="position-anchor:--inbox;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px">97</span>
+        <span class="micl-badge-small" style="position-anchor:--favorites;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px"></span>
+    </div>
+
     <div class="headline">
         <h1 class="md-sys-typescale-emphasized-display-small">MICL Showcase</h1>
         <div id="settings-placeholder"></div>

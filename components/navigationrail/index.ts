@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const checkboxSelector = '.micl-checkbox';
+export const navigationrailSelector = '.micl-navigationrail__item[for]:not(.micl-navigationrail__item--disabled)';
 
 export default (() =>
 {
@@ -27,19 +27,24 @@ export default (() =>
         keydown: (event: Event) =>
         {
             if (
-                !(event.target as Element).matches(checkboxSelector)
-                || !(event instanceof KeyboardEvent)
-                || !(event.target instanceof HTMLInputElement)
-                || (event.target as HTMLInputElement).disabled
+                !(event instanceof KeyboardEvent)
+                || !(event.target instanceof HTMLLabelElement)
+                || !event.target.matches(navigationrailSelector)
             ) {
+                return;
+            }
+            const input = document.getElementById(event.target.htmlFor) as HTMLInputElement;
+            if (!input) {
                 return;
             }
 
             switch (event.key) {
                 case 'Enter':
                 case ' ':
-                    event.target.checked = !event.target.checked;
-                    event.preventDefault() // prevent page scrolling
+                    event.preventDefault();
+                    if (!input.checked) {
+                        input.checked = !input.checked;
+                    }
                     break;
                 default:
             }

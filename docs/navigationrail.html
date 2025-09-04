@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MICL Navigation Rail</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,delete,favorite,inbox,menu,menu_open,outbox&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .micl-card__content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-block: 32px;
+            row-gap: 32px;
+        }
+    </style>
+</head>
+<body class="light">
+    <!-- <dialog id="mynavigationrail1" class="micl-navigationrail" closedby="closerequest"> -->
+    <!-- <div id="mynavigationrail1" class="micl-navigationrail" popover="manual"> -->
+    <div id="mynavigationrail1" class="micl-navigationrail">
+        <div class="micl-navigationrail__headline">
+            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" popovertarget="mynavigationrail1" data-miclalt="menu_open" aria-label="Toggle navigation rail">menu</button>
+        </div>
+        <div class="micl-navigationrail__content">
+            <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
+            <label for="item1" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationrail__text">Inbox</span>
+            </label>
+            <input type="radio" id="item2" name="navitem" value="email_outbox">
+            <label for="item2" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationrail__text">Outbox</span>
+            </label>
+            <input type="radio" id="item3" name="navitem" value="email_favorites">
+            <label for="item3" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationrail__text">Favorites</span>
+            </label>
+            <input type="radio" id="item4" name="navitem" value="email_trash">
+            <label for="item4" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                <span class="micl-navigationrail__text">Trash</span>
+            </label>
+        </div>
+
+        <span class="micl-badge-large" style="position-anchor:--inbox;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px">97</span>
+        <span class="micl-badge-small" style="position-anchor:--favorites;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px"></span>
+    </div>
+    <!-- </dialog> -->
+
+    <div class="headline">
+        <!-- <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" style="margin:8px 0 0 8px" popovertarget="mynavigationrail1" aria-label="Toggle navigation rail">menu</button> -->
+        <h1 class="md-sys-typescale-emphasized-display-small">Navigation rails</h1>
+        <div id="settings-placeholder"></div>
+    </div>
+
+    <div class="cards">
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

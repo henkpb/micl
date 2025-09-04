@@ -107,7 +107,7 @@
     border-radius: var(--md-sys-shape-corner-none);
     background-color: var(--md-sys-list-item-container-color);
     background-image:
-        radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
@@ -117,7 +117,7 @@
         --statelayer-opacity var(--md-sys-list-motion-duration) linear;
 
     &:not(:has(> button)) {
-        --miclripple: 1;
+        --micl-ripple: 1;
     }
     &> a,
     &> button,

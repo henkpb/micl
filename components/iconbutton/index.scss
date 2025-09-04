@@ -47,14 +47,14 @@ button.micl-iconbutton-outlined-xl {
     --md-sys-iconbutton-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-iconbutton-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --miclripple: 1;
+    --micl-ripple: 1;
 
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-full);
     background-color: transparent;
     background-image:
-        radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;

@@ -21,9 +21,9 @@
 
 import _bottomsheet, { bottomsheetSelector } from './components/bottomsheet';
 import _button, { buttonSelector } from './components/button';
-import _checkbox, { checkboxSelector } from './components/checkbox';
 import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
+import _navigationrail, { navigationrailSelector } from './components/navigationrail';
 import _slider, { sliderSelector } from './components/slider';
 import _textfield, { textfieldSelector, selectSelector, textareaSelector } from './components/textfield';
 
@@ -40,15 +40,15 @@ interface ComponentEntry<T extends HTMLElement> {
 export default (() =>
 {
     const componentMap: Record<string, ComponentEntry<any>> = {
-        [bottomsheetSelector]: { component: _bottomsheet, type: HTMLDialogElement },
-        [buttonSelector]     : { component: _button, type: HTMLButtonElement },
-        [checkboxSelector]   : { component: _checkbox, type: HTMLInputElement },
-        [listSelector]       : { component: _list, type: HTMLElement },
-        [menuSelector]       : { component: _menu, type: HTMLElement },
-        [selectSelector]     : { component: _textfield, type: HTMLSelectElement },
-        [sliderSelector]     : { component: _slider, type: HTMLInputElement },
-        [textareaSelector]   : { component: _textfield, type: HTMLTextAreaElement },
-        [textfieldSelector]  : { component: _textfield, type: HTMLInputElement }
+        [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
+        [buttonSelector]        : { component: _button, type: HTMLButtonElement },
+        [listSelector]          : { component: _list, type: HTMLElement },
+        [menuSelector]          : { component: _menu, type: HTMLElement },
+        [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },
+        [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
+        [sliderSelector]        : { component: _slider, type: HTMLInputElement },
+        [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
+        [textfieldSelector]     : { component: _textfield, type: HTMLInputElement }
     };
 
     const selector = Object.keys(componentMap).join(',');
@@ -71,26 +71,19 @@ export default (() =>
     {
         parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
 
-        parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element => {
-            if (
-                element.parentElement
-                && !window.getComputedStyle(element.parentElement).getPropertyValue('--miclripple')
-                && window.getComputedStyle(element).getPropertyValue('--miclripple')
-            ) {
-                element.addEventListener('pointerdown', e => {
+        parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element =>
+        {
+            if (window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1') {
+                element.addEventListener('pointerdown', e =>
+                {
                     if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
                         return;
                     }
-                    let r      = element.getBoundingClientRect(),
-                        i      = 0,
-                        name   = '',
-                        styles = '';
-                    while ((name = element.style.item(i++)) && name) {
-                        if ((name != '--x') && (name != '--y')) {
-                            styles += `${name}:${element.style.getPropertyValue(name)};`;
-                        }
-                    }
-                    element.style.cssText = styles + `--x:${e.clientX - r.left}px;--y:${e.clientY - r.top}px`;
+                    e.stopPropagation();
+
+                    let r = element.getBoundingClientRect();
+                    element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
+                    element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
                 });
             }
         });
