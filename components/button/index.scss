@@ -53,12 +53,15 @@ button.micl-button-outlined-xl {
     --md-sys-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-button-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --miclripple: 1;
+    --micl-ripple: 1;
 
+    position: relative;
+    display: inline-flex;
+    align-items: center;
     padding: 0;
     border: none;
     background-image:
-        radial-gradient(circle at var(--x, center) var(--y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
@@ -97,6 +100,7 @@ button.micl-button-tonal-xs,
 button.micl-button-outlined-xs {
     @include typography.label-large;
 
+    column-gap: 8px;
     min-width: var(--md-sys-target-size);
     height: var(--md-sys-target-size);
     padding-inline: 12px;
@@ -134,8 +138,6 @@ button.micl-button-outlined-xs {
     .micl-button__icon {
         font-size: 20px;
         width: 20px;
-        margin-right: 8px;
-        vertical-align: text-bottom;
     }
 }
 
@@ -146,6 +148,7 @@ button.micl-button-tonal-s,
 button.micl-button-outlined-s {
     @include typography.label-large;
 
+    column-gap: 8px;
     min-width: var(--md-sys-target-size);
     height: var(--md-sys-target-size);
     padding-inline: 16px;
@@ -183,8 +186,6 @@ button.micl-button-outlined-s {
     .micl-button__icon {
         font-size: 20px;
         width: 20px;
-        margin-right: 8px;
-        vertical-align: text-bottom;
     }
 }
 
@@ -195,6 +196,7 @@ button.micl-button-tonal-m,
 button.micl-button-outlined-m {
     @include typography.title-medium;
 
+    column-gap: 8px;
     min-width: 56px;
     height: 56px;
     padding-inline: 24px;
@@ -218,8 +220,6 @@ button.micl-button-outlined-m {
     .micl-button__icon {
         font-size: 24px;
         width: 24px;
-        margin-right: 8px;
-        vertical-align: text-bottom;
     }
 }
 
@@ -230,6 +230,7 @@ button.micl-button-tonal-l,
 button.micl-button-outlined-l {
     @include typography.headline-small;
 
+    column-gap: 12px;
     min-width: 96px;
     height: 96px;
     padding-inline: 48px;
@@ -253,8 +254,6 @@ button.micl-button-outlined-l {
     .micl-button__icon {
         font-size: 32px;
         width: 32px;
-        margin-right: 12px;
-        vertical-align: text-bottom;
     }
 }
 
@@ -265,6 +264,7 @@ button.micl-button-tonal-xl,
 button.micl-button-outlined-xl {
     @include typography.headline-large;
 
+    column-gap: 16px;
     min-width: 136px;
     height: 136px;
     padding-inline: 64px;
@@ -288,8 +288,6 @@ button.micl-button-outlined-xl {
     .micl-button__icon {
         font-size: 40px;
         width: 40px;
-        margin-right: 16px;
-        vertical-align: text-bottom;
     }
 }
 
