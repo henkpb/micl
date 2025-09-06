@@ -4,12 +4,12 @@ This component implements the the [Material Design 3 Expressive Badge](https://m
 ## Basic Usage
 
 ### HTML
-To add a large badge, use a `<span>` element with the `micl-badge-large` class and add a short text inside. For a small badge, which is a simple dot, use a `<span>` with the `micl-badge-small` class and leave the element empty.
+To add a large badge, use a `<span>` element with the `micl-badge` class and add a short text inside. For a small badge, which is a simple dot, add the `micl-badge--small` class and leave the element empty.
 
 ```HTML
-<span class="micl-badge-large">57</span>
+<span class="micl-badge">57</span>
 
-<span class="micl-badge-small"></span>
+<span class="micl-badge micl-badge--small"></span>
 ```
 
 ### CSS
@@ -33,7 +33,7 @@ Badges are typically placed on top of other elements, like icons. To anchor a ba
 
 ```HTML
 <span class="material-symbols-outlined" style="anchor-name:--inbox">inbox</span>
-<span class="micl-badge-large" style="position-anchor:--inbox">57</span>
+<span class="micl-badge" style="position-anchor:--inbox">57</span>
 ```
 
 You can fine-tune the badge's position relative to its anchor using the following CSS variables:
@@ -57,7 +57,7 @@ You can customize the appearance of the Badge component by overriding its global
 
 ```HTML
 <div style="--md-sys-badge-small-size:8px">
-  <span class="micl-badge-small"></span>
+  <span class="micl-badge micl-badge--small"></span>
 </div>
 ```
 
