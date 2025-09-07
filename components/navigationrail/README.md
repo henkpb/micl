@@ -82,12 +82,12 @@ Add the `popover` attribute to the navigation rail, and the `popovertarget` attr
 </div>
 ```
 
-[!WARNING]
-The **popover** navigation rail component adds CSS rules to the `<body>` element to properly resize the main content area when the navigation rail is collapsed. Overriding these rules may cause the component to behave unexpectedly. The rules that are applied are:
-
-  ```CSS
-  margin-inline-start: var(--md-sys-navigationrail-collapsed-width);
-  ```
+> [!WARNING]
+> The **popover** navigation rail component adds CSS rules to the `<body>` element to properly resize the main content area when the navigation rail is collapsed. Overriding these rules may cause the component to behave unexpectedly. The rules that are applied are:
+>
+> ```CSS
+> margin-inline-start: var(--md-sys-navigationrail-collapsed-width);
+> ```
 
 ### Modal navigation rail
 

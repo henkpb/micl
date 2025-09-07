@@ -7,10 +7,10 @@ This component implements the the [Material Design 3 Expressive Dialog](https://
 To create a basic dialog, use the `<dialog>` element with the `micl-dialog` class. You can open and close the dialog using JavaScript, or you can use a control element, such as a button, to open and close the dialog.
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" closedby="any" popover>
+<dialog id="mydialog" class="micl-dialog" closedby="any" popover aria-labelledby="mytitle" aria-describedby="mydesc">
   <div class="micl-dialog__headline">
-    <h2>Basic dialog</h2>
-    <span class="micl-dialog__supporting-text">An example of a basic dialog</span>
+    <h2 id="mytitle">Basic dialog</h2>
+    <span id="mydesc" class="micl-dialog__supporting-text">An example of a basic dialog</span>
   </div>
 </dialog>
 
@@ -40,11 +40,11 @@ When dialogs with the `popover` attribute are opened, they animate from the cont
 Removing the `popover` attribute creates a more intrusive **modal** dialog. This type of dialog requires the user to interact with its buttons or press the <kbd>Esc</kbd> key to close it.
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" closedby="closerequest">
+<dialog id="mydialog" class="micl-dialog" closedby="closerequest" aria-labelledby="mytitle" aria-describedby="mydesc">
   <div class="micl-dialog__headline">
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">info</span>
-    <h2>Modal dialog</h2>
-    <span class="micl-dialog__supporting-text">An example of a modal dialog</span>
+    <h2 id="mytitle">Modal dialog</h2>
+    <span id="mydesc" class="micl-dialog__supporting-text">An example of a modal dialog</span>
   </div>
   <div class="micl-dialog__actions">
     <form method="dialog">
@@ -90,15 +90,15 @@ A dialog typically consists of three main sections to organize its content:
 A full-screen dialog covers the entire viewport, primarily on smaller screens. On screens wider than 560 pixels, a full-screen dialog behaves like a basic dialog. Use the `micl-dialog-fullscreen` class for this variant:
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog-fullscreen" closedby="none" popover>
+<dialog id="mydialog" class="micl-dialog-fullscreen" closedby="none" popover aria-labelledby="mytitle" aria-describedby="mydesc">
   <form method="dialog" class="micl-dialog__headline">
     <button type="button" class="micl-iconbutton-s material-symbols-outlined" popovertarget="mydialog" aria-label="Close">close</button>
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
-    <h2>Full-screen dialog</h2>
+    <h2 id="mytitle">Full-screen dialog</h2>
     <button class="micl-button" value="dosave">Save</button>
   </form>
   <div class="micl-dialog__content">
-    <span class="micl-dialog__supporting-text">This dialog covers the whole screen.</span>
+    <span id="mydesc" class="micl-dialog__supporting-text">This dialog covers the whole screen.</span>
   </div>
   <form method="dialog" class="micl-dialog__actions">
     <button type="button" class="micl-button" popovertarget="mydialog">Cancel</button>

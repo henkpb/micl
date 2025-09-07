@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Side Sheets">
     <title>MICL Side Sheets</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_back,close,dark_mode&display=block">
@@ -42,11 +43,11 @@
     </div>
 
     <div class="cards">
-        <div class="micl-card-filled">
+        <div class="micl-card-filled" style="height:400px">
             <div class="micl-card__content">
-                <dialog id="mysidesheet1" class="micl-sidesheet" closedby="any" popover>
+                <dialog id="mysidesheet1" class="micl-sidesheet" popover aria-labelledby="title1">
                     <div class="micl-sidesheet__headline">
-                        <h2>Title</h2>
+                        <h2 id="title1">Lorem Ipsum</h2>
                         <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet1">close</button>
                     </div>
                     <div class="micl-sidesheet__content">
@@ -58,9 +59,9 @@
                 </dialog>
                 <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet1">Open Standard Sheet</button>
 
-                <dialog id="mysidesheet2" class="micl-sidesheet" closedby="any" popover>
+                <dialog id="mysidesheet2" class="micl-sidesheet" popover aria-labelledby="title2">
                     <div class="micl-sidesheet__headline">
-                        <h2>Title</h2>
+                        <h2 id="title2">Lorem Ipsum</h2>
                         <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet2">close</button>
                     </div>
                     <div class="micl-sidesheet__content">
@@ -72,10 +73,10 @@
                 </dialog>
                 <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet2">Open Standard Sheet without dividers</button>
 
-                <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest">
+                <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest" aria-labelledby="title1">
                     <div class="micl-sidesheet__headline">
                         <button class="micl-iconbutton-standard-s material-symbols-outlined">arrow_back</button>
-                        <h2>Title</h2>
+                        <h2 id="title3">Title</h2>
                         <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet3">close</button>
                     </div>
                     <div class="micl-sidesheet__content">
@@ -102,11 +103,25 @@
                         </div>
                     </div>
                     <div class="micl-sidesheet__actions">
+                        <button type="button" class="micl-button-filled-s">Save</button>
+                        <button type="button" class="micl-button-outlined-s">Cancel</button>
                     </div>
                 </dialog>
                 <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet3">Open Modal Sheet</button>
             </div>
         </div>
+
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
     </div>
 
     <script src="micl.js"></script>

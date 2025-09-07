@@ -27,42 +27,35 @@
     --md-sys-badge-large-padding: 4px;
 }
 
-.micl-badge-small {
+.micl-badge {
     --md-sys-badge-inline-offset: 0px;
     --md-sys-badge-block-offset: 0px;
 
     box-sizing: border-box;
     position: fixed;
-    inline-size: var(--md-sys-badge-small-size);
-    block-size: var(--md-sys-badge-small-size);
     inset: unset;
-    inset-block-start: calc(anchor(start) + var(--md-sys-badge-block-offset));
-    inset-inline-start: calc(anchor(end) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
-    border-radius: calc(var(--md-sys-badge-small-size) / 2);
     margin: 0;
-    padding: 0;
     background-color: var(--md-sys-color-error);
     color: var(--md-sys-color-on-error);
-}
 
-.micl-badge-large {
-    --md-sys-badge-inline-offset: 0px;
-    --md-sys-badge-block-offset: 0px;
+    &.micl-badge--small {
+        inline-size: var(--md-sys-badge-small-size);
+        block-size: var(--md-sys-badge-small-size);
+        inset-block-start: calc(anchor(start) + var(--md-sys-badge-block-offset));
+        inset-inline-start: calc(anchor(end) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
+        padding: 0;
+        border-radius: calc(var(--md-sys-badge-small-size) / 2);
+    }
+    &:not(.micl-badge--small) {
+        @include typography.label-small;
 
-    @include typography.label-small;
-
-    box-sizing: border-box;
-    position: fixed;
-    inline-size: fit-content;
-    max-inline-size: 34px;
-    min-inline-size: var(--md-sys-badge-large-size);
-    block-size: var(--md-sys-badge-large-size);
-    inset: unset;
-    inset-block-start: calc(anchor(start) - 2px + var(--md-sys-badge-block-offset));
-    inset-inline-start: calc(anchor(end) - 12px - var(--md-sys-badge-inline-offset));
-    margin: 0;
-    padding-inline: var(--md-sys-badge-large-padding);
-    border-radius: calc(var(--md-sys-badge-large-size) / 2);
-    background-color: var(--md-sys-color-error);
-    color: var(--md-sys-color-on-error);
+        inline-size: fit-content;
+        max-inline-size: 34px;
+        min-inline-size: var(--md-sys-badge-large-size);
+        block-size: var(--md-sys-badge-large-size);
+        inset-block-start: calc(anchor(start) - 2px + var(--md-sys-badge-block-offset));
+        inset-inline-start: calc(anchor(end) - 12px - var(--md-sys-badge-inline-offset));
+        padding-inline: var(--md-sys-badge-large-padding);
+        border-radius: calc(var(--md-sys-badge-large-size) / 2);
+    }
 }

@@ -23,19 +23,19 @@ export const bottomsheetSelector = 'dialog.micl-bottomsheet';
 
 export default (() =>
 {
-    var fitHeight = 0;
-
     const getSnapHeights = (dialog: HTMLDialogElement): number[] =>
     {
-        let maxHeight   = parseInt(window.getComputedStyle(dialog).getPropertyValue('max-height')),
-            snapHeights = (dialog.dataset.snapheights || '').split(',').map(Number).filter(
-                n => !isNaN(n) && (n > 0) && (n <= maxHeight)
+        let fitHeight   = parseInt(dialog.dataset.miclfitheight || '0', 10),
+            maxHeight   = parseInt(window.getComputedStyle(dialog).getPropertyValue('max-block-size'), 10),
+            snapHeights = (dialog.dataset.miclsnapheights || '').split(',').map(Number).filter(
+                n => !isNaN(n) && (n >= 0) && (n <= maxHeight)
             );
 
-        if (!fitHeight) {
-            fitHeight = dialog.getBoundingClientRect().height;
+        if (fitHeight < 1) {
+            fitHeight = Math.min(dialog.getBoundingClientRect().height, maxHeight);
+            dialog.dataset.miclfitheight = `${fitHeight}`;
         }
-        return [...new Set(snapHeights.concat([fitHeight, maxHeight]).sort())];
+        return [...new Set(snapHeights.concat([fitHeight]).sort())];
     };
 
     const getNextSnapHeight = (dialog: HTMLDialogElement, isResizing: boolean): number =>
@@ -58,14 +58,21 @@ export default (() =>
 
     const setHeight = (dialog: HTMLDialogElement, value: number): void =>
     {
-        dialog.style.setProperty('--md-sys-bottomsheet-height', `${value}px`);
+        if (value < 1) {
+            delete dialog.dataset.miclfitheight;
+            dialog.style.removeProperty('--md-sys-bottomsheet-height');
+            dialog[!dialog.popover ? 'close' : 'hidePopover']();
+        }
+        else {
+            dialog.style.setProperty('--md-sys-bottomsheet-height', `${value}px`);
+        }
     }
 
     return {
         initialize: (element: HTMLDialogElement) =>
         {
             if (
-                !element.matches('dialog.micl-bottomsheet')
+                !element.matches(bottomsheetSelector)
                 || element.dataset.miclinitialized
             ) {
                 return;
@@ -80,10 +87,7 @@ export default (() =>
 
             draghandle?.addEventListener('click', () =>
             {
-                const nextSnapHeight = getNextSnapHeight(element, false);
-                if (nextSnapHeight > 4) {
-                    setHeight(element, nextSnapHeight);
-                }
+                setHeight(element, getNextSnapHeight(element, false));
             });
 
             let isPreparing = false,
@@ -126,16 +130,11 @@ export default (() =>
                     if (currentMouseY < initialMouseY) {
                         setHeight(element, getNextSnapHeight(element, true));
                     }
+                    else if (element.getBoundingClientRect().height < 48) {
+                        setHeight(element, 0);
+                    }
                     else {
-                        if (element.getBoundingClientRect().height < 48) {
-                            if (!!element.popover) {
-                                element.hidePopover();
-                            }
-                            setHeight(element, initialHeight);
-                        }
-                        else {
-                            setHeight(element, getPreviousSnapHeight(element));
-                        }
+                        setHeight(element, getPreviousSnapHeight(element));
                     }
                     document.removeEventListener('mousemove', onMouseMove);
                     document.removeEventListener('mouseup', onMouseUp);
@@ -144,8 +143,10 @@ export default (() =>
         },
         cleanup: (element: HTMLDialogElement) =>
         {
-            if (element.matches('dialog.micl-bottomsheet')) {
+            if (element.matches(bottomsheetSelector)) {
+                element.classList.remove('micl-bottomsheet--resizing');
                 delete element.dataset.miclinitialized;
+                delete element.dataset.miclfitheight;
             }
         }
     };
