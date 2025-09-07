@@ -4,10 +4,10 @@ This component implements the the [Material Design 3 Expressive Side sheet](http
 ## Basic Usage
 
 ### HTML
-To create a standard side sheet, use the `<dialog>` element with the `popover` attribute. The `closedby="any"` attribute allows the user to dismiss the side sheet by clicking anywhere outside of it.
+To create a standard side sheet, use the `<dialog>` element with the `popover` attribute.
 
 ```HTML
-<dialog id="mysidesheet" class="micl-sidesheet" closedby="any" popover aria-labelledby="mytitle">
+<dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mytitle">
   <div class="micl-sidesheet__headline">
     <h2 id="mytitle">Title</h2>
     <button
