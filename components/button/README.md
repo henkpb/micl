@@ -66,7 +66,7 @@ To add a leading icon to a button, include an element with the `micl-button__ico
 
 ```HTML
 <button type="button" class="micl-button-filled-m">
-  <span class="micl-button__icon material-symbols-outlined">save</span>
+  <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">save</span>
   Save
 </button>
 ```
