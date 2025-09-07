@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Bottom Sheets">
     <title>MICL Bottom Sheets</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,edit,link,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,edit,link,pause,share,skip_next&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -36,6 +37,24 @@
             border-radius: 50%;
             object-fit: cover;
         }
+        .player {
+            display: flex;
+            align-items: center;
+            column-gap: 16px;
+            padding-block-start: 24px;
+        }
+        .cover {
+            border-radius: 0;
+        }
+        .actions {
+            display: flex;
+            column-gap: 16px;
+        }
+        p {
+            display: flex;
+            flex: 1 1 100%;
+            flex-direction: column;
+        }
         .micl-list {
             --md-sys-list-item-container-color: var(--md-sys-color-surface-container-low);
         }
@@ -48,9 +67,9 @@
     </div>
 
     <div class="cards">
-        <div class="micl-card-filled">
+        <div class="micl-card-filled" style="height:400px">
             <div class="micl-card__content">
-                <dialog id="mybottomsheet1" class="micl-bottomsheet" closedby="any" popover>
+                <dialog id="mybottomsheet1" class="micl-bottomsheet" popover>
                     <div class="micl-bottomsheet__content">
                         <h3 class="md-sys-typescale-title-large">Send</h3>
                         <div class="figures">
@@ -75,7 +94,24 @@
                 </dialog>
                 <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet1">Open Sheet</button>
 
-                <dialog id="mybottomsheet2" class="micl-bottomsheet" closedby="any" popover data-snapheights="400">
+                <dialog id="mybottomsheet2" class="micl-bottomsheet" popover="manual">
+                    <div class="micl-bottomsheet__content">
+                        <div class="player">
+                            <img alt="City Album" src="card-city.webp" class="cover">
+                            <p>
+                                <span class="md-sys-typescale-body-large">City Sleepers</span>
+                                <span class="md-sys-typescale-body-small">Various artists</span>
+                            </p>
+                            <div class="actions">
+                                <span class="material-symbols-outlined micl-list-item__icon">pause</span>
+                                <span class="material-symbols-outlined micl-list-item__icon">skip_next</span>
+                            </div>
+                        </div>
+                    </div>
+                </dialog>
+                <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet2">Open Co-Existing Sheet</button>
+
+                <dialog id="mybottomsheet3" class="micl-bottomsheet" popover data-miclsnapheights="0,400">
                     <div class="micl-bottomsheet__headline">
                         <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
                     </div>
@@ -102,9 +138,9 @@
                         </ul>
                     </div>
                 </dialog>
-                <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet2">Open Resizable Sheet</button>
+                <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet3">Open Resizable Sheet</button>
 
-                <dialog id="mybottomsheet3" class="micl-bottomsheet" closedby="closerequest">
+                <dialog id="mybottomsheet4" class="micl-bottomsheet" closedby="any">
                     <div class="micl-bottomsheet__headline">
                         <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
                     </div>
@@ -127,6 +163,9 @@
                                 <span class="micl-list-item__text">
                                     <span class="micl-list-item__headline">Edit name</span>
                                 </span>
+                            </li>
+                            <li class="micl-list-item-one" tabindex="0">
+                                <button type="button" class="micl-iconbutton-standard-m material-symbols-outlined" popovertarget="mybottomsheet4">close</button>
                             </li>
                         </ul>
                         <hr class="micl-divider">
@@ -151,9 +190,21 @@
                         </div>
                     </div>
                 </dialog>
-                <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet3">Open Modal Sheet</button>
+                <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet4">Open Modal Sheet</button>
             </div>
         </div>
+
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
+        <div class="micl-card-filled" style="height:400px"></div>
     </div>
 
     <script src="micl.js"></script>
