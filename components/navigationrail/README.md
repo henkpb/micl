@@ -4,10 +4,10 @@ This component implements the the [Material Design 3 Expressive Navigation rail]
 ## Basic Usage
 
 ### HTML
-To create a simple navigation rail, use a `<div>` element with the `micl-navigationrail` class. Inside, use an `input type="radio"` group to create the selectable navigation items. The `input` elements must share the same `name` attribute to ensure that only one item can be selected at a time. The `label` elements are associated with their respective inputs using the `for` attribute.
+To create a simple navigation rail, use a `<nav>` element with the `micl-navigationrail` class. Inside, use an `input type="radio"` group to create the selectable navigation items. The `input` elements must share the same `name` attribute to ensure that only one item can be selected at a time. The `label` elements are associated with their respective inputs using the `for` attribute.
 
 ```HTML
-<div id="mynavigationrail" class="micl-navigationrail">
+<nav id="mynavigationrail" class="micl-navigationrail">
   <div class="micl-navigationrail__content">
     <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
     <label for="item1" class="micl-navigationrail__item" tabindex="0">
@@ -20,7 +20,7 @@ To create a simple navigation rail, use a `<div>` element with the `micl-navigat
       <span class="micl-navigationrail__text">Outbox</span>
     </label>
   </div>
-</div>
+</nav>
 ```
 
 ### CSS
@@ -44,7 +44,7 @@ A live example of the [Navigation rail component](https://henkpb.github.io/micl/
 The basic example creates a **collapsed** navigation rail. Add a menu button to allow the user to toggle between a **collapsed** and an **expanded** view.
 
 ```HTML
-<div id="mynavigationrail" class="micl-navigationrail">
+<nav id="mynavigationrail" class="micl-navigationrail">
   <div class="micl-navigationrail__headline">
     <button
       type="button"
@@ -56,7 +56,7 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
   <div class="micl-navigationrail__content">
     ...
   </div>
-</div>
+</nav>
 ```
 
 When the user clicks the menu button, the navigation rail is expanded and the toggle button is given the `micl-button--selected` class and the `micl-button--toggled` class that indicates that the toggle button has been clicked at least once.
@@ -66,7 +66,7 @@ When the user clicks the menu button, the navigation rail is expanded and the to
 Add the `popover` attribute to the navigation rail, and the `popovertarget` attribute to the menu button. The value of the `popovertarget` attribute must be the `id` of the navigation rail.
 
 ```HTML
-<div id="mynavigationrail" class="micl-navigationrail" popover="manual">
+<nav id="mynavigationrail" class="micl-navigationrail" popover="manual">
   <div class="micl-navigationrail__headline">
     <button
       type="button"
@@ -79,7 +79,7 @@ Add the `popover` attribute to the navigation rail, and the `popovertarget` attr
   <div class="micl-navigationrail__content">
     ...
   </div>
-</div>
+</nav>
 ```
 
 > [!WARNING]
@@ -91,7 +91,7 @@ Add the `popover` attribute to the navigation rail, and the `popovertarget` attr
 
 ### Modal navigation rail
 
-A **modal** navigation rail is hidden until the user clicks a menu button. When shown, the **expanded** navigation rail is displayed on top of other page content. Use a `<dialog>` element instead of a `<div>`.
+A **modal** navigation rail is hidden until the user clicks a menu button. When shown, the **expanded** navigation rail is displayed on top of other page content. Use a `<dialog>` element instead of a `<nav>`.
 
 ```HTML
 <dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest">
@@ -132,9 +132,9 @@ You can customize the appearance of the Navigation rail component by overriding 
 
 ```HTML
 <div style="--md-sys-navigationrail-collapsed-width:80px">
-  <div id="mynavigationrail" class="micl-navigationrail">
+  <nav id="mynavigationrail" class="micl-navigationrail">
     ...
-  </div>
+  </nav>
 </div>
 ```
 

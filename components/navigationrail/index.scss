@@ -164,7 +164,7 @@
     }
 }
 dialog.micl-navigationrail,
-div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--selected) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--selected) {
     max-inline-size: var(--md-sys-navigationrail-expanded-maxwidth);
     min-inline-size: var(--md-sys-navigationrail-expanded-minwidth);
 
@@ -210,7 +210,7 @@ div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         }
     }
 }
-div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--selected) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--selected) {
     &> .micl-navigationrail__content {
         transition: row-gap var(--md-sys-navigationrail-morph-duration) linear;
 
@@ -232,7 +232,7 @@ div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         }
     }
 }
-div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled.micl-button--selected) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled.micl-button--selected) {
     animation: var(--md-sys-navigationrail-morph-duration) linear forwards navigationrail-to-expanded;
 
     &> .micl-navigationrail__content > label.micl-navigationrail__item {
@@ -243,7 +243,7 @@ div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         }
     }
 }
-div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not(.micl-button--selected)) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not(.micl-button--selected)) {
     animation: var(--md-sys-navigationrail-morph-duration-reverse) linear forwards navigationrail-to-collapsed;
 
     &> .micl-navigationrail__content {
@@ -265,7 +265,7 @@ div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         }
     }
 }
-div.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle:not(.micl-button--selected)) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle:not(.micl-button--selected)) {
     &> .micl-navigationrail__content > label.micl-navigationrail__item {
         &:hover {
             &> .micl-navigationrail__icon {
@@ -316,7 +316,7 @@ dialog.micl-navigationrail {
         }
     }
 }
-div.micl-navigationrail {
+nav.micl-navigationrail {
     position: sticky;
     float: inline-start;
     inset: unset;
@@ -324,7 +324,7 @@ div.micl-navigationrail {
     inset-inline-start: 0;
     border-inline-end: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
 }
-div.micl-navigationrail[popover] {
+nav.micl-navigationrail[popover] {
     position: fixed;
 }
 .micl-navigationrail {
@@ -356,7 +356,7 @@ div.micl-navigationrail[popover] {
             display var(--md-sys-navigationrail-motion-duration) linear allow-discrete;
     }
 }
-body:has(div.micl-navigationrail[popover]) {
+body:has(nav.micl-navigationrail[popover]) {
     margin-inline-start: var(--md-sys-navigationrail-collapsed-width);
 }
 
