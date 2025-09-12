@@ -1,0 +1,196 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+$md-sys-window-compact-max: 599px;
+$md-sys-window-medium-min: 600px;
+$md-sys-window-medium-max: 839px;
+$md-sys-window-expanded-min: 840px;
+$md-sys-window-expanded-max: 1199px;
+$md-sys-window-large-min: 1200px;
+$md-sys-window-large-max: 1599px;
+$md-sys-window-extralarge-min: 1600px;
+
+$md-sys-window-margin-compact: 16px;
+$md-sys-window-margin-medium: 24px;
+$md-sys-window-margin-expanded: 24px;
+$md-sys-window-margin-large: 24px;
+$md-sys-window-margin-extralarge: 24px;
+
+$md-sys-pane-spacer: 24px;
+
+$md-sys-padding-xxs: 4px;
+$md-sys-padding-xs: 8px;
+$md-sys-padding-s: 12px;
+$md-sys-padding-m: 16px;
+$md-sys-padding-l: 20px;
+$md-sys-padding-xl: 24px;
+$md-sys-padding-xxl: 28px;
+
+:root {
+    --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
+
+    --md-sys-layout-padding-xxs: #{$md-sys-padding-xxs};
+    --md-sys-layout-padding-xs: #{$md-sys-padding-xs};
+    --md-sys-layout-padding-s: #{$md-sys-padding-s};
+    --md-sys-layout-padding-m: #{$md-sys-padding-m};
+    --md-sys-layout-padding-l: #{$md-sys-padding-l};
+    --md-sys-layout-padding-xl: #{$md-sys-padding-xl};
+    --md-sys-layout-padding-xxl: #{$md-sys-padding-xxl};
+
+    @media (max-width: $md-sys-window-compact-max) {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
+    }
+    @media (min-width: $md-sys-window-medium-min) and (max-width: $md-sys-window-medium-max) {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-medium};
+    }
+    @media (min-width: $md-sys-window-expanded-min) and (max-width: $md-sys-window-expanded-max) {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-expanded};
+    }
+    @media (min-width: $md-sys-window-large-min) and (max-width: $md-sys-window-large-max) {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-large};
+    }
+    @media (min-width: $md-sys-window-extralarge-min) {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-extralarge};
+    }
+}
+
+.micl-window {
+    padding: 0 var(--md-sys-layout-window-margin);
+    background-color: var(--md-sys-color-surface);
+
+    &.micl-window--spatial {
+        display: flex;
+        padding-block: calc(2 * var(--md-sys-layout-window-margin));
+        gap: var(--md-sys-layout-window-margin);
+
+        .micl-body {
+            background: transparent;
+        }
+        .micl-pane {
+            padding: 24px;
+            border-radius: calc(var(--md-sys-shape-corner-medium) + 24px);
+            background-color: var(--md-sys-color-surface);
+        }
+    }
+}
+.micl-body {
+    display: flex;
+    flex-direction: row;
+    gap: var(--md-sys-pane-spacer);
+    background-color: inherit;
+
+    &.micl-body--split:has(> .micl-pane:nth-child(2)) {
+        .micl-pane {
+            flex-basis: 50%;
+        }
+    }
+}
+.micl-pane {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-inline-size: 0;
+    background-color: inherit;
+
+    &.micl-pane--fixed {
+        flex: 0 0 auto;
+    }
+    &:has(> .micl-pane__columns) {
+        flex-direction: row;
+    }
+    &> .micl-pane__columns {
+        display: flex;
+
+        &> .micl-pane__column {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-inline-size: 0;
+            background-color: inherit;
+        }
+    }
+}
+
+@media (max-width: $md-sys-window-compact-max) {
+    :root {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
+    }
+
+    .micl-body.micl-body--columns-to-medium,
+    .micl-body.micl-body--columns-to-expanded,
+    .micl-body.micl-body--columns-to-large,
+    .micl-body.micl-body--columns-to-extralarge {
+        flex-direction: column;
+    }
+    .micl-pane.micl-pane--hidden-to-medium,
+    .micl-pane.micl-pane--hidden-to-expanded,
+    .micl-pane.micl-pane--hidden-to-large,
+    .micl-pane.micl-pane--hidden-to-extralarge {
+        display: none;
+    }
+}
+@media (min-width: $md-sys-window-medium-min) and (max-width: $md-sys-window-medium-max) {
+    :root {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-medium};
+    }
+
+    .micl-body.micl-body--columns-to-expanded,
+    .micl-body.micl-body--columns-to-large,
+    .micl-body.micl-body--columns-to-extralarge {
+        flex-direction: column;
+    }
+    .micl-pane.micl-pane--hidden-to-expanded,
+    .micl-pane.micl-pane--hidden-to-large,
+    .micl-pane.micl-pane--hidden-to-extralarge {
+        display: none;
+    }
+}
+@media (min-width: $md-sys-window-expanded-min) and (max-width: $md-sys-window-expanded-max) {
+    :root {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-expanded};
+    }
+
+    .micl-body.micl-body--columns-to-large,
+    .micl-body.micl-body--columns-to-extralarge {
+        flex-direction: column;
+    }
+    .micl-pane.micl-pane--hidden-to-large,
+    .micl-pane.micl-pane--hidden-to-extralarge {
+        display: none;
+    }
+}
+@media (min-width: $md-sys-window-large-min) and (max-width: $md-sys-window-large-max) {
+    :root {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-large};
+    }
+
+    .micl-body.micl-body--columns-to-extralarge {
+        flex-direction: column;
+    }
+    .micl-pane.micl-pane--hidden-to-extralarge {
+        display: none;
+    }
+}
+@media (min-width: $md-sys-window-extralarge-min) {
+    :root {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-extralarge};
+    }
+}
