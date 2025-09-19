@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Text Fields">
     <title>MICL Text Fields</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=cancel,credit_card,dark_mode,error,search&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=cancel,credit_card,dark_mode,error,home,search&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -15,148 +16,190 @@
         }
     </style>
 </head>
-<body class="light">
-    <div class="headline">
-        <h1 class="md-sys-typescale-emphasized-display-small">Text fields</h1>
-        <div id="settings-placeholder"></div>
-    </div>
+<body class="micl-window light">
+    <main class="micl-body micl-body--stacked-to-large">
+        <section class="micl-pane">
+            <header class="micl-appbar">
+                <a href="index.html" class="micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
+                </a>
+                <div class="micl-appbar__headline micl-appbar__headline--center">
+                    <h1>Text fields</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL text fields</p>
+                </div>
+                <div id="settings-placeholder"></div>
+            </header>
 
-    <div class="cards">
-        <div class="micl-card-elevated">
-            <div class="micl-card__content">
-                <div class="micl-textfield-outlined">
-                    <label for="mytextfield1">Label text</label>
-                    <input type="text" id="mytextfield1">
+            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column">
+                    <div class="micl-card-elevated">
+                        <div class="micl-card__content">
+                            <div class="micl-textfield-outlined">
+                                <label for="mytextfield1">Label text</label>
+                                <input type="text" id="mytextfield1">
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield2">Name</label>
+                                <input type="text" id="mytextfield2" value="Marie Curie">
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield3">Label text</label>
+                                <input type="text" id="mytextfield3">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield4">City</label>
+                                <input type="text" id="mytextfield4" disabled value="Paris">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <label for="mytextfield5">Multiline text field</label>
+                                <textarea id="mytextfield5"></textarea>
+                            </div>
+                            <div class="micl-textfield-outlined micl-textfield--error">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield6">Label text</label>
+                                <input type="text" id="mytextfield6">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                            </div>
+                            <div class="micl-textfield-outlined micl-textfield--error">
+                                <label for="mytextfield7">Password</label>
+                                <input type="password" id="mytextfield7" value="foobar">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
+                                <span class="micl-textfield__supporting-text">Include an uppercase letter, a lowercase letter, and a numeric character</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="micl-card-filled">
+                        <div class="micl-card__content">
+                            <div class="micl-textfield-outlined">
+                                <input type="text" name="myname">
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield12">Text field</label>
+                                <input type="text" id="mytextfield12" value="Outlined">
+                                <span class="micl-textfield__supporting-text">Supporting text</span>
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <span class="micl-textfield__prefix" aria-label="Euro">€</span>
+                                <label for="mytextfield13">Amount</label>
+                                <input type="text" id="mytextfield13" value="299.89">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">credit_card</span>
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield14">City</label>
+                                <input type="text" id="mytextfield14" disabled value="Paris">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                                <span class="micl-textfield__supporting-text">This input field is disabled</span>
+                            </div>
+                            <div class="micl-textfield-outlined">
+                                <label for="mytextfield15">Text area</label>
+                                <textarea id="mytextfield15" rows="3">Text areas are taller than text fields and wrap overflow text onto a new line. They are a fixed height and scroll vertically when the cursor reaches the bottom of the field. </textarea>
+                            </div>
+                            <div class="micl-textfield-outlined micl-textfield--error">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield16">Label text</label>
+                                <input type="text" id="mytextfield16">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                            </div>
+                            <div class="micl-textfield-outlined micl-textfield--error">
+                                <label for="mytextfield17">Weight</label>
+                                <input type="number" id="mytextfield17" value="17800">
+                                <span class="micl-textfield__suffix" aria-label="Kilograms">kg</span>
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
+                                <span class="micl-textfield__supporting-text">Too heavy</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="micl-textfield-outlined">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield2">Name</label>
-                    <input type="text" id="mytextfield2" value="Marie Curie">
-                </div>
-                <div class="micl-textfield-outlined">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield3">Label text</label>
-                    <input type="text" id="mytextfield3">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                </div>
-                <div class="micl-textfield-outlined">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield4">City</label>
-                    <input type="text" id="mytextfield4" disabled value="Paris">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                </div>
-                <div class="micl-textfield-outlined">
-                    <label for="mytextfield5">Multiline text field</label>
-                    <textarea id="mytextfield5"></textarea>
-                </div>
-                <div class="micl-textfield-outlined micl-textfield--error">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield6">Label text</label>
-                    <input type="text" id="mytextfield6">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                </div>
-                <div class="micl-textfield-outlined micl-textfield--error">
-                    <label for="mytextfield7">Password</label>
-                    <input type="password" id="mytextfield7" value="foobar">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
-                    <span class="micl-textfield__supporting-text">Include an uppercase letter, a lowercase letter, and a numeric character</span>
+                <div class="micl-pane__column">
+                    <div class="micl-card-outlined">
+                        <div class="micl-card__content">
+                            <div class="micl-textfield-filled">
+                                <label for="mytextfield21">Timestamp</label>
+                                <input type="datetime-local" id="mytextfield21">
+                            </div>
+                            <div class="micl-textfield-filled" style="--md-sys-textfield-prefix-space:2.5em">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <span class="micl-textfield__prefix" aria-label="Norwegian kroner">NOK</span>
+                                <label for="mytextfield22">Amount*</label>
+                                <input type="text" id="mytextfield22" required value="">
+                                <span class="micl-textfield__supporting-text">In Norwegian kroner</span>
+                            </div>
+                            <div class="micl-textfield-filled">
+                                <span class="micl-textfield__character-counter"></span>
+                                <span class="micl-textfield__supporting-text micl-textfield__supporting-text--focus">Enter at least twelve characters</span>
+                                <span class="micl-textfield__prefix" aria-label="Euro">€</span>
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                                <input type="text" id="mytextfield23" maxlength="24">
+                                <label for="mytextfield23">Label text</label>
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                            </div>
+                            <div class="micl-textfield-filled">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield24">City</label>
+                                <input type="text" id="mytextfield24" disabled value="Paris">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+                                <span class="micl-textfield__supporting-text">This input field is disabled</span>
+                            </div>
+                            <div class="micl-textfield-filled">
+                                <label for="mytextfield25">Multiline text field</label>
+                                <textarea id="mytextfield25" maxlength="100">Lorem ipsum dolor sit amet consectetur adipiscing elit</textarea>
+                                <span class="micl-textfield__character-counter"></span>
+                            </div>
+                            <div class="micl-textfield-filled micl-textfield--error">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield26">Label text</label>
+                                <input type="text" id="mytextfield26">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
+                            </div>
+                            <div class="micl-textfield-filled micl-textfield--error">
+                                <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+                                <label for="mytextfield27">City</label>
+                                <input type="text" id="mytextfield27" maxlength="20" value="Amsterdaaam">
+                                <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
+                                <span class="micl-textfield__supporting-text">Incorrect spelling</span>
+                                <span class="micl-textfield__character-counter"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="micl-card-filled">
-            <div class="micl-card__content">
-                <div class="micl-textfield-outlined">
-                    <input type="text" name="myname">
+        </section>
+        <section class="micl-pane">
+            <div class="micl-card-filled">
+                <div class="micl-card__headline-s">
+                    <h2>Code example</h2>
                 </div>
-                <div class="micl-textfield-outlined">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield12">Text field</label>
-                    <input type="text" id="mytextfield12" value="Outlined">
-                    <span class="micl-textfield__supporting-text">Supporting text</span>
-                </div>
-                <div class="micl-textfield-outlined">
-                    <span class="micl-textfield__prefix" aria-label="Euro">€</span>
-                    <label for="mytextfield13">Amount</label>
-                    <input type="text" id="mytextfield13" value="299.89">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">credit_card</span>
-                </div>
-                <div class="micl-textfield-outlined">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield14">City</label>
-                    <input type="text" id="mytextfield14" disabled value="Paris">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                    <span class="micl-textfield__supporting-text">This input field is disabled</span>
-                </div>
-                <div class="micl-textfield-outlined">
-                    <label for="mytextfield15">Text area</label>
-                    <textarea id="mytextfield15" rows="3">Text areas are taller than text fields and wrap overflow text onto a new line. They are a fixed height and scroll vertically when the cursor reaches the bottom of the field. </textarea>
-                </div>
-                <div class="micl-textfield-outlined micl-textfield--error">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield16">Label text</label>
-                    <input type="text" id="mytextfield16">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                </div>
-                <div class="micl-textfield-outlined micl-textfield--error">
-                    <label for="mytextfield17">Weight</label>
-                    <input type="number" id="mytextfield17" value="17800">
-                    <span class="micl-textfield__suffix" aria-label="Kilograms">kg</span>
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
-                    <span class="micl-textfield__supporting-text">Too heavy</span>
+                <div class="micl-card__content docs-code">
+                    <pre><code>
+&lt;div class="micl-textfield-outlined"&gt;
+  &lt;label for="id0">Label text&lt;/label&gt;
+  &lt;input type="text" id="id0"&gt;
+&lt;/div&gt;
+
+&lt;div class="micl-textfield-outlined"&gt;
+  &lt;label for="id1"&gt;Multiline text field&lt;/label&gt;
+  &lt;textarea id="id1"&gt;&lt;/textarea&gt;
+&lt;/div>
+
+&lt;div class="micl-textfield-outlined"&gt;
+  &lt;span class="micl-textfield__icon-leading material-symbols-outlined"&gt;search&lt;/span&gt;
+  &lt;label for="id2"&gt;City&lt;/label&gt;
+  &lt;input type="text" id="id2" disabled value="Paris"&gt;
+  &lt;span class="micl-textfield__icon-trailing material-symbols-outlined"&gt;cancel&lt;/span&gt;
+  &lt;span class="micl-textfield__supporting-text"&gt;Disabled field&lt;/span&gt;
+&lt;/div&gt;
+                    </code></pre>
                 </div>
             </div>
-        </div>
-        <div class="micl-card-outlined">
-            <div class="micl-card__content">
-                <div class="micl-textfield-filled">
-                    <label for="mytextfield21">Timestamp</label>
-                    <input type="datetime-local" id="mytextfield21">
-                </div>
-                <div class="micl-textfield-filled" style="--md-sys-textfield-prefix-space:2.5em">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <span class="micl-textfield__prefix" aria-label="Norwegian kroner">NOK</span>
-                    <label for="mytextfield22">Amount*</label>
-                    <input type="text" id="mytextfield22" required value="">
-                    <span class="micl-textfield__supporting-text">In Norwegian kroner</span>
-                </div>
-                <div class="micl-textfield-filled">
-                    <span class="micl-textfield__character-counter"></span>
-                    <span class="micl-textfield__supporting-text micl-textfield__supporting-text--focus">Enter at least twelve characters</span>
-                    <span class="micl-textfield__prefix" aria-label="Euro">€</span>
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                    <input type="text" id="mytextfield23" maxlength="24">
-                    <label for="mytextfield23">Label text</label>
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                </div>
-                <div class="micl-textfield-filled">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield24">City</label>
-                    <input type="text" id="mytextfield24" disabled value="Paris">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
-                    <span class="micl-textfield__supporting-text">This input field is disabled</span>
-                </div>
-                <div class="micl-textfield-filled">
-                    <label for="mytextfield25">Multiline text field</label>
-                    <textarea id="mytextfield25" maxlength="100">Lorem ipsum dolor sit amet consectetur adipiscing elit</textarea>
-                    <span class="micl-textfield__character-counter"></span>
-                </div>
-                <div class="micl-textfield-filled micl-textfield--error">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield26">Label text</label>
-                    <input type="text" id="mytextfield26">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
-                </div>
-                <div class="micl-textfield-filled micl-textfield--error">
-                    <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
-                    <label for="mytextfield27">City</label>
-                    <input type="text" id="mytextfield27" maxlength="20" value="Amsterdaaam">
-                    <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1">error</span>
-                    <span class="micl-textfield__supporting-text">Incorrect spelling</span>
-                    <span class="micl-textfield__character-counter"></span>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

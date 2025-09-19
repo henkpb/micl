@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Icon Buttons">
     <title>MICL Icon Buttons</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,settings&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,home,settings&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -17,179 +18,203 @@
         }
     </style>
 </head>
-<body class="light">
-    <div class="headline">
-        <h1 class="md-sys-typescale-emphasized-display-small">Icon buttons</h1>
-        <div id="settings-placeholder"></div>
-    </div>
+<body class="micl-window light">
+    <main class="micl-body micl-body--stacked-to-large">
+        <section class="micl-pane">
+            <header class="micl-appbar">
+                <a href="index.html" class="micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
+                </a>
+                <div class="micl-appbar__headline micl-appbar__headline--center">
+                    <h1>Icon Buttons</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL icon buttons</p>
+                </div>
+                <div id="settings-placeholder"></div>
+            </header>
 
-    <!-- <div class="micl-card-filled"> -->
-        <!-- <div class="micl-card__content"> -->
-            <div>
-                <button class="micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+            <div class="micl-card-elevated">
+                <div class="micl-card__content">
+                    <div>
+                        <button class="micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-standard-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xs micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xs micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-filled-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-filled-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xs micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xs micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-tonal-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-s material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-tonal-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xs micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-s micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-l micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xl micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xs micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-s micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-l micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-xl micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-outlined-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-outlined-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xs micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xs micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-standard-xs material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-s material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-l material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-xl material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xs micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-s micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-l micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-xl micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xs micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-s micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-l micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-xl micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
+                    </div>
+                    <div>
+                        <button class="micl-iconbutton-standard-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-standard-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-filled-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-tonal-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
+                        <button class="micl-iconbutton-outlined-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
+                    </div>
+                </div>
             </div>
-            <div>
-                <button class="micl-iconbutton-standard-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xs micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl micl-button--square micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xs micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl micl-button--square micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
+        </section>
+        <section class="micl-pane">
+            <div class="micl-card-filled">
+                <div class="micl-card__headline-s">
+                    <h2>Code example</h2>
+                </div>
+                <div class="micl-card__content docs-code">
+                    <pre><code>
+&lt;button class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Control Panel"&gt;settings&lt;/button&gt;
+
+&lt;button class="micl-iconbutton-filled-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel"&gt;settings&lt;/button&gt;
+                    </code></pre>
+                </div>
             </div>
-            <div>
-                <button class="micl-iconbutton-filled-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-filled-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xs micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xs micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-tonal-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-s material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-tonal-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xs micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-s micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-l micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xl micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xs micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-s micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-l micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-xl micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-outlined-xs material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xs micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl micl-iconbutton--narrow material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xs micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl micl-iconbutton--wide material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-outlined-xs micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xs micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl micl-iconbutton--narrow micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xs micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl micl-iconbutton--wide micl-button--square material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-standard-xs material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-s material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-l material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-xl material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xs micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-s micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-l micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-xl micl-iconbutton--narrow material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xs micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-s micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-l micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-xl micl-iconbutton--wide material-symbols-outlined" disabled aria-label="Control Panel">settings</button>
-            </div>
-            <div>
-                <button class="micl-iconbutton-standard-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-standard-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-filled-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-tonal-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Control Panel">settings</button>
-                <button class="micl-iconbutton-outlined-m micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
-            </div>
-        <!-- </div> -->
-    <!-- </div> -->
+        </section>
+    </main>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

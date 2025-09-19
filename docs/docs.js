@@ -1,5 +1,5 @@
 document.getElementById('settings-placeholder').innerHTML =
-`<button class="micl-iconbutton-standard-m material-symbols-outlined" popovertarget="settings" popovertargetaction="toggle">dark_mode</button>
+`<button class="micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined" popovertarget="settings" popovertargetaction="toggle">dark_mode</button>
 <dialog id="settings" class="micl-dialog" closedby="any" popover>
     <div class="micl-dialog__headline">
         <h2>Settings</h2>

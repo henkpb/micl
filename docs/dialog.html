@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Dialogs">
     <title>MICL Dialogs</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,info,person,restart_alt&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,home,person,restart_alt&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -13,139 +14,169 @@
         label {
             color: var(--md-sys-color-on-surface);
         }
-        .micl-card__content {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding-block: 32px;
-            row-gap: 32px;
-        }
     </style>
 </head>
-<body class="light">
-    <div class="headline">
-        <h1 class="md-sys-typescale-emphasized-display-small">Dialogs</h1>
-        <div id="settings-placeholder"></div>
-    </div>
+<body class="micl-window light">
+    <main class="micl-body">
+        <section class="micl-pane">
+            <header class="micl-appbar">
+                <a href="index.html" class="micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
+                </a>
+                <div class="micl-appbar__headline micl-appbar__headline--center">
+                    <h1>Dialogs</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL dialogs</p>
+                </div>
+                <div id="settings-placeholder"></div>
+            </header>
 
-    <div class="cards">
-        <div class="micl-card-outlined">
-            <div class="micl-card__content">
-                <dialog id="mydialog1" class="micl-dialog" style="width:300px" closedby="any" popover>
-                    <div class="micl-dialog__headline">
-                        <h2>Basic dialog</h2>
-                        <span class="micl-dialog__supporting-text">A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.</span>
-                    </div>
-                    <div class="micl-dialog__actions">
-                        <button type="button" class="micl-button-text-s" popovertarget="mydialog1">Cancel</button>
-                        <button type="button" class="micl-button-text-s">Action</button>
-                    </div>
-                </dialog>
-                <button type="button" class="micl-button-tonal-m micl-button--square" popovertarget="mydialog1">Open Basic Dialog</button>
+            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column">
+                    <div class="micl-card-filled">
+                        <div class="micl-card__headline-s">
+                            <h2>Showcase</h2>
+                        </div>
+                        <p class="micl-card__supporting-text">Click a button to open one of the MICL dialogs.</p>
+                        <div class="micl-card__content docs-buttons">
+                            <dialog id="mydialog1" class="micl-dialog" style="width:300px" closedby="any" popover>
+                                <div class="micl-dialog__headline">
+                                    <h2>Basic dialog</h2>
+                                    <span class="micl-dialog__supporting-text">A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.</span>
+                                </div>
+                                <div class="micl-dialog__actions">
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog1">Cancel</button>
+                                    <button type="button" class="micl-button-text-s">Action</button>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog1">Open Basic Dialog</button>
 
-                <dialog id="mydialog2" class="micl-dialog" style="width:400px" closedby="any" popover>
-                    <div class="micl-dialog__headline">
-                        <span class="micl-dialog__icon material-symbols-outlined">restart_alt</span>
-                        <h2>Reset settings?</h2>
-                        <span class="micl-dialog__supporting-text">This will reset your app preferences back to their default settings. The following accounts will also be signed out:</span>
-                    </div>
-                    <div class="micl-dialog__content">
-                        <hr class="micl-divider">
-                        <ul class="micl-list" style="--md-sys-list-item-container-color:transparent;margin-block:24px">
-                            <li class="micl-list-item-one">
-                                <span class="micl-list-item__avatar">JH</span>
-                                <span class="micl-list-item__text">
-                                    <span class="micl-list-item__headline">johnny.hanssen@proton.me</span>
-                                </span>
-                            </li>
-                            <li class="micl-list-item-one">
-                                <span class="micl-list-item__avatar">LS</span>
-                                <span class="micl-list-item__text">
-                                    <span class="micl-list-item__headline">laura.smith@outlook.com</span>
-                                </span>
-                            </li>
-                            <li class="micl-list-item-one">
-                                <span class="micl-list-item__avatar">LH</span>
-                                <span class="micl-list-item__text">
-                                    <span class="micl-list-item__headline">lucy.hong@gmail.com</span>
-                                </span>
-                            </li>
-                        </ul>
-                        <hr class="micl-divider">
-                    </div>
-                    <div class="micl-dialog__actions">
-                        <button type="button" class="micl-button-text-s" popovertarget="mydialog2">Cancel</button>
-                        <button type="button" class="micl-button-text-s">Accept</button>
-                    </div>
-                </dialog>
-                <button class="micl-button-tonal-m micl-button--square" popovertarget="mydialog2">Open Dialog</button>
+                            <dialog id="mydialog2" class="micl-dialog" style="width:400px" closedby="any" popover>
+                                <div class="micl-dialog__headline">
+                                    <span class="micl-dialog__icon material-symbols-outlined">restart_alt</span>
+                                    <h2>Reset settings?</h2>
+                                    <span class="micl-dialog__supporting-text">This will reset your app preferences back to their default settings. The following accounts will also be signed out:</span>
+                                </div>
+                                <div class="micl-dialog__content">
+                                    <hr class="micl-divider">
+                                    <ul class="micl-list" style="--md-sys-list-item-container-color:transparent;margin-block:24px">
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__avatar">JH</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">johnny.hanssen@proton.me</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__avatar">LS</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">laura.smith@outlook.com</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__avatar">LH</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">lucy.hong@gmail.com</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <hr class="micl-divider">
+                                </div>
+                                <div class="micl-dialog__actions">
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog2">Cancel</button>
+                                    <button type="button" class="micl-button-text-s">Accept</button>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog2">Open Dialog</button>
 
-                <dialog id="mydialog3" class="micl-dialog" style="width:350px" closedby="closerequest">
-                    <div class="micl-dialog__headline">
-                        <h2>Delete selected images?</h2>
-                        <span class="micl-dialog__supporting-text">Images will be permanently removed from your account and all synchronized devices.</span>
-                    </div>
-                    <form method="dialog" class="micl-dialog__actions">
-                        <button class="micl-button-text-s" value="donotdelete">Cancel</button>
-                        <button class="micl-button-text-s" value="dodelete">Delete</button>
-                    </form>
-                </dialog>
-                <button class="micl-button-tonal-m micl-button--square" popovertarget="mydialog3">Open Modal Dialog</button>
+                            <dialog id="mydialog3" class="micl-dialog" style="width:350px" closedby="closerequest">
+                                <div class="micl-dialog__headline">
+                                    <h2>Delete selected images?</h2>
+                                    <span class="micl-dialog__supporting-text">Images will be permanently removed from your account and all synchronized devices.</span>
+                                </div>
+                                <form method="dialog" class="micl-dialog__actions">
+                                    <button class="micl-button-text-s" value="donotdelete">Cancel</button>
+                                    <button class="micl-button-text-s" value="dodelete">Delete</button>
+                                </form>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog3">Open Modal Dialog</button>
 
-                <dialog id="mydialog4" class="micl-dialog-fullscreen" closedby="none" popover>
-                    <form method="dialog" class="micl-dialog__headline">
-                        <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mydialog4" aria-label="Close">close</button>
-                        <span class="micl-dialog__icon material-symbols-outlined">person</span>
-                        <h2>Personal info</h2>
-                        <button class="micl-button-text-s" value="dosave">Save</button>
-                    </form>
-                    <div class="micl-dialog__content">
-                        <p class="micl-dialog__supporting-text">Please specify personal information about the new employee.</p>
-                        <div class="micl-textfield-outlined" style="margin-block:24px">
-                            <label for="mytextfield1">Name</label>
-                            <input type="text" id="mytextfield1" value="Marie Curie">
-                        </div>
-                        <div class="micl-textfield-outlined" style="margin-block:24px">
-                            <label for="mytextfield2">Address</label>
-                            <input type="text" id="mytextfield2" value="Rue du Boulevard 3, Paris">
-                        </div>
-                        <div class="micl-textfield-outlined">
-                            <label for="myselect">Country</label>
-                            <select id="myselect">
-                                <option class="micl-list-item-one" value="AR">
-                                    <span class="micl-list-item__text">Argentina</span>
-                                </option>
-                                <option class="micl-list-item-one" value="BO">
-                                    <span class="micl-list-item__text">Bolivia</span>
-                                </option>
-                                <option class="micl-list-item-one" value="BR">
-                                    <span class="micl-list-item__text">Brazil</span>
-                                </option>
-                                <option class="micl-list-item-one" value="CL" disabled>
-                                    <span class="micl-list-item__text">Chile</span>
-                                </option>
-                                <option class="micl-list-item-one" value="CO">
-                                    <span class="micl-list-item__text">Colombia</span>
-                                </option>
-                                <option class="micl-list-item-one" value="FR" selected>
-                                    <span class="micl-list-item__text">France</span>
-                                </option>
-                            </select>
-                        </div>
-                        <div class="micl-textfield-outlined" style="margin-block:24px 4px">
-                            <label for="mytextfield4">Profession</label>
-                            <input type="text" id="mytextfield4" value="Physics researcher">
+                            <dialog id="mydialog4" class="micl-dialog-fullscreen" closedby="none" popover>
+                                <form method="dialog" class="micl-dialog__headline">
+                                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mydialog4" aria-label="Close">close</button>
+                                    <span class="micl-dialog__icon material-symbols-outlined">person</span>
+                                    <h2>Personal info</h2>
+                                    <button class="micl-button-text-s" value="dosave">Save</button>
+                                </form>
+                                <div class="micl-dialog__content">
+                                    <p class="micl-dialog__supporting-text">Please specify personal information about the new employee.</p>
+                                    <div class="micl-textfield-outlined" style="margin-block:24px">
+                                        <label for="mytextfield1">Name</label>
+                                        <input type="text" id="mytextfield1" value="Marie Curie">
+                                    </div>
+                                    <div class="micl-textfield-outlined" style="margin-block:24px">
+                                        <label for="mytextfield2">Address</label>
+                                        <input type="text" id="mytextfield2" value="Rue du Boulevard 3, Paris">
+                                    </div>
+                                    <div class="micl-textfield-outlined">
+                                        <label for="myselect">Country</label>
+                                        <select id="myselect">
+                                            <option class="micl-list-item-one" value="AR">
+                                                <span class="micl-list-item__text">Argentina</span>
+                                            </option>
+                                            <option class="micl-list-item-one" value="BO">
+                                                <span class="micl-list-item__text">Bolivia</span>
+                                            </option>
+                                            <option class="micl-list-item-one" value="BR">
+                                                <span class="micl-list-item__text">Brazil</span>
+                                            </option>
+                                            <option class="micl-list-item-one" value="CL" disabled>
+                                                <span class="micl-list-item__text">Chile</span>
+                                            </option>
+                                            <option class="micl-list-item-one" value="CO">
+                                                <span class="micl-list-item__text">Colombia</span>
+                                            </option>
+                                            <option class="micl-list-item-one" value="FR" selected>
+                                                <span class="micl-list-item__text">France</span>
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="micl-textfield-outlined" style="margin-block:24px 4px">
+                                        <label for="mytextfield4">Profession</label>
+                                        <input type="text" id="mytextfield4" value="Physics researcher">
+                                    </div>
+                                </div>
+                                <form method="dialog" class="micl-dialog__actions">
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog4">Cancel</button>
+                                    <button class="micl-button-text-s" value="dosave">Save</button>
+                                </form>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog4">Open Full-Screen Dialog</button>
                         </div>
                     </div>
-                    <form method="dialog" class="micl-dialog__actions">
-                        <button type="button" class="micl-button-text-s" popovertarget="mydialog4">Cancel</button>
-                        <button class="micl-button-text-s" value="dosave">Save</button>
-                    </form>
-                </dialog>
-                <button class="micl-button-tonal-m micl-button--square" popovertarget="mydialog4">Open Full-Screen Dialog</button>
+                </div>
+                <div class="micl-pane__column">
+                    <div class="micl-card-filled">
+                        <div class="micl-card__headline-s">
+                            <h2>Code example</h2>
+                        </div>
+                        <div class="micl-card__content docs-code">
+                            <pre><code>
+&lt;dialog id="id0" class="micl-dialog" style="width:300px" closedby="any" popover&gt;
+  &lt;div class="micl-dialog__headline"&gt;
+    &lt;h2&gt;Basic dialog&lt;/h2&gt;
+    &lt;span class="micl-dialog__supporting-text"&gt;A dialog is a type of modal window.&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="micl-dialog__actions"&gt;
+    &lt;button type="button" class="micl-button-text-s" popovertarget="id0"&gt;Cancel&lt;/button&gt;
+    &lt;button type="button" class="micl-button-text-s"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>
