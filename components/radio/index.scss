@@ -148,6 +148,6 @@ label:has(+ input[type=radio].micl-radio:not(:disabled)) {
     cursor: pointer;
 }
 input[type=radio].micl-radio + label,
-label + input[type=radio].micl-radio {
+label:has(+ input[type=radio].micl-radio) {
     color: var(--md-sys-color-on-surface);
 }
