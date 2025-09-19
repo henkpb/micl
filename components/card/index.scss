@@ -37,7 +37,7 @@
     --md-sys-card-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
     height: fit-content;
-    margin: var(--md-sys-card-margin);
+    margin: 0;
     border-radius: var(--md-sys-shape-corner-medium);
     overflow: hidden;
     interpolate-size: allow-keywords;
