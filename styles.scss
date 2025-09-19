@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use 'layout';
+
 @use 'styles/typography';
 @use 'styles/shapes';
 @use 'styles/elevation';
@@ -39,6 +41,7 @@
 @use 'components/card';
 @use 'components/dialog';
 @use 'components/badge';
+@use 'components/appbar';
 @use 'components/sidesheet';
 @use 'components/bottomsheet';
 @use 'components/navigationrail';

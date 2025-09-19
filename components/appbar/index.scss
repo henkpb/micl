@@ -1,0 +1,206 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../layout';
+@use '../../styles/elevation';
+@use '../../styles/shapes';
+@use '../../styles/typography';
+
+@mixin appbar-sticky() {
+    position: sticky;
+    inset: unset;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    animation: 1ms linear alternate appbar-background;
+    animation-timeline: scroll(root);
+}
+
+.micl-appbar {
+    --md-sys-appbar-height: 64px;
+    --md-sys-appbar-padding-block-start: 0px;
+    --md-sys-appbar-padding-block-end: 0px;
+
+    box-sizing: border-box;
+    display: grid;
+    grid-template-areas:
+        "appbar-leading appbar-middle appbar-trailing"
+        "appbar-bottom appbar-bottom appbar-bottom";
+    grid-template-columns: 0fr 1fr auto;
+    column-gap: 4px;
+    align-items: center;
+    min-block-size: var(--md-sys-appbar-height);
+    padding-block: var(--md-sys-appbar-padding-block-start) var(--md-sys-appbar-padding-block-end);
+    padding-inline: 4px;
+    border-start-start-radius: inherit;
+    border-start-end-radius: inherit;
+    background-color: var(--md-sys-color-surface);
+    box-shadow: var(--md-sys-elevation-level0);
+    z-index: 8;
+    
+    &.micl-appbar--sticky {
+        @include appbar-sticky;
+    }
+    .micl-appbar__leading {
+        grid-area: appbar-leading;
+        margin-inline-start: calc(var(--md-sys-layout-window-margin) - 4px);
+        transform: translateX(0%);
+    }
+    .micl-appbar__leading-icon {
+        grid-area: appbar-leading;
+        margin-inline-start: calc(var(--md-sys-layout-window-margin) - 4px + 12px);
+        transform: translateX(-50%);
+    }
+    .micl-appbar__headline {
+        display: flex;
+        grid-area: appbar-middle;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 8px 0;
+        border-radius: var(--md-sys-shape-corner-none);
+        color: var(--md-sys-color-on-surface);
+
+        &.micl-appbar__headline--center {
+            align-items: center;
+            text-align: center;
+        }
+        h1, h2, h3, h4, h5, h6, .micl-heading {
+            @include typography.title-large;
+
+            margin: 0;
+        }
+        .micl-appbar__subtitle {
+            margin: 0;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+    }
+    &:has(.micl-appbar__subtitle) {
+        .micl-appbar__subtitle {
+            @include typography.label-medium;
+        }
+    }
+    .micl-appbar__trailing {
+        grid-area: appbar-trailing;
+        margin-inline-end: calc(var(--md-sys-layout-window-margin) - 4px);
+        transform: translateX(0%);
+    }
+    .micl-appbar__trailing-icon {
+        grid-area: appbar-trailing;
+        margin-inline-end: calc(var(--md-sys-layout-window-margin) - 4px + 12px);
+        transform: translateX(50%);
+    }
+    &.micl-appbar--medium {
+        --md-sys-appbar-height: 112px;
+        --md-sys-appbar-padding-block-start: 4px;
+        --md-sys-appbar-padding-block-end: 12px;
+
+        padding-inline-start: 0;
+
+        .micl-appbar__headline {
+            grid-area: appbar-bottom;
+            margin: 0;
+            padding-inline-start: 16px;
+
+            h1, h2, h3, h4, h5, h6, .micl-heading {
+                @include typography.headline-medium;
+            }
+        }
+        &:has(.micl-appbar__subtitle) {
+            --md-sys-appbar-height: 136px;
+
+            .micl-appbar__subtitle {
+                @include typography.title-small;
+            }
+        }
+    }
+    &.micl-appbar--large {
+        --md-sys-appbar-height: 120px;
+        --md-sys-appbar-padding-block-start: 4px;
+        --md-sys-appbar-padding-block-end: 12px;
+
+        padding-inline-start: 0;
+
+        .micl-appbar__headline {
+            grid-area: appbar-bottom;
+            margin: 0;
+            padding-inline-start: 16px;
+
+            h1, h2, h3, h4, h5, h6, .micl-heading {
+                @include typography.display-small;
+            }
+        }
+        &:has(.micl-appbar__subtitle) {
+            --md-sys-appbar-height: 152px;
+
+            .micl-appbar__subtitle {
+                @include typography.title-medium;
+            }
+        }
+    }
+}
+
+.micl-body:not(:has(> .micl-pane:nth-child(2))) {
+    .micl-appbar:not(.micl-appbar--not-sticky) {
+        @include appbar-sticky;
+    }
+}
+.micl-body:has(> .micl-pane:nth-child(2)) {
+    @media (max-width: layout.$md-sys-window-medium-min) {
+        .micl-appbar:not(.micl-appbar--not-sticky) {
+            @include appbar-sticky;
+        }
+    }
+    @media (min-width: layout.$md-sys-window-medium-min) and (max-width: layout.$md-sys-window-medium-max) {
+        &.micl-body--stacked-to-expanded,
+        &.micl-body--stacked-to-large,
+        &.micl-body--stacked-to-extralarge {
+            .micl-appbar:not(.micl-appbar--not-sticky) {
+                @include appbar-sticky;
+            }
+        }
+    }
+    @media (min-width: layout.$md-sys-window-expanded-min) and (max-width: layout.$md-sys-window-expanded-max) {
+        &.micl-body--stacked-to-large,
+        &.micl-body--stacked-to-extralarge {
+            .micl-appbar:not(.micl-appbar--not-sticky) {
+                @include appbar-sticky;
+            }
+        }
+    }
+    @media (min-width: layout.$md-sys-window-large-min) and (max-width: layout.$md-sys-window-large-max) {
+        &.micl-body--stacked-to-extralarge {
+            .micl-appbar:not(.micl-appbar--not-sticky) {
+                @include appbar-sticky;
+            }
+        }
+    }
+}
+
+@keyframes appbar-background {
+    0% {
+        background-color: inherit;
+    }
+    10% {
+        background-color: var(--md-sys-color-surface-container);
+    }
+    100% {
+        background-color: var(--md-sys-color-surface-container);
+    }
+}
