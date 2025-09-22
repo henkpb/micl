@@ -61,3 +61,13 @@
     inherits: false;
     initial-value: -100000px;
 }
+@property --micl-width {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 0px;
+}
+@property --micl-height {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 0px;
+}
