@@ -25,6 +25,7 @@
 @use '../../styles/statelayer';
 
 button.micl-iconbutton-standard-xs,
+a.micl-iconbutton-standard-xs,
 button.micl-iconbutton-standard-s,
 a.micl-iconbutton-standard-s,
 button.micl-iconbutton-standard-m,
@@ -92,13 +93,17 @@ button.micl-iconbutton-outlined-xl {
 }
 
 button.micl-iconbutton-standard-xs,
+a.micl-iconbutton-standard-xs,
 button.micl-iconbutton-filled-xs,
 button.micl-iconbutton-tonal-xs,
 button.micl-iconbutton-outlined-xs {
+    --micl-width: 32px;
+    --micl-height: 32px;
+
     position: relative;
-    inline-size: 32px;
-    min-inline-size: 32px;
-    block-size: 32px;
+    inline-size: var(--micl-width);
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
     font-size: 20px;
 
     &::before {
@@ -106,12 +111,11 @@ button.micl-iconbutton-outlined-xs {
         position: absolute;
         block-size: var(--md-sys-target-size);
         inline-size: var(--md-sys-target-size);
-        inset: calc((32px - var(--md-sys-target-size)) / 2) 0 0 calc((32px - var(--md-sys-target-size)) / 2);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size)) / 2) 0 0 calc((var(--micl-width) - var(--md-sys-target-size)) / 2);
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
-        // border-radius: var(--md-sys-shape-corner-medium);
-        border-radius: var(--md-sys-shape-corner-large);
+        border-radius: var(--md-sys-shape-corner-medium);
     }
     &:not(:disabled) {
         &:active {
@@ -119,22 +123,12 @@ button.micl-iconbutton-outlined-xs {
         }
     }
     &.micl-iconbutton--narrow {
-        inline-size: 28px;
-        min-inline-size: 28px;
-        border-radius: 14px;
-
-        &::before {
-            inset: calc((32px - var(--md-sys-target-size)) / 2) 0 0 calc((28px - var(--md-sys-target-size)) / 2);
-        }
+        --micl-width: 28px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-iconbutton--wide {
-        inline-size: 40px;
-        min-inline-size: 40px;
-        border-radius: 16px;
-
-        &::before {
-            inset: calc((32px - var(--md-sys-target-size)) / 2) 0 0 calc((40px - var(--md-sys-target-size)) / 2);
-        }
+        --micl-width: 40px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-medium);
@@ -150,10 +144,13 @@ a.micl-iconbutton-standard-s,
 button.micl-iconbutton-filled-s,
 button.micl-iconbutton-tonal-s,
 button.micl-iconbutton-outlined-s {
+    --micl-width: 40px;
+    --micl-height: 40px;
+
     position: relative;
-    inline-size: 40px;
-    min-inline-size: 40px;
-    block-size: 40px;
+    inline-size: var(--micl-width);
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
     font-size: 24px;
 
     &::before {
@@ -161,7 +158,7 @@ button.micl-iconbutton-outlined-s {
         position: absolute;
         block-size: var(--md-sys-target-size);
         inline-size: var(--md-sys-target-size);
-        inset: calc((40px - var(--md-sys-target-size)) / 2) 0 0 calc((40px - var(--md-sys-target-size)) / 2);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size)) / 2) 0 0 calc((var(--micl-width) - var(--md-sys-target-size)) / 2);
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -173,21 +170,15 @@ button.micl-iconbutton-outlined-s {
         }
     }
     &.micl-iconbutton--narrow {
-        inline-size: 32px;
-        min-inline-size: 32px;
-        border-radius: 16px;
-
-        &::before {
-            inset: calc((40px - var(--md-sys-target-size)) / 2) 0 0 calc((32px - var(--md-sys-target-size)) / 2);
-        }
+        --micl-width: 32px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-iconbutton--wide {
-        inline-size: 52px;
-        min-inline-size: 52px;
-        border-radius: 20px;
+        --micl-width: 52px;
+        border-radius: calc(var(--micl-width) / 2);
 
         &::before {
-            inline-size: 52px;
+            inline-size: var(--micl-width);
             inset: calc((40px - var(--md-sys-target-size)) / 2) 0 0 0;
         }
     }
@@ -205,9 +196,12 @@ a.micl-iconbutton-standard-m,
 button.micl-iconbutton-filled-m,
 button.micl-iconbutton-tonal-m,
 button.micl-iconbutton-outlined-m {
-    inline-size: 56px;
-    min-inline-size: 56px;
-    block-size: 56px;
+    --micl-width: 56px;
+    --micl-height: 56px;
+
+    inline-size: var(--micl-width);
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
     font-size: 24px;
 
     &.micl-button--toggle.micl-button--selected {
@@ -215,19 +209,16 @@ button.micl-iconbutton-outlined-m {
     }
     &:not(:disabled) {
         &:active {
-            // border-radius: var(--md-sys-shape-corner-small);
-            border-radius: var(--md-sys-shape-corner-medium);
+            border-radius: var(--md-sys-shape-corner-small);
         }
     }
     &.micl-iconbutton--narrow {
-        inline-size: var(--md-sys-target-size);
-        min-inline-size: var(--md-sys-target-size);
-        border-radius: calc(var(--md-sys-target-size) / 2);
+        --micl-width: 48px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-iconbutton--wide {
-        inline-size: 72px;
-        min-inline-size: 72px;
-        border-radius: 36px;
+        --micl-width: 72px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-large);
@@ -242,9 +233,12 @@ button.micl-iconbutton-standard-l,
 button.micl-iconbutton-filled-l,
 button.micl-iconbutton-tonal-l,
 button.micl-iconbutton-outlined-l {
-    inline-size: 96px;
-    min-inline-size: 96px;
-    block-size: 96px;
+    --micl-width: 96px;
+    --micl-height: 96px;
+
+    inline-size: var(--micl-width);
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
     font-size: 32px;
 
     &.micl-button--toggle.micl-button--selected {
@@ -256,14 +250,12 @@ button.micl-iconbutton-outlined-l {
         }
     }
     &.micl-iconbutton--narrow {
-        inline-size: 64px;
-        min-inline-size: 64px;
-        border-radius: 32px;
+        --micl-width: 64px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-iconbutton--wide {
-        inline-size: 128px;
-        min-inline-size: 128px;
-        border-radius: 64px;
+        --micl-width: 128px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-extra-large);
@@ -278,9 +270,12 @@ button.micl-iconbutton-standard-xl,
 button.micl-iconbutton-filled-xl,
 button.micl-iconbutton-tonal-xl,
 button.micl-iconbutton-outlined-xl {
-    inline-size: 136px;
-    min-inline-size: 136px;
-    block-size: 136px;
+    --micl-width: 136px;
+    --micl-height: 136px;
+
+    inline-size: var(--micl-width);
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
     font-size: 40px;
 
     &.micl-button--toggle.micl-button--selected {
@@ -292,14 +287,12 @@ button.micl-iconbutton-outlined-xl {
         }
     }
     &.micl-iconbutton--narrow {
-        inline-size: 104px;
-        min-inline-size: 104px;
-        border-radius: 52px;
+        --micl-width: 104px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-iconbutton--wide {
-        inline-size: 184px;
-        min-inline-size: 184px;
-        border-radius: 92px;
+        --micl-width: 184px;
+        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-extra-large);
@@ -311,6 +304,7 @@ button.micl-iconbutton-outlined-xl {
 }
 
 button.micl-iconbutton-standard-xs,
+a.micl-iconbutton-standard-xs,
 button.micl-iconbutton-standard-s,
 a.micl-iconbutton-standard-s,
 button.micl-iconbutton-standard-m,
@@ -407,15 +401,9 @@ button.micl-iconbutton-outlined-xl {
     color: var(--md-sys-color-on-surface-variant);
 
     &.micl-iconbutton-outlined-xs,
-    &.micl-iconbutton-outlined-s {
-        // border-color: var(--md-sys-color-outline);
-        box-shadow: inset 1px 0px var(--md-sys-color-outline-variant),
-                    inset -1px 0px var(--md-sys-color-outline-variant),
-                    inset 0px -1px var(--md-sys-color-outline-variant),
-                    inset 0px 1px var(--md-sys-color-outline-variant);
-    }
+    &.micl-iconbutton-outlined-s,
     &.micl-iconbutton-outlined-m {
-        // border: 1px solid var(--md-sys-color-outline);
+        // border-color: var(--md-sys-color-outline);
         border: 1px solid var(--md-sys-color-outline-variant);
     }
     &.micl-iconbutton-outlined-l {
