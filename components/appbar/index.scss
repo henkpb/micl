@@ -22,6 +22,7 @@
 @use '../../layout';
 @use '../../styles/elevation';
 @use '../../styles/shapes';
+@use '../../styles/statelayer';
 @use '../../styles/typography';
 
 @mixin appbar-sticky() {
@@ -37,18 +38,19 @@
     --md-sys-appbar-height: 64px;
     --md-sys-appbar-padding-block-start: 0px;
     --md-sys-appbar-padding-block-end: 0px;
+    --md-sys-appbar-padding-inline: 4px;
 
     box-sizing: border-box;
     display: grid;
     grid-template-areas:
         "appbar-leading appbar-middle appbar-trailing"
         "appbar-bottom appbar-bottom appbar-bottom";
-    grid-template-columns: 0fr 1fr auto;
+    grid-template-columns: 0fr 1fr max-content;
     column-gap: 4px;
     align-items: center;
     min-block-size: var(--md-sys-appbar-height);
     padding-block: var(--md-sys-appbar-padding-block-start) var(--md-sys-appbar-padding-block-end);
-    padding-inline: 4px;
+    padding-inline: var(--md-sys-appbar-padding-inline);
     border-start-start-radius: inherit;
     border-start-end-radius: inherit;
     background-color: var(--md-sys-color-surface);
@@ -60,13 +62,12 @@
     }
     .micl-appbar__leading {
         grid-area: appbar-leading;
-        margin-inline-start: calc(var(--md-sys-layout-window-margin) - 4px);
-        transform: translateX(0%);
+        margin-inline-start: calc(var(--md-sys-layout-window-margin) - var(--md-sys-appbar-padding-inline));
     }
     .micl-appbar__leading-icon {
         grid-area: appbar-leading;
-        margin-inline-start: calc(var(--md-sys-layout-window-margin) - 4px + 12px);
-        transform: translateX(-50%);
+        margin-inline-start: calc(var(--md-sys-layout-window-margin) - (var(--micl-width, statelayer.$md-sys-target-size) / 2) + (24px / 2) - var(--md-sys-appbar-padding-inline));
+        color: var(--md-sys-color-on-surface);
     }
     .micl-appbar__headline {
         display: flex;
@@ -98,13 +99,12 @@
     }
     .micl-appbar__trailing {
         grid-area: appbar-trailing;
-        margin-inline-end: calc(var(--md-sys-layout-window-margin) - 4px);
-        transform: translateX(0%);
+        margin-inline-end: calc(var(--md-sys-layout-window-margin) - var(--md-sys-appbar-padding-inline));
     }
     .micl-appbar__trailing-icon {
         grid-area: appbar-trailing;
-        margin-inline-end: calc(var(--md-sys-layout-window-margin) - 4px + 12px);
-        transform: translateX(50%);
+        margin-inline-end: calc(var(--md-sys-layout-window-margin) - (var(--micl-width, statelayer.$md-sys-target-size) / 2) + (24px / 2) - var(--md-sys-appbar-padding-inline));
+        color: var(--md-sys-color-on-surface-variant);
     }
     &.micl-appbar--medium {
         --md-sys-appbar-height: 112px;
@@ -116,7 +116,7 @@
         .micl-appbar__headline {
             grid-area: appbar-bottom;
             margin: 0;
-            padding-inline-start: 16px;
+            padding-inline-start: var(--md-sys-layout-window-margin);
 
             h1, h2, h3, h4, h5, h6, .micl-heading {
                 @include typography.headline-medium;
@@ -140,7 +140,7 @@
         .micl-appbar__headline {
             grid-area: appbar-bottom;
             margin: 0;
-            padding-inline-start: 16px;
+            padding-inline-start: var(--md-sys-layout-window-margin);
 
             h1, h2, h3, h4, h5, h6, .micl-heading {
                 @include typography.display-small;
@@ -199,8 +199,10 @@
     }
     10% {
         background-color: var(--md-sys-color-surface-container);
-    }
+        box-shadow: var(--md-sys-elevation-level2);
+   }
     100% {
         background-color: var(--md-sys-color-surface-container);
+        box-shadow: var(--md-sys-elevation-level2);
     }
 }
