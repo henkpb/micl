@@ -56,7 +56,7 @@
     background-color: var(--md-sys-color-surface);
     box-shadow: var(--md-sys-elevation-level0);
     z-index: 8;
-    
+
     &.micl-appbar--sticky {
         @include appbar-sticky;
     }
@@ -196,13 +196,21 @@
 @keyframes appbar-background {
     0% {
         background-color: inherit;
+        border-start-start-radius: inherit;
+        border-start-end-radius: inherit;
     }
     10% {
         background-color: var(--md-sys-color-surface-container);
         box-shadow: var(--md-sys-elevation-level2);
-   }
+    }
+    50% {
+        border-start-start-radius: 0;
+        border-start-end-radius: 0;
+    }
     100% {
         background-color: var(--md-sys-color-surface-container);
         box-shadow: var(--md-sys-elevation-level2);
+        border-start-start-radius: 0;
+        border-start-end-radius: 0;
     }
 }
