@@ -159,7 +159,7 @@
                     --statelayer-opacity var(--md-sys-navigationrail-motion-duration) linear;
             }
             &> .micl-navigationrail__text {
-                color: var(--md-sys-color-secondary);
+                color: var(--md-sys-color-on-secondary-container);
             }
         }
     }
@@ -327,6 +327,7 @@ nav.micl-navigationrail {
 }
 nav.micl-navigationrail[popover] {
     position: fixed;
+    margin-inline-start: 0;
 }
 .micl-navigationrail {
     &[open],
@@ -358,7 +359,7 @@ nav.micl-navigationrail[popover] {
     }
 }
 .micl-window:has(nav.micl-navigationrail[popover]) {
-    margin-inline-start: var(--md-sys-navigationrail-collapsed-width);
+    padding-inline-start: var(--md-sys-navigationrail-collapsed-width);
 }
 .micl-window.micl-window--explicit-containment nav.micl-navigationrail {
     block-size: fit-content;
