@@ -62,7 +62,9 @@ document.getElementById('theme').addEventListener('change', event => {
     }
 });
 document.getElementById('mode').addEventListener('change', event => {
-    document.body.setAttribute('class', event.target.value);
+    document.body.setAttribute('class', document.body.classList.toString().split(' ').filter(
+        c => c.startsWith('micl')
+    ) + ' ' + event.target.value);
 });
 document.getElementById('directionality').addEventListener('change', event => {
     document.documentElement.setAttribute('dir', event.target.checked ? 'rtl' : 'ltr');
