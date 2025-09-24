@@ -20,28 +20,28 @@
     </style>
 </head>
 <body class="micl-window light">
-    <nav id="mynavigationrail" class="micl-navigationrail">
+    <dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest">
         <div class="micl-navigationrail__headline">
-            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" popovertarget="mynavigationrail" data-miclalt="menu_open" aria-label="Toggle navigation rail">menu</button>
+            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
         </div>
         <div class="micl-navigationrail__content">
             <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
-            <label for="item1" class="micl-navigationrail__item">
+            <label for="item1" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
             </label>
             <input type="radio" id="item2" name="navitem" value="email_outbox">
-            <label for="item2" class="micl-navigationrail__item">
+            <label for="item2" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
             </label>
             <input type="radio" id="item3" name="navitem" value="email_favorites">
-            <label for="item3" class="micl-navigationrail__item">
+            <label for="item3" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
             </label>
             <input type="radio" id="item4" name="navitem" value="email_trash">
-            <label for="item4" class="micl-navigationrail__item">
+            <label for="item4" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined">delete</span>
                 <span class="micl-navigationrail__text">Trash</span>
             </label>
@@ -49,11 +49,12 @@
 
         <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px">97</span>
         <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px"></span>
-    </nav>
+    </dialog>
 
     <main class="micl-body">
         <section class="micl-pane">
             <header class="micl-appbar micl-appbar--large">
+                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mynavigationrail" aria-label="Open navigation rail">menu</button>
                 <div class="micl-appbar__headline micl-appbar__headline--center">
                     <h1>MICL Showcase</h1>
                 </div>
@@ -287,10 +288,10 @@
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    <p>Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
-                                    <p>Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
-                                    <p>Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
+                                    <p style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                    <p style="color:var(--md-sys-color-on-surface)">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                                    <p style="color:var(--md-sys-color-on-surface)">Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
+                                    <p style="color:var(--md-sys-color-on-surface)">Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
                                 </div>
                             </dialog>
                             <button type="button" class="micl-button-tonal-s" popovertarget="mysidesheet">Open Side Sheet</button>
