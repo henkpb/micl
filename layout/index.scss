@@ -136,7 +136,8 @@ $md-sys-padding-xxl: 28px;
     &.micl-pane--fixed {
         flex: 0 0 auto;
     }
-    &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
+    &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined),
+    &> *:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
         gap: var(--md-sys-card-margin, 0px);
     }
     &> .micl-pane__columns {
