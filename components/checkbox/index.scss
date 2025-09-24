@@ -260,6 +260,10 @@ input[type=checkbox].micl-checkbox:not(:disabled) + label,
 label:has(+ input[type=checkbox].micl-checkbox:not(:disabled)) {
     cursor: pointer;
 }
+input[type=checkbox].micl-checkbox + label,
+label:has(+ input[type=checkbox].micl-checkbox) {
+    color: var(--md-sys-color-on-surface);
+}
 
 [dir=rtl] input[type=checkbox].micl-checkbox {
     &::after {

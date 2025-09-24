@@ -1,5 +1,5 @@
 document.getElementById('settings-placeholder').innerHTML =
-`<button class="micl-iconbutton-standard-m material-symbols-outlined" popovertarget="settings" popovertargetaction="toggle">dark_mode</button>
+`<button class="micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined" popovertarget="settings" popovertargetaction="toggle">dark_mode</button>
 <dialog id="settings" class="micl-dialog" closedby="any" popover>
     <div class="micl-dialog__headline">
         <h2>Settings</h2>
@@ -62,7 +62,9 @@ document.getElementById('theme').addEventListener('change', event => {
     }
 });
 document.getElementById('mode').addEventListener('change', event => {
-    document.body.setAttribute('class', event.target.value);
+    document.body.setAttribute('class', document.body.classList.toString().split(' ').filter(
+        c => c.startsWith('micl')
+    ) + ' ' + event.target.value);
 });
 document.getElementById('directionality').addEventListener('change', event => {
     document.documentElement.setAttribute('dir', event.target.checked ? 'rtl' : 'ltr');
