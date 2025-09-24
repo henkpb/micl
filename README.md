@@ -76,9 +76,15 @@ Copy the main `micl.js` file to your distribution folder and include it in your 
 ```
 This will initialize all MICL components, including those that will be added to the DOM later on.
 
+## Foundations
+A separate CSS file, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/understanding-layout/overview), provides styles for an adaptive layout. It includes styles for the **window frame**, **body region** and **panes** that adjust to the available screen space, ensuring your layout follows Material Design's responsive guidelines.
+
+- [x] [Layout](layout/README.md)
+
 ## Available components ✅
 The library currently consists of the following components:
 - [x] [Accordion](components/accordion/README.md)
+- [x] [App Bar](components/appbar/README.md)
 - [x] [Badge](components/badge/README.md)
 - [x] [Bottom sheet](components/bottomsheet/README.md)
 - [x] [Button](components/button/README.md)
@@ -98,6 +104,14 @@ The library currently consists of the following components:
 - [x] [Text field](components/textfield/README.md)
 
 ## Change Log
+
+### 3.0.0 (24.09.2025)
+**Features**
+
+- **App Bar**: New component.
+- **Layout**: Support for adaptive layout.
+- Improved handling of target area for small buttons.
+- **BREAKING:** Use `<nav>` instead of `<div>` for Navigation rail.
 
 ### 2.0.0 (04.09.2025)
 **Features**
