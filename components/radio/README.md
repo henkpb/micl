@@ -1,5 +1,5 @@
 # Radio button
-This component implements the the [Material Design 3 Expressive Radio button](https://m3.material.io/components/radio-button/overview) design.
+This component implements the the [Material Design 3 Expressive Radio button](https://m3.material.io/components/radio-button/overview) design. A radio button allows a user to select only one option from a group of mutually exclusive choices.
 
 ## Basic Usage
 
@@ -29,7 +29,7 @@ A radio button can be disabled by adding the `disabled` attribute to the `<input
 
 The Radio Button component respects the `dir` global attribute, automatically adjusting its layout for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element.
 
-By default, the component applies a specific color and `cursor: pointer` to `<label>` elements immediately preceding or following an `<input type="radio">` with the `micl-radio` class. You are encouraged to customize these CSS settings to match your design system.
+By default, the component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following an `<input type="radio">` with the `micl-radio` class. You are encouraged to customize these CSS settings to match your design system.
 
 ## Customizations
 You can customize the appearance of the Radio Button component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child radio buttons.
@@ -44,8 +44,17 @@ You can customize the appearance of the Radio Button component by overriding its
 
 ```HTML
 <div style="--md-sys-radio-container-size:28px">
-    <input type="radio" id="myradio" class="micl-radio">
-    <label for="myradio">Large radio button</label>
+  <input type="radio" id="myradio" class="micl-radio">
+  <label for="myradio">Large radio button</label>
+</div>
+```
+
+To vertically align a radio button with its label, wrap both in an element that has the `micl-flex--vcenter` class.
+
+```HTML
+<div class="micl-flex--vcenter">
+  <input type="radio" id="myradio" class="micl-radio">
+  <label for="myradio">Large radio button</label>
 </div>
 ```
 

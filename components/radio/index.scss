@@ -37,8 +37,10 @@ input[type=radio].micl-radio {
     appearance: none;
     box-sizing: border-box;
     position: relative;
-    width: var(--md-sys-target-size);
-    height: var(--md-sys-target-size);
+    inline-size: var(--md-sys-target-size);
+    min-inline-size: var(--md-sys-target-size);
+    block-size: var(--md-sys-target-size);
+    min-block-size: var(--md-sys-target-size);
     margin: 0;
     border: calc((var(--md-sys-target-size) - var(--md-sys-radio-state-layer-size)) / 2) solid transparent;
     background-clip: content-box;
@@ -50,8 +52,8 @@ input[type=radio].micl-radio {
         content: "";
         box-sizing: border-box;
         position: absolute;
-        width: var(--md-sys-radio-container-size);
-        height: var(--md-sys-radio-container-size);
+        inline-size: var(--md-sys-radio-container-size);
+        block-size: var(--md-sys-radio-container-size);
         inset: 0;
         margin: auto;
         padding: calc((var(--md-sys-radio-container-size) / 2) - var(--md-sys-radio-border-width));
