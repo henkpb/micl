@@ -284,9 +284,6 @@
             border-block-end-color: var(--md-sys-color-primary);
         }
     }
-    &> select {
-        line-height: 28px;
-    }
     &> textarea {
         padding-block-start: 24px;
     }
@@ -352,9 +349,6 @@
             outline-width: 3px;
             outline-color: var(--md-sys-color-primary);
         }
-    }
-    &> select {
-        line-height: var(--md-sys-textfield-height);
     }
     &:has(
         > input:focus,
