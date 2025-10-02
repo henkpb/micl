@@ -1,5 +1,5 @@
 # Select
-This component implements the the [Material Design 3 Expressive Select](https://m3.material.io/components/menus/guidelines#ee2f3664-c926-47ab-acbf-2ab675506932) design.
+This component implements the the [Material Design 3 Expressive Select](https://m3.material.io/components/menus/guidelines#ee2f3664-c926-47ab-acbf-2ab675506932) design. A select component is used to offer the user with a set of options from which the user can select a single one. 
 
 ## Basic Usage
 
@@ -11,10 +11,10 @@ The Select component is an extension of the [Text field](../textfield/README.md)
   <label for="myselect">Country</label>
   <select id="myselect">
     <option class="micl-list-item-one" value="AR">
-        <span class="micl-list-item__text">Argentina</span>
+      <span class="micl-list-item__text">Argentina</span>
     </option>
     <option class="micl-list-item-one" value="BO">
-        <span class="micl-list-item__text">Bolivia</span>
+      <span class="micl-list-item__text">Bolivia</span>
     </option>
   </select>
 </div>
@@ -42,7 +42,29 @@ This will initialize any Select component, including those that will be added to
 A live example of the [Select component](https://henkpb.github.io/micl/select.html) is available for you to interact with.
 
 ## Variants
-To display extra information for an option, add the `aria-description` attribute to the `<option>` element. In a two-line list item (`micl-list-item-two`), this displays the attribute's content as supporting text. Do not add a separate text element to the `<option>`, as this will change the text of the selected option.
+A Select Component can be disabled by adding the `disabled` attribute to the `<select>` element. An option within the component can be disabled by adding the `disabled` attribute to the `<option>` element.
+
+You can add [Dividers](../divider/README.md) into the list of options and they will appear as separators to help visually break up the options.
+
+**Example: A select with a divider**
+
+```HTML
+<div class="micl-textfield-outlined">
+  <label for="myselect">Country</label>
+  <select id="myselect">
+    <option class="micl-list-item-two" value=""></option>
+    <option class="micl-list-item-two" value="AR">
+      <span class="micl-list-item__text">Argentina</span>
+    </option>
+    <hr class="micl-divider">
+    <option class="micl-list-item-two" value="BO">
+      <span class="micl-list-item__text">Bolivia</span>
+    </option>
+  </select>
+</div>
+```
+
+To display extra information for an option, add the `aria-description` attribute to its `<span class="micl-list-item__text">` element. In a two-line list item (`micl-list-item-two`), this displays the attribute's content as supporting text. Do not add a separate text element to the `<option>`, as this will change the text of the selected option.
 
 **Example: A select with supporting text**
 
@@ -51,10 +73,10 @@ To display extra information for an option, add the `aria-description` attribute
   <label for="myselect">Country</label>
   <select id="myselect">
     <option class="micl-list-item-two" value="AR">
-        <span class="micl-list-item__text" aria-description="Country code: AR">Argentina</span>
+      <span class="micl-list-item__text" aria-description="Country code: AR">Argentina</span>
     </option>
     <option class="micl-list-item-two" value="BO">
-        <span class="micl-list-item__text" aria-description="Country code: BO">Bolivia</span>
+      <span class="micl-list-item__text" aria-description="Country code: BO">Bolivia</span>
     </option>
   </select>
 </div>
