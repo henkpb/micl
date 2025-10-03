@@ -26,7 +26,7 @@
 @use '../../styles/typography';
 
 .micl-textfield-filled > select {
-    --md-sys-select-line-height: calc(var(--md-sys-textfield-height) / 2);
+    --md-sys-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
 }
 .micl-textfield-outlined > select {
     --md-sys-select-line-height: var(--md-sys-textfield-height);
@@ -97,6 +97,7 @@
         --md-sys-list-item-container-color: var(--md-sys-color-surface-container);
 
         line-height: normal;
+        background-color: transparent;
 
         &:not(:disabled) {
             cursor: pointer;
