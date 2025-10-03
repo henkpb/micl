@@ -104,7 +104,7 @@
     column-gap: var(--md-sys-list-item-space);
     padding-inline: var(--md-sys-list-item-space);
     border: none;
-    border-radius: var(--md-sys-shape-corner-none);
+    border-radius: var(--md-sys-shape-corner-none, 0px);
     background-color: var(--md-sys-list-item-container-color);
     background-image:
         radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
@@ -330,7 +330,7 @@
     display: inline-block;
     height: 56px;
     min-width: 56px;
-    border-radius: var(--md-sys-shape-corner-none);
+    border-radius: var(--md-sys-shape-corner-none, 0px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -339,7 +339,7 @@
     display: inline-block;
     height: 64px;
     min-width: calc(64px * var(--md-sys-list-item-thumbnail-aspect-ratio));
-    border-radius: var(--md-sys-shape-corner-none);
+    border-radius: var(--md-sys-shape-corner-none, 0px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

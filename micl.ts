@@ -25,7 +25,7 @@ import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
 import _slider, { sliderSelector } from './components/slider';
-import _textfield, { textfieldSelector, selectSelector, textareaSelector } from './components/textfield';
+import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
 
 interface ComponentEntry<T extends HTMLElement> {
     component: {

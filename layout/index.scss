@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../components/iconbutton';
+@use '../styles/shapes';
 
 $md-sys-window-compact-max: 599px;
 $md-sys-window-medium-min: 600px;
@@ -98,7 +98,7 @@ $md-sys-padding-xxl: 28px;
             block-size: inherit;
             min-block-size: inherit;
             margin: 0;
-            padding-block-end: var(--md-sys-navigationrail-top-space);
+            padding-block-end: var(--md-sys-navigationrail-top-space, 0px);
             border-radius: var(--md-sys-layout-spatial-radius);
         }
         .micl-body {
@@ -166,18 +166,7 @@ $md-sys-padding-xxl: 28px;
     }
 }
 
-.micl-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
 @media (max-width: $md-sys-window-compact-max) {
-    :root {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
-    }
-
     .micl-body.micl-body--stacked-to-medium,
     .micl-body.micl-body--stacked-to-expanded,
     .micl-body.micl-body--stacked-to-large,
@@ -198,10 +187,6 @@ $md-sys-padding-xxl: 28px;
     }
 }
 @media (min-width: $md-sys-window-medium-min) and (max-width: $md-sys-window-medium-max) {
-    :root {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-medium};
-    }
-
     .micl-body.micl-body--stacked-to-expanded,
     .micl-body.micl-body--stacked-to-large,
     .micl-body.micl-body--stacked-to-extralarge {
@@ -219,10 +204,6 @@ $md-sys-padding-xxl: 28px;
     }
 }
 @media (min-width: $md-sys-window-expanded-min) and (max-width: $md-sys-window-expanded-max) {
-    :root {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-expanded};
-    }
-
     .micl-body.micl-body--stacked-to-large,
     .micl-body.micl-body--stacked-to-extralarge {
         flex-direction: column;
@@ -237,10 +218,6 @@ $md-sys-padding-xxl: 28px;
     }
 }
 @media (min-width: $md-sys-window-large-min) and (max-width: $md-sys-window-large-max) {
-    :root {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-large};
-    }
-
     .micl-body.micl-body--stacked-to-extralarge {
         flex-direction: column;
     }
@@ -251,8 +228,32 @@ $md-sys-padding-xxl: 28px;
         flex-direction: column;
     }
 }
-@media (min-width: $md-sys-window-extralarge-min) {
-    :root {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-extralarge};
-    }
+
+.micl-flex--vcenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.micl-grid-iconfield {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    margin-block: 24px;
+    row-gap: 24px;
+    background-color: inherit;
+}
+.micl-grid-iconfield__icon {
+    grid-column: 1;
+    margin-block-start: 0.6rem;
+}
+.micl-grid-iconfield__field {
+    grid-column: 2;
+}
+
+.micl-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }

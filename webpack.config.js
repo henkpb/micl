@@ -5,7 +5,7 @@ const miniCss = require('mini-css-extract-plugin');
 const distDir = path.resolve(__dirname, 'dist');
 const docsDir = path.resolve(__dirname, 'docs');
 
-const scssFiles = glob.sync('./components/**/*.scss');
+const scssFiles = glob.sync('{./layout/*.scss,./components/**/*.scss}');
 const scssEntries = scssFiles.reduce((entries, filePath) => {
     const componentName = path.dirname(filePath).split('\\').pop();
     entries[componentName] = './' + filePath;

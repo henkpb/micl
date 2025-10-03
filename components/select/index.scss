@@ -25,15 +25,28 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+.micl-textfield-filled > select {
+    --md-sys-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
+}
+.micl-textfield-outlined > select {
+    --md-sys-select-line-height: var(--md-sys-textfield-height);
+}
 .micl-textfield-filled > select,
 .micl-textfield-outlined > select {
+    --md-sys-divider-space: 8px;
     --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-sys-select-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-sys-select-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-sys-select-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-sys-select-picker-origin: left top;
 
     appearance: base-select;
+    line-height: var(--md-sys-select-line-height);
 
     &::picker-icon {
       color: var(--md-sys-color-on-surface-variant);
-      transition: 0.4s rotate;
+      transition: motion.$md-sys-motion-duration-medium4 rotate;
+      transform-origin: 50% calc((var(--md-sys-select-line-height) / 2) - 1px);
     }
     &:open::picker-icon {
       rotate: 180deg;
@@ -42,12 +55,36 @@
         appearance: base-select;
         min-inline-size: max(anchor-size(self-inline), 112px);
         max-inline-size: 280px;
-        padding-block: 8px;
-        padding-inline: 0;
+        position-try: most-block-size flip-block;
+        padding: 8px 0;
         border: none;
         border-radius: var(--md-sys-shape-corner-extra-small);
         background-color: var(--md-sys-color-surface-container);
         box-shadow: var(--md-sys-elevation-level2);
+        opacity: 0;
+        overflow: hidden;
+        transform: scaleY(0);
+        transform-origin: var(--md-sys-select-picker-origin);
+        transition:
+            opacity var(--md-sys-select-motion-duration-reverse) linear,
+            transform var(--md-sys-select-motion-duration-reverse) var(--md-sys-select-motion-spatial),
+            overlay var(--md-sys-select-motion-duration-reverse) linear allow-discrete,
+            display var(--md-sys-select-motion-duration-reverse) linear allow-discrete;
+
+        &:popover-open {
+            opacity: 1;
+            transform: scaleY(1);
+            transition:
+                opacity var(--md-sys-select-motion-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
+                transform var(--md-sys-select-motion-duration) var(--md-sys-select-motion-spatial),
+                overlay var(--md-sys-select-motion-duration) linear allow-discrete,
+                display var(--md-sys-select-motion-duration) linear allow-discrete;
+
+            @starting-style {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+        }
     }
 
     option {
@@ -59,7 +96,8 @@
         --md-sys-list-item-padding-inline: 16px;
         --md-sys-list-item-container-color: var(--md-sys-color-surface-container);
 
-        border-radius: 0px;
+        line-height: normal;
+        background-color: transparent;
 
         &:not(:disabled) {
             cursor: pointer;
@@ -84,6 +122,7 @@
             @include typography.body-large;
 
             color: var(--md-sys-color-on-surface);
+            white-space: normal;
         }
         .micl-list-item__text::after {
             @include typography.body-medium;
@@ -94,7 +133,7 @@
             white-space: normal;
         }
         &::checkmark {
-            color: var(--md-sys-color-on-surface);
+            color: var(--md-sys-color-on-surface-variant);
         }
     }
 }
@@ -107,10 +146,17 @@ dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select) {
     inset-inline-start: 0;
     margin: auto;
     transform: scale(50%);
+
+    &:popover-open {
+        transform: scale(100%);
+    }
 }
-dialog.micl-dialog:has(.micl-textfield-filled > select):popover-open,
-dialog.micl-dialog:has(.micl-textfield-outlined > select):popover-open,
-dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select):popover-open,
-dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select):popover-open {
-    transform: scale(100%);
+
+[dir=rtl] {
+    .micl-textfield-filled > select,
+    .micl-textfield-outlined > select {
+        &:open::picker-icon {
+          rotate: -180deg;
+        }
+    }
 }

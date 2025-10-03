@@ -156,19 +156,19 @@ To enable selection of list items, integrate a checkbox or switch component with
   <li class="micl-list-item-two" tabindex="0">
     <label>
       <span class="micl-list-item__text">
-        <span class="micl-list-item__headline">Blue car</span>
+        <span id="hd1" class="micl-list-item__headline">Blue car</span>
         <span class="micl-list-item__supporting-text">A blue car with four wheels.</span>
       </label>
-      <input type="checkbox" id="mycheckbox" class="micl-checkbox" value="cb1" tabindex="-1">
+      <input type="checkbox" id="mycheckbox" class="micl-checkbox" value="cb1" tabindex="-1" aria-labelledby="hd1">
     </span>
   </li>
   <li class="micl-list-item-two" tabindex="0">
     <label>
       <span class="micl-list-item__text">
-        <span class="micl-list-item__headline">Red car</span>
+        <span id="hd2" class="micl-list-item__headline">Red car</span>
         <span class="micl-list-item__supporting-text">A red car with tinted windows.</span>
       </label>
-      <input type="checkbox" id="checkbox2" class="micl-switch" value="cb2" tabindex="-1">
+      <input type="checkbox" id="checkbox2" class="micl-switch" value="cb2" tabindex="-1" aria-labelledby="hd2">
     </label>
   </li>
 </ul>

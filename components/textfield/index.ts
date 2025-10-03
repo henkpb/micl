@@ -20,12 +20,25 @@
 // SOFTWARE.
 
 export const textfieldSelector = '.micl-textfield-outlined > input,.micl-textfield-filled > input';
-export const selectSelector    = '.micl-textfield-outlined > select,.micl-textfield-filled > select';
 export const textareaSelector  = '.micl-textfield-outlined > textarea,.micl-textfield-filled > textarea';
+export const selectSelector = '.micl-textfield-filled > select,.micl-textfield-outlined > select';
 
 export default (() =>
 {
-    const counterSelector = '.micl-textfield__character-counter';
+    const setCounter = (element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) =>
+    {
+        if (
+            !element.parentElement
+            || element instanceof HTMLSelectElement
+            || !element.maxLength
+        ) {
+            return;
+        }
+        const counter = element.parentElement.querySelector('.micl-textfield__character-counter');
+        if (counter) {
+            counter.textContent = `${element.value.length}/${element.maxLength}`;
+        }
+    };
 
     return {
         initialize: (element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
@@ -39,17 +52,21 @@ export default (() =>
                 element.dataset.miclvalue = '1';
             }
 
-            if (
-                (element instanceof HTMLSelectElement)
-                || !element.maxLength
-            ) {
-                return;
-            }
+            if (element instanceof HTMLSelectElement) {
+                element.addEventListener('mousedown', event =>
+                {
+                    const
+                        rect      = element.getBoundingClientRect(),
+                        roomAbove = rect.top,
+                        roomBelow = window.innerHeight - rect.bottom;
 
-            const counter = element.parentElement?.querySelector(counterSelector);
-            if (counter) {
-                counter.textContent = `${element.value.length}/${element.maxLength}`;
+                    !element.matches(':open') && element.style.setProperty(
+                        '--md-sys-select-picker-origin',
+                        roomAbove > roomBelow ? 'left bottom' : 'left top'
+                    );
+                });
             }
+            setCounter(element);
         },
 
         input: (event: Event): void =>
@@ -72,17 +89,7 @@ export default (() =>
                 delete event.target.dataset.miclvalue;
             }
 
-            if (
-                (event.target instanceof HTMLSelectElement)
-                || !event.target.maxLength
-            ) {
-                return;
-            }
-
-            const counter = event.target.parentElement?.querySelector(counterSelector);
-            if (counter) {
-                counter.textContent = `${event.target.value.length}/${event.target.maxLength}`;
-            }
+            setCounter(event.target);
         }
     };
 })();

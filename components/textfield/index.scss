@@ -284,9 +284,6 @@
             border-block-end-color: var(--md-sys-color-primary);
         }
     }
-    &> select {
-        line-height: 28px;
-    }
     &> textarea {
         padding-block-start: 24px;
     }
@@ -300,7 +297,7 @@
         > input[type=time],
         > input[type=week],
         > select:focus,
-        > select[value]:not([value='']):not([data-miclinitialized]),
+        > select:not([data-miclinitialized]) option:checked:not([value='']),
         > select[data-miclvalue],
         > textarea:focus,
         > textarea:not(:empty):not([data-miclinitialized]),
@@ -324,7 +321,7 @@
     }
 }
 .micl-textfield-outlined {
-    margin-block-start: 0.375rem;
+    margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height)/2);
 
     &:hover {
         &> label {
@@ -353,9 +350,6 @@
             outline-color: var(--md-sys-color-primary);
         }
     }
-    &> select {
-        line-height: var(--md-sys-textfield-height);
-    }
     &:has(
         > input:focus,
         > input[value]:not([value='']):not([data-miclinitialized]),
@@ -366,7 +360,7 @@
         > input[type=time],
         > input[type=week],
         > select:focus,
-        > select[value]:not([value='']):not([data-miclinitialized]),
+        > select:not([data-miclinitialized]) option:checked:not([value='']),
         > select[data-miclvalue],
         > textarea:focus,
         > textarea:not(:empty):not([data-miclinitialized]),
