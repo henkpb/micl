@@ -171,6 +171,9 @@
 .micl-card__image {
     width: 100%;
     border-radius: var(--md-sys-shape-corner-medium);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .micl-card__headline-s,
