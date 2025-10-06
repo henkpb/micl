@@ -1,5 +1,5 @@
 # Switch
-This component implements the the [Material Design 3 Expressive Switch](https://m3.material.io/components/switch/overview) design.
+This component implements the the [Material Design 3 Expressive Switch](https://m3.material.io/components/switch/overview) design. Switches toggle the state of a single setting on or off.
 
 ## Basic Usage
 
@@ -41,9 +41,31 @@ To remove the icon in the selected state:
 
 A switch can be disabled by adding the `disabled` attribute to the `<input>` element.
 
-The switch component is aware of the `dir` global attribute that indicates the directionality of text.
+The Switch component respects the `dir` global attribute, automatically adjusting its layout for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element.
 
-Note that the component assigns a default color and `cursor: pointer` to the `<label>` element immediately preceding or immediately following the `<input>` element. Of course, you may change these CSS settings to something more appropriate.
+The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
+
+## Customizations
+You can customize the appearance of the Switch component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child switches.
+
+| Variable name | Default Value | Description |
+| ------------- | ------------- | ----------- |
+| --md-sys-switch-handle-size | 16px | The diameter of the handle when the switch is "off" |
+| --md-sys-switch-handle-selected-size | 24px | The diameter of the handle when the switch is "on" |
+| --md-sys-switch-handle-pressed-size | 28px | The diameter of the handle when the switch is pressed |
+| --md-sys-switch-outline-width | 2px | The width of the border |
+| --md-sys-switch-state-layer-size | 40px | Sets the size of the area that indicates the component's current state (e.g., hover, focus, press) |
+| --md-sys-switch-target-height | 32px | The height of the track |
+| --md-sys-switch-target-width | 52px | The width of the track |
+
+**Example: Changing the width of the switch**
+
+```HTML
+<div style="--md-sys-switch-target-width:64px">
+  <input type="checkbox" id="myswitch" class="micl-switch" role="switch">
+  <label for="myswitch">Long switch</label>
+</div>
+```
 
 ## Compatibility
-This component uses the `color-mix` CSS functional notation, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix#browser_compatibility) for details.
+This component utilizes relative RGB color values, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.

@@ -40,8 +40,8 @@ input[type=checkbox].micl-switch {
 
     appearance: none;
     position: relative;
-    width: var(--md-sys-switch-target-width);
-    height: var(--md-sys-target-size);
+    inline-size: var(--md-sys-switch-target-width);
+    block-size: var(--md-sys-target-size);
     margin: 0;
     border-radius: calc(var(--md-sys-switch-target-height) / 2);
     outline: none;
@@ -50,8 +50,8 @@ input[type=checkbox].micl-switch {
         content: "";
         box-sizing: border-box;
         display: block;
-        width: var(--md-sys-switch-target-width);
-        height: var(--md-sys-switch-target-height);
+        inline-size: var(--md-sys-switch-target-width);
+        block-size: var(--md-sys-switch-target-height);
         margin-block: calc((var(--md-sys-target-size) - var(--md-sys-switch-target-height)) / 2);
         border: var(--md-sys-switch-outline-width) solid var(--md-sys-color-outline);
         border-radius: inherit;
@@ -62,12 +62,12 @@ input[type=checkbox].micl-switch {
         content: var(--md-sys-switch-unselected-icon);
         box-sizing: border-box;
         position: absolute;
-        width: var(--md-sys-switch-state-layer-size);
-        height: var(--md-sys-switch-state-layer-size);
+        inline-size: var(--md-sys-switch-state-layer-size);
+        block-size: var(--md-sys-switch-state-layer-size);
         inset: 0;
-        inset-inline-start: -4px;
+        inset-inline-start: calc((var(--md-sys-target-size) - var(--md-sys-switch-state-layer-size) - 16px) / 2);
         margin: auto 0;
-        font: 300 1rem/1rem var(--md-ref-typeface-plain);
+        font: 300 16px / 1rem var(--md-ref-typeface-plain);
         color: var(--md-sys-color-surface-container-highest);
         text-align: center;
         background-color: var(--md-sys-color-outline);
@@ -78,7 +78,6 @@ input[type=checkbox].micl-switch {
         transition:
             inset-inline-start var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
             border-width var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
-            font-size var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
             line-height var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
             color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
             border-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
@@ -90,9 +89,10 @@ input[type=checkbox].micl-switch {
         }
         &::after {
             content: var(--md-sys-switch-selected-icon);
-            inset-inline-start: 16px;
-            font-size: 2rem;
-            line-height: 1.4rem;
+            inset-inline-start: calc(var(--md-sys-switch-target-width) - ((var(--md-sys-switch-state-layer-size) + var(--md-sys-target-size) - 16px) / 2));
+            font-size: 1.6rem;
+            line-height: 1.3rem;
+            letter-spacing: 0.1rem;
             border: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-selected-size)) / 2) solid transparent;
             color: var(--md-sys-color-on-primary-container);
             background-color: var(--md-sys-color-on-primary);
@@ -129,19 +129,18 @@ input[type=checkbox].micl-switch {
         }
         &:active {
             &::after {
-                font-size: 2rem;
                 line-height: 1.7rem;
                 border: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-pressed-size)) / 2) solid transparent;
                 background-color: var(--md-sys-color-on-surface-variant);
             }
             &:checked::after {
-                line-height: 1.7rem;
+                line-height: 1.6rem;
                 border-width: calc((var(--md-sys-switch-state-layer-size) - var(--md-sys-switch-handle-pressed-size)) / 2);
                 border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-pressed-state-layer-opacity), transparent);
                 background-color: var(--md-sys-color-primary-container);
             }
             &:not(:checked)::after {
-                inset-inline-start: -4px;
+                inset-inline-start: calc((var(--md-sys-target-size) - var(--md-sys-switch-state-layer-size) - 16px) / 2);
                 border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity), transparent);
             }
         }
@@ -154,15 +153,14 @@ input[type=checkbox].micl-switch {
         }
         &:checked::before {
             background-color: var(--md-sys-color-on-surface);
-            opacity: 12%;
         }
         &::after {
-            color: color-mix(in srgb, var(--md-sys-color-surface-container-highest) 38%, transparent);
+            color: rgb(from var(--md-sys-color-surface-container-highest) r g b / 38%);
             background-color: var(--md-sys-color-on-surface);
             opacity: 38%;
         }
         &:checked::after {
-            color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
             background-color: var(--md-sys-color-surface);
             opacity: 100%;
         }
