@@ -24,16 +24,19 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
-input[type=checkbox].micl-switch {
-    --md-sys-switch-target-height: 32px;
-    --md-sys-switch-target-width: 52px;
-    --md-sys-switch-state-layer-size: 40px;
+:root {
     --md-sys-switch-handle-size: 16px;
     --md-sys-switch-handle-selected-size: 24px;
     --md-sys-switch-handle-pressed-size: 28px;
+    --md-sys-switch-outline-width: 2px;
+    --md-sys-switch-state-layer-size: 40px;
+    --md-sys-switch-target-height: 32px;
+    --md-sys-switch-target-width: 52px;
+}
+
+input[type=checkbox].micl-switch {
     --md-sys-switch-unselected-icon: "+";
     --md-sys-switch-selected-icon: "\AC";
-    --md-sys-switch-outline-width: 2px;
     --md-sys-switch-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
     --md-sys-switch-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
     --md-sys-switch-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
