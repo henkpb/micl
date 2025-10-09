@@ -229,6 +229,10 @@ $md-sys-padding-xxl: 28px;
     }
 }
 
+.micl-hidden {
+    display: none !important;
+}
+
 .micl-flex--vcenter {
     display: flex;
     flex-direction: row;
