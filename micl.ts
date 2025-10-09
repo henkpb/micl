@@ -25,6 +25,7 @@ import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
 import _slider, { sliderSelector } from './components/slider';
+import _stepper, { stepperSelector } from './components/stepper';
 import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
 
 interface ComponentEntry<T extends HTMLElement> {
@@ -47,6 +48,7 @@ export default (() =>
         [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },
         [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
         [sliderSelector]        : { component: _slider, type: HTMLInputElement },
+        [stepperSelector]       : { component: _stepper, type: HTMLElement },
         [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
         [textfieldSelector]     : { component: _textfield, type: HTMLInputElement }
     };

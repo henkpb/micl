@@ -45,6 +45,7 @@
 @use 'components/sidesheet';
 @use 'components/bottomsheet';
 @use 'components/navigationrail';
+@use 'components/stepper';
 
 @property --micl-ripple {
     syntax: '<integer>';
