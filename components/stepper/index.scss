@@ -35,12 +35,12 @@
 
     .micl-stepper__steps {
         display: grid;
-        grid-template-areas: "micl-steps";
+        grid-template-areas: "stepper-steps";
         overflow-x: hidden;
         background-color: inherit;
 
         .micl-stepper__step {
-            grid-area: micl-steps;
+            grid-area: stepper-steps;
             display: flex;
             visibility: hidden;
             flex-direction: column;

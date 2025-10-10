@@ -261,7 +261,7 @@ input[type=range].micl-slider-xl {
 
 .micl-slider__container {
     display: grid;
-    grid-template-areas: "slidericon";
+    grid-template-areas: "slider-icon";
     flex-shrink: 0;
     align-items: center;
     justify-items: flex-start;
@@ -269,7 +269,7 @@ input[type=range].micl-slider-xl {
 
     &:has(> .micl-slider-m,> .micl-slider-l,> .micl-slider-xl) {
         .micl-slider__icon {
-            grid-area: slidericon;
+            grid-area: slider-icon;
             inset: 0;
             margin: 6px;
             font-size: 24px;
@@ -278,7 +278,7 @@ input[type=range].micl-slider-xl {
         }
     }
     &> input[type=range] {
-        grid-area: slidericon;
+        grid-area: slider-icon;
     }
     .micl-slider__icon:has(+ input[type=range].micl-slider-xl),
     input[type=range].micl-slider-xl + .micl-slider__icon {
