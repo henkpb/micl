@@ -1,6 +1,6 @@
 {
   "name": "material-inspired-component-library",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "The Material-Inspired Component Library (MICL) offers a collection of beautifully crafted components leveraging native HTML markup, designed to align with the Material Design 3 guidelines.",
   "author": "MICL Hermana <micl.hermana@proton.me> (https://github.com/henkpb/micl)",
   "license": "MIT",
@@ -12,8 +12,9 @@
     "UI",
     "UX",
     "CSS",
+    "HTML",
     "accordion",
-    "app bar"
+    "app bar",
     "badge",
     "bottomsheet",
     "button",
