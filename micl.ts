@@ -25,17 +25,20 @@ import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
 import _slider, { sliderSelector } from './components/slider';
+import _stepper, { stepperSelector } from './components/stepper';
 import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
 
 interface ComponentEntry<T extends HTMLElement> {
     component: {
         initialize?: (element: T) => void,
         input?     : (event: Event) => void,
+        invalid?   : (event: Event) => void,
         keydown?   : (event: Event) => void,
         cleanup?   : (element: T) => void
     };
     type: new () => T;
 }
+type ComponentKey = keyof ComponentEntry<any>['component'];
 
 export default (() =>
 {
@@ -47,6 +50,7 @@ export default (() =>
         [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },
         [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
         [sliderSelector]        : { component: _slider, type: HTMLInputElement },
+        [stepperSelector]       : { component: _stepper, type: HTMLElement },
         [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
         [textfieldSelector]     : { component: _textfield, type: HTMLInputElement }
     };
@@ -108,6 +112,21 @@ export default (() =>
         parent.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
     };
 
+    const handleEvent = (event: Event): void =>
+    {
+        for (const [selector, { component, type }] of Object.entries(componentMap)) {
+            if (
+                (event.target as Element).matches(selector)
+                && event.target instanceof type
+                && ['input', 'invalid', 'keydown'].includes(event.type)
+                && typeof component[event.type as ComponentKey] === 'function'
+            ) {
+                component[event.type as ComponentKey]?.(event);
+                return;
+            }
+        }
+    };
+
     const activate = () =>
     {
         const observer = new MutationObserver(mutations =>
@@ -142,32 +161,9 @@ export default (() =>
         initializeComponents(document);
 
         // Delegated Event Handlers
-        document.addEventListener('input', event =>
-        {
-            for (const [selector, { component, type }] of Object.entries(componentMap)) {
-                if (
-                    (event.target as Element).matches(selector)
-                    && event.target instanceof type
-                    && typeof component.input === 'function'
-                ) {
-                    component.input(event);
-                    return;
-                }
-            }
-        });
-        document.addEventListener('keydown', event =>
-        {
-            for (const [selector, { component, type }] of Object.entries(componentMap)) {
-                if (
-                    (event.target as Element).matches(selector)
-                    && event.target instanceof type
-                    && typeof component.keydown === 'function'
-                ) {
-                    component.keydown(event);
-                    return;
-                }
-            }
-        });
+        document.addEventListener('input', handleEvent);
+        document.addEventListener('keydown', handleEvent);
+        document.addEventListener('invalid', handleEvent, true);
     };
 
     const loaded = () =>

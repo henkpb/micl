@@ -1,5 +1,5 @@
 # Card
-This component implements the the [Material Design 3 Expressive Card](https://m3.material.io/components/cards/overview) design.
+This component implements the the [Material Design 3 Expressive Card](https://m3.material.io/components/cards/overview) design. Cards display content and actions about a single subject.
 
 ## Basic Usage
 
@@ -40,7 +40,6 @@ Cards come in **three distinct styles**:
 - `micl-card-outlined`: A card with a clear border, often used for less prominent content or to indicate interactivity.
 
 ### Card Content Structure
-
 While the card container is the only required element, the Card component provides several optional utility classes to help structure your card's content:
 ```HTML
 <div class="micl-card-outlined" tabindex="0">
@@ -64,7 +63,7 @@ While the card container is the only required element, the Card component provid
   - `micl-card__headline-m` (medium) - *Used in the example above*
   - `micl-card__headline-l` (large)
 
-- `micl-card__image`: Applies styling to an `<img>` element used as the primary image for the card.
+- `micl-card__image`: Applies styling to an `<img>` element or an element with a `background-image` style used as the primary image for the card.
 
 - `micl-card__subhead`: For secondary headings, displayed with a smaller font than the main headline.
 
@@ -93,18 +92,23 @@ Cards can also serve as containers for expandable detail areas using the `<detai
 </details>
 ```
 
+### Compact Cards
+Add the `micl-card--compact` to the main `<div>` element (or, the `<summary>` element for expandable cards) to create a compact version of the card header.
+
 ### States
 - **Disabled Cards**: To visually indicate a disabled card (e.g., non-interactive), add the `micl-card--disabled` class to the card container.
 
 - **Dragging State**: When implementing drag-and-drop functionality for cards, apply the `micl-card--dragging` class to the card container to provide visual feedback during the drag operation.
 
 ## Customizations
-You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child dividers.
+You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child cards.
 
 | Variable name | Default Value | Description |
 | ------------- | ----- | ----------- |
 | --md-sys-card-margin | 8px | Sets the spacing between adjacent cards both horizontally and vertically |
 | --md-sys-card-padding-inline | 16px | Defines the amount of space between the left and right edges of a card and its content |
+| --md-sys-card-content-padding-block | 16px | The amount of vertical padding reserved for the content area |
+| --md-sys-card-outlined-border-width | 1px | The width of the border of **outlined** cards |
 
 **Example: Changing the card margins**
 
@@ -120,6 +124,6 @@ You can customize the appearance of the Card component by overriding its global 
 ```
 
 ## Compatibility
-This component uses the `color-mix` CSS functional notation, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix#browser_compatibility) for details.
+This component utilizes relative RGB color values, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
 
 The Card component uses the `interpolate-size` CSS property to smoothly open and close the detail area of a Details disclosure element, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.

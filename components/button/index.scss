@@ -221,8 +221,8 @@ button.micl-button-outlined-m {
         }
     }
     .micl-button__icon {
-        font-size: 24px;
-        width: 24px;
+        font-size: var(--md-sys-layout-icon-size, 24px);
+        width: var(--md-sys-layout-icon-size, 24px);
     }
 }
 

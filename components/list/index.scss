@@ -308,8 +308,8 @@
 }
 
 .micl-list-item__icon {
-    min-width: 24px;
-    font-size: 24px;
+    min-width: var(--md-sys-layout-icon-size, 24px);
+    font-size: var(--md-sys-layout-icon-size, 24px);
     font-variation-settings: 'FILL' 0;
     color: var(--md-sys-color-on-surface-variant);
     transition: font-variation-settings var(--md-sys-list-motion-duration) linear;

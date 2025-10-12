@@ -25,50 +25,41 @@
     --md-sys-divider-space: 4px;
 }
 body {
-    --md-sys-divider-color: var(--md-sys-color-outline-variant);
+    --md-sys-divider-color: var(--md-sys-color-outline-variant, gray);
 }
 
-.micl-divider {
-    width: 100%;
-    height: 0;
+.micl-divider,
+.micl-divider-inset,
+.micl-divider-inset-start,
+.micl-divider-inset-end {
+    inline-size: 100%;
+    block-size: 0;
     margin-block: calc(var(--md-sys-divider-space, 4px) - 1px) var(--md-sys-divider-space, 4px);
     margin-inline: 0;
     border: 0;
-    border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
+    border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color, gray);
 }
 
 .micl-divider-inset {
-    width: calc(100% - 2 * var(--md-sys-divider-inset-margin));
-    height: 0;
-    margin-block: calc(var(--md-sys-divider-space, 4px) - 1px) var(--md-sys-divider-space, 4px);
+    inline-size: calc(100% - 2 * var(--md-sys-divider-inset-margin, 16px));
     margin-inline: var(--md-sys-divider-inset-margin);
-    border: 0;
-    border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
 }
 
-.micl-divider-inset--start {
-    width: calc(100% - var(--md-sys-divider-inset-margin));
-    height: 0;
-    margin-block: calc(var(--md-sys-divider-space, 4px) - 1px) var(--md-sys-divider-space, 4px);
-    margin-inline: var(--md-sys-divider-inset-margin) 0;
-    border: 0;
-    border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
+.micl-divider-inset-start {
+    inline-size: calc(100% - var(--md-sys-divider-inset-margin, 16px));
+    margin-inline-start: var(--md-sys-divider-inset-margin, 16px);
 }
 
-.micl-divider-inset--end {
-    width: calc(100% - var(--md-sys-divider-inset-margin));
-    height: 0;
-    margin-block: calc(var(--md-sys-divider-space, 4px) - 1px) var(--md-sys-divider-space, 4px);
-    margin-inline: 0 var(--md-sys-divider-inset-margin);
-    border: 0;
-    border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
+.micl-divider-inset-end {
+    inline-size: calc(100% - var(--md-sys-divider-inset-margin, 16px));
+    margin-inline-end: var(--md-sys-divider-inset-margin, 16px);
 }
 
 .micl-divider-vertical {
-    min-height: 100%;
-    width: 0;
+    min-block-size: 100%;
+    inline-size: 0;
     margin-block: 0;
     margin-inline: calc(2 * var(--md-sys-divider-space, 4px));
     border: 0;
-    border-inline-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
+    border-inline-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color, gray);
 }

@@ -62,7 +62,8 @@
         background-color: var(--md-sys-color-surface-container);
         box-shadow: var(--md-sys-elevation-level2);
         opacity: 0;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
         transform: scaleY(0);
         transform-origin: var(--md-sys-select-picker-origin);
         transition:
@@ -130,7 +131,9 @@
             content: attr(aria-description);
             display: block;
             color: var(--md-sys-color-on-surface-variant);
-            white-space: normal;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         &::checkmark {
             color: var(--md-sys-color-on-surface-variant);

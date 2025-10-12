@@ -29,6 +29,7 @@
             <label for="item1" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
+                <span class="micl-badge" style="position-anchor:--inbox">97</span>
             </label>
             <input type="radio" id="item2" name="navitem" value="email_outbox">
             <label for="item2" class="micl-navigationrail__item" tabindex="0">
@@ -39,6 +40,7 @@
             <label for="item3" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites"></span>
             </label>
             <input type="radio" id="item4" name="navitem" value="email_trash">
             <label for="item4" class="micl-navigationrail__item" tabindex="0">
@@ -46,9 +48,6 @@
                 <span class="micl-navigationrail__text">Trash</span>
             </label>
         </div>
-
-        <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px">97</span>
-        <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-block-offset:4px;--md-sys-badge-inline-offset:16px"></span>
     </dialog>
 
     <main class="micl-body">
@@ -67,7 +66,7 @@
                         <div class="micl-card__headline-s">
                             <h2>Data entry</h2>
                         </div>
-                        <div class="micl-card__content" style="display:flex;flex-direction:column;row-gap:16px;padding-block:16px">
+                        <div class="micl-card__content" style="display:flex;flex-direction:column;row-gap:16px;padding-block-start:16px">
                             <div class="micl-textfield-outlined">
                                 <label for="mytextfield1">Text field</label>
                                 <input type="text" id="mytextfield1">
@@ -129,8 +128,8 @@
                             <h2>Card</h2>
                         </div>
                         <span class="micl-card__supporting-text">A card is a versatile component that groups related elements. It can hold a wide range of content, including images, headlines, supporting text, and buttons. Cards are designed with flexible layouts and dimensions that adapt to their contents.</span>
-                        <div class="micl-card__content" style="display:flex;justify-content:space-between;padding-block:16px">
-                            <button type="button" class="micl-button-filled-s">Button</button>
+                        <div class="micl-card__content" style="display:flex;justify-content:space-between;padding-block-start:16px">
+                            <button type="button" class="micl-button-filled-s">Action</button>
                             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mymenu" aria-label="Open Menu">more_vert</button>
                             <nav id="mymenu" class="micl-menu" popover>
                                 <ul class="micl-list">
@@ -202,7 +201,7 @@
                                             <span class="micl-list-item__supporting-text">Click to open</span>
                                         </span>
                                     </summary>
-                                    <div class="micl-list-item__content" style="padding-block:16px">
+                                    <div class="micl-list-item__content" style="padding-block-start:16px">
                                         <div class="micl-textfield-filled">
                                             <label for="tf1">Name</label>
                                             <input type="text" id="tf1" value="Filled text field">
@@ -216,7 +215,7 @@
                                             <span class="micl-list-item__supporting-text">Click to open</span>
                                         </span>
                                     </summary>
-                                    <div class="micl-list-item__content" style="padding-block:16px">
+                                    <div class="micl-list-item__content" style="padding-block-start:16px">
                                         <div class="micl-textfield-filled">
                                             <label for="tf2">Date</label>
                                             <input type="date" id="tf2" value="">
@@ -231,7 +230,7 @@
                         <div class="micl-card__headline-s">
                             <h2>Button actions</h2>
                         </div>
-                        <div class="micl-card__content" style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px;padding-block:16px">
+                        <div class="micl-card__content" style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px;padding-block-start:16px">
                             <dialog id="mydialog" class="micl-dialog" closedby="none" popover>
                                 <form method="dialog" class="micl-dialog__headline">
                                     <span class="micl-dialog__icon material-symbols-outlined">person</span>
@@ -331,7 +330,7 @@
                         <div class="micl-card__headline-l">
                             <h2>Demos</h2>
                         </div>
-                        <div class="micl-card__content" style="column-count:2;padding-block:16px">
+                        <div class="micl-card__content" style="column-count:2;padding-block-start:16px">
                             <p><a href="accordion.html" class="md-sys-typescale-body-large">Accordions</a></p>
                             <p><a href="bottomsheet.html" class="md-sys-typescale-body-large">Bottom sheets</a></p>
                             <p><a href="button.html" class="md-sys-typescale-body-large">Buttons</a></p>

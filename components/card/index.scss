@@ -28,6 +28,8 @@
 :root {
     --md-sys-card-margin: 8px;
     --md-sys-card-padding-inline: 16px;
+    --md-sys-card-content-padding-block: 16px;
+    --md-sys-card-outlined-border-width: 1px;
 }
 
 .micl-card-elevated,
@@ -36,9 +38,12 @@
     --md-sys-card-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-sys-card-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
-    height: fit-content;
+    display: block;
+    block-size: fit-content;
     margin: 0;
+    padding-block-end: var(--md-sys-card-content-padding-block);
     border-radius: var(--md-sys-shape-corner-medium);
+    outline: none;
     overflow: hidden;
     interpolate-size: allow-keywords;
 
@@ -66,7 +71,6 @@
 
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
             outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
-            box-shadow: var(--md-sys-elevation-level1);
         }
         &:active {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
@@ -89,20 +93,22 @@
         outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
     }
     &::details-content {
-        height: 0;
+        block-size: 0;
         overflow: hidden;
         transition:
-            height var(--md-sys-card-motion-duration) var(--md-sys-card-motion-spatial),
+            block-size var(--md-sys-card-motion-duration) var(--md-sys-card-motion-spatial),
             content-visibility var(--md-sys-card-motion-duration) linear allow-discrete;
     }
     &[open]::details-content {
-        height: auto;
+        block-size: auto;
     }
     &> summary {
-        padding-block-end: 8px;
         outline: none;
         list-style: none;
         cursor: pointer
+    }
+    &:not([open]):has(> summary.micl-card--compact) {
+        padding-block-end: 0;
     }
 }
 
@@ -114,9 +120,6 @@
         &:hover {
             box-shadow: var(--md-sys-elevation-level2);
         }
-        &:active {
-            box-shadow: var(--md-sys-elevation-level1);
-        }
         &.micl-card--dragging {
             box-shadow: var(--md-sys-elevation-level4);
         }
@@ -125,29 +128,18 @@
 .micl-card-filled {
     background-color: var(--md-sys-color-surface-container-highest);
     box-shadow: var(--md-sys-elevation-level0);
-
-    &[tabindex='0']:not(.micl-card--disabled) {
-        &:focus-visible {
-            box-shadow: var(--md-sys-elevation-level0);
-        }
-        &:active {
-            box-shadow: var(--md-sys-elevation-level0);
-        }
-    }
 }
 .micl-card-outlined {
     background-color: var(--md-sys-color-surface);
     box-shadow: var(--md-sys-elevation-level0);
-    border: 1px solid var(--md-sys-color-outline-variant);
+    border: var(--md-sys-card-outlined-border-width) solid var(--md-sys-color-outline-variant);
 
     &[tabindex='0']:not(.micl-card--disabled) {
         &:focus-visible {
             border-color: var(--md-sys-color-on-surface);
-            box-shadow: var(--md-sys-elevation-level0);
         }
         &:active {
             border-color: var(--md-sys-color-outline-variant);
-            box-shadow: var(--md-sys-elevation-level0);
         }
     }
 }
@@ -167,10 +159,44 @@
         border-color: rgb(from var(--md-sys-color-outline) r g b / 12%);
     }
 }
+.micl-card--compact {
+    display: grid;
+    grid-template-areas:
+        "card-media card-headline"
+        "card-media card-subhead"
+        "card-media card-supporting"
+        "card-content card-content";
+    grid-template-columns: 20% 1fr;
+
+    .micl-card__image {
+        grid-area: card-media;
+        block-size: 100%;
+        object-fit: cover;
+        background-size: cover;
+    }
+    .micl-card__headline-s,
+    .micl-card__headline-m,
+    .micl-card__headline-l {
+        grid-area: card-headline;
+    }
+    .micl-card__subhead {
+        grid-area: card-subhead;
+    }
+    .micl-card__supporting-text {
+        grid-area: card-supporting;
+    }
+    .micl-card__content {
+        grid-area: card-content;
+    }
+}
 
 .micl-card__image {
-    width: 100%;
+    display: block;
+    inline-size: 100%;
     border-radius: var(--md-sys-shape-corner-medium);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .micl-card__headline-s,
@@ -260,6 +286,7 @@
 
 .micl-card__content {
     box-sizing: border-box;
+    padding-block: var(--md-sys-card-content-padding-block) 0;
     padding-inline: var(--md-sys-card-padding-inline);
     background-color: inherit;
     overflow: hidden;

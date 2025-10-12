@@ -25,57 +25,85 @@ export const selectSelector = '.micl-textfield-filled > select,.micl-textfield-o
 
 export default (() =>
 {
-    const setCounter = (element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) =>
+    const isRequiredType = (
+        eventTarget: EventTarget | null
+    ): eventTarget is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
+    {
+        return eventTarget instanceof HTMLInputElement ||
+               eventTarget instanceof HTMLSelectElement ||
+               eventTarget instanceof HTMLTextAreaElement;
+    };
+
+    const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
     {
         if (
-            !element.parentElement
-            || element instanceof HTMLSelectElement
-            || !element.maxLength
+            !input.parentElement
+            || input instanceof HTMLSelectElement
+            || !input.maxLength
         ) {
             return;
         }
-        const counter = element.parentElement.querySelector('.micl-textfield__character-counter');
+        const counter = input.parentElement.querySelector('.micl-textfield__character-counter');
         if (counter) {
-            counter.textContent = `${element.value.length}/${element.maxLength}`;
+            counter.textContent = `${input.value.length}/${input.maxLength}`;
+        }
+    };
+
+    const handleInvalid = (
+        input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+        isValid?: boolean
+    ): void => {
+        if (input.required) {
+            input.parentElement?.classList.toggle('micl-textfield--error', !isValid);
+
+            const supporting = input.parentElement?.querySelector(
+                '.micl-textfield__supporting-text'
+            ) as HTMLElement;
+
+            if (supporting) {
+                if (!isValid && !('micltext' in supporting.dataset)) {
+                    supporting.dataset.micltext = supporting.textContent;
+                }
+                supporting.textContent = input.validationMessage || supporting.dataset.micltext || '';
+            }
         }
     };
 
     return {
-        initialize: (element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
+        initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
         {
-            if (element.dataset.miclinitialized) {
+            if (input.dataset.miclinitialized) {
                 return;
             }
-            element.dataset.miclinitialized = '1';
+            input.dataset.miclinitialized = '1';
 
-            if (element.value) {
-                element.dataset.miclvalue = '1';
+            if (input.value) {
+                input.dataset.miclvalue = '1';
             }
 
-            if (element instanceof HTMLSelectElement) {
-                element.addEventListener('mousedown', event =>
+            if (input instanceof HTMLSelectElement) {
+                input.addEventListener('mousedown', () =>
                 {
                     const
-                        rect      = element.getBoundingClientRect(),
+                        rect      = input.getBoundingClientRect(),
                         roomAbove = rect.top,
                         roomBelow = window.innerHeight - rect.bottom;
 
-                    !element.matches(':open') && element.style.setProperty(
+                    !input.matches(':open') && input.style.setProperty(
                         '--md-sys-select-picker-origin',
                         roomAbove > roomBelow ? 'left bottom' : 'left top'
                     );
                 });
             }
-            setCounter(element);
+
+            setCounter(input);
         },
 
         input: (event: Event): void =>
         {
             if (
-                !(event.target as Element).matches(`${textfieldSelector},${selectSelector},${textareaSelector}`)
-                || !((event.target instanceof HTMLInputElement)
-                    || (event.target instanceof HTMLSelectElement)
-                    || (event.target instanceof HTMLTextAreaElement))
+                !isRequiredType(event.target)
+                || !event.target.matches(`${textfieldSelector},${selectSelector},${textareaSelector}`)
                 || !event.target.dataset.miclinitialized
                 || event.target.disabled
             ) {
@@ -89,7 +117,13 @@ export default (() =>
                 delete event.target.dataset.miclvalue;
             }
 
+            handleInvalid(event.target, true);
             setCounter(event.target);
+        },
+
+        invalid: (event: Event): void =>
+        {
+            isRequiredType(event.target) && handleInvalid(event.target);
         }
     };
 })();
