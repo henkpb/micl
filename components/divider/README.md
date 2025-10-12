@@ -1,5 +1,5 @@
 # Divider
-This component implements the the [Material Design 3 Expressive Divider](https://m3.material.io/components/divider/overview) design.
+This component implements the the [Material Design 3 Expressive Divider](https://m3.material.io/components/divider/overview) design. Dividers are thin lines that separate content into distinct sections.
 
 ## Basic Usage
 
@@ -30,8 +30,8 @@ The Divider component offers five CSS classes for different divider styles:
 | --------- | ----------- |
 | micl-divider | A standard, full-width divider |
 | micl-divider-inset | Indented equally on both the left and right sides |
-| micl-divider-inset--start | Indented only on the left (start) side |
-| micl-divider-inset--end | Indented only on the right (end) side |
+| micl-divider-inset-start | Indented only on the left (start) side |
+| micl-divider-inset-end | Indented only on the right (end) side |
 | micl-divider-vertical | A vertical divider |
 
 ## Customizations

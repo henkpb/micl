@@ -14,8 +14,14 @@
         p {
             color: var(--md-sys-color-on-surface);
         }
+        section:first-child .micl-pane__column > :last-child {
+            padding-block-end: 0;
+        }
         section:first-child .micl-card__content {
-            padding-inline: 0;
+            padding: 0;
+        }
+        section:first-child .micl-card-filled {
+            --md-sys-divider-color: var(--md-sys-color-primary);
         }
         p.md-sys-typescale-label-large {
             margin: 3rem 2rem 1rem;
