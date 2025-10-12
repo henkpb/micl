@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../layout';
 @use '../../styles/motion';
 
 :root {
@@ -31,6 +32,9 @@
     --md-sys-stepper-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--md-sys-layout-padding-xl, 24px);
     background-color: inherit;
 
     .micl-stepper__steps {

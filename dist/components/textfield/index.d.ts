@@ -2,7 +2,8 @@ export declare const textfieldSelector = ".micl-textfield-outlined > input,.micl
 export declare const textareaSelector = ".micl-textfield-outlined > textarea,.micl-textfield-filled > textarea";
 export declare const selectSelector = ".micl-textfield-filled > select,.micl-textfield-outlined > select";
 declare const _default: {
-    initialize: (element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => void;
+    initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => void;
     input: (event: Event) => void;
+    invalid: (event: Event) => void;
 };
 export default _default;

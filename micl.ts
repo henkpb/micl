@@ -32,11 +32,13 @@ interface ComponentEntry<T extends HTMLElement> {
     component: {
         initialize?: (element: T) => void,
         input?     : (event: Event) => void,
+        invalid?   : (event: Event) => void,
         keydown?   : (event: Event) => void,
         cleanup?   : (element: T) => void
     };
     type: new () => T;
 }
+type ComponentKey = keyof ComponentEntry<any>['component'];
 
 export default (() =>
 {
@@ -110,6 +112,21 @@ export default (() =>
         parent.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
     };
 
+    const handleEvent = (event: Event): void =>
+    {
+        for (const [selector, { component, type }] of Object.entries(componentMap)) {
+            if (
+                (event.target as Element).matches(selector)
+                && event.target instanceof type
+                && ['input', 'invalid', 'keydown'].includes(event.type)
+                && typeof component[event.type as ComponentKey] === 'function'
+            ) {
+                component[event.type as ComponentKey]?.(event);
+                return;
+            }
+        }
+    };
+
     const activate = () =>
     {
         const observer = new MutationObserver(mutations =>
@@ -144,32 +161,9 @@ export default (() =>
         initializeComponents(document);
 
         // Delegated Event Handlers
-        document.addEventListener('input', event =>
-        {
-            for (const [selector, { component, type }] of Object.entries(componentMap)) {
-                if (
-                    (event.target as Element).matches(selector)
-                    && event.target instanceof type
-                    && typeof component.input === 'function'
-                ) {
-                    component.input(event);
-                    return;
-                }
-            }
-        });
-        document.addEventListener('keydown', event =>
-        {
-            for (const [selector, { component, type }] of Object.entries(componentMap)) {
-                if (
-                    (event.target as Element).matches(selector)
-                    && event.target instanceof type
-                    && typeof component.keydown === 'function'
-                ) {
-                    component.keydown(event);
-                    return;
-                }
-            }
-        });
+        document.addEventListener('input', handleEvent);
+        document.addEventListener('keydown', handleEvent);
+        document.addEventListener('invalid', handleEvent, true);
     };
 
     const loaded = () =>

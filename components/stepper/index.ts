@@ -36,6 +36,7 @@ export default (() =>
         step.classList.add('micl-stepper__step--current');
         return step;
     };
+
     const endTransitionCurrent = (event: Event): void =>
     {
         if (!event.currentTarget || ((event as TransitionEvent).propertyName !== 'transform')) {
@@ -47,6 +48,7 @@ export default (() =>
         );
         event.currentTarget.removeEventListener('transitionend', endTransitionCurrent);
     };
+
     const showHideActions = (actions: HTMLElement[], step: HTMLElement | null): void =>
     {
         step && actions.forEach(action =>
@@ -57,6 +59,7 @@ export default (() =>
             ]?.classList.contains('micl-stepper__step'));
         });
     };
+
     const showHideElements = (stepper: HTMLElement, step: HTMLElement): void =>
     {
         stepper.querySelectorAll<HTMLElement>('[data-step]').forEach(element =>
@@ -65,8 +68,42 @@ export default (() =>
         });
     };
 
+    const checkStepValidity = (stepper: HTMLElement): HTMLElement | null =>
+    {
+        let currentStep = getCurrentStep(stepper);
+        if (currentStep) {
+            currentStep.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
+                'input:required,select:required,textarea:required'
+            ).forEach(input =>
+            {
+                if (!input.checkValidity()) {
+                    currentStep = null;
+                }
+            });
+
+            currentStep?.querySelectorAll<HTMLFieldSetElement>(
+                'fieldset.micl-checkbox-group[data-miclname]'
+            ).forEach(fieldset =>
+            {
+                let nrChecked = 0;
+                fieldset.querySelectorAll<HTMLInputElement>(
+                    `.micl-checkbox[name="${fieldset.dataset.miclname}"]`
+                ).forEach(checkbox =>
+                {
+                    if (checkbox.checked) {
+                        nrChecked++;
+                    }
+                });
+                if (nrChecked === 0) {
+                    console.log("NOT ENGOUGH CHECKS");
+                }
+            });
+        }
+        return currentStep;
+    };
+
     return {
-        initialize: (stepper: HTMLElement) =>
+        initialize: (stepper: HTMLElement): void =>
         {
             if (
                 !stepper.matches(stepperSelector)
@@ -93,7 +130,7 @@ export default (() =>
             {
                 action.addEventListener('click', () =>
                 {
-                    const currentStep = getCurrentStep(stepper);
+                    const currentStep = checkStepValidity(stepper);
                     if (!currentStep) {
                         return;
                     }
