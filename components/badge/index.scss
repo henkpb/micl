@@ -25,16 +25,16 @@
     --md-sys-badge-small-size: 6px;
     --md-sys-badge-large-size: 16px;
     --md-sys-badge-large-padding: 4px;
+    --md-sys-badge-inline-offset: 0px;
+    --md-sys-badge-block-offset: 0px;
 }
 
 .micl-badge {
-    --md-sys-badge-inline-offset: 0px;
-    --md-sys-badge-block-offset: 0px;
-
     box-sizing: border-box;
     position: fixed;
-    inset: unset;
+    inset: 0;
     margin: 0;
+    overflow-x: hidden;
     background-color: var(--md-sys-color-error);
     color: var(--md-sys-color-on-error);
 
@@ -42,7 +42,7 @@
         inline-size: var(--md-sys-badge-small-size);
         block-size: var(--md-sys-badge-small-size);
         inset-block-start: calc(anchor(start) + var(--md-sys-badge-block-offset));
-        inset-inline-start: calc(anchor(end) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
+        inset-inline-start: calc(anchor(end) - var(--md-sys-badge-small-size) + var(--md-sys-badge-inline-offset));
         padding: 0;
         border-radius: calc(var(--md-sys-badge-small-size) / 2);
     }
@@ -53,9 +53,24 @@
         max-inline-size: 34px;
         min-inline-size: var(--md-sys-badge-large-size);
         block-size: var(--md-sys-badge-large-size);
-        inset-block-start: calc(anchor(start) - 2px + var(--md-sys-badge-block-offset));
-        inset-inline-start: calc(anchor(end) - 12px - var(--md-sys-badge-inline-offset));
+        inset-block-start: calc(anchor(start) - (var(--md-sys-badge-large-size) - 14px) + var(--md-sys-badge-block-offset));
+        inset-inline-start: calc(anchor(end) - 12px + var(--md-sys-badge-inline-offset));
         padding-inline: var(--md-sys-badge-large-padding);
         border-radius: calc(var(--md-sys-badge-large-size) / 2);
+    }
+}
+
+@supports not (top: anchor(bottom)) {
+    .micl-badge {
+        position: absolute;
+        inset: 0 !important;
+        margin-block: calc(12px + var(--md-sys-badge-block-offset)) auto;
+
+        &.micl-badge--small {
+            margin-inline-start: calc(var(--md-sys-layout-icon-size) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
+        }
+        &:not(.micl-badge--small) {
+            margin-inline-start: calc(12px - var(--md-sys-badge-inline-offset));
+        }
     }
 }
