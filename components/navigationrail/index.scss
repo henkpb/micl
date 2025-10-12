@@ -43,6 +43,8 @@
     --md-sys-navigationrail-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
     --md-sys-navigationrail-morph-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-navigationrail-morph-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-sys-badge-inline-offset: -16px;
+    --md-sys-badge-block-offset: 4px;
 
     box-sizing: border-box;
     display: flex;
@@ -91,6 +93,7 @@
 
             box-sizing: border-box;
             display: flex;
+            position: relative;
             flex-direction: column;
             align-items: center;
             block-size: var(--md-sys-navigationrail-item-height);
@@ -115,8 +118,8 @@
             &> .micl-navigationrail__icon {
                 --micl-ripple: 1;
 
-                font-size: 24px;
-                inline-size: 24px;
+                font-size: var(--md-sys-layout-icon-size, 24px);
+                inline-size: var(--md-sys-layout-icon-size, 24px);
                 margin: 0;
                 padding-block: 4px;
                 padding-inline: 16px;
@@ -173,7 +176,6 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         row-gap: 0px;
 
         &> label.micl-navigationrail__item {
-            position: relative;
             flex-direction: row;
             inline-size: fit-content;
 

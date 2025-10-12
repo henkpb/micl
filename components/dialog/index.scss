@@ -161,9 +161,9 @@ dialog.micl-dialog-fullscreen {
             color: var(--md-sys-color-on-surface);
         }
         .micl-dialog__icon {
-            width: 24px;
-            height: 24px;
-            font-size: 24px;
+            width: var(--md-sys-layout-icon-size, 24px);
+            height: var(--md-sys-layout-icon-size, 24px);
+            font-size: var(--md-sys-layout-icon-size, 24px);
             color: var(--md-sys-color-secondary);
         }
         button {

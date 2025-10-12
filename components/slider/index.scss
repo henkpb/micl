@@ -272,7 +272,7 @@ input[type=range].micl-slider-xl {
             grid-area: slider-icon;
             inset: 0;
             margin: 6px;
-            font-size: 24px;
+            font-size: var(--md-sys-layout-icon-size, 24px);
             color: var(--md-sys-color-on-primary);
             z-index: 1;
         }

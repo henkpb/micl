@@ -46,6 +46,8 @@ $md-sys-padding-l: 20px;
 $md-sys-padding-xl: 24px;
 $md-sys-padding-xxl: 28px;
 
+$md-sys-icon-size: 24px;
+
 :root {
     --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
 
@@ -56,6 +58,8 @@ $md-sys-padding-xxl: 28px;
     --md-sys-layout-padding-l: #{$md-sys-padding-l};
     --md-sys-layout-padding-xl: #{$md-sys-padding-xl};
     --md-sys-layout-padding-xxl: #{$md-sys-padding-xxl};
+
+    --md-sys-layout-icon-size: #{$md-sys-icon-size};
 
     @media (max-width: $md-sys-window-compact-max) {
         --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
@@ -243,8 +247,7 @@ $md-sys-padding-xxl: 28px;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 48px 1fr;
-    margin-block: 24px;
-    row-gap: 24px;
+    row-gap: var(--md-sys-layout-padding-xl, 24px);
     background-color: inherit;
 }
 .micl-grid-iconfield__icon {
