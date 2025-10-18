@@ -85,9 +85,10 @@ input[type=radio].micl-radio {
             background-size 3000ms,
             --statelayer-opacity var(--md-sys-radio-motion-duration) linear;
 
-        &:hover {
+        &:hover,
+        &:focus-visible,
+        &:active {
             --statelayer-color: var(--md-sys-color-on-surface);
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
             &:checked {
                 --statelayer-color: var(--md-sys-color-primary);
@@ -99,38 +100,19 @@ input[type=radio].micl-radio {
                 border-color: var(--md-sys-color-primary);
             }
         }
+        &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+        }
         &:focus-visible {
-            --statelayer-color: var(--md-sys-color-on-surface);
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
 
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-
-            &:checked {
-                --statelayer-color: var(--md-sys-color-primary);
-            }
-            &::after {
-                border-color: var(--md-sys-color-on-surface);
-            }
-            &:checked::after {
-                border-color: var(--md-sys-color-primary);
-            }
         }
         &:active {
-            --statelayer-color: var(--md-sys-color-on-surface);
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
 
             background-size: 0%, 100%;
             transition: background-size 0ms;
-
-            &:checked {
-                --statelayer-color: var(--md-sys-color-primary);
-            }
-            &::after {
-                border-color: var(--md-sys-color-on-surface);
-            }
-            &:checked::after {
-                border-color: var(--md-sys-color-primary);
-            }
         }
     }
     &:disabled {
