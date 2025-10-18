@@ -24,234 +24,200 @@
 @use '../../styles/typography';
 
 :root {
-    --md-sys-checkbox-container-size: 18px;
     --md-sys-checkbox-border-width: 2px;
-    --md-sys-checkbox-selected-icon: "\2A3D";
-    --md-sys-checkbox-state-layer-radius: 20px;
-}
-
-@property --checkbox-outline-color {
-    syntax: '<color>';
-    initial-value: transparent;
-    inherits: false;
-}
-@property --checkbox-state-layer-color {
-    syntax: '<color>';
-    initial-value: transparent;
-    inherits: false;
-}
-@property --checkbox-container-color {
-    syntax: '<color>';
-    initial-value: transparent;
-    inherits: false;
-}
-@property --checkbox-container-border-color {
-    syntax: '<color>';
-    initial-value: transparent;
-    inherits: false;
+    --md-sys-checkbox-container-size: 18px;
+    --md-sys-checkbox-state-layer-size: 40px;
 }
 
 input[type=checkbox].micl-checkbox {
     --md-sys-checkbox-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
-    --checkbox-container-color: transparent;
-    --checkbox-container-border-color: var(--md-sys-color-on-surface-variant);
+    --md-sys-checkbox-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-sys-checkbox-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
+
+    --statelayer-color: var(--md-sys-color-on-surface);
 
     appearance: none;
     box-sizing: border-box;
     position: relative;
-    width: var(--md-sys-target-size);
-    min-width: var(--md-sys-target-size);
-    height: var(--md-sys-target-size);
-    min-height: var(--md-sys-target-size);
+    inline-size: var(--md-sys-target-size);
+    min-inline-size: var(--md-sys-target-size);
+    block-size: var(--md-sys-target-size);
+    min-block-size: var(--md-sys-target-size);
     margin: 0;
-    padding: calc((var(--md-sys-target-size) - var(--md-sys-checkbox-container-size)) / 2);
-    border-radius: calc(var(--md-sys-checkbox-border-width) + ((var(--md-sys-target-size) - var(--md-sys-checkbox-container-size)) / 2));
-    background-clip: border-box, border-box, content-box, content-box, content-box;
-    background-image:
-        radial-gradient(
-            circle var(--md-sys-checkbox-state-layer-radius),
-            transparent 0%,
-            transparent calc(var(--md-sys-checkbox-state-layer-radius) - var(--md-sys-state-focus-indicator-thickness)),
-            var(--checkbox-outline-color) calc(var(--md-sys-checkbox-state-layer-radius) - var(--md-sys-state-focus-indicator-thickness)),
-            var(--checkbox-outline-color) 100%,
-            transparent
-        ),
-        radial-gradient(
-            circle calc(var(--md-sys-checkbox-state-layer-radius) - var(--md-sys-state-focus-indicator-thickness)),
-            var(--checkbox-state-layer-color) 0%,
-            var(--checkbox-state-layer-color) 100%,
-            transparent
-        ),
-        linear-gradient(
-            to right,
-            var(--checkbox-container-color) 0%,
-            var(--checkbox-container-color) 100%,
-            transparent
-        ),
-        linear-gradient(
-            to bottom,
-            var(--checkbox-container-border-color) var(--md-sys-checkbox-border-width),
-            transparent var(--md-sys-checkbox-border-width),
-            transparent 16px,
-            var(--checkbox-container-border-color) 0px,
-            var(--checkbox-container-border-color) var(--md-sys-checkbox-container-size),
-            transparent var(--md-sys-checkbox-container-size)
-        ),
-        linear-gradient(
-            to right,
-            var(--checkbox-container-border-color) var(--md-sys-checkbox-border-width),
-            transparent var(--md-sys-checkbox-border-width),
-            transparent 16px,
-            var(--checkbox-container-border-color) 0px,
-            var(--checkbox-container-border-color) var(--md-sys-checkbox-container-size),
-            transparent var(--md-sys-checkbox-container-size)
-        );
-    background-origin: border-box;
-    background-position: center, center, center, center, center;
-    background-repeat: no-repeat;
-    background-size:
-        auto,
-        auto,
-        var(--md-sys-checkbox-container-size) var(--md-sys-checkbox-container-size),
-        var(--md-sys-checkbox-container-size) var(--md-sys-checkbox-container-size),
-        var(--md-sys-checkbox-container-size) var(--md-sys-checkbox-container-size),
-        var(--md-sys-checkbox-container-size) var(--md-sys-checkbox-container-size);
-    clip-path: circle(var(--md-sys-checkbox-state-layer-radius));
-    transition:
-        --checkbox-outline-color var(--md-sys-checkbox-motion-duration),
-        --checkbox-state-layer-color var(--md-sys-checkbox-motion-duration),
-        --checkbox-container-color var(--md-sys-checkbox-motion-duration) var(--md-sys-motion-duration-short4),
-        --checkbox-container-border-color var(--md-sys-checkbox-motion-duration);
+    border: calc((var(--md-sys-target-size) - var(--md-sys-checkbox-state-layer-size)) / 2) solid transparent;
+    background-clip: content-box;
+    background-color: transparent;
+    border-radius: var(--md-sys-shape-corner-full);
+    outline-offset: -4px;
 
-    &.micl-checkbox--error {
-        --checkbox-container-border-color: var(--md-sys-color-error);
-    }
-    &::after {
-        content: var(--md-sys-checkbox-selected-icon);
+    &::before {
+        --md-sys-checkbox-check-width: calc(var(--md-sys-checkbox-container-size) - 3px);
+        --md-sys-checkbox-check-height: calc(0.4667 * var(--md-sys-checkbox-check-width));
+
+        content: "";
         box-sizing: border-box;
         position: absolute;
-        width: calc(var(--md-sys-checkbox-container-size) + 2px);
-        height: 0;
+        inline-size: var(--md-sys-checkbox-check-width);
+        block-size: 0;
         inset: 0;
-        inset-block-start: 15px;
-        inset-inline-start: 8px;
-        margin: 4px;
-        font: 400 26px/2px var(--md-ref-typeface-plain);
-        color: var(--md-sys-color-on-primary);
-        text-align: center;
+        inset-block-start: calc((var(--md-sys-checkbox-state-layer-size) - var(--md-sys-checkbox-check-height) - 4px) / 2);
+        inset-inline-start: calc((var(--md-sys-checkbox-state-layer-size) - var(--md-sys-checkbox-check-width) + 1px) / 2);
+        border-block-end: 2px var(--md-sys-color-on-primary) solid;
+        border-inline-start: 2px var(--md-sys-color-on-primary) solid;
         transform: rotate(-45deg);
-        transform-origin: top;
-        clip-path: rect(0px 4.5px 18px 0px);
-        overflow: hidden;
+        transform-origin: center;
+        clip-path: rect(0 2px 0 0);
+        z-index: 1;
         transition:
+          block-size var(--md-sys-motion-duration-short3) var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard-decelerate,
           clip-path var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard-accelerate,
-          height var(--md-sys-motion-duration-short3) var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard-decelerate;
+          inset-block-start 0ms linear var(--md-sys-motion-duration-short3),
+          inset-inline-start 0ms linear var(--md-sys-motion-duration-short3),
+          border-inline-start-width 0ms linear var(--md-sys-motion-duration-short3),
+          transform 0ms linear var(--md-sys-motion-duration-short3);
     }
     @supports (-moz-appearance:none) {
-        &::after {
+        &::before {
             inset-block-start: 16px;
             inset-inline-start: 7px;
-            font: 400 27px/3px var(--md-ref-typeface-plain);
         }
     }
-    &:checked {
-        --checkbox-container-color: var(--md-sys-color-primary);
-        --checkbox-container-border-color: transparent;
-        transition:
-            --checkbox-container-color var(--md-sys-motion-duration-medium2),
-            --checkbox-container-border-color var(--md-sys-motion-duration-medium2);
+    &::after {
+        --md-sys-checkbox-background-color: transparent;
+        --md-sys-checkbox-border-color: var(--md-sys-color-on-surface-variant);
 
-        &.micl-checkbox--error {
-            --checkbox-container-color: var(--md-sys-color-error);
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        inline-size: var(--md-sys-checkbox-container-size);
+        block-size: var(--md-sys-checkbox-container-size);
+        inset: 0;
+        margin: auto;
+        border: var(--md-sys-checkbox-border-width) solid var(--md-sys-checkbox-border-color);
+        border-radius: 2px;
+        background-color: var(--md-sys-checkbox-background-color);
+        transition:
+            background-color var(--md-sys-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-sys-checkbox-motion-duration-reverse),
+            border-color var(--md-sys-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-sys-checkbox-motion-duration-reverse);
+    }
+    &:checked,
+    &:indeterminate {
+        --statelayer-color: var(--md-sys-color-primary);
+
+        &::before {
+            block-size: var(--md-sys-checkbox-check-height);
+            clip-path: rect(0 13px 18px 0);
+            transition:
+                block-size var(--md-sys-motion-duration-short3) var(--md-sys-checkbox-motion-spatial),
+                clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--md-sys-checkbox-motion-spatial);
         }
         &::after {
-            height: 8px;
-            clip-path: rect(0px 16px 18px 0px);
+            --md-sys-checkbox-background-color: var(--md-sys-color-primary);
+            --md-sys-checkbox-border-color: var(--md-sys-color-primary);
+
             transition:
-                height var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard-accelerate,
-                clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) linear(motion.$md-sys-motion-spring-default-spatial);
+                background-color var(--md-sys-checkbox-motion-duration) linear,
+                border-color var(--md-sys-checkbox-motion-duration) motion.$md-sys-motion-easing-emphasized;
+        }
+    }
+    &:indeterminate::before {
+        inset-block-start: 14px;
+        inset-inline-start: 14px;
+        border-inline-start-width: 0px;
+        clip-path: rect(0 12px 18px 0);
+        transform: rotate(0deg);
+    }
+    &.micl-checkbox--error:not(:disabled) {
+        --statelayer-color: var(--md-sys-color-error);
+
+        &::after {
+            --md-sys-checkbox-border-color: var(--md-sys-color-error);
+        }
+        &:checked,
+        &:indeterminate {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                --statelayer-color: var(--md-sys-color-error);
+            }
+            &::before {
+                color: var(--md-sys-color-on-error);
+            }
+            &::after {
+                --md-sys-checkbox-background-color: var(--md-sys-color-error);
+            }
+        }
+        &:not(:checked):not(:indeterminate) {
+            &:hover,
+            &:focus-visible,
+            &:active {
+                --statelayer-color: var(--md-sys-color-error);
+
+                &::after {
+                    --md-sys-checkbox-border-color: var(--md-sys-color-error);
+                }
+            }
         }
     }
     &:not(:disabled) {
         --micl-ripple: 1;
 
+        background-image:
+            radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+            linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+        background-repeat: no-repeat;
+        background-size: 10000%, 100%;
         cursor: pointer;
+        transition:
+            background-size 3000ms,
+            --statelayer-opacity var(--md-sys-checkbox-motion-duration) linear;
 
         &:hover {
-            &:checked {
-                --checkbox-outline-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
-                --checkbox-state-layer-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-hover-state-layer-opacity));
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
-                &.micl-checkbox--error {
-                    --checkbox-outline-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-hover-state-layer-opacity));
-                    --checkbox-state-layer-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-hover-state-layer-opacity));
-                }
-            }
-            &:not(:checked) {
-                --checkbox-container-border-color: var(--md-sys-color-on-surface);
-                --checkbox-outline-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-hover-state-layer-opacity));
-                --checkbox-state-layer-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-hover-state-layer-opacity));
-
-                &.micl-checkbox--error {
-                    --checkbox-container-border-color: var(--md-sys-color-error);
-                    --checkbox-outline-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-hover-state-layer-opacity));
-                    --checkbox-state-layer-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-hover-state-layer-opacity));
-                }
+            &:not(:checked):not(:indeterminate)::after {
+                --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
             }
         }
         &:focus-visible {
-            --checkbox-outline-color: var(--md-sys-color-secondary);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
 
-            &:checked {
-                --checkbox-state-layer-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-focus-state-layer-opacity));
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
 
-                &.micl-checkbox--error {
-                    --checkbox-state-layer-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-focus-state-layer-opacity));
-                }
-            }
-            &:not(:checked) {
-                --checkbox-container-border-color: var(--md-sys-color-on-surface);
-                --checkbox-state-layer-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-focus-state-layer-opacity));
-
-                &.micl-checkbox--error {
-                    --checkbox-container-border-color: var(--md-sys-color-error);
-                    --checkbox-state-layer-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-focus-state-layer-opacity));
-                }
+            &:not(:checked):not(:indeterminate)::after {
+                --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
             }
         }
         &:active {
-            &:checked {
-                --checkbox-outline-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-                --checkbox-state-layer-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            --statelayer-color: var(--md-sys-color-on-surface);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
 
-                &.micl-checkbox--error {
-                    --checkbox-outline-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-                    --checkbox-state-layer-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-                }
-            }
-            &:not(:checked) {
-                --checkbox-container-border-color: var(--md-sys-color-on-surface);
-                --checkbox-outline-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-                --checkbox-state-layer-color: rgb(from var(--md-sys-color-primary) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
 
-                &.micl-checkbox--error {
-                    --checkbox-container-border-color: var(--md-sys-color-error);
-                    --checkbox-outline-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-pressed-state-layer-opacity));
-                    --checkbox-state-layer-color: rgb(from var(--md-sys-color-error) r g b / var(--md-sys-state-pressed-state-layer-opacity));
+            &:not(:checked):not(:indeterminate) {
+                --statelayer-color: var(--md-sys-color-primary);
+
+                &::after {
+                    --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
                 }
             }
         }
     }
     &:disabled {
-        --checkbox-container-border-color: var(--md-sys-color-on-surface);
         opacity: 38%;
 
-        &:checked {
-            --checkbox-container-color: var(--md-sys-color-on-surface);
-
-            &::after {
+        &:checked,
+        &:indeterminate {
+            &::before {
                 color: var(--md-sys-color-surface);
             }
+            &::after {
+                --md-sys-checkbox-background-color: var(--md-sys-color-on-surface);
+            }
+        }
+        &::after {
+            --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
         }
     }
 }
@@ -266,12 +232,13 @@ label:has(+ input[type=checkbox].micl-checkbox) {
 }
 
 [dir=rtl] input[type=checkbox].micl-checkbox {
-    &::after {
-        inset-inline-start: 9px;
+    &::before {
+        inset-inline-start: 11px;
         transform: rotate(45deg);
-        clip-path: rect(0px 18px 7.5px 16px);
+        clip-path: rect(0 18px 8px 16px);
     }
-    &:checked::after {
-        clip-path: rect(0px 18px 8px 6px);
+    &:checked::before,
+    &:indeterminate::before {
+        clip-path: rect(0 18px 8px 3px);
     }
 }
