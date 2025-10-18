@@ -97,18 +97,17 @@ export default (() =>
             setValue(element);
             setVars(element);
 
-            const
-                max  = parseFloat(element.max),
-                min  = parseFloat(element.min),
-                rect = element.getBoundingClientRect(),
-                percentages = getTickValues(element, max, min).sort((a, b) => a - b).map(value => {
-                    return Math.round(100 * (value - min) / (max - min));
-                });
+            const max  = parseFloat(element.max);
+            const min  = parseFloat(element.min);
+            const rect = element.getBoundingClientRect();
+            const percentages = getTickValues(element, max, min).sort((a, b) => a - b).map(value => {
+                return Math.round(100 * (value - min) / (max - min));
+            });
 
             if (percentages.length > 0) {
-                const
-                    canvas = document.createElement('canvas'),
-                    ctx    = canvas.getContext('2d');
+                const canvas = document.createElement('canvas');
+                const ctx    = canvas.getContext('2d');
+
                 if (ctx) {
                     ctx.font = window.getComputedStyle(element).getPropertyValue('font');
                     let blankWidth   = ctx.measureText(blank).width,

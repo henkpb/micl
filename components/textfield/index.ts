@@ -84,10 +84,9 @@ export default (() =>
             if (input instanceof HTMLSelectElement) {
                 input.addEventListener('mousedown', () =>
                 {
-                    const
-                        rect      = input.getBoundingClientRect(),
-                        roomAbove = rect.top,
-                        roomBelow = window.innerHeight - rect.bottom;
+                    const rect      = input.getBoundingClientRect();
+                    const roomAbove = rect.top;
+                    const roomBelow = window.innerHeight - rect.bottom;
 
                     !input.matches(':open') && input.style.setProperty(
                         '--md-sys-select-picker-origin',
