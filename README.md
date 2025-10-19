@@ -84,6 +84,7 @@ A separate CSS file, based on the [Material Design Layout Foundation](https://m3
 ## Available components ✅
 The library currently consists of the following components:
 - [x] [Accordion](components/accordion/README.md)
+- [ ] [Alert](README.md)
 - [x] [App Bar](components/appbar/README.md)
 - [x] [Badge](components/badge/README.md)
 - [x] [Bottom sheet](components/bottomsheet/README.md)
@@ -100,39 +101,33 @@ The library currently consists of the following components:
 - [x] [Select](components/select/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
 - [x] [Slider](components/slider/README.md)
+- [ ] [Stepper](README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)
 
 ## Change Log ↪️
 
-### 3.0.0 (24.09.2025)
-**Features**
+### 3.1.0 (19.10.2025)
+- **Checkbox**: Refactoring + add support for checkbox groups.
 
+### 3.0.0 (24.09.2025)
+- **BREAKING:** Use `<nav>` instead of `<div>` for Navigation rail.
 - **App Bar**: New component.
 - **Layout**: Support for adaptive layout.
-- Improved handling of target area for small buttons.
-- **BREAKING:** Use `<nav>` instead of `<div>` for Navigation rail.
+- **Buttons**: Improved handling of target area for small buttons.
 
 ### 2.0.0 (04.09.2025)
-**Features**
-
 - **Navigation rail**: New component.
 - **Badge**: New component.
 - **Ripple**: Now uses custom CSS properties.
 
 ### 1.3.0 (23.08.2025)
-**Features**
-
 - **Menu**: Added support for submenus.
 - **Ripple**: The ripple-effect does not use a pseudo-element anymore.
 - **State layer**: Rewrite for simpler styling.
 
 ### 1.2.0 (17.08.2025)
-**Features**
-
 - **List**: Added support for switches inside list items.
 
 ### 1.1.0 (12.08.2025)
-**Features**
-
 - **Text field**: Added support for multi-line text fields.
