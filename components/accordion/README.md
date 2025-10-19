@@ -1,5 +1,5 @@
 # Accordion
-This component implements the the [Material Design 3 Expressive Expandable Lists](https://m3.material.io/components/lists/overview) design. Accordions are vertically stacked lists that allow you to show and hide sections of content.
+This component implements the [Material Design 3 Expressive Expandable Lists](https://m3.material.io/components/lists/overview) design. Accordions are vertically stacked lists that allow you to show and hide sections of content.
 
 ## Basic Usage
 
@@ -43,8 +43,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any List component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available for you to interact with.
+### Live Demo
+A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available to interact with.
 
 ## Variants
 To ensure that only one accordion item within a group can be open at a time, add a matching `name` attribute to all the `<details>` elements you want to group together.

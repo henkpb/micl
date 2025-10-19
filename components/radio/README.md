@@ -1,5 +1,5 @@
 # Radio button
-This component implements the the [Material Design 3 Expressive Radio button](https://m3.material.io/components/radio-button/overview) design. A radio button allows a user to select only one option from a group of mutually exclusive choices.
+This component implements the [Material Design 3 Expressive Radio button](https://m3.material.io/components/radio-button/overview) design. A radio button allows a user to select only one option from a group of mutually exclusive choices.
 
 ## Basic Usage
 
@@ -21,8 +21,8 @@ Import the radio button styles into your project:
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [Radio button component](https://henkpb.github.io/micl/radio.html) is available for you to interact with.
+### Live Demo
+A live example of the [Radio button component](https://henkpb.github.io/micl/radio.html) is available to interact with.
 
 ## Variants
 A radio button can be disabled by adding the `disabled` attribute to the `<input>` element.

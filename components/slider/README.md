@@ -1,5 +1,5 @@
 # Slider
-This component implements the the [Material Design 3 Expressive Slider](https://m3.material.io/components/sliders/overview) design.
+This component implements the [Material Design 3 Expressive Slider](https://m3.material.io/components/sliders/overview) design.
 
 ## Basic Usage
 
@@ -26,8 +26,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Slider component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Slider component](https://henkpb.github.io/micl/slider.html) is available for you to interact with.
+### Live Demo
+A live example of the [Slider component](https://henkpb.github.io/micl/slider.html) is available to interact with.
 
 ## Variants
 Sliders come in **five different sizes**: extra small (`xs`), small (`s`), medium (`m`), large (`l`), and extra large (`xl`). To set a specific size, append the appropriate postfix to the `micl-slider` CSS class name:

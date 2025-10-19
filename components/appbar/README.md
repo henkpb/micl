@@ -1,5 +1,5 @@
 # App Bar
-This component implements the the [Material Design 3 Expressive App Bar](https://m3.material.io/components/app-bars/overview) design. The app bar serves as the top container for a page, displaying the page title, primary actions, and navigation options.
+This component implements the [Material Design 3 Expressive App Bar](https://m3.material.io/components/app-bars/overview) design. The app bar serves as the top container for a page, displaying the page title, primary actions, and navigation options.
 
 ## Basic Usage
 
@@ -25,8 +25,8 @@ Import the app bar styles into your project:
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [App Bar component](https://henkpb.github.io/micl/index.html) is available for you to interact with.
+### Live Demo
+A live example of the [App Bar component](https://henkpb.github.io/micl/index.html) is available to interact with.
 
 ## Variants
 The app bar component supports three sizes: **small**, **medium** (flexible), and **large** (flexible). Use a modifier class to specify a size other than the default small size.

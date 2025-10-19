@@ -1,5 +1,5 @@
 # Switch
-This component implements the the [Material Design 3 Expressive Switch](https://m3.material.io/components/switch/overview) design. Switches toggle the state of a single setting on or off.
+This component implements the [Material Design 3 Expressive Switch](https://m3.material.io/components/switch/overview) design. Switches toggle the state of a single setting on or off.
 
 ## Basic Usage
 
@@ -21,8 +21,8 @@ Import the switch styles into your project:
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [Switch component](https://henkpb.github.io/micl/switch.html) is available for you to interact with.
+### Live Demo
+A live example of the [Switch component](https://henkpb.github.io/micl/switch.html) is available to interact with.
 
 ## Variants
 By default, the component displays an icon on the switch handle in both the selected and unselected state. To remove the icon in the unselected state, assign an empty string to the following CSS variable:

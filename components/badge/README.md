@@ -1,5 +1,5 @@
 # Badge
-This component implements the the [Material Design 3 Expressive Badge](https://m3.material.io/components/badges/overview) design. Badges are small status indicators that can show a count or simply signal new information.
+This component implements the [Material Design 3 Expressive Badge](https://m3.material.io/components/badges/overview) design. Badges are small status indicators that can show a count or simply signal new information.
 
 ## Basic Usage
 
@@ -22,8 +22,8 @@ Import the badge styles into your project:
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [Badge component](https://henkpb.github.io/micl/index.html) is available for you to interact with.
+### Live Demo
+A live example of the [Badge component](https://henkpb.github.io/micl/index.html) is available to interact with.
 
 ## Anchoring
 Badges are typically placed on top of other elements, like icons. To anchor a badge to a specific element, use CSS `anchor positioning`.

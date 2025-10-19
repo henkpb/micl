@@ -1,5 +1,5 @@
 # Checkbox
-This component implements the the [Material Design 3 Expressive Checkbox](https://m3.material.io/components/checkbox/overview) design. A checkbox allows a user to select one or more options from a number of choices.
+This component implements the [Material Design 3 Expressive Checkbox](https://m3.material.io/components/checkbox/overview) design. A checkbox allows a user to select one or more options from a number of choices.
 
 ## Basic Usage
 
@@ -25,8 +25,8 @@ This component requires JavaScript to support checkbox groups:
 
 This will initialize any checkbox group, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Checkbox component](https://henkpb.github.io/micl/checkbox.html) is available for you to interact with.
+### Live Demo
+A live example of the [Checkbox component](https://henkpb.github.io/micl/checkbox.html) is available to interact with.
 
 ## Variants
 Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification.

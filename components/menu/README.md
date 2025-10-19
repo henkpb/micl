@@ -37,8 +37,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Menu component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Menu component](https://henkpb.github.io/micl/menu.html) is available for you to interact with.
+### Live Demo
+A live example of the [Menu component](https://henkpb.github.io/micl/menu.html) is available to interact with.
 
 ## Variants
 Since the Menu component is based on the **List component**, all of its list item variants and content features can be used. You can incorporate icons, avatars, images, multiple lines of text, and more.

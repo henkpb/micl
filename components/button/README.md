@@ -1,5 +1,5 @@
 # Button
-This component implements the the [Material Design 3 Expressive Button](https://m3.material.io/components/buttons/overview) design. Buttons are interactive elements that enable users to trigger actions or navigate.
+This component implements the [Material Design 3 Expressive Button](https://m3.material.io/components/buttons/overview) design. Buttons are interactive elements that enable users to trigger actions or navigate.
 
 ## Basic Usage
 
@@ -26,8 +26,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Button component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Button component](https://henkpb.github.io/micl/button.html) is available for you to interact with.
+### Live Demo
+A live example of the [Button component](https://henkpb.github.io/micl/button.html) is available to interact with.
 
 ## Variants
 Buttons come in **five sizes**: extra small (`xs`), small (`s`), medium (`m`), large (`l`), and extra large (`xl`). To specify a size, append the appropriate postfix to the button's style class:

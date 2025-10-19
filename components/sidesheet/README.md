@@ -1,5 +1,5 @@
 # Side sheet
-This component implements the the [Material Design 3 Expressive Side sheet](https://m3.material.io/components/side-sheets/overview) design. Side sheets provide optional content and actions without interrupting the main content.
+This component implements the [Material Design 3 Expressive Side sheet](https://m3.material.io/components/side-sheets/overview) design. Side sheets provide optional content and actions without interrupting the main content.
 
 ## Basic Usage
 
@@ -32,8 +32,8 @@ Import the side sheet styles into your project:
 ### JavaScript
 No custom JavaScript is required for the core functionality of the side sheet component.
 
-### Demo
-A live example of the [Side sheet component](https://henkpb.github.io/micl/sidesheet.html) is available for you to interact with.
+### Live Demo
+A live example of the [Side sheet component](https://henkpb.github.io/micl/sidesheet.html) is available to interact with.
 
 ## Variants
 A **modal** side sheet blocks access to the rest of the page and must be dismissed explicitly by the user. This is suitable for critical tasks or information that requires a user's full attention.
