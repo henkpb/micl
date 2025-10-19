@@ -25,6 +25,7 @@
 
 :root {
     --md-sys-checkbox-border-width: 2px;
+    --md-sys-checkbox-check-thickness: 2px;
     --md-sys-checkbox-container-size: 18px;
     --md-sys-checkbox-state-layer-size: 40px;
 }
@@ -60,10 +61,11 @@ input[type=checkbox].micl-checkbox {
         inline-size: var(--md-sys-checkbox-check-width);
         block-size: 0;
         inset: 0;
-        inset-block-start: calc((var(--md-sys-checkbox-state-layer-size) - var(--md-sys-checkbox-check-height) - 4px) / 2);
-        inset-inline-start: calc((var(--md-sys-checkbox-state-layer-size) - var(--md-sys-checkbox-check-width) + 1px) / 2);
-        border-block-end: 2px var(--md-sys-color-on-primary) solid;
-        border-inline-start: 2px var(--md-sys-color-on-primary) solid;
+        inset-block-start: calc(-0.25 * var(--md-sys-checkbox-container-size));
+        inset-inline-start: 1px;
+        margin: auto;
+        border-block-end: var(--md-sys-checkbox-check-thickness) var(--md-sys-color-on-primary) solid;
+        border-inline-start: var(--md-sys-checkbox-check-thickness) var(--md-sys-color-on-primary) solid;
         transform: rotate(-45deg);
         transform-origin: center;
         clip-path: rect(0 2px 0 0);
@@ -75,12 +77,6 @@ input[type=checkbox].micl-checkbox {
           inset-inline-start 0ms linear var(--md-sys-motion-duration-short3),
           border-inline-start-width 0ms linear var(--md-sys-motion-duration-short3),
           transform 0ms linear var(--md-sys-motion-duration-short3);
-    }
-    @supports (-moz-appearance:none) {
-        &::before {
-            inset-block-start: 16px;
-            inset-inline-start: 7px;
-        }
     }
     &::after {
         --md-sys-checkbox-background-color: transparent;
@@ -106,7 +102,7 @@ input[type=checkbox].micl-checkbox {
 
         &::before {
             block-size: var(--md-sys-checkbox-check-height);
-            clip-path: rect(0 13px 18px 0);
+            clip-path: rect(0 calc(var(--md-sys-checkbox-container-size) - 5px) 18px 0);
             transition:
                 block-size var(--md-sys-motion-duration-short3) var(--md-sys-checkbox-motion-spatial),
                 clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--md-sys-checkbox-motion-spatial);
@@ -121,10 +117,8 @@ input[type=checkbox].micl-checkbox {
         }
     }
     &:indeterminate::before {
-        inset-block-start: 14px;
-        inset-inline-start: 14px;
+        inset-inline-start: 2px;
         border-inline-start-width: 0px;
-        clip-path: rect(0 12px 18px 0);
         transform: rotate(0deg);
     }
     &.micl-checkbox--error:not(:disabled) {
@@ -233,12 +227,14 @@ label:has(+ input[type=checkbox].micl-checkbox) {
 
 [dir=rtl] input[type=checkbox].micl-checkbox {
     &::before {
-        inset-inline-start: 11px;
-        transform: rotate(45deg);
         clip-path: rect(0 18px 8px 16px);
     }
-    &:checked::before,
+    &:checked::before {
+        clip-path: rect(0 18px 8px 2px);
+        transform: rotate(45deg);
+    }
     &:indeterminate::before {
-        clip-path: rect(0 18px 8px 3px);
+        clip-path: rect(0 18px 8px 2px);
+        transform: rotate(0deg);
     }
 }

@@ -82,6 +82,7 @@ You can customize the appearance of the Checkbox component by overriding its glo
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
 | --md-sys-checkbox-border-width | 2px | Controls the thickness of the checkbox's border |
+| --md-sys-checkbox-check-thickness | 2px | The thickness of the checkmark |
 | --md-sys-checkbox-container-size | 18px | Defines the size of the checkbox itself |
 
 **Example: Changing the border width of a checkbox**
