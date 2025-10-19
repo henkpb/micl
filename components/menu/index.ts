@@ -25,8 +25,8 @@ export default (() =>
 {
     const getOrigin = (invoker: Element, popover: Element): string =>
     {
-        const invokerRect = invoker.getBoundingClientRect(),
-              popoverRect = popover.getBoundingClientRect();
+        const invokerRect = invoker.getBoundingClientRect();
+        const popoverRect = popover.getBoundingClientRect();
 
         return ((invokerRect.x > popoverRect.x) ? 'right ' : 'left ') +
                ((invokerRect.y > popoverRect.y) ? 'bottom' : 'top');

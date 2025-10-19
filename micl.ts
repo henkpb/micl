@@ -21,6 +21,7 @@
 
 import _bottomsheet, { bottomsheetSelector } from './components/bottomsheet';
 import _button, { buttonSelector } from './components/button';
+import _checkboxgroup, { checkboxGroupSelector } from './components/checkbox';
 import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
@@ -45,6 +46,7 @@ export default (() =>
     const componentMap: Record<string, ComponentEntry<any>> = {
         [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
         [buttonSelector]        : { component: _button, type: HTMLButtonElement },
+        [checkboxGroupSelector] : { component: _checkboxgroup, type: HTMLElement },
         [listSelector]          : { component: _list, type: HTMLElement },
         [menuSelector]          : { component: _menu, type: HTMLElement },
         [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },

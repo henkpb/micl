@@ -23,9 +23,8 @@ export const listSelector = '.micl-list-item-one,.micl-list-item-two,.micl-list-
 
 export default (() =>
 {
-    const
-        isDisabled = (item: HTMLElement | null): boolean => !!item && item.classList.contains('micl-list-item--disabled'),
-        isSelected = (item: HTMLElement | null): boolean => !!item && item.matches(':has(input[type=checkbox]:checked)');
+    const isDisabled = (item: HTMLElement | null): boolean => !!item && item.classList.contains('micl-list-item--disabled');
+    const isSelected = (item: HTMLElement | null): boolean => !!item && item.matches(':has(input[type=checkbox]:checked)');
 
     return {
         keydown: (event: Event) =>
