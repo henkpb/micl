@@ -81,7 +81,7 @@ Use the `micl-appbar__trailing` (or: `micl-appbar__trailing-icon`) class for ele
 ### Sticky app bar
 The app bar is 'glued' to the top of the page when one of the following conditions is met:
 
-- The [body region](../../layout/README.md) contains only one pane.
+- The [body region](../../foundations/layout/README.md) contains only one pane.
 - The body region contains two or more panes and the page has a compact size.
 - The body region contains two or more panes, has the `micl-body--stacked-to-expanded` class and the page has a compact or medium size.
 - The body region contains two or more panes, has the `micl-body--stacked-to-large` class and the page has a compact, medium or expanded size.
