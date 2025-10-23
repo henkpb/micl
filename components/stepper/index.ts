@@ -19,145 +19,179 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import form from '../../foundations/form';
+
 export const stepperSelector = '.micl-stepper';
 
 export default (() =>
 {
-    const getCurrentStep = (stepper: HTMLElement): HTMLElement | null =>
+    const getSelectedStep = (stepper: HTMLElement): HTMLElement | null =>
     {
-        let step = stepper.querySelector('.micl-stepper__step--current') as HTMLElement;
+        let step = stepper.querySelector('.micl-stepper__step[aria-selected=true]') as HTMLElement;
         if (step) {
             return step;
         }
         step = stepper.querySelector('.micl-stepper__step') as HTMLElement;
-        if (!step) {
-            return null;
+        if (step) {
+            step.setAttribute('aria-selected', 'true');
         }
-        step.classList.add('micl-stepper__step--current');
         return step;
     };
 
-    const endTransitionCurrent = (event: Event): void =>
+    const getStepNumber = (stepper: HTMLElement, step: HTMLElement): number =>
     {
-        if (!event.currentTarget || ((event as TransitionEvent).propertyName !== 'transform')) {
-            return;
+        let stepNumber = 1;
+        let sibling    = step.previousElementSibling;
+
+        while (sibling) {
+            if (sibling.classList.contains('micl-stepper__step')) {
+                stepNumber++;
+            }
+            sibling = sibling.previousElementSibling;
         }
-        (event.currentTarget as Element).classList.remove(
-            'micl-stepper__step--fromcurrent',
-            'micl-stepper__step--tocurrent'
-        );
-        event.currentTarget.removeEventListener('transitionend', endTransitionCurrent);
+        return stepNumber;
     };
 
-    const showHideActions = (actions: HTMLElement[], step: HTMLElement | null): void =>
+    const endTransitionSelected = (event: Event): void =>
     {
-        step && actions.forEach(action =>
+        const target = event.currentTarget as Element;
+        if ((event as TransitionEvent).propertyName !== 'transform' || !target) {
+            return;
+        }
+        target.classList.remove(
+            'micl-stepper__step--fromselected',
+            'micl-stepper__step--toselected'
+        );
+        target.removeEventListener('transitionend', endTransitionSelected);
+    };
+
+    const goToSibling = (selectedStep: HTMLElement, sibling: HTMLElement): void =>
+    {
+        selectedStep.addEventListener('transitionend', endTransitionSelected);
+        selectedStep.classList.add('micl-stepper__step--fromselected');
+        selectedStep.offsetHeight;
+
+        sibling.addEventListener('transitionend', endTransitionSelected);
+        sibling.classList.add('micl-stepper__step--toselected');
+        sibling.offsetHeight;
+
+        sibling.setAttribute('aria-selected', 'true');
+        selectedStep.setAttribute('aria-selected', 'false');
+        selectedStep.offsetHeight;
+    };
+
+    const showHideActions = (actions: HTMLElement[], step: HTMLElement): void =>
+    {
+        actions.forEach(action =>
         {
-            action.classList.toggle('micl-hidden', !step[
-                action.classList.contains('micl-stepper--gonext') ?
-                'nextElementSibling' : 'previousElementSibling'
-            ]?.classList.contains('micl-stepper__step'));
+            const siblingKey = action.classList.contains('micl-stepper__action-back') ?
+                               'previousElementSibling' : 'nextElementSibling';
+            const hasSibling = (step[siblingKey] as Element)?.classList.contains('micl-stepper__step');
+
+            action.classList.toggle('micl-hidden', !hasSibling);
         });
     };
 
     const showHideElements = (stepper: HTMLElement, step: HTMLElement): void =>
     {
+        const selectedStep = getStepNumber(stepper, step);
+
         stepper.querySelectorAll<HTMLElement>('[data-step]').forEach(element =>
         {
-            element.classList.toggle('micl-hidden', element.dataset.step !== step.dataset.miclstep);
+            const shouldHide = element.dataset.step != `${selectedStep}`;
+            element.classList.toggle('micl-hidden', shouldHide);
         });
     };
 
-    const checkStepValidity = (stepper: HTMLElement): HTMLElement | null =>
+    const updateProgress = (stepper: HTMLElement, step: HTMLElement): void =>
     {
-        let currentStep = getCurrentStep(stepper);
-        if (currentStep) {
-            currentStep.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
-                'input:required,select:required,textarea:required'
-            ).forEach(input =>
-            {
-                if (!input.checkValidity()) {
-                    currentStep = null;
-                }
-            });
+        const index      = getStepNumber(stepper, step);
+        const totalSteps = stepper.querySelectorAll('.micl-stepper__step').length;
 
-            currentStep?.querySelectorAll<HTMLFieldSetElement>(
-                'fieldset.micl-checkbox-group[data-miclname]'
-            ).forEach(fieldset =>
-            {
-                let nrChecked = 0;
-                fieldset.querySelectorAll<HTMLInputElement>(
-                    `.micl-checkbox[name="${fieldset.dataset.miclname}"]`
-                ).forEach(checkbox =>
-                {
-                    if (checkbox.checked) {
-                        nrChecked++;
-                    }
-                });
-                if (nrChecked === 0) {
-                    console.log("NOT ENGOUGH CHECKS");
-                }
-            });
-        }
-        return currentStep;
+        stepper.querySelectorAll('.micl-stepper__progress-current').forEach(current =>
+        {
+            current.textContent = `${index}`;
+        });
+        stepper.querySelectorAll('.micl-stepper__progress-total').forEach(total =>
+        {
+            total.textContent = `${totalSteps}`;
+        });
+        stepper.querySelectorAll('.micl-stepper__progress-dots').forEach(dots =>
+        {
+            const fragment = document.createDocumentFragment();
+
+            dots.innerHTML = '';
+            for (let i = 1; i <= totalSteps; i++) {
+                let dot = document.createElement('span');
+                dot.classList.add((i <= index) ? 'micl-stepper__progress-dot-done' :
+                                                 'micl-stepper__progress-dot');
+                fragment.appendChild(dot);
+            }
+            dots.appendChild(fragment);
+        });
     };
 
     return {
         initialize: (stepper: HTMLElement): void =>
         {
-            if (
-                !stepper.matches(stepperSelector)
-                || stepper.dataset.miclinitialized
-            ) {
+            if (!stepper.matches(stepperSelector) || stepper.dataset.miclinitialized) {
                 return;
             }
             stepper.dataset.miclinitialized = '1';
 
-            stepper.querySelectorAll<HTMLElement>('.micl-stepper__step').forEach((step, index) =>
-            {
-                step.dataset.miclstep = `${index + 1}`;
-            });
+            const step    = getSelectedStep(stepper);
+            const actions = Array.from(stepper.querySelectorAll<HTMLElement>(
+                '.micl-stepper__action-back,.micl-stepper__action-next'
+            ));
 
-            const
-                step    = getCurrentStep(stepper),
-                actions = stepper.querySelectorAll<HTMLButtonElement>(
-                    'button.micl-stepper--goback,button.micl-stepper--gonext'
-                );
-            showHideActions([...actions], step);
-            step && showHideElements(stepper, step);
+            if (step) {
+                showHideActions(actions, step);
+                showHideElements(stepper, step);
+                updateProgress(stepper, step);
+            }
 
             actions.forEach(action =>
             {
-                action.addEventListener('click', () =>
+                action.addEventListener('click', function(event: Event)
                 {
-                    const currentStep = checkStepValidity(stepper);
-                    if (!currentStep) {
+                    const back         = this.classList.contains('micl-stepper__action-back');
+                    const selectedStep = getSelectedStep(stepper);
+
+                    if (
+                        !selectedStep
+                        || (!back
+                            && selectedStep instanceof HTMLFieldSetElement
+                            && !form.validateFieldSet(selectedStep, true))
+                    ) {
+                        if (!back) {
+                            event.stopImmediatePropagation();
+                        }
                         return;
                     }
-                    const
-                        goNext  = action.classList.contains('micl-stepper--gonext'),
-                        sibling = currentStep[
-                            goNext ? 'nextElementSibling' : 'previousElementSibling'
-                        ] as HTMLElement;
+                    const sibling = selectedStep[
+                        back ? 'previousElementSibling' : 'nextElementSibling'
+                    ] as HTMLElement;
 
                     if (sibling?.classList.contains('micl-stepper__step')) {
-                        currentStep.addEventListener('transitionend', endTransitionCurrent);
-                        currentStep.classList.add('micl-stepper__step--fromcurrent');
-                        currentStep.offsetHeight;
-
-                        sibling.addEventListener('transitionend', endTransitionCurrent);
-                        sibling.classList.add('micl-stepper__step--tocurrent');
-                        sibling.offsetHeight;
-
-                        sibling.classList.add('micl-stepper__step--current');
-                        currentStep.classList.remove('micl-stepper__step--current');
-                        currentStep.offsetHeight;
-
-                        showHideActions([...actions], sibling);
+                        goToSibling(selectedStep, sibling);
+                        showHideActions(actions, sibling);
                         showHideElements(stepper, sibling);
+                        updateProgress(stepper, sibling);
                     }
-                });
+                }, true);
             });
+
+            if (stepper instanceof HTMLFormElement) {
+                stepper.addEventListener('submit', (event: SubmitEvent) =>
+                {
+                    if (!event.submitter?.classList.contains('micl-form--dosubmit')) {
+                        event.preventDefault();
+                    }
+                    if (!form.validateForm(stepper, true)) {
+                        event.stopImmediatePropagation();
+                    }
+                }, true);
+            }
         }
     };
 })();
