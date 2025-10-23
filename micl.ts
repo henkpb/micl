@@ -33,7 +33,6 @@ interface ComponentEntry<T extends HTMLElement> {
     component: {
         initialize?: (element: T) => void,
         input?     : (event: Event) => void,
-        invalid?   : (event: Event) => void,
         keydown?   : (event: Event) => void,
         cleanup?   : (element: T) => void
     };
@@ -120,7 +119,7 @@ export default (() =>
             if (
                 (event.target as Element).matches(selector)
                 && event.target instanceof type
-                && ['input', 'invalid', 'keydown'].includes(event.type)
+                && ['input', 'keydown'].includes(event.type)
                 && typeof component[event.type as ComponentKey] === 'function'
             ) {
                 component[event.type as ComponentKey]?.(event);
@@ -165,7 +164,6 @@ export default (() =>
         // Delegated Event Handlers
         document.addEventListener('input', handleEvent);
         document.addEventListener('keydown', handleEvent);
-        document.addEventListener('invalid', handleEvent, true);
     };
 
     const loaded = () =>

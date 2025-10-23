@@ -25,14 +25,9 @@ export const selectSelector = '.micl-textfield-filled > select,.micl-textfield-o
 
 export default (() =>
 {
-    const isRequiredType = (
-        eventTarget: EventTarget | null
-    ): eventTarget is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
-    {
-        return eventTarget instanceof HTMLInputElement ||
-               eventTarget instanceof HTMLSelectElement ||
-               eventTarget instanceof HTMLTextAreaElement;
-    };
+    const isTextFieldElement = (target: EventTarget | null): target is
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
+        (target as Element).matches(`${textfieldSelector},${selectSelector},${textareaSelector}`);
 
     const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
     {
@@ -46,26 +41,6 @@ export default (() =>
         const counter = input.parentElement.querySelector('.micl-textfield__character-counter');
         if (counter) {
             counter.textContent = `${input.value.length}/${input.maxLength}`;
-        }
-    };
-
-    const handleInvalid = (
-        input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
-        isValid?: boolean
-    ): void => {
-        if (input.required) {
-            input.parentElement?.classList.toggle('micl-textfield--error', !isValid);
-
-            const supporting = input.parentElement?.querySelector(
-                '.micl-textfield__supporting-text'
-            ) as HTMLElement;
-
-            if (supporting) {
-                if (!isValid && !('micltext' in supporting.dataset)) {
-                    supporting.dataset.micltext = supporting.textContent;
-                }
-                supporting.textContent = input.validationMessage || supporting.dataset.micltext || '';
-            }
         }
     };
 
@@ -84,13 +59,13 @@ export default (() =>
             if (input instanceof HTMLSelectElement) {
                 input.addEventListener('mousedown', () =>
                 {
-                    const rect      = input.getBoundingClientRect();
-                    const roomAbove = rect.top;
-                    const roomBelow = window.innerHeight - rect.bottom;
+                    const rect       = input.getBoundingClientRect();
+                    const spaceAbove = rect.top;
+                    const spaceBelow = window.innerHeight - rect.bottom;
 
                     !input.matches(':open') && input.style.setProperty(
                         '--md-sys-select-picker-origin',
-                        roomAbove > roomBelow ? 'left bottom' : 'left top'
+                        spaceAbove > spaceBelow ? 'left bottom' : 'left top'
                     );
                 });
             }
@@ -101,8 +76,7 @@ export default (() =>
         input: (event: Event): void =>
         {
             if (
-                !isRequiredType(event.target)
-                || !event.target.matches(`${textfieldSelector},${selectSelector},${textareaSelector}`)
+                !isTextFieldElement(event.target)
                 || !event.target.dataset.miclinitialized
                 || event.target.disabled
             ) {
@@ -116,13 +90,7 @@ export default (() =>
                 delete event.target.dataset.miclvalue;
             }
 
-            handleInvalid(event.target, true);
             setCounter(event.target);
-        },
-
-        invalid: (event: Event): void =>
-        {
-            isRequiredType(event.target) && handleInvalid(event.target);
         }
     };
 })();

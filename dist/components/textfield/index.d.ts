@@ -4,6 +4,5 @@ export declare const selectSelector = ".micl-textfield-filled > select,.micl-tex
 declare const _default: {
     initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => void;
     input: (event: Event) => void;
-    invalid: (event: Event) => void;
 };
 export default _default;
