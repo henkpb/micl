@@ -28,7 +28,8 @@ export default (() =>
     const setErrorStateCheckbox = (element: HTMLInputElement): boolean =>
     {
         element.classList.toggle('micl-checkbox--error', !!element.validationMessage);
-        return !element.closest('fieldset[data-miclvalidate-checkboxes-name]');
+
+        return false;
     };
 
     const setErrorStateTextField = (textField: HTMLElement, message: string): boolean =>
@@ -52,7 +53,8 @@ export default (() =>
                 supporting.textContent = message;
             }
         }
-        return true;
+
+        return !!message && !!supporting;
     };
 
     const setErrorState = (element: HTMLElement): boolean =>
