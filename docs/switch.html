@@ -11,11 +11,15 @@
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card-filled .micl-card__content,
-        .micl-card-outlined.unselectedicon .micl-card__content {
+        .micl-card-filled.noicons .micl-card__content {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            text-align: end;
+        }
+        .micl-card-outlined.unselectedicon .micl-card__content {
+            display: flex;
+            flex-direction: column;
         }
         .micl-flex--vcenter {
             column-gap: 16px;
