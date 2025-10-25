@@ -23,33 +23,51 @@ import form from '../../foundations/form';
 
 export const stepperSelector = '.micl-stepper';
 
+const ACTIONS_SELECTOR = '.micl-stepper__action-back,.micl-stepper__action-next';
+const BUTTON_SELECTOR  = '.micl-stepper__header button[role=tab][aria-controls]';
+const STEP_CLASS       = 'micl-stepper__step';
+const STEP_SELECTOR    = '.' + STEP_CLASS;
+
 export default (() =>
 {
     const getSelectedStep = (stepper: HTMLElement): HTMLElement | null =>
     {
-        let step = stepper.querySelector('.micl-stepper__step[aria-selected=true]') as HTMLElement;
+        let step = stepper.querySelector(`${STEP_SELECTOR}[aria-current=step]`);
         if (step) {
-            return step;
+            return step as HTMLElement;
         }
-        step = stepper.querySelector('.micl-stepper__step') as HTMLElement;
-        if (step) {
-            step.setAttribute('aria-selected', 'true');
-        }
-        return step;
+        return setSelectedStep(stepper, stepper.querySelector(STEP_SELECTOR));
     };
 
     const getStepNumber = (stepper: HTMLElement, step: HTMLElement): number =>
     {
-        let stepNumber = 1;
-        let sibling    = step.previousElementSibling;
+        const allSteps = Array.from(stepper.querySelectorAll(STEP_SELECTOR));
+        const index    = allSteps.indexOf(step);
 
-        while (sibling) {
-            if (sibling.classList.contains('micl-stepper__step')) {
-                stepNumber++;
-            }
-            sibling = sibling.previousElementSibling;
+        return index + 1;
+    };
+
+    const setSelectedStep = (stepper: HTMLElement, step: HTMLElement | null): HTMLElement | null =>
+    {
+        if (!step) {
+            return null;
         }
-        return stepNumber;
+        let index = 0;
+        stepper.querySelectorAll(STEP_SELECTOR).forEach((e, i) =>
+        {
+            e.setAttribute('aria-current', e === step ? 'step' : 'false');
+            if (e === step) {
+                index = i;
+            }
+        });
+        const button = stepper.querySelectorAll(BUTTON_SELECTOR).item(index);
+        stepper.querySelectorAll(BUTTON_SELECTOR).forEach((e, i) =>
+        {
+            e.setAttribute('aria-selected', e === button ? 'true' : 'false');
+        });
+        refresh(stepper, step);
+
+        return step;
     };
 
     const endTransitionSelected = (event: Event): void =>
@@ -65,7 +83,7 @@ export default (() =>
         target.removeEventListener('transitionend', endTransitionSelected);
     };
 
-    const goToSibling = (selectedStep: HTMLElement, sibling: HTMLElement): void =>
+    const goToSibling = (stepper: HTMLElement, selectedStep: HTMLElement, sibling: HTMLElement): void =>
     {
         selectedStep.addEventListener('transitionend', endTransitionSelected);
         selectedStep.classList.add('micl-stepper__step--fromselected');
@@ -75,18 +93,18 @@ export default (() =>
         sibling.classList.add('micl-stepper__step--toselected');
         sibling.offsetHeight;
 
-        sibling.setAttribute('aria-selected', 'true');
-        selectedStep.setAttribute('aria-selected', 'false');
-        selectedStep.offsetHeight;
+        setSelectedStep(stepper, sibling);
     };
 
-    const showHideActions = (actions: HTMLElement[], step: HTMLElement): void =>
+    const isBackAction = (action: HTMLElement): boolean =>
+          action.classList.contains('micl-stepper__action-back');
+
+    const showHideActions = (stepper: HTMLElement, step: HTMLElement): void =>
     {
-        actions.forEach(action =>
+        Array.from(stepper.querySelectorAll<HTMLElement>(ACTIONS_SELECTOR)).forEach(action =>
         {
-            const siblingKey = action.classList.contains('micl-stepper__action-back') ?
-                               'previousElementSibling' : 'nextElementSibling';
-            const hasSibling = (step[siblingKey] as Element)?.classList.contains('micl-stepper__step');
+            const siblingKey = isBackAction(action) ? 'previousElementSibling' : 'nextElementSibling';
+            const hasSibling = (step[siblingKey] as Element)?.classList.contains(STEP_CLASS);
 
             action.classList.toggle('micl-hidden', !hasSibling);
         });
@@ -106,16 +124,15 @@ export default (() =>
     const updateProgress = (stepper: HTMLElement, step: HTMLElement): void =>
     {
         const index      = getStepNumber(stepper, step);
-        const totalSteps = stepper.querySelectorAll('.micl-stepper__step').length;
+        const totalSteps = stepper.querySelectorAll(STEP_SELECTOR).length;
+        const linear     = !stepper.classList.contains('micl-stepper--nonlinear');
+        const setText    = (selector: string, content: string): void => {
+            stepper.querySelectorAll(selector).forEach(e => { e.textContent = content; });
+        };
 
-        stepper.querySelectorAll('.micl-stepper__progress-current').forEach(current =>
-        {
-            current.textContent = `${index}`;
-        });
-        stepper.querySelectorAll('.micl-stepper__progress-total').forEach(total =>
-        {
-            total.textContent = `${totalSteps}`;
-        });
+        setText('.micl-stepper__progress-current', `${index}`);
+        setText('.micl-stepper__progress-total', `${totalSteps}`);
+
         stepper.querySelectorAll('.micl-stepper__progress-dots').forEach(dots =>
         {
             const fragment = document.createDocumentFragment();
@@ -123,12 +140,28 @@ export default (() =>
             dots.innerHTML = '';
             for (let i = 1; i <= totalSteps; i++) {
                 let dot = document.createElement('span');
-                dot.classList.add((i <= index) ? 'micl-stepper__progress-dot-done' :
-                                                 'micl-stepper__progress-dot');
+                dot.classList.add('micl-stepper__progress-dot');
+                if ((linear && (i <= index)) || (!linear && (i === index))) {
+                    dot.classList.add('micl-stepper__progress--done');
+                }
                 fragment.appendChild(dot);
             }
             dots.appendChild(fragment);
         });
+        stepper.querySelectorAll(BUTTON_SELECTOR).forEach((button, i) =>
+        {
+            button.classList.toggle(
+                'micl-stepper__progress--done',
+                linear ? i + 1 <= index : i + 1 === index
+            );
+        });
+    };
+
+    const refresh = (stepper: HTMLElement, step: HTMLElement): void =>
+    {
+        showHideActions(stepper, step);
+        showHideElements(stepper, step);
+        updateProgress(stepper, step);
     };
 
     return {
@@ -139,22 +172,39 @@ export default (() =>
             }
             stepper.dataset.miclinitialized = '1';
 
-            const step    = getSelectedStep(stepper);
-            const actions = Array.from(stepper.querySelectorAll<HTMLElement>(
-                '.micl-stepper__action-back,.micl-stepper__action-next'
-            ));
+            const step   = getSelectedStep(stepper);
+            const header = stepper.querySelector('.micl-stepper__header');
 
             if (step) {
-                showHideActions(actions, step);
-                showHideElements(stepper, step);
-                updateProgress(stepper, step);
+                refresh(stepper, step);
+
+                header?.querySelectorAll<HTMLButtonElement>(
+                    'button[role=tab][aria-controls]'
+                ).forEach(button =>
+                {
+                    button.addEventListener('click', () =>
+                    {
+                        if (
+                            ('ariaControlsElements' in Element.prototype)
+                            && button.ariaControlsElements
+                        ) {
+                            setSelectedStep(stepper, button.ariaControlsElements[0] as HTMLElement);
+                        }
+                        else {
+                            const id = button.getAttribute('aria-controls');
+                            if (id) {
+                                setSelectedStep(stepper, document.getElementById(id));
+                            }
+                        }
+                    });
+                });
             }
 
-            actions.forEach(action =>
+            Array.from(stepper.querySelectorAll<HTMLElement>(ACTIONS_SELECTOR)).forEach(action =>
             {
                 action.addEventListener('click', function(event: Event)
                 {
-                    const back         = this.classList.contains('micl-stepper__action-back');
+                    const back         = isBackAction(this);
                     const selectedStep = getSelectedStep(stepper);
 
                     if (
@@ -172,11 +222,8 @@ export default (() =>
                         back ? 'previousElementSibling' : 'nextElementSibling'
                     ] as HTMLElement;
 
-                    if (sibling?.classList.contains('micl-stepper__step')) {
-                        goToSibling(selectedStep, sibling);
-                        showHideActions(actions, sibling);
-                        showHideElements(stepper, sibling);
-                        updateProgress(stepper, sibling);
+                    if (sibling?.classList.contains(STEP_CLASS)) {
+                        goToSibling(stepper, selectedStep, sibling);
                     }
                 }, true);
             });

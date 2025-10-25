@@ -23,6 +23,7 @@
 @use '../../styles/motion';
 
 :root {
+    --md-sys-stepper-counter-style: decimal;
     --md-sys-stepper-dot-size: 12px;
 }
 body {
@@ -42,7 +43,33 @@ body {
     background-color: inherit;
 
     .micl-stepper__header {
+        --md-sys-stepper-dot-size: 24px;
 
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-inline: -10px;
+        background-color: inherit;
+        background-image: linear-gradient(90deg, var(--md-sys-divider-color), var(--md-sys-divider-color));
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 1px;
+        counter-reset: dotnumber;
+
+        button {
+            background-color: inherit;
+            pointer-events: none;
+
+            &.micl-stepper__progress--done {
+                pointer-events: inherit;
+            }
+        }
+        .micl-stepper__progress-dot::before {
+            content: counter(dotnumber, var(--md-sys-stepper-counter-style));
+        }
+    }
+    &.micl-stepper--nonlinear .micl-stepper__header button {
+        pointer-events: inherit;
     }
     .micl-stepper__steps {
         display: grid;
@@ -65,13 +92,13 @@ body {
                 opacity var(--md-sys-stepper-motion-duration) linear,
                 transform var(--md-sys-stepper-motion-duration) var(--md-sys-stepper-motion-spatial);
 
-            &:has(~ .micl-stepper__step[aria-selected=true]) {
+            &:has(~ .micl-stepper__step[aria-current=step]) {
                 transform: translateX(-100%);
             }
             &.micl-stepper__step--toselected {
                 visibility: visible;
             }
-            &[aria-selected=true] {
+            &[aria-current=step] {
                 visibility: visible;
                 opacity: 100%;
                 transform: translateX(0%);
@@ -103,16 +130,35 @@ body {
         align-items: center;
         column-gap: 4px;
     }
-    .micl-stepper__progress-dot,
-    .micl-stepper__progress-dot-done {
+    .micl-stepper__progress-dot {
         block-size: var(--md-sys-stepper-dot-size);
         inline-size: var(--md-sys-stepper-dot-size);
+        min-inline-size: var(--md-sys-stepper-dot-size);
+        line-height: var(--md-sys-stepper-dot-size);
         border-radius: calc(var(--md-sys-stepper-dot-size) / 2);
+        text-align: center;
         background-color: var(--md-sys-color-on-surface);
+        color: var(--md-sys-color-surface);
         opacity: 38%;
+        counter-increment: dotnumber 1;
     }
-    .micl-stepper__progress-dot-done {
+    .micl-stepper__progress--done.micl-stepper__progress-dot,
+    .micl-stepper__progress--done .micl-stepper__progress-dot {
         background-color: var(--md-sys-stepper-dot-done-color);
+        color: var(--md-sys-color-on-tertiary-container);
         opacity: 100%;
+    }
+}
+
+[dir=rtl] {
+    .micl-stepper .micl-stepper__steps .micl-stepper__step {
+        transform: translateX(-100%);
+
+        &:has(~ .micl-stepper__step[aria-current=step]) {
+            transform: translateX(100%);
+        }
+        &[aria-current=step] {
+            transform: translateX(0%);
+        }
     }
 }
