@@ -21,6 +21,11 @@ Import the bottom sheet styles into your project:
 @use "material-inspired-component-library/dist/bottomsheet";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support **resizable** bottom sheets. The library will automatically initialize new components as they're added to the DOM.
 

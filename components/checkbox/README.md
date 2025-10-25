@@ -18,6 +18,11 @@ Import the checkbox styles into your project:
 @use "material-inspired-component-library/dist/checkbox";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support checkbox groups:
 

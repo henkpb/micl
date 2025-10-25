@@ -28,6 +28,11 @@ Import the styles for both the menu and list components into your project:
 @use "material-inspired-component-library/dist/menu";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript for functionality:
 

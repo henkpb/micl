@@ -19,6 +19,11 @@ Import the badge styles into your project:
 @use "material-inspired-component-library/dist/badge";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 

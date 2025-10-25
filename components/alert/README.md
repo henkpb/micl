@@ -23,6 +23,11 @@ Import the alert styles into your project:
 @use "material-inspired-component-library/dist/alert";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 

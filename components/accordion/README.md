@@ -34,6 +34,11 @@ Import the list styles into your project:
 @use "material-inspired-component-library/dist/list";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support keyboard navigation:
 

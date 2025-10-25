@@ -29,6 +29,11 @@ Import the side sheet styles into your project:
 @use "material-inspired-component-library/dist/sidesheet";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of the side sheet component.
 

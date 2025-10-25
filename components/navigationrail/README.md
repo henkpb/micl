@@ -30,6 +30,11 @@ Import the navigation rail styles into your project:
 @use "material-inspired-component-library/dist/navigationrail";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support keyboard navigation. The library will automatically initialize new components as they're added to the DOM.
 

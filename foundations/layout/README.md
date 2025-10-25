@@ -31,6 +31,11 @@ Import the layout styles into your project:
 @use "material-inspired-component-library/dist/layout";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ## Layout Components Explained
 
 ### Window

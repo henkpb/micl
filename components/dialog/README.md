@@ -28,6 +28,11 @@ Import the dialog styles into your project:
 @use "material-inspired-component-library/dist/dialog";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component, as the native popover attribute handles the open/close behavior.
 

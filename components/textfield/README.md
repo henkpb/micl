@@ -20,6 +20,11 @@ Import the text field styles into your project:
 @use "material-inspired-component-library/dist/textfield";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript for interactive features like the **character counter**:
 

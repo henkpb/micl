@@ -17,6 +17,11 @@ Import the slider styles into your project:
 @use "material-inspired-component-library/dist/slider";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript for functionality:
 

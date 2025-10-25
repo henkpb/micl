@@ -22,6 +22,11 @@ Import the app bar styles into your project:
 @use "material-inspired-component-library/dist/appbar";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
