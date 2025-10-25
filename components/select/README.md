@@ -1,5 +1,5 @@
 # Select
-This component implements the [Material Design 3 Expressive Select](https://m3.material.io/components/menus/guidelines#ee2f3664-c926-47ab-acbf-2ab675506932) design. A select component is used to offer the user with a set of options from which the user can select a single one. 
+This component implements the [Material Design 3 Expressive Select](https://m3.material.io/components/menus/guidelines#ee2f3664-c926-47ab-acbf-2ab675506932) design. A select component is used to offer the user with a set of options from which the user can select a single one.
 
 ## Basic Usage
 
