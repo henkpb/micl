@@ -71,6 +71,7 @@ button.micl-button-outlined-xl {
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
         border-radius var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects),

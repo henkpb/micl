@@ -45,6 +45,7 @@ input[type=radio].micl-radio {
     border: calc((var(--md-sys-target-size) - var(--md-sys-radio-state-layer-size)) / 2) solid transparent;
     background-clip: content-box;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     border-radius: var(--md-sys-shape-corner-full);
     outline-offset: -7px;
 
@@ -129,6 +130,7 @@ input[type=radio].micl-radio {
 
 input[type=radio].micl-radio:not(:disabled) + label,
 label:has(+ input[type=radio].micl-radio:not(:disabled)) {
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 }
 input[type=radio].micl-radio + label,

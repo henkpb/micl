@@ -62,9 +62,10 @@ button.micl-iconbutton-outlined-xl {
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
+    -webkit-tap-highlight-color: transparent;
     color: var(--md-sys-color-on-surface-variant);
-    cursor: pointer;
     font-variation-settings: 'FILL' 0;
+    cursor: pointer;
     transition:
         border-radius var(--md-sys-iconbutton-motion-duration) var(--md-sys-iconbutton-motion-effects),
         font-variation-settings var(--md-sys-iconbutton-motion-duration) linear,

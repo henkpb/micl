@@ -64,6 +64,7 @@
         &> summary.micl-list-item-two,
         &> summary.micl-list-item-three {
             position: relative;
+            -webkit-tap-highlight-color: transparent;
 
             &::-webkit-details-marker {
                 display: none;
