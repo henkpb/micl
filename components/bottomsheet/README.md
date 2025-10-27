@@ -1,5 +1,5 @@
 # Bottom sheet
-This component implements the the [Material Design 3 Expressive Bottom sheet](https://m3.material.io/components/bottom-sheets/overview) design. Bottom sheets show secondary content anchored to the bottom of the screen.
+This component implements the [Material Design 3 Expressive Bottom sheet](https://m3.material.io/components/bottom-sheets/overview) design. Bottom sheets show secondary content anchored to the bottom of the screen.
 
 ## Basic Usage
 
@@ -21,6 +21,11 @@ Import the bottom sheet styles into your project:
 @use "material-inspired-component-library/dist/bottomsheet";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support **resizable** bottom sheets. The library will automatically initialize new components as they're added to the DOM.
 
@@ -28,8 +33,8 @@ This component requires JavaScript to support **resizable** bottom sheets. The l
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
-### Demo
-A live example of the [Bottom sheet component](https://henkpb.github.io/micl/bottomsheet.html) is available for you to interact with.
+### Live Demo
+A live example of the [Bottom sheet component](https://henkpb.github.io/micl/bottomsheet.html) is available to interact with.
 
 ## Variants
 Setting the `popover` attribute to `manual` lets a bottom sheet co-exist and be interactive with the rest of the page.

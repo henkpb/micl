@@ -1,5 +1,5 @@
 # Navigation rail
-This component implements the the [Material Design 3 Expressive Navigation rail](https://m3.material.io/components/navigation-rail/overview) design.
+This component implements the [Material Design 3 Expressive Navigation rail](https://m3.material.io/components/navigation-rail/overview) design.
 
 ## Basic Usage
 
@@ -30,6 +30,11 @@ Import the navigation rail styles into your project:
 @use "material-inspired-component-library/dist/navigationrail";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support keyboard navigation. The library will automatically initialize new components as they're added to the DOM.
 
@@ -37,8 +42,8 @@ This component requires JavaScript to support keyboard navigation. The library w
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
-### Demo
-A live example of the [Navigation rail component](https://henkpb.github.io/micl/navigationrail.html) is available for you to interact with.
+### Live Demo
+A live example of the [Navigation rail component](https://henkpb.github.io/micl/navigationrail.html) is available to interact with.
 
 ## Variants
 The basic example creates a **collapsed** navigation rail. Add a menu button to allow the user to toggle between a **collapsed** and an **expanded** view.

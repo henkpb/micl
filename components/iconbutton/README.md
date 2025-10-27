@@ -1,5 +1,5 @@
 # Icon button
-This component implements the the [Material Design 3 Expressive Icon button](https://m3.material.io/components/icon-buttons/overview) design. Icon buttons allow users to perform a single action with a minimal visual footprint.
+This component implements the [Material Design 3 Expressive Icon button](https://m3.material.io/components/icon-buttons/overview) design. Icon buttons allow users to perform a single action with a minimal visual footprint.
 
 ## Basic Usage
 
@@ -19,6 +19,11 @@ Import the icon button styles into your project:
 @use "material-inspired-component-library/dist/iconbutton";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript for interactive features like the **toggle logic**:
 
@@ -28,8 +33,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Icon button component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Icon button component](https://henkpb.github.io/micl/iconbutton.html) is available for you to interact with.
+### Live Demo
+A live example of the [Icon button component](https://henkpb.github.io/micl/iconbutton.html) is available to interact with.
 
 ## Variants
 Icon buttons come in **five sizes**: extra small (`xs`), small (`s`), medium (`m`), large (`l`), and extra large (`xl`). To specify a size, append the appropriate postfix to the button's style class:

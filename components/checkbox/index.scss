@@ -48,6 +48,7 @@ input[type=checkbox].micl-checkbox {
     border: calc((var(--md-sys-target-size) - var(--md-sys-checkbox-state-layer-size)) / 2) solid transparent;
     background-clip: content-box;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     border-radius: var(--md-sys-shape-corner-full);
     outline-offset: -4px;
 
@@ -218,6 +219,7 @@ input[type=checkbox].micl-checkbox {
 
 input[type=checkbox].micl-checkbox:not(:disabled) + label,
 label:has(+ input[type=checkbox].micl-checkbox:not(:disabled)) {
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 }
 input[type=checkbox].micl-checkbox + label,

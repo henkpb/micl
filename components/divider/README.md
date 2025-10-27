@@ -1,5 +1,5 @@
 # Divider
-This component implements the the [Material Design 3 Expressive Divider](https://m3.material.io/components/divider/overview) design. Dividers are thin lines that separate content into distinct sections.
+This component implements the [Material Design 3 Expressive Divider](https://m3.material.io/components/divider/overview) design. Dividers are thin lines that separate content into distinct sections.
 
 ## Basic Usage
 
@@ -17,11 +17,16 @@ Import the divider styles into your project:
 @use "material-inspired-component-library/dist/divider";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [Divider component](https://henkpb.github.io/micl/divider.html) is available for you to interact with.
+### Live Demo
+A live example of the [Divider component](https://henkpb.github.io/micl/divider.html) is available to interact with.
 
 ## Variants
 The Divider component offers five CSS classes for different divider styles:

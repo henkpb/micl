@@ -1,5 +1,5 @@
 # App Bar
-This component implements the the [Material Design 3 Expressive App Bar](https://m3.material.io/components/app-bars/overview) design. The app bar serves as the top container for a page, displaying the page title, primary actions, and navigation options.
+This component implements the [Material Design 3 Expressive App Bar](https://m3.material.io/components/app-bars/overview) design. The app bar serves as the top container for a page, displaying the page title, primary actions, and navigation options.
 
 ## Basic Usage
 
@@ -22,11 +22,16 @@ Import the app bar styles into your project:
 @use "material-inspired-component-library/dist/appbar";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [App Bar component](https://henkpb.github.io/micl/index.html) is available for you to interact with.
+### Live Demo
+A live example of the [App Bar component](https://henkpb.github.io/micl/index.html) is available to interact with.
 
 ## Variants
 The app bar component supports three sizes: **small**, **medium** (flexible), and **large** (flexible). Use a modifier class to specify a size other than the default small size.
@@ -81,7 +86,7 @@ Use the `micl-appbar__trailing` (or: `micl-appbar__trailing-icon`) class for ele
 ### Sticky app bar
 The app bar is 'glued' to the top of the page when one of the following conditions is met:
 
-- The [body region](../../layout/README.md) contains only one pane.
+- The [body region](../../foundations/layout/README.md) contains only one pane.
 - The body region contains two or more panes and the page has a compact size.
 - The body region contains two or more panes, has the `micl-body--stacked-to-expanded` class and the page has a compact or medium size.
 - The body region contains two or more panes, has the `micl-body--stacked-to-large` class and the page has a compact, medium or expanded size.

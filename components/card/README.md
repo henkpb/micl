@@ -1,5 +1,5 @@
 # Card
-This component implements the the [Material Design 3 Expressive Card](https://m3.material.io/components/cards/overview) design. Cards display content and actions about a single subject.
+This component implements the [Material Design 3 Expressive Card](https://m3.material.io/components/cards/overview) design. Cards display content and actions about a single subject.
 
 ## Basic Usage
 
@@ -19,14 +19,19 @@ Import the card styles into your project:
 @use "material-inspired-component-library/dist/card";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
-### Demo
-A live example of the [Card component](https://henkpb.github.io/micl/card.html) is available for you to interact with.
+### Live Demo
+A live example of the [Card component](https://henkpb.github.io/micl/card.html) is available to interact with.
 
 ## Variants
-Cards come in **three distinct styles**:
+Cards are available in **three distinct styles**:
 
 - `micl-card-elevated`: A card with a subtle shadow, visually lifted from the background. This is the style shown in Basic Usage.
 
@@ -41,6 +46,7 @@ Cards come in **three distinct styles**:
 
 ### Card Content Structure
 While the card container is the only required element, the Card component provides several optional utility classes to help structure your card's content:
+
 ```HTML
 <div class="micl-card-outlined" tabindex="0">
   <img alt="Descriptive image text" class="micl-card__image" src="/path/to/your/image.jpg">

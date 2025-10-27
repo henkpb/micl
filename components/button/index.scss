@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations/layout';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -70,6 +71,7 @@ button.micl-button-outlined-xl {
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
         border-radius var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects),
@@ -112,6 +114,7 @@ button.micl-button-outlined-xs {
     position: relative;
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 12px;
 
@@ -157,6 +160,7 @@ button.micl-button-outlined-s {
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 16px;
 
@@ -202,6 +206,7 @@ button.micl-button-outlined-m {
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 24px;
 
@@ -238,6 +243,7 @@ button.micl-button-outlined-l {
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
     column-gap: 12px;
     padding-inline: 48px;
 
@@ -274,6 +280,7 @@ button.micl-button-outlined-xl {
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
     column-gap: 16px;
     padding-inline: 64px;
 

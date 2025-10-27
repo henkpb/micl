@@ -48,6 +48,7 @@ input[type=checkbox].micl-switch {
     margin: 0;
     border-radius: calc(var(--md-sys-switch-target-height) / 2);
     outline: none;
+    -webkit-tap-highlight-color: transparent;
 
     &::before {
         content: "";
@@ -172,6 +173,7 @@ input[type=checkbox].micl-switch {
 
 input[type=checkbox].micl-switch:not(:disabled) + label,
 label:has(+ input[type=checkbox].micl-switch:not(:disabled)) {
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 }
 input[type=checkbox].micl-switch + label,

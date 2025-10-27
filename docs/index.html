@@ -6,7 +6,7 @@
     <meta name="description" content="The Material-Inspired Component Library (MICL) Showcase">
     <title>MICL Showcase</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,favorite,globe,inbox,link,menu,menu_open,more_vert,newspaper,outbox,person,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,error,favorite,globe,inbox,link,menu,menu_open,more_vert,newspaper,outbox,person,share&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -128,39 +128,48 @@
                             <h2>Card</h2>
                         </div>
                         <span class="micl-card__supporting-text">A card is a versatile component that groups related elements. It can hold a wide range of content, including images, headlines, supporting text, and buttons. Cards are designed with flexible layouts and dimensions that adapt to their contents.</span>
-                        <div class="micl-card__content" style="display:flex;justify-content:space-between;padding-block-start:16px">
-                            <button type="button" class="micl-button-filled-s">Action</button>
-                            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mymenu" aria-label="Open Menu">more_vert</button>
-                            <nav id="mymenu" class="micl-menu" popover>
-                                <ul class="micl-list">
-                                    <li class="micl-list-item-one" tabindex="0">
-                                        <span class="micl-list-item__text">
-                                            <span class="micl-list-item__headline">Menu item without graphics</span>
-                                        </span>
-                                    </li>
-                                    <li class="micl-list-item-one" tabindex="0">
-                                        <span class="micl-list-item__icon material-symbols-outlined">globe</span>
-                                        <span class="micl-list-item__text">
-                                            <span class="micl-list-item__headline">Menu item with an icon</span>
-                                        </span>
-                                    </li>
-                                    <li class="micl-list-item-three">
-                                        <a href="https://www.nytimes.com" tabindex="-1">
-                                            <span class="micl-list-item__icon material-symbols-outlined">newspaper</span>
+                        <div class="micl-card__content">
+                            <div class="micl-alert-outlined" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined">error</span>
+                                <div class="micl-alert__text">
+                                    <h4>This is an alert</h4>
+                                    <span class="micl-alert__supporting-text">An error has occurred</span>
+                                </div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;padding-block-start:16px">
+                                <button type="button" class="micl-button-filled-s">Action</button>
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mymenu" aria-label="Open Menu">more_vert</button>
+                                <nav id="mymenu" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0">
                                             <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">The New York Times</span>
-                                                <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
+                                                <span class="micl-list-item__headline">Menu item without graphics</span>
                                             </span>
-                                        </a>
-                                    </li>
-                                    <li class="micl-list-item-one" tabindex="0">
-                                        <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Atmosphere_-_2.jpg/256px-Atmosphere_-_2.jpg?20200310200715)"></span>
-                                        <span class="micl-list-item__text">
-                                            <span class="micl-list-item__headline">Item with an image</span>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </nav>
+                                        </li>
+                                        <li class="micl-list-item-one" tabindex="0">
+                                            <span class="micl-list-item__icon material-symbols-outlined">globe</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Menu item with an icon</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-three">
+                                            <a href="https://www.nytimes.com" tabindex="-1">
+                                                <span class="micl-list-item__icon material-symbols-outlined">newspaper</span>
+                                                <span class="micl-list-item__text">
+                                                    <span class="micl-list-item__headline">The New York Times</span>
+                                                    <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="micl-list-item-one" tabindex="0">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Atmosphere_-_2.jpg/256px-Atmosphere_-_2.jpg?20200310200715)"></span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Item with an image</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -332,6 +341,7 @@
                         </div>
                         <div class="micl-card__content" style="column-count:2;padding-block-start:16px">
                             <p><a href="accordion.html" class="md-sys-typescale-body-large">Accordions</a></p>
+                            <p><a href="alert.html" class="md-sys-typescale-body-large">Alerts</a></p>
                             <p><a href="bottomsheet.html" class="md-sys-typescale-body-large">Bottom sheets</a></p>
                             <p><a href="button.html" class="md-sys-typescale-body-large">Buttons</a></p>
                             <p><a href="card.html" class="md-sys-typescale-body-large">Cards</a></p>
@@ -346,6 +356,7 @@
                             <p><a href="select.html" class="md-sys-typescale-body-large">Selects</a></p>
                             <p><a href="sidesheet.html" class="md-sys-typescale-body-large">Side sheets</a></p>
                             <p><a href="slider.html" class="md-sys-typescale-body-large">Sliders</a></p>
+                            <p><a href="stepper.html" class="md-sys-typescale-body-large">Steppers</a></p>
                             <p><a href="switch.html" class="md-sys-typescale-body-large">Switches</a></p>
                             <p><a href="textfield.html" class="md-sys-typescale-body-large">Text fields</a></p>
                         </div>

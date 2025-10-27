@@ -32,10 +32,12 @@ To import the styles for a single component (e.g., the [Card component](componen
 ```SCSS
 @use "material-inspired-component-library/dist/card";
 ```
-To import all component styles:
+
+To import all MICL styles:
 ```SCSS
 @use "material-inspired-component-library/styles";
 ```
+
 Remember to import your [theme file](themes/README.md) as well:
 ```SCSS
 @use "path/to/mytheme";
@@ -79,12 +81,12 @@ This will initialize all MICL components, including those that will be added to 
 ## Foundations 🪟
 A separate CSS file, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/understanding-layout/overview), provides styles for an adaptive layout. It includes styles for the **window frame**, **body region** and **panes** that adjust to the available screen space, ensuring your layout follows Material Design's responsive guidelines.
 
-- [x] [Layout](layout/README.md)
+- [x] [Layout](foundations/layout/README.md)
 
 ## Available components ✅
 The library currently consists of the following components:
 - [x] [Accordion](components/accordion/README.md)
-- [ ] [Alert](README.md)
+- [x] [Alert](components/alert/README.md)
 - [x] [App Bar](components/appbar/README.md)
 - [x] [Badge](components/badge/README.md)
 - [x] [Bottom sheet](components/bottomsheet/README.md)
@@ -101,14 +103,19 @@ The library currently consists of the following components:
 - [x] [Select](components/select/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
 - [x] [Slider](components/slider/README.md)
-- [ ] [Stepper](README.md)
+- [x] [Stepper](components/stepper/README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)
 
 ## Change Log ↪️
 
+### 4.0.0 (27.10.2025)
+- **BREAKING**: Moved layout.scss til sub-folder.
+- **Alert**: New component.
+- **Stepper**: New component.
+
 ### 3.1.0 (19.10.2025)
-- **Checkbox**: Refactoring + add support for checkbox groups.
+- **Checkbox**: Refactoring + added support for checkbox groups.
 
 ### 3.0.0 (24.09.2025)
 - **BREAKING:** Use `<nav>` instead of `<div>` for Navigation rail.

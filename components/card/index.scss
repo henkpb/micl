@@ -289,5 +289,5 @@
     padding-block: var(--md-sys-card-content-padding-block) 0;
     padding-inline: var(--md-sys-card-padding-inline);
     background-color: inherit;
-    overflow: hidden;
+    overflow: clip visible;
 }

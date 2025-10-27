@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use 'layout';
+@use 'foundations/layout';
 
 @use 'styles/typography';
 @use 'styles/shapes';
@@ -28,6 +28,7 @@
 @use 'styles/statelayer';
 
 @use 'components/divider';
+@use 'components/alert';
 @use 'components/radio';
 @use 'components/checkbox';
 @use 'components/switch';

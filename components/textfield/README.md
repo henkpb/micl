@@ -1,5 +1,5 @@
 # Text field
-This component implements the the [Material Design 3 Expressive Text field](https://m3.material.io/components/text-fields/overview) design.
+This component implements the [Material Design 3 Expressive Text field](https://m3.material.io/components/text-fields/overview) design.
 
 ## Basic Usage
 
@@ -20,6 +20,11 @@ Import the text field styles into your project:
 @use "material-inspired-component-library/dist/textfield";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript for interactive features like the **character counter**:
 
@@ -29,8 +34,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Text field component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Text field component](https://henkpb.github.io/micl/textfield.html) is available for you to interact with.
+### Live Demo
+A live example of the [Text field component](https://henkpb.github.io/micl/textfield.html) is available to interact with.
 
 ## Variants
 The following example shows a text field with every available feature. You can include any combination of these elements. The order of elements inside the `<div>` does not change the layout.

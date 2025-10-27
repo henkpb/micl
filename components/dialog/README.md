@@ -1,5 +1,5 @@
 # Dialog
-This component implements the the [Material Design 3 Expressive Dialog](https://m3.material.io/components/dialogs/overview) design.
+This component implements the [Material Design 3 Expressive Dialog](https://m3.material.io/components/dialogs/overview) design.
 
 ## Basic Usage
 
@@ -28,11 +28,16 @@ Import the dialog styles into your project:
 @use "material-inspired-component-library/dist/dialog";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component, as the native popover attribute handles the open/close behavior.
 
-### Demo
-A live example of the [Dialog component](https://henkpb.github.io/micl/dialog.html) is available for you to interact with.
+### Live Demo
+A live example of the [Dialog component](https://henkpb.github.io/micl/dialog.html) is available to interact with.
 
 ## Variants
 When dialogs with the `popover` attribute are opened, they animate from the control element to the center of the screen. They can be easily dismissed by clicking outside or pressing <kbd>Esc</kbd>.

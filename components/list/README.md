@@ -1,5 +1,5 @@
 # List
-This component implements the the [Material Design 3 Expressive List](https://m3.material.io/components/lists/overview) design. Lists are continuous, vertical groups of text or images, representing a set of data.
+This component implements the [Material Design 3 Expressive List](https://m3.material.io/components/lists/overview) design. Lists are continuous, vertical groups of text or images, representing a set of data.
 
 ## Basic Usage
 
@@ -27,6 +27,11 @@ Import the list styles into your project:
 @use "material-inspired-component-library/dist/list";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript to support keyboard navigation:
 
@@ -36,8 +41,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any List component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [List component](https://henkpb.github.io/micl/list.html) is available for you to interact with.
+### Live Demo
+A live example of the [List component](https://henkpb.github.io/micl/list.html) is available to interact with.
 
 ## Variants
 The List component offers three CSS classes to control the height and content capacity of individual list items:

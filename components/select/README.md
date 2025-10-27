@@ -1,5 +1,5 @@
 # Select
-This component implements the the [Material Design 3 Expressive Select](https://m3.material.io/components/menus/guidelines#ee2f3664-c926-47ab-acbf-2ab675506932) design. A select component is used to offer the user with a set of options from which the user can select a single one. 
+This component implements the [Material Design 3 Expressive Select](https://m3.material.io/components/menus/guidelines#ee2f3664-c926-47ab-acbf-2ab675506932) design. A select component is used to offer the user with a set of options from which the user can select a single one.
 
 ## Basic Usage
 
@@ -38,8 +38,8 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Select component, including those that will be added to the DOM later on.
 
-### Demo
-A live example of the [Select component](https://henkpb.github.io/micl/select.html) is available for you to interact with.
+### Live Demo
+A live example of the [Select component](https://henkpb.github.io/micl/select.html) is available to interact with.
 
 ## Variants
 A Select Component can be disabled by adding the `disabled` attribute to the `<select>` element. An option within the component can be disabled by adding the `disabled` attribute to the `<option>` element.
