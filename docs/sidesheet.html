@@ -79,14 +79,14 @@
                             </dialog>
                             <button type="button" class="micl-button-outlined-m" popovertarget="mysidesheet2">Open Standard Sheet<br>without dividers</button>
 
-                            <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest" aria-labelledby="title1">
+                            <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest" aria-labelledby="title1" tabindex="-1">
                                 <div class="micl-sidesheet__headline">
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined">arrow_back</button>
                                     <h2 id="title3">Title</h2>
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet3">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">
-                                    <p class="md-sys-typescale-body-medium" style="padding-top:1rem">Make your selection:</p>
+                                    <p class="md-sys-typescale-body-medium">Make your selection:</p>
                                     <div class="switch">
                                         <label for="cb01" class="md-sys-typescale-body-medium">Selection A</label>
                                         <input type="checkbox" id="cb01" class="micl-switch">
@@ -108,6 +108,7 @@
                                         <input type="checkbox" id="cb05" class="micl-switch">
                                     </div>
                                 </div>
+                                <hr class="micl-divider">
                                 <div class="micl-sidesheet__actions">
                                     <button type="button" class="micl-button-filled-s">Save</button>
                                     <button type="button" class="micl-button-outlined-s">Cancel</button>
