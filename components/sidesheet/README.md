@@ -81,14 +81,14 @@ The back-button and the actions-container are optional. To remove the vertical d
 }
 ```
 
-[!WARNING]
-The **standard** side sheet component adds CSS rules to the `<body>` element to properly resize the main content area when the side sheet is open. Overriding these rules may cause the component to behave unexpectedly. The rules that are applied are:
-  ```CSS
-  box-sizing: border-box;
-  margin: 0;
-  max-inline-size: ...varies depending on if the side sheet is opened...
-  transition: ...transition on max-inline-size...
-  ```
+> [!WARNING]
+> The **standard** side sheet component adds CSS rules to the `<body>` element to properly resize the main content area when the side sheet is open. Overriding these rules may cause the component to behave unexpectedly. The rules that are applied are:
+> ```CSS
+> box-sizing: border-box;
+> margin: 0;
+> max-inline-size: ...varies depending on if the side sheet is opened...
+> transition: ...transition on max-inline-size...
+> ```
 
 ## Customizations
 You can customize the appearance of the Side sheet component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child side sheets.
