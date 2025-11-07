@@ -6,7 +6,7 @@
     <meta name="description" content="The Material-Inspired Component Library (MICL) Showcase">
     <title>MICL Showcase</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,error,favorite,globe,inbox,link,menu,menu_open,more_vert,newspaper,outbox,person,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,error,favorite,globe,inbox,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,person,share&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -179,21 +179,21 @@
                             <h2>Lists</h2>
                         </div>
                         <div class="micl-card__content">
-                            <ul class="micl-list" style="margin-block:16px" role="listbox">
-                                <li class="micl-list-item-one" tabindex="0">
+                            <ul class="micl-list" role="listbox">
+                                <li class="micl-list-item-one">
                                     <span class="material-symbols-outlined micl-list-item__icon">person</span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">One-line list item</span>
                                     </span>
                                 </li>
-                                <li class="micl-list-item-two" tabindex="0">
+                                <li class="micl-list-item-two">
                                     <span class="material-symbols-outlined micl-list-item__icon">globe</span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Two-line list item</span>
                                         <span class="micl-list-item__supporting-text">Supporting text</span>
                                     </span>
                                 </li>
-                                <li class="micl-list-item-three" tabindex="0">
+                                <li class="micl-list-item-three">
                                     <span class="micl-list-item__image" style="background-image:url(card-names.webp);background-position:center"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Three-line list item</span>
@@ -202,15 +202,16 @@
                                 </li>
                             </ul>
 
-                            <div class="micl-list" style="margin-block:16px" role="listbox">
+                            <div class="micl-list" role="listbox">
                                 <details name="accordion">
                                     <summary class="micl-list-item-two">
                                         <span class="micl-list-item__text">
                                             <span class="micl-list-item__headline">Accordion item 1</span>
                                             <span class="micl-list-item__supporting-text">Click to open</span>
                                         </span>
+                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-hidden="true">keyboard_arrow_down</span>
                                     </summary>
-                                    <div class="micl-list-item__content" style="padding-block-start:16px">
+                                    <div class="micl-list-item__content" style="padding-block:16px">
                                         <div class="micl-textfield-filled">
                                             <label for="tf1">Name</label>
                                             <input type="text" id="tf1" value="Filled text field">
@@ -224,8 +225,9 @@
                                             <span class="micl-list-item__headline">Accordion item 2</span>
                                             <span class="micl-list-item__supporting-text">Click to open</span>
                                         </span>
+                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-hidden="true">keyboard_arrow_down</span>
                                     </summary>
-                                    <div class="micl-list-item__content" style="padding-block-start:16px">
+                                    <div class="micl-list-item__content" style="padding-block:16px">
                                         <div class="micl-textfield-filled">
                                             <label for="tf2">Date</label>
                                             <input type="date" id="tf2" value="">

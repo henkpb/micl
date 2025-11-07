@@ -60,6 +60,9 @@
         &[open]::details-content {
             block-size: auto;
         }
+        &[open] .micl-list-item__icon--expander {
+            transform: rotate(180deg);
+        }
 
         &> summary.micl-list-item-one,
         &> summary.micl-list-item-two,
@@ -329,6 +332,11 @@
     font-variation-settings: 'FILL' 0;
     color: var(--md-sys-color-on-surface-variant);
     transition: font-variation-settings var(--md-sys-list-motion-duration) linear;
+
+    &.micl-list-item__icon--expander {
+        transform: rotate(0deg);
+        transition: transform var(--md-sys-list-motion-duration) linear;
+    }
 }
 .micl-list-item__avatar {
     @include typography.title-medium;
@@ -384,4 +392,8 @@
     @include typography.label-small;
 
     color: var(--md-sys-color-on-surface-variant);
+}
+
+[dir=rtl] .micl-list details[open] .micl-list-item__icon--expander {
+    transform: rotate(-180deg);
 }

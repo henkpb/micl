@@ -88,6 +88,24 @@ To ensure that only one accordion item within a group can be open at a time, add
 </div>
 ```
 
+Add a trailing icon to an accordion item to indicate that the item can be expanded. If you add the `micl-list-item__icon--expander` class to the icon, the icon will rotate 180 degrees when the accordion panel is opened or closed.
+
+```HTML
+<div class="micl-list" role="listbox">
+  <details>
+    <summary class="micl-list-item-one">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Heading</span>
+      </span>
+      <span class="micl-list-item__icon micl-list-item__icon--expander material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+    </summary>
+    <div class="micl-list-item__content">
+      ...content...
+    </div>
+  </details>
+</div>
+```
+
 Adding the `micl-list-item--disabled` class to the `<summary>` element causes the accordion item to be displayed in a disabled state.
 
 Use a [Divider component](../divider/README.md) to separate neighbouring accordion items by a divider.
