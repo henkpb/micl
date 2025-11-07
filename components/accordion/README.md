@@ -1,5 +1,5 @@
 # Accordion
-This component implements the [Material Design 3 Expressive Expandable Lists](https://m3.material.io/components/lists/overview) design. Accordions are vertically stacked lists that allow you to show and hide sections of content.
+This component implements the [Material Design 3 Expressive Expandable Lists](https://m3.material.io/components/lists/guidelines#b5697cef-6e9f-4699-ae10-c3f49649593e) design. Accordions are vertically stacked lists that allow you to show and hide sections of content.
 
 ## Basic Usage
 
@@ -46,7 +46,7 @@ This component requires JavaScript to support keyboard navigation:
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
-This will initialize any List component, including those that will be added to the DOM later on.
+This will initialize any Accordion component, including those that will be added to the DOM later on.
 
 ### Live Demo
 A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available to interact with.
@@ -70,6 +70,7 @@ To ensure that only one accordion item within a group can be open at a time, add
       </div>
     </div>
   </details>
+  <hr class="micl-divider">
   <details name="mygroup">
     <summary class="micl-list-item-two" tabindex="-1">
       <span class="micl-list-item__text">
@@ -89,7 +90,7 @@ To ensure that only one accordion item within a group can be open at a time, add
 
 Adding the `micl-list-item--disabled` class to the `<summary>` element causes the accordion item to be displayed in a disabled state.
 
-Add the `micl-list__divider` class to the `<div class="micl-list">` element to automatically place a divider between each accordion item.
+Use a [Divider component](../divider/README.md) to separate neighbouring accordion items by a divider.
 
 Since the Accordion is based on the List component, you can use the same utility classes for content structure and styling. Refer to the [List component documentation](../list/README.md) for details on how to add icons, avatars, images, and other features to your accordion items.
 

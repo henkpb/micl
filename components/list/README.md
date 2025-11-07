@@ -7,7 +7,7 @@ This component implements the [Material Design 3 Expressive List](https://m3.mat
 To create a basic list, use the `<ul>` element with the `micl-list` class and individual `<li>` elements for each list item. For a basic single-line item, use the `micl-list-item-one` class:
 
 ```HTML
-<ul class="micl-list" role="listbox">
+<ul class="micl-list">
   <li class="micl-list-item-one" tabindex="0">
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">A single-line item</span>
@@ -15,8 +15,6 @@ To create a basic list, use the `<ul>` element with the `micl-list` class and in
   </li>
 </ul>
 ```
-
-- The `role="listbox"` is used for accessibility, indicating a selectable list.
 
 - `tabindex="0"` on the `<li>` makes the list item focusable and allows keyboard navigation.
 
@@ -54,8 +52,8 @@ The List component offers three CSS classes to control the height and content ca
 | micl-list-item-three | For three-line items, accommodating up to three lines of text. |
 
 ```HTML
-<ul class="micl-list" role="listbox">
-  <li class="micl-list-item-three" tabindex="0">
+<ul class="micl-list">
+  <li class="micl-list-item-three">
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">A three-line item</span>
       <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences.</span>
@@ -67,7 +65,7 @@ The List component offers three CSS classes to control the height and content ca
 Use the anchor element to convert a list item into a hyperlink:
 
 ```HTML
-<ul class="micl-list" role="listbox">
+<ul class="micl-list">
   <li class="micl-list-item-one" tabindex="0">
     <a href="https://www.thetimes.com" tabindex="-1">
       <span class="micl-list-item__text">
@@ -87,7 +85,7 @@ The text content of a list item can be preceded by various media elements:
 
 - **Icon**: Use `micl-list-item__icon` with a (Material Symbols) icon.
   ```HTML
-  <li class="micl-list-item-two" tabindex="0">
+  <li class="micl-list-item-two">
     <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">Bill Jones</span>
@@ -98,7 +96,7 @@ The text content of a list item can be preceded by various media elements:
 
 - **Avatar**: Use `micl-list-item__avatar` with a text.
   ```HTML
-  <li class="micl-list-item-two" tabindex="0">
+  <li class="micl-list-item-two">
     <span class="micl-list-item__avatar">BJ</span>
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">Bill Jones</span>
@@ -109,7 +107,7 @@ The text content of a list item can be preceded by various media elements:
 
 - **Image**: Use `micl-list-item__image` with a background image.
   ```HTML
-  <li class="micl-list-item-two" tabindex="0">
+  <li class="micl-list-item-two">
     <span class="micl-list-item__image" style="background-image:url(https://...jpg)"></span>
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">Bill Jones</span>
@@ -120,7 +118,7 @@ The text content of a list item can be preceded by various media elements:
 
 - **Thumbnail (Video)**: Use `micl-list-item__thumbnail` for video previews with a background-image.
   ```HTML
-  <li class="micl-list-item-two" tabindex="0">
+  <li class="micl-list-item-two">
     <span class="micl-list-item__thumbnail" style="background-image:url(https://...mp4)"></span>
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">Bill Jones</span>
@@ -145,7 +143,7 @@ The text of a list item may be followed by a trailing text, imagery or other ele
 
 - **Text**: Use `micl-list-item__trailing-text` with a short text.
   ```HTML
-  <li class="micl-list-item-one" tabindex="0">
+  <li class="micl-list-item-one">
     <span class="micl-list-item__text">
       <span class="micl-list-item__headline">To-do items</span>
     </span>
@@ -154,7 +152,7 @@ The text of a list item may be followed by a trailing text, imagery or other ele
   ````
 
 ### Selecting List Items
-To enable selection of list items, integrate a checkbox or switch component within the `<li>` element.
+To enable selection of list items, integrate a Checkbox or Switch component within the `<li>` element.
 
 ```HTML
 <ul class="micl-list micl-list__divider" role="listbox">
@@ -167,7 +165,7 @@ To enable selection of list items, integrate a checkbox or switch component with
       <input type="checkbox" id="mycheckbox" class="micl-checkbox" value="cb1" tabindex="-1" aria-labelledby="hd1">
     </span>
   </li>
-  <li class="micl-list-item-two" tabindex="0">
+  <li class="micl-list-item-two">
     <label>
       <span class="micl-list-item__text">
         <span id="hd2" class="micl-list-item__headline">Red car</span>
@@ -181,11 +179,14 @@ To enable selection of list items, integrate a checkbox or switch component with
 
 - `tabindex="-1"` on the `input` is important here, as the `<li>` should handle the focus for accessibility.
 
+- The `role="listbox"` is used for accessibility, indicating a selectable list.
+
 ## Customizations
 You can customize the appearance of the List component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child lists.
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
+| --md-sys-list-padding | 8px | The vertical padding of a list. |
 | --md-sys-list-item-one-height | 56px | The height for a single-line list item. |
 | --md-sys-list-item-two-height | 72px | The height for a two-line list item. |
 | --md-sys-list-item-three-height | 88px | The height for a three-line list item. |
@@ -199,7 +200,7 @@ You can customize the appearance of the List component by overriding its global 
 ```HTML
 <div style="--md-sys-list-item-one-height:60px">
   <ul class="micl-list">
-    <li class="micl-list-item-one" tabindex="0">
+    <li class="micl-list-item-one">
       <span class="micl-list-item__text">
         <span class="micl-list-item__headline">A single-line item</span>
       </span>

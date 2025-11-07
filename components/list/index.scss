@@ -42,6 +42,7 @@
     --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-sys-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-sys-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-sys-divider-space: 1px;
 
     margin: 0;
     padding: var(--md-sys-list-padding) 0;
@@ -50,14 +51,14 @@
 
     &> details {
         &::details-content {
-            height: 0;
+            block-size: 0;
             overflow: hidden;
             transition:
-                height var( --md-sys-accordion-motion-duration) var(--md-sys-accordion-motion-spatial),
+                block-size var( --md-sys-accordion-motion-duration) var(--md-sys-accordion-motion-spatial),
                 content-visibility var(--md-sys-accordion-motion-duration) linear allow-discrete;
         }
         &[open]::details-content {
-            height: auto;
+            block-size: auto;
         }
 
         &> summary.micl-list-item-one,
@@ -92,6 +93,42 @@
             border-top: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
         }
     }
+
+    &:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]) {
+        .micl-list-item-one:not(:disabled):not(.micl-list-item--disabled),
+        .micl-list-item-two:not(:disabled):not(.micl-list-item--disabled),
+        .micl-list-item-three:not(:disabled):not(.micl-list-item--disabled) {
+            cursor: pointer;
+
+            &:hover {
+                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+
+                .micl-list-item__icon {
+                    font-variation-settings: 'FILL' 1;
+                }
+            }
+            &:focus-visible {
+                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline-offset: var(--md-sys-state-focus-indicator-inner-offset);
+
+                .micl-list-item__icon {
+                    font-variation-settings: 'FILL' 1;
+                }
+            }
+            &:active {
+                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+
+                background-size: 0%, 100%;
+                transition: background-size 0ms;
+
+                .micl-list-item__icon {
+                    font-variation-settings: 'FILL' 1;
+                }
+            }
+        }
+    }
 }
 
 .micl-list-item-one,
@@ -107,6 +144,7 @@
     padding-inline: var(--md-sys-list-item-space);
     border: none;
     border-radius: var(--md-sys-shape-corner-none, 0px);
+    outline: none;
     background-color: var(--md-sys-list-item-container-color);
     background-image:
         radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
@@ -128,7 +166,7 @@
         display: inherit;
         align-items: inherit;
         column-gap: inherit;
-        min-height: inherit;
+        min-block-size: inherit;
         inline-size: 100%;
         padding-inline: var(--md-sys-list-item-space);
         border: none;
@@ -143,9 +181,8 @@
     &:disabled,
     &.micl-list-item--disabled {
         .micl-list-item__icon,
-        .micl-list-item__text,
-        .micl-list-item__text .micl-list-item__headline,
-        .micl-list-item__text .micl-list-item__supporting-text,
+        .micl-list-item__headline,
+        .micl-list-item__supporting-text,
         .micl-list-item__text::after,
         .micl-list-item__trailing-text {
             color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
@@ -160,36 +197,6 @@
         }
     }
     &:not(:disabled):not(.micl-list-item--disabled) {
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
-
-            &:has(input[type=checkbox]) {
-                cursor: pointer;
-            }
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
-
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-            outline-offset: var(--md-sys-state-focus-indicator-inner-offset);
-
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
-
-            background-size: 0%, 100%;
-            transition: background-size 0ms;
-
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
         &:has(input[type=checkbox]:checked) {
             background-color: var(--md-sys-color-secondary-container);
 
@@ -204,14 +211,17 @@
         }
         input[type=checkbox]:not(:disabled):hover,
         input[type=checkbox]:not(:disabled):active {
-            --checkbox-state-layer-color: initial;
-            --checkbox-outline-color: initial;
+            --statelayer-opacity: 0%;
+
+            &.micl-switch::after {
+                border-color: transparent;
+            }
         }
     }
 }
 
 .micl-list-item-one {
-    min-height: var(--md-sys-list-item-one-height);
+    min-block-size: var(--md-sys-list-item-one-height);
 
     &:not(:has(> a,> button,> label)) {
         padding-block-start: var(--md-sys-list-item-one-padding);
@@ -237,7 +247,7 @@
     }
 }
 .micl-list-item-two {
-    min-height: var(--md-sys-list-item-two-height);
+    min-block-size: var(--md-sys-list-item-two-height);
 
     &:not(:has(> a,> button,> label)) {
         padding-block-start: var(--md-sys-list-item-two-padding);
@@ -266,9 +276,16 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    input[type=checkbox].micl-checkbox {
+        block-size: 24px;
+        min-block-size: 24px;
+        inline-size: 24px;
+        min-inline-size: 24px;
+    }
 }
 .micl-list-item-three {
-    min-height: var(--md-sys-list-item-three-height);
+    min-block-size: var(--md-sys-list-item-three-height);
+    align-items: flex-start;
 
     &:not(:has(> a,> button,> label)) {
         padding-block-start: var(--md-sys-list-item-three-padding);
@@ -292,25 +309,22 @@
             padding-inline-start: 0px;
         }
     }
-    .micl-list-item__icon,
-    .micl-list-item__avatar,
-    .micl-list-item__image {
-        align-self: flex-start;
-    }
     .micl-list-item__supporting-text {
         display: -webkit-box;
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
     }
-    input[type=checkbox] {
-        align-self: flex-start;
-        margin-block-start: -12px;
+    input[type=checkbox].micl-checkbox {
+        block-size: 24px;
+        min-block-size: 24px;
+        inline-size: 24px;
+        min-inline-size: 24px;
     }
 }
 
 .micl-list-item__icon {
-    min-width: var(--md-sys-layout-icon-size, 24px);
+    min-inline-size: var(--md-sys-layout-icon-size, 24px);
     font-size: var(--md-sys-layout-icon-size, 24px);
     font-variation-settings: 'FILL' 0;
     color: var(--md-sys-color-on-surface-variant);
@@ -330,8 +344,8 @@
 }
 .micl-list-item__image {
     display: inline-block;
-    height: 56px;
-    min-width: 56px;
+    block-size: 56px;
+    min-inline-size: 56px;
     border-radius: var(--md-sys-shape-corner-none, 0px);
     background-position: center;
     background-repeat: no-repeat;
@@ -339,19 +353,19 @@
 }
 .micl-list-item__thumbnail {
     display: inline-block;
-    height: 64px;
-    min-width: calc(64px * var(--md-sys-list-item-thumbnail-aspect-ratio));
+    block-size: 64px;
+    min-inline-size: calc(64px * var(--md-sys-list-item-thumbnail-aspect-ratio));
     border-radius: var(--md-sys-shape-corner-none, 0px);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 
 .micl-list-item__text {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
-    min-width: 0;
+    min-inline-size: 0;
     text-align: start;
 
     .micl-list-item__headline {
