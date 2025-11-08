@@ -45,7 +45,7 @@
     --md-sys-divider-space: 1px;
 
     margin: 0;
-    padding: var(--md-sys-list-padding) 0;
+    padding: var(--md-sys-list-padding, 8px) 0;
     interpolate-size: allow-keywords;
     list-style-type: none;
 
@@ -82,7 +82,7 @@
         }
         .micl-list-item__content {
             box-sizing: border-box;
-            padding-inline: var(--md-sys-list-item-padding-inline);
+            padding-inline: var(--md-sys-list-item-padding-inline, 16px);
             background-color: var(--md-sys-list-item-container-color);
             overflow: hidden;
         }
@@ -96,39 +96,40 @@
             border-top: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
         }
     }
+}
 
-    &:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]) {
-        .micl-list-item-one:not(:disabled):not(.micl-list-item--disabled),
-        .micl-list-item-two:not(:disabled):not(.micl-list-item--disabled),
-        .micl-list-item-three:not(:disabled):not(.micl-list-item--disabled) {
-            cursor: pointer;
+.micl-list:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]),
+select {
+    .micl-list-item-one:not(:disabled):not(.micl-list-item--disabled),
+    .micl-list-item-two:not(:disabled):not(.micl-list-item--disabled),
+    .micl-list-item-three:not(:disabled):not(.micl-list-item--disabled) {
+        cursor: pointer;
 
-            &:hover {
-                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+        &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
 
-                .micl-list-item__icon {
-                    font-variation-settings: 'FILL' 1;
-                }
+            .micl-list-item__icon {
+                font-variation-settings: 'FILL' 1;
             }
-            &:focus-visible {
-                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+        }
+        &:focus-visible {
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
 
-                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-                outline-offset: var(--md-sys-state-focus-indicator-inner-offset);
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline-offset: var(--md-sys-state-focus-indicator-inner-offset);
 
-                .micl-list-item__icon {
-                    font-variation-settings: 'FILL' 1;
-                }
+            .micl-list-item__icon {
+                font-variation-settings: 'FILL' 1;
             }
-            &:active {
-                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+        }
+        &:active {
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
 
-                background-size: 0%, 100%;
-                transition: background-size 0ms;
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
 
-                .micl-list-item__icon {
-                    font-variation-settings: 'FILL' 1;
-                }
+            .micl-list-item__icon {
+                font-variation-settings: 'FILL' 1;
             }
         }
     }
@@ -143,8 +144,8 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    column-gap: var(--md-sys-list-item-space);
-    padding-inline: var(--md-sys-list-item-space);
+    column-gap: var(--md-sys-list-item-space, 16px);
+    padding-inline: var(--md-sys-list-item-space, 16px);
     border: none;
     border-radius: var(--md-sys-shape-corner-none, 0px);
     outline: none;
@@ -171,7 +172,7 @@
         column-gap: inherit;
         min-block-size: inherit;
         inline-size: 100%;
-        padding-inline: var(--md-sys-list-item-space);
+        padding-inline: var(--md-sys-list-item-space, 16px);
         border: none;
         border-radius: inherit;
         background-color: transparent;
@@ -186,6 +187,7 @@
         .micl-list-item__icon,
         .micl-list-item__headline,
         .micl-list-item__supporting-text,
+        .micl-list-item__text,
         .micl-list-item__text::after,
         .micl-list-item__trailing-text {
             color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
@@ -346,7 +348,7 @@
     justify-content: center;
     block-size: 40px;
     min-inline-size: 40px;
-    border-radius: var(--md-sys-shape-corner-full);
+    border-radius: var(--md-sys-shape-corner-full, 50%);
     color: var(--md-sys-color-on-primary-container);
     background-color: var(--md-sys-color-primary-container);
 }
