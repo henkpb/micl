@@ -37,11 +37,12 @@
     inset-block-start: anchor(end);
     inset-inline-start: anchor(start);
     position-try: most-block-size flip-block, flip-inline;
-    min-width: var(--md-sys-menu-width-min);
-    max-width: var(--md-sys-menu-width-max);
+    min-inline-size: var(--md-sys-menu-width-min, 112px);
+    max-inline-size: var(--md-sys-menu-width-max, 280px);
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-extra-small);
+    outline: none;
     background-color: var(--md-sys-color-surface-container);
     box-shadow: var(--md-sys-elevation-level2);
     opacity: 0;
@@ -84,7 +85,6 @@
     }
 
     &> .micl-list {
-        --md-sys-list-padding: 4px;
         --md-sys-list-item-one-height: 48px;
         --md-sys-list-item-one-padding: 0;
         --md-sys-list-item-two-padding: 0;
@@ -94,21 +94,6 @@
         .micl-list-item-one,
         .micl-list-item-two,
         .micl-list-item-three {
-            &.micl-list-item__divider {
-                position: relative;
-                margin-block-start: 16px;
-                overflow: clip;
-                overflow-clip-margin: 8px;
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    inset-block-start: -8px;
-                    inset-inline-start: 0;
-                    width: 100%;
-                    border-top: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
-                }
-            }
             &> .micl-menu[popover] {
                 transform: scaleX(0);
 

@@ -78,7 +78,7 @@ Use the anchor element to convert a list item into a hyperlink:
 
 Adding the `micl-list-item--disabled` class to the `<li>` element causes the list item to be displayed in a disabled state.
 
-Add the `micl-list__divider` class to the `<ul>` element to automatically place a divider between each list item.
+Use a [Divider component](../divider/README.md) to separate neighbouring list items by a divider.
 
 ### Leading Content
 The text content of a list item can be preceded by various media elements:
@@ -155,7 +155,7 @@ The text of a list item may be followed by a trailing text, imagery or other ele
 To enable selection of list items, integrate a Checkbox or Switch component within the `<li>` element.
 
 ```HTML
-<ul class="micl-list micl-list__divider" role="listbox">
+<ul class="micl-list" role="listbox">
   <li class="micl-list-item-two" tabindex="0">
     <label>
       <span class="micl-list-item__text">
@@ -165,6 +165,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
       <input type="checkbox" id="mycheckbox" class="micl-checkbox" value="cb1" tabindex="-1" aria-labelledby="hd1">
     </span>
   </li>
+  <li role="separator" class="micl-divider"></li>
   <li class="micl-list-item-two">
     <label>
       <span class="micl-list-item__text">

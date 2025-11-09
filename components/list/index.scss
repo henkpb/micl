@@ -42,12 +42,13 @@
     --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-sys-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-sys-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-sys-divider-space: 1px;
+    --md-sys-divider-space: 8px;
 
     margin: 0;
     padding: var(--md-sys-list-padding, 8px) 0;
     interpolate-size: allow-keywords;
     list-style-type: none;
+    overflow-x: hidden;
 
     &> details {
         &::details-content {
@@ -88,13 +89,9 @@
         }
     }
 
-    &.micl-list__divider {
-        .micl-list-item-one + .micl-list-item-one,
-        .micl-list-item-two + .micl-list-item-two,
-        .micl-list-item-three + .micl-list-item-three,
-        details + details {
-            border-top: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
-        }
+    li.micl-divider {
+        box-shadow: 0  -4px 0 3px var(--md-sys-list-item-container-color),
+                    0 4px 0 4px var(--md-sys-list-item-container-color);
     }
 }
 
