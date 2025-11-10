@@ -113,6 +113,7 @@ A menu item may trigger opening a submenu when invoked by a button. Wrap the men
               <span class="micl-list-item__headline">Item 1-1</span>
             </span>
           </li>
+          <li role="separator" class="micl-divider"></li>
           <li class="micl-list-item-one" tabindex="0">
             <span class="micl-list-item__text">
               <span class="micl-list-item__headline">Item 1-2</span>
@@ -132,7 +133,7 @@ A menu item may trigger opening a submenu when invoked by a button. Wrap the men
 
 Adding the `micl-list-item--disabled` class to a menu item causes the item to be displayed in a disabled state.
 
-Add the `micl-list-item__divider` class to a menu item to create a divider between the item and the previous menu item.
+Use a [Divider component](../divider/README.md) to separate neighbouring menu items by a divider.
 
 ## Customizations
 You can customize the appearance of the Menu component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child menus.

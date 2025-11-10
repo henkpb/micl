@@ -27,14 +27,17 @@
 :root {
     --md-sys-sidesheet-width: 256px;
     --md-sys-sidesheet-maxwidth: 400px;
-    --md-sys-sidesheet-spring-buffer: 200px;
-    --md-sys-sidesheet-padding-standard: 24px;
+    --md-sys-sidesheet-padding-standard: var(--md-sys-layout-window-margin, 24px);
+}
+body {
     --md-sys-sidesheet-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
     --md-sys-sidesheet-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
     --md-sys-sidesheet-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 }
 
 dialog.micl-sidesheet {
+    --md-sys-sidesheet-spring-buffer: 40px;
+
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -47,7 +50,7 @@ dialog.micl-sidesheet {
     margin-block: 0;
     margin-inline-start: auto;
     margin-inline-end: calc(-1 * (var(--md-sys-sidesheet-maxwidth) + var(--md-sys-sidesheet-spring-buffer)));
-    padding-block: 14px 0;
+    padding-block: var(--md-sys-sidesheet-padding-standard) 0;
     padding-inline: 0 var(--md-sys-sidesheet-spring-buffer);
     background-color: var(--md-sys-color-surface);
     border: none;
@@ -64,7 +67,9 @@ dialog.micl-sidesheet {
     .micl-sidesheet__headline {
         display: flex;
         align-items: center;
+        block-size: var(--md-sys-typescale-title-large-line-height);
         padding-inline: var(--md-sys-sidesheet-padding-standard);
+        margin-block-end: 16px;
         column-gap: 12px;
         color: var(--md-sys-color-on-surface-variant);
 
@@ -82,14 +87,12 @@ dialog.micl-sidesheet {
             margin-inline: -12px;
         }
         button:first-child {
-            margin-inline-start: -20px;
+            margin-inline-start: -16px;
         }
     }
     .micl-sidesheet__content {
         box-sizing: border-box;
         flex: 1 1 auto;
-        inline-size: 100%;
-        max-inline-size: 100%;
         padding-inline: var(--md-sys-sidesheet-padding-standard);
         overflow: hidden auto;
     }
@@ -99,12 +102,10 @@ dialog.micl-sidesheet {
         flex-shrink: 0;
         align-items: center;
         justify-content: start;
-        inline-size: 100%;
-        max-inline-size: 100%;
-        padding-block: 16px 24px;
+        padding-block: 16px var(--md-sys-sidesheet-padding-standard);
         padding-inline: var(--md-sys-sidesheet-padding-standard);
+        column-gap: 8px;
         overflow: hidden;
-        border-block-start: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
     }
 
     &[open] {
@@ -114,9 +115,9 @@ dialog.micl-sidesheet {
         box-shadow: var(--md-sys-elevation-level1);
     }
     &:popover-open {
-        --md-sys-divider-color: var(--md-sys-color-outline);
+        --md-sys-divider-color: var(--md-sys-color-outline, gray);
 
-        border-inline-start: var(--md-sys-divider-thickness) solid var(--md-sys-divider-color);
+        border-inline-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
     }
     &:popover-open,
     &[open] {
@@ -136,13 +137,11 @@ dialog.micl-sidesheet {
     }
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
-        transition:
-            background-color var(--md-sys-sidesheet-motion-duration) linear,
-            overlay var(--md-sys-sidesheet-motion-duration) linear allow-discrete,
-            display var(--md-sys-sidesheet-motion-duration) linear allow-discrete;
+        transition: background-color var(--md-sys-sidesheet-motion-duration-reverse) linear;
     }
     &[open]::backdrop {
         background-color: rgba(0, 0, 0, 0.2);
+        transition: background-color var(--md-sys-sidesheet-motion-duration) linear;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);

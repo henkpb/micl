@@ -36,7 +36,7 @@ body {
     block-size: 0;
     margin-block: calc(var(--md-sys-divider-space, 4px) - 1px) var(--md-sys-divider-space, 4px);
     margin-inline: 0;
-    border: 0;
+    border: none;
     border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color, gray);
 }
 
@@ -60,6 +60,6 @@ body {
     inline-size: 0;
     margin-block: 0;
     margin-inline: calc(2 * var(--md-sys-divider-space, 4px));
-    border: 0;
+    border: none;
     border-inline-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color, gray);
 }

@@ -35,23 +35,23 @@
                 <div class="micl-pane__column">
                     <div class="micl-card-elevated">
                         <div class="micl-card__content">
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-one" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-two" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-two">
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
                                         <span class="micl-list-item__supporting-text">Supporting text</span>
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-three" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-three">
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline 1</span>
                                         <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
@@ -64,7 +64,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
+                            <ul class="micl-list">
                                 <li class="micl-list-item-one" tabindex="0">
                                     <span class="material-symbols-outlined micl-list-item__icon">settings</span>
                                     <span class="micl-list-item__text">
@@ -73,7 +73,7 @@
                                     <span class="material-symbols-outlined micl-list-item__icon">more_horiz</span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
+                            <ul class="micl-list">
                                 <li class="micl-list-item-two" tabindex="0">
                                     <span class="material-symbols-outlined micl-list-item__icon">person</span>
                                     <span class="micl-list-item__text">
@@ -85,18 +85,24 @@
                             </ul>
                             <ul class="micl-list" role="listbox">
                                 <li class="micl-list-item-three" tabindex="0">
-                                    <span class="material-symbols-outlined micl-list-item__icon">search</span>
-                                    <span class="micl-list-item__text">
-                                        <span class="micl-list-item__headline">Headline 1</span>
-                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                    </span>
+                                    <label>
+                                        <span class="material-symbols-outlined micl-list-item__icon">search</span>
+                                        <span class="micl-list-item__text">
+                                            <span id="hd1" class="micl-list-item__headline">Headline 1</span>
+                                            <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                        </span>
+                                        <input type="checkbox" id="cb1" class="micl-checkbox" value="c2" tabindex="-1" aria-labelledby="hd1">
+                                    </label>
                                 </li>
                                 <li class="micl-list-item-three">
-                                    <span class="material-symbols-outlined micl-list-item__icon">confirmation_number</span>
-                                    <span class="micl-list-item__text">
-                                        <span class="micl-list-item__headline">Headline 2</span>
-                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                    </span>
+                                    <label>
+                                        <span class="material-symbols-outlined micl-list-item__icon">confirmation_number</span>
+                                        <span class="micl-list-item__text">
+                                            <span id="hd2" class="micl-list-item__headline">Headline 2</span>
+                                            <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                        </span>
+                                        <input type="checkbox" id="cb2" class="micl-checkbox" value="c3" tabindex="-1" aria-labelledby="hd2">
+                                    </label>
                                 </li>
                             </ul>
                         </div>
@@ -105,16 +111,16 @@
                 <div class="micl-pane__column">
                     <div class="micl-card-filled">
                         <div class="micl-card__content">
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-one" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
                                     <span class="micl-list-item__avatar">3</span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-two" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-two">
                                     <span class="micl-list-item__avatar">17</span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
@@ -122,7 +128,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
+                            <ul class="micl-list">
                                 <li class="micl-list-item-three" tabindex="0">
                                     <a href="https://www.thetimes.com/" tabindex="-1">
                                         <span class="micl-list-item__avatar">T</span>
@@ -140,8 +146,8 @@
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-one" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
                                     <span class="micl-list-item__image" style="background-image:url(card-city.webp)"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
@@ -161,16 +167,16 @@
                                     </label>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-three" tabindex="0">
-                                    <span class="micl-list-item__image" style="background-image:url(card-cabinet.webp)"></span>
+                            <ul class="micl-list">
+                                <li class="micl-list-item-three">
+                                    <span class="micl-list-item__image" style="background-image:url(card-cabinet.webp);border-radius:16px"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline 1</span>
                                         <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
                                     </span>
                                 </li>
                                 <li class="micl-list-item-three">
-                                    <span class="micl-list-item__image" style="background-image:url(card-awards.webp)"></span>
+                                    <span class="micl-list-item__image" style="background-image:url(card-awards.webp);border-radius:16px"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline 2</span>
                                         <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
@@ -181,10 +187,10 @@
                     </div>
                 </div>
                 <div class="micl-pane__column">
-                    <div class="micl-card-outlined">
+                    <div class="micl-card-elevated">
                         <div class="micl-card__content">
-                            <ul class="micl-list" role="listbox">
-                                <li class="micl-list-item-one" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
                                     <span class="micl-list-item__thumbnail" style="background-image:url(card-city.webp)"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
@@ -196,21 +202,22 @@
                                     <label>
                                         <span class="micl-list-item__thumbnail" style="background-image:url(card-holiday.webp)"></span>
                                         <span class="micl-list-item__text">
-                                            <span id="hd1" class="micl-list-item__headline">Headline</span>
+                                            <span id="hd3" class="micl-list-item__headline">Headline</span>
                                             <span class="micl-list-item__supporting-text">Supporting text</span>
                                         </span>
-                                        <input type="checkbox" id="cb1" class="micl-checkbox" value="c1" tabindex="-1" aria-labelledby="hd1">
+                                        <input type="checkbox" id="cb3" class="micl-checkbox" value="c1" tabindex="-1" aria-labelledby="hd3">
                                     </label>
                                 </li>
                             </ul>
-                            <ul class="micl-list micl-list__divider" role="listbox">
-                                <li class="micl-list-item-three" tabindex="0">
+                            <ul class="micl-list">
+                                <li class="micl-list-item-three">
                                     <span class="micl-list-item__thumbnail" style="background-image:url(card-cabinet.webp)"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline 1</span>
                                         <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
                                     </span>
                                 </li>
+                                <li role="separator" class="micl-divider"></li>
                                 <li class="micl-list-item-three">
                                     <span class="micl-list-item__thumbnail" style="background-image:url(card-awards.webp)"></span>
                                     <span class="micl-list-item__text">
@@ -219,23 +226,24 @@
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list micl-list__divider" role="listbox">
+                            <ul class="micl-list" role="listbox">
                                 <li class="micl-list-item-three" tabindex="0">
                                     <label>
                                         <span class="micl-list-item__text">
-                                            <span id="hd2" class="micl-list-item__headline">Headline 1</span>
+                                            <span id="hd4" class="micl-list-item__headline">Headline 1</span>
                                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
                                         </span>
-                                        <input type="checkbox" id="cb2" class="micl-checkbox" value="c2" tabindex="-1" aria-labelledby="hd2">
+                                        <input type="checkbox" id="cb4" class="micl-checkbox" value="c2" tabindex="-1" aria-labelledby="hd4">
                                     </label>
                                 </li>
+                                <li role="separator" class="micl-divider"></li>
                                 <li class="micl-list-item-three">
                                     <label>
                                         <span class="micl-list-item__text">
-                                            <span id="hd3" class="micl-list-item__headline">Headline 2</span>
+                                            <span id="hd5" class="micl-list-item__headline">Headline 2</span>
                                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
                                         </span>
-                                        <input type="checkbox" id="cb3" class="micl-checkbox" value="c3" tabindex="-1" aria-labelledby="hd3">
+                                        <input type="checkbox" id="cb5" class="micl-checkbox" value="c3" tabindex="-1" aria-labelledby="hd5">
                                     </label>
                                 </li>
                             </ul>
@@ -251,8 +259,8 @@
                 </div>
                 <div class="micl-card__content docs-code">
                     <pre tabindex="-1"><code>
-&lt;ul class="micl-list" role="listbox"&gt;
-  &lt;li class="micl-list-item-two" tabindex="0"&gt;
+&lt;ul class="micl-list"&gt;
+  &lt;li class="micl-list-item-two"&gt;
     &lt;span class="micl-list-item__avatar"&gt;17&lt;/span&gt;
     &lt;span class="micl-list-item__text"&gt;
       &lt;span class="micl-list-item__headline"&gt;Headline&lt;/span&gt;
@@ -261,7 +269,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;ul class="micl-list" role="listbox"&gt;
+&lt;ul class="micl-list"&gt;
   &lt;li class="micl-list-item-two" tabindex="0"&gt;
     &lt;label&gt;
       &lt;span class="micl-list-item__thumbnail" style="background-image:url(card-holiday.webp)"&gt;&lt;/span&gt;

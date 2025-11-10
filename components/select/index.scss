@@ -56,9 +56,9 @@
         min-inline-size: max(anchor-size(self-inline), 112px);
         max-inline-size: 280px;
         position-try: most-block-size flip-block;
-        padding: 8px 0;
+        padding: var(--md-sys-list-padding, 8px) 0;
         border: none;
-        border-radius: var(--md-sys-shape-corner-extra-small);
+        border-radius: var(--md-sys-shape-corner-extra-small, 4px);
         background-color: var(--md-sys-color-surface-container);
         box-shadow: var(--md-sys-elevation-level2);
         opacity: 0;
@@ -94,7 +94,6 @@
         --md-sys-list-item-one-padding: 0;
         --md-sys-list-item-two-padding: 0;
         --md-sys-list-item-space: 12px;
-        --md-sys-list-item-padding-inline: 16px;
         --md-sys-list-item-container-color: var(--md-sys-color-surface-container);
 
         line-height: normal;

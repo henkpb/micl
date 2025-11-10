@@ -29,6 +29,11 @@ The Select component relies on styles from the text field and list components. B
 @use "material-inspired-component-library/dist/select";
 ```
 
+Or import all MICL styles:
+```CSS
+@use "material-inspired-component-library/styles";
+```
+
 ### JavaScript
 This component requires JavaScript for functionality:
 
@@ -42,7 +47,7 @@ This will initialize any Select component, including those that will be added to
 A live example of the [Select component](https://henkpb.github.io/micl/select.html) is available to interact with.
 
 ## Variants
-A Select Component can be disabled by adding the `disabled` attribute to the `<select>` element. An option within the component can be disabled by adding the `disabled` attribute to the `<option>` element.
+A Select component can be disabled by adding the `disabled` attribute to the `<select>` element. An option within the component can be disabled by adding the `disabled` attribute to the `<option>` element.
 
 You can add [Dividers](../divider/README.md) into the list of options and they will appear as separators to help visually break up the options.
 
@@ -52,7 +57,7 @@ You can add [Dividers](../divider/README.md) into the list of options and they w
 <div class="micl-textfield-outlined">
   <label for="myselect">Country</label>
   <select id="myselect">
-    <option class="micl-list-item-two" value=""></option>
+    <option class="micl-list-item-two" value="" label="(none)"></option>
     <option class="micl-list-item-two" value="AR">
       <span class="micl-list-item__text">Argentina</span>
     </option>
