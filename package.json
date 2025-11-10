@@ -1,6 +1,6 @@
 {
   "name": "material-inspired-component-library",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "The Material-Inspired Component Library (MICL) offers a collection of beautifully crafted components leveraging native HTML markup, designed to align with the Material Design 3 guidelines.",
   "author": "MICL Hermana <micl.hermana@proton.me> (https://github.com/henkpb/micl)",
   "license": "MIT",
@@ -47,9 +47,7 @@
   "main": "dist/micl.js",
   "types": "dist/micl.d.ts",
   "scripts": {
-    "build": "webpack",
-    "start": "echo 'No start script yet'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "sideEffects": false,
   "devDependencies": {
