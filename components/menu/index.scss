@@ -114,3 +114,6 @@
     }
 }
 
+[dir=rtl] .micl-menu[popover] > .micl-list button[popovertarget] .micl-list-item__icon {
+    transform: rotate(180deg);
+}
