@@ -63,6 +63,7 @@ button.micl-button-outlined-xl {
     position: relative;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     padding: 0;
     border: none;
     border-radius: calc(var(--micl-height) / 2);
@@ -115,15 +116,15 @@ button.micl-button-outlined-xs {
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
-    column-gap: 8px;
+    column-gap: 4px;
     padding-inline: 12px;
 
     &::before {
         content: "";
         position: absolute;
-        block-size: var(--md-sys-target-size);
-        inline-size: var(--md-sys-target-size);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size)) / 2) 0 0 calc((var(--micl-width) - var(--md-sys-target-size)) / 2);
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 0;
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -133,7 +134,7 @@ button.micl-button-outlined-xs {
         border-radius: var(--md-sys-shape-corner-medium);
 
         &.micl-button--toggle.micl-button--selected {
-            border-radius: var(--md-sys-shape-corner-full);
+            border-radius: calc(var(--micl-height) / 2);
         }
     }
     &:not(:disabled) {
@@ -167,9 +168,9 @@ button.micl-button-outlined-s {
     &::before {
         content: "";
         position: absolute;
-        block-size: var(--md-sys-target-size);
-        inline-size: var(--md-sys-target-size);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size)) / 2) 0 0 calc((var(--micl-width) - var(--md-sys-target-size)) / 2);
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 0;
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -179,7 +180,7 @@ button.micl-button-outlined-s {
         border-radius: var(--md-sys-shape-corner-medium);
 
         &.micl-button--toggle.micl-button--selected {
-            border-radius: var(--md-sys-shape-corner-full);
+            border-radius: calc(var(--micl-height) / 2);
         }
     }
     &:not(:disabled) {
@@ -217,12 +218,12 @@ button.micl-button-outlined-m {
         border-radius: var(--md-sys-shape-corner-large);
 
         &.micl-button--toggle.micl-button--selected {
-            border-radius: var(--md-sys-shape-corner-full);
+            border-radius: calc(var(--micl-height) / 2);
         }
     }
     &:not(:disabled) {
         &:active {
-            border-radius: var(--md-sys-shape-corner-small);
+            border-radius: var(--md-sys-shape-corner-medium);
         }
     }
     .micl-button__icon {
@@ -254,7 +255,7 @@ button.micl-button-outlined-l {
         border-radius: var(--md-sys-shape-corner-extra-large);
 
         &.micl-button--toggle.micl-button--selected {
-            border-radius: var(--md-sys-shape-corner-full);
+            border-radius: calc(var(--micl-height) / 2);
         }
     }
     &:not(:disabled) {
@@ -291,7 +292,7 @@ button.micl-button-outlined-xl {
         border-radius: var(--md-sys-shape-corner-extra-large);
 
         &.micl-button--toggle.micl-button--selected {
-            border-radius: var(--md-sys-shape-corner-full);
+            border-radius: calc(var(--micl-height) / 2);
         }
     }
     &:not(:disabled) {
