@@ -53,8 +53,8 @@ Removing the `popover` attribute creates a more intrusive **modal** dialog. This
   </div>
   <div class="micl-dialog__actions">
     <form method="dialog">
-      <button class="micl-button">Cancel</button>
-      <button class="micl-button">Save</button>
+      <button class="micl-button-text-s">Cancel</button>
+      <button class="micl-button-text-s">Save</button>
     </form>
   </div>
 </dialog>
@@ -100,14 +100,14 @@ A full-screen dialog covers the entire viewport, primarily on smaller screens. O
     <button type="button" class="micl-iconbutton-s material-symbols-outlined" popovertarget="mydialog" aria-label="Close">close</button>
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
     <h2 id="mytitle">Full-screen dialog</h2>
-    <button class="micl-button" value="dosave">Save</button>
+    <button class="micl-button-text-s" value="dosave">Save</button>
   </form>
   <div class="micl-dialog__content">
     <span id="mydesc" class="micl-dialog__supporting-text">This dialog covers the whole screen.</span>
   </div>
   <form method="dialog" class="micl-dialog__actions">
-    <button type="button" class="micl-button" popovertarget="mydialog">Cancel</button>
-    <button class="micl-button" value="dosave">Save</button>
+    <button type="button" class="micl-button-text-s" popovertarget="mydialog">Cancel</button>
+    <button class="micl-button-text-s" value="dosave">Save</button>
   </form>
 </dialog>
 
