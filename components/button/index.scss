@@ -124,7 +124,8 @@ button.micl-button-outlined-xs {
         position: absolute;
         block-size: var(--md-sys-target-size, 48px);
         inline-size: 100%;
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 0;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -144,7 +145,7 @@ button.micl-button-outlined-xs {
     }
     .micl-button__icon {
         font-size: 20px;
-        width: 20px;
+        inline-size: 20px;
     }
 }
 
@@ -170,7 +171,8 @@ button.micl-button-outlined-s {
         position: absolute;
         block-size: var(--md-sys-target-size, 48px);
         inline-size: 100%;
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 0;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -190,7 +192,7 @@ button.micl-button-outlined-s {
     }
     .micl-button__icon {
         font-size: 20px;
-        width: 20px;
+        inline-size: 20px;
     }
 }
 
@@ -228,7 +230,7 @@ button.micl-button-outlined-m {
     }
     .micl-button__icon {
         font-size: var(--md-sys-layout-icon-size, 24px);
-        width: var(--md-sys-layout-icon-size, 24px);
+        inline-size: var(--md-sys-layout-icon-size, 24px);
     }
 }
 
@@ -265,7 +267,7 @@ button.micl-button-outlined-l {
     }
     .micl-button__icon {
         font-size: 32px;
-        width: 32px;
+        inline-size: 32px;
     }
 }
 
@@ -302,7 +304,7 @@ button.micl-button-outlined-xl {
     }
     .micl-button__icon {
         font-size: 40px;
-        width: 40px;
+        inline-size: 40px;
     }
 }
 
@@ -374,11 +376,11 @@ button.micl-button-elevated-xl {
     }
 }
 button.micl-button-elevated-xs {
-    height: 32px;
+    block-size: 32px;
     border: none;
 }
 button.micl-button-elevated-s {
-    height: 40px;
+    block-size: 40px;
     border: none;
 }
 
