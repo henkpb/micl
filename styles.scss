@@ -47,6 +47,7 @@
 @use 'components/bottomsheet';
 @use 'components/navigationrail';
 @use 'components/stepper';
+@use 'components/timepicker';
 
 @property --micl-ripple {
     syntax: '<integer>';

@@ -70,6 +70,32 @@ export default (() =>
                 });
             }
 
+            if (input.matches('input[type=time][data-timepicker]')) {
+                const timePicker = !input.dataset.timepicker ? null :
+                                   document.getElementById(input.dataset.timepicker);
+                if (timePicker instanceof HTMLDialogElement) {
+                    input.addEventListener('click', (event: Event) =>
+                    {
+                        event.preventDefault();
+                        timePicker.showModal();
+                    });
+                    input.addEventListener('keydown', (event: Event) =>
+                    {
+                        if (!(event instanceof KeyboardEvent)) {
+                            return;
+                        }
+                        switch (event.key) {
+                            case 'Enter':
+                            case ' ':
+                                event.preventDefault();
+                                timePicker.showModal();
+                                break;
+                            default:
+                        }
+                    });
+                }
+            }
+
             setCounter(input);
         },
 

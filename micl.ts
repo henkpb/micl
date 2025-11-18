@@ -28,6 +28,7 @@ import _navigationrail, { navigationrailSelector } from './components/navigation
 import _slider, { sliderSelector } from './components/slider';
 import _stepper, { stepperSelector } from './components/stepper';
 import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
+import _timepicker, { timepickerSelector } from './components/timepicker';
 
 interface ComponentEntry<T extends HTMLElement> {
     component: {
@@ -53,7 +54,8 @@ export default (() =>
         [sliderSelector]        : { component: _slider, type: HTMLInputElement },
         [stepperSelector]       : { component: _stepper, type: HTMLElement },
         [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
-        [textfieldSelector]     : { component: _textfield, type: HTMLInputElement }
+        [textfieldSelector]     : { component: _textfield, type: HTMLInputElement },
+        [timepickerSelector]    : { component: _timepicker, type: HTMLDialogElement }
     };
 
     const selector = Object.keys(componentMap).join(',');
