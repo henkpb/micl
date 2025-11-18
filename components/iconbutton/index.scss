@@ -111,9 +111,10 @@ button.micl-iconbutton-outlined-xs {
     &::before {
         content: "";
         position: absolute;
-        block-size: var(--md-sys-target-size);
-        inline-size: var(--md-sys-target-size);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size)) / 2) 0 0 calc((var(--micl-width) - var(--md-sys-target-size)) / 2);
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -125,7 +126,7 @@ button.micl-iconbutton-outlined-xs {
     }
     &.micl-iconbutton--wide {
         --micl-width: 40px;
-        border-radius: calc(var(--micl-width) / 2);
+        border-radius: calc(var(--micl-height) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-medium);
@@ -158,9 +159,10 @@ button.micl-iconbutton-outlined-s {
     &::before {
         content: "";
         position: absolute;
-        block-size: var(--md-sys-target-size);
-        inline-size: var(--md-sys-target-size);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size)) / 2) 0 0 calc((var(--micl-width) - var(--md-sys-target-size)) / 2);
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
         background-color: transparent;
     }
     &.micl-button--toggle.micl-button--selected {
@@ -172,12 +174,7 @@ button.micl-iconbutton-outlined-s {
     }
     &.micl-iconbutton--wide {
         --micl-width: 52px;
-        border-radius: calc(var(--micl-width) / 2);
-
-        &::before {
-            inline-size: var(--micl-width);
-            inset: calc((40px - var(--md-sys-target-size)) / 2) 0 0 0;
-        }
+        border-radius: calc(var(--micl-height) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-medium);
@@ -215,7 +212,7 @@ button.micl-iconbutton-outlined-m {
     }
     &.micl-iconbutton--wide {
         --micl-width: 72px;
-        border-radius: calc(var(--micl-width) / 2);
+        border-radius: calc(var(--micl-height) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-large);
@@ -226,7 +223,7 @@ button.micl-iconbutton-outlined-m {
     }
     &:not(:disabled) {
         &:active {
-            border-radius: var(--md-sys-shape-corner-small);
+            border-radius: var(--md-sys-shape-corner-medium);
         }
     }
 }
@@ -252,7 +249,7 @@ button.micl-iconbutton-outlined-l {
     }
     &.micl-iconbutton--wide {
         --micl-width: 128px;
-        border-radius: calc(var(--micl-width) / 2);
+        border-radius: calc(var(--micl-height) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-extra-large);
@@ -289,7 +286,7 @@ button.micl-iconbutton-outlined-xl {
     }
     &.micl-iconbutton--wide {
         --micl-width: 184px;
-        border-radius: calc(var(--micl-width) / 2);
+        border-radius: calc(var(--micl-height) / 2);
     }
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-extra-large);
@@ -315,6 +312,9 @@ button.micl-iconbutton-standard-l,
 button.micl-iconbutton-standard-xl {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
 
+    &:disabled {
+        background-color: transparent;
+    }
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {
             --statelayer-color: var(--md-sys-color-primary);
@@ -415,6 +415,9 @@ button.micl-iconbutton-outlined-xl {
     &.micl-iconbutton-outlined-xl {
         // border: 3px solid var(--md-sys-color-outline);
         border: 3px solid var(--md-sys-color-outline-variant);
+    }
+    &:disabled {
+        background-color: transparent;
     }
     &:not(:disabled) {
         &.micl-button--toggle.micl-button--selected {

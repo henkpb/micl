@@ -1,0 +1,268 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/shapes';
+@use '../../styles/statelayer';
+@use '../../styles/typography';
+
+:root {
+    --md-sys-timepicker-input-height: 72px;
+    --md-sys-timepicker-input-width: 96px;
+    --md-sys-timepicker-period-height: 72px;
+    --md-sys-timepicker-period-width: 52px;
+    --md-sys-timepicker-dial-size: 256px;
+    --md-sys-timepicker-dial-center-size: 8px;
+    --md-sys-timepicker-dial-track-width: 2px;
+}
+
+dialog.micl-dialog.micl-timepicker {
+    .micl-dialog__headline h2 {
+        @include typography.label-medium;
+
+        color: var(--md-sys-color-on-surface-variant);
+    }
+    .micl-dialog__content {
+        display: grid;
+        grid-template-areas: "time-input time-input" "supporting-hour supporting-minute" "dial dial";
+    }
+}
+
+.micl-timepicker input {
+    --md-sys-timepicker-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+
+    @include typography.display-medium;
+
+    grid-area: time-input;
+    position:relative;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface);
+	-webkit-tap-highlight-color: transparent;
+
+    &::-webkit-datetime-edit-fields-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        text-align: center;
+    }
+    &::-webkit-datetime-edit-text {
+        inline-size: 24px;
+    }
+    &::-webkit-datetime-edit-hour-field,
+    &::-webkit-datetime-edit-minute-field {
+        --statelayer-color: var(--md-sys-color-on-surface);
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: var(--md-sys-timepicker-input-width);
+        block-size: var(--md-sys-timepicker-input-height);
+        padding: 0;
+        border-radius: var(--md-sys-shape-corner-small);
+        background-color: var(--md-sys-color-surface-container-highest);
+        background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+        background-repeat: no-repeat;
+        background-size: 100%;
+        cursor: pointer;
+        transition: --statelayer-opacity var(--md-sys-timepicker-motion-duration) linear;
+
+        &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+        }
+    }
+    &::-webkit-datetime-edit-hour-field:focus-within,
+    &::-webkit-datetime-edit-minute-field:focus-within {
+        box-sizing: border-box;
+        background-color: var(--md-sys-color-primary-container);
+        color: var(--md-sys-color-on-primary-container);
+        outline: none;
+        border: 2px solid var(--md-sys-color-primary);
+    }
+    &::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+    &::-webkit-datetime-edit-ampm-field {
+        --statelayer-color: var(--md-sys-color-on-surface-variant);
+
+        box-sizing: border-box;
+        block-size: var(--md-sys-timepicker-period-height);
+        inline-size: var(--md-sys-timepicker-period-width);
+        padding: 0;
+        margin: 0;
+        border-radius: var(--md-sys-shape-corner-small);
+        background-color: transparent;
+        color: transparent;
+        background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+        background-repeat: no-repeat;
+        background-size: 100%;
+        z-index: 1;
+        cursor: pointer;
+        transition: --statelayer-opacity var(--md-sys-timepicker-motion-duration) linear;
+
+        &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+        }
+    }
+    &::-webkit-datetime-edit-ampm-field:focus-within {
+        border: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+    }
+    &:has(::-webkit-datetime-edit-ampm-field) {
+        &::before,
+        &::after {
+            @include typography.title-medium;
+
+            content: "AM";
+            box-sizing: border-box;
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            block-size: calc(50% + 0.5px);
+            inline-size: var(--md-sys-timepicker-period-width);
+            inset-inline-end: 0;
+            inset-block-start: 0;
+            border: 1px solid var(--md-sys-color-outline);
+            border-start-start-radius: var(--md-sys-shape-corner-small);
+            border-start-end-radius: var(--md-sys-shape-corner-small);
+            background-color: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+        }
+        &::after {
+            content: "PM";
+            inset-block: auto 0;
+            border-start-start-radius: 0;
+            border-start-end-radius: 0;
+            border-end-start-radius: var(--md-sys-shape-corner-small);
+            border-end-end-radius: var(--md-sys-shape-corner-small);
+            background-color: transparent;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        &.micl-timepicker--pm {
+            &::before {
+                background-color: transparent;
+                color: var(--md-sys-color-on-surface-variant);
+            }
+            &::after {
+                background-color: var(--md-sys-color-tertiary-container);
+                color: var(--md-sys-color-on-tertiary-container);
+            }
+        }
+    }
+}
+.micl-timepicker__supporting-text-hour,
+.micl-timepicker__supporting-text-minute {
+    @include typography.body-small;
+
+    grid-area: supporting-hour;
+    padding-block: 4px 0;
+    color: var(--md-sys-color-on-surface-variant);
+}
+.micl-timepicker__supporting-text-minute {
+    grid-area: supporting-minute;
+    padding-inline-start: 16px;
+}
+
+
+.micl-timepicker .micl-timepicker__dial {
+    --r: calc((var(--md-sys-timepicker-dial-size, 256px) - var(--md-sys-target-size, 48px)) / 2);
+
+    position: relative;
+    grid-area: dial;
+    aspect-ratio: 1;
+    block-size: var(--md-sys-timepicker-dial-size, 256px);
+    inline-size: var(--md-sys-timepicker-dial-size, 256px);
+    padding: unset;
+    border-radius: var(--md-sys-shape-corner-full);
+    background-color: var(--md-sys-color-surface-container-highest);
+    list-style-type: none;
+
+    time:nth-child(1) { --d: 270deg; }
+    time:nth-child(2) { --d: 300deg; }
+    time:nth-child(3) { --d: 330deg; }
+    time:nth-child(4) { --d: 0deg; }
+    time:nth-child(5) { --d: 30deg; }
+    time:nth-child(6) { --d: 60deg; }
+    time:nth-child(7) { --d: 90deg; }
+    time:nth-child(8) { --d: 120deg; }
+    time:nth-child(9) { --d: 150deg; }
+    time:nth-child(10) { --d: 180deg; }
+    time:nth-child(11) { --d: 210deg; }
+    time:nth-child(12) { --d: 240deg; }
+
+    time {
+        --x: calc(var(--r) + (var(--r) * cos(var(--d))));
+        --y: calc(var(--r) + (var(--r) * sin(var(--d))));
+
+        @include typography.body-large;
+
+        position: absolute;
+        display: grid;
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: var(--md-sys-target-size, 48px);
+        inset-inline-start: var(--x);
+        inset-block-start: var(--y);
+        border-radius: var(--md-sys-shape-corner-full);
+        place-content: center;
+        cursor: pointer;
+        user-select: none;
+
+        &.micl-timepicker__time--selected {
+            color: var(--md-sys-color-on-primary);
+            background-color: var(--md-sys-color-primary);
+        }
+    }
+    &.micl-timepicker__dial--dragging {
+        time:hover {
+            color: var(--md-sys-color-on-primary);
+            background-color: var(--md-sys-color-primary);
+        }
+    }
+
+    .micl-timepicker__track {
+        --ah: 114px;
+
+        position: relative;
+        display: block;
+        inline-size: var(--md-sys-timepicker-dial-track-width, 2px);
+        block-size: var(--ah);
+        inset-inline-start: calc((var(--md-sys-timepicker-dial-size, 256px) - var(--md-sys-timepicker-dial-track-width, 2px)) / 2);
+        inset-block-start: calc((var(--md-sys-timepicker-dial-size, 256px) / 2) - var(--ah));
+        border-radius: calc(var(--md-sys-timepicker-dial-track-width, 2px) * 2);
+        background-color: var(--md-sys-color-primary);
+        transform: rotate(0deg);
+        transform-origin: bottom;
+
+        &::before {
+            content: "";
+            position: absolute;
+            display: block;
+            block-size: var(--md-sys-timepicker-dial-center-size, 8px);
+            inline-size: var(--md-sys-timepicker-dial-center-size, 8px);
+            inset-block-end: -3px;
+            inset-inline-start: -3px;
+            border-radius: var(--md-sys-shape-corner-full);
+            background-color: var(--md-sys-color-primary);
+        }
+    }
+}

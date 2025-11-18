@@ -112,5 +112,25 @@ Use a [Divider component](../divider/README.md) to separate neighbouring accordi
 
 Since the Accordion is based on the List component, you can use the same utility classes for content structure and styling. Refer to the [List component documentation](../list/README.md) for details on how to add icons, avatars, images, and other features to your accordion items.
 
+## Customizations
+You can customize the appearance of the Accordion component by overriding its own global CSS variables and those from the List component. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child accordions.
+
+| Variable name | Default Value | Description |
+| ------------- | ------------- | ----------- |
+| --md-sys-accordion-item-space | 0px | The space between an opened accordion item and its next neighbour. |
+
+**Example: Changing the margin between an opened item and the next**
+
+```HTML
+<div class="micl-list" role="listbox" style="--md-sys-accordion-item-space:4px">
+  <details>
+    ...
+  </details>
+  <details>
+    ...
+  </details>
+</div>
+```
+
 ## Compatibility
 The Card component uses the `interpolate-size` CSS property to smoothly open and close the detail area of a Details disclosure element, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.

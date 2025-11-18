@@ -34,7 +34,7 @@ body {
 .micl-divider-inset-end {
     inline-size: 100%;
     block-size: 0;
-    margin-block: calc(var(--md-sys-divider-space, 4px) - 1px) var(--md-sys-divider-space, 4px);
+    margin-block: calc(var(--md-sys-divider-space, 4px) - 0.5px) calc(var(--md-sys-divider-space, 4px) - 0.5px);
     margin-inline: 0;
     border: none;
     border-block-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color, gray);
@@ -62,4 +62,10 @@ body {
     margin-inline: calc(2 * var(--md-sys-divider-space, 4px));
     border: none;
     border-inline-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color, gray);
+}
+
+li.micl-divider {
+    list-style: none;
+    box-shadow: 0  calc(-1 * var(--md-sys-divider-space, 4px) / 2) 0 calc(var(--md-sys-divider-space, 4px) / 2) var(--md-sys-list-item-container-color),
+                0 calc(var(--md-sys-divider-space, 4px) / 2) 0 calc(var(--md-sys-divider-space, 4px) / 2) var(--md-sys-list-item-container-color);
 }

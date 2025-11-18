@@ -35,6 +35,7 @@
     --md-sys-list-item-three-padding: 12px;
     --md-sys-list-item-space: 16px;
     --md-sys-list-item-padding-inline: 16px;
+    --md-sys-accordion-item-space: 0px;
 }
 
 .micl-list {
@@ -60,6 +61,7 @@
         }
         &[open]::details-content {
             block-size: auto;
+            margin-block-end: var(--md-sys-accordion-item-space, 0px);
         }
         &[open] .micl-list-item__icon--expander {
             transform: rotate(180deg);
@@ -87,11 +89,6 @@
             background-color: var(--md-sys-list-item-container-color);
             overflow: hidden;
         }
-    }
-
-    li.micl-divider {
-        box-shadow: 0  -4px 0 3px var(--md-sys-list-item-container-color),
-                    0 4px 0 4px var(--md-sys-list-item-container-color);
     }
 }
 
