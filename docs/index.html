@@ -243,10 +243,10 @@
                             <h2>Button actions</h2>
                         </div>
                         <div class="micl-card__content" style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px;padding-block-start:16px">
-                            <dialog id="mydialog" class="micl-dialog" closedby="none" popover>
+                            <dialog id="mydialog" class="micl-dialog" popover closedby="none" aria-labelledby="mytitle">
                                 <form method="dialog" class="micl-dialog__headline">
                                     <span class="micl-dialog__icon material-symbols-outlined">person</span>
-                                    <h2>Personal info</h2>
+                                    <h2 id="mytitle">Personal info</h2>
                                 </form>
                                 <div class="micl-dialog__content">
                                     <p class="micl-dialog__supporting-text">Please specify personal information about the new employee.</p>
@@ -293,9 +293,9 @@
                             </dialog>
                             <button class="micl-button-elevated-s" popovertarget="mydialog">Open Dialog</button>
 
-                            <dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mytitle">
+                            <dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mysidesheettitle">
                                 <div class="micl-sidesheet__headline">
-                                    <h2 id="mytitle">Lorum ipsum</h2>
+                                    <h2 id="mysidesheettitle">Lorum ipsum</h2>
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">

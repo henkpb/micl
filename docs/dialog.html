@@ -38,9 +38,9 @@
                         </div>
                         <p class="micl-card__supporting-text">Click a button to open one of the MICL dialogs.</p>
                         <div class="micl-card__content docs-buttons">
-                            <dialog id="mydialog1" class="micl-dialog" style="width:300px" closedby="any" popover>
+                            <dialog id="mydialog1" class="micl-dialog" style="width:300px" popover closedby="any" role="alertdialog" aria-labelledby="mytitle1">
                                 <div class="micl-dialog__headline">
-                                    <h2>Basic dialog</h2>
+                                    <h2 id="mytitle1">Basic dialog</h2>
                                     <span class="micl-dialog__supporting-text">A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.</span>
                                 </div>
                                 <div class="micl-dialog__actions">
@@ -50,15 +50,15 @@
                             </dialog>
                             <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog1">Open Basic Dialog</button>
 
-                            <dialog id="mydialog2" class="micl-dialog" style="width:400px" closedby="any" popover>
+                            <dialog id="mydialog2" class="micl-dialog" style="width:400px" popover closedby="any" role="alertdialog" aria-labelledby="mytitle2">
                                 <div class="micl-dialog__headline">
-                                    <span class="micl-dialog__icon material-symbols-outlined">restart_alt</span>
-                                    <h2>Reset settings?</h2>
+                                    <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">restart_alt</span>
+                                    <h2 id="mytitle2">Reset settings?</h2>
                                     <span class="micl-dialog__supporting-text">This will reset your app preferences back to their default settings. The following accounts will also be signed out:</span>
                                 </div>
                                 <div class="micl-dialog__content">
                                     <hr class="micl-divider">
-                                    <ul class="micl-list" style="--md-sys-list-item-container-color:transparent;margin-block:24px">
+                                    <ul class="micl-list" style="--md-sys-list-item-container-color:transparent;margin-block:8px">
                                         <li class="micl-list-item-one">
                                             <span class="micl-list-item__avatar">JH</span>
                                             <span class="micl-list-item__text">
@@ -87,9 +87,9 @@
                             </dialog>
                             <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog2">Open Dialog</button>
 
-                            <dialog id="mydialog3" class="micl-dialog" style="width:350px" closedby="closerequest">
+                            <dialog id="mydialog3" class="micl-dialog" style="width:350px" role="alertdialog" closedby="closerequest" aria-labelledby="mytitle3">
                                 <div class="micl-dialog__headline">
-                                    <h2>Delete selected images?</h2>
+                                    <h2 id="mytitle3">Delete selected images?</h2>
                                     <span class="micl-dialog__supporting-text">Images will be permanently removed from your account and all synchronized devices.</span>
                                 </div>
                                 <form method="dialog" class="micl-dialog__actions">
@@ -99,11 +99,11 @@
                             </dialog>
                             <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog3">Open Modal Dialog</button>
 
-                            <dialog id="mydialog4" class="micl-dialog-fullscreen" closedby="none" popover>
+                            <dialog id="mydialog4" class="micl-dialog micl-dialog--fullscreen" popover closedby="none" aria-labelledby="mytitle4">
                                 <form method="dialog" class="micl-dialog__headline">
                                     <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mydialog4" aria-label="Close">close</button>
-                                    <span class="micl-dialog__icon material-symbols-outlined">person</span>
-                                    <h2>Personal info</h2>
+                                    <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
+                                    <h2 id="mytitle4">Personal info</h2>
                                     <button class="micl-button-text-s" value="dosave">Save</button>
                                 </form>
                                 <div class="micl-dialog__content">
@@ -160,7 +160,7 @@
                         </div>
                         <div class="micl-card__content docs-code">
                             <pre tabindex="-1"><code>
-&lt;dialog id="id0" class="micl-dialog" style="width:300px" closedby="any" popover&gt;
+&lt;dialog id="id0" class="micl-dialog" style="width:300px" role="alertdialog" closedby="any" popover&gt;
   &lt;div class="micl-dialog__headline"&gt;
     &lt;h2&gt;Basic dialog&lt;/h2&gt;
     &lt;span class="micl-dialog__supporting-text"&gt;A dialog is a type of modal window.&lt;/span&gt;

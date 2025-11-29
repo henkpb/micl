@@ -1,5 +1,5 @@
 # Dialog
-This component implements the [Material Design 3 Expressive Dialog](https://m3.material.io/components/dialogs/overview) design.
+This component implements the [Material Design 3 Expressive Dialog](https://m3.material.io/components/dialogs/overview) design. A dialog is a small window that prompts the user to make a decision or enter additional information.
 
 ## Basic Usage
 
@@ -7,7 +7,7 @@ This component implements the [Material Design 3 Expressive Dialog](https://m3.m
 To create a basic dialog, use the `<dialog>` element with the `micl-dialog` class. You can open and close the dialog using JavaScript, or you can use a control element, such as a button, to open and close the dialog.
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" closedby="any" popover aria-labelledby="mytitle" aria-describedby="mydesc">
+<dialog id="mydialog" class="micl-dialog" popover closedby="any" role="alertdialog" aria-labelledby="mytitle" aria-describedby="mydesc">
   <div class="micl-dialog__headline">
     <h2 id="mytitle">Basic dialog</h2>
     <span id="mydesc" class="micl-dialog__supporting-text">An example of a basic dialog</span>
@@ -45,7 +45,7 @@ When dialogs with the `popover` attribute are opened, they animate from the cont
 Removing the `popover` attribute creates a more intrusive **modal** dialog. This type of dialog requires the user to interact with its buttons or press the <kbd>Esc</kbd> key to close it.
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" closedby="closerequest" aria-labelledby="mytitle" aria-describedby="mydesc">
+<dialog id="mydialog" class="micl-dialog" closedby="closerequest" role="alertdialog" aria-labelledby="mytitle" aria-describedby="mydesc">
   <div class="micl-dialog__headline">
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">info</span>
     <h2 id="mytitle">Modal dialog</h2>
@@ -67,7 +67,7 @@ Removing the `popover` attribute creates a more intrusive **modal** dialog. This
 By default, modal dialogs open in the center of the screen. You can anchor a modal dialog to a control element, causing it to open relative to that element:
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" closedby="closerequest" style="position-anchor:--myanchor">
+<dialog id="mydialog" class="micl-dialog" style="position-anchor:--myanchor">
 </dialog>
 
 <button type="button" popovertarget="mydialog" style="anchor-name:--myanchor">Open Modal Dialog</button>
@@ -92,10 +92,10 @@ A dialog typically consists of three main sections to organize its content:
 - `micl-dialog__actions`: A container for action buttons that allow the user to perform actions related to the dialog or close it. Actions are typically placed in a `<form method="dialog">` for native HTML dialog closing.
 
 ### Full-screen dialog
-A full-screen dialog covers the entire viewport, primarily on smaller screens. On screens wider than 560 pixels, a full-screen dialog behaves like a basic dialog. Use the `micl-dialog-fullscreen` class for this variant:
+A full-screen dialog covers the entire viewport, primarily on smaller screens. On screens wider than 560 pixels, a full-screen dialog behaves like a basic dialog. Use the `micl-dialog--fullscreen` modifier class for this variant:
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog-fullscreen" closedby="none" popover aria-labelledby="mytitle" aria-describedby="mydesc">
+<dialog id="mydialog" class="micl-dialog micl-dialog--fullscreen" closedby="none" popover aria-labelledby="mytitle" aria-describedby="mydesc">
   <form method="dialog" class="micl-dialog__headline">
     <button type="button" class="micl-iconbutton-s material-symbols-outlined" popovertarget="mydialog" aria-label="Close">close</button>
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
@@ -123,7 +123,10 @@ You can customize the appearance of the Dialog component by overriding its globa
 
 | Variable name | Default Value | Description |
 | ------------- | ----- | ----------- |
+| --md-sys-dialog-min-width | 280px | The minimum width of a dialog |
+| --md-sys-dialog-max-width | 560px | The maximum width of a dialog |
 | --md-sys-dialog-padding | 24px | The inner padding between the dialog's edge and its content |
+| --md-sys-dialog-headline-space | 16px | The vertical spacing between the elements in the header |
 
 **Example: Changing the dialog padding**
 
