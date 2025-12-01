@@ -89,7 +89,7 @@ export default (() =>
         element.value = String(value).padStart(2, '0');
     };
 
-    const setInputAttributes = (input: HTMLInputElement, hourMode: boolean): void =>
+    const setInputAttributes = (input: HTMLInputElement): void =>
     {
         const { min, max } = getTimeLimits(input.name);
 
@@ -196,7 +196,7 @@ export default (() =>
 
             const element: HTMLDataElement = dial.appendChild(mark);
 
-            element.addEventListener('mouseenter', () =>
+            element.addEventListener('pointerenter', () =>
             {
                 if (dial.classList.contains('micl-timepicker__dial--dragging')) {
                     setInputValue(dialog, !dialog.querySelector(
@@ -218,30 +218,16 @@ export default (() =>
         dial.appendChild(track);
     };
 
-    const showDialHours = (dial: HTMLElement): void =>
+    const showDialMarks = (dial: HTMLElement, name: string): void =>
     {
         dial.querySelectorAll<HTMLDataElement>('data').forEach(mark =>
         {
-            if (!!mark.dataset.hour) {
-                mark.textContent = mark.dataset.hour;
-                mark.value       = mark.dataset.hour.padStart(2, '0');
+            if (!!mark.dataset[name]) {
+                mark.textContent = mark.dataset[name];
+                mark.value       = mark.dataset[name].padStart(2, '0');
             }
             if (mark.classList.contains('micl-timepicker__dial-inner')) {
-                mark.classList.remove('micl-hidden');
-            }
-        });
-    };
-
-    const showDialMinutes = (dial: HTMLElement): void =>
-    {
-        dial.querySelectorAll<HTMLDataElement>('data').forEach(mark =>
-        {
-            if (!!mark.dataset.minute) {
-                mark.textContent = mark.dataset.minute;
-                mark.value       = mark.dataset.minute.padStart(2, '0');
-            }
-            if (mark.classList.contains('micl-timepicker__dial-inner')) {
-                mark.classList.add('micl-hidden');
+                mark.classList[name === 'hour' ? 'remove' : 'add']('micl-hidden');
             }
         });
     };
@@ -256,13 +242,13 @@ export default (() =>
         const { max, min } = getTimeLimits(input.name);
         let value = parseInt(input.value, 10) || 0;
 
-        if (event.key === 'ArrowUp') {
-            value++;
-            if (value > max) value = min;
-        }
-        else if (event.key === 'ArrowDown') {
-            value--;
-            if (value < min) value = max;
+        value += event.key === 'ArrowUp' ? 1 : -1;
+        if (value < min || value > max) {
+            value = (value < min) ? max : min;
+            if (input.name === 'hour' && uses12HourFormat) {
+                const e = dialog.querySelector('input[name=period]:not(:checked)') as HTMLInputElement;
+                e?.click();
+            }
         }
 
         setInputValue(dialog, input.name, `${value}`);
@@ -276,63 +262,53 @@ export default (() =>
             }
 
             const form   = getElement<HTMLFormElement>(dialog, 'form');
-            const hour   = getElement<HTMLInputElement>(dialog, 'input[name=hour]');
-            const minute = getElement<HTMLInputElement>(dialog, 'input[name=minute]');
             const mode   = getElement<HTMLElement>(dialog, '.micl-timepicker__inputmode');
             const dial   = getElement<HTMLElement>(dialog, '.micl-timepicker__dial');
+            const inputs = [
+                getElement<HTMLInputElement>(dialog, 'input[name=hour]'),
+                getElement<HTMLInputElement>(dialog, 'input[name=minute]')
+            ].filter((input): input is HTMLInputElement => input !== null);
 
-            if (!form || !hour || !minute) {
+            if (!form || inputs.length < 2) {
                 return;
             }
             dialog.dataset.miclinitialized = '1';
 
-            setInputAttributes(hour, true);
-            setInputAttributes(minute, false);
-
-            hour.addEventListener('keydown', handleSpinning.bind(null, dialog, hour));
-            minute.addEventListener('keydown', handleSpinning.bind(null, dialog, minute));
-
-            hour.addEventListener('focus', () =>
+            inputs.forEach((input, i) =>
             {
-                toggleSelection(minute, false);
-                toggleSelection(hour, true);
+                setInputAttributes(input);
                 if (dial) {
-                    showDialHours(dial);
-                    setDial(dial, 'hour', hour.value);
+                    input.toggleAttribute('readonly', isVisible(dial));
                 }
-            });
-            minute.addEventListener('focus', () =>
-            {
-                toggleSelection(hour, false);
-                toggleSelection(minute, true);
-                if (dial) {
-                    showDialMinutes(dial);
-                    setDial(dial, 'minute', minute.value);
-                }
-            });
-            hour.addEventListener('blur', () =>
-            {
-                if (!isVisible(dial)) {
-                    formatValue(hour);
-                    toggleSelection(hour, false);
-                }
-            });
-            minute.addEventListener('blur', () =>
-            {
-                if (!isVisible(dial)) {
-                    formatValue(minute);
-                    toggleSelection(minute, false);
-                }
+
+                input.addEventListener('keydown', handleSpinning.bind(null, dialog, input));
+                input.addEventListener('focus', () =>
+                {
+                    toggleSelection(inputs[i === 0 ? 1 : 0], false);
+                    toggleSelection(input, true);
+                    if (dial) {
+                        showDialMarks(dial, input.name);
+                        setDial(dial, input.name, input.value);
+                    }
+                });
+                input.addEventListener('blur', () =>
+                {
+                    if (!isVisible(dial)) {
+                        formatValue(input);
+                        toggleSelection(input, false);
+                    }
+                });
             });
 
             const period = dialog.querySelector('.micl-timepicker__period');
-            if (period) {
+            if (period && uses12HourFormat) {
                 ['am', 'pm'].forEach(ampm => {
                     let e = document.createElement('input') as HTMLInputElement;
                     e.type = 'radio';
                     e.name = 'period';
                     e.classList.add(`micl-timepicker__${ampm}`);
                     e.value = ampm;
+                    e.ariaLabel = ampm.toUpperCase();
                     period.appendChild(e);
                 });
                 period.classList.toggle('micl-hidden', !uses12HourFormat);
@@ -344,20 +320,22 @@ export default (() =>
                 mode.textContent = mode.dataset.alticon || icon;
                 mode.dataset.alticon = icon;
                 dial?.classList.toggle('micl-hidden');
-                hour.toggleAttribute('readonly', isVisible(dial));
-                minute.toggleAttribute('readonly', isVisible(dial));
+                inputs.forEach(input =>
+                {
+                    input.toggleAttribute('readonly', isVisible(dial));
+                });
                 if (isVisible(dial)) {
-                    hour.focus();
+                    inputs[0].focus();
                 }
             });
 
             if (dial) {
                 addMarks(dialog, dial);
 
-                dial.addEventListener('mousedown', () => {
+                dial.addEventListener('pointerdown', () => {
                     dial.classList.add('micl-timepicker__dial--dragging');
                 });
-                dial.addEventListener('mouseup', () => {
+                dial.addEventListener('pointerup', () => {
                     dial.classList.remove('micl-timepicker__dial--dragging');
                 });
             }

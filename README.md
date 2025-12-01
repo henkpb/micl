@@ -106,8 +106,12 @@ The library currently consists of the following components:
 - [x] [Stepper](components/stepper/README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)
+- [x] [Time picker](components/timepicker/README.md)
 
 ## Change Log ↪️
+
+### 5.0.0 (02.12.2025)
+- **Time picker**: New component.
 
 ### 4.0.0 (27.10.2025)
 - **BREAKING**: Moved layout.scss til sub-folder.
