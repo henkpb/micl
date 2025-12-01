@@ -6,7 +6,7 @@
     <meta name="description" content="The Material-Inspired Component Library (MICL) Showcase">
     <title>MICL Showcase</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,error,favorite,globe,inbox,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,person,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,error,favorite,globe,inbox,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,person,schedule,share&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -229,9 +229,32 @@
                                     </summary>
                                     <div class="micl-list-item__content" style="padding-block:16px">
                                         <div class="micl-textfield-filled">
-                                            <label for="tf2">Date</label>
-                                            <input type="date" id="tf2" value="">
+                                            <label for="tf2">Time</label>
+                                            <input type="time" id="tf2" data-timepicker="mytimepicker" value="10:05">
                                         </div>
+                                        <dialog id="mytimepicker" class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="mytime">
+                                            <form method="dialog">
+                                                <div class="micl-dialog__headline">
+                                                    <h2 id="mytime">Enter time</h2>
+                                                </div>
+                                                <div class="micl-dialog__content">
+                                                    <input type="number" name="hour" value="00" aria-labelledby="myhour">
+                                                    <span class="micl-timepicker__separator">:</span>
+                                                    <input type="number" name="minute" value="00" aria-labelledby="myminute">
+                                                    <div class="micl-timepicker__period"></div>
+                                                    <span id="myhour" class="micl-timepicker__supporting-text-hour">Hour</span>
+                                                    <span id="myminute" class="micl-timepicker__supporting-text-minute">Minute</span>
+                                                    <div class="micl-timepicker__dial"></div>
+                                                </div>
+                                                <div class="micl-dialog__actions">
+                                                    <button type="button" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--square material-symbols-outlined" data-alticon="schedule">keyboard</button>
+                                                    <div>
+                                                        <button class="micl-button-text-s" value="">Cancel</button>
+                                                        <button class="micl-button-text-s" value="OK">OK</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </dialog>
                                     </div>
                                 </details>
                             </div>
@@ -362,6 +385,7 @@
                             <p><a href="stepper.html" class="md-sys-typescale-body-large">Steppers</a></p>
                             <p><a href="switch.html" class="md-sys-typescale-body-large">Switches</a></p>
                             <p><a href="textfield.html" class="md-sys-typescale-body-large">Text fields</a></p>
+                            <p><a href="timepicker.html" class="md-sys-typescale-body-large">Time pickers</a></p>
                         </div>
                     </div>
                 </div>
