@@ -193,24 +193,8 @@ export default (() =>
             else {
                 mark.dataset.minute = `${(i * 5) % 60}`;
             }
+            dial.appendChild(mark);
 
-            const element: HTMLDataElement = dial.appendChild(mark);
-
-            element.addEventListener('pointerenter', event =>
-            {
-                if (dial.classList.contains('micl-timepicker__dial--dragging')) {
-                    event.preventDefault();
-                    setInputValue(dialog, !dialog.querySelector(
-                        'input[name=hour].micl-timepicker--selected'
-                    ) ? 'minute' : 'hour', mark.value);
-                }
-            });
-            element.addEventListener('click', () =>
-            {
-                setInputValue(dialog, !dialog.querySelector(
-                    'input[name=hour].micl-timepicker--selected'
-                ) ? 'minute' : 'hour', element.value);
-            });
             angle = (angle + 30) % 360;
         }
 
@@ -333,14 +317,34 @@ export default (() =>
             if (dial) {
                 addMarks(dialog, dial);
 
-                dial.addEventListener('pointerdown', event => {
-                    event.preventDefault();
+                const handleSelection = (clientX: number, clientY: number) =>
+                {
+                    const target = document.elementFromPoint(clientX, clientY);
+                    if (target && target.tagName === 'DATA') {
+                        setInputValue(dialog, !dialog.querySelector(
+                            'input[name=hour].micl-timepicker--selected'
+                        ) ? 'minute' : 'hour', (target as HTMLDataElement).value);
+                    }
+                };
+                dial.addEventListener('pointerdown', (event: PointerEvent) =>
+                {
                     dial.classList.add('micl-timepicker__dial--dragging');
+                    handleSelection(event.clientX, event.clientY);
+                    dial.setPointerCapture(event.pointerId);
                 });
-                dial.addEventListener('pointerup', event => {
-                    event.preventDefault();
+                dial.addEventListener('pointermove', (event: PointerEvent) =>
+                {
+                    if (dial.classList.contains('micl-timepicker__dial--dragging')) {
+                        handleSelection(event.clientX, event.clientY);
+                    }
+                });
+                const stopDragging = (event: PointerEvent) =>
+                {
                     dial.classList.remove('micl-timepicker__dial--dragging');
-                });
+                    dial.releasePointerCapture(event.pointerId);
+                };
+                dial.addEventListener('pointerup', stopDragging);
+                dial.addEventListener('pointercancel', stopDragging);
             }
 
             dialog.addEventListener('beforetoggle', (event): void =>
