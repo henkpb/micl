@@ -351,6 +351,7 @@ dialog.micl-dialog.micl-timepicker {
             transform: rotate(var(--micl-angle)) translate(calc(-1 * var(--md-sys-target-size, 48px)));
             transform-origin: calc(var(--md-sys-target-size, 48px) / 2) center;
             z-index: 1;
+            user-select: none;
         }
     }
     &.micl-timepicker__dial--dragging {
