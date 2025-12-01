@@ -360,13 +360,6 @@ dialog.micl-dialog.micl-timepicker {
             z-index: 1;
         }
     }
-    &.micl-timepicker__dial--dragging {
-        data:hover {
-            --selected: 1;
-            color: var(--md-sys-color-on-primary);
-            background-color: var(--md-sys-color-primary);
-        }
-    }
 
     .micl-timepicker__track {
         --micl-track-length: 92px;
