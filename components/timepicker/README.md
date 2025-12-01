@@ -1,4 +1,4 @@
-# Divider
+# Time picker
 This component implements the [Material Design 3 Expressive Time picker](https://m3.material.io/components/time-pickers/overview) design. A time picker is a user interface component that allows users to select a specific time of day.
 
 ## Basic Usage
@@ -117,10 +117,12 @@ You can customize the appearance of the Time picker component by overriding its 
 | --md-sys-timepicker-dial-center-size | 8px | |
 | --md-sys-timepicker-dial-track-width | 2px | |
 
-**Example: Changing the inset margin**
+**Example: Changing the width of the dial track**
 
 ```HTML
-<div style="--md-sys-divider-inset-margin:32px">
-  <hr class="micl-divider-inset">
+<div style="--md-sys-timepicker-dial-track-width:3px">
+  <dialog class="micl-dialog micl-timepicker" closedby="closerequest">
+    ...
+  </dialog>
 </div>
 ```
