@@ -196,9 +196,10 @@ export default (() =>
 
             const element: HTMLDataElement = dial.appendChild(mark);
 
-            element.addEventListener('pointerenter', () =>
+            element.addEventListener('pointerenter', event =>
             {
                 if (dial.classList.contains('micl-timepicker__dial--dragging')) {
+                    event.preventDefault();
                     setInputValue(dialog, !dialog.querySelector(
                         'input[name=hour].micl-timepicker--selected'
                     ) ? 'minute' : 'hour', mark.value);
@@ -332,10 +333,12 @@ export default (() =>
             if (dial) {
                 addMarks(dialog, dial);
 
-                dial.addEventListener('pointerdown', () => {
+                dial.addEventListener('pointerdown', event => {
+                    event.preventDefault();
                     dial.classList.add('micl-timepicker__dial--dragging');
                 });
-                dial.addEventListener('pointerup', () => {
+                dial.addEventListener('pointerup', event => {
+                    event.preventDefault();
                     dial.classList.remove('micl-timepicker__dial--dragging');
                 });
             }
