@@ -74,7 +74,6 @@ By default, modal dialogs open in the center of the screen. You can anchor a mod
 ```
 
 ### Dialog Structure Sections
-
 A dialog typically consists of three main sections to organize its content:
 
 - `micl-dialog__headline`: The header of the dialog. It usually contains:
