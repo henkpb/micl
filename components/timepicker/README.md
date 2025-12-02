@@ -1,10 +1,10 @@
 # Time picker
-This component implements the [Material Design 3 Expressive Time picker](https://m3.material.io/components/time-pickers/overview) design. A time picker is a user interface component that allows users to select a specific time of day.
+This component implements the [Material Design 3 Expressive Time picker](https://m3.material.io/components/time-pickers/overview) design. It allows users to select a specific time of day using either a text input or an analog dial interface.
 
 ## Basic Usage
 
 ### HTML
-The Time picker component is an extension of the [**Dialog** component](../dialog/README.md). To create a basic time picker, use the `<dialog>` element with both the `micl-dialog` and the `micl-timepicker` class.
+The Time picker component is an extension of the [**Dialog** component](../dialog/README.md). To create a basic time picker, use a `<dialog>` element with both `micl-dialog` and `micl-timepicker` classes.
 
 ```HTML
 <dialog id="mytimepicker" class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="mytitle">
@@ -28,6 +28,7 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
         type="button"
         class="micl-timepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined"
         data-alticon="schedule"
+        aria-label="Switch input mode"
       >keyboard</button>
       <div>
         <button class="micl-button-text-s" value="">Cancel</button>
@@ -64,58 +65,64 @@ This will initialize any Time picker component, including those that will be add
 A live example of the [Time picker component](https://henkpb.github.io/micl/timepicker.html) is available to interact with.
 
 ## Variants
-Since the Time picker component is based on the Dialog component, you use the same utility classes for content structure and styling. Refer to the [Dialog component documentation](../dialog/README.md) for more information about this.
+Because the Time picker component relies on the Dialog component, it utilizes the same utility classes for content structure. Refer to the [Dialog component documentation](../dialog/README.md) for structural details.
 
 ### Time Picker Structure
-As shown in the example above, the main content area of the dialog consists of the following elements:
+For the picker to function correctly, the `micl-dialog__content` area must contain:
 
-- An input field for the number of hours. Its name must be `hour` (`<input type="number" name="hour">`).
+- Hour input: `<input type="number" name="hour">`
+- Minute input: `<input type="number" name="minute">`
+- Separator: A text element with class `micl-timepicker__separator` (e.g., a colon).
+- AM/PM Container: An empty `<div>` with class `micl-timepicker__period`. The component logic will populate this selector if the user's locale uses a 12-hour format.
+- Dial Container: An optional empty `<div>` with class `micl-timepicker__dial` for the analog clock interface.
+- Optional elements for "Hour" and "Minute" supporting text.
 
-- An input field for the number of minutes. Its name must be `minute` (`<input type="number" name="minute">`).
+By default, the layout is **vertical**. To switch to a **horizontal** layout (side-by-side inputs and dial), add the modifier class `micl-timepicker--horizontal` to the `<dialog>`.
 
-- A text element with the `micl-timepicker__separator` class that separates the hours- and minutes-fields (e.g. by using a colon).
+#### Input Mode Switching
+To allow users to toggle between the text inputs and the analog dial, add a button to the `micl-dialog__actions` container:
 
-- A container element with the `micl-timepicker__period` class that the component uses to add an AM/PM selector if the user's browser uses the 12-hour time format.
+- Class: `micl-timepicker__inputmode`
+- Data Attribute: `data-alticon="schedule"` (defines the icon to show when toggled).
 
-- Optional elements for supporting text (`micl-timepicker__supporting-text-hour` and `micl-timepicker__supporting-text-minute`).
+### Integration
+You can trigger the Time picker component from standard input fields or buttons.
 
-- An optional container element with the `micl-timepicker__dial` class in which the component generates the layout of an analog clock.
-
-By default, the Time picker component has a vertical-oriented layout. Adding the `micl-timepicker--horizontal` class to the `<dialog>` element will change this to a horizontal-oriented layout.
-
-Add a button with the `micl-timepicker__inputmode` class to the dialog's `micl-dialog__actions` section to support switching the time picker from **input**-type to **dial**-type.
-
-### Associating a data field with a Time picker
-The Time picker component replaces the browser's data input method for a time-input field. This is accomplished by adding the `timepicker` data-attribute to an `<input>`:
+#### Connecting to an Input Field
+To replace the browser's native time picker, add the `data-timepicker` attribute to an `<input>` element. The value of this attribute must match the `id` of your Time picker dialog.
 
 ```HTML
 <input type="time" data-timepicker="mytimepicker" value="09:41">
 ```
 
+- **Behavior**: When the input is clicked, the picker opens with the input's current value.
+- **Reusability**: Multiple input fields can target the same Time picker component ID.
+
 You may use the same time picker component for different time-input fields. When the user engages with the input field, the time picker is opened showing the time specified in the `value`-attribute.
 
-A Time picker component may also be associated with a button, by specifying the `popovertarget` attribute:
+#### Connecting to a Button
+You can use a button to trigger the picker using the standard `popovertarget` attribute.
 
 ```HTML
 <button type="button" class="micl-button-text-m" popovertarget="mytimepicker">09:41</button>
 ```
 
-The Time picker component uses the button's text as a storage for the time value.
+- **Behavior**: The Time picker treats the button's text content as the time value to read from and write to.
 
 ## Customizations
 You can customize the appearance of the Time picker component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child time pickers.
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| --md-sys-timepicker-input-height | 72px | |
-| --md-sys-timepicker-input-width | 96px | |
-| --md-sys-timepicker-input-width-24h | 114px | |
-| --md-sys-timepicker-separator-width | 24px | |
-| --md-sys-timepicker-period-height | 72px | |
-| --md-sys-timepicker-period-width | 52px | |
-| --md-sys-timepicker-dial-size | 256px | |
-| --md-sys-timepicker-dial-center-size | 8px | |
-| --md-sys-timepicker-dial-track-width | 2px | |
+| --md-sys-timepicker-input-height | 72px | Height of the hour a minute input boxes |
+| --md-sys-timepicker-input-width | 96px | Width of the input boxes in 12-hour mode |
+| --md-sys-timepicker-input-width-24h | 114px | Width of the input boxes in 24-hour mode |
+| --md-sys-timepicker-separator-width | 24px | Width of the space containing the colon separator |
+| --md-sys-timepicker-period-height | 72px | Total height of the AM/PM selector toggle |
+| --md-sys-timepicker-period-width | 52px | Width of the AM/PM selector toggle |
+| --md-sys-timepicker-dial-size | 256px | Diameter of the analog clock face |
+| --md-sys-timepicker-dial-center-size | 8px | Diameter of the center dot in the analog dial |
+| --md-sys-timepicker-dial-track-width | 2px | Thickness of the circular track line on the dial |
 
 **Example: Changing the width of the dial track**
 
