@@ -100,7 +100,7 @@ To replace the browser's native time picker, add the `data-timepicker` attribute
 
 You may use the same time picker component for different time-input fields. When the user engages with the input field, the time picker is opened showing the time specified in the `value`-attribute.
 
-####Connecting to a Button
+#### Connecting to a Button
 You can use a button to trigger the picker using the standard `popovertarget` attribute.
 
 ```HTML
