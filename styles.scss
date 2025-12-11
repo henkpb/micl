@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 @use 'foundations/layout';
+@use 'foundations/scrollbar';
 
 @use 'styles/typography';
 @use 'styles/shapes';
@@ -47,6 +48,7 @@
 @use 'components/bottomsheet';
 @use 'components/navigationrail';
 @use 'components/stepper';
+@use 'components/datepicker';
 @use 'components/timepicker';
 
 @property --micl-ripple {

@@ -22,6 +22,7 @@
 import _bottomsheet, { bottomsheetSelector } from './components/bottomsheet';
 import _button, { buttonSelector } from './components/button';
 import _checkboxgroup, { checkboxGroupSelector } from './components/checkbox';
+import _datepicker, { datepickerSelector } from './components/datepicker';
 import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
@@ -47,6 +48,7 @@ export default (() =>
         [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
         [buttonSelector]        : { component: _button, type: HTMLButtonElement },
         [checkboxGroupSelector] : { component: _checkboxgroup, type: HTMLElement },
+        [datepickerSelector]    : { component: _datepicker, type: HTMLDialogElement },
         [listSelector]          : { component: _list, type: HTMLElement },
         [menuSelector]          : { component: _menu, type: HTMLElement },
         [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },

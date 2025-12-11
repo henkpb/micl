@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Date Pickers">
+    <title>MICL Date Pickers</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_drop_down,calendar_today,check,chevron_left,chevron_right,dark_mode,edit,home&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .micl-card__content {
+            display: flex;
+            flex-direction: column;
+            row-gap: 8px;
+        }
+        p {
+            margin-block: 24px 0px;
+            color: var(--md-sys-color-on-surface);
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <main class="micl-body micl-body--stacked-to-large">
+        <section class="micl-pane">
+            <header class="micl-appbar">
+                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
+                </a>
+                <div class="micl-appbar__headline micl-appbar__headline--center">
+                    <h1>Date Pickers</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL date pickers</p>
+                </div>
+                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
+            </header>
+
+            <div class="micl-pane__columns">
+                <div class="micl-pane__column" style="gap:24px">
+                    <div class="micl-card-outlined">
+                        <div class="micl-card__content">
+                            <p class="md-sys-typescale-body-medium">Default non-MICL date input field</p>
+                            <input type="date" name="t0" style="width:fit-content" value="2025-12-01">
+                            <p class="md-sys-typescale-body-medium">MICL date textfield component without the MICL date picker component</p>
+                            <div class="micl-textfield-outlined" style="width:fit-content">
+                                <label for="mytextfield0">Select date</label>
+                                <input type="date" id="mytextfield0" value="2026-01-10">
+                            </div>
+                            <p class="md-sys-typescale-body-medium">MICL date textfield component with the MICL date picker component</p>
+                            <div class="micl-textfield-outlined" style="width:fit-content;anchor-name:--myanchor">
+                                <label for="mytextfield1">Start date</label>
+                                <input type="date" id="mytextfield1" min="2025-10-01" max="2026-04-30" data-datepicker="mydatepicker1" value="2025-12-02">
+                            </div>
+                            <dialog id="mydatepicker1" class="micl-dialog micl-dialog--anchored micl-datepicker" style="position-anchor:--myanchor" popover closedby="closerequest" aria-labelledby="mytitle1">
+                                <form method="dialog">
+                                    <div class="micl-dialog__headline">
+                                        <span class="micl-dialog__supporting-text">Enter date</span>
+                                        <div class="micl-datepicker__month-selector">
+                                            <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous month">chevron_left</button>
+                                            <button type="button" class="micl-datepicker__month micl-button-text-xs">
+                                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+                                            </button>
+                                            <button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next month">chevron_right</button>
+                                        </div>
+                                        <div class="micl-datepicker__year-selector">
+                                            <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous year">chevron_left</button>
+                                            <button type="button" class="micl-datepicker__year micl-button-text-xs">
+                                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+                                            </button>
+                                            <button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next year">chevron_right</button>
+                                        </div>
+                                    </div>
+                                    <div class="micl-dialog__content">
+                                        <div class="micl-datepicker__calendars"></div>
+                                        <div class="micl-datepicker__years"></div>
+                                        <div class="micl-datepicker__months"></div>
+                                    </div>
+                                    <div class="micl-dialog__actions">
+                                        <button class="micl-button-text-s" value="">Cancel</button>
+                                        <button class="micl-button-text-s" value="OK">OK</button>
+                                    </div>
+                                </form>
+                            </dialog>
+
+                            <p class="md-sys-typescale-body-medium">Date input using a MICL button component that opens the MICL date picker</p>
+                            <div class="micl-flex--vcenter" style="column-gap:8px">
+                                <label for="mydate" class="md-sys-typescale-body-large">Start date:</label>
+                                <button type="button" id="mydate" class="micl-button-text-m" popovertarget="mydatepicker2">07:53</button>
+                            </div>
+                            <dialog id="mydatepicker2" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="mytitle2">
+                                <form method="dialog">
+                                    <div class="micl-dialog__headline">
+                                        <h2 id="mytitle2">Enter dates</h2>
+                                        <span class="micl-dialog__supporting-text">Select date</span>
+                                        <button type="button" class="micl-datepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined" data-alticon="calendar_today">edit</button>
+                                        <hr class="micl-divider">
+                                        <div class="micl-datepicker__month-selector">
+                                            <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous month">chevron_left</button>
+                                            <button type="button" class="micl-datepicker__month micl-button-text-xs">
+                                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+                                            </button>
+                                            <button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next month">chevron_right</button>
+                                        </div>
+                                        <div class="micl-datepicker__year-selector">
+                                            <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous year">chevron_left</button>
+                                            <button type="button" class="micl-datepicker__year micl-button-text-xs">
+                                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+                                            </button>
+                                            <button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next year">chevron_right</button>
+                                        </div>
+                                    </div>
+                                    <div class="micl-dialog__content">
+                                        <div class="micl-datepicker__calendars"></div>
+                                        <div class="micl-datepicker__years"></div>
+                                        <div class="micl-datepicker__months"></div>
+                                        <div class="micl-datepicker__input micl-textfield-outlined">
+                                            <label for="mydate2">Date</label>
+                                            <input type="date" id="mydate2">
+                                        </div>
+                                    </div>
+                                    <div class="micl-dialog__actions">
+                                        <button class="micl-button-text-s" value="">Cancel</button>
+                                        <button class="micl-button-text-s" value="OK">OK</button>
+                                    </div>
+                                </form>
+                            </dialog>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="micl-pane">
+            <div class="micl-card-filled">
+                <div class="micl-card__headline-s">
+                    <h2>Code example</h2>
+                </div>
+                <div class="micl-card__content docs-code">
+                    <pre tabindex="-1"><code>
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>
