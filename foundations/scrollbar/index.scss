@@ -19,22 +19,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-:root {
-    --md-sys-scrollbar-width: 8px;
-    --md-sys-scrollbar-margin: 2px;
-    --md-sys-scrollbar-size: calc(var(--md-sys-scrollbar-width, 8px) + 2 * var(--md-sys-scrollbar-margin, 2px));
-    --md-sys-scrollbar-thumb-color: blue;
-}
+$md-sys-scrollbar-width: 8px;
+$md-sys-scrollbar-margin: 2px;
+$md-sys-scrollbar-size: calc(#{$md-sys-scrollbar-width} + 2 * #{$md-sys-scrollbar-margin});
+$md-sys-scrollbar-thumb-color: grey;
 
 ::-webkit-scrollbar {
-    width: var(--md-sys-scrollbar-size);
-    height: var(--md-sys-scrollbar-size);
+    width: #{$md-sys-scrollbar-size};
+    height: #{$md-sys-scrollbar-size};
 }
 ::-webkit-scrollbar-thumb {
-    border-radius: calc(var(--md-sys-scrollbar-size) / 2);
-    background-color: var(--md-sys-scrollbar-thumb-color);
+    border-radius: calc(#{$md-sys-scrollbar-size} / 2);
+    background-color: var(--md-sys-scrollbar-thumb-color, #{$md-sys-scrollbar-thumb-color});
     background-clip: content-box;
-    border: var(--md-sys-scrollbar-margin) solid transparent;
+    border: #{$md-sys-scrollbar-margin} solid transparent;
 }
 ::-webkit-scrollbar-button {
     display: none;
@@ -43,6 +41,6 @@
 @supports not selector(::-webkit-scrollbar) {
     .micl-scrollbar {
         scrollbar-width: auto;
-        scrollbar-color: var(--md-sys-scrollbar-thumb-color) transparent;
+        scrollbar-color: var(--md-sys-scrollbar-thumb-color, #{$md-sys-scrollbar-thumb-color}) transparent;
     }
 }

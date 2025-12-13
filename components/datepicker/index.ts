@@ -413,14 +413,6 @@ const selectDate = (dialog: HTMLDialogElement, dateStr: string): void =>
 
 export default (() =>
 {
-    const setScrollbarColor = () =>
-    {
-        document.documentElement.style.setProperty(
-            '--md-sys-scrollbar-thumb-color',
-            window.getComputedStyle(document.body).getPropertyValue('--md-sys-color-outline').trim()
-        );
-    };
-
     return {
         keydown: (event: Event): void =>
         {
