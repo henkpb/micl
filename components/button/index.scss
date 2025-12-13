@@ -82,7 +82,7 @@ button.micl-button-outlined-xl {
 
     &:disabled {
         background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
-        color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }

@@ -69,7 +69,7 @@
             transform: scaleY(0);
         }
         &::backdrop {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
 
             @starting-style {
                 background-color: rgba(0, 0, 0, 0);

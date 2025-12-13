@@ -117,7 +117,7 @@ input[type=radio].micl-radio {
         }
     }
     &:disabled {
-        opacity: 38%;
+        opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
 
         &::after {
             border-color: var(--md-sys-color-on-surface);

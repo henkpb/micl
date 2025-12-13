@@ -80,8 +80,8 @@
         caret-color: var(--md-sys-color-primary);
 
         &:disabled {
-            border-block-end-color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            border-block-end-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         &::placeholder {
             color: var(--md-sys-color-on-surface-variant);
@@ -220,12 +220,12 @@
     &:has(> select:disabled),
     &:has(> textarea:disabled) {
         &> label {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         &> .micl-textfield__icon-leading,
         &> .micl-textfield__icon-trailing,
         &> .micl-textfield__supporting-text {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         &> .micl-textfield__character-counter {
             display: none;

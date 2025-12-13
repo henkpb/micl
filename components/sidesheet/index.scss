@@ -140,7 +140,7 @@ dialog.micl-sidesheet {
         transition: background-color var(--md-sys-sidesheet-motion-duration-reverse) linear;
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
         transition: background-color var(--md-sys-sidesheet-motion-duration) linear;
 
         @starting-style {

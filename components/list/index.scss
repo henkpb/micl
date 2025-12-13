@@ -184,11 +184,11 @@ select {
         .micl-list-item__text,
         .micl-list-item__text::after,
         .micl-list-item__trailing-text {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         .micl-list-item__image,
         .micl-list-item__thumbnail {
-            opacity: 38%;
+            opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         }
         a, button, label {
             pointer-events: none;

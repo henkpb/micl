@@ -21,6 +21,7 @@
 
 @use '../../foundations/layout';
 @use '../../styles/motion';
+@use '../../styles/statelayer';
 
 :root {
     --md-sys-stepper-counter-style: decimal;
@@ -139,7 +140,7 @@ body {
         text-align: center;
         background-color: var(--md-sys-color-on-surface);
         color: var(--md-sys-color-surface);
-        opacity: 38%;
+        opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         counter-increment: dotnumber 1;
     }
     .micl-stepper__progress--done.micl-stepper__progress-dot,

@@ -159,12 +159,12 @@ input[type=checkbox].micl-switch {
             background-color: var(--md-sys-color-on-surface);
         }
         &::after {
-            color: rgb(from var(--md-sys-color-surface-container-highest) r g b / 38%);
+            color: rgb(from var(--md-sys-color-surface-container-highest) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
             background-color: var(--md-sys-color-on-surface);
-            opacity: 38%;
+            opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         }
         &:checked::after {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
             background-color: var(--md-sys-color-surface);
             opacity: 100%;
         }
