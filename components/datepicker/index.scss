@@ -268,13 +268,13 @@ dialog.micl-dialog.micl-datepicker {
                             cursor: pointer;
                         }
                         &:hover {
-                            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+                            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
                         }
                         &:focus-visible {
-                            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+                            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
                         }
                         &:active {
-                            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
                         }
                     }
                 }
@@ -343,8 +343,8 @@ dialog.micl-dialog.micl-datepicker {
                 block-size: 36px;
                 inline-size: 72px;
                 margin: 8px;
-                border: calc((var(--md-sys-target-size) - 36px) / 2) solid transparent;
-                border-radius: calc(var(--md-sys-target-size) / 2);
+                border: calc((var(--md-sys-target-size, 48px) - 36px) / 2) solid transparent;
+                border-radius: calc(var(--md-sys-target-size, 48px) / 2);
                 background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
                 background-repeat: no-repeat;
                 background-size: 100%;
@@ -354,13 +354,13 @@ dialog.micl-dialog.micl-datepicker {
                 transition: --statelayer-opacity var(--md-comp-date-picker-button-motion-duration) linear;
 
                 &:hover {
-                    --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+                    --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
                 }
                 &:focus-visible {
-                    --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+                    --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
                 }
                 &:active {
-                    --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                    --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
                 }
                 &:has(input:checked) {
                     color: var(--md-sys-color-on-primary);

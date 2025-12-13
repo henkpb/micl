@@ -253,7 +253,7 @@
         &> input:not(:disabled),
         &> select:not(:disabled),
         &> textarea:not(:disabled) {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             border-block-end-color: var(--md-sys-color-on-surface);
         }

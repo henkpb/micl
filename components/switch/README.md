@@ -59,7 +59,6 @@ You can customize the appearance of the Switch component by overriding its globa
 | --md-sys-switch-handle-selected-size | 24px | The diameter of the handle when the switch is "on" |
 | --md-sys-switch-handle-pressed-size | 28px | The diameter of the handle when the switch is pressed |
 | --md-sys-switch-outline-width | 2px | The width of the border |
-| --md-sys-switch-state-layer-size | 40px | Sets the size of the area that indicates the component's current state (e.g., hover, focus, press) |
 | --md-sys-switch-target-height | 32px | The height of the track |
 | --md-sys-switch-target-width | 52px | The width of the track |
 

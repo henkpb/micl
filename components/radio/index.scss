@@ -26,7 +26,6 @@
 :root {
     --md-sys-radio-border-width: 2px;
     --md-sys-radio-container-size: 20px;
-    --md-sys-radio-state-layer-size: 40px;
 }
 
 input[type=radio].micl-radio {
@@ -37,12 +36,12 @@ input[type=radio].micl-radio {
     appearance: none;
     box-sizing: border-box;
     position: relative;
-    inline-size: var(--md-sys-target-size);
-    min-inline-size: var(--md-sys-target-size);
-    block-size: var(--md-sys-target-size);
-    min-block-size: var(--md-sys-target-size);
+    inline-size: var(--md-sys-target-size, 48px);
+    min-inline-size: var(--md-sys-target-size, 48px);
+    block-size: var(--md-sys-target-size, 48px);
+    min-block-size: var(--md-sys-target-size, 48px);
     margin: 0;
-    border: calc((var(--md-sys-target-size) - var(--md-sys-radio-state-layer-size)) / 2) solid transparent;
+    border: calc((var(--md-sys-target-size, 48px) - var(--md-sys-state-layer-size, 40px)) / 2) solid transparent;
     background-clip: content-box;
     background-color: transparent;
     -webkit-tap-highlight-color: transparent;
@@ -102,15 +101,15 @@ input[type=radio].micl-radio {
             }
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
             background-size: 0%, 100%;
             transition: background-size 0ms;

@@ -81,7 +81,7 @@ button.micl-iconbutton-outlined-xl {
     }
     &:not(:disabled) {
         &:focus-visible {
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: 3px;
         }
         &:active {
@@ -323,13 +323,13 @@ button.micl-iconbutton-standard-xl {
             color: var(--md-sys-color-primary);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -353,13 +353,13 @@ button.micl-iconbutton-filled-xl {
             color: var(--md-sys-color-on-surface-variant);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -382,13 +382,13 @@ button.micl-iconbutton-tonal-xl {
             color: var(--md-sys-color-on-secondary);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -428,13 +428,13 @@ button.micl-iconbutton-outlined-xl {
             color: var(--md-sys-color-inverse-on-surface);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }

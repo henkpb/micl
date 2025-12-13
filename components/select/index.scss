@@ -114,7 +114,7 @@
             }
         }
         &:focus-visible {
-            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness));
+            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness, 3px));
             z-index: 1;
         }
 

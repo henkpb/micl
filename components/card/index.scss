@@ -61,25 +61,25 @@
             --statelayer-opacity var(--md-sys-card-motion-duration) linear;
 
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             box-shadow: var(--md-sys-elevation-level1);
             cursor: pointer;
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-            outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+            outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
             background-size: 0%, 100%;
             transition: background-size 0ms;
         }
         &.micl-card--dragging {
-            --statelayer-opacity: var(--md-sys-state-dragged-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-dragged-state-layer-opacity, 16%);
 
             box-shadow: var(--md-sys-elevation-level3);
             cursor: grabbing;
@@ -89,8 +89,8 @@
         }
     }
     &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:focus-visible) {
-        outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-        outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
+        outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+        outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
     }
     &::details-content {
         block-size: 0;

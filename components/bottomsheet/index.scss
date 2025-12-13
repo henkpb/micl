@@ -64,7 +64,7 @@ dialog.micl-bottomsheet {
         display: flex;
         align-items: center;
         inline-size: 100%;
-        block-size: var(--md-sys-target-size);
+        block-size: var(--md-sys-target-size, 48px);
         justify-content: center;
         cursor: grab;
 
@@ -72,7 +72,7 @@ dialog.micl-bottomsheet {
             box-sizing: content-box;
             inline-size: var(--md-sys-bottomsheet-handle-width);
             block-size: var(--md-sys-bottomsheet-handle-height);
-            padding: 16px calc((var(--md-sys-target-size) - var(--md-sys-bottomsheet-handle-width)) / 2);
+            padding: 16px calc((var(--md-sys-target-size, 48px) - var(--md-sys-bottomsheet-handle-width)) / 2);
             border: none;
             border-radius: var(--md-sys-shape-corner-small);
             background-color: var(--md-sys-color-on-surface-variant);
@@ -80,8 +80,8 @@ dialog.micl-bottomsheet {
             cursor: pointer;
 
             &:focus-visible {
-                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-                outline-offset: var(--md-sys-state-focus-indicator-outer-offset);
+                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+                outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
             }
         }
     }

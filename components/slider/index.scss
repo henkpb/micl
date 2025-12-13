@@ -223,10 +223,10 @@ input[type=range].micl-slider-xl {
         }
         &:focus-visible {
             &::-webkit-slider-thumb {
-                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             }
             &::-moz-range-thumb {
-                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             }
         }
         &:active {

@@ -152,7 +152,7 @@ dialog.micl-dialog {
     }
 
 //    &:hover {
-//        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+//        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 //    }
 
     .micl-dialog__headline {
@@ -230,7 +230,7 @@ dialog.micl-dialog.micl-dialog--fullscreen {
         timeline-scope: --headlineTimeline;
 
 //        &:hover {
-//            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+//            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 //        }
         .micl-dialog__headline {
             block-size: 56px;

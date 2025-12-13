@@ -188,15 +188,15 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
                 background-color: transparent;
             }
             &:hover {
-                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
             }
             &:focus-visible {
-                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
             }
             &:active {
                 background-size: 0%, 100%;
                 transition: background-size 0ms;
-                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
             }
             &> .micl-navigationrail__text {
                 @include typography.label-large;
@@ -273,17 +273,17 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     &> .micl-navigationrail__content > label.micl-navigationrail__item {
         &:hover {
             &> .micl-navigationrail__icon {
-                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
             }
         }
         &:focus-visible {
             &> .micl-navigationrail__icon {
-                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
             }
         }
         &:active {
             &> .micl-navigationrail__icon {
-                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
                 background-size: 0%, 100%;
                 transition:

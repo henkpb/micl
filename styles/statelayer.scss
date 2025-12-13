@@ -26,8 +26,8 @@ $md-sys-state-hover-state-layer-opacity: 8%;
 $md-sys-state-focus-state-layer-opacity: 10%;
 $md-sys-state-pressed-state-layer-opacity: 10%;
 $md-sys-state-dragged-state-layer-opacity: 16%;
-$md-sys-state-backdrop-opacity: 32%;
 $md-sys-state-disabled-state-layer-opacity: 38%;
+$md-sys-state-backdrop-opacity: 32%;
 
 $md-sys-state-focus-indicator-inner-offset: -3px;
 $md-sys-state-focus-indicator-outer-offset: 2px;
@@ -41,8 +41,8 @@ $md-sys-state-focus-indicator-thickness: 3px;
     --md-sys-state-focus-state-layer-opacity: #{$md-sys-state-focus-state-layer-opacity};
     --md-sys-state-pressed-state-layer-opacity: #{$md-sys-state-pressed-state-layer-opacity};
     --md-sys-state-dragged-state-layer-opacity: #{$md-sys-state-dragged-state-layer-opacity};
-    --md-sys-state-backdrop-opacity: #{$md-sys-state-backdrop-opacity};
     --md-sys-state-disabled-state-layer-opacity: #{$md-sys-state-disabled-state-layer-opacity};
+    --md-sys-state-backdrop-opacity: #{$md-sys-state-backdrop-opacity};
 
     --md-sys-state-focus-indicator-inner-offset: #{$md-sys-state-focus-indicator-inner-offset};
     --md-sys-state-focus-indicator-outer-offset: #{$md-sys-state-focus-indicator-outer-offset};
