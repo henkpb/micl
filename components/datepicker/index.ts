@@ -104,8 +104,12 @@ const getCalendarDays = (
     return results;
 };
 
-const populateContainerWithDays = (container: HTMLElement, days: Array<{ date: Date, val: string, isCurrentMonth: boolean }>, state: DatePickerState, isEmpty: boolean = false): void =>
-{
+const populateContainerWithDays = (
+    container: HTMLElement,
+    days     : Array<{ date: Date, val: string, isCurrentMonth: boolean }>,
+    state    : DatePickerState,
+    isEmpty  : boolean = false
+): void => {
     if (isEmpty) {
         const fragment    = document.createDocumentFragment();
         const tempDate    = new Date();
@@ -116,6 +120,7 @@ const populateContainerWithDays = (container: HTMLElement, days: Array<{ date: D
             const span = document.createElement('span');
             span.style.gridArea = `1 / ${i + 1}`;
             span.textContent = tempDate.toLocaleDateString(locale, { weekday: 'narrow' });
+            span.title = tempDate.toLocaleDateString(locale, { weekday: 'long' });
             fragment.appendChild(span);
             tempDate.setDate(tempDate.getDate() + 1);
         }
@@ -148,16 +153,25 @@ const populateContainerWithDays = (container: HTMLElement, days: Array<{ date: D
     });
 };
 
-const renderCalendar = (dialog: HTMLDialogElement, state: DatePickerState, amount: number = 0): void =>
-{
+const renderCalendar = (
+    dialog: HTMLDialogElement,
+    state : DatePickerState,
+    amount: number = 0
+): void => {
+
     const content   = dialog.querySelector<HTMLElement>('.micl-dialog__content');
     const calendars = content?.querySelector<HTMLElement>('.micl-datepicker__calendars');
     if (!calendars) {
         return;
     }
 
-    const startClass = 'start-left';
-    const endClass   = 'start-right';
+    const startClass     = 'micl-startleft';
+    const endClass       = 'micl-startright';
+    const moveLeftClass  = 'micl-moveleft';
+    const moveRightClass = 'micl-moveright';
+
+    calendars.classList.remove(moveLeftClass, moveRightClass, startClass, endClass);
+    void calendars.offsetWidth;
 
     if (amount !== 0) {
         const oldCalendar = calendars.querySelector<HTMLElement>('.micl-datepicker__calendar');
@@ -175,7 +189,7 @@ const renderCalendar = (dialog: HTMLDialogElement, state: DatePickerState, amoun
 
         const isNextMonth = amount > 0;
         const startPositionClass = isNextMonth ? startClass : endClass;
-        const endTransformClass = isNextMonth ? 'move-left' : 'move-right';
+        const endTransformClass = isNextMonth ? moveLeftClass : moveRightClass;
 
         newCalendar.appendChild(newCalendarInner);
         if (isNextMonth) {
@@ -185,13 +199,11 @@ const renderCalendar = (dialog: HTMLDialogElement, state: DatePickerState, amoun
             calendars.prepend(newCalendar);
         }
 
-        calendars.classList.add('micl-no-transition');
-        calendars.classList.add(startPositionClass);
+        calendars.classList.add('micl-no-transition', startPositionClass);
         void calendars.offsetWidth;
 
         requestAnimationFrame(() => {
-            calendars.classList.remove('micl-no-transition');
-            calendars.classList.remove(startPositionClass);
+            calendars.classList.remove('micl-no-transition', startPositionClass);
             calendars.classList.add(endTransformClass);
         });
 
@@ -205,30 +217,29 @@ const renderCalendar = (dialog: HTMLDialogElement, state: DatePickerState, amoun
                 if (oldCalendar.parentElement === calendars) {
                     oldCalendar.remove();
                 }
-                calendars.classList.add('micl-no-transition');
-                calendars.classList.add(startClass);
+                calendars.classList.add('micl-no-transition', startClass);
                 void calendars.offsetWidth;
 
-                calendars.classList.remove('micl-no-transition');
-                calendars.classList.remove(startClass);
+                calendars.classList.remove('micl-no-transition', startClass);
             }, 0);
         };
         calendars.addEventListener('transitionend', onTransitionEnd);
     }
     else {
-        calendars.classList.remove('move-left', 'move-right', startClass, endClass);
-
-        let calendar      = calendars.querySelector<HTMLElement>('.micl-datepicker__calendar');
-        let calendarInner = calendar?.querySelector<HTMLElement>('.micl-datepicker__calendar-inner');
-        if (!calendar || !calendarInner) {
-            calendar      = document.createElement('div');
-            calendarInner = document.createElement('div');
+        let calendar = calendars.querySelector<HTMLElement>('.micl-datepicker__calendar');
+        if (!calendar) {
+            calendar = document.createElement('div');
             calendar.classList.add('micl-datepicker__calendar');
-            calendarInner.classList.add('micl-datepicker__calendar-inner');
-            calendars.appendChild(calendar).appendChild(calendarInner);
+            calendar = calendars.appendChild(calendar);
+        }
+        let inner = calendar.querySelector<HTMLElement>('.micl-datepicker__calendar-inner');
+        if (!inner) {
+            inner = document.createElement('div');
+            inner.classList.add('micl-datepicker__calendar-inner');
+            calendar.appendChild(inner);
         }
         const days = getCalendarDays(state.viewDate.getFullYear(), state.viewDate.getMonth());
-        populateContainerWithDays(calendarInner, days, state, calendarInner.querySelectorAll('time').length === 0);
+        populateContainerWithDays(inner, days, state, inner.querySelectorAll('time').length === 0);
     }
     
     setText(
@@ -241,54 +252,49 @@ const renderCalendar = (dialog: HTMLDialogElement, state: DatePickerState, amoun
     );
     setText(
         dialog.querySelector('.micl-datepicker__year'),
-        state.viewDate.toLocaleDateString(locale, dialog.classList.contains('micl-dialog--anchored') ?
+        state.viewDate.toLocaleDateString(locale, dialog.classList.contains('micl-dialog--docked') ?
         { year: 'numeric' } : { month: 'long', year: 'numeric' })
     );
 
-    const monthRadio = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__months input[value="${state.viewDate.getMonth()}"]`);
-    if (monthRadio) {
-        monthRadio.checked = true;
-    }
-    const yearRadio = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__years input[value="${state.viewDate.getFullYear()}"]`);
-    if (yearRadio) {
-        yearRadio.checked = true;
-    }
+    ['months', 'years'].forEach(period => {
+        const value = period === 'months' ? state.viewDate.getMonth() : state.viewDate.getFullYear();
+        const input = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__${period} input[value="${value}"]`);
+        if (input) {
+            input.checked = true;
+        }
+    });
 };
 
-const initMonthYearPickers = (dialog: HTMLDialogElement, minYear: number, maxYear: number): void =>
+const initPeriodPickers = (dialog: HTMLDialogElement, minYear: number, maxYear: number): void =>
 {
-    const monthsContainer = dialog.querySelector('.micl-datepicker__months');
-    const yearsContainer  = dialog.querySelector('.micl-datepicker__years');
-    
-    if (monthsContainer && !monthsContainer.hasChildNodes()) {
-        const frag = document.createDocumentFragment();
-        const fmt  = new Intl.DateTimeFormat(undefined, { month: 'long' });
+    ['months', 'years'].forEach(period => {
+        const container = dialog.querySelector(`.micl-datepicker__${period}`);
+        if (container) {
+            container.innerHTML = '';
+            const frag = document.createDocumentFragment();
 
-        for (let i = 0; i < 12; i++) {
-            const label = document.createElement('label');
-            label.innerHTML = `<span class="material-symbols-outlined">check</span><input type="radio" name="miclmonth" value="${i}"> ${fmt.format(new Date(2000, i, 1))}`;
-            frag.appendChild(label);
+            if (period === 'months') {
+                const fmt  = new Intl.DateTimeFormat(undefined, { month: 'long' });
+
+                for (let m = 0; m < 12; m++) {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<span class="material-symbols-outlined">check</span><input type="radio" name="miclmonth" value="${m}"> ${fmt.format(new Date(2000, m, 1))}`;
+                    frag.appendChild(label);
+                }
+            }
+            else {
+                for (let y = minYear; y <= maxYear; y++) {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="miclyear" value="${y}"> ${y}`;
+                    frag.appendChild(label);
+                }
+            }
+
+            const inner = document.createElement('div');
+            inner.classList.add(`micl-datepicker__${period}-inner`);
+            container.appendChild(inner).appendChild(frag);
         }
-
-        const inner = document.createElement('div');
-        inner.classList.add('micl-datepicker__months-inner');
-        monthsContainer.appendChild(inner).appendChild(frag);
-    }
-
-    if (yearsContainer) {
-        yearsContainer.innerHTML = '';
-        const frag = document.createDocumentFragment();
-
-        for (let i = minYear; i <= maxYear; i++) {
-            const label = document.createElement('label');
-            label.innerHTML = `<input type="radio" name="miclyear" value="${i}"> ${i}`;
-            frag.appendChild(label);
-        }
-
-        const inner = document.createElement('div');
-        inner.classList.add('micl-datepicker__years-inner');
-        yearsContainer.appendChild(inner).appendChild(frag);
-    }
+    });
 };
 
 const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'years' | 'input'): void =>
@@ -317,20 +323,24 @@ const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'y
     }
     const contentHeight = parseInt(window.getComputedStyle(content).getPropertyValue('max-block-size'), 10);
 
-    const months = content.querySelector<HTMLElement>('.micl-datepicker__months');
-    if (months) {
-        const selectedMonth = months.querySelector<HTMLInputElement>('input:checked');
-        const monthHeight   = 48;
+    ['.micl-datepicker__months', '.micl-datepicker__years'].forEach(selector =>
+    {
+        const period = content.querySelector<HTMLElement>(selector);
+        if (!period) {
+            return;
+        }
+        const selected = period.querySelector<HTMLInputElement>('input:checked');
+        const height   = 48;
         let doHide: boolean | null = false;
 
-        if (view === 'months' && selectedMonth) {
-            const property = window.getComputedStyle(months).getPropertyValue('transition-duration');
+        if (selected && (selector.substring(18) === view)) {
+            const property = window.getComputedStyle(period).getPropertyValue('transition-duration');
             const duration = parseFloat(property) * (property.includes('ms') ? 1 : 1000);
-            const maxScrollDistance = months.scrollHeight - contentHeight;
+            const maxScrollDistance = period.scrollHeight - contentHeight;
+            const centerTop = (contentHeight - height) / 2;
 
-            const centerTop = (contentHeight - monthHeight) / 2;
-            if (selectedMonth.offsetTop > centerTop) {
-                let scrollDistance = selectedMonth.offsetTop - centerTop - (monthHeight / 2);
+            if (selected.offsetTop > centerTop) {
+                let scrollDistance = selected.offsetTop - centerTop - (height / 2);
                 if (scrollDistance > maxScrollDistance) {
                     scrollDistance = maxScrollDistance;
                 }
@@ -343,15 +353,15 @@ const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'y
                         requestAnimationFrame(animateScroll);
                     }
                 };
-                months.classList.remove('micl-datepicker__view-hidden');
+                period.classList.remove('micl-datepicker__view-hidden');
                 requestAnimationFrame(animateScroll);
                 doHide = null;
 
-                months.addEventListener('transitionend', function handler(event)
+                period.addEventListener('transitionend', function handler(event)
                 {
                     if (event.propertyName === 'height' || event.propertyName === 'block-size') {
                         content.scrollTop = scrollDistance;
-                        months.removeEventListener('transitionend', handler);
+                        period.removeEventListener('transitionend', handler);
                     }
                 });
             }
@@ -360,59 +370,12 @@ const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'y
             doHide = true;
         }
         if (doHide !== null) {
-            months.classList.toggle('micl-datepicker__view-hidden', doHide);
+            period.classList.toggle('micl-datepicker__view-hidden', doHide);
         }
-    }    
-
-    const years = content.querySelector<HTMLElement>('.micl-datepicker__years');
-    if (years) {
-        const selectedYear = years.querySelector<HTMLInputElement>('input:checked');
-        const yearHeight   = 40;
-        let doHide: boolean | null = false;
-
-        if (view === 'years' && selectedYear) {
-            const property = window.getComputedStyle(years).getPropertyValue('transition-duration');
-            const duration = parseFloat(property) * (property.includes('ms') ? 1 : 1000);
-            const maxScrollDistance = years.scrollHeight - contentHeight;
-
-            const centerTop = (contentHeight - yearHeight) / 2;
-            if (selectedYear.offsetTop > centerTop) {
-                let scrollDistance = selectedYear.offsetTop - centerTop - (yearHeight / 2);
-                if (scrollDistance > maxScrollDistance) {
-                    scrollDistance = maxScrollDistance;
-                }
-
-                const startTime = performance.now();
-                const animateScroll = (currentTime: number) => {
-                    const progress = Math.min((currentTime - startTime) / duration, 1);
-                    content.scrollTop = scrollDistance * progress;
-                    if (progress < 1) {
-                        requestAnimationFrame(animateScroll);
-                    }
-                };
-                years.classList.remove('micl-datepicker__view-hidden');
-                requestAnimationFrame(animateScroll);
-                doHide = null;
-
-                years.addEventListener('transitionend', function handler(event)
-                {
-                    if (event.propertyName === 'height' || event.propertyName === 'block-size') {
-                        content.scrollTop = scrollDistance;
-                        years.removeEventListener('transitionend', handler);
-                    }
-                });
-            }
-        }
-        else {
-            doHide = true;
-        }
-        if (doHide !== null) {
-            years.classList.toggle('micl-datepicker__view-hidden', doHide);
-        }
-    }
+    });
 };
 
-const changeMonthYear = (dialog: HTMLDialogElement, amount: number, unit: 'month' | 'year') =>
+const changePeriod = (dialog: HTMLDialogElement, amount: number, unit: 'month' | 'year'): void =>
 {
     const state = stateMap.get(dialog);
     if (!state) {
@@ -434,7 +397,7 @@ const changeMonthYear = (dialog: HTMLDialogElement, amount: number, unit: 'month
     renderCalendar(dialog, state, unit === 'month' ? amount : 0);
 };
 
-const selectDate = (dialog: HTMLDialogElement, dateStr: string) =>
+const selectDate = (dialog: HTMLDialogElement, dateStr: string): void =>
 {
     const state = stateMap.get(dialog);
     if (!state) {
@@ -459,6 +422,38 @@ export default (() =>
     };
 
     return {
+        keydown: (event: Event): void =>
+        {
+            if (
+                !(event instanceof KeyboardEvent)
+                || !(event.target instanceof Element)
+            ) {
+                return;
+            }
+            const dialog = event.target.closest(datepickerSelector) as HTMLDialogElement;
+            if (!dialog) {
+                return;
+            }
+
+            switch (event.key) {
+                case 'Enter':
+                case ' ':
+                    if (event.target instanceof HTMLInputElement && event.target.type === 'date') {
+                        event.preventDefault();
+                    }
+                    break;
+                case 'M':
+                case 'Y':
+                    toggleView(dialog, event.key === 'M' ? 'months' : 'years');
+                    break;
+                case 'PageUp':
+                case 'PageDown':
+                    changePeriod(dialog, event.key === 'PageUp' ? 1 : -1, event.shiftKey ? 'year' : 'month');
+                    break;
+                default:
+            }
+        },
+
         initialize: (dialog: HTMLDialogElement): void =>
         {
             if (dialog.dataset.miclinitialized) {
@@ -483,7 +478,7 @@ export default (() =>
                     const isPrev   = btn.classList.contains('micl-datepicker__previous');
                     
                     if (isNext || isPrev) {
-                        changeMonthYear(dialog, isNext ? 1 : -1, forMonth ? 'month' : 'year');
+                        changePeriod(dialog, isNext ? 1 : -1, forMonth ? 'month' : 'year');
                         return;
                     }
                 }
@@ -505,31 +500,23 @@ export default (() =>
                     selectDate(dialog, time.dateTime);
                 }
 
-                if (target.matches('input[name=miclmonth]')) {
+                if (
+                    target instanceof HTMLInputElement
+                    && (target.name === 'miclmonth' || target.name === 'miclyear')
+                ) {
                     const state = stateMap.get(dialog);
                     if (state) {
-                        state.viewDate.setMonth(parseInt((target as HTMLInputElement).value));
+                        const value = parseInt(target.value, 10);
+                        if (target.name === 'miclmonth') {
+                            state.viewDate.setMonth(value);
+                        }
+                        else {
+                            state.viewDate.setFullYear(value);
+                        }
                         renderCalendar(dialog, state);
                         toggleView(dialog, 'calendars');
                     }
                 }
-                if (target.matches('input[name=miclyear]')) {
-                    const state = stateMap.get(dialog);
-                    if (state) {
-                        state.viewDate.setFullYear(parseInt((target as HTMLInputElement).value));
-                        renderCalendar(dialog, state);
-                        toggleView(dialog, 'calendars');
-                    }
-                }
-            });
-
-            dialog.querySelectorAll('input[type=date]').forEach(input => {
-                input.addEventListener('keydown', (event: Event) =>
-                {
-                    if ((event instanceof KeyboardEvent) && (event.key === ' ' || event.key === 'Enter')) {
-                        event.preventDefault();
-                    }
-                });
             });
 
             dialog.addEventListener('beforetoggle', (event: any): void =>
@@ -579,7 +566,7 @@ export default (() =>
                     max
                 });
 
-                initMonthYearPickers(dialog, min ? min.getFullYear() : 1900, max ? max.getFullYear() : 2099);
+                initPeriodPickers(dialog, min ? min.getFullYear() : 1900, max ? max.getFullYear() : 2099);
                 toggleView(dialog, 'calendars');
                 renderCalendar(dialog, stateMap.get(dialog)!);
             });
