@@ -64,10 +64,10 @@ Removing the `popover` attribute creates a more intrusive **modal** dialog. This
 
 - The `closedby="closerequest"` attribute restricts closing methods, typically requiring an explicit action within the dialog.
 
-By default, modal dialogs open in the center of the screen. You can anchor a modal dialog to a control element, causing it to open relative to that element:
+By default, modal dialogs open in the center of the screen. You can anchor a modal dialog to a control element using the `micl-dialog--docked` class and CSS Anchor settings, causing it to open relative to that element:
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" style="position-anchor:--myanchor">
+<dialog id="mydialog" class="micl-dialog micl-dialog--docked" style="position-anchor:--myanchor">
 </dialog>
 
 <button type="button" popovertarget="mydialog" style="anchor-name:--myanchor">Open Modal Dialog</button>
@@ -96,10 +96,10 @@ A full-screen dialog covers the entire viewport, primarily on smaller screens. O
 ```HTML
 <dialog id="mydialog" class="micl-dialog micl-dialog--fullscreen" closedby="none" popover aria-labelledby="mytitle" aria-describedby="mydesc">
   <form method="dialog" class="micl-dialog__headline">
-    <button type="button" class="micl-iconbutton-s material-symbols-outlined" popovertarget="mydialog" aria-label="Close">close</button>
+    <button type="button" class="micl-dialog__fullscreen micl-iconbutton-s material-symbols-outlined" popovertarget="mydialog" aria-label="Close">close</button>
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
     <h2 id="mytitle">Full-screen dialog</h2>
-    <button class="micl-button-text-s" value="dosave">Save</button>
+    <button class="micl-dialog__fullscreen micl-button-text-s" value="dosave">Save</button>
   </form>
   <div class="micl-dialog__content">
     <span id="mydesc" class="micl-dialog__supporting-text">This dialog covers the whole screen.</span>
@@ -113,9 +113,9 @@ A full-screen dialog covers the entire viewport, primarily on smaller screens. O
 <button type="button" popovertarget="mydialog">Open Full-Screen Dialog</button>
 ```
 
-- In full-screen mode, buttons placed directly within the `micl-dialog__headline` become visible, while the `micl-dialog__icon` and `micl-dialog__actions` at the bottom are hidden.
+- In full-screen mode, `micl-dialog__fullscreen` buttons placed directly within the `micl-dialog__headline` become visible, while the `micl-dialog__icon` and `micl-dialog__actions` at the bottom are hidden.
 
-- When not in full-screen mode (e.g., on wider screens), the `micl-dialog__headline` buttons are hidden, and the standard dialog actions (`micl-dialog__actions`) are visible.
+- When not in full-screen mode (e.g., on wider screens), the `micl-dialog__fullscreen` buttons are hidden, and the standard dialog actions (`micl-dialog__actions`) are visible.
 
 ## Customizations
 You can customize the appearance of the Dialog component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child dialogs.

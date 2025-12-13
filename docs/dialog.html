@@ -99,12 +99,24 @@
                             </dialog>
                             <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog3">Open Modal Dialog</button>
 
-                            <dialog id="mydialog4" class="micl-dialog micl-dialog--fullscreen" popover closedby="none" aria-labelledby="mytitle4">
+                            <dialog id="mydialog4" class="micl-dialog micl-dialog--docked" style="position-anchor: --myanchor;width:350px" role="alertdialog" closedby="closerequest" aria-labelledby="mytitle4">
+                                <div class="micl-dialog__headline">
+                                    <h2 id="mytitle4">Delete selected images?</h2>
+                                    <span class="micl-dialog__supporting-text">Images will be permanently removed from your account and all synchronized devices.</span>
+                                </div>
+                                <form method="dialog" class="micl-dialog__actions">
+                                    <button class="micl-button-text-s" value="donotdelete">Cancel</button>
+                                    <button class="micl-button-text-s" value="dodelete">Delete</button>
+                                </form>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog4" style="anchor-name:--myanchor">Open Anchored Dialog</button>
+
+                            <dialog id="mydialog5" class="micl-dialog micl-dialog--fullscreen" popover closedby="none" aria-labelledby="mytitle5">
                                 <form method="dialog" class="micl-dialog__headline">
-                                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mydialog4" aria-label="Close">close</button>
+                                    <button type="button" class="micl-dialog__fullscreen micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mydialog5" aria-label="Close">close</button>
                                     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
-                                    <h2 id="mytitle4">Personal info</h2>
-                                    <button class="micl-button-text-s" value="dosave">Save</button>
+                                    <h2 id="mytitle5">Personal info</h2>
+                                    <button class="micl-dialog__fullscreen micl-button-text-s" value="dosave">Save</button>
                                 </form>
                                 <div class="micl-dialog__content">
                                     <p class="micl-dialog__supporting-text">Please specify personal information about the new employee.</p>
@@ -140,16 +152,16 @@
                                         </select>
                                     </div>
                                     <div class="micl-textfield-outlined" style="margin-block:24px 4px">
-                                        <label for="mytextfield4">Profession</label>
-                                        <input type="text" id="mytextfield4" value="Physics researcher">
+                                        <label for="mytextfield5">Profession</label>
+                                        <input type="text" id="mytextfield5" value="Physics researcher">
                                     </div>
                                 </div>
                                 <form method="dialog" class="micl-dialog__actions">
-                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog4">Cancel</button>
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog5">Cancel</button>
                                     <button class="micl-button-text-s" value="dosave">Save</button>
                                 </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog4">Open Full-Screen Dialog</button>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog5">Open Full-Screen Dialog</button>
                         </div>
                     </div>
                 </div>
