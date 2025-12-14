@@ -23,7 +23,7 @@ You can customize elevation levels by overriding their global CSS variables.
 </div>
 ```
 
-
+  
 ## Motion
 Motion brings your UI to life, making it expressive and intuitive to use. The motion styles are based on the [Material Design 3 Motion](https://m3.material.io/styles/motion/overview/how-it-works) guidelines.
 
@@ -34,7 +34,7 @@ Import the motion styles into your project:
 @use "material-inspired-component-library/styles/motion";
 ```
 
-
+  
 ## Shapes
 Shapes add decorative flair and help emphasize elements. These styles adhere to the [Material Design 3 Shape](https://m3.material.io/styles/shape/overview-principles) principles.
 
@@ -57,7 +57,7 @@ You can customize a component's shape by overriding its global CSS variables, su
 </div>
 ```
 
-
+  
 ## State layers
 State layers are visual overlays that communicate the interaction status of a component, such as when it's hovered over or pressed. These are based on [Material Design 3 States](https://m3.material.io/foundations/interaction/states/overview).
 
@@ -78,7 +78,7 @@ Customize the appearance of state layers by overriding their global CSS variable
 </div>
 ```
 
-
+  
 ## Typography
 Typography is the foundation of text styling. The typography styles in this library are based on the [Material Design 3 Typography](https://m3.material.io/styles/typography/overview) specifications.
 
@@ -90,10 +90,19 @@ Import the typography styles into your project:
 ```
 
 ### Customizations
-You can customize font settings by overriding their global CSS variables.
+You can customize font settings by overriding their global CSS variables on the **:root** CSS pseudo-class.
 
-**Changing the brand style font:**
+**Changing both the plain and brand style font:**
+
+```CSS
+:root {
+  --md-ref-typeface-plain: Roboto, system-ui, sans-serif;
+  --md-ref-typeface-brand: Roboto, system-ui, sans-serif;
+}
+```
+
+And include a reference to the font in your application.
 
 ```HTML
-<div style="--md-ref-typeface-brand:Helvetica, Arial, sans-serif">
-</div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+```

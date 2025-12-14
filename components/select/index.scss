@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -114,7 +115,7 @@
             }
         }
         &:focus-visible {
-            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness));
+            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness, 3px));
             z-index: 1;
         }
 

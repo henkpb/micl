@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/typography';
 
 :root {
@@ -68,7 +68,7 @@
         margin-block: calc(12px + var(--md-sys-badge-block-offset)) auto;
 
         &.micl-badge--small {
-            margin-inline-start: calc(var(--md-sys-layout-icon-size) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
+            margin-inline-start: calc(var(--md-sys-icon-size) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
         }
         &:not(.micl-badge--small) {
             margin-inline-start: calc(12px - var(--md-sys-badge-inline-offset));

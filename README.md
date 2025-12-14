@@ -78,6 +78,15 @@ Copy the main `micl.js` file to your distribution folder and include it in your 
 ```
 This will initialize all MICL components, including those that will be added to the DOM later on.
 
+### 4. Add a font
+MICL uses the [**Google Sans**](https://fonts.google.com/specimen/Google+Sans) as its default font. Include a reference to this font in your application.
+
+```HTML
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+```
+
+The [Styles guide](styles/README.md) describes how to change the default font.
+
 ## Foundations 🪟
 A separate CSS file, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/understanding-layout/overview), provides styles for an adaptive layout. It includes styles for the **window frame**, **body region** and **panes** that adjust to the available screen space, ensuring your layout follows Material Design's responsive guidelines.
 
@@ -93,6 +102,7 @@ The library currently consists of the following components:
 - [x] [Button](components/button/README.md)
 - [x] [Card](components/card/README.md)
 - [x] [Checkbox](components/checkbox/README.md)
+- [ ] [Date picker]()
 - [x] [Dialog](components/dialog/README.md)
 - [x] [Divider](components/divider/README.md)
 - [x] [Icon button](components/iconbutton/README.md)

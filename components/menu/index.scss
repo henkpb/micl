@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -69,7 +70,7 @@
             transform: scaleY(0);
         }
         &::backdrop {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
 
             @starting-style {
                 background-color: rgba(0, 0, 0, 0);

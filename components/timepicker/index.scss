@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
@@ -158,13 +159,13 @@ dialog.micl-dialog.micl-timepicker {
             border: 2px solid var(--md-sys-color-primary);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
     input[name=hour] {
@@ -258,16 +259,16 @@ dialog.micl-dialog.micl-timepicker {
             }
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: -2px;
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
     .micl-timepicker__am {
@@ -316,7 +317,7 @@ dialog.micl-dialog.micl-timepicker {
     touch-action: none;
 
     data.micl-timepicker__dial-inner {
-        --micl-hour-radius: calc(var(--micl-dial-radius) - var(--md-sys-target-size) + 12px);
+        --micl-hour-radius: calc(var(--micl-dial-radius) - var(--md-sys-target-size, 48px) + 12px);
 
         z-index: 2;
         &::before {

@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
@@ -100,24 +100,24 @@ select {
         cursor: pointer;
 
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             .micl-list-item__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-            outline-offset: var(--md-sys-state-focus-indicator-inner-offset);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+            outline-offset: var(--md-sys-state-focus-indicator-inner-offset, -3px);
 
             .micl-list-item__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
             background-size: 0%, 100%;
             transition: background-size 0ms;
@@ -184,11 +184,11 @@ select {
         .micl-list-item__text,
         .micl-list-item__text::after,
         .micl-list-item__trailing-text {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         .micl-list-item__image,
         .micl-list-item__thumbnail {
-            opacity: 38%;
+            opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         }
         a, button, label {
             pointer-events: none;
@@ -323,8 +323,8 @@ select {
 }
 
 .micl-list-item__icon {
-    min-inline-size: var(--md-sys-layout-icon-size, 24px);
-    font-size: var(--md-sys-layout-icon-size, 24px);
+    min-inline-size: var(--md-sys-icon-size, 24px);
+    font-size: var(--md-sys-icon-size, 24px);
     font-variation-settings: 'FILL' 0;
     color: var(--md-sys-color-on-surface-variant);
     transition: font-variation-settings var(--md-sys-list-motion-duration) linear;

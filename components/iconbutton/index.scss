@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -53,6 +53,7 @@ button.micl-iconbutton-outlined-xl {
     --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --micl-ripple: 1;
 
+    align-items: center;
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-full);
@@ -74,13 +75,13 @@ button.micl-iconbutton-outlined-xl {
 
     &:disabled {
         background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
-        color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }
     &:not(:disabled) {
         &:focus-visible {
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: 3px;
         }
         &:active {
@@ -154,7 +155,7 @@ button.micl-iconbutton-outlined-s {
     inline-size: var(--micl-width);
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
-    font-size: var(--md-sys-layout-icon-size, 24px);
+    font-size: var(--md-sys-icon-size, 24px);
 
     &::before {
         content: "";
@@ -201,7 +202,7 @@ button.micl-iconbutton-outlined-m {
     inline-size: var(--micl-width);
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
-    font-size: var(--md-sys-layout-icon-size, 24px);
+    font-size: var(--md-sys-icon-size, 24px);
 
     &.micl-button--toggle.micl-button--selected {
         border-radius: var(--md-sys-shape-corner-large);
@@ -322,13 +323,13 @@ button.micl-iconbutton-standard-xl {
             color: var(--md-sys-color-primary);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -352,13 +353,13 @@ button.micl-iconbutton-filled-xl {
             color: var(--md-sys-color-on-surface-variant);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -381,13 +382,13 @@ button.micl-iconbutton-tonal-xl {
             color: var(--md-sys-color-on-secondary);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -427,13 +428,13 @@ button.micl-iconbutton-outlined-xl {
             color: var(--md-sys-color-inverse-on-surface);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }

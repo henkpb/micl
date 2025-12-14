@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -82,13 +82,13 @@ button.micl-button-outlined-xl {
 
     &:disabled {
         background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
-        color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+        color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }
     &:not(:disabled) {
         &:focus-visible {
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: 3px;
         }
         &:active {
@@ -230,8 +230,8 @@ button.micl-button-outlined-m {
         }
     }
     .micl-button__icon {
-        font-size: var(--md-sys-layout-icon-size, 24px);
-        inline-size: var(--md-sys-layout-icon-size, 24px);
+        font-size: var(--md-sys-icon-size, 24px);
+        inline-size: var(--md-sys-icon-size, 24px);
     }
 }
 
@@ -324,17 +324,17 @@ button.micl-button-text-xl {
 
     &:not(:disabled) {
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -362,17 +362,17 @@ button.micl-button-elevated-xl {
             }
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -408,17 +408,17 @@ button.micl-button-filled-xl {
             color: var(--md-sys-color-on-surface-variant);
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -445,17 +445,17 @@ button.micl-button-tonal-xl {
             }
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }
@@ -482,17 +482,17 @@ button.micl-button-outlined-xl {
             }
         }
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
         }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
 }

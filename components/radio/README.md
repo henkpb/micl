@@ -43,7 +43,6 @@ You can customize the appearance of the Radio Button component by overriding its
 | ------------- | ------------- | ----------- |
 | --md-sys-radio-border-width | 2px | Controls the thickness of the radio button's border |
 | --md-sys-radio-container-size | 20px | Defines the diameter of the radio button itself |
-| --md-sys-radio-state-layer-size | 40px | Sets the size of the interactive area that indicates the component's current state (e.g., hover, focus, press) |
 
 **Example: Changing the size of the radio button**
 

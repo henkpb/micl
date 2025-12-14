@@ -55,17 +55,60 @@ document.getElementById('settings-placeholder').innerHTML =
     </div>
 </dialog>`;
 
+try {
+    const savedTheme = localStorage.getItem('theme');
+    const themelink  = document.getElementById('theme-link');
+    if (savedTheme && themelink) {
+        themelink.href = `themes/${savedTheme}/theme.css`
+        const theme = document.getElementById('theme');
+        if (theme) {
+            theme.value = savedTheme;
+        }
+    }
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode) {
+        document.body.setAttribute('class', document.body.classList.toString().split(' ').filter(
+            c => c.startsWith('micl')
+        ) + ' ' + savedMode);
+        const mode = document.getElementById('mode');
+        if (mode) {
+            mode.value = savedMode;
+        }
+    }
+    const savedDir = localStorage.getItem('dir');
+    if (savedDir) {
+        document.documentElement.setAttribute('dir', savedDir);
+        const directionality = document.getElementById('directionality');
+        if (directionality) {
+            directionality.checked = savedDir === 'rtl';
+        }
+    }
+}
+catch (e) {}
+
 document.getElementById('theme').addEventListener('change', event => {
     const themelink = document.getElementById('theme-link');
     if (themelink) {
         themelink.href = `themes/${event.target.value}/theme.css`
+        try {
+            localStorage.setItem('theme', event.target.value);
+        }
+        catch (e) {}
     }
 });
 document.getElementById('mode').addEventListener('change', event => {
     document.body.setAttribute('class', document.body.classList.toString().split(' ').filter(
         c => c.startsWith('micl')
     ) + ' ' + event.target.value);
+    try {
+        localStorage.setItem('mode', event.target.value);
+    }
+    catch (e) {}
 });
 document.getElementById('directionality').addEventListener('change', event => {
     document.documentElement.setAttribute('dir', event.target.checked ? 'rtl' : 'ltr');
+    try {
+        localStorage.setItem('dir', event.target.checked ? 'rtl' : 'ltr');
+    }
+    catch (e) {}
 });

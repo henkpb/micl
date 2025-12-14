@@ -70,14 +70,15 @@ export default (() =>
                 });
             }
 
-            if (input.matches('input[type=time][data-timepicker]')) {
-                const timePicker = !input.dataset.timepicker ? null :
-                                   document.getElementById(input.dataset.timepicker);
-                if (timePicker instanceof HTMLDialogElement) {
+            if (input.matches('input[type=time][data-timepicker],input[type=date][data-datepicker]')) {
+                const picker = !input.dataset.timepicker ? (!input.dataset.datepicker ? null :
+                               document.getElementById(input.dataset.datepicker)) :
+                               document.getElementById(input.dataset.timepicker);
+                if (picker instanceof HTMLDialogElement) {
                     input.addEventListener('click', (event: Event) =>
                     {
                         event.preventDefault();
-                        timePicker.showModal();
+                        picker.showModal();
                     });
                     input.addEventListener('keydown', (event: Event) =>
                     {
@@ -88,7 +89,7 @@ export default (() =>
                             case 'Enter':
                             case ' ':
                                 event.preventDefault();
-                                timePicker.showModal();
+                                picker.showModal();
                                 break;
                             default:
                         }

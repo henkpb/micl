@@ -19,7 +19,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use 'foundations';
 @use 'foundations/layout';
+@use 'foundations/scrollbar';
 
 @use 'styles/typography';
 @use 'styles/shapes';
@@ -47,30 +49,5 @@
 @use 'components/bottomsheet';
 @use 'components/navigationrail';
 @use 'components/stepper';
+@use 'components/datepicker';
 @use 'components/timepicker';
-
-@property --micl-ripple {
-    syntax: '<integer>';
-    inherits: false;
-    initial-value: 0;
-}
-@property --micl-x {
-    syntax: '<length>';
-    inherits: false;
-    initial-value: -100000px;
-}
-@property --micl-y {
-    syntax: '<length>';
-    inherits: false;
-    initial-value: -100000px;
-}
-@property --micl-width {
-    syntax: '<length>';
-    inherits: true;
-    initial-value: 0px;
-}
-@property --micl-height {
-    syntax: '<length>';
-    inherits: true;
-    initial-value: 0px;
-}

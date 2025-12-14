@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
@@ -80,8 +81,8 @@
         caret-color: var(--md-sys-color-primary);
 
         &:disabled {
-            border-block-end-color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            border-block-end-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         &::placeholder {
             color: var(--md-sys-color-on-surface-variant);
@@ -220,12 +221,12 @@
     &:has(> select:disabled),
     &:has(> textarea:disabled) {
         &> label {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         &> .micl-textfield__icon-leading,
         &> .micl-textfield__icon-trailing,
         &> .micl-textfield__supporting-text {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / 38%);
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         }
         &> .micl-textfield__character-counter {
             display: none;
@@ -253,7 +254,7 @@
         &> input:not(:disabled),
         &> select:not(:disabled),
         &> textarea:not(:disabled) {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
             border-block-end-color: var(--md-sys-color-on-surface);
         }

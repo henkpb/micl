@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
@@ -41,7 +41,7 @@
 @mixin slider-track-disabled() {
     background-image: linear-gradient(
         var(--md-sys-slider-track-direction),
-        color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
+        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity, 38%), transparent) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
         transparent calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
         color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
         color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent) 100%,
@@ -79,8 +79,8 @@
         var(--md-sys-slider-track-direction),
         transparent 0px,
         transparent var(--md-sys-slider-thumb-space),
-        color-mix(in srgb, var(--md-sys-color-on-surface) 38%, var(--md-sys-color-surface)) var(--md-sys-slider-thumb-space),
-        color-mix(in srgb, var(--md-sys-color-on-surface) 38%, var(--md-sys-color-surface)) 10px,
+        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity, 38%), var(--md-sys-color-surface)) var(--md-sys-slider-thumb-space),
+        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity, 38%), var(--md-sys-color-surface)) 10px,
         transparent 10px,
         transparent 16px
     );
@@ -223,10 +223,10 @@ input[type=range].micl-slider-xl {
         }
         &:focus-visible {
             &::-webkit-slider-thumb {
-                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             }
             &::-moz-range-thumb {
-                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
+                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             }
         }
         &:active {
@@ -273,7 +273,7 @@ input[type=range].micl-slider-xl {
             grid-area: slider-icon;
             inset: 0;
             margin: 6px;
-            font-size: var(--md-sys-layout-icon-size, 24px);
+            font-size: var(--md-sys-icon-size, 24px);
             color: var(--md-sys-color-on-primary);
             z-index: 1;
         }

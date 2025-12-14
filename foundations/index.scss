@@ -1,0 +1,102 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+$md-sys-icon-size: 24px;
+
+$md-sys-padding-xxs: 4px;
+$md-sys-padding-xs: 8px;
+$md-sys-padding-s: 12px;
+$md-sys-padding-m: 16px;
+$md-sys-padding-l: 20px;
+$md-sys-padding-xl: 24px;
+$md-sys-padding-xxl: 28px;
+
+:root {
+    --md-sys-icon-size: #{$md-sys-icon-size};
+
+    --md-sys-padding-xxs: #{$md-sys-padding-xxs};
+    --md-sys-padding-xs: #{$md-sys-padding-xs};
+    --md-sys-padding-s: #{$md-sys-padding-s};
+    --md-sys-padding-m: #{$md-sys-padding-m};
+    --md-sys-padding-l: #{$md-sys-padding-l};
+    --md-sys-padding-xl: #{$md-sys-padding-xl};
+    --md-sys-padding-xxl: #{$md-sys-padding-xxl};
+}
+
+.micl-hidden {
+    display: none !important;
+}
+.micl-no-transition {
+    transition: none !important;
+}
+.micl-flex--vcenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.micl-grid-iconfield {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    row-gap: var(--md-sys-padding-xl, 24px);
+    background-color: inherit;
+}
+.micl-grid-iconfield__icon {
+    grid-column: 1;
+    margin-block-start: 0.6rem;
+}
+.micl-grid-iconfield__field {
+    grid-column: 2;
+}
+
+.micl-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+@property --micl-ripple {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+}
+@property --micl-x {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: -100000px;
+}
+@property --micl-y {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: -100000px;
+}
+@property --micl-width {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 0px;
+}
+@property --micl-height {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 0px;
+}

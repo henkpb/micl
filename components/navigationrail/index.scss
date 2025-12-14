@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
 @use '../../foundations/layout';
 @use '../../styles/elevation';
 @use '../../styles/motion';
@@ -119,8 +120,8 @@
             &> .micl-navigationrail__icon {
                 --micl-ripple: 1;
 
-                font-size: var(--md-sys-layout-icon-size, 24px);
-                inline-size: var(--md-sys-layout-icon-size, 24px);
+                font-size: var(--md-sys-icon-size, 24px);
+                inline-size: var(--md-sys-icon-size, 24px);
                 margin: 0;
                 padding-block: 4px;
                 padding-inline: 16px;
@@ -188,15 +189,15 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
                 background-color: transparent;
             }
             &:hover {
-                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
             }
             &:focus-visible {
-                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
             }
             &:active {
                 background-size: 0%, 100%;
                 transition: background-size 0ms;
-                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
             }
             &> .micl-navigationrail__text {
                 @include typography.label-large;
@@ -273,17 +274,17 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     &> .micl-navigationrail__content > label.micl-navigationrail__item {
         &:hover {
             &> .micl-navigationrail__icon {
-                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
             }
         }
         &:focus-visible {
             &> .micl-navigationrail__icon {
-                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
             }
         }
         &:active {
             &> .micl-navigationrail__icon {
-                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+                --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
                 background-size: 0%, 100%;
                 transition:
@@ -346,7 +347,7 @@ nav.micl-navigationrail[popover] {
             display var(--md-sys-navigationrail-motion-duration) linear allow-discrete;
 
         &::backdrop {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
 
             @starting-style {
                 background-color: rgba(0, 0, 0, 0);

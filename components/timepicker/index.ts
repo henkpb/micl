@@ -21,7 +21,7 @@
 
 export const timepickerSelector = 'dialog.micl-dialog.micl-timepicker';
 
-type ValueElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+type ValueElement = HTMLInputElement | HTMLButtonElement;
 
 interface TimeLimits {
     max: number,
@@ -49,11 +49,9 @@ export default (() =>
         return parent.querySelector(selector) as T | null;
     };
 
-    const isValueElement = (element: Element): element is ValueElement =>
+    const isValueElement = (element: Element | null): element is ValueElement =>
     {
-        return element instanceof HTMLInputElement ||
-               element instanceof HTMLTextAreaElement ||
-               element instanceof HTMLSelectElement;
+        return element instanceof HTMLInputElement || element instanceof HTMLButtonElement;
     };
 
     const isVisible = (element: Element | null): boolean =>
@@ -353,21 +351,21 @@ export default (() =>
                     return;
                 }
 
-                let invoker = document.activeElement as HTMLInputElement | HTMLButtonElement | null;
+                let invoker = document.activeElement;
                 if (
-                    !invoker
+                    !isValueElement(invoker)
                     || (!invoker.dataset.timepicker && !invoker.popoverTargetElement)
                 ) {
                     invoker = document.querySelector(
                         `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`
                     );
                 }
-                if (!invoker) {
+                if (!isValueElement(invoker)) {
                     return;
                 }
                 (dialog as any)._miclInvoker = invoker;
 
-                const time = (isValueElement(invoker) ? invoker.value : invoker.textContent).split(':');
+                const time = (invoker.value || invoker.textContent).split(':');
                 if (time.length === 2) {
                     setInputValue(dialog, 'hour', time[0], true);
                     setInputValue(dialog, 'minute', time[1], false, false);
@@ -386,7 +384,7 @@ export default (() =>
                         `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`
                     );
                 }
-                if (!invoker) {
+                if (!isValueElement(invoker)) {
                     return;
                 }
 
@@ -403,9 +401,11 @@ export default (() =>
                     return;
                 }
                 const time = `${h}`.padStart(2, '0') + ':' + `${m}`.padStart(2, '0');
+                invoker.value = time;
 
-                if (isValueElement(invoker)) {
-                    invoker.value = time;
+                if (invoker instanceof HTMLInputElement) {
+                    invoker.dispatchEvent(new Event('change', { bubbles: true }));
+                    invoker.dispatchEvent(new Event('input', { bubbles: true }));
                 }
                 else {
                     invoker.textContent = time;

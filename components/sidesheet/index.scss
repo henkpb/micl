@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
+@use '../../foundations/layout';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -140,7 +142,7 @@ dialog.micl-sidesheet {
         transition: background-color var(--md-sys-sidesheet-motion-duration-reverse) linear;
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
         transition: background-color var(--md-sys-sidesheet-motion-duration) linear;
 
         @starting-style {

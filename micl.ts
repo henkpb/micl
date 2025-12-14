@@ -22,6 +22,7 @@
 import _bottomsheet, { bottomsheetSelector } from './components/bottomsheet';
 import _button, { buttonSelector } from './components/button';
 import _checkboxgroup, { checkboxGroupSelector } from './components/checkbox';
+import _datepicker, { datepickerSelector } from './components/datepicker';
 import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
@@ -47,6 +48,7 @@ export default (() =>
         [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
         [buttonSelector]        : { component: _button, type: HTMLButtonElement },
         [checkboxGroupSelector] : { component: _checkboxgroup, type: HTMLElement },
+        [datepickerSelector]    : { component: _datepicker, type: HTMLDialogElement },
         [listSelector]          : { component: _list, type: HTMLElement },
         [menuSelector]          : { component: _menu, type: HTMLElement },
         [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },
@@ -59,6 +61,14 @@ export default (() =>
     };
 
     const selector = Object.keys(componentMap).join(',');
+
+    const initializeScrollbars = (): void =>
+    {
+        document.documentElement.style.setProperty(
+            '--md-sys-scrollbar-thumb-color',
+            window.getComputedStyle(document.body).getPropertyValue('--md-sys-color-outline').trim()
+        );
+    };
 
     const initializeComponent = (element: HTMLElement): void =>
     {
@@ -94,6 +104,8 @@ export default (() =>
                 });
             }
         });
+
+        initializeScrollbars();
     };
 
     const cleanupComponent = (element: HTMLElement): void =>
@@ -118,14 +130,12 @@ export default (() =>
     const handleEvent = (event: Event): void =>
     {
         for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (
-                (event.target as Element).matches(selector)
-                && event.target instanceof type
-                && ['input', 'keydown'].includes(event.type)
-                && typeof component[event.type as ComponentKey] === 'function'
-            ) {
-                component[event.type as ComponentKey]?.(event);
-                return;
+            if (typeof component[event.type as ComponentKey] === 'function') {
+                const e = (event.target as Element).closest(selector);
+                if (e instanceof type) {
+                    component[event.type as ComponentKey]?.(event);
+                    return;
+                }
             }
         }
     };
