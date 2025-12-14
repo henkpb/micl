@@ -62,6 +62,14 @@ export default (() =>
 
     const selector = Object.keys(componentMap).join(',');
 
+    const initializeScrollbars = (): void =>
+    {
+        document.documentElement.style.setProperty(
+            '--md-sys-scrollbar-thumb-color',
+            window.getComputedStyle(document.body).getPropertyValue('--md-sys-color-outline').trim()
+        );
+    };
+
     const initializeComponent = (element: HTMLElement): void =>
     {
         for (const [selector, { component, type }] of Object.entries(componentMap)) {
@@ -96,6 +104,8 @@ export default (() =>
                 });
             }
         });
+
+        initializeScrollbars();
     };
 
     const cleanupComponent = (element: HTMLElement): void =>
@@ -120,14 +130,12 @@ export default (() =>
     const handleEvent = (event: Event): void =>
     {
         for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (
-                (event.target as Element).matches(selector)
-                && event.target instanceof type
-                && ['input', 'keydown'].includes(event.type)
-                && typeof component[event.type as ComponentKey] === 'function'
-            ) {
-                component[event.type as ComponentKey]?.(event);
-                return;
+            if (typeof component[event.type as ComponentKey] === 'function') {
+                const e = (event.target as Element).closest(selector);
+                if (e instanceof type) {
+                    component[event.type as ComponentKey]?.(event);
+                    return;
+                }
             }
         }
     };
