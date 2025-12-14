@@ -21,10 +21,10 @@
 
 export const datepickerSelector = 'dialog.micl-dialog.micl-datepicker';
 
-type ValueElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+type ValueElement = HTMLInputElement | HTMLButtonElement;
 
 interface DatePickerState {
-    invoker : ValueElement | HTMLElement | null;
+    invoker : ValueElement | null;
     selected: Date;
     viewDate: Date; // the month/year currently being viewed
     min     : Date | null;
@@ -34,6 +34,11 @@ interface DatePickerState {
 const stateMap = new WeakMap<HTMLDialogElement, DatePickerState>();
 
 const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
+
+const isValueElement = (element: Element | null): element is ValueElement =>
+{
+    return element instanceof HTMLInputElement || element instanceof HTMLButtonElement;
+};
 
 const getFirstDayOfWeek = (): number =>
 {
@@ -240,6 +245,12 @@ const renderCalendar = (
         }
         const days = getCalendarDays(state.viewDate.getFullYear(), state.viewDate.getMonth());
         populateContainerWithDays(inner, days, state, inner.querySelectorAll('time').length === 0);
+    }
+
+    const input = content?.querySelector<HTMLInputElement>('.micl-datepicker__input input');
+    if (input) {
+        const pad  = (n: number): string => n.toString().padStart(2, '0');
+        input.value = `${state.selected.getFullYear()}-${pad(state.selected.getMonth() + 1)}-${pad(state.selected.getDate())}`;
     }
     
     setText(
@@ -517,14 +528,17 @@ export default (() =>
                     return;
                 }
 
-                let invoker = document.activeElement as HTMLElement;
+                let invoker = document.activeElement;
                 if (
-                    !invoker
+                    !isValueElement(invoker)
                     || (!invoker.dataset.datepicker && !invoker.getAttribute('popovertarget'))
                 ) {
                     invoker = document.querySelector(
                         `[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`
-                    ) as HTMLElement;
+                    );
+                }
+                if (!isValueElement(invoker)) {
+                    return;
                 }
 
                 let initialDate = new Date();
@@ -541,8 +555,8 @@ export default (() =>
                     if (invoker.min) min = new Date(invoker.min);
                     if (invoker.max) max = new Date(invoker.max);
                 }
-                else if (invoker?.textContent) {
-                    const parsed = new Date(invoker.textContent);
+                else {
+                    const parsed = new Date(invoker.value || invoker.textContent);
                     if (isValidDate(parsed)) {
                         initialDate = parsed;
                     }
@@ -571,9 +585,9 @@ export default (() =>
                 }
                 const pad  = (n: number): string => n.toString().padStart(2, '0');
                 const date = `${state.selected.getFullYear()}-${pad(state.selected.getMonth() + 1)}-${pad(state.selected.getDate())}`;
+                state.invoker.value = date;
 
                 if (state.invoker instanceof HTMLInputElement) {
-                    state.invoker.value = date;
                     state.invoker.dispatchEvent(new Event('change', { bubbles: true }));
                     state.invoker.dispatchEvent(new Event('input', { bubbles: true }));
                 }
