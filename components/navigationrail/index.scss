@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations';
 @use '../../foundations/layout';
 @use '../../styles/elevation';
 @use '../../styles/motion';
@@ -119,8 +120,8 @@
             &> .micl-navigationrail__icon {
                 --micl-ripple: 1;
 
-                font-size: var(--md-sys-layout-icon-size, 24px);
-                inline-size: var(--md-sys-layout-icon-size, 24px);
+                font-size: var(--md-sys-icon-size, 24px);
+                inline-size: var(--md-sys-icon-size, 24px);
                 margin: 0;
                 padding-block: 4px;
                 padding-inline: 16px;

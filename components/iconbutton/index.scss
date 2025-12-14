@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -155,7 +155,7 @@ button.micl-iconbutton-outlined-s {
     inline-size: var(--micl-width);
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
-    font-size: var(--md-sys-layout-icon-size, 24px);
+    font-size: var(--md-sys-icon-size, 24px);
 
     &::before {
         content: "";
@@ -202,7 +202,7 @@ button.micl-iconbutton-outlined-m {
     inline-size: var(--micl-width);
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
-    font-size: var(--md-sys-layout-icon-size, 24px);
+    font-size: var(--md-sys-icon-size, 24px);
 
     &.micl-button--toggle.micl-button--selected {
         border-radius: var(--md-sys-shape-corner-large);

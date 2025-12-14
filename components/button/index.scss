@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -230,8 +230,8 @@ button.micl-button-outlined-m {
         }
     }
     .micl-button__icon {
-        font-size: var(--md-sys-layout-icon-size, 24px);
-        inline-size: var(--md-sys-layout-icon-size, 24px);
+        font-size: var(--md-sys-icon-size, 24px);
+        inline-size: var(--md-sys-icon-size, 24px);
     }
 }
 

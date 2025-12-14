@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
@@ -169,9 +169,9 @@ dialog.micl-dialog {
             align-items: center;
         }
         .micl-dialog__icon {
-            inline-size: var(--md-sys-layout-icon-size, 24px);
-            block-size: var(--md-sys-layout-icon-size, 24px);
-            font-size: var(--md-sys-layout-icon-size, 24px);
+            inline-size: var(--md-sys-icon-size, 24px);
+            block-size: var(--md-sys-icon-size, 24px);
+            font-size: var(--md-sys-icon-size, 24px);
             color: var(--md-sys-color-secondary);
         }
         h1, h2, h3, h4, h5, h6, .micl-heading {

@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/statelayer';
 
@@ -39,7 +39,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    row-gap: var(--md-sys-layout-padding-xl, 24px);
+    row-gap: var(--md-sys-padding-xl, 24px);
     margin: 0;
     background-color: inherit;
 
@@ -120,7 +120,7 @@ body {
         &>:last-child {
             display: flex;
             flex: 1 1 0;
-            column-gap: var(--md-sys-layout-padding-xs, 8px)
+            column-gap: var(--md-sys-padding-xs, 8px)
         }
         &>:last-child {
             justify-content: flex-end;

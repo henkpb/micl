@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations';
 @use '../../styles/shapes';
 @use '../../styles/typography';
 
@@ -46,9 +46,9 @@
     color: var(--md-sys-alert-color);
 
     .micl-alert__icon {
-        block-size: var(--md-sys-layout-icon-size, 24px);
-        inline-size: var(--md-sys-layout-icon-size, 24px);
-        font-size: var(--md-sys-layout-icon-size, 24px);
+        block-size: var(--md-sys-icon-size, 24px);
+        inline-size: var(--md-sys-icon-size, 24px);
+        font-size: var(--md-sys-icon-size, 24px);
     }
     .micl-alert__text {
         display: flex;
