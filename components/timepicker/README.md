@@ -27,7 +27,7 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
       <button
         type="button"
         class="micl-timepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined"
-        data-alticon="schedule"
+        data-miclalt="schedule"
         aria-label="Switch input mode"
       >keyboard</button>
       <div>
@@ -83,7 +83,7 @@ By default, the layout is **vertical**. To switch to a **horizontal** layout (si
 To allow users to toggle between the text inputs and the analog dial, add a button to the `micl-dialog__actions` container:
 
 - Class: `micl-timepicker__inputmode`
-- Data Attribute: `data-alticon="schedule"` (defines the icon to show when toggled).
+- Data Attribute: `data-miclalt="schedule"` (defines the icon to show when toggled).
 
 ### Integration
 You can trigger the Time picker component from standard input fields or buttons.
