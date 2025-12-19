@@ -385,7 +385,8 @@ dialog.micl-dialog.micl-datepicker {
             margin-block-end: 16px;
 
             &.micl-datepicker__view-hidden,
-            input[type=date]::-webkit-calendar-picker-indicator {
+            input[type=date]::-webkit-calendar-picker-indicator,
+            input[type=date]::-webkit-inner-spin-button {
                 display: none;
             }
         }
