@@ -44,6 +44,59 @@ export default (() =>
         }
     };
 
+    const formatAsDate = (input: HTMLInputElement, inputType: string): void =>
+    {
+        const partsRegex = /([DMY]{2,4})([^DMY])?([DMY]{2,4})([^DMY])?([DMY]{2,4})/;
+        const match      = (input.dataset.micldateformat || '').match(partsRegex);
+        if (!match) {
+            return;
+        }
+
+        const components = [
+            { type: match[1], length: match[1].length, separator: match[2] || '' },
+            { type: match[3], length: match[3].length, separator: match[4] || '' },
+            { type: match[5], length: match[5].length, separator: '' }
+        ];
+
+        input.maxLength = components.reduce((sum, c) => sum + c.length + (c.separator ? 1 : 0), 0);
+
+        let value = input.value.replace(/\D/g, ''); // remove all non-digits
+        let formattedValue = '';
+        let valueIndex = 0;
+        let cursorPosition = input.selectionStart || 0;
+
+        for (let i = 0; i < components.length; i++) {
+            const comp = components[i];
+            if (value.length < valueIndex) break;
+
+            const segment = value.substring(valueIndex, valueIndex + comp.length);
+            formattedValue += segment;
+            valueIndex += segment.length;
+            
+            if (segment.length === comp.length && comp.separator) {
+                formattedValue += comp.separator;
+            }
+        }
+
+        const prevLength = input.value.length;
+        input.value = formattedValue.substring(0, input.maxLength);
+        const newLength = input.value.length;
+
+        if (inputType.startsWith('deleteContent')) {
+            if (cursorPosition > 0) {
+                input.setSelectionRange(cursorPosition, cursorPosition);
+            }
+        }
+        else {
+            if (newLength > prevLength && newLength > cursorPosition) {
+                input.setSelectionRange(newLength, newLength);
+            }
+            else {
+                input.setSelectionRange(cursorPosition, cursorPosition);
+            }
+        }
+    };
+
     return {
         initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
         {
@@ -110,6 +163,9 @@ export default (() =>
                 return;
             }
 
+            if (event.target instanceof HTMLInputElement && event.target.dataset.micldateformat) {
+                formatAsDate(event.target, (event as InputEvent).inputType);
+            }
             if (event.target.value) {
                 event.target.dataset.miclvalue = '1';
             }
