@@ -1,10 +1,10 @@
 # Date picker
-This component implements the [Material Design 3 Expressive Date picker](https://m3.material.io/components/date-pickers/overview) design. It allows users to select a specific date using either a text input or a calendar interface.
+This component implements the [Material Design 3 Expressive Date picker](https://m3.material.io/components/date-pickers/overview) design. It allows users to select a date using either a text input or a calendar interface.
 
 ## Basic Usage
 
 ### HTML
-The Date picker component is an extension of the [**Dialog** component](../dialog/README.md). To create a basic date picker, use a `<dialog>` element with both `micl-dialog` and `micl-datepicker` classes.
+The Date Picker component is an extension of the [**Dialog** component](../dialog/README.md). To create a basic date picker, use a `<dialog>` element with both `micl-dialog` and `micl-datepicker` classes.
 
 ```HTML
 <dialog id="mydatepicker" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="mytitle">
@@ -77,29 +77,36 @@ A live example of the [Date picker component](https://henkpb.github.io/micl/date
 Because the Date picker component relies on the Dialog component, it utilizes the same utility classes for content structure. Refer to the [Dialog component documentation](../dialog/README.md) for structural details.
 
 ### Date Picker Structure
-For the picker to function correctly, the `micl-dialog__content` area must contain the `<div class="micl-datepicker__calendars">` container that will hold the month-based calendars. In addition, the content area may contain:
+For the picker to function, the `micl-dialog__content` area **must** contain the `<div class="micl-datepicker__calendars">` container. This holds the month-based calendars.
 
-- Container from which to select a year: `<div class="micl-datepicker__years">`
-- Container from which to select a month: `<div class="micl-datepicker__months">`
-- [Text field component](../textfield/README.md) with the `micl-datepicker__input` class to manually enter a date
+Additionally, the content area may contain:
 
-The `micl-dialog__headline` area may contain the following items:
+- A container for selecting a year: `<div class="micl-datepicker__years">`
 
-- Title: A heading element like `<h2>` that will display the selected date.
-- Supporting label: A text element with class `micl-dialog__supporting-text`.
-- Month selector: A sub-container containing three [Icon button components](../iconbutton/README.md) with these classes:
-    - `micl-datepicker__month`: opens the `micl-datepicker__months` container from which to select a month.
-    - `micl-datepicker__previous`: navigates to the previous month.
-    - `micl-datepicker__next`: navigates to the next month.
-- Year selector: A sub-container containing three Icon buttons with these classes:
-    - `micl-datepicker__year`: opens the `micl-datepicker__years` container from which to select a year.
-    - `micl-datepicker__previous`: navigates to the previous year.
-    - `micl-datepicker__next`: navigates to the next year.
+- A container for selecting a month: `<div class="micl-datepicker__months">`
 
-Each of these items may be omitted if its functionality is not required.
+- A [Text field component](../textfield/README.md) with the `micl-datepicker__input` class for manual date entry.
+
+The `micl-dialog__headline` area may contain:
+
+- **Title**: A heading element (e.g., `<h2>`) to display the selected date.
+
+- **Supporting label**: A text element with the class `micl-dialog__supporting-text`.
+
+- **Month selector**: A container with three [Icon button components](../iconbutton/README.md):
+    - `micl-datepicker__month`: Opens the month selection container.
+    - `micl-datepicker__previous`: Navigates to the previous month.
+    - `micl-datepicker__next`: Navigates to the next month.
+
+- **Year selector**: A container with three [Icon button components](../iconbutton/README.md):
+    - `micl-datepicker__year`: Opens the year selection container.
+    - `micl-datepicker__previous`: Navigates to the previous year.
+    - `micl-datepicker__next`: Navigates to the next year.
+
+Any item not required for your implementation may be omitted.
 
 #### Input Mode Switching
-To allow users to toggle between the date picker and the date input field, add an icon button to the `micl-dialog__headling` area:
+To allow users to toggle between the calendar view and the manual date input, add an icon button to the `micl-dialog__headline` area:
 
 - Class: `micl-datepicker__inputmode`
 - Data Attribute: `data-miclalt="calendar_today"` (defines the icon to show when toggled).
@@ -114,16 +121,26 @@ To replace the browser's native date picker, add the `data-datepicker` attribute
 <input type="date" data-datepicker="mydatepicker" value="2025-12-02">
 ```
 
-- **Behavior**: When the input is clicked, the picker opens with the input's current value.
-- **Reusability**: Multiple input fields can target the same Date picker component ID.
+- **Behavior**: Clicking the input opens the picker initialized with the input's current value.
+- **Reusability**: Multiple input fields can target the same Date picker component ID. The picker will automatically update to reflect the date of the specific input field engaged by the user.
 
-You may use the same date picker component for different date-input fields. When the user engages with the input field, the date picker is opened showing the date specified in the `value`-attribute.
+**Docked Positioning** By default, the Date picker opens in the center of the screen. To anchor it to the input field, use the `micl-dialog--docked` class and CSS Anchor positioning.
+
+```HTML
+<dialog id="mydatepicker" class="micl-dialog micl-dialog--docked micl-datepicker" style="position-anchor:--myanchor">
+
+<div class="micl-textfield-outlined" style="anchor-name:--myanchor">
+  <label for="mytextfield">Start date</label>
+  <input type="date" id="mytextfield" data-datepicker="mydatepicker">
+</div>
+```
 
 #### Connecting to a Button
-You can use a button to trigger the picker using the standard `popovertarget` attribute.
+You can trigger the picker from a button using the standard `popovertarget` attribute.
 
 ```HTML
 <button type="button" class="micl-button-text-m" popovertarget="mydatepicker" value="2026-01-23">23.01.2026</button>
 ```
 
-- **Behavior**: The Date picker treats the button's value attribute as the date value to read from and write to. In addition, it updates the button's text content with the selected date formatted according to the user's locale.
+- **Behavior**: The Date picker reads from and writes to the button's value attribute.
+- **Formatting**: The component automatically updates the button's text content with the selected date, formatted according to the user's locale.
