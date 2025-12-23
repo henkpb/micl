@@ -1,5 +1,5 @@
 document.getElementById('settings-placeholder').innerHTML =
-`<button class="micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined" popovertarget="settings" popovertargetaction="toggle">dark_mode</button>
+`<button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="settings">dark_mode</button>
 <dialog id="settings" class="micl-dialog" closedby="any" popover>
     <div class="micl-dialog__headline">
         <h2>Settings</h2>
@@ -17,8 +17,29 @@ document.getElementById('settings-placeholder').innerHTML =
                 <option class="micl-list-item-one" value="citrine">
                     <span class="micl-list-item__text">Citrine</span>
                 </option>
+                <option class="micl-list-item-one" value="gray">
+                    <span class="micl-list-item__text">Gray</span>
+                </option>
+                <option class="micl-list-item-one" value="greenery">
+                    <span class="micl-list-item__text">Greenery</span>
+                </option>
+                <option class="micl-list-item-one" value="hermana">
+                    <span class="micl-list-item__text">Hermana</span>
+                </option>
+                <option class="micl-list-item-one" value="illuminating">
+                    <span class="micl-list-item__text">Illuminating</span>
+                </option>
+                <option class="micl-list-item-one" value="magenta">
+                    <span class="micl-list-item__text">Magenta</span>
+                </option>
+                <option class="micl-list-item-one" value="mocha">
+                    <span class="micl-list-item__text">Mocha</span>
+                </option>
                 <option class="micl-list-item-one" value="olivegreen">
                     <span class="micl-list-item__text">Olive green</span>
+                </option>
+                <option class="micl-list-item-one" value="peri">
+                    <span class="micl-list-item__text">Peri</span>
                 </option>
             </select>
         </div>
