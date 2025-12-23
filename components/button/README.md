@@ -63,8 +63,16 @@ A toggle button has two states: **on** (selected) and **off** (unselected). To c
 **Example: A selected toggle button**
 
 ```HTML
-<button type="button" class="micl-button-tonal-s micl-button--toggle micl-button--selected">Selected</button>
+<button
+  type="button"
+  id="id0"
+  class="micl-button-tonal-s micl-button--toggle micl-button--selected"
+  commandfor="id0"
+  command="--micl-toggle"
+>Selected</button>
 ```
+
+The self-targeting `command` property (`--micl-toggle`) toggles the button state whenever the user interacts with the button.
 
 ## Icons
 To add a leading icon to a button, include an element with the `micl-button__icon` class inside the `<button>`:
