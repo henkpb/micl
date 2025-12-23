@@ -85,7 +85,7 @@
                                 <div class="micl-sidesheet__headline">
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined">arrow_back</button>
                                     <h2 id="title3">Title</h2>
-                                    <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet3">close</button>
+                                    <button class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mysidesheet3">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">
                                     <p class="md-sys-typescale-body-medium">Make your selection:</p>
@@ -113,10 +113,10 @@
                                 <hr class="micl-divider">
                                 <div class="micl-sidesheet__actions">
                                     <button type="button" class="micl-button-filled-s">Save</button>
-                                    <button type="button" class="micl-button-outlined-s">Cancel</button>
+                                    <button type="button" class="micl-button-outlined-s" command="close" commandfor="mysidesheet3">Cancel</button>
                                 </div>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" popovertarget="mysidesheet3">Open Modal Sheet</button>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mysidesheet3">Open Modal Sheet</button>
                         </div>
                     </div>
                 </div>

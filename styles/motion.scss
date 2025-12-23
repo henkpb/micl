@@ -104,6 +104,8 @@ $md-sys-motion-duration-extra-long2: 800ms;
 $md-sys-motion-duration-extra-long3: 900ms;
 $md-sys-motion-duration-extra-long4: 1000ms;
 
+$md-sys-motion-path: linear;
+
 :root {
     --md-sys-motion-duration-short1: #{$md-sys-motion-duration-short1};
     --md-sys-motion-duration-short2: #{$md-sys-motion-duration-short2};
@@ -121,4 +123,5 @@ $md-sys-motion-duration-extra-long4: 1000ms;
     --md-sys-motion-duration-extra-long2: #{$md-sys-motion-duration-extra-long2};
     --md-sys-motion-duration-extra-long3: #{$md-sys-motion-duration-extra-long3};
     --md-sys-motion-duration-extra-long4: #{$md-sys-motion-duration-extra-long4};
+    --md-sys-motion-path: #{$md-sys-motion-path};
 }

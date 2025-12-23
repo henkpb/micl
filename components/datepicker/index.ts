@@ -32,26 +32,38 @@ interface DatePickerState {
 }
 
 const stateMap = new WeakMap<HTMLDialogElement, DatePickerState>();
-
 const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
 
-const formatter = new Intl.DateTimeFormat(locale, {
-    year : 'numeric',
-    month: '2-digit',
-    day  : '2-digit'
-});
+const formatters = {
+    input: new Intl.DateTimeFormat(locale, {
+        year : 'numeric',
+        month: '2-digit',
+        day  : '2-digit'
+    }),
+    header: new Intl.DateTimeFormat(locale, { weekday: 'short', day: 'numeric', month: 'short' }),
+    monthLong: new Intl.DateTimeFormat(undefined, { month: 'long' }),
+    monthShort: new Intl.DateTimeFormat(locale, { month: 'short' }),
+    weekdayNarrow: new Intl.DateTimeFormat(locale, { weekday: 'narrow' }),
+    weekdayLong: new Intl.DateTimeFormat(locale, { weekday: 'long' })
+};
+
+const toLocalMidnight = (date: Date): Date =>
+{
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+};
 
 const formatToInputDateValue = (d: Date): string =>
 {
     const month = (d.getMonth() + 1).toString().padStart(2, '0');
     const day   = d.getDate().toString().padStart(2, '0');
-
     return `${d.getFullYear()}-${month}-${day}`;
 };
 
 const getDateFormat = (): string =>
 {
-    return formatter.formatToParts(new Date(2025, 0, 15)).map(part =>
+    return formatters.input.formatToParts(new Date(2025, 0, 15)).map(part =>
     {
         switch (part.type) {
             case 'day'    : return 'DD';
@@ -77,20 +89,7 @@ const getFirstDayOfWeek = (): number =>
 };
 
 const firstDayOfWeek = getFirstDayOfWeek();
-
 const isValidDate = (date: Date): boolean => !isNaN(date.getTime());
-
-const toLocalMidnight = (date: Date): Date =>
-{
-    const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
-    return d;
-};
-
-const isValueElement = (element: Element | null): element is ValueElement =>
-{
-    return element instanceof HTMLInputElement || element instanceof HTMLButtonElement;
-};
 
 const setText = (parent: Element | null, text: string): void =>
 {
@@ -118,23 +117,40 @@ const getCalendarDays = (
     month: number
 ): Array<{ date: Date, val: string, isCurrentMonth: boolean }> => {
 
-    const results      = [];
     const firstOfMonth = new Date(year, month, 1);
     const dayOfWeek    = firstOfMonth.getDay();
     const offset       = (dayOfWeek - firstDayOfWeek + 7) % 7;
-    const current      = new Date(year, month, 1 - offset);
-    const pad          = (n: number): string => n.toString().padStart(2, '0');
 
-    // 6 weeks * 7 days
-    for (let i = 0; i < 42; i++) {
-        results.push({
-            date          : new Date(current),
-            val           : `${current.getFullYear()}-${pad(current.getMonth())}-${pad(current.getDate())}`,
+    const startDate = new Date(year, month, 1 - offset);
+
+    return Array.from({ length: 42 }, (_, i) => {
+        const current = new Date(startDate);
+        current.setDate(startDate.getDate() + i);
+        return {
+            date          : current,
+            val           : formatToInputDateValue(current),
             isCurrentMonth: current.getMonth() === month
-        });
-        current.setDate(current.getDate() + 1);
+        };
+    });
+};
+
+const renderCalendarHeader = (): DocumentFragment =>
+{
+    const tempDate = new Date();
+    const startOffset = tempDate.getDay() - firstDayOfWeek;
+    tempDate.setDate(tempDate.getDate() - startOffset);
+    
+    const fragment = document.createDocumentFragment();
+    
+    for (let i = 0; i < 7; i++) {
+        const span = document.createElement('span');
+        span.style.gridArea = `1 / ${i + 1}`;
+        span.textContent = formatters.weekdayNarrow.format(tempDate);
+        span.title = formatters.weekdayLong.format(tempDate);
+        fragment.appendChild(span);
+        tempDate.setDate(tempDate.getDate() + 1);
     }
-    return results;
+    return fragment;
 };
 
 const populateContainerWithDays = (
@@ -144,19 +160,7 @@ const populateContainerWithDays = (
     isEmpty  : boolean = false
 ): void => {
     if (isEmpty) {
-        const fragment    = document.createDocumentFragment();
-        const tempDate    = new Date();
-        const startOffset = tempDate.getDay() - firstDayOfWeek;
-        tempDate.setDate(tempDate.getDate() - startOffset); 
-        
-        for (let i = 0; i < 7; i++) {
-            const span = document.createElement('span');
-            span.style.gridArea = `1 / ${i + 1}`;
-            span.textContent = tempDate.toLocaleDateString(locale, { weekday: 'narrow' });
-            span.title = tempDate.toLocaleDateString(locale, { weekday: 'long' });
-            fragment.appendChild(span);
-            tempDate.setDate(tempDate.getDate() + 1);
-        }
+        const fragment = renderCalendarHeader();
 
         days.forEach((_, index) => {
             const time = document.createElement('time');
@@ -277,7 +281,7 @@ const renderCalendar = (
 
     const input = content?.querySelector<HTMLInputElement>('.micl-datepicker__input input');
     if (input) {
-        input.value = formatter.format(state.selected);
+        input.value = formatters.input.format(state.selected);
         if (input.value) {
             input.dataset.miclvalue = '1';
         }
@@ -289,72 +293,66 @@ const renderCalendar = (
         }
     }
 
-    setText(
-        dialog.querySelector('h1, h2, h3, h4, h5, h6, .micl-heading'),
-        state.selected.toLocaleDateString(locale, { weekday: 'short', day: 'numeric', month: 'short' })
-    );
-    setText(
-        dialog.querySelector('.micl-datepicker__month'),
-        state.viewDate.toLocaleDateString(locale, { month: 'short' })
-    );
+    setText(dialog.querySelector('h1, h2, h3, h4, h5, h6, .micl-heading'), formatters.header.format(state.selected));
+    setText(dialog.querySelector('.micl-datepicker__month'), formatters.monthShort.format(state.viewDate));
     setText(
         dialog.querySelector('.micl-datepicker__year'),
         state.viewDate.toLocaleDateString(locale, dialog.classList.contains('micl-dialog--docked') ?
         { year: 'numeric' } : { month: 'long', year: 'numeric' })
     );
 
-    ['months', 'years'].forEach(period => {
-        const value = period === 'months' ? state.viewDate.getMonth() : state.viewDate.getFullYear();
-        const input = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__${period} input[value="${value}"]`);
-        if (input) {
-            input.checked = true;
-        }
-    });
+    const monthInput = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__months input[value="${state.viewDate.getMonth()}"]`);
+    if (monthInput) monthInput.checked = true;
+    
+    const yearInput = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__years input[value="${state.viewDate.getFullYear()}"]`);
+    if (yearInput) yearInput.checked = true;
 };
 
 const initPeriodPickers = (dialog: HTMLDialogElement, min: Date, max: Date): void =>
 {
-    ['months', 'years'].forEach(period => {
+    const minYear  = min.getFullYear();
+    const maxYear  = max.getFullYear();
+
+    ['months', 'years'].forEach(period =>
+    {
         const container = dialog.querySelector(`.micl-datepicker__${period}`);
-        if (container) {
-            container.innerHTML = '';
-            const frag = document.createDocumentFragment();
-
-            const maxMonth = max.getMonth();
-            const maxYear  = max.getFullYear();
-
-            if (period === 'months') {
-                const months: number[] = [];
-
-                let current = new Date(min.getFullYear(), min.getMonth(), 1);
-                while (
-                    current <= max
-                    || (current.getMonth() === maxMonth && current.getFullYear() === maxYear)
-                ) {
-                    months.push(current.getMonth());
-                    current.setMonth(current.getMonth() + 1);
-                }
-                
-                const fmt = new Intl.DateTimeFormat(undefined, { month: 'long' });
-
-                [...new Set(months.sort((a, b) => a - b))].forEach(m => {
-                    const label = document.createElement('label');
-                    label.innerHTML = `<span class="material-symbols-outlined">check</span><input type="radio" name="miclmonth" value="${m}"> ${fmt.format(new Date(2000, m, 1))}`;
-                    frag.appendChild(label);
-                });
-            }
-            else {
-                for (let y = min.getFullYear(); y <= maxYear; y++) {
-                    const label = document.createElement('label');
-                    label.innerHTML = `<input type="radio" name="miclyear" value="${y}"> ${y}`;
-                    frag.appendChild(label);
-                }
-            }
-
-            const inner = document.createElement('div');
-            inner.classList.add(`micl-datepicker__${period}-inner`);
-            container.appendChild(inner).appendChild(frag);
+        if (!container) {
+            return;
         }
+        container.innerHTML = '';
+        const frag = document.createDocumentFragment();
+
+        const maxMonth = max.getMonth();
+
+        if (period === 'months') {
+            const months: number[] = [];
+
+            let current = new Date(min.getFullYear(), min.getMonth(), 1);
+            while (
+                current <= max
+                || (current.getMonth() === maxMonth && current.getFullYear() === maxYear)
+            ) {
+                months.push(current.getMonth());
+                current.setMonth(current.getMonth() + 1);
+            }
+            
+            [...new Set(months.sort((a, b) => a - b))].forEach(m => {
+                const label = document.createElement('label');
+                label.innerHTML = `<span class="material-symbols-outlined">check</span><input type="radio" name="miclmonth" value="${m}"> ${formatters.monthLong.format(new Date(2000, m, 1))}`;
+                frag.appendChild(label);
+            });
+        }
+        else {
+            for (let y = minYear; y <= maxYear; y++) {
+                const label = document.createElement('label');
+                label.innerHTML = `<input type="radio" name="miclyear" value="${y}"> ${y}`;
+                frag.appendChild(label);
+            }
+        }
+
+        const inner = document.createElement('div');
+        inner.classList.add(`micl-datepicker__${period}-inner`);
+        container.appendChild(inner).appendChild(frag);
     });
 };
 
@@ -461,15 +459,13 @@ const changePeriod = (dialog: HTMLDialogElement, amount: number, unit: 'month' |
 
     const belowMin = state.min && newDate < state.min;
     const aboveMax = state.max && newDate > state.max;
+
     if (belowMin || aboveMax) {
-        const animation = dialog.querySelector('.micl-datepicker__calendars')?.animate([
+        dialog.querySelector('.micl-datepicker__calendars')?.animate([
             { transform: 'translateX(0)' },
             { transform: `translateX(${belowMin ? 8 : -8}px)` },
             { transform: 'translateX(0)' }
-        ], {
-            duration: 500,
-            easing: 'ease-in-out'
-        });
+        ], { duration: 500, easing: 'ease-in-out' });
         return;
     }
 
@@ -504,6 +500,7 @@ const selectDate = (dialog: HTMLDialogElement, dateStr: string, isLocaleFormatte
     }
     else {
         parts = dateStr.split('-').map(Number);
+        parts[1]--;
     }
 
     if (parts.length === 3) {
@@ -538,8 +535,10 @@ export default (() =>
                     }
                     break;
                 case 'M':
+                    toggleView(dialog, 'months');
+                    break;
                 case 'Y':
-                    toggleView(dialog, event.key === 'M' ? 'months' : 'years');
+                    toggleView(dialog, 'years');
                     break;
                 case 'PageUp':
                 case 'PageDown':
@@ -623,20 +622,21 @@ export default (() =>
                 if (event.newState !== 'open') {
                     return;
                 }
+                const isInvoker = (e: Element | null): e is ValueElement => e instanceof HTMLInputElement || e instanceof HTMLButtonElement;
 
                 let invoker = document.activeElement;
                 if (
-                    !isValueElement(invoker)
-                    || (!invoker.dataset.datepicker && !invoker.getAttribute('popovertarget'))
+                    !isInvoker(invoker)
+                    || (!invoker.dataset.datepicker && !invoker.popoverTargetElement && !(invoker as any).commandForElement)
                 ) {
                     invoker = document.querySelector(
-                        `[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`
+                        `[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
                     );
                 }
-                if (!isValueElement(invoker)) {
+                if (!isInvoker(invoker)) {
                     return;
                 }
-
+                
                 let initialDate = new Date();
                 let min = new Date(1900, 0, 1);
                 let max = new Date(2099, 11, 31);
@@ -660,30 +660,30 @@ export default (() =>
                 if (!isValidDate(initialDate)) initialDate = new Date();
                 initialDate = toLocalMidnight(initialDate);
 
-                stateMap.set(dialog, {
-                    invoker: invoker as ValueElement,
+                const state: DatePickerState = {
+                    invoker,
                     selected: initialDate,
                     viewDate: new Date(initialDate),
                     min,
                     max
-                });
+                };
+                stateMap.set(dialog, state);
 
                 initPeriodPickers(dialog, min, max);
                 toggleView(dialog, 'calendars');
-                renderCalendar(dialog, stateMap.get(dialog)!);
+                renderCalendar(dialog, state);
 
                 dialog.querySelector('.micl-datepicker__input input')?.addEventListener('blur', e =>
                 {
-                    if (e.target) {
-                        selectDate(dialog, (e.target as HTMLInputElement).value, true);
-                    }
-                });
+                    const element = e.target as HTMLInputElement;
+                    selectDate(dialog, element.value, true);
+                }, { once: true });
             });
 
             dialog.addEventListener('close', (): void =>
             {
                 const state = stateMap.get(dialog);
-                if (!state || !state.invoker || dialog.returnValue === '') {
+                if (!state?.invoker || dialog.returnValue === '') {
                     return;
                 }
                 state.invoker.value = formatToInputDateValue(state.selected);

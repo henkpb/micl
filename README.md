@@ -102,7 +102,7 @@ The library currently consists of the following components:
 - [x] [Button](components/button/README.md)
 - [x] [Card](components/card/README.md)
 - [x] [Checkbox](components/checkbox/README.md)
-- [ ] [Date picker]()
+- [x] [Date picker](components/datepicker/README.md)
 - [x] [Dialog](components/dialog/README.md)
 - [x] [Divider](components/divider/README.md)
 - [x] [Icon button](components/iconbutton/README.md)
@@ -120,11 +120,15 @@ The library currently consists of the following components:
 
 ## Change Log ↪️
 
+### 6.0.0 (23.12.2025)
+- **BREAKING**: Use command-attribute to control toggle buttons.
+- **Date picker**: New component.
+
 ### 5.0.0 (02.12.2025)
 - **Time picker**: New component.
 
 ### 4.0.0 (27.10.2025)
-- **BREAKING**: Moved layout.scss til sub-folder.
+- **BREAKING**: Moved layout.scss to sub-folder.
 - **Alert**: New component.
 - **Stepper**: New component.
 

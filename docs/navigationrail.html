@@ -23,7 +23,7 @@
     <dialog id="mynavigationrail1" class="micl-navigationrail" closedby="closerequest">
     <!-- <nav id="mynavigationrail1" class="micl-navigationrail" popover="manual"> -->
         <div class="micl-navigationrail__headline">
-            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" popovertarget="mynavigationrail1" data-miclalt="menu_open" aria-label="Toggle navigation rail">menu</button>
+            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" command="close" commandfor="mynavigationrail1" data-miclalt="menu_open" aria-label="Toggle navigation rail">menu</button>
         </div>
         <div class="micl-navigationrail__content">
             <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
@@ -54,7 +54,7 @@
     <main class="micl-body">
         <section class="micl-pane">
             <header class="micl-appbar micl-appbar--large">
-                <button type="button" class="micl-iconbutton-standard-m micl-button--toggle material-symbols-outlined" style="margin:8px 0 0 8px" popovertarget="mynavigationrail1" aria-label="Toggle navigation rail">menu</button>
+                <button type="button" class="micl-iconbutton-standard-m micl-button--toggle material-symbols-outlined" style="margin:8px 0 0 8px" command="show-modal" commandfor="mynavigationrail1" aria-label="Toggle navigation rail">menu</button>
                 <div class="micl-appbar__headline">
                     <h1>Navigation rails</h1>
                     <p class="micl-appbar__subtitle">Showcasing MICL navigation rails</p>

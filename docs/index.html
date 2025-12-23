@@ -24,7 +24,7 @@
 <body class="micl-window light">
     <dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest">
         <div class="micl-navigationrail__headline">
-            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
+            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
         </div>
         <div class="micl-navigationrail__content">
             <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
@@ -55,7 +55,7 @@
     <main class="micl-body">
         <section class="micl-pane">
             <header class="micl-appbar micl-appbar--large">
-                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mynavigationrail" aria-label="Open navigation rail">menu</button>
+                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" command="show-modal" commandfor="mynavigationrail" aria-label="Open navigation rail">menu</button>
                 <div class="micl-appbar__headline micl-appbar__headline--center">
                     <h1>MICL Showcase</h1>
                 </div>
@@ -374,6 +374,7 @@
                             <p><a href="button.html" class="md-sys-typescale-body-large">Buttons</a></p>
                             <p><a href="card.html" class="md-sys-typescale-body-large">Cards</a></p>
                             <p><a href="checkbox.html" class="md-sys-typescale-body-large">Checkboxes</a></p>
+                            <p><a href="datepicker.html" class="md-sys-typescale-body-large">Date pickers</a></p>
                             <p><a href="dialog.html" class="md-sys-typescale-body-large">Dialogs</a></p>
                             <p><a href="divider.html" class="md-sys-typescale-body-large">Dividers</a></p>
                             <p><a href="iconbutton.html" class="md-sys-typescale-body-large">Icon buttons</a></p>

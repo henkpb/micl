@@ -148,7 +148,7 @@
                             </dialog>
                             <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet3">Open Resizable Sheet</button>
 
-                            <dialog id="mybottomsheet4" class="micl-bottomsheet" closedby="any">
+                            <dialog id="mybottomsheet4" class="micl-bottomsheet" closedby="closerequest">
                                 <div class="micl-bottomsheet__headline">
                                     <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
                                 </div>
@@ -173,7 +173,7 @@
                                             </span>
                                         </li>
                                         <li class="micl-list-item-one" tabindex="0">
-                                            <button type="button" class="micl-iconbutton-standard-m material-symbols-outlined" popovertarget="mybottomsheet4">close</button>
+                                            <button type="button" class="micl-iconbutton-standard-m material-symbols-outlined" command="close" commandfor="mybottomsheet4">close</button>
                                         </li>
                                     </ul>
                                     <hr class="micl-divider">
@@ -198,7 +198,7 @@
                                     </div>
                                 </div>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet4">Open Modal Sheet</button>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mybottomsheet4">Open Modal Sheet</button>
                         </div>
                     </div>
                 </div>

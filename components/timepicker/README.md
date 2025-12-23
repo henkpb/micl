@@ -95,19 +95,18 @@ To replace the browser's native time picker, add the `data-timepicker` attribute
 <input type="time" data-timepicker="mytimepicker" value="09:41">
 ```
 
-- **Behavior**: When the input is clicked, the picker opens with the input's current value.
-- **Reusability**: Multiple input fields can target the same Time picker component ID.
-
-You may use the same time picker component for different time-input fields. When the user engages with the input field, the time picker is opened showing the time specified in the `value`-attribute.
+- **Behavior**: Clicking the input opens the picker initialized with the input's current value.
+- **Reusability**: Multiple input fields can target the same Time picker component ID. The picker will automatically update to reflect the time of the specific input field engaged by the user.
 
 #### Connecting to a Button
-You can use a button to trigger the picker using the standard `popovertarget` attribute.
+You can trigger the picker from a button using the standard `popovertarget` attribute.
 
 ```HTML
-<button type="button" class="micl-button-text-m" popovertarget="mytimepicker">09:41</button>
+<button type="button" class="micl-button-text-m" popovertarget="mytimepicker" value="09:41">09:41</button>
 ```
 
-- **Behavior**: The Time picker treats the button's text content as the time value to read from and write to.
+- **Behavior**: The Time picker reads from and writes to the button's value attribute.
+- **Formatting**: The component automatically updates the button's text content with the selected time, formatted according to the user's locale.
 
 ## Customizations
 You can customize the appearance of the Time picker component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child time pickers.

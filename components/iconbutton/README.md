@@ -67,8 +67,17 @@ A toggle button has two states: **on** (selected) and **off** (unselected). To c
 **Example: A selected toggle button**
 
 ```HTML
-<button type="button" class="micl-iconbutton-outlined-l micl-button--toggle micl-button--selected material-symbols-outlined" aria-label="Control Panel">settings</button>
+<button
+  type="button"
+  id="id0"
+  class="micl-iconbutton-outlined-l micl-button--toggle micl-button--selected material-symbols-outlined"
+  commandfor="id0"
+  command="--micl-toggle"
+  aria-label="Control Panel"
+>settings</button>
 ```
+
+The self-targeting `command` property (`--micl-toggle`) toggles the button state whenever the user interacts with the button.
 
 ## Icons
 The examples above use [Google Material Symbols](https://fonts.google.com/icons). For buttons using these icons, a fill-style of `1` is applied when the button is active or hovered over. To enable this effect, ensure your `link` tag includes `FILL@0..1`.

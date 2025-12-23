@@ -1,5 +1,6 @@
-export declare const buttonSelector = "button[popovertarget],button.micl-button--toggle";
+export declare const buttonSelector = "button.micl-button--toggle";
 declare const _default: {
+    command: (event: Event) => void;
     initialize: (element: HTMLButtonElement) => void;
     cleanup: (element: HTMLButtonElement) => void;
 };
