@@ -99,17 +99,17 @@
                                     <button class="micl-button-text-s" value="dodelete">Delete</button>
                                 </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog3">Open Modal Dialog</button>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" commandfor="mydialog3" command="show-modal">Open Modal Dialog</button>
 
-                            <dialog id="mydialog4" class="micl-dialog micl-dialog--docked" style="position-anchor: --myanchor;width:350px" role="alertdialog" closedby="closerequest" aria-labelledby="mytitle4">
+                            <dialog id="mydialog4" class="micl-dialog micl-dialog--docked" style="position-anchor: --myanchor;width:350px" popover role="alertdialog" closedby="closerequest" aria-labelledby="mytitle4">
                                 <div class="micl-dialog__headline">
                                     <h2 id="mytitle4">Delete selected images?</h2>
                                     <span class="micl-dialog__supporting-text">Images will be permanently removed from your account and all synchronized devices.</span>
                                 </div>
-                                <form method="dialog" class="micl-dialog__actions">
-                                    <button class="micl-button-text-s" value="donotdelete">Cancel</button>
+                                <div class="micl-dialog__actions">
+                                    <button class="micl-button-text-s" value="donotdelete" popovertarget="mydialog4">Cancel</button>
                                     <button class="micl-button-text-s" value="dodelete">Delete</button>
-                                </form>
+                                </div>
                             </dialog>
                             <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog4" style="anchor-name:--myanchor">Open Anchored Dialog</button>
 

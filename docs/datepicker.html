@@ -79,12 +79,12 @@
                                     </div>
                                     <div class="micl-dialog__content">
                                         <div class="micl-datepicker__calendars"></div>
-                                        <!-- <div class="micl-datepicker__years"></div> -->
-                                        <!-- <div class="micl-datepicker__months"></div> -->
-                                        <!-- <div class="micl-datepicker__input micl-textfield-outlined"> -->
-                                            <!-- <label for="mydate1">Date</label> -->
-                                            <!-- <input type="text" id="mydate1"> -->
-                                        <!-- </div> -->
+                                        <div class="micl-datepicker__years"></div>
+                                        <div class="micl-datepicker__months"></div>
+                                        <div class="micl-datepicker__input micl-textfield-outlined">
+                                            <label for="mydate1">Date</label>
+                                            <input type="text" id="mydate1">
+                                        </div>
                                     </div>
                                     <div class="micl-dialog__actions">
                                         <button class="micl-button-text-s" value="">Cancel</button>
@@ -132,7 +132,7 @@
                             <p class="md-sys-typescale-body-medium">MICL date textfield component with limited date range</p>
                             <div class="micl-textfield-outlined" style="width:fit-content">
                                 <label for="mytextfield1">Start date</label>
-                                <input type="date" id="mytextfield3" min="2025-10-01" max="2026-04-30" data-datepicker="mydatepicker1" value="2025-12-02">
+                                <input type="date" id="mytextfield3" min="2025-10-01" max="2026-04-30" data-datepicker="mydatepicker3" value="2025-12-02">
                             </div>
                             <dialog id="mydatepicker3" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="mytitle3">
                                 <form method="dialog">
@@ -175,7 +175,7 @@
                             <p class="md-sys-typescale-body-medium">Date input using a MICL button component that opens the MICL date picker</p>
                             <div class="micl-flex--vcenter" style="column-gap:8px">
                                 <label for="mydate" class="md-sys-typescale-body-large">Start date:</label>
-                                <button type="button" id="mydate" class="micl-button-text-m" popovertarget="mydatepicker4" value="2026-01-23">23.01.2026</button>
+                                <button type="button" id="mydate" class="micl-button-text-m" command="show-modal" commandfor="mydatepicker4" value="2026-01-23">23.01.2026</button>
                             </div>
                             <dialog id="mydatepicker4" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="mytitle4">
                                 <form method="dialog">
@@ -226,6 +226,43 @@
                 </div>
                 <div class="micl-card__content docs-code">
                     <pre tabindex="-1"><code>
+&lt;dialog id="id0" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="id1"&gt;
+  &lt;form method="dialog"&gt;
+    &lt;div class="micl-dialog__headline"&gt;
+      &lt;h2 id="id1"&gt;Enter dates&lt;/h2&gt;
+      &lt;span class="micl-dialog__supporting-text"&gt;Select date&lt;/span&gt;
+      &lt;button type="button" class="micl-datepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined" data-miclalt="calendar_today"&gt;edit&lt;/button&gt;
+      &lt;hr class="micl-divider"&gt;
+      &lt;div class="micl-datepicker__month-selector"&gt;
+        &lt;button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous month"&gt;chevron_left&lt;/button&gt;
+        &lt;button type="button" class="micl-datepicker__month micl-button-text-xs"&gt;
+          &lt;span class="micl-button__icon material-symbols-outlined" aria-hidden="true"&gt;arrow_drop_down&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next month"&gt;chevron_right&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="micl-datepicker__year-selector"&gt;
+        &lt;button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous year"&gt;chevron_left&lt;/button&gt;
+        &lt;button type="button" class="micl-datepicker__year micl-button-text-xs"&gt;
+          &lt;span class="micl-button__icon material-symbols-outlined" aria-hidden="true"&gt;arrow_drop_down&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next year"&gt;chevron_right&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="micl-dialog__content"&gt;
+      &lt;div class="micl-datepicker__calendars"&gt;&lt;/div&gt;
+      &lt;div class="micl-datepicker__years"&gt;&lt;/div&gt;
+      &lt;div class="micl-datepicker__months"&gt;&lt;/div&gt;
+      &lt;div class="micl-datepicker__input micl-textfield-outlined"&gt;
+        &lt;label for="mydate1"&gt;Date&lt;/label&gt;
+        &lt;input type="text" id="mydate1"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="micl-dialog__actions"&gt;
+      &lt;button class="micl-button-text-s" value=""&gt;Cancel&lt;/button&gt;
+      &lt;button class="micl-button-text-s" value="OK"&gt;OK&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
                     </code></pre>
                 </div>
             </div>
