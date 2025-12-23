@@ -19,58 +19,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const buttonSelector = 'button[popovertarget],button.micl-button--toggle';
+export const buttonSelector = 'button.micl-button--toggle';
 
 export default (() =>
 {
-    const onClick = (event: Event) =>
-    {
-        if (!event.target || !(event.target instanceof HTMLButtonElement)) {
-            return;
-        }
-        if (event.target.popoverTargetElement instanceof HTMLDialogElement) {
-            if (event.target.popoverTargetElement.open) {
-                event.target.popoverTargetElement.close();
-            }
-            else {
-                event.target.popoverTargetElement.showModal();
-            }
-        }
-        if (event.target.classList.contains('micl-button--toggle')) {
-            event.target.classList.add('micl-button--toggled');
-            event.target.classList.toggle('micl-button--selected');
-            if (!!event.target.dataset.miclalt) {
-                [event.target.textContent, event.target.dataset.miclalt] =
-                [event.target.dataset.miclalt, event.target.textContent];
-            }
-        }
-    };
-
     return {
-        initialize: (element: HTMLButtonElement) =>
+        command: (event: Event): void =>
+        {
+            const target = event.target as HTMLButtonElement;
+
+            if (
+                target.matches(buttonSelector)
+                && !target.disabled
+                && (event as any).command === '--micl-toggle'
+            ) {
+                target.classList.add('micl-button--toggled');
+                target.classList.toggle('micl-button--selected');
+            }
+        },
+
+        initialize: function(element: HTMLButtonElement): void
         {
             if (
-                !element.matches('button[popovertarget],button.micl-button--toggle')
+                !element.matches(buttonSelector)
                 || element.dataset.miclinitialized
             ) {
                 return;
             }
             element.dataset.miclinitialized = '1';
 
-            if (
-                (element.popoverTargetElement instanceof HTMLDialogElement)
-                && !element.popoverTargetElement.hasAttribute('popover')
-            ) {
-                element.addEventListener('click', onClick);
-            }
-            else if (element.classList.contains('micl-button--toggle')) {
-                element.addEventListener('click', onClick);
-            }
+            element.addEventListener('command', this.command);
         },
-        cleanup: (element: HTMLButtonElement) =>
+
+        cleanup: function(element: HTMLButtonElement): void
         {
-            if (element.matches('button[popovertarget],button.micl-button--toggle')) {
-                document.removeEventListener('click', onClick);
+            if (element.matches(buttonSelector)) {
+                document.removeEventListener('command', this.command);
                 delete element.dataset.miclinitialized;
             }
         }
