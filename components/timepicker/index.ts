@@ -354,10 +354,10 @@ export default (() =>
                 let invoker = document.activeElement;
                 if (
                     !isValueElement(invoker)
-                    || (!invoker.dataset.timepicker && !invoker.popoverTargetElement)
+                    || (!invoker.dataset.timepicker && !invoker.popoverTargetElement && !(invoker as any).commandForElement)
                 ) {
                     invoker = document.querySelector(
-                        `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`
+                        `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
                     );
                 }
                 if (!isValueElement(invoker)) {
@@ -381,7 +381,7 @@ export default (() =>
                 let invoker = (dialog as any)._miclInvoker;
                 if (!invoker) {
                     invoker = document.querySelector(
-                        `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`
+                        `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
                     );
                 }
                 if (!isValueElement(invoker)) {

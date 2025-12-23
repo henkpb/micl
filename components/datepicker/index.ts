@@ -627,9 +627,11 @@ export default (() =>
                 let invoker = document.activeElement;
                 if (
                     !isInvoker(invoker)
-                    || (!invoker.dataset.datepicker && !invoker.getAttribute('popovertarget'))
+                    || (!invoker.dataset.datepicker && !invoker.popoverTargetElement && !(invoker as any).commandForElement)
                 ) {
-                    invoker = document.querySelector(`[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"]`);
+                    invoker = document.querySelector(
+                        `[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
+                    );
                 }
                 if (!isInvoker(invoker)) {
                     return;
