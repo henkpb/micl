@@ -42,12 +42,12 @@ The following example shows a text field with every available feature. You can i
 
 ```HTML
 <div class="micl-textfield-filled">
-  <span class="micl-textfield__icon-leading material-symbols-outlined">search</span>
+  <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
   <label for="mytextfield">Label text</label>
   <span class="micl-textfield__prefix" aria-label="US dollars">$</span>
   <input type="text" id="mytextfield" maxlength="20" aria-describedby="mysupport">
   <span class="micl-textfield__suffix" aria-label="kilograms">kg</span>
-  <span class="micl-textfield__icon-trailing material-symbols-outlined">cancel</span>
+  <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
   <span id="mysupport" class="micl-textfield__supporting-text">Supporting text</span>
   <span class="micl-textfield__character-counter"></span>
 </div>

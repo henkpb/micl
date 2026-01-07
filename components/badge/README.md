@@ -37,7 +37,7 @@ Badges are typically placed on top of other elements, like icons. To anchor a ba
 2. Use the `position-anchor` CSS property on the badge and set its value to the `anchor-name` of the target element.
 
 ```HTML
-<span class="material-symbols-outlined" style="anchor-name:--inbox">inbox</span>
+<span class="material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
 <span class="micl-badge" style="position-anchor:--inbox">57</span>
 ```
 
