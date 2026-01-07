@@ -12,7 +12,7 @@ To create a standard side sheet, use the `<dialog>` element with the `popover` a
     <h2 id="mytitle">Title</h2>
     <button
       type="button"
-      class="micl-iconbutton-s material-symbols-outlined"
+      class="micl-iconbutton-standard-s material-symbols-outlined"
       popovertarget="mysidesheet"
     >close</button>
   </div>
@@ -50,12 +50,12 @@ To create a modal side sheet, use the `<dialog>` element without the `popover` a
   <div class="micl-sidesheet__headline">
     <button
       type="button"
-      class="micl-iconbutton-s material-symbols-outlined"
+      class="micl-iconbutton-standard-s material-symbols-outlined"
     >arrow_back</button>
     <h2 id="mytitle">Title</h2>
     <button
       type="button"
-      class="micl-iconbutton-s material-symbols-outlined"
+      class="micl-iconbutton-standard-s material-symbols-outlined"
       popovertarget="mysidesheet"
     >close</button>
   </div>
