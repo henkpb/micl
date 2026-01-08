@@ -8,7 +8,7 @@ To add a basic alert, use a `<div>` element with one of the primary alert style 
 
 ```HTML
 <div class="micl-alert-tonal" role="alert">
-  <span class="micl-alert__icon material-symbols-outlined">error</span>
+  <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
   <div class="micl-alert__text">
     <h4>An error has occurred</h4>
     <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>

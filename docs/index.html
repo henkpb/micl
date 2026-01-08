@@ -29,24 +29,24 @@
         <div class="micl-navigationrail__content">
             <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
             <label for="item1" class="micl-navigationrail__item" tabindex="0">
-                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox">inbox</span>
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
                 <span class="micl-badge" style="position-anchor:--inbox">97</span>
             </label>
             <input type="radio" id="item2" name="navitem" value="email_outbox">
             <label for="item2" class="micl-navigationrail__item" tabindex="0">
-                <span class="micl-navigationrail__icon material-symbols-outlined">outbox</span>
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
             </label>
             <input type="radio" id="item3" name="navitem" value="email_favorites">
             <label for="item3" class="micl-navigationrail__item" tabindex="0">
-                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites">favorite</span>
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
                 <span class="micl-badge micl-badge--small" style="position-anchor:--favorites"></span>
             </label>
             <input type="radio" id="item4" name="navitem" value="email_trash">
             <label for="item4" class="micl-navigationrail__item" tabindex="0">
-                <span class="micl-navigationrail__icon material-symbols-outlined">delete</span>
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
                 <span class="micl-navigationrail__text">Trash</span>
             </label>
         </div>
@@ -132,7 +132,7 @@
                         <span class="micl-card__supporting-text">A card is a versatile component that groups related elements. It can hold a wide range of content, including images, headlines, supporting text, and buttons. Cards are designed with flexible layouts and dimensions that adapt to their contents.</span>
                         <div class="micl-card__content">
                             <div class="micl-alert-outlined" role="alert">
-                                <span class="micl-alert__icon material-symbols-outlined">error</span>
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
                                 <div class="micl-alert__text">
                                     <h4>This is an alert</h4>
                                     <span class="micl-alert__supporting-text">An error has occurred</span>
@@ -149,14 +149,14 @@
                                             </span>
                                         </li>
                                         <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined">globe</span>
+                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">globe</span>
                                             <span class="micl-list-item__text">
                                                 <span class="micl-list-item__headline">Menu item with an icon</span>
                                             </span>
                                         </li>
                                         <li class="micl-list-item-three">
                                             <a href="https://www.nytimes.com" tabindex="-1">
-                                                <span class="micl-list-item__icon material-symbols-outlined">newspaper</span>
+                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
                                                 <span class="micl-list-item__text">
                                                     <span class="micl-list-item__headline">The New York Times</span>
                                                     <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
@@ -183,13 +183,13 @@
                         <div class="micl-card__content">
                             <ul class="micl-list" role="listbox">
                                 <li class="micl-list-item-one">
-                                    <span class="material-symbols-outlined micl-list-item__icon">person</span>
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">One-line list item</span>
                                     </span>
                                 </li>
                                 <li class="micl-list-item-two">
-                                    <span class="material-symbols-outlined micl-list-item__icon">globe</span>
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">globe</span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Two-line list item</span>
                                         <span class="micl-list-item__supporting-text">Supporting text</span>
@@ -211,7 +211,7 @@
                                             <span class="micl-list-item__headline">Accordion item 1</span>
                                             <span class="micl-list-item__supporting-text">Click to open</span>
                                         </span>
-                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-hidden="true">keyboard_arrow_down</span>
+                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-label="Open or close accordion panel">keyboard_arrow_down</span>
                                     </summary>
                                     <div class="micl-list-item__content" style="padding-block:16px">
                                         <div class="micl-textfield-filled">
@@ -227,7 +227,7 @@
                                             <span class="micl-list-item__headline">Accordion item 2</span>
                                             <span class="micl-list-item__supporting-text">Click to open</span>
                                         </span>
-                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-hidden="true">keyboard_arrow_down</span>
+                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-label="Open or close accordion panel">keyboard_arrow_down</span>
                                     </summary>
                                     <div class="micl-list-item__content" style="padding-block:16px">
                                         <div class="micl-textfield-filled">
@@ -270,7 +270,7 @@
                         <div class="micl-card__content" style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px;padding-block-start:16px">
                             <dialog id="mydialog" class="micl-dialog" popover closedby="none" aria-labelledby="mytitle">
                                 <form method="dialog" class="micl-dialog__headline">
-                                    <span class="micl-dialog__icon material-symbols-outlined">person</span>
+                                    <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
                                     <h2 id="mytitle">Personal info</h2>
                                 </form>
                                 <div class="micl-dialog__content">
@@ -339,19 +339,19 @@
                                 <div class="micl-bottomsheet__content">
                                     <ul class="micl-list" style="--md-sys-list-item-container-color:transparent" role="listbox">
                                         <li class="micl-list-item-one" tabindex="0">
-                                            <span class="material-symbols-outlined micl-list-item__icon">share</span>
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
                                             <span class="micl-list-item__text">
                                                 <span class="micl-list-item__headline">Share</span>
                                             </span>
                                         </li>
                                         <li class="micl-list-item-one" tabindex="0">
-                                            <span class="material-symbols-outlined micl-list-item__icon">link</span>
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
                                             <span class="micl-list-item__text">
                                                 <span class="micl-list-item__headline">Get link</span>
                                             </span>
                                         </li>
                                         <li class="micl-list-item-one" tabindex="0">
-                                            <span class="material-symbols-outlined micl-list-item__icon">edit</span>
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
                                             <span class="micl-list-item__text">
                                                 <span class="micl-list-item__headline">Edit name</span>
                                             </span>

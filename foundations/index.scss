@@ -53,12 +53,15 @@ $md-sys-padding-xxl: 28px;
     align-items: center;
 }
 
+.micl-grid-field,
 .micl-grid-iconfield {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 48px 1fr;
     row-gap: var(--md-sys-padding-xl, 24px);
     background-color: inherit;
+-}
+.micl-grid-iconfield {
+    grid-template-columns: 48px 1fr;
 }
 .micl-grid-iconfield__icon {
     grid-column: 1;

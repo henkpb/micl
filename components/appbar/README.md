@@ -79,7 +79,7 @@ Use the `micl-appbar__trailing` (or: `micl-appbar__trailing-icon`) class for ele
   <div class="micl-appbar__headline">
     <h1>Headline</h1>
   </div>
-  <button type="button" class="micl-appbar__trailing micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined">settings</button>
+  <button type="button" class="micl-appbar__trailing micl-iconbutton-tonal-s micl-iconbutton--wide material-symbols-outlined" aria-hidden="true">settings</button>
 </header>
 ```
 
