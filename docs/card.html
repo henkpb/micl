@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -118,13 +118,13 @@
             </div>
         </section>
         <section class="micl-pane micl-pane--fixed" style="width:680px">
-            <div class="micl-card-filled">
+            <div class="micl-card-filled" style="margin-top:8px">
                 <div class="micl-card__headline-s">
                     <h2>Code example</h2>
+                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
                 </div>
                 <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>
-&lt;div class="micl-card-elevated" tabindex="0"&gt;
+                    <pre tabindex="-1"><code>&lt;div class="micl-card-elevated" tabindex="0"&gt;
   &lt;div class="micl-card__headline-s"&gt;
     &lt;h2&gt;Lorem ipsum dolor sit amet consectetur adipiscing elit&lt;/h2&gt;
   &lt;/div&gt;
@@ -133,8 +133,7 @@
   &lt;div class="micl-card__content"&gt;
     &lt;p class="md-sys-typescale-body-small"&gt;Lorem ipsum dolor sit amet consectetur adipiscing elit&lt;/p&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-                    </code></pre>
+&lt;/div&gt;</code></pre>
                 </div>
             </div>
         </section>
