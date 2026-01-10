@@ -49,6 +49,9 @@
       transition: motion.$md-sys-motion-duration-medium4 rotate;
       transform-origin: 50% calc((var(--md-sys-select-line-height) / 2) - 1px);
     }
+    &:disabled::picker-icon {
+        color: rgb(from var(--md-sys-color-on-surface-variant) r g b/var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    }
     &:open::picker-icon {
       rotate: 180deg;
     }
