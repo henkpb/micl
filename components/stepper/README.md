@@ -157,7 +157,7 @@ To enable built-in **form validation** for each step, use a `<form>` element as 
 ```
 
 #### Step-Specific Action Buttons
-Action buttons can be made visible only on a specific step by using the `data-step` attribute, which specifies the step number (starting from 1). This is useful for replacing the default **Next** button with a content-specific action, like a **Submit** button on the final step.
+Action buttons can be made visible only on a specific step by using the `data-step` attribute, which specifies the step number starting from the first step (step 1) or starting from the last step (step -1). This is useful for replacing the default **Next** button with a content-specific action, like a **Submit** button on the final step.
 
 In this example for a three-step stepper, the **Next** button is hidden on step 3, and the **Submit** button is shown instead:
 
