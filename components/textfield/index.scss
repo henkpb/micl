@@ -51,7 +51,7 @@
         width: fit-content;
         padding-inline: 4px;
         margin-block-start: calc((var(--md-sys-textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
-        margin-inline-start: 12px;
+        margin-inline: 12px 4px;
         border-radius: 4px;
         background-color: inherit;
         color: var(--md-sys-color-on-surface-variant);

@@ -133,3 +133,7 @@ document.getElementById('directionality').addEventListener('change', event => {
     }
     catch (e) {}
 });
+document.getElementById('copycode')?.addEventListener('click', event => {
+    const code = document.querySelector('code');
+    !!code && navigator.clipboard.writeText(code.textContent).then(() => {}).catch(e => {});
+});

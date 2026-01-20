@@ -112,12 +112,16 @@ export default (() =>
 
     const showHideElements = (stepper: HTMLElement, step: HTMLElement): void =>
     {
+        const nrsteps      = stepper.querySelectorAll(STEP_SELECTOR).length;
         const selectedStep = getStepNumber(stepper, step);
 
         stepper.querySelectorAll<HTMLElement>('[data-step]').forEach(element =>
         {
-            const shouldHide = element.dataset.step != `${selectedStep}`;
-            element.classList.toggle('micl-hidden', shouldHide);
+            const stepnr = parseInt(element.dataset.step || '0', 10);
+            element.classList.toggle(
+                'micl-hidden',
+                stepnr > 0 ? stepnr != selectedStep : nrsteps + stepnr + 1 != selectedStep
+            );
         });
     };
 

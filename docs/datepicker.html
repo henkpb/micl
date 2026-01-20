@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_drop_down,calendar_today,check,chevron_left,chevron_right,dark_mode,edit,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_drop_down,calendar_today,check,chevron_left,chevron_right,content_copy,dark_mode,edit,home&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -220,13 +220,13 @@
             </div>
         </section>
         <section class="micl-pane">
-            <div class="micl-card-filled">
+            <div class="micl-card-filled" style="margin-top:8px">
                 <div class="micl-card__headline-s">
                     <h2>Code example</h2>
+                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
                 </div>
                 <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>
-&lt;dialog id="id0" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="id1"&gt;
+                    <pre tabindex="-1"><code>&lt;dialog id="id0" class="micl-dialog micl-datepicker" closedby="closerequest" aria-labelledby="id1"&gt;
   &lt;form method="dialog"&gt;
     &lt;div class="micl-dialog__headline"&gt;
       &lt;h2 id="id1"&gt;Enter dates&lt;/h2&gt;
@@ -262,8 +262,7 @@
       &lt;button class="micl-button-text-s" value="OK"&gt;OK&lt;/button&gt;
     &lt;/div&gt;
   &lt;/form&gt;
-&lt;/dialog&gt;
-                    </code></pre>
+&lt;/dialog&gt;</code></pre>
                 </div>
             </div>
         </section>

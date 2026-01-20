@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,edit,home,link,pause,share,skip_next&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,content_copy,dark_mode,edit,home,link,pause,share,skip_next&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -206,31 +206,30 @@
                     <div class="micl-card-filled">
                         <div class="micl-card__headline-s">
                             <h2>Code example</h2>
+                            <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
                         </div>
                         <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code>
-&lt;dialog id="id0" class="micl-bottomsheet" popover data-miclsnapheights="0,400"&gt;
-    &lt;div class="micl-bottomsheet__headline"&gt;
-        &lt;button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"&gt;&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class="micl-bottomsheet__content"&gt;
-        &lt;ul class="micl-list" role="listbox"&gt;
-            &lt;li class="micl-list-item-one" tabindex="0"&gt;
-                &lt;span class="material-symbols-outlined micl-list-item__icon"&gt;share&lt;/span&gt;
-                &lt;span class="micl-list-item__text"&gt;
-                    &lt;span class="micl-list-item__headline"&gt;Share&lt;/span&gt;
-                &lt;/span&gt;
-            &lt;/li&gt;
-            &lt;li class="micl-list-item-one" tabindex="0"&gt;
-                &lt;span class="material-symbols-outlined micl-list-item__icon"&gt;edit&lt;/span&gt;
-                &lt;span class="micl-list-item__text"&gt;
-                    &lt;span class="micl-list-item__headline"&gt;Edit name&lt;/span&gt;
-                &lt;/span&gt;
-            &lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/dialog&gt;
-                            </code></pre>
+                            <pre tabindex="-1"><code>&lt;dialog id="id0" class="micl-bottomsheet" popover data-miclsnapheights="0,400"&gt;
+  &lt;div class="micl-bottomsheet__headline"&gt;
+    &lt;button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="micl-bottomsheet__content"&gt;
+    &lt;ul class="micl-list" role="listbox"&gt;
+      &lt;li class="micl-list-item-one" tabindex="0"&gt;
+        &lt;span class="material-symbols-outlined micl-list-item__icon"&gt;share&lt;/span&gt;
+        &lt;span class="micl-list-item__text"&gt;
+          &lt;span class="micl-list-item__headline"&gt;Share&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/li&gt;
+      &lt;li class="micl-list-item-one" tabindex="0"&gt;
+        &lt;span class="material-symbols-outlined micl-list-item__icon"&gt;edit&lt;/span&gt;
+        &lt;span class="micl-list-item__text"&gt;
+          &lt;span class="micl-list-item__headline"&gt;Edit name&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
                         </div>
                     </div>
                 </div>
