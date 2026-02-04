@@ -1,0 +1,142 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../foundations';
+@use '../../styles/elevation';
+@use '../../styles/motion';
+@use '../../styles/shapes';
+@use '../../styles/typography';
+
+:root {
+    --md-comp-snackbar-with-single-line-container-height: 48px;
+    --md-comp-snackbar-with-two-lines-container-height: 68px;
+    --md-comp-snackbar-margin: 24px;
+}
+
+.micl-snackbar {
+    box-sizing: border-box;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    block-size: 0;
+    inset: auto;
+    inset-block-end: calc(var(--md-comp-snackbar-margin) + env(safe-area-inset-bottom));
+    inset-inline-start: 50%;
+    margin: 0;
+    padding-block: 0;
+    padding-inline: 16px 4px;
+    border: none;
+    border-radius: var(--md-sys-shape-corner-extra-small);
+    background-color: var(--md-sys-color-inverse-surface);
+    box-shadow: var(--md-sys-elevation-level3);
+    opacity: 0;
+    overflow-y: hidden;
+    translate: -50% 0;
+    transition:
+        opacity 500ms linear,
+        block-size 500ms linear,
+        display 300ms allow-discrete,
+        overlay 300ms allow-discrete;
+    
+    &:popover-open {
+        block-size: var(--md-comp-snackbar-with-single-line-container-height);
+        opacity: 1;
+        transition:
+            opacity 500ms linear,
+            block-size 500ms linear;
+
+        @starting-style {
+            block-size: 0;
+            opacity: 0;
+        }
+    }
+
+    .micl-snackbar__supporting-text {
+        @include typography.body-medium;
+
+        color: var(--md-sys-color-inverse-on-surface);
+
+        &+ * {
+            margin-inline-start: 16px;
+        }
+    }
+    button {
+        --statelayer-color: var(--md-sys-color-inverse-primary);
+        color: var(--md-sys-color-inverse-primary);
+    }
+    button[class*='micl-iconbutton'] {
+        --statelayer-color: var(--md-sys-color-inverse-on-surface);
+        color: var(--md-sys-color-inverse-on-surface);
+    }
+}
+
+.micl-snackbarZ {
+    position: fixed;
+    display: grid;
+    grid-template-rows: 0fr;
+    align-content: flex-end;
+    inset: auto;
+    inset-block-end: 24px;
+    inset-block-end: calc(var(--md-comp-snackbar-margin) + env(safe-area-inset-bottom));
+    inset-inline-start: 50%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    opacity: 0;
+    overflow: visible;
+    translate: -50% 0;
+    transition:
+        opacity 300ms ease-out,
+        grid-template-rows 0s linear 300ms,
+        display 300ms allow-discrete,
+        overlay 300ms allow-discrete;
+
+    &:popover-open {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        transition:
+            grid-template-rows 300ms cubic-bezier(0.2, 0, 0, 1),
+            opacity 300ms ease-out;
+
+        @starting-style {
+            grid-template-rows: 0fr;
+            opacity: 0;
+        }
+    }
+
+    .micl-snackbar__inner {
+        min-block-size: 0;
+        min-inline-size: 300px;
+        border-radius: 8px;
+        background: darkgray;
+        color: white;
+        overflow: hidden;
+
+        .micl-snackbar__content {
+            display: flex;
+            padding: 16px;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
