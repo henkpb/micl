@@ -159,7 +159,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
   <li role="option" class="micl-list-item-two" tabindex="0" aria-selected="true">
     <label>
       <span class="micl-list-item__text">
-        <span id="hd1" class="micl-list-item__headline">Blue car</span>
+        <span class="micl-list-item__headline">Blue car</span>
         <span class="micl-list-item__supporting-text">A blue car with four wheels.</span>
       </span>
       <input
@@ -169,7 +169,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
         value="cb1"
         checked
         tabindex="-1"
-        aria-labelledby="hd1"
+        aria-label="Blue car"
       >
     </label>
   </li>
@@ -182,10 +182,10 @@ To enable selection of list items, integrate a Checkbox or Switch component with
         class="micl-switch"
         value="cb2"
         tabindex="-1"
-        aria-labelledby="hd2"
+        aria-label="Red car"
       >
       <span class="micl-list-item__text">
-        <span id="hd2" class="micl-list-item__headline">Red car</span>
+        <span class="micl-list-item__headline">Red car</span>
         <span class="micl-list-item__supporting-text">A red car with tinted windows.</span>
       </span>
     </label>
