@@ -313,6 +313,8 @@ button.micl-iconbutton-standard-l,
 button.micl-iconbutton-standard-xl {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
 
+    text-decoration: none;
+
     &:disabled {
         background-color: transparent;
     }
