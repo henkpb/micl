@@ -176,6 +176,7 @@ export default (() =>
         initializeComponents(document);
 
         // Delegated Event Handlers
+        document.addEventListener('change', handleEvent);
         document.addEventListener('input', handleEvent);
         document.addEventListener('keydown', handleEvent);
     };
