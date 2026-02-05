@@ -67,7 +67,7 @@ Use the anchor element to convert a list item into a hyperlink:
 ```HTML
 <ul class="micl-list">
   <li class="micl-list-item-one" tabindex="0">
-    <a href="https://www.thetimes.com" tabindex="-1">
+    <a href="https://www.thetimes.com">
       <span class="micl-list-item__text">
         <span class="micl-list-item__headline">The Times</span>
       </span>
@@ -159,7 +159,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
   <li role="option" class="micl-list-item-two" tabindex="0" aria-selected="true">
     <label>
       <span class="micl-list-item__text">
-        <span id="hd1" class="micl-list-item__headline">Blue car</span>
+        <span class="micl-list-item__headline">Blue car</span>
         <span class="micl-list-item__supporting-text">A blue car with four wheels.</span>
       </span>
       <input
@@ -168,8 +168,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
         class="micl-checkbox"
         value="cb1"
         checked
-        tabindex="-1"
-        aria-labelledby="hd1"
+        aria-label="Blue car"
       >
     </label>
   </li>
@@ -181,19 +180,16 @@ To enable selection of list items, integrate a Checkbox or Switch component with
         id="checkbox2"
         class="micl-switch"
         value="cb2"
-        tabindex="-1"
-        aria-labelledby="hd2"
+        aria-label="Red car"
       >
       <span class="micl-list-item__text">
-        <span id="hd2" class="micl-list-item__headline">Red car</span>
+        <span class="micl-list-item__headline">Red car</span>
         <span class="micl-list-item__supporting-text">A red car with tinted windows.</span>
       </span>
     </label>
   </li>
 </ul>
 ```
-
-- `tabindex="-1"` on the `input` is important here, as the `<li>` should handle the focus for accessibility.
 
 - The `role="listbox"` is used for accessibility, indicating a selectable list.
 

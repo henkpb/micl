@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const listSelector = '.micl-list-item-one,.micl-list-item-two,.micl-list-item-three';
+export const listSelector = '.micl-list';
 
 export default (() =>
 {
@@ -27,7 +27,7 @@ export default (() =>
     const isSelected = (item: HTMLElement | null): boolean => !!item && item.matches(':has(input[type=checkbox]:checked)');
 
     return {
-        keydown: (event: Event) =>
+        keydown: (event: Event): void =>
         {
             if (
                 !(event instanceof KeyboardEvent)
@@ -37,72 +37,102 @@ export default (() =>
                 return;
             }
             const parent = (event.target as Element).parentElement;
-            if (!parent) {
-                return;
-            }
+            if (!parent) return;
 
             let items: HTMLElement[] = [];
+
             if (parent instanceof HTMLDetailsElement) {
                 items = Array.from(parent.parentElement?.children || []).map(details => {
                     let summary = details.querySelector(':scope > summary') as HTMLElement;
                     return isDisabled(summary) ? null : summary;
                 }).filter(item => !!item);
             }
-            else if (parent instanceof HTMLUListElement) {
-                items = Array.from(parent.children).map(li => {
-                    return ((li instanceof HTMLLIElement) && !isDisabled(li)) ? li : null;
+            else if (parent instanceof HTMLUListElement || parent instanceof HTMLOListElement) {
+                items = Array.from(parent.children).map(child => {
+                    return (
+                        (child instanceof HTMLLIElement)
+                        && !isDisabled(child)
+                        && (child.role !== 'separator')
+                    ) ? child : null;
                 }).filter(item => !!item);
             }
             if (items.length === 0) {
                 return;
             }
 
-            let selectedIndex = items.findIndex(item => isSelected(item)),
-                currentIndex  = items.findIndex(item => item.tabIndex === 0),
-                nextIndex     = currentIndex;
+            const selectedIndex = items.findIndex(item => isSelected(item));
+            const currentItem   = document.activeElement as HTMLElement;
+            const currentIndex  = items.indexOf(currentItem);
+
+            if (currentIndex === -1) return;
+
+            let nextIndex = currentIndex;
 
             switch (event.key) {
                 case 'ArrowDown':
-                    nextIndex = (currentIndex + 1) % items.length;
                     event.preventDefault(); // prevent page scrolling
+                    nextIndex = (currentIndex + 1) % items.length;
                     break;
                 case 'ArrowUp':
-                    nextIndex = (currentIndex - 1 + items.length) % items.length;
                     event.preventDefault();
+                    nextIndex = (currentIndex - 1 + items.length) % items.length;
                     break;
                 case 'Tab':
-                    if (selectedIndex === -1) {
-                        if (currentIndex !== 0) {
-                            items[currentIndex].tabIndex = -1;
-                            items[0].tabIndex = 0;
-                        }
-                    }
-                    else if (selectedIndex !== currentIndex) {
-                        items[currentIndex].tabIndex = -1;
-                        items[selectedIndex].tabIndex = 0;
-                    }
+                    nextIndex = (selectedIndex === -1) ? 0 : selectedIndex;
                     break;
-                case 'Enter':
                 case ' ':
-                    const cb = (event.target as Element).querySelector('input[type=checkbox]');
-                    if (cb instanceof HTMLInputElement) {
-                        cb.checked = !cb.checked;
+                    event.preventDefault();
+                case 'Enter':
+                    const el = (event.target as Element).querySelector(
+                        'input[type=checkbox], a[href], button'
+                    );
+                    if (el instanceof HTMLInputElement) {
+                        el.checked = !el.checked;
+                    }
+                    else if (el instanceof HTMLAnchorElement) {
+                        el.click();
+                    }
+                    else if (el instanceof HTMLButtonElement) {
+                        el.dispatchEvent(new MouseEvent('mouseenter', {
+                            bubbles   : true,
+                            cancelable: true,
+                            view      : window
+                        }));
                     }
                     break;
                 default:
             }
-            if (nextIndex !== currentIndex) {
-                items[currentIndex].tabIndex = -1;
-                items[nextIndex].tabIndex = 0;
-                items[nextIndex].focus();
 
-                const btn = items[nextIndex].querySelector(':scope > button');
-                btn?.dispatchEvent(new MouseEvent('mouseenter', {
-                    bubbles   : true,
-                    cancelable: true,
-                    view      : window
-                }));
+            if (nextIndex !== currentIndex) {
+                currentItem?.setAttribute('tabindex', '-1');
+                items[nextIndex].setAttribute('tabindex', '0');
+                items[nextIndex].focus();
             }
+        },
+
+        initialize: (element: HTMLElement): void =>
+        {
+            if (element.dataset.miclinitialized) return;
+
+            element.dataset.miclinitialized = '1';
+
+            if (element.querySelectorAll<HTMLLIElement>('li[tabindex="0"]').length === 0) {
+                return;
+            }
+
+            const items: HTMLLIElement[] = Array.from(element.querySelectorAll(
+                'li:not([role="separator"])'
+            ));
+
+            items.forEach(item =>
+            {
+                if (item.getAttribute('tabindex') !== '0') {
+                    item.setAttribute('tabindex', '-1');
+                }
+
+                const links = item.querySelectorAll('a, button, input');
+                links.forEach(link => link.setAttribute('tabindex', '-1'));
+            });
         }
     };
 })();

@@ -59,7 +59,7 @@ Removing the `popover` attribute creates a more intrusive **modal** dialog. This
   </div>
 </dialog>
 
-<button type="button" popovertarget="mydialog">Open Modal Dialog</button>
+<button type="button" command="show-modal" commandfor="mydialog">Open Modal Dialog</button>
 ```
 
 - The `closedby="closerequest"` attribute restricts closing methods, typically requiring an explicit action within the dialog.

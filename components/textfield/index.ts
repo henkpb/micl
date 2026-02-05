@@ -97,6 +97,29 @@ export default (() =>
         }
     };
 
+    const refreshTextField = (event: Event): void =>
+    {
+        if (
+            !isTextFieldElement(event.target)
+            || !event.target.dataset.miclinitialized
+            || event.target.disabled
+        ) {
+            return;
+        }
+
+        if (event.target instanceof HTMLInputElement && event.target.dataset.micldateformat) {
+            formatAsDate(event.target, (event as InputEvent).inputType);
+        }
+        if (event.target.value) {
+            event.target.dataset.miclvalue = '1';
+        }
+        else {
+            delete event.target.dataset.miclvalue;
+        }
+
+        setCounter(event.target);
+    };
+
     return {
         initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
         {
@@ -153,27 +176,13 @@ export default (() =>
             setCounter(input);
         },
 
+        change: (event: Event): void =>
+        {
+            refreshTextField(event);
+        },
         input: (event: Event): void =>
         {
-            if (
-                !isTextFieldElement(event.target)
-                || !event.target.dataset.miclinitialized
-                || event.target.disabled
-            ) {
-                return;
-            }
-
-            if (event.target instanceof HTMLInputElement && event.target.dataset.micldateformat) {
-                formatAsDate(event.target, (event as InputEvent).inputType);
-            }
-            if (event.target.value) {
-                event.target.dataset.miclvalue = '1';
-            }
-            else {
-                delete event.target.dataset.miclvalue;
-            }
-
-            setCounter(event.target);
+            refreshTextField(event);
         }
     };
 })();

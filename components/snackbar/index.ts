@@ -19,52 +19,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const navigationrailSelector = '.micl-navigationrail';
+export const snackbarSelector = '.micl-snackbar';
 
 export default (() =>
 {
     return {
-        keydown: (event: Event): void =>
+        initialize: (element: HTMLElement): void =>
         {
             if (
-                !(event instanceof KeyboardEvent)
-                || !(event.target instanceof HTMLLabelElement)
-                || !event.target.matches('label.micl-navigationrail__item[for]')
+                !element.matches(snackbarSelector)
+                || element.dataset.miclinitialized
             ) {
                 return;
             }
-            const input = document.getElementById(event.target.htmlFor) as HTMLInputElement;
-            if (!input) {
-                return;
-            }
-
-            switch (event.key) {
-                case ' ':
-                    event.preventDefault();
-                case 'Enter':
-                    if (!input.checked) {
-                        input.checked = !input.checked;
-                    }
-
-                    const el = (event.target as Element).querySelector('a[href]');
-                    if (el instanceof HTMLAnchorElement) {
-                        el.click();
-                    }
-                    break;
-                default:
-            }
-        },
-
-        initialize: (element: HTMLElement): void =>
-        {
-            if (element.dataset.miclinitialized) return;
-
             element.dataset.miclinitialized = '1';
 
-            element.querySelectorAll<HTMLAnchorElement>('label[for] a[href]').forEach(link =>
-            {
-                link.setAttribute('tabindex', '-1');
-            });
+            const delay = parseInt(element.dataset.micldelay || '0', 10);
+            if (!isNaN(delay) && delay > 0) {
+                element.addEventListener('toggle', event =>
+                {
+                    let timeoutid = parseInt(element.dataset.micltimeoutid || '0', 10);
+                    if (timeoutid > 0) {
+                        clearTimeout(timeoutid);
+                        delete element.dataset.micltimeoutid;
+                    }
+
+                    if ((event as ToggleEvent).oldState === 'closed') {
+                        // The snackbar has just opened.
+                        timeoutid = window.setTimeout(() => { element.hidePopover(); }, delay);
+                        element.dataset.micltimeoutid = `${timeoutid}`;
+                    }
+                });
+            }
         }
     };
 })();

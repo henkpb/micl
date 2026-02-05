@@ -113,6 +113,7 @@ The library currently consists of the following components:
 - [x] [Select](components/select/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
 - [x] [Slider](components/slider/README.md)
+- [ ] [Snackbar]
 - [x] [Stepper](components/stepper/README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)

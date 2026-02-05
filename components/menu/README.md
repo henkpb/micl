@@ -66,7 +66,7 @@ Since the Menu component is based on the **List component**, all of its list ite
         <span class="micl-list-item__headline">Person</span>
         <span class="micl-list-item__supporting-text">This person is an administrator</span>
       </label>
-      <input type="checkbox" id="cb" class="micl-checkbox" tabindex="-1">
+      <input type="checkbox" id="cb" class="micl-checkbox">
     </li>
   </ul>
 </nav>
@@ -74,13 +74,13 @@ Since the Menu component is based on the **List component**, all of its list ite
 
 **Example: A menu with a link**
 
-To make a menu item function as a link, wrap its content in an `<a>` tag and set the `tabindex` to `-1`. This ensures the link is clickable but does not interfere with menu navigation.
+To make a menu item function as a link, wrap its content in an `<a>` tag. This ensures the link is clickable but does not interfere with menu navigation.
 
 ```HTML
 <nav id="mymenu" class="micl-menu" popover>
   <ul class="micl-list">
     <li class="micl-list-item-two" tabindex="0">
-      <a href="https://www.nytimes.com" tabindex="-1">
+      <a href="https://www.nytimes.com" target="_blank">
         <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
         <span class="micl-list-item__text">
           <span class="micl-list-item__headline">The New York Times</span>
@@ -94,13 +94,13 @@ To make a menu item function as a link, wrap its content in an `<a>` tag and set
 
 **Example: A menu with a submenu**
 
-A menu item may trigger opening a submenu when invoked by a button. Wrap the menu item content in a `<button>` tag, set its `tabindex` to `-1` and add the `popovertarget` attribute that points to the submenu. The button acts then as the control element for the submenu.
+A menu item may trigger opening a submenu when invoked by a button. Wrap the menu item content in a `<button>` tag and add the `popovertarget` attribute that points to the submenu. The button acts then as the control element for the submenu.
 
 ```HTML
 <nav id="mymenu" class="micl-menu" popover>
   <ul class="micl-list">
     <li class="micl-list-item-one" tabindex="0">
-      <button popovertarget="mysubmenu" tabindex="-1">
+      <button popovertarget="mysubmenu">
         <span class="micl-list-item__text">
           <span class="micl-list-item__headline">Item 1</span>
         </span>
@@ -114,7 +114,7 @@ A menu item may trigger opening a submenu when invoked by a button. Wrap the men
             </span>
           </li>
           <li role="separator" class="micl-divider"></li>
-          <li class="micl-list-item-one" tabindex="0">
+          <li class="micl-list-item-one">
             <span class="micl-list-item__text">
               <span class="micl-list-item__headline">Item 1-2</span>
             </span>
@@ -122,7 +122,7 @@ A menu item may trigger opening a submenu when invoked by a button. Wrap the men
         </ul>
       </nav>
     </li>
-    <li class="micl-list-item-one" tabindex="0">
+    <li class="micl-list-item-one">
       <span class="micl-list-item__text">
         <span class="micl-list-item__headline">Item 2</span>
       </span>

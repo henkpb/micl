@@ -27,6 +27,7 @@ import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
 import _slider, { sliderSelector } from './components/slider';
+import _snackbar, { snackbarSelector } from './components/snackbar';
 import _stepper, { stepperSelector } from './components/stepper';
 import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
 import _timepicker, { timepickerSelector } from './components/timepicker';
@@ -51,9 +52,10 @@ export default (() =>
         [datepickerSelector]    : { component: _datepicker, type: HTMLDialogElement },
         [listSelector]          : { component: _list, type: HTMLElement },
         [menuSelector]          : { component: _menu, type: HTMLElement },
-        [navigationrailSelector]: { component: _navigationrail, type: HTMLLabelElement },
+        [navigationrailSelector]: { component: _navigationrail, type: HTMLElement },
         [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
         [sliderSelector]        : { component: _slider, type: HTMLInputElement },
+        [snackbarSelector]      : { component: _snackbar, type: HTMLElement },
         [stepperSelector]       : { component: _stepper, type: HTMLElement },
         [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
         [textfieldSelector]     : { component: _textfield, type: HTMLInputElement },
@@ -174,6 +176,7 @@ export default (() =>
         initializeComponents(document);
 
         // Delegated Event Handlers
+        document.addEventListener('change', handleEvent);
         document.addEventListener('input', handleEvent);
         document.addEventListener('keydown', handleEvent);
     };

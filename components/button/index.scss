@@ -321,6 +321,7 @@ button.micl-button-text-xl {
 
     background-color: transparent;
     color: var(--md-sys-color-primary);
+    text-decoration: none;
 
     &:not(:disabled) {
         &:hover {

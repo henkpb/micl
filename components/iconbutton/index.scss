@@ -53,7 +53,9 @@ button.micl-iconbutton-outlined-xl {
     --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --micl-ripple: 1;
 
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-full);
@@ -312,6 +314,8 @@ a.micl-iconbutton-standard-m,
 button.micl-iconbutton-standard-l,
 button.micl-iconbutton-standard-xl {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
+
+    text-decoration: none;
 
     &:disabled {
         background-color: transparent;
