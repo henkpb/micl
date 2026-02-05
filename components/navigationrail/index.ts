@@ -19,17 +19,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const navigationrailSelector = '.micl-navigationrail__item[for]:not(.micl-navigationrail__item--disabled)';
+export const navigationrailSelector = '.micl-navigationrail';
 
 export default (() =>
 {
     return {
-        keydown: (event: Event) =>
+        keydown: (event: Event): void =>
         {
             if (
                 !(event instanceof KeyboardEvent)
                 || !(event.target instanceof HTMLLabelElement)
-                || !event.target.matches(navigationrailSelector)
+                || !event.target.matches('label.micl-navigationrail__item[for]')
             ) {
                 return;
             }
@@ -39,15 +39,32 @@ export default (() =>
             }
 
             switch (event.key) {
-                case 'Enter':
                 case ' ':
                     event.preventDefault();
+                case 'Enter':
                     if (!input.checked) {
                         input.checked = !input.checked;
+                    }
+
+                    const el = (event.target as Element).querySelector('a[href]');
+                    if (el instanceof HTMLAnchorElement) {
+                        el.click();
                     }
                     break;
                 default:
             }
+        },
+
+        initialize: (element: HTMLElement): void =>
+        {
+            if (element.dataset.miclinitialized) return;
+
+            element.dataset.miclinitialized = '1';
+
+            element.querySelectorAll<HTMLAnchorElement>('label[for] a[href]').forEach(link =>
+            {
+                link.setAttribute('tabindex', '-1');
+            });
         }
     };
 })();

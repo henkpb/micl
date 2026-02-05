@@ -117,7 +117,17 @@
                 background-size 3000ms,
                 --statelayer-opacity var(--md-sys-navigationrail-motion-duration) linear;
 
-            &> .micl-navigationrail__icon {
+            &:has(a) {
+                padding-block: 0;
+            }
+            a {
+                display: inherit;
+                align-items: inherit;
+                padding-block: 12px;
+                text-decoration: none;
+                z-index: 0;
+            }
+            .micl-navigationrail__icon {
                 --micl-ripple: 1;
 
                 font-size: var(--md-sys-icon-size, 24px);
@@ -140,7 +150,7 @@
                     font-variation-settings var(--md-sys-navigationrail-morph-duration-reverse) linear,
                     --statelayer-opacity var(--md-sys-navigationrail-motion-duration) linear;
             }
-            &> .micl-navigationrail__text {
+            .micl-navigationrail__text {
                 @include typography.label-medium;
 
                 min-block-size: var(--md-sys-typescale-label-medium-line-height);
@@ -153,7 +163,7 @@
             }
         }
         &> input[type=radio]:checked + label.micl-navigationrail__item {
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 background-color: var(--md-sys-color-secondary-container);
                 color: var(--md-sys-color-on-secondary-container);
                 font-variation-settings: 'FILL' 1;
@@ -163,7 +173,7 @@
                     font-variation-settings var(--md-sys-navigationrail-morph-duration) linear,
                     --statelayer-opacity var(--md-sys-navigationrail-motion-duration) linear;
             }
-            &> .micl-navigationrail__text {
+            .micl-navigationrail__text {
                 color: var(--md-sys-color-on-secondary-container);
             }
         }
@@ -199,7 +209,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
                 transition: background-size 0ms;
                 --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
             }
-            &> .micl-navigationrail__text {
+            .micl-navigationrail__text {
                 @include typography.label-large;
 
                 margin-inline-start: -8px;
@@ -209,7 +219,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         &> input[type=radio]:checked + label.micl-navigationrail__item  {
             background-color: var(--md-sys-color-secondary-container);
 
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 background-color: transparent;
             }
         }
@@ -227,7 +237,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
                 --statelayer-opacity var(--md-sys-navigationrail-motion-duration) linear;
         }
         &> input[type=radio]:checked + label.micl-navigationrail__item  {
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 transition:
                     background-size 3000ms,
                     background-color calc(var(--md-sys-navigationrail-morph-duration) / 2) linear,
@@ -243,7 +253,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     &> .micl-navigationrail__content > label.micl-navigationrail__item {
         animation: calc(var(--md-sys-navigationrail-morph-duration) / 2) linear forwards navigationrail-item-to-expanded;
 
-        &> .micl-navigationrail__text {
+        .micl-navigationrail__text {
             animation: var(--md-sys-navigationrail-morph-duration) linear forwards navigationrail-text-to-expanded;
         }
     }
@@ -255,12 +265,12 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         &> label.micl-navigationrail__item {
             animation: calc(var(--md-sys-navigationrail-morph-duration-reverse) / 2) linear forwards navigationrail-item-to-collapsed;
 
-            &> .micl-navigationrail__text {
+            .micl-navigationrail__text {
                 animation: var(--md-sys-navigationrail-morph-duration-reverse) linear forwards navigationrail-text-to-collapsed;
             }
         }
         &> input[type=radio]:checked + label.micl-navigationrail__item  {
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 transition:
                     background-size 3000ms,
                     background-color calc(var(--md-sys-navigationrail-morph-duration-reverse) / 2) calc(var(--md-sys-navigationrail-morph-duration-reverse) / 2) linear,
@@ -273,17 +283,17 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
 nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle:not(.micl-button--selected)) {
     &> .micl-navigationrail__content > label.micl-navigationrail__item {
         &:hover {
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
             }
         }
         &:focus-visible {
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
             }
         }
         &:active {
-            &> .micl-navigationrail__icon {
+            .micl-navigationrail__icon {
                 --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
                 background-size: 0%, 100%;

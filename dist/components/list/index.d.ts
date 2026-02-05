@@ -1,5 +1,6 @@
-export declare const listSelector = ".micl-list-item-one,.micl-list-item-two,.micl-list-item-three";
+export declare const listSelector = ".micl-list";
 declare const _default: {
     keydown: (event: Event) => void;
+    initialize: (element: HTMLElement) => void;
 };
 export default _default;

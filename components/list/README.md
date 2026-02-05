@@ -67,7 +67,7 @@ Use the anchor element to convert a list item into a hyperlink:
 ```HTML
 <ul class="micl-list">
   <li class="micl-list-item-one" tabindex="0">
-    <a href="https://www.thetimes.com" tabindex="-1">
+    <a href="https://www.thetimes.com">
       <span class="micl-list-item__text">
         <span class="micl-list-item__headline">The Times</span>
       </span>
@@ -168,7 +168,6 @@ To enable selection of list items, integrate a Checkbox or Switch component with
         class="micl-checkbox"
         value="cb1"
         checked
-        tabindex="-1"
         aria-label="Blue car"
       >
     </label>
@@ -181,7 +180,6 @@ To enable selection of list items, integrate a Checkbox or Switch component with
         id="checkbox2"
         class="micl-switch"
         value="cb2"
-        tabindex="-1"
         aria-label="Red car"
       >
       <span class="micl-list-item__text">
@@ -192,8 +190,6 @@ To enable selection of list items, integrate a Checkbox or Switch component with
   </li>
 </ul>
 ```
-
-- `tabindex="-1"` on the `input` is important here, as the `<li>` should handle the focus for accessibility.
 
 - The `role="listbox"` is used for accessibility, indicating a selectable list.
 
