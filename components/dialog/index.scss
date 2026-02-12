@@ -199,6 +199,9 @@ dialog.micl-dialog {
 
         color: var(--md-sys-color-on-surface-variant);
     }
+    form {
+        background-color: inherit;
+    }
     .micl-dialog__content {
         flex-shrink: 1;
         padding-inline: var(--md-sys-dialog-padding, 24px);
