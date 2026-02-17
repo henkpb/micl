@@ -47,6 +47,7 @@
         "appbar-leading appbar-middle appbar-trailing"
         "appbar-bottom appbar-bottom appbar-bottom";
     grid-template-columns: 0fr 1fr max-content;
+    grid-template-rows: max-content;
     column-gap: 4px;
     align-items: center;
     min-block-size: var(--md-sys-appbar-height);
