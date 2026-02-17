@@ -42,7 +42,6 @@
     display: block;
     block-size: fit-content;
     margin: 0;
-    padding-block-end: var(--md-sys-card-content-padding-block);
     border-radius: var(--md-sys-shape-corner-medium);
     outline: none;
     overflow: hidden;
@@ -53,7 +52,7 @@
         --statelayer-color: var(--md-sys-color-on-surface);
 
         background-image:
-            radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+            radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) / 2)) 10%, transparent 10%),
             linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
         background-repeat: no-repeat;
         background-size: 10000%, 100%;
@@ -106,7 +105,8 @@
     &> summary {
         outline: none;
         list-style: none;
-        cursor: pointer
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
     &:not([open]):has(> summary.micl-card--compact) {
         padding-block-end: 0;
@@ -206,8 +206,12 @@
     display: flex;
     align-items: center;
     column-gap: 8px;
-    margin-block: 8px;
+    padding-block: 8px;
     color: var(--md-sys-color-on-surface-variant);
+
+    &:first-child {
+        padding-block-start: 16px;
+    }
 
     h1, h2, h3, h4, h5, h6, .micl-heading {
         flex: 1 2 fit-content;
@@ -245,8 +249,8 @@
     @include typography.title-medium;
 
     display: block;
-    margin-block: 0 8px;
-    padding-inline: var(--md-sys-card-padding-inline);
+    margin: 0;
+    padding: 0 var(--md-sys-card-padding-inline) 8px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -257,8 +261,8 @@
     @include typography.body-small;
 
     display: block;
-    margin-block: 0 8px;
-    padding-inline: var(--md-sys-card-padding-inline);
+    margin: 0;
+    padding: 0 var(--md-sys-card-padding-inline) 8px;
     color: var(--md-sys-color-on-surface-variant);
 }
 
@@ -287,7 +291,7 @@
 
 .micl-card__content {
     box-sizing: border-box;
-    padding-block: var(--md-sys-card-content-padding-block) 0;
+    padding-block: var(--md-sys-card-content-padding-block);
     padding-inline: var(--md-sys-card-padding-inline);
     background-color: inherit;
     overflow: clip visible;
