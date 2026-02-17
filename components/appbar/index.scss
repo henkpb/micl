@@ -39,7 +39,7 @@
     --md-sys-appbar-height: 64px;
     --md-sys-appbar-padding-block-start: 0px;
     --md-sys-appbar-padding-block-end: 0px;
-    --md-sys-appbar-padding-inline: 4px;
+    --md-sys-appbar-padding-inline: 0px;
 
     box-sizing: border-box;
     display: grid;
@@ -47,7 +47,7 @@
         "appbar-leading appbar-middle appbar-trailing"
         "appbar-bottom appbar-bottom appbar-bottom";
     grid-template-columns: 0fr 1fr max-content;
-    grid-template-rows: max-content;
+    grid-template-rows: 64px max-content;
     column-gap: 4px;
     align-items: center;
     min-block-size: var(--md-sys-appbar-height);
@@ -110,7 +110,6 @@
     }
     &.micl-appbar--medium {
         --md-sys-appbar-height: 112px;
-        --md-sys-appbar-padding-block-start: 4px;
         --md-sys-appbar-padding-block-end: 12px;
 
         padding-inline-start: 0;
@@ -134,7 +133,6 @@
     }
     &.micl-appbar--large {
         --md-sys-appbar-height: 120px;
-        --md-sys-appbar-padding-block-start: 4px;
         --md-sys-appbar-padding-block-end: 12px;
 
         padding-inline-start: 0;
