@@ -71,7 +71,6 @@
         &> summary.micl-list-item-two,
         &> summary.micl-list-item-three {
             position: relative;
-            -webkit-tap-highlight-color: transparent;
 
             &::-webkit-details-marker {
                 display: none;
@@ -153,6 +152,7 @@ select {
     transition:
         background-size 3000ms,
         --statelayer-opacity var(--md-sys-list-motion-duration) linear;
+    -webkit-tap-highlight-color: transparent;
 
     &:not(:has(> button)) {
         --micl-ripple: 1;
