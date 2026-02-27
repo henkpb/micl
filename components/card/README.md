@@ -107,14 +107,23 @@ Add the `micl-card--compact` to the main `<div>` element (or, the `<summary>` el
 - **Dragging State**: When implementing drag-and-drop functionality for cards, apply the `micl-card--dragging` class to the card container to provide visual feedback during the drag operation.
 
 ## Customizations
-You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child cards.
+You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child cards. Replace **?** by either **elevated**, **filled** or **outlined**.
 
 | Variable name | Default Value | Description |
 | ------------- | ----- | ----------- |
-| --md-sys-card-margin | 8px | Sets the spacing between adjacent cards both horizontally and vertically |
-| --md-sys-card-padding-inline | 16px | Defines the amount of space between the left and right edges of a card and its content |
-| --md-sys-card-content-padding-block | 16px | The amount of vertical padding reserved for the content area |
-| --md-sys-card-outlined-border-width | 1px | The width of the border of **outlined** cards |
+| --md-comp-card-margin | 8px | Sets the spacing between adjacent cards both horizontally and vertically |
+| --md-comp-card-padding-inline | 16px | Defines the amount of space between the left and right edges of a card and its content |
+| --md-comp-card-content-padding-block | 16px | The amount of vertical padding reserved for the content area |
+| --md-comp-card-gap | 8px | Defines the amount of vertical space between structural elements inside the card |
+| --md-comp-**?**-card-container-shape | | The shape of the card, like having rounded corners |
+| --md-comp-**?**-card-disabled-container-opacity | 38% | The transparency level of a disabled card |
+| --md-comp-**?**-card-container-elevation | | How high an enabled card floats above its background |
+| --md-comp-**?**-card-disabled-container-elevation | The elevation of a disabled card |
+| --md-comp-**?**-card-hover-container-elevation | The elevation of a card in the hovered state  |
+| --md-comp-**?**-card-focus-container-elevation | The elevation of a card in the focused state |
+| --md-comp-**?**-card-pressed-container-elevation | The elevation of a card in the pressed state |
+| --md-comp-**?**-card-dragged-container-elevation | The elevation of a card being dragged |
+| --md-comp-outlined-card-outline-width | 1px | The width of the border of **outlined** cards |
 
 **Example: Changing the card margins**
 
