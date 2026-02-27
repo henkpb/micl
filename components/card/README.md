@@ -118,17 +118,17 @@ You can customize the appearance of the Card component by overriding its global 
 | --md-comp-**?**-card-container-shape | | The shape of the card, like having rounded corners |
 | --md-comp-**?**-card-disabled-container-opacity | 38% | The transparency level of a disabled card |
 | --md-comp-**?**-card-container-elevation | | How high an enabled card floats above its background |
-| --md-comp-**?**-card-disabled-container-elevation | The elevation of a disabled card |
-| --md-comp-**?**-card-hover-container-elevation | The elevation of a card in the hovered state  |
-| --md-comp-**?**-card-focus-container-elevation | The elevation of a card in the focused state |
-| --md-comp-**?**-card-pressed-container-elevation | The elevation of a card in the pressed state |
-| --md-comp-**?**-card-dragged-container-elevation | The elevation of a card being dragged |
+| --md-comp-**?**-card-disabled-container-elevation | | The elevation of a disabled card |
+| --md-comp-**?**-card-hover-container-elevation | | The elevation of a card in the hovered state  |
+| --md-comp-**?**-card-focus-container-elevation | | The elevation of a card in the focused state |
+| --md-comp-**?**-card-pressed-container-elevation | | The elevation of a card in the pressed state |
+| --md-comp-**?**-card-dragged-container-elevation | | The elevation of a card being dragged |
 | --md-comp-outlined-card-outline-width | 1px | The width of the border of **outlined** cards |
 
 **Example: Changing the card margins**
 
 ```HTML
-<div style="--md-sys-card-margin:4px">
+<div style="--md-comp-card-margin:4px">
   <div class="micl-card-filled">
     <p>This is a filled card.</p>
   </div>
