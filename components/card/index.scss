@@ -177,7 +177,11 @@ body {
             min-inline-size: 0;
             margin-block-start: var(--md-comp-card-gap, 8px);
         }
-        .micl-card__subhead,
+        .micl-card__subhead {
+            grid-column: 2;
+            min-inline-size: 0;
+            margin-block-start: 0;
+        }
         .micl-card__supporting-text {
             grid-column: 2;
             min-inline-size: 0;
@@ -358,7 +362,7 @@ body {
     @include typography.title-medium;
 
     display: block;
-    margin: 0;
+    margin: calc(-1 * var(--md-comp-card-gap)) 0 var(--md-comp-card-gap) 0;
     padding: 0 var(--md-comp-card-padding-inline);
     overflow: hidden;
     text-overflow: ellipsis;
