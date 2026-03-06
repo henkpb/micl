@@ -102,7 +102,7 @@ Cards can also serve as containers for expandable detail areas using the `<detai
 Add the `micl-card--compact` to the main `<div>` element (or, the `<summary>` element for expandable cards) to create a compact version of the card header.
 
 ### States
-- **Disabled Cards**: To visually indicate a disabled card (e.g., non-interactive), add the `micl-card--disabled` class to the card container.
+- **Disabled Cards**: To visually indicate a disabled card (e.g., non-interactive), add the `inert` attribute to the card container.
 
 - **Dragging State**: When implementing drag-and-drop functionality for cards, apply the `micl-card--dragging` class to the card container to provide visual feedback during the drag operation.
 

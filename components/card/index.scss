@@ -60,8 +60,8 @@
         row-gap: var(--md-comp-card-gap, 8px);
     }
 
-    &[tabindex='0']:not(.micl-card--disabled),
-    &:not(.micl-card--disabled) > summary {
+    &[tabindex='0']:not([inert]),
+    &:not([inert]) > summary {
         --micl-ripple: 1;
 
         background-image:
@@ -103,25 +103,25 @@
         }
     }
 
-    &[tabindex='0']:not(.micl-card--disabled):hover,
-    &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:hover) {
+    &[tabindex='0']:not([inert]):hover,
+    &:not([tabindex='0']):not([inert]):has(> summary:hover) {
         box-shadow: var(--_hover-elevation);
         border-color: var(--_hover-border-color, var(--_border-color, transparent));
     }
-    &[tabindex='0']:not(.micl-card--disabled):focus-visible,
-    &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:focus-visible) {
+    &[tabindex='0']:not([inert]):focus-visible,
+    &:not([tabindex='0']):not([inert]):has(> summary:focus-visible) {
         box-shadow: var(--_focus-elevation);
         border-width: var(--_focus-border-width, var(--_border-width, 0));
         border-color: var(--_focus-border-color, transparent);
         outline: var(--_focus-outline-thickness, 0px) solid var(--_focus-outline-color, transparent);
         outline-offset: var(--_focus-outline-offset, 0px);
     }
-    &[tabindex='0']:not(.micl-card--disabled):active,
-    &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:active) {
+    &[tabindex='0']:not([inert]):active,
+    &:not([tabindex='0']):not([inert]):has(> summary:active) {
         box-shadow: var(--_pressed-elevation);
         border-color: var(--_pressed-border-color, transparent);
     }
-    &[tabindex='0']:not(.micl-card--disabled).micl-card--dragging {
+    &[tabindex='0']:not([inert]).micl-card--dragging {
         box-shadow: var(--_dragged-elevation);
         border-color: var(--_dragged-border-color, transparent);
     }
@@ -206,7 +206,7 @@
     --_dragged-state-opacity: var(--md-comp-elevated-card-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity));
     --_dragged-elevation: var(--md-comp-elevated-card-dragged-container-elevation, var(--md-sys-elevation-level4));
 
-    &.micl-card--disabled {
+    &[inert] {
         --_color: var(--md-comp-elevated-card-disabled-container-color, var(--md-sys-color-surface));
         --_elevation: var(--md-comp-elevated-card-disabled-container-elevation, var(--md-sys-elevation-level1));
         --_opacity: var(--md-comp-elevated-card-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity));
@@ -238,7 +238,7 @@
     --_dragged-state-opacity: var(--md-comp-filled-card-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity));
     --_dragged-elevation: var(--md-comp-filled-card-dragged-container-elevation, var(--md-sys-elevation-level3));
 
-    &.micl-card--disabled {
+    &[inert] {
         --_color: var(--md-comp-filled-card-disabled-container-color, var(--md-sys-color-surface-variant));
         --_elevation: var(--md-comp-filled-card-disabled-container-elevation, var(--md-sys-elevation-level0));
         --_opacity: var(--md-comp-filled-card-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity));
@@ -274,7 +274,7 @@
     --_dragged-elevation: var(--md-comp-outlined-card-dragged-container-elevation, var(--md-sys-elevation-level3));
     --_dragged-border-color: var(--md-comp-outlined-card-dragged-outline-color, var(--md-sys-color-outline-variant));
 
-    &.micl-card--disabled {
+    &[inert] {
         --_border-color: rgb(from var(--md-comp-outlined-card-disabled-outline-color, var(--md-sys-color-outline)) r g b / var(--md-comp-outlined-card-disabled-outline-opacity, 12%));
         --_color: var(--md-comp-outlined-card-disabled-container-color, var(--md-sys-color-surface));
         --_elevation: var(--md-comp-outlined-card-disabled-container-elevation, var(--md-sys-elevation-level0));
