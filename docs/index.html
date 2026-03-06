@@ -396,8 +396,24 @@
             </div>
         </section>
     </main>
+    <div id="mysnackbar" class="micl-snackbar" popover data-micldelay="7000" role="status" aria-atomic="true">
+        <span class="micl-snackbar__supporting-text">This is the Snackbar component</span>
+        <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar" popovertargetaction="hide">close</button>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>
+    <script>
+        const loaded = () => {
+            document.removeEventListener('DOMContentLoaded', loaded);
+            document.querySelector('#mysnackbar')?.showPopover();
+        };
+        if (document.readyState !== 'loading') {
+            document.querySelector('#mysnackbar')?.showPopover();
+        }
+        else {
+            document.addEventListener('DOMContentLoaded', loaded);
+        }
+    </script>
 </body>
 </html>
