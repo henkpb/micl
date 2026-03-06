@@ -191,7 +191,8 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
             flex-direction: row;
             inline-size: fit-content;
 
-            &::before {
+            &::before,
+            a::before {
                 content: "";
                 position: absolute;
                 inset: 0px;
@@ -372,7 +373,7 @@ nav.micl-navigationrail[popover] {
             display var(--md-sys-navigationrail-motion-duration) linear allow-discrete;
     }
 }
-.micl-window:has(nav.micl-navigationrail[popover]) {
+.micl-window:has(nav.micl-navigationrail[popover]:not(.micl-hidden)) {
     padding-inline-start: var(--md-sys-navigationrail-collapsed-width);
 }
 .micl-window.micl-window--explicit-containment nav.micl-navigationrail {
