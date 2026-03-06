@@ -31,46 +31,6 @@
     --md-comp-card-margin: 8px;
     --md-comp-card-padding-inline: 16px;
     --md-comp-card-content-padding-block: 16px;
-    --md-comp-elevated-card-container-shape: var(--md-sys-shape-corner-medium);
-    --md-comp-elevated-card-disabled-container-opacity: 38%;
-    --md-comp-elevated-card-container-elevation: var(--md-sys-elevation-level1);
-    --md-comp-elevated-card-disabled-container-elevation: var(--md-sys-elevation-level1);
-    --md-comp-elevated-card-hover-container-elevation: var(--md-sys-elevation-level2);
-    --md-comp-elevated-card-focus-container-elevation: var(--md-sys-elevation-level1);
-    --md-comp-elevated-card-pressed-container-elevation: var(--md-sys-elevation-level1);
-    --md-comp-elevated-card-dragged-container-elevation: var(--md-sys-elevation-level4);
-    --md-comp-filled-card-container-shape: var(--md-sys-shape-corner-medium);
-    --md-comp-filled-card-disabled-container-opacity: 38%;
-    --md-comp-filled-card-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-filled-card-disabled-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-filled-card-hover-container-elevation: var(--md-sys-elevation-level1);
-    --md-comp-filled-card-focus-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-filled-card-pressed-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-filled-card-dragged-container-elevation: var(--md-sys-elevation-level3);
-    --md-comp-outlined-card-container-shape: var(--md-sys-shape-corner-medium);
-    --md-comp-outlined-card-disabled-container-opacity: 38%;
-    --md-comp-outlined-card-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-outlined-card-disabled-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-outlined-card-hover-container-elevation: var(--md-sys-elevation-level1);
-    --md-comp-outlined-card-focus-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-outlined-card-pressed-container-elevation: var(--md-sys-elevation-level0);
-    --md-comp-outlined-card-dragged-container-elevation: var(--md-sys-elevation-level3);
-    --md-comp-outlined-card-outline-width: 1px;
-    --md-comp-outlined-card-disabled-outline-opacity: 12%;
-}
-body {
-    --md-comp-elevated-card-container-color: var(--md-sys-color-surface-container-low);
-    --md-comp-elevated-card-disabled-container-color: var(--md-sys-color-surface);
-    --md-comp-filled-card-container-color: var(--md-sys-color-surface-container-highest);
-    --md-comp-filled-card-disabled-container-color: var(--md-sys-color-surface-variant);
-    --md-comp-outlined-card-container-color: var(--md-sys-color-surface);
-    --md-comp-outlined-card-disabled-container-color: var(--md-sys-color-surface);
-    --md-comp-outlined-card-outline-color: var(--md-sys-color-outline-variant);
-    --md-comp-outlined-card-disabled-outline-color: var(--md-sys-color-outline);
-    --md-comp-outlined-card-hover-outline-color: var(--md-sys-color-outline-variant);
-    --md-comp-outlined-card-focus-outline-color: var(--md-sys-color-on-surface);
-    --md-comp-outlined-card-pressed-outline-color: var(--md-sys-color-outline-variant);
-    --md-comp-outlined-card-dragged-outline-color: var(--md-sys-color-outline-variant);
 }
 
 .micl-card-elevated,
@@ -94,7 +54,6 @@ body {
     &[tabindex='0']:not(.micl-card--disabled),
     &:not(.micl-card--disabled) > summary {
         --micl-ripple: 1;
-        --statelayer-color: var(--md-sys-color-on-surface);
 
         background-image:
             radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) / 2)) 10%, transparent 10%),
@@ -106,25 +65,13 @@ body {
             --statelayer-opacity var(--md-sys-card-motion-duration) linear;
 
         &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-
             cursor: pointer;
         }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
-        }
         &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
-
             background-size: 0%, 100%;
             transition: background-size 0ms;
         }
         &.micl-card--dragging {
-            --statelayer-opacity: var(--md-sys-state-dragged-state-layer-opacity, 16%);
-
             cursor: grabbing;
         }
         .micl-card__content {
@@ -132,8 +79,8 @@ body {
         }
     }
     &:not([tabindex='0']):not(.micl-card--disabled):has(> summary:focus-visible) {
-        outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-        outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
+        outline: var(--md-comp-elevated-card-focus-indicator-thickness, --md-sys-state-focus-indicator-thickness) solid var(--md-comp-elevated-card-focus-indicator-color, --md-sys-color-secondary);
+        outline-offset: var(--md-comp-elevated-card-focus-indicator-outline-offset, --md-sys-state-focus-indicator-outer-offset);
     }
     &::details-content {
         block-size: 0;
@@ -206,15 +153,25 @@ body {
     &[tabindex='0']:not(.micl-card--disabled),
     &:not(.micl-card--disabled) > summary {
         &:hover {
+            --statelayer-color: var(--md-comp-elevated-card-hover-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-elevated-card-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity));
             box-shadow: var(--md-comp-elevated-card-hover-container-elevation, var(--md-sys-elevation-level2));
         }
         &:focus-visible {
+            --statelayer-color: var(--md-comp-elevated-card-focus-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-elevated-card-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity));
+            outline: var(--md-comp-elevated-card-focus-indicator-thickness, --md-sys-state-focus-indicator-thickness) solid var(--md-comp-elevated-card-focus-indicator-color, --md-sys-color-secondary);
+            outline-offset: var(--md-comp-elevated-card-focus-indicator-outline-offset, --md-sys-state-focus-indicator-outer-offset);
             box-shadow: var(--md-comp-elevated-card-focus-container-elevation, var(--md-sys-elevation-level1));
         }
         &:active {
+            --statelayer-color: var(--md-comp-elevated-card-pressed-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-elevated-card-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity));
             box-shadow: var(--md-comp-elevated-card-pressed-container-elevation, var(--md-sys-elevation-level1));
         }
         &.micl-card--dragging {
+            --statelayer-color: var(--md-comp-elevated-card-dragged-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-elevated-card-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity));
             box-shadow: var(--md-comp-elevated-card-dragged-container-elevation, var(--md-sys-elevation-level4));
         }
     }
@@ -227,15 +184,25 @@ body {
     &[tabindex='0']:not(.micl-card--disabled),
     &:not(.micl-card--disabled) > summary {
         &:hover {
+            --statelayer-color: var(--md-comp-filled-card-hover-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-filled-card-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity));
             box-shadow: var(--md-comp-filled-card-hover-container-elevation, var(--md-sys-elevation-level1));
         }
         &:focus-visible {
+            --statelayer-color: var(--md-comp-filled-card-focus-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-filled-card-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity));
+            outline: var(--md-comp-filled-card-focus-indicator-thickness, --md-sys-state-focus-indicator-thickness) solid var(--md-comp-filled-card-focus-indicator-color, --md-sys-color-secondary);
+            outline-offset: var(--md-comp-filled-card-focus-indicator-outline-offset, --md-sys-state-focus-indicator-outer-offset);
             box-shadow: var(--md-comp-filled-card-focus-container-elevation, var(--md-sys-elevation-level0));
         }
         &:active {
+            --statelayer-color: var(--md-comp-filled-card-pressed-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-filled-card-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity));
             box-shadow: var(--md-comp-filled-card-pressed-container-elevation, var(--md-sys-elevation-level0));
         }
         &.micl-card--dragging {
+            --statelayer-color: var(--md-comp-filled-card-dragged-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-filled-card-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity));
             box-shadow: var(--md-comp-filled-card-dragged-container-elevation, var(--md-sys-elevation-level3));
         }
     }
@@ -249,18 +216,27 @@ body {
     &[tabindex='0']:not(.micl-card--disabled),
     &:not(.micl-card--disabled) > summary {
         &:hover {
+            --statelayer-color: var(--md-comp-outlined-card-hover-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-outlined-card-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity));
             border-color: var(--md-comp-outlined-card-hover-outline-color, var(--md-sys-color-outline-variant));
             box-shadow: var(--md-comp-outlined-card-hover-container-elevation, var(--md-sys-elevation-level1));
         }
         &:focus-visible {
-            border-color: var(--md-comp-outlined-card-focus-outline-color, var(--md-sys-color-on-surface));
+            --statelayer-color: var(--md-comp-outlined-card-focus-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-outlined-card-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity));
+            border-width: var(--md-comp-outlined-card-focus-indicator-thickness, --md-sys-state-focus-indicator-thickness);
+            border-color: var(--md-comp-outlined-card-focus-indicator-color, var(--md-sys-color-secondary));
             box-shadow: var(--md-comp-outlined-card-focus-container-elevation, var(--md-sys-elevation-level0));
         }
         &:active {
+            --statelayer-color: var(--md-comp-outlined-card-pressed-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-outlined-card-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity));
             border-color: var(--md-comp-outlined-card-pressed-outline-color, var(--md-sys-color-outline-variant));
             box-shadow: var(--md-comp-outlined-card-pressed-container-elevation, var(--md-sys-elevation-level0));
         }
         &.micl-card--dragging {
+            --statelayer-color: var(--md-comp-outlined-card-dragged-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-outlined-card-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity));
             border-color: var(--md-comp-outlined-card-dragged-outline-color, var(--md-sys-color-outline-variant));
             box-shadow: var(--md-comp-outlined-card-dragged-container-elevation, var(--md-sys-elevation-level3));
         }
@@ -283,7 +259,7 @@ body {
     &.micl-card-outlined {
         border-color: rgb(from var(--md-comp-outlined-card-disabled-outline-color, var(--md-sys-color-outline)) r g b / var(--md-comp-outlined-card-disabled-outline-opacity, 12%));
         background-color: var(--md-comp-outlined-card-disabled-container-color, var(--md-sys-color-surface));
-        box-shadow: var(--md-comp-outlined-card-container-elevation, var(--md-sys-elevation-level0));
+        box-shadow: var(--md-comp-outlined-card-disabled-container-elevation, var(--md-sys-elevation-level0));
         opacity: var(--md-comp-outlined-card-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity));
     }
 }
@@ -329,7 +305,7 @@ body {
     h1, h2, h3, h4, h5, h6, .micl-heading {
         flex: 1 2 fit-content;
         margin: 0;
-        padding-inline: var(--md-comp-card-padding-inline);
+        padding-inline: var(--md-comp-card-padding-inline, 16px);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -362,8 +338,8 @@ body {
     @include typography.title-medium;
 
     display: block;
-    margin: calc(-1 * var(--md-comp-card-gap)) 0 var(--md-comp-card-gap) 0;
-    padding: 0 var(--md-comp-card-padding-inline);
+    margin: calc(-1 * var(--md-comp-card-gap, 8px)) 0 var(--md-comp-card-gap, 8px) 0;
+    padding: 0 var(--md-comp-card-padding-inline, 16px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -375,7 +351,7 @@ body {
 
     display: block;
     margin: 0;
-    padding: 0 var(--md-comp-card-padding-inline);
+    padding: 0 var(--md-comp-card-padding-inline, 16px);
     color: var(--md-sys-color-on-surface-variant);
 }
 
@@ -407,8 +383,8 @@ body {
 
 .micl-card__content {
     box-sizing: border-box;
-    padding-block: var(--md-comp-card-content-padding-block);
-    padding-inline: var(--md-comp-card-padding-inline);
+    padding-block: var(--md-comp-card-content-padding-block, 16px);
+    padding-inline: var(--md-comp-card-padding-inline, 16px);
     background-color: inherit;
     overflow: clip visible;
 }

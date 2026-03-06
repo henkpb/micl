@@ -107,7 +107,7 @@ Add the `micl-card--compact` to the main `<div>` element (or, the `<summary>` el
 - **Dragging State**: When implementing drag-and-drop functionality for cards, apply the `micl-card--dragging` class to the card container to provide visual feedback during the drag operation.
 
 ## Customizations
-You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child cards. Replace **?** by either **elevated**, **filled** or **outlined**.
+You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child cards.
 
 | Variable name | Default Value | Description |
 | ------------- | ----- | ----------- |
@@ -115,15 +115,78 @@ You can customize the appearance of the Card component by overriding its global 
 | --md-comp-card-padding-inline | 16px | Defines the amount of space between the left and right edges of a card and its content |
 | --md-comp-card-content-padding-block | 16px | The amount of vertical padding reserved for the content area |
 | --md-comp-card-gap | 8px | Defines the amount of vertical space between structural elements inside the card |
-| --md-comp-**?**-card-container-shape | | The shape of the card, like having rounded corners |
-| --md-comp-**?**-card-disabled-container-opacity | 38% | The transparency level of a disabled card |
-| --md-comp-**?**-card-container-elevation | | How high an enabled card floats above its background |
-| --md-comp-**?**-card-disabled-container-elevation | | The elevation of a disabled card |
-| --md-comp-**?**-card-hover-container-elevation | | The elevation of a card in the hovered state  |
-| --md-comp-**?**-card-focus-container-elevation | | The elevation of a card in the focused state |
-| --md-comp-**?**-card-pressed-container-elevation | | The elevation of a card in the pressed state |
-| --md-comp-**?**-card-dragged-container-elevation | | The elevation of a card being dragged |
-| --md-comp-outlined-card-outline-width | 1px | The width of the border of **outlined** cards |
+
+The Card component supports the following CSS variables, as defined in the [Material Design 3 Expressive Card Specification](https://m3.material.io/components/cards/specs):
+
+```CSS
+--md-comp-elevated-card-container-color
+--md-comp-elevated-card-container-elevation
+--md-comp-elevated-card-container-shape
+--md-comp-elevated-card-disabled-container-elevation
+--md-comp-elevated-card-disabled-container-color
+--md-comp-elevated-card-hover-container-elevation
+--md-comp-elevated-card-hover-state-layer-color
+--md-comp-elevated-card-hover-state-layer-opacity
+--md-comp-elevated-card-focus-indicator-color
+--md-comp-elevated-card-focus-indicator-thickness
+--md-comp-elevated-card-focus-indicator-outline-offset
+--md-comp-elevated-card-focus-container-elevation
+--md-comp-elevated-card-focus-state-layer-color
+--md-comp-elevated-card-focus-state-layer-opacity
+--md-comp-elevated-card-pressed-container-elevation
+--md-comp-elevated-card-pressed-state-layer-color
+--md-comp-elevated-card-pressed-state-layer-opacity
+--md-comp-elevated-card-dragged-container-elevation
+--md-comp-elevated-card-dragged-state-layer-color
+--md-comp-elevated-card-dragged-state-layer-opacity
+--md-comp-filled-card-container-color
+--md-comp-filled-card-container-elevation
+--md-comp-filled-card-container-shape
+--md-comp-filled-card-disabled-container-elevation
+--md-comp-filled-card-disabled-container-color
+--md-comp-filled-card-hover-container-elevation
+--md-comp-filled-card-hover-state-layer-color
+--md-comp-filled-card-hover-state-layer-opacity
+--md-comp-filled-card-focus-indicator-color
+--md-comp-filled-card-focus-indicator-thickness
+--md-comp-filled-card-focus-indicator-outline-offset
+--md-comp-filled-card-focus-container-elevation
+--md-comp-filled-card-focus-state-layer-color
+--md-comp-filled-card-focus-state-layer-opacity
+--md-comp-filled-card-pressed-container-elevation
+--md-comp-filled-card-pressed-state-layer-color
+--md-comp-filled-card-pressed-state-layer-opacity
+--md-comp-filled-card-dragged-container-elevation
+--md-comp-filled-card-dragged-state-layer-color
+--md-comp-filled-card-dragged-state-layer-opacity
+--md-comp-outlined-card-container-color
+--md-comp-outlined-card-container-elevation
+--md-comp-outlined-card-container-shape
+--md-comp-outlined-card-outline-width
+--md-comp-outlined-card-outline-color
+--md-comp-outlined-card-disabled-container-elevation
+--md-comp-outlined-card-disabled-outline-color
+--md-comp-outlined-card-disabled-outline-opacity
+--md-comp-outlined-card-hover-container-elevation
+--md-comp-outlined-card-hover-outline-color
+--md-comp-outlined-card-hover-state-layer-color
+--md-comp-outlined-card-hover-state-layer-opacity
+--md-comp-outlined-card-focus-indicator-color
+--md-comp-outlined-card-focus-indicator-thickness
+--md-comp-outlined-card-focus-indicator-outline-offset
+--md-comp-outlined-card-focus-container-elevation
+--md-comp-outlined-card-focus-outline-color
+--md-comp-outlined-card-focus-state-layer-color
+--md-comp-outlined-card-focus-state-layer-opacity
+--md-comp-outlined-card-pressed-container-elevation
+--md-comp-outlined-card-pressed-outline-color
+--md-comp-outlined-card-pressed-state-layer-color
+--md-comp-outlined-card-pressed-state-layer-opacity
+--md-comp-outlined-card-dragged-container-elevation
+--md-comp-outlined-card-dragged-outline-color
+--md-comp-outlined-card-dragged-state-layer-color
+--md-comp-outlined-card-dragged-state-layer-opacity
+```
 
 **Example: Changing the card margins**
 
@@ -136,6 +199,14 @@ You can customize the appearance of the Card component by overriding its global 
     <p>This is another filled card.</p>
   </div>
 </div>
+```
+
+To change the amount of rounding of a filled card's corners, you could for example add a CSS rule to your stylesheet:
+
+```CSS
+.micl-card-filled {
+  --md-comp-filled-card-container-shape: 24px;
+}
 ```
 
 ## Compatibility
