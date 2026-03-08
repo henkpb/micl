@@ -299,9 +299,6 @@ export default (() =>
 
             mode?.addEventListener('click', () =>
             {
-                const icon = mode.textContent;
-                mode.textContent = mode.dataset.miclalt || icon;
-                mode.dataset.miclalt = icon;
                 dial?.classList.toggle('micl-hidden');
                 inputs.forEach(input =>
                 {

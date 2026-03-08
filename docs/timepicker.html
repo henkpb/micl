@@ -69,7 +69,7 @@
                                         <div class="micl-timepicker__dial"></div>
                                     </div>
                                     <div class="micl-dialog__actions">
-                                        <button type="button" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--square material-symbols-outlined" data-alticon="schedule">keyboard</button>
+                                        <button type="button" id="btn1" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn1" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
                                         <div>
                                             <button class="micl-button-text-s" value="">Cancel</button>
                                             <button class="micl-button-text-s" value="OK">OK</button>
@@ -97,7 +97,7 @@
                                         <div class="micl-timepicker__dial micl-hidden"></div>
                                     </div>
                                     <div class="micl-dialog__actions">
-                                        <button type="button" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--square material-symbols-outlined" data-alticon="keyboard">schedule</button>
+                                        <button type="button" id="btn2" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn2" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
                                         <div>
                                             <button class="micl-button-text-s" value="">Cancel</button>
                                             <button class="micl-button-text-s" value="OK">OK</button>
@@ -132,7 +132,16 @@
       &lt;div class="micl-timepicker__dial"&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="micl-dialog__actions"&gt;
-      &lt;button type="button" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--square material-symbols-outlined" data-alticon="schedule"&gt;keyboard&lt;/button&gt;
+      &lt;button
+        type="button"
+        id="btn"
+        class="micl-timepicker__inputmode micl-iconbutton-standard-s
+               micl-button--toggle micl-button--square material-symbols-outlined"
+        commandfor="btn"
+        command="--micl-toggle"
+        data-miclicon="keyboard"
+        data-micliconselected="schedule"
+      &gt;&lt;/button&gt;
       &lt;div&gt;
         &lt;button class="micl-button-text-s" value=""&gt;Cancel&lt;/button&gt;
         &lt;button class="micl-button-text-s" value="OK"&gt;OK&lt;/button&gt;

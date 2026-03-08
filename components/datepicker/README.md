@@ -12,7 +12,7 @@ The Date Picker component is an extension of the [**Dialog** component](../dialo
     <div class="micl-dialog__headline">
       <h2 id="mytitle">Enter date</h2>
       <span class="micl-dialog__supporting-text">Select date</span>
-      <button type="button" class="micl-datepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined" data-miclalt="calendar_today">edit</button>
+      <button type="button" id="btn" class="micl-datepicker__inputmode micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" commandfor="btn" command="--micl-toggle" data-miclicon="edit" data-micliconselected="calendar_today"></button>
       <hr class="micl-divider">
       <div class="micl-datepicker__month-selector">
         <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous month">chevron_left</button>
@@ -109,7 +109,8 @@ Any item not required for your implementation may be omitted.
 To allow users to toggle between the calendar view and the manual date input, add an icon button to the `micl-dialog__headline` area:
 
 - Class: `micl-datepicker__inputmode`
-- Data Attribute: `data-miclalt="calendar_today"` (defines the icon to show when toggled).
+- Data Attribute: `data-miclicon="edit"` (defines the icon to show).
+- Data Attribute: `data-micliconselected="calendar_today"` (defines the icon to show when toggled).
 
 ### Integration
 You can trigger the Date picker component from standard input fields or buttons.
