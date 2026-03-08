@@ -22,33 +22,29 @@
     </style>
 </head>
 <body class="micl-window light">
-    <dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest">
+    <dialog id="mynavigationrail" class="micl-navigationrail" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest">
         <div class="micl-navigationrail__headline">
             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
         </div>
         <div class="micl-navigationrail__content">
-            <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
-            <label for="item1" class="micl-navigationrail__item" tabindex="0">
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox">97</span>
-            </label>
-            <input type="radio" id="item2" name="navitem" value="email_outbox">
-            <label for="item2" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-inline-offset:-16px">97</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
-            </label>
-            <input type="radio" id="item3" name="navitem" value="email_favorites">
-            <label for="item3" class="micl-navigationrail__item" tabindex="0">
+            </a>
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites"></span>
-            </label>
-            <input type="radio" id="item4" name="navitem" value="email_trash">
-            <label for="item4" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-inline-offset:-16px"></span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
                 <span class="micl-navigationrail__text">Trash</span>
-            </label>
+            </a>
         </div>
     </dialog>
 
@@ -249,7 +245,7 @@
                                                     <div class="micl-timepicker__dial"></div>
                                                 </div>
                                                 <div class="micl-dialog__actions">
-                                                    <button type="button" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--square material-symbols-outlined" data-alticon="schedule">keyboard</button>
+                                                    <button type="button" id="btn" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
                                                     <div>
                                                         <button class="micl-button-text-s" value="">Cancel</button>
                                                         <button class="micl-button-text-s" value="OK">OK</button>

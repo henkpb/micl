@@ -21,50 +21,67 @@
 
 export const navigationrailSelector = '.micl-navigationrail';
 
-export default (() =>
+interface NavigationRailState {
+    boundHandleClick: (event: Event) => void;
+}
+
+const navigationrailStates = new WeakMap<HTMLElement, NavigationRailState>();
+
+export default
 {
-    return {
-        keydown: (event: Event): void =>
-        {
-            if (
-                !(event instanceof KeyboardEvent)
-                || !(event.target instanceof HTMLLabelElement)
-                || !event.target.matches('label.micl-navigationrail__item[for]')
-            ) {
-                return;
-            }
-            const input = document.getElementById(event.target.htmlFor) as HTMLInputElement;
-            if (!input) {
-                return;
-            }
-
-            switch (event.key) {
-                case ' ':
-                    event.preventDefault();
-                case 'Enter':
-                    if (!input.checked) {
-                        input.checked = !input.checked;
-                    }
-
-                    const el = (event.target as Element).querySelector('a[href]');
-                    if (el instanceof HTMLAnchorElement) {
-                        el.click();
-                    }
-                    break;
-                default:
-            }
-        },
-
-        initialize: (element: HTMLElement): void =>
-        {
-            if (element.dataset.miclinitialized) return;
-
-            element.dataset.miclinitialized = '1';
-
-            element.querySelectorAll<HTMLAnchorElement>('label[for] a[href]').forEach(link =>
-            {
-                link.setAttribute('tabindex', '-1');
-            });
+    initialize: (element: HTMLElement): void =>
+    {
+        if (!element.matches(navigationrailSelector) || element.dataset.miclinitialized) {
+            return;
         }
-    };
-})();
+
+        element.dataset.miclinitialized = '1';
+
+        const boundHandleClick = (event: Event): void =>
+        {
+            const clickedItem = (event.target as HTMLElement).closest<HTMLAnchorElement>(
+                'a.micl-navigationrail__item'
+            );
+
+            if (clickedItem) {
+                const allItems = element.querySelectorAll<HTMLAnchorElement>(
+                    'a.micl-navigationrail__item'
+                );
+                allItems.forEach(item => item.removeAttribute('aria-current'));
+
+                clickedItem.setAttribute('aria-current', 'page');
+            }
+        };
+
+        navigationrailStates.set(element, { boundHandleClick });
+
+        element.addEventListener('click', boundHandleClick);
+    },
+
+    keydown: (event: Event): void =>
+    {
+        if (
+            !(event instanceof KeyboardEvent)
+            || !(event.target instanceof HTMLElement)
+            || !event.target.matches('.micl-navigationrail__item')
+        ) {
+            return;
+        }
+
+        if (event.keyCode === 32 || event.key === ' ') {
+            event.preventDefault();
+            event.target.click();
+        }
+    },
+
+    cleanup: (element: HTMLElement): void =>
+    {
+        const state = navigationrailStates.get(element);
+
+        if (state) {
+            element.removeEventListener('click', state.boundHandleClick);
+        }
+
+        delete element.dataset.miclinitialized;
+    }
+};
