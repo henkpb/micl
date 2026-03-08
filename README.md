@@ -51,6 +51,8 @@ Copy the main `micl.css` file to your distribution folder and include it in your
 <link rel="stylesheet" type="text/css" href="path/to/dist/micl.css">
 ```
 
+The main MICL CSS file can also be found on CDN networks, like on jsDelivr: `https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.css`
+
 ### 3. Add the HTML & JavaScript
 Here is a simple example of a [Card component](components/card/README.md).
 
@@ -76,7 +78,8 @@ Copy the main `micl.js` file to your distribution folder and include it in your 
 ```HTML
 <script src="path/to/dist/micl.js"></script>
 ```
-This will initialize all MICL components, including those that will be added to the DOM later on.
+
+The main MICL JavaScript file can also be found on CDN networks, like on jsDelivr: `https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.js`
 
 ### 4. Add a font
 MICL uses the [**Google Sans**](https://fonts.google.com/specimen/Google+Sans) as its default font. Include a reference to this font in your application.
@@ -113,13 +116,19 @@ The library currently consists of the following components:
 - [x] [Select](components/select/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
 - [x] [Slider](components/slider/README.md)
-- [ ] [Snackbar]
+- [x] [Snackbar](components/snackbar/README.md)
 - [x] [Stepper](components/stepper/README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)
 - [x] [Time picker](components/timepicker/README.md)
 
 ## Change Log ↪️
+
+### 7.0.0 (08.03.2026)
+- **BREAKING**: Use `<a>` instead of `<label>` inside Navigation rail.
+- **BREAKING**: Use `inert` for disabled cards instead of `micl-card--disabled`.
+- **Snackbar**: New component.
+- **Toggle buttons**: Support for toggling icons.
 
 ### 6.0.0 (23.12.2025)
 - **BREAKING**: Use command-attribute to control toggle buttons.
