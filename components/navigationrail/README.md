@@ -4,21 +4,19 @@ This component implements the [Material Design 3 Expressive Navigation rail](htt
 ## Basic Usage
 
 ### HTML
-To create a simple navigation rail, use a `<nav>` element with the `micl-navigationrail` class. Inside, use an `input type="radio"` group to create the selectable navigation items. The `input` elements must share the same `name` attribute to ensure that only one item can be selected at a time. The `label` elements are associated with their respective inputs using the `for` attribute.
+To create a simple navigation rail, use a `<nav>` element with the `micl-navigationrail` class. Inside, use anchor elements `<a>` to create the selectable navigation items.
 
 ```HTML
 <nav id="mynavigationrail" class="micl-navigationrail">
-  <div class="micl-navigationrail__content">
-    <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
-    <label for="item1" class="micl-navigationrail__item" tabindex="0">
+  <div class="micl-navigationrail__content" role="menu">
+    <a href="#" class="micl-navigationrail__item" role="menuitem" aria-current="page">
       <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
       <span class="micl-navigationrail__text">Inbox</span>
-    </label>
-    <input type="radio" id="item2" name="navitem" value="email_outbox">
-    <label for="item2" class="micl-navigationrail__item" tabindex="0">
+    </a>
+    <a href="#" class="micl-navigationrail__item" role="menuitem">
       <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
       <span class="micl-navigationrail__text">Outbox</span>
-    </label>
+    </a>
   </div>
 </nav>
 ```
@@ -62,7 +60,7 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
       aria-label="Toggle navigation rail"
     ></button>
   </div>
-  <div class="micl-navigationrail__content">
+  <div class="micl-navigationrail__content" role="menu">
     ...
   </div>
 </nav>
@@ -70,57 +68,33 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
 
 When the user clicks the menu button, the navigation rail is expanded and the toggle button is given the `micl-button--selected` class and the `micl-button--toggled` class that indicates that the toggle button has been clicked at least once.
 
-### Popover expanded navigation rail
-
-Add the `popover` attribute to the navigation rail, and the `popovertarget` attribute to the menu button. The value of the `popovertarget` attribute must be the `id` of the navigation rail.
-
-```HTML
-<nav id="mynavigationrail" class="micl-navigationrail" popover="manual">
-  <div class="micl-navigationrail__headline">
-    <button
-      type="button"
-      class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
-      popovertarget="mynavigationrail"
-      aria-label="Toggle navigation rail"
-    >menu</button>
-  </div>
-  <div class="micl-navigationrail__content">
-    ...
-  </div>
-</nav>
-```
-
-> [!WARNING]
-> The **popover** navigation rail component adds CSS rules to the element with the `.micl-window` class to properly resize the main content area when the navigation rail is collapsed. Overriding these rules may cause the component to behave unexpectedly. The rules that are applied are:
->
-> ```CSS
-> margin-inline-start: var(--md-sys-navigationrail-collapsed-width);
-> ```
-
 ### Modal navigation rail
 
 A **modal** navigation rail is hidden until the user clicks a menu button. When shown, the **expanded** navigation rail is displayed on top of other page content. Use a `<dialog>` element instead of a `<nav>`.
 
 ```HTML
-<dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest">
+<dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest" aria-modal="true">
   <div class="micl-navigationrail__headline">
     <button
       type="button"
-      class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
-      popovertarget="mynavigationrail"
-      aria-label="Toggle navigation rail"
+      class="micl-iconbutton-standard-s material-symbols-outlined"
+      command="close"
+      commandfor="mynavigationrail"
+      aria-label="Close navigation rail"
+      autofocus
     >menu_open</button>
   </div>
-  <div class="micl-navigationrail__content">
+  <div class="micl-navigationrail__content" role="menu">
     ...
   </div>
 </dialog>
 
 <button
   type="button"
-  class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
-  popovertarget="mynavigationrail"
-  aria-label="Toggle navigation rail"
+  class="micl-iconbutton-standard-s material-symbols-outlined"
+  command="show-modal"
+  commandfor="mynavigationrail"
+  aria-label="Open navigation rail"
 >menu</button>
 ```
 
@@ -131,10 +105,12 @@ You can customize the appearance of the Navigation rail component by overriding 
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| --md-sys-navigationrail-collapsed-width | 96px | The width of the collapsed navigation rail |
-| --md-sys-navigationrail-expanded-maxwidth | 360px | The largest allowed width of the expanded navigation rail |
-| --md-sys-navigationrail-expanded-minwidth | 220px | The smallest allowed width of the expanded navigation rail |
+| --md-comp-nav-rail-divider-thickness | 0px | The width of the vertical divider at the end of the rail |
+| --md-comp-nav-rail-divider-color |  | The color of the vertical divider |
 
+The Navigation rail component supports the following CSS variables, as defined in the [Material Design 3 Expressive Navigation rail Specification](https://m3.material.io/components/navigation-rail/specs):
+
+```CSS
 --md-comp-nav-rail-item-icon-size
 --md-comp-nav-rail-item-active-indicator-leading-space
 --md-comp-nav-rail-item-active-indicator-icon-label-space
@@ -163,25 +139,22 @@ You can customize the appearance of the Navigation rail component by overriding 
 --md-comp-nav-rail-item-vertical-active-indicator-height
 --md-comp-nav-rail-item-vertical-active-indicator-width
 --md-comp-nav-rail-item-horizontal-full-width-leading-space
-
+```
 
 **Example: Changing the width of the collapsed navigation rail**
 
 ```HTML
-<div style="--md-sys-navigationrail-collapsed-width:80px">
+<div style="--md-comp-nav-rail-collapsed-container-width:80px">
   <nav id="mynavigationrail" class="micl-navigationrail">
     ...
   </nav>
 </div>
 ```
 
-To add a vertical divider of the to the navigation rail, assign one to the following CSS variable:
+To add a vertical divider of the to the navigation rail, set the following CSS variable:
 
 ```CSS
 #mynavigationrail {
-  --md-sys-divider-thickness: 1;
+  --md-comp-nav-rail-divider-thickness: 1px;
 }
 ```
-
-## Compatibility
-This component uses the Popover API, which might not be supported in all browsers. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API#api.htmlelement.popover) for details.

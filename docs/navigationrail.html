@@ -21,12 +21,12 @@
 </head>
 <body class="micl-window light">
     <nav id="mynavigationrail1" class="micl-navigationrail micl-hidden">
-        <div class="micl-navigationrail__content" role="menu">
+        <div class="micl-navigationrail__content" role="menu" role="menuitem" aria-current="page">
             <a href="#" class="micl-navigationrail__item">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
             </a>
-            <a href="#" class="micl-navigationrail__item">
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
             </a>
@@ -55,7 +55,7 @@
 
     <dialog id="mynavigationrail4" class="micl-navigationrail micl-hidden" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest" aria-modal="true">
         <div class="micl-navigationrail__headline">
-            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" command="close" commandfor="mynavigationrail4" aria-label="Toggle navigation rail" autofocus>menu_open</button>
+            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail4" aria-label="Close navigation rail" autofocus>menu_open</button>
         </div>
         <div class="micl-navigationrail__content" role="menu">
             <a href="#" class="micl-navigationrail__item" role="menuitem">
