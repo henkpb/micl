@@ -21,6 +21,19 @@
 
 export const buttonSelector = 'button.micl-button--toggle';
 
+const toggleIcon = (button: HTMLButtonElement): void =>
+{
+    const element = button.querySelector<HTMLElement>('.micl-button__icon') ?? button;
+
+    const selected = button.classList.contains('micl-button--selected');
+    if (element.dataset.micliconselected) {
+        element.classList.toggle(element.dataset.micliconselected, selected);
+    }
+    if (element.dataset.miclicon) {
+        element.classList.toggle(element.dataset.miclicon, !selected);
+    }
+};
+
 export default (() =>
 {
     return {
@@ -35,6 +48,8 @@ export default (() =>
             ) {
                 target.classList.add('micl-button--toggled');
                 target.classList.toggle('micl-button--selected');
+
+                toggleIcon(target);
             }
         },
 
@@ -47,6 +62,8 @@ export default (() =>
                 return;
             }
             element.dataset.miclinitialized = '1';
+
+            toggleIcon(element);
 
             element.addEventListener('command', this.command);
         },

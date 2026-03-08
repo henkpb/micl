@@ -79,6 +79,17 @@ A toggle button has two states: **on** (selected) and **off** (unselected). To c
 
 The self-targeting `command` property (`--micl-toggle`) toggles the button state whenever the user interacts with the button.
 
+To use different icons for the **on** state and the **off** state, remove the icon name from the button and add the `data-miclicon` (the name of the **on** icon) and `data-micliconselected` (the name of the **off** icon) attributes:
+
+```HTML
+  ...
+  data-miclicon="icon_for_on"
+  data-micliconselected="icon_for_off"
+></button>
+```
+
+Note that the name of the currently used icon is also added to the `class` attribute to support icon libraries using class names to identify icons.
+
 ## Icons
 The examples above use [Google Material Symbols](https://fonts.google.com/icons). For buttons using these icons, a fill-style of `1` is applied when the button is active or hovered over. To enable this effect, ensure your `link` tag includes `FILL@0..1`.
 

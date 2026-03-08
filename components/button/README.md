@@ -84,7 +84,22 @@ To add a leading icon to a button, include an element with the `micl-button__ico
 </button>
 ```
 
-This example uses a [Google Material Symbol](https://fonts.google.com/icons). For buttons using these icons, a fill-style of `1` is applied when the button is selected or hovered over. To enable this effect, ensure your `link` tag includes `FILL@0..1`.
+To use different icons for the **on** state and the **off** state in a toggle button, remove the icon name from the `micl-button__icon` element and add the `data-miclicon` (the name of the **on** icon) and `data-micliconselected` (the name of the **off** icon) attributes:
+
+```HTML
+  ...
+  <span
+    class="micl-button__icon material-symbols-outlined"
+    data-miclicon="icon_for_on"
+    data-micliconselected="icon_for_off"
+    aria-hidden="true"
+  ><span>
+  ...
+```
+
+Note that the name of the currently used icon is also added to the `class` attribute to support icon libraries using class names to identify icons.
+
+These examples use [Google Material Symbols](https://fonts.google.com/icons). For buttons using these icons, a fill-style of `1` is applied when the button is selected or hovered over. To enable this effect, ensure your `link` tag includes `FILL@0..1`.
 
 ```HTML
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" rel="stylesheet">
