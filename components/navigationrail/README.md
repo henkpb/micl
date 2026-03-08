@@ -1,5 +1,5 @@
 # Navigation rail
-This component implements the [Material Design 3 Expressive Navigation rail](https://m3.material.io/components/navigation-rail/overview) design.
+This component implements the [Material Design 3 Expressive Navigation rail](https://m3.material.io/components/navigation-rail/overview) design. A navigation rail houses destinations and functionality for the application.
 
 ## Basic Usage
 
@@ -53,10 +53,14 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
   <div class="micl-navigationrail__headline">
     <button
       type="button"
+      id="mybutton"
       class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
-      data-miclalt="menu_open"
+      command="--micl-toggle"
+      commandfor="mybutton"
+      data-miclicon="menu"
+      data-micliconselected="menu_open"
       aria-label="Toggle navigation rail"
-    >menu</button>
+    ></button>
   </div>
   <div class="micl-navigationrail__content">
     ...
@@ -77,7 +81,6 @@ Add the `popover` attribute to the navigation rail, and the `popovertarget` attr
       type="button"
       class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
       popovertarget="mynavigationrail"
-      data-miclalt="menu_open"
       aria-label="Toggle navigation rail"
     >menu</button>
   </div>
@@ -105,9 +108,8 @@ A **modal** navigation rail is hidden until the user clicks a menu button. When 
       type="button"
       class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
       popovertarget="mynavigationrail"
-      data-miclalt="menu_open"
       aria-label="Toggle navigation rail"
-    >menu</button>
+    >menu_open</button>
   </div>
   <div class="micl-navigationrail__content">
     ...
@@ -132,6 +134,36 @@ You can customize the appearance of the Navigation rail component by overriding 
 | --md-sys-navigationrail-collapsed-width | 96px | The width of the collapsed navigation rail |
 | --md-sys-navigationrail-expanded-maxwidth | 360px | The largest allowed width of the expanded navigation rail |
 | --md-sys-navigationrail-expanded-minwidth | 220px | The smallest allowed width of the expanded navigation rail |
+
+--md-comp-nav-rail-item-icon-size
+--md-comp-nav-rail-item-active-indicator-leading-space
+--md-comp-nav-rail-item-active-indicator-icon-label-space
+--md-comp-nav-rail-item-active-indicator-trailing-space
+--md-comp-nav-rail-item-container-height
+--md-comp-nav-rail-item-short-container-height
+--md-comp-nav-rail-item-container-shape
+--md-comp-nav-rail-item-container-vertical-space
+--md-comp-nav-rail-item-header-space-minimum
+--md-comp-nav-rail-collapsed-container-width
+--md-comp-nav-rail-collapsed-narrow-container-width
+--md-comp-nav-rail-collapsed-container-elevation
+--md-comp-nav-rail-collapsed-container-shape
+--md-comp-nav-rail-collapsed-container-color
+--md-comp-nav-rail-collapsed-item-vertical-space
+--md-comp-nav-rail-collapsed-top-space
+--md-comp-nav-rail-expanded-container-width-minimum
+--md-comp-nav-rail-expanded-container-width-maximum
+--md-comp-nav-rail-expanded-top-space
+--md-comp-nav-rail-expanded-container-elevation
+--md-comp-nav-rail-expanded-modal-container-elevation
+--md-comp-nav-rail-expanded-container-color
+--md-comp-nav-rail-expanded-modal-container-color
+--md-comp-nav-rail-expanded-container-shape
+--md-comp-nav-rail-expanded-modal-container-shape
+--md-comp-nav-rail-item-vertical-active-indicator-height
+--md-comp-nav-rail-item-vertical-active-indicator-width
+--md-comp-nav-rail-item-horizontal-full-width-leading-space
+
 
 **Example: Changing the width of the collapsed navigation rail**
 

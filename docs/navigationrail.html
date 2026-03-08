@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,delete,favorite,home,inbox,menu,menu_open,outbox&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,delete,favorite,home,inbox,menu,menu_open,newspaper,outbox&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -20,41 +20,72 @@
     </style>
 </head>
 <body class="micl-window light">
-    <dialog id="mynavigationrail1" class="micl-navigationrail" closedby="closerequest">
-    <!-- <nav id="mynavigationrail1" class="micl-navigationrail" popover="manual"> -->
-        <div class="micl-navigationrail__headline">
-            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" command="close" commandfor="mynavigationrail1" data-miclalt="menu_open" aria-label="Toggle navigation rail">menu</button>
-        </div>
-        <div class="micl-navigationrail__content">
-            <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
-            <label for="item1" class="micl-navigationrail__item" tabindex="0">
-                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+    <nav id="mynavigationrail1" class="micl-navigationrail micl-hidden">
+        <div class="micl-navigationrail__content" role="menu">
+            <a href="#" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox">97</span>
-            </label>
-            <input type="radio" id="item2" name="navitem" value="email_outbox">
-            <label for="item2" class="micl-navigationrail__item" tabindex="0">
+            </a>
+            <a href="#" class="micl-navigationrail__item">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
-            </label>
-            <input type="radio" id="item3" name="navitem" value="email_favorites">
-            <label for="item3" class="micl-navigationrail__item" tabindex="0">
-                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
-                <span class="micl-navigationrail__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites"></span>
-            </label>
-            <input type="radio" id="item4" name="navitem" value="email_trash">
-            <label for="item4" class="micl-navigationrail__item" tabindex="0">
+            </a>
+        </div>
+    </nav>
+
+    <nav id="mynavigationrail2" class="micl-navigationrail micl-hidden">
+        <div class="micl-navigationrail__headline">
+            <button type="button" id="btn2" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" command="--micl-toggle" commandfor="btn2" data-miclicon="menu" data-micliconselected="menu_open" aria-label="Toggle navigation rail"></button>
+        </div>
+        <div class="micl-navigationrail__content" role="menu">
+            <a href="#" class="micl-navigationrail__item" role="menuitem" aria-current="page">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
+                <span class="micl-navigationrail__text">Inbox</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationrail__text">Outbox</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
                 <span class="micl-navigationrail__text">Trash</span>
-            </label>
+            </a>
         </div>
-    <!-- </nav> -->
+    </nav>
+
+    <dialog id="mynavigationrail4" class="micl-navigationrail micl-hidden" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest" aria-modal="true">
+        <div class="micl-navigationrail__headline">
+            <button type="button" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" command="close" commandfor="mynavigationrail4" aria-label="Toggle navigation rail" autofocus>menu_open</button>
+        </div>
+        <div class="micl-navigationrail__content" role="menu">
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationrail__text">Inbox</span>
+                <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-inline-offset:-16px">97</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationrail__text">Outbox</span>
+            </a>
+            <a href="https://www.nytimes.com" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
+                <span class="micl-navigationrail__text">Newspaper</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationrail__text">Favorites</span>
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-inline-offset:-16px"></span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                <span class="micl-navigationrail__text">Trash</span>
+            </a>
+        </div>
     </dialog>
     <main class="micl-body">
         <section class="micl-pane">
             <header class="micl-appbar micl-appbar--large">
-                <button type="button" class="micl-iconbutton-standard-m micl-button--toggle material-symbols-outlined" style="margin:8px 0 0 8px" command="show-modal" commandfor="mynavigationrail1" aria-label="Toggle navigation rail">menu</button>
+                <button type="button" id="btn4" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined micl-hidden" command="show-modal" commandfor="mynavigationrail4" aria-label="Toggle navigation rail">menu</button>
                 <div class="micl-appbar__headline">
                     <h1>Navigation rails</h1>
                     <p class="micl-appbar__subtitle">Showcasing MICL navigation rails</p>
@@ -62,7 +93,20 @@
                 <div id="settings-placeholder" class="micl-appbar__trailing"></div>
             </header>
             <div style="display:flex;flex-wrap:wrap">
-                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled md-sys-typescale-body-medium" style="box-sizing:border-box;padding:16px">
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="nav1" name="nav" class="micl-radio" value="1">
+                        <label for="nav1">Collapsed navigation rail</label>
+                    </div>
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="nav2" name="nav" class="micl-radio" value="2">
+                        <label for="nav2">Collapsed rail with toggle button</label>
+                    </div>
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="nav4" name="nav" class="micl-radio" value="4">
+                        <label for="nav4">Modal navigation rail</label>
+                    </div>
+                </div>
                 <div class="micl-card-filled"></div>
                 <div class="micl-card-filled"></div>
                 <div class="micl-card-filled"></div>
@@ -80,5 +124,15 @@
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>
+    <script>
+        document.querySelectorAll('.micl-radio').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.querySelectorAll('.micl-navigationrail').forEach(rail => {
+                    rail.classList.toggle('micl-hidden', !rail.matches(`#mynavigationrail${radio.value}`));
+                });
+                document.getElementById('btn4')?.classList.toggle('micl-hidden', radio.value != '4');
+            });
+        });
+    </script>
 </body>
 </html>

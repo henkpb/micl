@@ -22,33 +22,29 @@
     </style>
 </head>
 <body class="micl-window light">
-    <dialog id="mynavigationrail" class="micl-navigationrail" closedby="closerequest">
+    <dialog id="mynavigationrail" class="micl-navigationrail" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest">
         <div class="micl-navigationrail__headline">
             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
         </div>
         <div class="micl-navigationrail__content">
-            <input type="radio" id="item1" name="navitem" value="email_inbox" checked>
-            <label for="item1" class="micl-navigationrail__item" tabindex="0">
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox">97</span>
-            </label>
-            <input type="radio" id="item2" name="navitem" value="email_outbox">
-            <label for="item2" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-inline-offset:-16px">97</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
-            </label>
-            <input type="radio" id="item3" name="navitem" value="email_favorites">
-            <label for="item3" class="micl-navigationrail__item" tabindex="0">
+            </a>
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites"></span>
-            </label>
-            <input type="radio" id="item4" name="navitem" value="email_trash">
-            <label for="item4" class="micl-navigationrail__item" tabindex="0">
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-inline-offset:-16px"></span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
                 <span class="micl-navigationrail__text">Trash</span>
-            </label>
+            </a>
         </div>
     </dialog>
 
@@ -125,7 +121,7 @@
                     </div>
 
                     <div class="micl-card-outlined">
-                        <img class="micl-card__image" alt="city" src="card-city.webp">
+                        <img class="micl-card__image" alt="city" src="card-city.webp" aria-hidden="true">
                         <div class="micl-card__headline-l">
                             <h2>Card</h2>
                         </div>
@@ -196,7 +192,7 @@
                                     </span>
                                 </li>
                                 <li class="micl-list-item-three">
-                                    <span class="micl-list-item__image" style="background-image:url(card-names.webp);background-position:center"></span>
+                                    <span class="micl-list-item__image" style="background-image:url(card-names.webp);background-position:center" aria-hidden="true"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Three-line list item</span>
                                         <span class="micl-list-item__supporting-text">Supporting text</span>
@@ -249,7 +245,7 @@
                                                     <div class="micl-timepicker__dial"></div>
                                                 </div>
                                                 <div class="micl-dialog__actions">
-                                                    <button type="button" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--square material-symbols-outlined" data-alticon="schedule">keyboard</button>
+                                                    <button type="button" id="btn" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
                                                     <div>
                                                         <button class="micl-button-text-s" value="">Cancel</button>
                                                         <button class="micl-button-text-s" value="OK">OK</button>
@@ -385,6 +381,7 @@
                             <p><a href="select.html" class="md-sys-typescale-body-large">Selects</a></p>
                             <p><a href="sidesheet.html" class="md-sys-typescale-body-large">Side sheets</a></p>
                             <p><a href="slider.html" class="md-sys-typescale-body-large">Sliders</a></p>
+                            <p><a href="snackbar.html" class="md-sys-typescale-body-large">Snackbars</a></p>
                             <p><a href="stepper.html" class="md-sys-typescale-body-large">Steppers</a></p>
                             <p><a href="switch.html" class="md-sys-typescale-body-large">Switches</a></p>
                             <p><a href="textfield.html" class="md-sys-typescale-body-large">Text fields</a></p>
@@ -395,8 +392,24 @@
             </div>
         </section>
     </main>
+    <div id="mysnackbar" class="micl-snackbar" popover data-micldelay="7000" role="status" aria-atomic="true">
+        <span class="micl-snackbar__supporting-text">This is the Snackbar component</span>
+        <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar" popovertargetaction="hide">close</button>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>
+    <script>
+        const loaded = () => {
+            document.removeEventListener('DOMContentLoaded', loaded);
+            document.querySelector('#mysnackbar')?.showPopover();
+        };
+        if (document.readyState !== 'loading') {
+            document.querySelector('#mysnackbar')?.showPopover();
+        }
+        else {
+            document.addEventListener('DOMContentLoaded', loaded);
+        }
+    </script>
 </body>
 </html>

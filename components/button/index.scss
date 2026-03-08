@@ -100,6 +100,12 @@ button.micl-button-outlined-xl {
         font-variation-settings: 'FILL' 0;
         transition: font-variation-settings var(--md-sys-button-motion-duration) linear;
     }
+    &.micl-button--toggle:not(.micl-button--selected) .micl-button__icon::before {
+        content: attr(data-miclicon);
+    }
+    &.micl-button--toggle.micl-button--selected .micl-button__icon::before {
+        content: attr(data-micliconselected);
+    }
 }
 
 button.micl-button-text-xs,

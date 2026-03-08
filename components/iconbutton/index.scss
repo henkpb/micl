@@ -95,6 +95,12 @@ button.micl-iconbutton-outlined-xl {
     &.micl-button--toggle.micl-button--selected {
         font-variation-settings: 'FILL' 1;
     }
+    &.micl-button--toggle:not(.micl-button--selected)::before {
+        content: attr(data-miclicon);
+    }
+    &.micl-button--toggle.micl-button--selected::before {
+        content: attr(data-micliconselected);
+    }
 }
 
 button.micl-iconbutton-standard-xs,
@@ -114,6 +120,9 @@ button.micl-iconbutton-outlined-xs {
     &::before {
         content: "";
         position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         block-size: var(--md-sys-target-size, 48px);
         inline-size: 100%;
         min-inline-size: var(--md-sys-target-size, 48px);
@@ -162,6 +171,9 @@ button.micl-iconbutton-outlined-s {
     &::before {
         content: "";
         position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         block-size: var(--md-sys-target-size, 48px);
         inline-size: 100%;
         min-inline-size: var(--md-sys-target-size, 48px);

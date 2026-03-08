@@ -21,36 +21,98 @@
 
 export const snackbarSelector = '.micl-snackbar';
 
-export default (() =>
+interface SnackbarState {
+    timeoutid?: number;
+    delay: number;
+    boundHandleToggle: (event: Event) => void;
+    boundClearTimer: () => void;
+    boundHandleMouseLeave: () => void;
+}
+
+const snackbarStates = new WeakMap<HTMLElement, SnackbarState>();
+
+const clearTimer = (element: HTMLElement): void =>
 {
-    return {
-        initialize: (element: HTMLElement): void =>
-        {
-            if (
-                !element.matches(snackbarSelector)
-                || element.dataset.miclinitialized
-            ) {
-                return;
-            }
-            element.dataset.miclinitialized = '1';
+    const state = snackbarStates.get(element);
+    if (state && state.timeoutid) {
+        clearTimeout(state.timeoutid);
+        state.timeoutid = undefined;
+    }
+};
 
-            const delay = parseInt(element.dataset.micldelay || '0', 10);
-            if (!isNaN(delay) && delay > 0) {
-                element.addEventListener('toggle', event =>
-                {
-                    let timeoutid = parseInt(element.dataset.micltimeoutid || '0', 10);
-                    if (timeoutid > 0) {
-                        clearTimeout(timeoutid);
-                        delete element.dataset.micltimeoutid;
-                    }
+const startTimer = (element: HTMLElement): void =>
+{
+    clearTimer(element);
+    const state = snackbarStates.get(element);
+    if (!state) return;
 
-                    if ((event as ToggleEvent).oldState === 'closed') {
-                        // The snackbar has just opened.
-                        timeoutid = window.setTimeout(() => { element.hidePopover(); }, delay);
-                        element.dataset.micltimeoutid = `${timeoutid}`;
-                    }
-                });
-            }
+    state.timeoutid = window.setTimeout(() => {
+        if (element.isConnected && element.matches(':popover-open')) {
+            element.hidePopover();
         }
-    };
-})();
+    }, state.delay);
+};
+
+export default
+{
+    initialize: (element: HTMLElement): void =>
+    {
+        if (!element.matches(snackbarSelector) || element.dataset.miclinitialized) {
+            return;
+        }
+
+        const delayAttr = element.dataset.micldelay;
+        const delay = delayAttr ? parseInt(delayAttr, 10) : 0;
+
+        if (isNaN(delay) || delay <= 0) return;
+
+        element.dataset.miclinitialized = '1';
+
+        // Create bound handlers specifically for THIS snackbar.
+        const boundClearTimer = () => clearTimer(element);
+
+        const boundHandleToggle = (event: Event): void =>
+        {
+            const toggleEvent = event as ToggleEvent;
+            if (toggleEvent.newState === 'open') {
+                startTimer(element);
+            }
+            else {
+                clearTimer(element);
+            }
+        };
+
+        const boundHandleMouseLeave = (): void =>
+        {
+            if (element.matches(':popover-open')) {
+                startTimer(element);
+            }
+        };
+
+        // Save these references in the WeakMap.
+        snackbarStates.set(element, {
+            delay,
+            boundHandleToggle,
+            boundClearTimer,
+            boundHandleMouseLeave
+        });
+
+        element.addEventListener('toggle', boundHandleToggle);
+        element.addEventListener('mouseenter', boundClearTimer);
+        element.addEventListener('mouseleave', boundHandleMouseLeave);
+    },
+
+    cleanup: (element: HTMLElement): void =>
+    {
+        const state = snackbarStates.get(element);
+
+        if (state) {
+            clearTimer(element);
+            element.removeEventListener('toggle', state.boundHandleToggle);
+            element.removeEventListener('mouseenter', state.boundClearTimer);
+            element.removeEventListener('mouseleave', state.boundHandleMouseLeave);
+            snackbarStates.delete(element);
+        }
+        delete element.dataset.miclinitialized;
+    }
+};

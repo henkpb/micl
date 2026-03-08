@@ -35,32 +35,46 @@
                         </div>
                         <p class="micl-card__supporting-text">Click a button to open one of the MICL snackbars.</p>
                         <div class="micl-card__content docs-buttons">
-                            <div id="mysnackbar1" class="micl-snackbar" popover="manual" data-micldelay="4000">
+                            <div id="mysnackbar1" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
                                 <span class="micl-snackbar__supporting-text">Message sent</span>
                                 <button type="button" class="micl-button-text-s">Action</button>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar1">Open Snackbar 1</button>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar1">Open Snackbar with action button</button>
 
-                            <div id="mysnackbar2" class="micl-snackbar" popover="manual" data-micldelay="4000">
+                            <div id="mysnackbar2" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
                                <span class="micl-snackbar__supporting-text">Message sent</span>
-                               <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar2">close</button>
+                               <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar2" popovertargetaction="hide">close</button>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar2">Open Snackbar 2</button>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar2">Open Snackbar with close button</button>
 
-                            <div id="mysnackbar3" class="micl-snackbar" popover="manual" data-micldelay="4000">
+                            <div id="mysnackbar3" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
                                <span class="micl-snackbar__supporting-text">Message sent</span>
                                <button type="button" class="micl-button-text-s">Action</button>
-                               <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar3">close</button>
+                               <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar3" popovertargetaction="hide">close</button>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar3">Open Snackbar 3</button>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar3">Open Snackbar with action- and close button</button>
 
-                            <div id="mysnackbar4" class="micl-snackbar" popover="manual" data-micldelay="4000">
-                               <span class="micl-snackbar__supporting-text">Message sent</span>
-                               <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
+                            <div id="mysnackbar4" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                <span class="micl-snackbar__supporting-text">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</span>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar4">Open Snackbar 4</button>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar4">Open Snackbar with a long line of text</button>
 
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog5">Open Full-Screen Dialog</button>
+                            <div id="mysnackbar5" class="micl-snackbar micl-snackbar--two" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                <span>
+                                    <span class="micl-snackbar__supporting-text">Message sent</span>
+                                    <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
+                                </span>
+                            </div>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar5">Open Snackbar with 2 lines of text</button>
+
+                            <div id="mysnackbar6" class="micl-snackbar micl-snackbar--two" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                <span>
+                                    <span class="micl-snackbar__supporting-text">Message sent</span>
+                                    <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
+                                </span>
+                               <button type="button" class="micl-button-text-s">Action</button>
+                            </div>
+                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar6">Open Snackbar with 2 lines of text and action</button>
                         </div>
                     </div>
                 </div>
@@ -71,7 +85,10 @@
                             <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
                         </div>
                         <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code></code></pre>
+                            <pre tabindex="-1"><code>&lt;div id="mysnackbar" class="micl-snackbar" popover="manual" data-micldelay="3000"&gt;
+    &lt;span class="micl-snackbar__supporting-text"&gt;Message sent&lt;/span&gt;
+    &lt;button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar"&gt;close&lt;/button&gt;
+&lt;/div&gt;</code></pre>
                         </div>
                     </div>
                 </div>

@@ -83,7 +83,8 @@ By default, the layout is **vertical**. To switch to a **horizontal** layout (si
 To allow users to toggle between the text inputs and the analog dial, add a button to the `micl-dialog__actions` container:
 
 - Class: `micl-timepicker__inputmode`
-- Data Attribute: `data-miclalt="schedule"` (defines the icon to show when toggled).
+- Data Attribute: `data-miclicon="keyboard"` (defines the icon to show).
+- Data Attribute: `data-micliconselected="schedule"` (defines the icon to show when toggled).
 
 ### Integration
 You can trigger the Time picker component from standard input fields or buttons.

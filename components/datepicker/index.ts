@@ -432,14 +432,6 @@ const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'y
             period.classList.toggle('micl-datepicker__view-hidden', doHide);
         }
     });
-
-    const mode = dialog.querySelector<HTMLElement>('.micl-datepicker__inputmode[data-miclalt]');
-    if (mode) {
-        if (!mode.dataset.miclalticon) {
-            mode.dataset.miclalticon = mode.textContent;
-        }
-        mode.textContent = (view === 'input' ? mode.dataset.miclalt : mode.dataset.miclalticon) || '';
-    }
 };
 
 const changePeriod = (dialog: HTMLDialogElement, amount: number, unit: 'month' | 'year'): void =>

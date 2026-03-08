@@ -64,11 +64,11 @@
     }
     .micl-appbar__leading {
         grid-area: appbar-leading;
-        margin-inline-start: calc(var(--md-sys-layout-window-margin) - var(--md-sys-appbar-padding-inline));
+        margin-inline-start: var(--md-sys-layout-window-margin);
     }
     .micl-appbar__leading-icon {
         grid-area: appbar-leading;
-        margin-inline-start: calc(var(--md-sys-layout-window-margin) - (var(--micl-width, statelayer.$md-sys-target-size) / 2) + (var(--md-sys-icon-size, 24px) / 2) - var(--md-sys-appbar-padding-inline));
+        margin-inline-start: var(--md-sys-layout-window-margin);
         color: var(--md-sys-color-on-surface);
     }
     .micl-appbar__headline {
@@ -101,11 +101,11 @@
     }
     .micl-appbar__trailing {
         grid-area: appbar-trailing;
-        margin-inline-end: calc(var(--md-sys-layout-window-margin) - var(--md-sys-appbar-padding-inline));
+        margin-inline-end: var(--md-sys-layout-window-margin);
     }
     .micl-appbar__trailing-icon {
         grid-area: appbar-trailing;
-        margin-inline-end: calc(var(--md-sys-layout-window-margin) - (var(--micl-width, statelayer.$md-sys-target-size) / 2) + (var(--md-sys-icon-size, 24px) / 2) - var(--md-sys-appbar-padding-inline));
+        margin-inline-end: var(--md-sys-layout-window-margin);
         color: var(--md-sys-color-on-surface-variant);
     }
     &.micl-appbar--medium {
