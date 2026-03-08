@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home,settings&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check_circle,content_copy,dark_mode,home,settings&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -270,19 +270,19 @@
                 <div class="micl-card__content">
                     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
                         <button type="button" id="btn1" class="micl-iconbutton-standard-m micl-button--toggle material-symbols-outlined" commandfor="btn1" command="--micl-toggle" aria-label="Control Panel">settings</button>
-                        <button type="button" id="btn2" class="micl-iconbutton-standard-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn2" command="--micl-toggle" aria-label="Control Panel">settings</button>
+                        <button type="button" id="btn2" class="micl-iconbutton-standard-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn2" command="--micl-toggle" data-miclicon="settings" data-micliconselected="check_circle" aria-label="Control Panel"></button>
                     </div>
                     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
                         <button type="button" id="btn3" class="micl-iconbutton-filled-m micl-button--toggle material-symbols-outlined" commandfor="btn3" command="--micl-toggle" aria-label="Control Panel">settings</button>
-                        <button type="button" id="btn4" class="micl-iconbutton-filled-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn4" command="--micl-toggle" aria-label="Control Panel">settings</button>
+                        <button type="button" id="btn4" class="micl-iconbutton-filled-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn4" command="--micl-toggle" data-miclicon="settings" data-micliconselected="check_circle" aria-label="Control Panel"></button>
                     </div>
                     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
                         <button type="button" id="btn5" class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" commandfor="btn5" command="--micl-toggle" aria-label="Control Panel">settings</button>
-                        <button type="button" id="btn6" class="micl-iconbutton-tonal-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn6" command="--micl-toggle" aria-label="Control Panel">settings</button>
+                        <button type="button" id="btn6" class="micl-iconbutton-tonal-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn6" command="--micl-toggle" data-miclicon="settings" data-micliconselected="check_circle" aria-label="Control Panel"></button>
                     </div>
                     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
                         <button type="button" id="btn7" class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" commandfor="btn7" command="--micl-toggle" aria-label="Control Panel">settings</button>
-                        <button type="button" id="btn8" class="micl-iconbutton-outlined-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn8" command="--micl-toggle" aria-label="Control Panel">settings</button>
+                        <button type="button" id="btn8" class="micl-iconbutton-outlined-m micl-button--toggle micl-button--selected material-symbols-outlined" commandfor="btn8" command="--micl-toggle" data-miclicon="settings" data-micliconselected="check_circle" aria-label="Control Panel"></button>
                     </div>
                 </div>
             </div>
@@ -294,16 +294,30 @@
                     <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
                 </div>
                 <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;button type="button"
+                    <pre tabindex="-1"><code>&lt;button
+  type="button"
   class="micl-iconbutton-standard-s material-symbols-outlined"
   aria-label="Control Panel"
 &gt;settings&lt;/button&gt;
 
-&lt;button type="button"
+&lt;button
+  type="button"
   class="micl-iconbutton-filled-m material-symbols-outlined
          micl-button--toggle micl-button--selected"
   aria-label="Control Panel"
-&gt;settings&lt;/button&gt;</code></pre>
+&gt;settings&lt;/button&gt;
+
+&lt;button
+  type="button"
+  id="mybutton"
+  class="micl-iconbutton-outlined-m micl-button--toggle
+         micl-button--selected material-symbols-outlined"
+  commandfor="mybutton"
+  command="--micl-toggle"
+  data-miclicon="settings"
+  data-micliconselected="check_circle"
+  aria-label="Control Panel"
+&gt;&lt;/button&gt;</code></pre>
                 </div>
             </div>
         </section>
