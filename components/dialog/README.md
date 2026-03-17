@@ -7,7 +7,7 @@ This component implements the [Material Design 3 Expressive Dialog](https://m3.m
 To create a basic dialog, use the `<dialog>` element with the `micl-dialog` class. You can open and close the dialog using JavaScript, or you can use a control element, such as a button, to open and close the dialog.
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog" popover closedby="any" role="alertdialog" aria-labelledby="mytitle" aria-describedby="mydesc">
+<dialog id="mydialog" class="micl-dialog" popover closedby="any" aria-labelledby="mytitle" aria-describedby="mydesc">
   <div class="micl-dialog__headline">
     <h2 id="mytitle">Basic dialog</h2>
     <span id="mydesc" class="micl-dialog__supporting-text">An example of a basic dialog</span>
@@ -53,8 +53,8 @@ Removing the `popover` attribute creates a more intrusive **modal** dialog. This
   </div>
   <div class="micl-dialog__actions">
     <form method="dialog">
-      <button class="micl-button-text-s">Cancel</button>
-      <button class="micl-button-text-s">Save</button>
+      <button class="micl-button-text-s" autofocus>Cancel</button>
+      <button class="micl-button-text-s" value="save">Save</button>
     </form>
   </div>
 </dialog>
@@ -94,9 +94,9 @@ A dialog typically consists of three main sections to organize its content:
 A full-screen dialog covers the entire viewport, primarily on smaller screens. On screens wider than 560 pixels, a full-screen dialog behaves like a basic dialog. Use the `micl-dialog--fullscreen` modifier class for this variant:
 
 ```HTML
-<dialog id="mydialog" class="micl-dialog micl-dialog--fullscreen" closedby="none" popover aria-labelledby="mytitle" aria-describedby="mydesc">
+<dialog id="mydialog" class="micl-dialog micl-dialog--fullscreen" closedby="none" aria-labelledby="mytitle" aria-describedby="mydesc">
   <form method="dialog" class="micl-dialog__headline">
-    <button type="button" class="micl-dialog__fullscreen micl-iconbutton-s material-symbols-outlined" popovertarget="mydialog" aria-label="Close">close</button>
+    <button class="micl-dialog__fullscreen micl-iconbutton-s material-symbols-outlined" aria-label="Close">close</button>
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
     <h2 id="mytitle">Full-screen dialog</h2>
     <button class="micl-dialog__fullscreen micl-button-text-s" value="dosave">Save</button>
@@ -105,12 +105,12 @@ A full-screen dialog covers the entire viewport, primarily on smaller screens. O
     <span id="mydesc" class="micl-dialog__supporting-text">This dialog covers the whole screen.</span>
   </div>
   <form method="dialog" class="micl-dialog__actions">
-    <button type="button" class="micl-button-text-s" popovertarget="mydialog">Cancel</button>
+    <button class="micl-button-text-s" autofocus>Cancel</button>
     <button class="micl-button-text-s" value="dosave">Save</button>
   </form>
 </dialog>
 
-<button type="button" popovertarget="mydialog">Open Full-Screen Dialog</button>
+<button type="button" command="show-modal" commandfor="mydialog">Open Full-Screen Dialog</button>
 ```
 
 - In full-screen mode, `micl-dialog__fullscreen` buttons placed directly within the `micl-dialog__headline` become visible, while the `micl-dialog__icon` and `micl-dialog__actions` at the bottom are hidden.
