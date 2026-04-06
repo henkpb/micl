@@ -7,7 +7,7 @@ This component implements the [Material Design 3 Expressive Expandable Lists](ht
 The Accordion component is an extension of the [**List** component](../list/README.md), using `<details>` and `<summary>` elements for its interactive behaviour. To create a basic accordion, use a `<div>` with the `micl-list` class and nest individual `<details>` elements for each collapsible item. Apply the appropriate `micl-list-item-` class to the `summary` element.
 
 ```HTML
-<div class="micl-list" role="listbox">
+<div class="micl-list">
   <details>
     <summary class="micl-list-item-one">
       <span class="micl-list-item__text">
@@ -22,8 +22,6 @@ The Accordion component is an extension of the [**List** component](../list/READ
   </details>
 </div>
 ```
-
-- The `role="listbox"` is used for accessibility, indicating a selectable list.
 
 - The `micl-list-item__content` class styles the collapsible area of the accordion item.
 
@@ -55,7 +53,7 @@ A live example of the [Accordion component](https://henkpb.github.io/micl/accord
 To ensure that only one accordion item within a group can be open at a time, add a matching `name` attribute to all the `<details>` elements you want to group together.
 
 ```HTML
-<div class="micl-list" role="listbox">
+<div class="micl-list">
   <details name="mygroup">
     <summary class="micl-list-item-two">
       <span class="micl-list-item__text">
@@ -91,7 +89,7 @@ To ensure that only one accordion item within a group can be open at a time, add
 Add a trailing icon to an accordion item to indicate that the item can be expanded. If you add the `micl-list-item__icon--expander` class to the icon, the icon will rotate 180 degrees when the accordion panel is opened or closed.
 
 ```HTML
-<div class="micl-list" role="listbox">
+<div class="micl-list">
   <details>
     <summary class="micl-list-item-one">
       <span class="micl-list-item__text">
@@ -122,7 +120,7 @@ You can customize the appearance of the Accordion component by overriding its ow
 **Example: Changing the margin between an opened item and the next**
 
 ```HTML
-<div class="micl-list" role="listbox" style="--md-sys-accordion-item-space:4px">
+<div class="micl-list" style="--md-sys-accordion-item-space:4px">
   <details>
     ...
   </details>
