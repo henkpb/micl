@@ -96,7 +96,7 @@ A full-screen dialog covers the entire viewport, primarily on smaller screens. O
 ```HTML
 <dialog id="mydialog" class="micl-dialog micl-dialog--fullscreen" closedby="none" aria-labelledby="mytitle" aria-describedby="mydesc">
   <form method="dialog" class="micl-dialog__headline">
-    <button class="micl-dialog__fullscreen micl-iconbutton-s material-symbols-outlined" aria-label="Close">close</button>
+    <button class="micl-dialog__fullscreen micl-iconbutton-standard-s material-symbols-outlined" aria-label="Close">close</button>
     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
     <h2 id="mytitle">Full-screen dialog</h2>
     <button class="micl-dialog__fullscreen micl-button-text-s" value="dosave">Save</button>

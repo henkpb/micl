@@ -77,6 +77,8 @@ While the card container is the only required element, the Card component provid
 
 - `micl-card__content`: A flexible container for the main body of your card's content.
 
+- `micl-card__actions`: A flexible container for any action buttons.
+
 ### Actionable Cards
 For cards that are themselves clickable or interactive (e.g., to navigate to another page), specify the `tabindex="0"` attribute on the card container. Non-actionable cards, which contain interactive elements like buttons or links within their content, should *not* have a tabindex on the card container itself.
 

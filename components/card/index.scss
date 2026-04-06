@@ -368,3 +368,12 @@
     background-color: inherit;
     overflow: clip visible;
 }
+
+.micl-card__actions {
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    column-gap: 8px;
+    padding-block: 0 var(--md-comp-card-content-padding-block, 16px);
+    padding-inline: var(--md-comp-card-padding-inline, 16px);
+}

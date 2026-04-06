@@ -144,20 +144,20 @@
     }
 }
 
-dialog.micl-dialog:has(.micl-textfield-filled > select),
-dialog.micl-dialog:has(.micl-textfield-outlined > select),
-dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select),
-dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select) {
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    margin: auto;
-    transform: scale(50%);
+/* dialog.micl-dialog:has(.micl-textfield-filled > select), */
+/* dialog.micl-dialog:has(.micl-textfield-outlined > select), */
+/* dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select), */
+/* dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select) { */
+    /* inset-block-start: 0; */
+    /* inset-inline-start: 0; */
+    /* margin: auto; */
+    /* transform: scale(50%); */
 
-    &:popover-open,
-    &[open] {
-        transform: scale(100%);
-    }
-}
+    /* &:popover-open, */
+    /* &[open] { */
+        /* transform: scale(100%); */
+    /* } */
+/* } */
 
 [dir=rtl] {
     .micl-textfield-filled > select,

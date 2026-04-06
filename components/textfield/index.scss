@@ -285,6 +285,9 @@
             border-block-end-color: var(--md-sys-color-primary);
         }
     }
+    &> input {
+        width: 100%;
+    }
     &> textarea {
         padding-block-start: 24px;
     }
@@ -351,6 +354,9 @@
             outline-width: 3px;
             outline-color: var(--md-sys-color-primary);
         }
+    }
+    &> input {
+        width: calc(100% - 3px - 3px);
     }
     &:has(
         > input:focus,
