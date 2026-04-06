@@ -226,6 +226,10 @@ input[type=checkbox].micl-checkbox + label,
 label:has(+ input[type=checkbox].micl-checkbox) {
     color: var(--md-sys-color-on-surface);
 }
+input[type=checkbox].micl-checkbox:disabled + label,
+label:has(+ input[type=radio].micl-checkbox:disabled) {
+    opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%)
+}
 
 [dir=rtl] input[type=checkbox].micl-checkbox {
     &::before {
