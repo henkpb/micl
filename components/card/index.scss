@@ -354,7 +354,7 @@
 }
 
 .micl-card__supporting-text {
-    @include typography.body-small;
+    @include typography.body-smallmedium;
     display: block;
     margin: 0;
     padding: 0 var(--md-comp-card-padding-inline, 16px);

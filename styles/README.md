@@ -106,3 +106,13 @@ And include a reference to the font in your application.
 ```HTML
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
 ```
+
+**Font width and letter spacing**
+
+The default typography styles apply natural letter spacing (`0px` or `normal`) optimized for the default MICL font, [**Google Sans**](https://fonts.google.com/specimen/Google+Sans). If you opt to use a narrower geometric font, such as [**Roboto**](https://fonts.google.com/specimen/Roboto), you can enable positive letter spacing to improve legibility at smaller sizes. To do this, set the `--md-ref-typeface-plain-narrow` variable to `1` in your root stylesheet:
+
+```CSS
+:root {
+    --md-ref-typeface-plain-narrow: 1;
+}
+```
