@@ -61,7 +61,7 @@ export default (() =>
             }
         });
         const button = stepper.querySelectorAll(BUTTON_SELECTOR).item(index);
-        stepper.querySelectorAll(BUTTON_SELECTOR).forEach((e, i) =>
+        stepper.querySelectorAll(BUTTON_SELECTOR).forEach(e =>
         {
             e.setAttribute('aria-selected', e === button ? 'true' : 'false');
         });
