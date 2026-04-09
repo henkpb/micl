@@ -174,7 +174,7 @@ export default (() =>
         }
     }
 
-    const addMarks = (dialog: HTMLElement, dial: HTMLElement): void =>
+    const addMarks = (dial: HTMLElement): void =>
     {
         let angle = uses12HourFormat ? 300 : 270;
 
@@ -310,7 +310,7 @@ export default (() =>
             });
 
             if (dial) {
-                addMarks(dialog, dial);
+                addMarks(dial);
 
                 const handleSelection = (clientX: number, clientY: number) =>
                 {
