@@ -32,16 +32,21 @@ import _stepper, { stepperSelector } from './components/stepper';
 import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
 import _timepicker, { timepickerSelector } from './components/timepicker';
 
+interface ComponentEventHandlers {
+    input?  : (event: Event) => void;
+    keydown?: (event: Event) => void;
+    change? : (event: Event) => void;
+}
+
 interface ComponentEntry<T extends HTMLElement> {
-    component: {
-        initialize?: (element: T) => void,
-        input?     : (event: Event) => void,
-        keydown?   : (event: Event) => void,
-        cleanup?   : (element: T) => void
+    component: ComponentEventHandlers & {
+        initialize?: (element: T) => void;
+        cleanup?   : (element: T) => void;
     };
     type: new () => T;
 }
-type ComponentKey = keyof ComponentEntry<any>['component'];
+
+type EventHandlerKey = keyof ComponentEventHandlers;
 
 export default (() =>
 {
@@ -64,6 +69,11 @@ export default (() =>
 
     const selector = Object.keys(componentMap).join(',');
 
+    const findEntry = (element: HTMLElement): ComponentEntry<HTMLElement> | undefined =>
+        Object.entries(componentMap)
+            .find(([selector, { type }]) => element.matches(selector) && element instanceof type)
+            ?.[1];
+
     const initializeScrollbars = (): void =>
     {
         document.documentElement.style.setProperty(
@@ -74,36 +84,46 @@ export default (() =>
 
     const initializeComponent = (element: HTMLElement): void =>
     {
-        for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (
-                element.matches(selector)
-                && element instanceof type
-                && typeof component.initialize === 'function'
-            ) {
-                component.initialize(element);
-                return;
-            }
+        const entry = findEntry(element);
+        if (entry && typeof entry.component.initialize === 'function') {
+            entry.component.initialize(element);
         }
     };
+
+    const rippleInitialized = new WeakSet<HTMLElement>();
 
     const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
     {
         parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
-
         parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element =>
         {
+            if (rippleInitialized.has(element)) return;
+
             if (window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1') {
-                element.addEventListener('pointerdown', e =>
+                element.addEventListener('pointerdown', (e: PointerEvent) =>
                 {
                     if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
                         return;
                     }
                     e.stopPropagation();
 
-                    let r = element.getBoundingClientRect();
+                    const r = element.getBoundingClientRect();
                     element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
                     element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
+
+                    const cleanup = (ev: AnimationEvent): void =>
+                    {
+                        if (ev.animationName !== 'micl-ripple') return;
+
+                        element.style.removeProperty('--micl-x');
+                        element.style.removeProperty('--micl-y');
+                        element.removeEventListener('animationend', cleanup);
+                    };
+
+                    element.addEventListener('animationend', cleanup);
                 });
+
+                rippleInitialized.add(element);
             }
         });
 
@@ -112,15 +132,9 @@ export default (() =>
 
     const cleanupComponent = (element: HTMLElement): void =>
     {
-        for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (
-                element.matches(selector)
-                && element instanceof type
-                && typeof component.cleanup === 'function'
-            ) {
-                component.cleanup(element);
-                return;
-            }
+        const entry = findEntry(element);
+        if (entry && typeof entry.component.cleanup === 'function') {
+            entry.component.cleanup(element);
         }
     };
 
@@ -131,14 +145,13 @@ export default (() =>
 
     const handleEvent = (event: Event): void =>
     {
-        for (const [selector, { component, type }] of Object.entries(componentMap)) {
-            if (typeof component[event.type as ComponentKey] === 'function') {
-                const e = (event.target as Element).closest(selector);
-                if (e instanceof type) {
-                    component[event.type as ComponentKey]?.(event);
-                    return;
-                }
-            }
+        const target = (event.target as Element).closest(selector);
+        if (!(target instanceof HTMLElement)) return;
+
+        const entry = findEntry(target);
+        const key   = event.type as EventHandlerKey;
+        if (entry && typeof entry.component[key] === 'function') {
+            entry.component[key]?.(event);
         }
     };
 
