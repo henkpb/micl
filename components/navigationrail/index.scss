@@ -36,19 +36,18 @@
     --md-comp-nav-rail-morph-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-comp-nav-rail-morph-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
 
-    --_current-max-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
-    --_current-min-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
-    --_item-direction: column;
-    --_item-width: var(--md-comp-nav-rail-item-short-container-height, 56px);
+    --_navigationrail-current-max-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
+    --_navigationrail-current-min-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
+    --_navigationrail-item-direction: column;
+    --_navigationrail-item-width: var(--md-comp-nav-rail-item-short-container-height, 56px);
+    --_navigationrail-item-target-height: var(--_navigationrail-item-base-height);
 
-    --_item-target-height: var(--_item-base-height);
-
-    --_content-gap: var(--md-comp-nav-rail-item-container-vertical-space, 6px);
-    --_morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
-    --_container-delay: calc(var(--_morph-speed) / 2);
-    --_item-delay: 0ms;
-    --_text-animation: none;
-    --_expanded-text-margin: calc(var(--md-comp-nav-rail-item-active-indicator-icon-label-space, 8px) - 16px);
+    --_navigationrail-content-gap: var(--md-comp-nav-rail-item-container-vertical-space, 6px);
+    --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
+    --_navigationrail-container-delay: calc(var(--_navigationrail-morph-speed) / 2);
+    --_navigationrail-item-delay: 0ms;
+    --_navigationrail-text-animation: none;
+    --_navigationrail-expanded-text-margin: calc(var(--md-comp-nav-rail-item-active-indicator-icon-label-space, 8px) - 16px);
 
     box-sizing: border-box;
     display: flex;
@@ -70,11 +69,11 @@
     interpolate-size: allow-keywords;
 
     transition:
-        min-inline-size var(--_morph-speed) var(--_container-delay) linear,
-        max-inline-size var(--_morph-speed) var(--_container-delay) linear,
-        padding-block-start var(--_morph-speed) var(--_container-delay) linear;
-    min-inline-size: var(--_current-min-width);
-    max-inline-size: var(--_current-max-width);
+        min-inline-size var(--_navigationrail-morph-speed) var(--_navigationrail-container-delay) linear,
+        max-inline-size var(--_navigationrail-morph-speed) var(--_navigationrail-container-delay) linear,
+        padding-block-start var(--_navigationrail-morph-speed) var(--_navigationrail-container-delay) linear;
+    min-inline-size: var(--_navigationrail-current-min-width);
+    max-inline-size: var(--_navigationrail-current-max-width);
 
     &> .micl-navigationrail__headline {
         padding-inline-start: 28px;
@@ -87,12 +86,12 @@
         flex: 1 1 auto;
         align-items: flex-start;
         inline-size: 100%;
-        row-gap: var(--_content-gap);
+        row-gap: var(--_navigationrail-content-gap);
         padding-block: var(--md-comp-nav-rail-item-header-space-minimum, 40px) 16px;
         padding-inline: 20px 0;
 
         overflow: hidden auto;
-        transition: row-gap var(--_morph-speed) linear;
+        transition: row-gap var(--_navigationrail-morph-speed) linear;
 
         &> a.micl-navigationrail__item:focus-visible {
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
@@ -101,9 +100,9 @@
         &> a.micl-navigationrail__item {
             --micl-ripple: 1;
             --statelayer-color: var(--md-sys-color-on-secondary-container);
-            --_item-base-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
-            --_item-margin-bottom: 0px;
-            --_item-padding-block: 12px;
+            --_navigationrail-item-base-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
+            --_navigationrail-item-margin-bottom: 0px;
+            --_navigationrail-item-padding-block: 12px;
 
             box-sizing: border-box;
             display: flex;
@@ -123,14 +122,14 @@
             background-size: 10000%, 100%;
 
             &:has(.micl-navigationrail__text) {
-                --_item-base-height: var(--md-comp-nav-rail-item-vertical-active-indicator-height, 32px);
-                --_item-margin-bottom: 40px;
-                --_item-padding-block: 0px;
+                --_navigationrail-item-base-height: var(--md-comp-nav-rail-item-vertical-active-indicator-height, 32px);
+                --_navigationrail-item-margin-bottom: 40px;
+                --_navigationrail-item-padding-block: 0px;
             }
             &:not(:has(.micl-navigationrail__icon)) {
-                --_item-base-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
-                --_item-margin-bottom: 0px;
-                --_item-padding-block: 0px;
+                --_navigationrail-item-base-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
+                --_navigationrail-item-margin-bottom: 0px;
+                --_navigationrail-item-padding-block: 0px;
 
                 justify-content: center;
 
@@ -146,27 +145,27 @@
                     animation: none !important;
 
                     transition:
-                        padding-inline calc(var(--_morph-speed) / 2) var(--_item-delay) linear,
-                        margin-inline calc(var(--_morph-speed) / 2) var(--_item-delay) linear;
+                        padding-inline calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
+                        margin-inline calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear;
                 }
             }
 
-            inline-size: var(--_item-width);
-            block-size: var(--_item-target-height, var(--_item-base-height));
-            margin-block-end: var(--_item-target-margin, var(--_item-margin-bottom));
-            padding-block: var(--_item-target-padding, var(--_item-padding-block));
-            flex-direction: var(--_item-direction);
+            inline-size: var(--_navigationrail-item-width);
+            block-size: var(--_navigationrail-item-target-height, var(--_navigationrail-item-base-height));
+            margin-block-end: var(--_navigationrail-item-target-margin, var(--_navigationrail-item-margin-bottom));
+            padding-block: var(--_navigationrail-item-target-padding, var(--_navigationrail-item-padding-block));
+            flex-direction: var(--_navigationrail-item-direction);
 
-            border-radius: calc(var(--_item-target-height, var(--_item-base-height)) / 2);
+            border-radius: calc(var(--_navigationrail-item-target-height, var(--_navigationrail-item-base-height)) / 2);
 
             transition:
-                inline-size calc(var(--_morph-speed) / 2) var(--_item-delay) linear,
-                block-size calc(var(--_morph-speed) / 2) var(--_item-delay) linear,
-                margin-block-end calc(var(--_morph-speed) / 2) var(--_item-delay) linear,
-                padding-block calc(var(--_morph-speed) / 2) var(--_item-delay) linear,
-                border-radius calc(var(--_morph-speed) / 2) var(--_item-delay) linear,
-                flex-direction 0s calc(var(--_morph-speed) / 2) linear allow-discrete,
-                background-color calc(var(--_morph-speed) / 2) linear,
+                inline-size calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
+                block-size calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
+                margin-block-end calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
+                padding-block calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
+                border-radius calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
+                flex-direction 0s calc(var(--_navigationrail-morph-speed) / 2) linear allow-discrete,
+                background-color calc(var(--_navigationrail-morph-speed) / 2) linear,
                 background-size 3000ms linear,
                 --statelayer-opacity var(--md-comp-nav-rail-motion-duration) linear;
 
@@ -185,7 +184,7 @@
                 margin: 4px 0px 0px 0px;
                 color: var(--md-sys-color-on-surface-variant);
                 overflow: hidden;
-                animation: var(--_text-animation);
+                animation: var(--_navigationrail-text-animation);
             }
 
             &:hover {
@@ -194,7 +193,7 @@
             &:active {
                 --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
                 background-size: 0%, 100%;
-                transition-duration: 0ms, 0ms, 0ms, calc(var(--_morph-speed) / 2), 0ms, var(--md-comp-nav-rail-motion-duration);
+                transition-duration: 0ms, 0ms, 0ms, calc(var(--_navigationrail-morph-speed) / 2), 0ms, var(--md-comp-nav-rail-motion-duration);
             }
         }
 
@@ -239,20 +238,20 @@
 
 dialog.micl-navigationrail,
 nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--selected) {
-    --_current-max-width: var(--md-comp-nav-rail-expanded-container-width-maximum, 360px);
-    --_current-min-width: var(--md-comp-nav-rail-expanded-container-width-minimum, 220px);
-    --_item-direction: row;
-    --_item-width: fit-content;
+    --_navigationrail-current-max-width: var(--md-comp-nav-rail-expanded-container-width-maximum, 360px);
+    --_navigationrail-current-min-width: var(--md-comp-nav-rail-expanded-container-width-minimum, 220px);
+    --_navigationrail-item-direction: row;
+    --_navigationrail-item-width: fit-content;
 
-    --_item-target-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
-    --_item-target-margin: 0px;
-    --_item-target-padding: 16px;
+    --_navigationrail-item-target-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
+    --_navigationrail-item-target-margin: 0px;
+    --_navigationrail-item-target-padding: 16px;
 
-    --_content-gap: 0px;
-    --_morph-speed: var(--md-comp-nav-rail-morph-duration);
-    --_container-delay: 0ms;
-    --_item-delay: calc(var(--_morph-speed) / 2);
-    --_text-animation: var(--_morph-speed) linear forwards navigationrail-text-to-expanded;
+    --_navigationrail-content-gap: 0px;
+    --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration);
+    --_navigationrail-container-delay: 0ms;
+    --_navigationrail-item-delay: calc(var(--_navigationrail-morph-speed) / 2);
+    --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-expanded;
 
     padding-block: var(--md-comp-nav-rail-expanded-top-space, 44px) 0;
     border-radius: var(--md-comp-nav-rail-expanded-container-shape, 0px);
@@ -269,7 +268,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
         }
         .micl-navigationrail__text {
             @include typography.label-large;
-            margin-inline-start: var(--_expanded-text-margin);
+            margin-inline-start: var(--_navigationrail-expanded-text-margin);
             padding-inline-end: 16px;
         }
 
@@ -281,8 +280,8 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
 }
 
 nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not(.micl-button--selected)) {
-    --_morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
-    --_text-animation: var(--_morph-speed) linear forwards navigationrail-text-to-collapsed;
+    --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
+    --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-collapsed;
 }
 
 nav.micl-navigationrail {
@@ -324,14 +323,14 @@ dialog.micl-navigationrail {
     0% {
         @include typography.label-large;
         margin-block-start: 0;
-        margin-inline-start: var(--_expanded-text-margin);
+        margin-inline-start: var(--_navigationrail-expanded-text-margin);
         padding-inline-end: 16px;
         opacity: 100%
     }
     49.9% {
         @include typography.label-large;
         margin-block-start: 0;
-        margin-inline-start: var(--_expanded-text-margin);
+        margin-inline-start: var(--_navigationrail-expanded-text-margin);
         padding-inline-end: 16px;
         opacity: 0%;
     }
@@ -373,14 +372,14 @@ dialog.micl-navigationrail {
     50.1% {
         @include typography.label-large;
         margin-block-start: 0px;
-        margin-inline-start: var(--_expanded-text-margin);
+        margin-inline-start: var(--_navigationrail-expanded-text-margin);
         padding-inline-end: 16px;
         opacity: 0%;
     }
     100% {
         @include typography.label-large;
         margin-block-start: 0px;
-        margin-inline-start: var(--_expanded-text-margin);
+        margin-inline-start: var(--_navigationrail-expanded-text-margin);
         padding-inline-end: 16px;
         opacity: 100%;
     }
