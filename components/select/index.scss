@@ -144,6 +144,11 @@
     }
 }
 
+[inert] .micl-textfield-filled > select::picker-icon,
+[inert] .micl-textfield-outlined > select::picker-icon {
+    display: none;
+}
+
 /* dialog.micl-dialog:has(.micl-textfield-filled > select), */
 /* dialog.micl-dialog:has(.micl-textfield-outlined > select), */
 /* dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select), */
