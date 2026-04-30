@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=confirmation_number,content_copy,dark_mode,home,keyboard_arrow_right,more_horiz,person,search,settings&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=confirmation_number,content_copy,dark_mode,home,keyboard_arrow_right,more_horiz,person,search,settings,star&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -37,14 +37,18 @@
                 <div class="micl-pane__column">
                     <div class="micl-card-elevated">
                         <div class="micl-card__content">
-                            <ul class="micl-list">
+                            <ul class="micl-list micl-list--segmented">
                                 <li class="micl-list-item-one">
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
                                     </span>
                                 </li>
-                            </ul>
-                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__overline">Overline</span>
+                                        <span class="micl-list-item__headline">Headline</span>
+                                    </span>
+                                </li>
                                 <li class="micl-list-item-two">
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
@@ -52,7 +56,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list">
+                            <ul class="micl-list micl-list--segmented">
                                 <li class="micl-list-item-three">
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline 1</span>
@@ -63,6 +67,15 @@
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline 2</span>
                                         <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">star</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__overline">Overline</span>
+                                        <span class="micl-list-item__headline">Headline</span>
                                     </span>
                                 </li>
                             </ul>
@@ -85,7 +98,7 @@
                                     <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">keyboard_arrow_right</span>
                                 </li>
                             </ul>
-                            <ul class="micl-list" role="listbox">
+                            <ul class="micl-list micl-list--segmented" role="listbox">
                                 <li role="option" class="micl-list-item-three" tabindex="0">
                                     <label>
                                         <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">search</span>
@@ -93,7 +106,7 @@
                                             <span class="micl-list-item__headline">Headline 1</span>
                                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
                                         </span>
-                                        <input type="checkbox" id="cb1" class="micl-checkbox" value="c2" aria-label="Headline 1">
+                                        <input type="checkbox" id="cb1" class="micl-checkbox" value="c2" aria-label="Headline 1" checked>
                                     </label>
                                 </li>
                                 <li role="option" class="micl-list-item-three">
@@ -117,6 +130,7 @@
                                 <li class="micl-list-item-one">
                                     <span class="micl-list-item__avatar">3</span>
                                     <span class="micl-list-item__text">
+                                        <span class="micl-list-item__overline">Overline</span>
                                         <span class="micl-list-item__headline">Headline</span>
                                     </span>
                                 </li>
@@ -130,7 +144,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <ul class="micl-list">
+                            <ul class="micl-list micl-list--segmented">
                                 <li class="micl-list-item-three" tabindex="0">
                                     <a href="https://www.thetimes.com/" target="_blank">
                                         <span class="micl-list-item__avatar">T</span>
@@ -162,8 +176,8 @@
                                     <label>
                                         <span class="micl-list-item__image" style="background-image:url(card-holiday.webp)"></span>
                                         <span class="micl-list-item__text">
+                                            <span class="micl-list-item__overline">Overline</span>
                                             <span class="micl-list-item__headline">Headline</span>
-                                            <span class="micl-list-item__supporting-text">Supporting text</span>
                                         </span>
                                         <input type="checkbox" class="micl-switch" id="myswitch" value="c1" aria-label="Headline">
                                     </label>
@@ -192,7 +206,7 @@
                     <div class="micl-card-elevated">
                         <div class="micl-card__content">
                             <ul class="micl-list">
-                                <li class="micl-list-item-one">
+                                <li class="micl-list-item-one micl-list-item--disabled">
                                     <span class="micl-list-item__thumbnail" style="background-image:url(card-city.webp)"></span>
                                     <span class="micl-list-item__text">
                                         <span class="micl-list-item__headline">Headline</span>
@@ -219,7 +233,7 @@
                                         <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
                                     </span>
                                 </li>
-                                <li role="separator" class="micl-divider"></li>
+                                <li role="separator" class="micl-divider-inset"></li>
                                 <li class="micl-list-item-three">
                                     <span class="micl-list-item__thumbnail" style="background-image:url(card-awards.webp)"></span>
                                     <span class="micl-list-item__text">
@@ -238,7 +252,7 @@
                                         <input type="checkbox" id="cb4" class="micl-checkbox" value="c2" checked aria-label="Headline 1">
                                     </label>
                                 </li>
-                                <li role="separator" class="micl-divider" tabindex="-1"></li>
+                                <li role="separator" class="micl-divider-inset" tabindex="-1"></li>
                                 <li role="option" class="micl-list-item-three">
                                     <label>
                                         <input type="checkbox" id="cb5" class="micl-checkbox" value="c3" aria-label="Headline 2">
@@ -246,6 +260,7 @@
                                             <span class="micl-list-item__headline">Headline 2</span>
                                             <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
                                         </span>
+                                        <span class="micl-list-item__trailing-text">47</span>
                                     </label>
                                 </li>
                             </ul>
