@@ -34,12 +34,6 @@
     cursor: pointer;
 
     &:not(:has(input[type=checkbox]:checked)) {
-        &:hover, &:focus-visible, &:active, &.micl-list-item--dragging {
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-hovered-expressive-shape, var(--md-sys-shape-corner-medium, 12px));
             --_headline-color: var(--md-comp-list-item-hover-label-text-color, var(--md-sys-color-on-surface));
@@ -109,6 +103,9 @@
             --_trailing-icon-color: var(--md-comp-list-item-selected-pressed-trailing-icon-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-pressed-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
+
+            background-size: 0%, 100%;
+            transition: background-size 0ms;
         }
         &.micl-list-item--dragging {
             --_list-item-shape: var(--md-comp-list-item-container-selected-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -129,13 +126,14 @@
     --md-sys-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-sys-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
     --md-sys-divider-space: 0.5px;
+    --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
     --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
 
     display: flex;
     flex-direction: column;
     margin: var(--md-comp-list-container-space, 0px) 0;
     padding: 0;
-    border-radius: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
+    border-radius: var(--_list-shape);
     interpolate-size: allow-keywords;
     list-style-type: none;
 
@@ -228,6 +226,14 @@
         --statelayer-opacity var(--md-sys-list-motion-duration) linear;
     -webkit-tap-highlight-color: transparent;
 
+    &:first-of-type {
+        border-start-start-radius: max(var(--_list-item-shape), var(--_list-shape));
+        border-start-end-radius: max(var(--_list-item-shape), var(--_list-shape));
+    }
+    &:last-of-type {
+        border-end-start-radius: max(var(--_list-item-shape), var(--_list-shape));
+        border-end-end-radius: max(var(--_list-item-shape), var(--_list-shape));
+    }
     &:not(:has(> button)) {
         --micl-ripple: 1;
     }
@@ -257,7 +263,7 @@
         --_overline-color: rgb(from var(--md-comp-list-item-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --_headline-color: rgb(from var(--md-comp-list-item-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --_supporting-text-color: rgb(from var(--md-comp-list-item-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-        --_trailing-text-color: rgb(from var(--md-comp-list-item-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-icon-opacity, var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, 38%)));
+        --_trailing-text-color: rgb(from var(--md-comp-list-item-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --_leading-icon-color: rgb(from var(--md-comp-list-item-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --_trailing-icon-color: rgb(from var(--md-comp-list-item-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --statelayer-color: var(--md-comp-list-item-disabled-state-layer-color, var(--md-sys-color-on-surface));
@@ -279,7 +285,7 @@
             --_overline-color: rgb(from var(--md-comp-list-item-selected-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_leading-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_supporting-text-color: rgb(from var(--md-comp-list-item-selected-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, 38%)));
+            --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_trailing-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --statelayer-color: var(--md-comp-list-item-selected-disabled-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 10%);
@@ -320,15 +326,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    input[type=checkbox].micl-checkbox {
-        block-size: 24px;
-        min-block-size: 24px;
-        inline-size: 24px;
-        min-inline-size: 24px;
-    }
 }
 .micl-list-item-three {
-    min-block-size: var(--md-comp-list-item-three-line-container-height);
+    min-block-size: var(--md-comp-list-item-three-line-container-height, 88px);
     align-items: flex-start;
 
     .micl-list-item__supporting-text {
@@ -337,6 +337,8 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
     }
+}
+.micl-list-item-two, .micl-list-item-three {
     input[type=checkbox].micl-checkbox {
         block-size: 24px;
         min-block-size: 24px;

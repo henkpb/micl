@@ -47,10 +47,10 @@ Adding the `micl-list--segmented` class to the `<ul>` element gives the list a s
 
 The List component offers three CSS classes to control the height and content capacity of individual list items:
 
-| CSS class | Description |
-| --------- | ----------- |
-| micl-list-item-one | For single-line items, accommodating one line of text. |
-| micl-list-item-two | For two-line items, accommodating up to two lines of text. |
+| CSS class            | Description                                                    |
+| -------------------- | -------------------------------------------------------------- |
+| micl-list-item-one   | For single-line items, accommodating one line of text.         |
+| micl-list-item-two   | For two-line items, accommodating up to two lines of text.     |
 | micl-list-item-three | For three-line items, accommodating up to three lines of text. |
 
 ```HTML
@@ -78,6 +78,20 @@ Use the anchor element to convert a list item into a hyperlink:
 </ul>
 ```
 
+Use the button element to convert a list item into an action item:
+
+```HTML
+<ul class="micl-list">
+  <li class="micl-list-item-one" tabindex="0">
+    <button type="button" onclick="Hello World!">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">The Times</span>
+      </span>
+    </button>
+  </li>
+</ul>
+```
+
 Adding the `micl-list-item--disabled` class to the `<li>` element causes the list item to be displayed in a disabled state.
 
 Use a [Divider component](../divider/README.md) to separate neighbouring list items by a divider.
@@ -90,8 +104,8 @@ The text content of a list item can be preceded by various media elements:
   <li class="micl-list-item-two">
     <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
     <span class="micl-list-item__text">
-      <span class="micl-list-item__headline">Bill Jones</span>
-      <span class="micl-list-item__supporting-text">bill.jones@email.com</span>
+      <span class="micl-list-item__overline">Senior consultant</span>
+      <span class="micl-list-item__headline">Bill Radmore</span>
     </span>
   </li>
   ```
@@ -99,10 +113,10 @@ The text content of a list item can be preceded by various media elements:
 - **Avatar**: Use `micl-list-item__avatar` with a text.
   ```HTML
   <li class="micl-list-item-two">
-    <span class="micl-list-item__avatar">BJ</span>
+    <span class="micl-list-item__avatar">BR</span>
     <span class="micl-list-item__text">
-      <span class="micl-list-item__headline">Bill Jones</span>
-      <span class="micl-list-item__supporting-text">bill.jones@email.com</span>
+      <span class="micl-list-item__overline">Our man</span>
+      <span class="micl-list-item__headline">Bill Radmore</span>
     </span>
   </li>
   ```
@@ -112,8 +126,8 @@ The text content of a list item can be preceded by various media elements:
   <li class="micl-list-item-two">
     <span class="micl-list-item__image" style="background-image:url(https://...jpg)"></span>
     <span class="micl-list-item__text">
-      <span class="micl-list-item__headline">Bill Jones</span>
-      <span class="micl-list-item__supporting-text">bill.jones@email.com</span>
+      <span class="micl-list-item__headline">Bill Radmore</span>
+      <span class="micl-list-item__supporting-text">bill.radmore@email.com</span>
     </span>
   </li>
   ```
@@ -123,7 +137,7 @@ The text content of a list item can be preceded by various media elements:
   <li class="micl-list-item-two">
     <span class="micl-list-item__thumbnail" style="background-image:url(https://...mp4)"></span>
     <span class="micl-list-item__text">
-      <span class="micl-list-item__headline">Bill Jones</span>
+      <span class="micl-list-item__headline">Bill Radmore</span>
       <span class="micl-list-item__supporting-text">Short clip of Bill</span>
     </span>
   </li>
@@ -196,19 +210,6 @@ To enable selection of list items, integrate a Checkbox or Switch component with
 - The `role="listbox"` is used for accessibility, indicating a selectable list.
 
 ## Customizations
-You can customize the appearance of the List component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child lists.
-
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-list-padding | 8px | The vertical padding of a list. |
-| --md-sys-list-item-one-height | 56px | The height for a single-line list item. |
-| --md-sys-list-item-two-height | 72px | The height for a two-line list item. |
-| --md-sys-list-item-three-height | 88px | The height for a three-line list item. |
-| --md-sys-list-item-one-padding | 8px | The vertical padding of a single-line list item. |
-| --md-sys-list-item-two-padding | 8px | The vertical padding of a two-line list item. |
-| --md-sys-list-item-three-padding | 12px | The vertical padding of a three-line list item. |
-| --md-sys-list-item-space | 16px | The horizontal spacing between the elements within a list item. |
-
 The List component supports the following CSS variables, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs):
 
 ```CSS
@@ -286,7 +287,6 @@ The List component supports the following CSS variables, as defined in the [Mate
 --md-comp-list-item-pressed-trailing-icon-color
 --md-comp-list-item-segmented-container-color
 --md-comp-list-item-selected-container-color
---md-comp-list-item-selected-container-shape
 --md-comp-list-item-selected-disabled-label-text-color
 --md-comp-list-item-selected-disabled-label-text-opacity
 --md-comp-list-item-selected-disabled-leading-icon-color
@@ -343,7 +343,7 @@ The List component supports the following CSS variables, as defined in the [Mate
 **Example: Changing the height of single-line list items**
 
 ```HTML
-<div style="--md-sys-list-item-one-height:60px">
+<div style="--md-comp-list-item-one-line-container-height:60px">
   <ul class="micl-list">
     <li class="micl-list-item-one">
       <span class="micl-list-item__text">

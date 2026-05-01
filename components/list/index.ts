@@ -1,5 +1,5 @@
 //
-// Copyright © 2025 Hermana AS
+// Copyright © 2026 Hermana AS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,118 +21,105 @@
 
 export const listSelector = '.micl-list';
 
-export default (() =>
+const isDisabled   = (item?: HTMLElement | null) => item?.classList.contains('micl-list-item--disabled');
+const isSelectable = (item?: HTMLElement | null) => item?.matches(':has(input[type=checkbox])');
+const isSelected   = (item?: HTMLElement | null) => item?.matches(':has(input[type=checkbox]:checked)');
+
+export default
 {
-    const isDisabled = (item: HTMLElement | null): boolean => !!item && item.classList.contains('micl-list-item--disabled');
-    const isSelected = (item: HTMLElement | null): boolean => !!item && item.matches(':has(input[type=checkbox]:checked)');
+    keydown(event: KeyboardEvent | Event): void
+    {
+        const target = event.target as HTMLElement;
 
-    return {
-        keydown: (event: Event): void =>
-        {
-            if (
-                !(event instanceof KeyboardEvent)
-                || !(event.target instanceof Element)
-                || !event.target.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
-            ) {
-                return;
-            }
-            const parent = (event.target as Element).parentElement;
-            if (!parent) return;
-
-            let items: HTMLElement[] = [];
-
-            if (parent instanceof HTMLDetailsElement) {
-                items = Array.from(parent.parentElement?.children || []).map(details => {
-                    let summary = details.querySelector(':scope > summary') as HTMLElement;
-                    return isDisabled(summary) ? null : summary;
-                }).filter(item => !!item);
-            }
-            else if (parent instanceof HTMLUListElement || parent instanceof HTMLOListElement) {
-                items = Array.from(parent.children).map(child => {
-                    return (
-                        (child instanceof HTMLLIElement)
-                        && !isDisabled(child)
-                        && (child.role !== 'separator')
-                    ) ? child : null;
-                }).filter(item => !!item);
-            }
-            if (items.length === 0) {
-                return;
-            }
-
-            const selectedIndex = items.findIndex(item => isSelected(item));
-            const currentItem   = document.activeElement as HTMLElement;
-            const currentIndex  = items.indexOf(currentItem);
-
-            if (currentIndex === -1) return;
-
-            let nextIndex = currentIndex;
-
-            switch (event.key) {
-                case 'ArrowDown':
-                    event.preventDefault(); // prevent page scrolling
-                    nextIndex = (currentIndex + 1) % items.length;
-                    break;
-                case 'ArrowUp':
-                    event.preventDefault();
-                    nextIndex = (currentIndex - 1 + items.length) % items.length;
-                    break;
-                case 'Tab':
-                    nextIndex = (selectedIndex === -1) ? 0 : selectedIndex;
-                    break;
-                case ' ':
-                    event.preventDefault();
-                case 'Enter':
-                    const el = (event.target as Element).querySelector(
-                        'input[type=checkbox], a[href], button'
-                    );
-                    if (el instanceof HTMLInputElement) {
-                        el.checked = !el.checked;
-                    }
-                    else if (el instanceof HTMLAnchorElement) {
-                        el.click();
-                    }
-                    else if (el instanceof HTMLButtonElement) {
-                        el.dispatchEvent(new MouseEvent('mouseenter', {
-                            bubbles   : true,
-                            cancelable: true,
-                            view      : window
-                        }));
-                    }
-                    break;
-                default:
-            }
-
-            if (nextIndex !== currentIndex) {
-                currentItem?.setAttribute('tabindex', '-1');
-                items[nextIndex].setAttribute('tabindex', '0');
-                items[nextIndex].focus();
-            }
-        },
-
-        initialize: (element: HTMLElement): void =>
-        {
-            if (element.dataset.miclinitialized) return;
-
-            element.dataset.miclinitialized = '1';
-
-            if (element.querySelectorAll<HTMLLIElement>('li[tabindex="0"]').length === 0) {
-                return;
-            }
-
-            const items: HTMLLIElement[] = Array.from(element.querySelectorAll(
-                'li:not([role="separator"])'
-            ));
-
-            items.forEach(item =>
-            {
-                if (item.getAttribute('tabindex') !== '0') {
-                    item.setAttribute('tabindex', '-1');
-                }
-
-                const links = item.querySelectorAll('a, button, input');
-                links.forEach(link => link.setAttribute('tabindex', '-1'));
-            });
+        if (
+            !(event instanceof KeyboardEvent)
+            || !target?.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
+        ) {
+            return;
         }
-    };
-})();
+
+        const parent = target.parentElement;
+        if (!parent) return;
+
+        let items: HTMLElement[] = [];
+
+        if (parent instanceof HTMLDetailsElement) {
+            items = Array.from(parent.parentElement?.children || [])
+                .map(details => details.querySelector(':scope > summary') as HTMLElement)
+                .filter(Boolean);
+        }
+        else if (['UL', 'OL'].includes(parent.tagName)) {
+            items = Array.from(parent.children).filter(child =>
+                child instanceof HTMLLIElement && child.getAttribute('role') !== 'separator'
+                ) as HTMLElement[];
+        }
+
+        items = items.filter(item => !isDisabled(item));
+        if (!items.length) return;
+
+        const currentIndex  = items.indexOf(target);
+        if (currentIndex === -1) return;
+
+        let nextIndex = currentIndex;
+
+        switch (event.key) {
+            case 'ArrowDown':
+                event.preventDefault(); // prevent page scrolling
+                nextIndex = (currentIndex + 1) % items.length;
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                nextIndex = (currentIndex - 1 + items.length) % items.length;
+                break;
+            case 'Tab':
+                const selectedIndex = items.findIndex(isSelected);
+                nextIndex = selectedIndex === -1 ? 0 : selectedIndex;
+                break;
+            case ' ':
+                event.preventDefault();
+            case 'Enter':
+                const el = target.querySelector<HTMLElement>(
+                    'input[type=checkbox], a[href], button'
+                );
+                if (el instanceof HTMLInputElement) {
+                    el.checked = !el.checked;
+                    el.dispatchEvent(new Event('change', {
+                        bubbles   : true,
+                        cancelable: true
+                    }));
+                }
+                else {
+                    el?.click();
+                }
+                break;
+            default:
+        }
+
+        if (nextIndex !== currentIndex) {
+            target.setAttribute('tabindex', '-1');
+            items[nextIndex].setAttribute('tabindex', '0');
+            items[nextIndex].focus();
+        }
+    },
+
+    initialize(element: HTMLElement): void
+    {
+        if (element.dataset.miclinitialized || !element.querySelector('li[tabindex="0"]')) return;
+
+        element.dataset.miclinitialized = '1';
+
+        element.querySelectorAll<HTMLLIElement>('li:not([role="separator"])').forEach(item =>
+        {
+            if (item.getAttribute('tabindex') !== '0') {
+                item.setAttribute('tabindex', '-1');
+            }
+
+            item.querySelectorAll('a, button, input').forEach(link => link.setAttribute('tabindex', '-1'));
+
+            if (isSelectable(item)) {
+                item.setAttribute('role', 'option');
+                item.parentElement?.setAttribute('role', 'listbox');
+            }
+        });
+    }
+};
