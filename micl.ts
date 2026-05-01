@@ -95,7 +95,7 @@ export default (() =>
     const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
     {
         parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
-        parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element =>
+        parent.querySelectorAll<HTMLElement>('[class*="micl-"], [class*="micl-"] > summary').forEach(element =>
         {
             if (rippleInitialized.has(element)) return;
 
