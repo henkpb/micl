@@ -41,9 +41,10 @@ export default
         const parent = target.parentElement;
         if (!parent) return;
 
+        const isAccordion = parent instanceof HTMLDetailsElement;
         let items: HTMLElement[] = [];
 
-        if (parent instanceof HTMLDetailsElement) {
+        if (isAccordion) {
             items = Array.from(parent.parentElement?.children || [])
                 .map(details => details.querySelector(':scope > summary') as HTMLElement)
                 .filter(Boolean);
@@ -57,7 +58,7 @@ export default
         items = items.filter(item => !isDisabled(item));
         if (!items.length) return;
 
-        const currentIndex  = items.indexOf(target);
+        const currentIndex = items.indexOf(target);
         if (currentIndex === -1) return;
 
         let nextIndex = currentIndex;
@@ -72,12 +73,17 @@ export default
                 nextIndex = (currentIndex - 1 + items.length) % items.length;
                 break;
             case 'Tab':
-                const selectedIndex = items.findIndex(isSelected);
-                nextIndex = selectedIndex === -1 ? 0 : selectedIndex;
+                if (!isAccordion) {
+                    const selectedIndex = items.findIndex(isSelected);
+                    nextIndex = selectedIndex === -1 ? 0 : selectedIndex;
+                }
                 break;
             case ' ':
-                event.preventDefault();
             case 'Enter':
+                if (isAccordion) break;
+                if (event.key === ' ') {
+                    event.preventDefault();
+                }
                 const el = target.querySelector<HTMLElement>(
                     'input[type=checkbox], a[href], button'
                 );
@@ -96,17 +102,24 @@ export default
         }
 
         if (nextIndex !== currentIndex) {
-            target.setAttribute('tabindex', '-1');
-            items[nextIndex].setAttribute('tabindex', '0');
+            if (!isAccordion) {
+                target.setAttribute('tabindex', '-1');
+                items[nextIndex].setAttribute('tabindex', '0');
+            }
             items[nextIndex].focus();
         }
     },
 
     initialize(element: HTMLElement): void
     {
-        if (element.dataset.miclinitialized || !element.querySelector('li[tabindex="0"]')) return;
-
+        if (element.dataset.miclinitialized) return;
         element.dataset.miclinitialized = '1';
+
+        element.querySelectorAll<HTMLElement>(
+            ':scope > details > summary.micl-list-item--disabled'
+        ).forEach(summary => summary.setAttribute('tabindex', '-1'));
+
+        if (!element.querySelector('li[tabindex="0"]')) return;
 
         element.querySelectorAll<HTMLLIElement>('li:not([role="separator"])').forEach(item =>
         {

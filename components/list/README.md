@@ -16,7 +16,7 @@ To create a standard list, use the `<ul>` element with the `micl-list` class and
 </ul>
 ```
 
-- `tabindex="0"` on the `<li>` makes the list item focusable and allows keyboard navigation.
+- `tabindex="0"` on the `<li>` makes the list item focusable and allows keyboard navigation. Only one item should be marked with a `tabindex="0"`.
 
 ### CSS
 Import the list styles into your project:
@@ -188,7 +188,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
       >
     </label>
   </li>
-  <li role="separator" class="micl-divider"></li>
+  <li role="separator" class="micl-divider-inset"></li>
   <li role="option" class="micl-list-item-two">
     <label>
       <input
@@ -207,7 +207,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
 </ul>
 ```
 
-- The `role="listbox"` is used for accessibility, indicating a selectable list.
+- The `role="listbox"` and `role="option"` are used for accessibility, indicating a selectable list. They are added automatically when a list contains a selectable item.
 
 ## Customizations
 The List component supports the following CSS variables, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs):
@@ -235,7 +235,6 @@ The List component supports the following CSS variables, as defined in the [Mate
 --md-comp-list-item-disabled-label-text-opacity
 --md-comp-list-item-disabled-leading-icon-color
 --md-comp-list-item-disabled-leading-icon-opacity
---md-comp-list-item-disabled-opacity
 --md-comp-list-item-disabled-overline-color
 --md-comp-list-item-disabled-overline-opacity
 --md-comp-list-item-disabled-state-layer-color
@@ -291,7 +290,6 @@ The List component supports the following CSS variables, as defined in the [Mate
 --md-comp-list-item-selected-disabled-label-text-opacity
 --md-comp-list-item-selected-disabled-leading-icon-color
 --md-comp-list-item-selected-disabled-leading-icon-opacity
---md-comp-list-item-selected-disabled-opacity
 --md-comp-list-item-selected-disabled-overline-color
 --md-comp-list-item-selected-disabled-overline-opacity
 --md-comp-list-item-selected-disabled-state-layer-color
@@ -302,6 +300,7 @@ The List component supports the following CSS variables, as defined in the [Mate
 --md-comp-list-item-selected-disabled-trailing-icon-opacity
 --md-comp-list-item-selected-disabled-trailing-supporting-text-color
 --md-comp-list-item-selected-disabled-trailing-supporting-text-opacity
+--md-comp-list-item-selected-disabled-trailing-text-opacity
 --md-comp-list-item-selected-dragged-container-elevation
 --md-comp-list-item-selected-dragged-label-text-color
 --md-comp-list-item-selected-dragged-leading-icon-color

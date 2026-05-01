@@ -30,6 +30,9 @@
     --md-sys-accordion-item-space: 0px;
 }
 
+$item-padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
+$item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp-list-item-trailing-space, 16px);
+
 %shared-interactive-states {
     cursor: pointer;
 
@@ -171,7 +174,7 @@
                 pointer-events: none;
             }
             &:not(.micl-list-item--disabled) {
-                cursor: pointer;
+                @extend %shared-interactive-states;
             }
         }
         .micl-list-item__content {
@@ -183,7 +186,7 @@
     }
 }
 
-.micl-list:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]), select {
+.micl-list:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]) {
     .micl-list-item-one, .micl-list-item-two, .micl-list-item-three {
         &:not(:disabled):not(.micl-list-item--disabled) {
             @extend %shared-interactive-states;
@@ -208,8 +211,8 @@
     display: flex;
     align-items: center;
     column-gap: var(--md-comp-list-item-between-space, 12px);
-    padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
-    padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp-list-item-trailing-space, 16px);
+    padding-block: $item-padding-block;
+    padding-inline: $item-padding-inline;
     border: none;
     border-radius: var(--_list-item-shape);
     outline: none;
@@ -246,8 +249,8 @@
         column-gap: inherit;
         min-block-size: inherit;
         inline-size: 100%;
-        padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
-        padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp-list-item-trailing-space, 16px);
+        padding-block: $item-padding-block;
+        padding-inline: $item-padding-inline;
         border: none;
         border-radius: inherit;
         background-color: transparent;
@@ -281,11 +284,11 @@
 
         &:has(input[type=checkbox]:checked) {
             --_list-item-shape: var(--md-comp-list-item-container-selected-disabled-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: rgb(from var(--md-comp-list-item-selected-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_overline-color: rgb(from var(--md-comp-list-item-selected-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_leading-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_headline-color: rgb(from var(--md-comp-list-item-selected-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_supporting-text-color: rgb(from var(--md-comp-list-item-selected-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_leading-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_trailing-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --statelayer-color: var(--md-comp-list-item-selected-disabled-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 10%);
