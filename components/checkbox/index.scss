@@ -166,10 +166,10 @@ input[type=checkbox].micl-checkbox {
             ),
             linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
         background-repeat: no-repeat;
-        background-size: 10000%, 100%;
+        background-size: 0%, 100%;
         cursor: pointer;
         transition:
-            background-size 3000ms motion.$md-sys-motion-easing-standard,
+            background-size 0ms,
             --statelayer-opacity var(--md-sys-checkbox-motion-duration) linear;
 
         &:hover {
@@ -192,9 +192,6 @@ input[type=checkbox].micl-checkbox {
             --statelayer-color: var(--md-sys-color-on-surface);
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
-            background-size: 0%, 100%;
-            transition: background-size 0ms;
-
             &:not(:checked):not(:indeterminate) {
                 --statelayer-color: var(--md-sys-color-primary);
 
@@ -202,6 +199,9 @@ input[type=checkbox].micl-checkbox {
                     --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
                 }
             }
+        }
+        &.micl-rippling {
+            animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
         }
     }
     &:disabled {

@@ -124,7 +124,7 @@
                 ),
                 linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
             background-repeat: no-repeat;
-            background-size: 10000%, 100%;
+            background-size: 0%, 100%;
 
             &:has(.micl-navigationrail__text) {
                 --_navigationrail-item-base-height: var(--md-comp-nav-rail-item-vertical-active-indicator-height, 32px);
@@ -171,7 +171,7 @@
                 border-radius calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
                 flex-direction 0s calc(var(--_navigationrail-morph-speed) / 2) linear allow-discrete,
                 background-color calc(var(--_navigationrail-morph-speed) / 2) linear,
-                background-size 3000ms motion.$md-sys-motion-easing-standard,
+                background-size 0ms,
                 --statelayer-opacity var(--md-comp-nav-rail-motion-duration) linear;
 
             .micl-navigationrail__icon {
@@ -197,8 +197,10 @@
             }
             &:active {
                 --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
-                background-size: 0%, 100%;
                 transition-duration: 0ms, 0ms, 0ms, calc(var(--_navigationrail-morph-speed) / 2), 0ms, var(--md-comp-nav-rail-motion-duration);
+            }
+            &.micl-rippling {
+                animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
             }
         }
 

@@ -63,9 +63,6 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             --_trailing-icon-color: var(--md-comp-list-item-pressed-trailing-icon-color, var(--md-sys-color-on-surface-variant));
             --statelayer-color: var(--md-comp-list-item-pressed-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
-
-            background-size: 0%, 100%;
-            transition: background-size 0ms;
         }
         &.micl-list-item--dragging {
             --_list-item-shape: var(--md-comp-list-item-container-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -106,9 +103,6 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             --_trailing-icon-color: var(--md-comp-list-item-selected-pressed-trailing-icon-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-pressed-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
-
-            background-size: 0%, 100%;
-            transition: background-size 0ms;
         }
         &.micl-list-item--dragging {
             --_list-item-shape: var(--md-comp-list-item-container-selected-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -120,6 +114,9 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
 
             box-shadow: var(--md-comp-list-item-selected-dragged-container-elevation, var(--md-sys-elevation-level4));
         }
+    }
+    &.micl-rippling {
+        animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
     }
 }
 
@@ -226,11 +223,11 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
         ),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
-    background-size: 10000%, 100%;
+    background-size: 0%, 100%;
     list-style: none;
     transition:
         border-radius var(--md-sys-list-motion-duration) var(--md-sys-list-motion-effects),
-        background-size 3000ms motion.$md-sys-motion-easing-standard,
+        background-size 0ms,
         --statelayer-opacity var(--md-sys-list-motion-duration) linear;
     -webkit-tap-highlight-color: transparent;
 
