@@ -61,7 +61,12 @@ button.micl-iconbutton-outlined-xl {
     border-radius: var(--md-sys-shape-corner-full);
     background-color: transparent;
     background-image:
-        radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        radial-gradient(
+            circle at var(--micl-x, center) var(--micl-y, center),
+            transparent 0%,
+            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+            transparent 10%
+        ),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
@@ -72,7 +77,7 @@ button.micl-iconbutton-outlined-xl {
     transition:
         border-radius var(--md-sys-iconbutton-motion-duration) var(--md-sys-iconbutton-motion-effects),
         font-variation-settings var(--md-sys-iconbutton-motion-duration) linear,
-        background-size 3000ms,
+        background-size 3000ms motion.$md-sys-motion-easing-standard,
         --statelayer-opacity var(--md-sys-iconbutton-motion-duration) linear;
 
     &:disabled {

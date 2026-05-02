@@ -218,14 +218,19 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
     outline: none;
     background-color: var(--_list-item-background-color);
     background-image:
-        radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        radial-gradient(
+            circle at var(--micl-x, center) var(--micl-y, center),
+            transparent 0%,
+            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+            transparent 10%
+        ),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     background-size: 10000%, 100%;
     list-style: none;
     transition:
         border-radius var(--md-sys-list-motion-duration) var(--md-sys-list-motion-effects),
-        background-size 3000ms,
+        background-size 3000ms motion.$md-sys-motion-easing-standard,
         --statelayer-opacity var(--md-sys-list-motion-duration) linear;
     -webkit-tap-highlight-color: transparent;
 

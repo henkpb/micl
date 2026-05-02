@@ -47,6 +47,8 @@ $md-sys-state-focus-indicator-thickness: 3px;
     --md-sys-state-focus-indicator-inner-offset: #{$md-sys-state-focus-indicator-inner-offset};
     --md-sys-state-focus-indicator-outer-offset: #{$md-sys-state-focus-indicator-outer-offset};
     --md-sys-state-focus-indicator-thickness: #{$md-sys-state-focus-indicator-thickness};
+
+    --md-sys-state-ripple-opacity-factor: 0.6;
 }
 
 @property --statelayer-color {
