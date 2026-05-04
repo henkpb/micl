@@ -35,7 +35,7 @@
 .micl-textfield-filled > select,
 .micl-textfield-outlined > select {
     --md-sys-divider-space: 8px;
-    --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-sys-select-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-sys-select-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
     --md-sys-select-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
@@ -98,7 +98,6 @@
         --md-sys-list-item-one-padding: 0;
         --md-sys-list-item-two-padding: 0;
         --md-sys-list-item-space: 12px;
-        --md-sys-list-item-container-color: var(--md-sys-color-surface-container);
 
         line-height: normal;
         background-color: transparent;

@@ -27,7 +27,7 @@
 @use '../../styles/typography';
 
 :root {
-    --md-sys-accordion-item-space: 0px;
+    --md-comp-accordion-item-space: 0px;
 }
 
 $item-padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
@@ -137,10 +137,10 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
 }
 
 .micl-list {
-    --md-sys-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-sys-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-sys-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-comp-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-comp-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
     --md-sys-divider-space: 0.5px;
     --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
     --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
@@ -166,12 +166,12 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             block-size: 0;
             overflow: hidden;
             transition:
-                block-size var( --md-sys-accordion-motion-duration) var(--md-sys-accordion-motion-spatial),
-                content-visibility var(--md-sys-accordion-motion-duration) linear allow-discrete;
+                block-size var( --md-comp-accordion-motion-duration) var(--md-comp-accordion-motion-spatial),
+                content-visibility var(--md-comp-accordion-motion-duration) linear allow-discrete;
         }
         &[open]::details-content {
             block-size: auto;
-            margin-block-end: var(--md-sys-accordion-item-space, 0px);
+            margin-block-end: var(--md-comp-accordion-item-space, 0px);
         }
         &[open] .micl-list-item__icon--expander {
             transform: rotate(180deg);
@@ -213,7 +213,6 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
 .micl-list-item-two,
 .micl-list-item-three {
     --statelayer-color: var(--md-sys-color-on-surface);
-    --md-comp-list-item-thumbnail-aspect-ratio: 1.778;
     --_list-item-shape: var(--md-comp-list-item-container-expressive-shape, var(--md-sys-shape-corner-extra-small, 4px));
     --_overline-color: var(--md-comp-list-item-overline-color, var(--md-sys-color-on-surface-variant));
     --_headline-color: var(--md-comp-list-item-label-text-color, var(--md-sys-color-on-surface));
@@ -244,9 +243,9 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
     background-size: 0%, 100%;
     list-style: none;
     transition:
-        border-radius var(--md-sys-list-motion-duration) var(--md-sys-list-motion-effects),
+        border-radius var(--md-comp-list-motion-duration) var(--md-comp-list-motion-effects),
         background-size 0ms,
-        --statelayer-opacity var(--md-sys-list-motion-duration) linear;
+        --statelayer-opacity var(--md-comp-list-motion-duration) linear;
     -webkit-tap-highlight-color: transparent;
 
     &:first-of-type {
@@ -290,7 +289,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
         --_trailing-icon-color: rgb(from var(--md-comp-list-item-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --_trailing-text-color: rgb(from var(--md-comp-list-item-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --statelayer-color: var(--md-comp-list-item-disabled-state-layer-color, var(--md-sys-color-on-surface));
-        --statelayer-opacity: var(--md-comp-list-item-disabled-state-layer-opacity, 10%);
+        --statelayer-opacity: var(--md-comp-list-item-disabled-state-layer-opacity, 0%);
 
         a, button, label {
             pointer-events: none;
@@ -313,7 +312,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             --_trailing-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --statelayer-color: var(--md-comp-list-item-selected-disabled-state-layer-color, var(--md-sys-color-on-surface));
-            --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 10%);
+            --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 0%);
         }
     }
     &:has(input[type=checkbox]:checked) {
@@ -364,7 +363,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
         -webkit-line-clamp: 2;
     }
 }
-.micl-list-item-two, .micl-list-item-three {
+.micl-list-item-one, .micl-list-item-two, .micl-list-item-three {
     input[type=checkbox].micl-checkbox {
         block-size: 24px;
         min-block-size: 24px;
@@ -378,11 +377,11 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
     font-size: var(--md-comp-list-item-leading-icon-expressive-size, 20px);
     font-variation-settings: 'FILL' 0;
     color: var(--_leading-icon-color);
-    transition: font-variation-settings var(--md-sys-list-motion-duration) linear;
+    transition: font-variation-settings var(--md-comp-list-motion-duration) linear;
 
     &.micl-list-item__icon--expander {
         transform: rotate(0deg);
-        transition: transform var(--md-sys-list-motion-duration) linear;
+        transition: transform var(--md-comp-list-motion-duration) linear;
     }
 }
 .micl-list-item__text ~ .micl-list-item__icon {
@@ -404,8 +403,11 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
     background-color: var(--md-comp-list-item-leading-avatar-color, var(--md-sys-color-primary-container));
 }
 .micl-list-item__image {
+    align-self: stretch;
     display: inline-block;
-    block-size: var(--md-comp-list-item-leading-image-height, 56px);
+    max-block-size: var(--md-comp-list-item-leading-image-height, 56px);
+    inline-size: var(--md-comp-list-item-leading-image-width, 56px);
+    max-inline-size: var(--md-comp-list-item-leading-image-width, 56px);
     min-inline-size: var(--md-comp-list-item-leading-image-width, 56px);
     border-radius: var(--md-comp-list-item-leading-image-expressive-shape, var(--md-sys-shape-corner-small, 8px));
     background-position: center;
@@ -413,9 +415,12 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
     background-size: cover;
 }
 .micl-list-item__thumbnail {
+    align-self: stretch;
     display: inline-block;
-    block-size: var(--md-comp-list-item-leading-video-height, 64px);
-    min-inline-size: calc(var(--md-comp-list-item-leading-video-height, 64px) * var(--md-comp-list-item-thumbnail-aspect-ratio));
+    max-block-size: var(--md-comp-list-item-leading-video-height, 56px);
+    inline-size: var(--md-comp-list-item-leading-video-width, 100px);
+    max-inline-size: var(--md-comp-list-item-leading-video-width, 100px);
+    min-inline-size: var(--md-comp-list-item-leading-video-width, 100px);
     border-radius: var(--md-comp-list-item-leading-video-shape, var(--md-sys-shape-corner-small, 8px));
     background-position: center;
     background-repeat: no-repeat;
