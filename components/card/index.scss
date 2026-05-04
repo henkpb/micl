@@ -1,5 +1,5 @@
 //
-// Copyright © 2026 Hermana AS
+// Copyright © 2025 Hermana AS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -89,8 +89,8 @@
 .micl-card-elevated,
 .micl-card-filled,
 .micl-card-outlined {
-    --md-sys-card-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-sys-card-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-comp-card-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-comp-card-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 
     --_card-color: var(--md-sys-color-on-surface-variant);
 
@@ -129,7 +129,7 @@
         background-size: 0%, 100%;
         transition:
             background-size 0ms,
-            --statelayer-opacity var(--md-sys-card-motion-duration) linear;
+            --statelayer-opacity var(--md-comp-card-motion-duration) linear;
 
         &:hover {
             --statelayer-color: var(--_card-hover-state-color);
@@ -186,8 +186,8 @@
         block-size: 0;
         overflow: hidden;
         transition:
-            block-size var(--md-sys-card-motion-duration) var(--md-sys-card-motion-spatial),
-            content-visibility var(--md-sys-card-motion-duration) linear allow-discrete;
+            block-size var(--md-comp-card-motion-duration) var(--md-comp-card-motion-spatial),
+            content-visibility var(--md-comp-card-motion-duration) linear allow-discrete;
     }
     &[open]::details-content {
         block-size: auto;
