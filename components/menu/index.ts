@@ -32,6 +32,14 @@ export default (() =>
                ((invokerRect.y > popoverRect.y) ? 'bottom' : 'top');
     };
 
+    const navigableItems = (list: Element): HTMLElement[] =>
+        Array.from(list.children).filter((child): child is HTMLElement =>
+            child instanceof HTMLLIElement
+            && child.getAttribute('role') !== 'separator'
+            && !child.classList.contains('micl-list-item--disabled')
+            && child.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
+        );
+
     return {
         initialize: (element: HTMLElement): void =>
         {
@@ -45,62 +53,91 @@ export default (() =>
 
             const invoker = document.querySelector(`[popovertarget="${element.id}"]`);
 
-            invoker && element.addEventListener('beforetoggle', event =>
+            invoker && element.addEventListener('beforetoggle', () =>
             {
-                if ((event as ToggleEvent).oldState === 'open') {
-                    // The popover is about to be closed.
-                    element.style.transformOrigin = getOrigin(invoker, element);
-                }
+                element.style.transformOrigin = getOrigin(invoker, element);
             });
-            invoker && element.addEventListener('toggle', event =>
+
+            element.addEventListener('keydown', (event: KeyboardEvent) =>
             {
-                if ((event as ToggleEvent).oldState === 'closed') {
-                    // The popover has just opened.
-                    element.style.transformOrigin = getOrigin(invoker, element);
+                if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+
+                const target = event.target;
+                if (
+                    !(target instanceof HTMLElement)
+                    || !target.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
+                ) {
+                    return;
                 }
-            });
+
+                const currentList = target.parentElement;
+                if (!currentList?.matches('ul.micl-list')) return;
+                if (currentList.parentElement !== element) return;
+
+                const lists = Array.from(element.querySelectorAll<HTMLElement>(':scope > ul.micl-list'));
+                if (lists.length < 2) return;
+
+                const listIndex = lists.indexOf(currentList as HTMLElement);
+                const items = navigableItems(currentList);
+                const itemIndex = items.indexOf(target);
+                if (itemIndex === -1) return;
+
+                let nextItem: HTMLElement | undefined;
+
+                if (event.key === 'ArrowDown' && itemIndex === items.length - 1) {
+                    const nextListIndex = (listIndex + 1) % lists.length;
+                    nextItem = navigableItems(lists[nextListIndex])[0];
+                }
+                else if (event.key === 'ArrowUp' && itemIndex === 0) {
+                    const prevListIndex = (listIndex - 1 + lists.length) % lists.length;
+                    const prev = navigableItems(lists[prevListIndex]);
+                    nextItem = prev[prev.length - 1];
+                }
+
+                if (nextItem) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    target.setAttribute('tabindex', '-1');
+                    nextItem.setAttribute('tabindex', '0');
+                    nextItem.focus();
+                }
+            }, true);
 
             element.querySelectorAll<HTMLButtonElement>(
                 ':scope > ul.micl-list > li > button[popovertarget]'
             ).forEach(submenuinvoker =>
             {
                 if (submenuinvoker.popoverTargetElement?.matches('.micl-menu[popover]')) {
-                    let hoverTimeout: any,
-                        id = `--${submenuinvoker.popoverTargetElement.id}`;
+                    const popover = submenuinvoker.popoverTargetElement as HTMLElement;
+                    const id = `--${popover.id}`;
+                    let hoverTimeout: ReturnType<typeof setTimeout>;
 
-                    if (submenuinvoker.popoverTargetElement instanceof HTMLElement) {
-                        submenuinvoker.style.setProperty('anchor-name', id);
-                        submenuinvoker.popoverTargetElement.style.insetBlockStart = `anchor(${id} start)`;
-                        submenuinvoker.popoverTargetElement.style.insetInlineStart = `anchor(${id} end)`;
-                    }
+                    submenuinvoker.style.setProperty('anchor-name', id);
+                    popover.style.insetBlockStart = `anchor(${id} start)`;
+                    popover.style.insetInlineStart = `anchor(${id} end)`;
+
+                    const scheduleClose = () =>
+                    {
+                        clearTimeout(hoverTimeout);
+                        hoverTimeout = setTimeout(() =>
+                        {
+                            if (!submenuinvoker.matches(':hover') && !popover.matches(':hover')) {
+                                popover.hidePopover();
+                            }
+                        }, 300);
+                    };
 
                     submenuinvoker.addEventListener('mouseenter', () =>
                     {
-                        if (submenuinvoker.popoverTargetElement instanceof HTMLElement) {
-                            submenuinvoker.popoverTargetElement.showPopover();
-                        }
+                        clearTimeout(hoverTimeout);
+                        popover.showPopover();
                     });
-                    submenuinvoker.addEventListener('mouseleave', () =>
-                    {
-                        hoverTimeout = setTimeout(() => {
-                            if (
-                                submenuinvoker.popoverTargetElement instanceof HTMLElement
-                                && !submenuinvoker.popoverTargetElement.matches(':hover')
-                            ) {
-                                submenuinvoker.popoverTargetElement.hidePopover();
-                            }
-                        }, 100);
-                    });
-                    submenuinvoker.popoverTargetElement.addEventListener('mouseenter', () =>
+                    submenuinvoker.addEventListener('mouseleave', scheduleClose);
+                    popover.addEventListener('mouseenter', () =>
                     {
                         clearTimeout(hoverTimeout);
                     });
-                    submenuinvoker.popoverTargetElement.addEventListener('mouseleave', () =>
-                    {
-                        if (submenuinvoker.popoverTargetElement instanceof HTMLElement) {
-                            submenuinvoker.popoverTargetElement.hidePopover();
-                        }
-                    });
+                    popover.addEventListener('mouseleave', scheduleClose);
                 }
             });
         }

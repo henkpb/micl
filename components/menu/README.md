@@ -20,6 +20,8 @@ The Menu component is an extension of the [List component](../list/README.md). I
 <button type="button" popovertarget="mymenu">Open Menu</button>
 ```
 
+Adding the `micl-list-item--disabled` class to a menu item causes the item to be displayed in a disabled state.
+
 ### CSS
 Import the styles for both the menu and list components into your project:
 
@@ -62,11 +64,11 @@ Since the Menu component is based on the **List component**, all of its list ite
     </li>
     <li class="micl-list-item-two">
       <span class="micl-list-item__image" style="background-image:url(https://...jpg)"></span>
-      <label for="cb" class="micl-list-item__text">
+      <label class="micl-list-item__text">
         <span class="micl-list-item__headline">Person</span>
         <span class="micl-list-item__supporting-text">This person is an administrator</span>
+        <input type="checkbox" id="cb" class="micl-checkbox">
       </label>
-      <input type="checkbox" id="cb" class="micl-checkbox">
     </li>
   </ul>
 </nav>
@@ -113,7 +115,7 @@ A menu item may trigger opening a submenu when invoked by a button. Wrap the men
               <span class="micl-list-item__headline">Item 1-1</span>
             </span>
           </li>
-          <li role="separator" class="micl-divider"></li>
+          <li role="separator" class="micl-divider-inset"></li>
           <li class="micl-list-item-one">
             <span class="micl-list-item__text">
               <span class="micl-list-item__headline">Item 1-2</span>
@@ -131,165 +133,209 @@ A menu item may trigger opening a submenu when invoked by a button. Wrap the men
 </nav>
 ```
 
-Adding the `micl-list-item--disabled` class to a menu item causes the item to be displayed in a disabled state.
+**Example: A vibrant menu**
 
-Use a [Divider component](../divider/README.md) to separate neighbouring menu items by a divider.
+Add the `micl-menu--vibrant` class to render the menu in a high-emphasis variant.
+
+```HTML
+<nav id="mymenu" class="micl-menu micl-menu--vibrant" popover>
+  <ul class="micl-list">
+    <li class="micl-list-item-one" tabindex="0">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Menu item</span>
+      </span>
+    </li>
+  </ul>
+</nav>
+```
+
+**Example: Grouping menu items**
+
+Menu items can be grouped by including a [Divider component](../divider/README.md) or a small gap. To create a gap between groups of menu items, bundle similar menu items in different lists.
+
+```HTML
+<nav id="mymenu" class="micl-menu" popover>
+  <ul class="micl-list">
+    <li role="separator" class="micl-menu__section">File</li>
+    <li class="micl-list-item-one" tabindex="0">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">New</span>
+      </span>
+    </li>
+  </ul>
+  <ul class="micl-list">
+    <li role="separator" class="micl-menu__section">Edit</li>
+    <li class="micl-list-item-one">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Cut</span>
+      </span>
+    </li>
+  </ul>
+</nav>
+```
+
+You may include an `<li>` with the `micl-menu__section` class to give the menu item group a descriptive title.
 
 ## Customizations
 You can customize the appearance of the Menu component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child menus.
 
-| Variable name | Default Value | Description |
-| ------------- | ----- | ----------- |
-| --md-sys-menu-width-max | 280px | The maximum width allowed for a menu |
-| --md-sys-menu-width-min | 112px | The minimum allowed width for a menu |
+| Variable name            | Default Value | Description                          |
+| ------------------------ | ------------- | ------------------------------------ |
+| --md-comp-menu-width-max | 320px         | The maximum width allowed for a menu |
+| --md-comp-menu-width-min | 112px         | The minimum allowed width for a menu |
 
---md-comp-menu-gap
+The Menu component supports the following CSS variables, as defined in the [Material Design 3 Expressive Menu Specification](https://m3.material.io/components/menus/specs):
 
---md-comp-menu-container-elevation
---md-comp-menu-container-shape
---md-comp-menu-active-container-shape
---md-comp-menu-inactive-container-shape
---md-comp-menu-group-padding
---md-comp-menu-group-shape
---md-comp-menu-item-first-child-inner-corner-corner-size
---md-comp-menu-item-first-child-shape
---md-comp-menu-item-last-child-inner-corner-corner-size
---md-comp-menu-item-last-child-shape
---md-comp-menu-item-focus-indicator-color
---md-comp-menu-item-focus-indicator-offset
---md-comp-menu-item-focus-indicator-thickness
---md-comp-menu-item-height
---md-comp-menu-item-selected-shape
---md-comp-menu-item-shape
---md-comp-menu-item-leading-space
---md-comp-menu-item-leading-icon-size
---md-comp-menu-item-trailing-space
---md-comp-menu-item-trailing-icon-size
-
---md-comp-menu-standard-container-color
---md-comp-menu-standard-menu-item-container-color
---md-comp-menu-standard-menu-item-focused-label-text-color
---md-comp-menu-standard-menu-item-focused-leading-icon-color
---md-comp-menu-standard-menu-item-focused-state-layer-color
---md-comp-menu-standard-menu-item-focused-state-layer-opacity
---md-comp-menu-standard-menu-item-focused-supporting-text-color
---md-comp-menu-standard-menu-item-focused-trailing-icon-color
---md-comp-menu-standard-menu-item-focused-trailing-supporting-text-color
---md-comp-menu-standard-menu-item-hovered-label-text-color
---md-comp-menu-standard-menu-item-hovered-leading-icon-color
---md-comp-menu-standard-menu-item-hovered-state-layer-color
---md-comp-menu-standard-menu-item-hovered-state-layer-opacity
---md-comp-menu-standard-menu-item-hovered-supporting-text-color
---md-comp-menu-standard-menu-item-hovered-trailing-icon-color
---md-comp-menu-standard-menu-item-hovered-trailing-supporting-text-color
---md-comp-menu-standard-menu-item-pressed-label-text-color
---md-comp-menu-standard-menu-item-pressed-leading-icon-color
---md-comp-menu-standard-menu-item-pressed-state-layer-color
---md-comp-menu-standard-menu-item-pressed-state-layer-opacity
---md-comp-menu-standard-menu-item-pressed-supporting-text-color
---md-comp-menu-standard-menu-item-pressed-trailing-icon-color
---md-comp-menu-standard-menu-item-pressed-trailing-supporting-text-color
---md-comp-menu-standard-menu-item-label-text-color
---md-comp-menu-standard-menu-item-leading-icon-color
---md-comp-menu-standard-menu-item-supporting-text-color
---md-comp-menu-standard-menu-item-trailing-icon-color
---md-comp-menu-standard-menu-item-trailing-supporting-text-color
---md-comp-menu-standard-section-label-text-color
-
---md-comp-menu-vibrant-container-color
---md-comp-menu-vibrant-menu-item-container-color
---md-comp-menu-vibrant-menu-item-focused-label-text-color
---md-comp-menu-vibrant-menu-item-focused-leading-icon-color
---md-comp-menu-vibrant-menu-item-focused-state-layer-color
---md-comp-menu-vibrant-menu-item-focused-state-layer-opacity
---md-comp-menu-vibrant-menu-item-focused-supporting-text-color
---md-comp-menu-vibrant-menu-item-focused-trailing-icon-color
---md-comp-menu-vibrant-menu-item-focused-trailing-supporting-text-color
---md-comp-menu-vibrant-menu-item-hovered-label-text-color
---md-comp-menu-vibrant-menu-item-hovered-leading-icon-color
---md-comp-menu-vibrant-menu-item-hovered-state-layer-color
---md-comp-menu-vibrant-menu-item-hovered-state-layer-opacity
---md-comp-menu-vibrant-menu-item-hovered-supporting-text-color
---md-comp-menu-vibrant-menu-item-hovered-trailing-icon-color
---md-comp-menu-vibrant-menu-item-hovered-trailing-supporting-text-color
---md-comp-menu-vibrant-menu-item-pressed-label-text-color
---md-comp-menu-vibrant-menu-item-pressed-leading-icon-color
---md-comp-menu-vibrant-menu-item-pressed-state-layer-color
---md-comp-menu-vibrant-menu-item-pressed-state-layer-opacity
---md-comp-menu-vibrant-menu-item-pressed-supporting-text-color
---md-comp-menu-vibrant-menu-item-pressed-trailing-icon-color
---md-comp-menu-vibrant-menu-item-pressed-trailing-supporting-text-color
---md-comp-menu-vibrant-menu-item-label-text-color
---md-comp-menu-vibrant-menu-item-leading-icon-color
---md-comp-menu-vibrant-menu-item-supporting-text-color
---md-comp-menu-vibrant-menu-item-trailing-icon-color
---md-comp-menu-vibrant-menu-item-trailing-supporting-text-color
---md-comp-menu-vibrant-section-label-text-color
-
---md-comp-menu-standard-menu-item-selected-container-color
---md-comp-menu-standard-menu-item-selected-label-text-color
---md-comp-menu-standard-menu-item-selected-leading-icon-color
---md-comp-menu-standard-menu-item-selected-supporting-text-color
---md-comp-menu-standard-menu-item-selected-trailing-icon-color
---md-comp-menu-standard-menu-item-selected-trailing-supporting-text-color
-
---md-comp-menu-standard-menu-item-selected-disabled-container-color
---md-comp-menu-standard-menu-item-selected-disabled-container-opacity
---md-comp-menu-standard-menu-item-selected-disabled-label-text-color
---md-comp-menu-standard-menu-item-selected-disabled-label-text-opacity
---md-comp-menu-standard-menu-item-selected-disabled-leading-icon-color
---md-comp-menu-standard-menu-item-selected-disabled-leading-icon-opacity
---md-comp-menu-standard-menu-item-selected-disabled-trailing-icon-color
---md-comp-menu-standard-menu-item-selected-disabled-trailing-icon-opacity
---md-comp-menu-standard-menu-item-selected-disabled-trailing-supporting-text-color
---md-comp-menu-standard-menu-item-selected-focused-label-text-color
---md-comp-menu-standard-menu-item-selected-focused-leading-icon-color
---md-comp-menu-standard-menu-item-selected-focused-state-layer-color
---md-comp-menu-standard-menu-item-selected-focused-state-layer-opacity
---md-comp-menu-standard-menu-item-selected-focused-supporting-text-color
---md-comp-menu-standard-menu-item-selected-focused-trailing-icon-color
---md-comp-menu-standard-menu-item-selected-focused-trailing-supporting-text-color
---md-comp-menu-standard-menu-item-selected-hovered-label-text-color
---md-comp-menu-standard-menu-item-selected-hovered-leading-icon-color
---md-comp-menu-standard-menu-item-selected-hovered-state-layer-color
---md-comp-menu-standard-menu-item-selected-hovered-state-layer-opacity
---md-comp-menu-standard-menu-item-selected-hovered-supporting-text-color
---md-comp-menu-standard-menu-item-selected-hovered-trailing-icon-color
---md-comp-menu-standard-menu-item-selected-hovered-trailing-supporting-text-color
---md-comp-menu-standard-menu-item-selected-pressed-label-text-color
---md-comp-menu-standard-menu-item-selected-pressed-leading-icon-color
---md-comp-menu-standard-menu-item-selected-pressed-state-layer-color
---md-comp-menu-standard-menu-item-selected-pressed-state-layer-opacity
---md-comp-menu-standard-menu-item-selected-pressed-supporting-text-color
---md-comp-menu-standard-menu-item-selected-pressed-trailing-icon-color
---md-comp-menu-standard-menu-item-selected-pressed-trailing-supporting-text-color
-
---md-comp-menu-vibrant-menu-item-selected-container-color
---md-comp-menu-vibrant-menu-item-selected-label-text-color
---md-comp-menu-vibrant-menu-item-selected-leading-icon-color
---md-comp-menu-vibrant-menu-item-selected-supporting-text-color
---md-comp-menu-vibrant-menu-item-selected-trailing-icon-color
---md-comp-menu-vibrant-menu-item-selected-trailing-supporting-text-color
---md-comp-menu-vibrant-menu-item-selected-focused-state-layer-color
-
---md-comp-menu-vibrant-menu-item-selected-disabled-label-text-opacity
---md-comp-menu-vibrant-menu-item-selected-disabled-leading-icon-opacity
---md-comp-menu-vibrant-menu-item-selected-disabled-supporting-text-opacity
---md-comp-menu-vibrant-menu-item-selected-disabled-trailing-icon-opacity
---md-comp-menu-vibrant-menu-item-selected-disabled-trailing-supporting-text-opacity
---md-comp-menu-vibrant-menu-item-selected-focused-state-layer-opacity
---md-comp-menu-vibrant-menu-item-selected-focused-label-text-color
---md-comp-menu-vibrant-menu-item-selected-hovered-state-layer-color
---md-comp-menu-vibrant-menu-item-selected-hovered-state-layer-opacity
---md-comp-menu-vibrant-menu-item-selected-hovered-label-text-color
---md-comp-menu-vibrant-menu-item-selected-pressed-state-layer-color
---md-comp-menu-vibrant-menu-item-selected-pressed-state-layer-opacity
---md-comp-menu-vibrant-menu-item-selected-pressed-label-text-color
+| Variable name |
+| ------------- |
+| --md-comp-menu-container-elevation |
+| --md-comp-menu-container-shape |
+| --md-comp-menu-active-container-shape |
+| --md-comp-menu-inactive-container-shape |
+| --md-comp-menu-gap |
+| --md-comp-menu-group-padding |
+| --md-comp-menu-group-shape |
+| --md-comp-menu-item-height |
+| --md-comp-menu-item-bottom-space |
+| --md-comp-menu-item-leading-space |
+| --md-comp-menu-item-top-space |
+| --md-comp-menu-item-trailing-space |
+| --md-comp-menu-item-focus-indicator-color |
+| --md-comp-menu-item-focus-indicator-offset |
+| --md-comp-menu-item-focus-indicator-thickness |
+| --md-comp-menu-item-leading-icon-size |
+| --md-comp-menu-item-trailing-icon-size |
+| --md-comp-menu-item-shape |
+| --md-comp-menu-item-shape-single |
+| --md-comp-menu-item-selected-shape |
+|  |
+| --md-comp-menu-section-label-bottom-space |
+| --md-comp-menu-section-label-top-space |
+|  |
+| --md-comp-menu-standard-container-color |
+| --md-comp-menu-standard-menu-item-container-color |
+| --md-comp-menu-standard-menu-item-focused-label-text-color |
+| --md-comp-menu-standard-menu-item-focused-leading-icon-color |
+| --md-comp-menu-standard-menu-item-focused-state-layer-color |
+| --md-comp-menu-standard-menu-item-focused-state-layer-opacity |
+| --md-comp-menu-standard-menu-item-focused-supporting-text-color |
+| --md-comp-menu-standard-menu-item-focused-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-focused-trailing-supporting-text-color |
+| --md-comp-menu-standard-menu-item-hovered-label-text-color |
+| --md-comp-menu-standard-menu-item-hovered-leading-icon-color |
+| --md-comp-menu-standard-menu-item-hovered-state-layer-color |
+| --md-comp-menu-standard-menu-item-hovered-state-layer-opacity |
+| --md-comp-menu-standard-menu-item-hovered-supporting-text-color |
+| --md-comp-menu-standard-menu-item-hovered-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-hovered-trailing-supporting-text-color |
+| --md-comp-menu-standard-menu-item-pressed-label-text-color |
+| --md-comp-menu-standard-menu-item-pressed-leading-icon-color |
+| --md-comp-menu-standard-menu-item-pressed-state-layer-color |
+| --md-comp-menu-standard-menu-item-pressed-state-layer-opacity |
+| --md-comp-menu-standard-menu-item-pressed-supporting-text-color |
+| --md-comp-menu-standard-menu-item-pressed-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-pressed-trailing-supporting-text-color |
+| --md-comp-menu-standard-menu-item-label-text-color |
+| --md-comp-menu-standard-menu-item-leading-icon-color |
+| --md-comp-menu-standard-menu-item-supporting-text-color |
+| --md-comp-menu-standard-menu-item-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-trailing-supporting-text-color |
+| --md-comp-menu-standard-section-label-text-color |
+|  |
+| --md-comp-menu-vibrant-container-color |
+| --md-comp-menu-vibrant-menu-item-container-color |
+| --md-comp-menu-vibrant-menu-item-focused-label-text-color |
+| --md-comp-menu-vibrant-menu-item-focused-leading-icon-color |
+| --md-comp-menu-vibrant-menu-item-focused-state-layer-color |
+| --md-comp-menu-vibrant-menu-item-focused-state-layer-opacity |
+| --md-comp-menu-vibrant-menu-item-focused-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-focused-trailing-icon-color |
+| --md-comp-menu-vibrant-menu-item-focused-trailing-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-hovered-label-text-color |
+| --md-comp-menu-vibrant-menu-item-hovered-leading-icon-color |
+| --md-comp-menu-vibrant-menu-item-hovered-state-layer-color |
+| --md-comp-menu-vibrant-menu-item-hovered-state-layer-opacity |
+| --md-comp-menu-vibrant-menu-item-hovered-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-hovered-trailing-icon-color |
+| --md-comp-menu-vibrant-menu-item-hovered-trailing-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-pressed-label-text-color |
+| --md-comp-menu-vibrant-menu-item-pressed-leading-icon-color |
+| --md-comp-menu-vibrant-menu-item-pressed-state-layer-color |
+| --md-comp-menu-vibrant-menu-item-pressed-state-layer-opacity |
+| --md-comp-menu-vibrant-menu-item-pressed-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-pressed-trailing-icon-color |
+| --md-comp-menu-vibrant-menu-item-pressed-trailing-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-label-text-color |
+| --md-comp-menu-vibrant-menu-item-leading-icon-color |
+| --md-comp-menu-vibrant-menu-item-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-trailing-icon-color |
+| --md-comp-menu-vibrant-menu-item-trailing-supporting-text-color |
+| --md-comp-menu-vibrant-section-label-text-color |
+|  |
+| --md-comp-menu-standard-menu-item-selected-container-color |
+| --md-comp-menu-standard-menu-item-selected-label-text-color |
+| --md-comp-menu-standard-menu-item-selected-leading-icon-color |
+| --md-comp-menu-standard-menu-item-selected-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-selected-trailing-supporting-text-color |
+|  |
+| --md-comp-menu-standard-menu-item-selected-disabled-container-color |
+| --md-comp-menu-standard-menu-item-selected-disabled-container-opacity |
+| --md-comp-menu-standard-menu-item-selected-disabled-label-text-color |
+| --md-comp-menu-standard-menu-item-selected-disabled-label-text-opacity |
+| --md-comp-menu-standard-menu-item-selected-disabled-leading-icon-color |
+| --md-comp-menu-standard-menu-item-selected-disabled-leading-icon-opacity |
+| --md-comp-menu-standard-menu-item-selected-disabled-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-selected-disabled-trailing-icon-opacity |
+| --md-comp-menu-standard-menu-item-selected-disabled-trailing-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-focused-label-text-color |
+| --md-comp-menu-standard-menu-item-selected-focused-leading-icon-color |
+| --md-comp-menu-standard-menu-item-selected-focused-state-layer-color |
+| --md-comp-menu-standard-menu-item-selected-focused-state-layer-opacity |
+| --md-comp-menu-standard-menu-item-selected-focused-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-focused-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-selected-focused-trailing-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-hovered-label-text-color |
+| --md-comp-menu-standard-menu-item-selected-hovered-leading-icon-color |
+| --md-comp-menu-standard-menu-item-selected-hovered-state-layer-color |
+| --md-comp-menu-standard-menu-item-selected-hovered-state-layer-opacity |
+| --md-comp-menu-standard-menu-item-selected-hovered-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-hovered-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-selected-hovered-trailing-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-pressed-label-text-color |
+| --md-comp-menu-standard-menu-item-selected-pressed-leading-icon-color |
+| --md-comp-menu-standard-menu-item-selected-pressed-state-layer-color |
+| --md-comp-menu-standard-menu-item-selected-pressed-state-layer-opacity |
+| --md-comp-menu-standard-menu-item-selected-pressed-supporting-text-color |
+| --md-comp-menu-standard-menu-item-selected-pressed-trailing-icon-color |
+| --md-comp-menu-standard-menu-item-selected-pressed-trailing-supporting-text-color |
+|  |
+| --md-comp-menu-vibrant-menu-item-selected-container-color |
+| --md-comp-menu-vibrant-menu-item-selected-label-text-color |
+| --md-comp-menu-vibrant-menu-item-selected-leading-icon-color |
+| --md-comp-menu-vibrant-menu-item-selected-supporting-text-color |
+| --md-comp-menu-vibrant-menu-item-selected-trailing-icon-color |
+| --md-comp-menu-vibrant-menu-item-selected-trailing-supporting-text-color |
+|  |
+| --md-comp-menu-vibrant-menu-item-selected-disabled-label-text-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-disabled-leading-icon-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-disabled-supporting-text-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-disabled-trailing-icon-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-disabled-trailing-supporting-text-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-focused-state-layer-color |
+| --md-comp-menu-vibrant-menu-item-selected-focused-state-layer-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-focused-label-text-color |
+| --md-comp-menu-vibrant-menu-item-selected-hovered-state-layer-color |
+| --md-comp-menu-vibrant-menu-item-selected-hovered-state-layer-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-hovered-label-text-color |
+| --md-comp-menu-vibrant-menu-item-selected-pressed-state-layer-color |
+| --md-comp-menu-vibrant-menu-item-selected-pressed-state-layer-opacity |
+| --md-comp-menu-vibrant-menu-item-selected-pressed-label-text-color |
 
 **Example: Changing the maximum width**
 
 ```HTML
-<div style="--md-sys-menu-width-max:320px">
+<div style="--md-comp-menu-width-max:360px">
   <nav id="mymenu" class="micl-menu" popover>
     <ul class="micl-list">
       <li class="micl-list-item-one" tabindex="0">
