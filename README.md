@@ -124,6 +124,12 @@ The library currently consists of the following components:
 
 ## Change Log ↪️
 
+### 8.0.0 (05.05.2026)
+- **BREAKING**: Renamed many CSS custom properties from --md-sys- to --md-comp-.
+- **List, Menu, Accordion, Select**: Aligned with latest MD3 spec.
+- **Ripple**: Now starts on pointer-down.
+- **Text field**: Outlined version uses CSS variable instead of inherited background.
+
 ### 7.0.0 (08.03.2026)
 - **BREAKING**: Use `<a>` instead of `<label>` inside Navigation rail.
 - **BREAKING**: Use `inert` for disabled cards instead of `micl-card--disabled`.
