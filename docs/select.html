@@ -16,7 +16,7 @@
         .micl-card__content > .micl-textfield-outlined, .micl-card__content > .micl-textfield-filled {
             margin: 32px 0;
         }
-        #myselect3 option::checkmark {
+        #myselect3 option::checkmark, #myselect4 option::checkmark {
             display: none;
         }
         .micl-list-item__thumbnail {
@@ -125,6 +125,55 @@
                                     </option>
                                 </select>
                             </div>
+                            <div class="micl-textfield-outlined">
+                                <label for="myselect4">American Country</label>
+                                <select id="myselect4">
+                                    <option class="micl-list-item-two" value=""></option>
+                                    <optgroup>
+                                        <legend class="micl-menu__section">North American Countries</legend>
+                                        <option class="micl-list-item-two" value="CA">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Flag_of_Canada.svg/330px-Flag_of_Canada.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: CA">Canada</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="MX">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/330px-Flag_of_Mexico.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: MX">Mexico</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="US">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/330px-Flag_of_the_United_States.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: US">USA</span>
+                                        </option>
+                                    </optgroup>
+                                    <hr class="micl-divider-inset">
+                                    <optgroup>
+                                        <legend class="micl-menu__section">South American Countries</legend>
+                                        <option class="micl-list-item-two" value="AR">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Argentina.svg/330px-Flag_of_Argentina.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: AR">Argentina</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="BO">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Bandera_de_Bolivia_%28Estado%29.svg/330px-Bandera_de_Bolivia_%28Estado%29.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: BO">Bolivia</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="BR">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/330px-Flag_of_Brazil.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: BR">Brazil</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="CL">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/330px-Flag_of_Chile.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: CL">Chile</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="CO" disabled>
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/330px-Flag_of_Colombia.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: CO">Colombia</span>
+                                        </option>
+                                        <option class="micl-list-item-two" value="EC">
+                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Flag_of_Ecuador.svg/330px-Flag_of_Ecuador.svg.png)"></span>
+                                            <span class="micl-list-item__text" aria-description="Country code: EC">Ecuador</span>
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,8 +181,8 @@
                     <div class="micl-card-outlined">
                         <div class="micl-card__content" style="padding-block-end:32px">
                             <div class="micl-textfield-filled">
-                                <label for="myselect4">Country</label>
-                                <select id="myselect4">
+                                <label for="myselect5">Country</label>
+                                <select id="myselect5">
                                     <option class="micl-list-item-one" value=""></option>
                                     <option class="micl-list-item-one" value="AR">
                                         <span class="micl-list-item__text">Argentina</span>
@@ -144,7 +193,7 @@
                                     <option class="micl-list-item-one" value="BR" disabled>
                                         <span class="micl-list-item__text">Brazil</span>
                                     </option>
-                                    <hr class="micl-divider">
+                                    <hr class="micl-divider-inset">
                                     <option class="micl-list-item-one" selected value="CL">
                                         <span class="micl-list-item__text">Chile</span>
                                     </option>
@@ -157,8 +206,8 @@
                                 </select>
                             </div>
                             <div class="micl-textfield-filled">
-                                <label for="myselect5">Country</label>
-                                <select id="myselect5">
+                                <label for="myselect6">Country</label>
+                                <select id="myselect6">
                                     <option class="micl-list-item-one" value=""></option>
                                     <option class="micl-list-item-one" value="AR">
                                         <span class="micl-list-item__text">Argentina</span>
@@ -172,7 +221,7 @@
                                         <span class="micl-list-item__text">Brazil</span>
                                         <span class="bigdot" style="background-color:burlywood"></span>
                                     </option>
-                                    <hr class="micl-divider">
+                                    <hr class="micl-divider-inset">
                                     <option class="micl-list-item-one" value="CL">
                                         <span class="micl-list-item__text">Chile</span>
                                         <span class="bigdot" style="background-color:coral"></span>
@@ -181,7 +230,7 @@
                                         <span class="micl-list-item__text">Colombia</span>
                                         <span class="bigdot" style="background-color:darkkhaki"></span>
                                     </option>
-                                    <hr class="micl-divider">
+                                    <hr class="micl-divider-inset">
                                     <option class="micl-list-item-one" value="EC">
                                         <span class="micl-list-item__text">Ecuador</span>
                                         <span class="bigdot" style="background-color:darkviolet"></span>
@@ -189,8 +238,8 @@
                                 </select>
                             </div>
                             <div class="micl-textfield-filled">
-                                <label for="myselect6">Country</label>
-                                <select id="myselect6" disabled>
+                                <label for="myselect7">Country</label>
+                                <select id="myselect7" disabled>
                                     <option class="micl-list-item-one" value=""></option>
                                     <option class="micl-list-item-one" value="AR">
                                         <span class="micl-list-item__text">Argentina</span>
@@ -220,8 +269,8 @@
                                 </div>
                                 <div class="micl-dialog__content">
                                     <div class="micl-textfield-outlined" style="margin:8px">
-                                        <label for="myselect7">Country</label>
-                                        <select id="myselect7">
+                                        <label for="myselect8">Country</label>
+                                        <select id="myselect8">
                                             <option class="micl-list-item-two" value="AR">
                                                 <span class="micl-list-item__text" aria-description="Country code: AR">Argentina</span>
                                             </option>
@@ -271,7 +320,7 @@
     &lt;option class="micl-list-item-one" value="BO"&gt;
       &lt;span class="micl-list-item__text"&gt;Bolivia&lt;/span&gt;
     &lt;/option&gt;
-    &lt;hr class="micl-divider"&gt;
+    &lt;hr class="micl-divider-inset"&gt;
     &lt;option class="micl-list-item-one" value="BR" disabled&gt;
       &lt;span class="micl-list-item__text"&gt;Brazil&lt;/span&gt;
     &lt;/option&gt;

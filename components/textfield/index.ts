@@ -72,7 +72,7 @@ export default (() =>
             const segment = value.substring(valueIndex, valueIndex + comp.length);
             formattedValue += segment;
             valueIndex += segment.length;
-            
+
             if (segment.length === comp.length && comp.separator) {
                 formattedValue += comp.separator;
             }
@@ -140,7 +140,7 @@ export default (() =>
                     const spaceBelow = window.innerHeight - rect.bottom;
 
                     !input.matches(':open') && input.style.setProperty(
-                        '--md-sys-select-picker-origin',
+                        '--md-comp-select-picker-origin',
                         spaceAbove > spaceBelow ? 'left bottom' : 'left top'
                     );
                 });
