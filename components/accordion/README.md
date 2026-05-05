@@ -68,9 +68,9 @@ To ensure that only one accordion item within a group can be open at a time, add
       </div>
     </div>
   </details>
-  <hr class="micl-divider">
+  <hr class="micl-divider-inset">
   <details name="mygroup">
-    <summary class="micl-list-item-two" tabindex="-1">
+    <summary class="micl-list-item-two">
       <span class="micl-list-item__text">
         <span class="micl-list-item__headline">Country</span>
         <span class="micl-list-item__supporting-text">The country of residence.</span>
@@ -110,6 +110,9 @@ Use a [Divider component](../divider/README.md) to separate neighbouring accordi
 
 Since the Accordion is based on the List component, you can use the same utility classes for content structure and styling. Refer to the [List component documentation](../list/README.md) for details on how to add icons, avatars, images, and other features to your accordion items.
 
+## Keyboard
+Each `<summary>` is a tab stop in document order — `Tab` and `Shift+Tab` move focus through the accordion headers. While focus is on a header, `Enter` or `Space` toggles the panel open or closed. As an optional enhancement, `ArrowDown` and `ArrowUp` move focus to the next or previous header in the same group; focus wraps around at the ends.
+
 ## Customizations
 You can customize the appearance of the Accordion component by overriding its own global CSS variables and those from the List component. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child accordions.
 
@@ -131,4 +134,4 @@ You can customize the appearance of the Accordion component by overriding its ow
 ```
 
 ## Compatibility
-The Card component uses the `interpolate-size` CSS property to smoothly open and close the detail area of a Details disclosure element, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.
+The Accordion component uses the `interpolate-size` CSS property to smoothly open and close the detail area of a Details disclosure element, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.

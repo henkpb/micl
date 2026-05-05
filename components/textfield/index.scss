@@ -53,7 +53,7 @@
         margin-block-start: calc((var(--md-sys-textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
         margin-inline: 12px 4px;
         border-radius: 4px;
-        background-color: inherit;
+        background-color: var(--_dialog-background-color, var(--_card-background-color, inherit));
         color: var(--md-sys-color-on-surface-variant);
         z-index: 1;
         transition:

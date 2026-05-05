@@ -139,9 +139,9 @@ const renderCalendarHeader = (): DocumentFragment =>
     const tempDate = new Date();
     const startOffset = tempDate.getDay() - firstDayOfWeek;
     tempDate.setDate(tempDate.getDate() - startOffset);
-    
+
     const fragment = document.createDocumentFragment();
-    
+
     for (let i = 0; i < 7; i++) {
         const span = document.createElement('span');
         span.style.gridArea = `1 / ${i + 1}`;
@@ -179,10 +179,10 @@ const populateContainerWithDays = (
         const day = days[index];
         el.dateTime = day.val;
         el.textContent = day.date.getDate().toString();
-        
+
         const isSelected = day.date.getTime() === state.selected.getTime();
         const isToday = day.date.getTime() === today.getTime();
-        
+
         el.className = '';
         if (!day.isCurrentMonth) el.classList.add('micl-datepicker__outside');
         if (isSelected) el.classList.add('micl-datepicker__selected');
@@ -303,7 +303,7 @@ const renderCalendar = (
 
     const monthInput = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__months input[value="${state.viewDate.getMonth()}"]`);
     if (monthInput) monthInput.checked = true;
-    
+
     const yearInput = dialog.querySelector<HTMLInputElement>(`.micl-datepicker__years input[value="${state.viewDate.getFullYear()}"]`);
     if (yearInput) yearInput.checked = true;
 };
@@ -335,7 +335,7 @@ const initPeriodPickers = (dialog: HTMLDialogElement, min: Date, max: Date): voi
                 months.push(current.getMonth());
                 current.setMonth(current.getMonth() + 1);
             }
-            
+
             [...new Set(months.sort((a, b) => a - b))].forEach(m => {
                 const label = document.createElement('label');
                 label.innerHTML = `<span class="material-symbols-outlined">check</span><input type="radio" name="miclmonth" value="${m}"> ${formatters.monthLong.format(new Date(2000, m, 1))}`;
@@ -498,7 +498,7 @@ const selectDate = (dialog: HTMLDialogElement, dateStr: string, isLocaleFormatte
     if (parts.length === 3) {
         state.selected = new Date(parts[0], parts[1], parts[2]);
         state.viewDate = new Date(state.selected);
-        
+
         renderCalendar(dialog, state);
     }
 };
@@ -562,7 +562,7 @@ export default (() =>
                     const forMonth = btn.parentElement?.classList.contains('micl-datepicker__month-selector');
                     const isNext   = btn.classList.contains('micl-datepicker__next');
                     const isPrev   = btn.classList.contains('micl-datepicker__previous');
-                    
+
                     if (isNext || isPrev) {
                         changePeriod(dialog, isNext ? 1 : -1, forMonth ? 'month' : 'year');
                         return;
@@ -628,7 +628,7 @@ export default (() =>
                 if (!isInvoker(invoker)) {
                     return;
                 }
-                
+
                 let initialDate = new Date();
                 let min = new Date(1900, 0, 1);
                 let max = new Date(2099, 11, 31);

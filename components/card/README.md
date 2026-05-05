@@ -126,6 +126,7 @@ The Card component supports the following CSS variables, as defined in the [Mate
 --md-comp-elevated-card-container-shape
 --md-comp-elevated-card-disabled-container-elevation
 --md-comp-elevated-card-disabled-container-color
+--md-comp-elevated-card-disabled-container-opacity
 --md-comp-elevated-card-hover-container-elevation
 --md-comp-elevated-card-hover-state-layer-color
 --md-comp-elevated-card-hover-state-layer-opacity
@@ -146,6 +147,7 @@ The Card component supports the following CSS variables, as defined in the [Mate
 --md-comp-filled-card-container-shape
 --md-comp-filled-card-disabled-container-elevation
 --md-comp-filled-card-disabled-container-color
+--md-comp-filled-card-disabled-container-opacity
 --md-comp-filled-card-hover-container-elevation
 --md-comp-filled-card-hover-state-layer-color
 --md-comp-filled-card-hover-state-layer-opacity
@@ -166,7 +168,9 @@ The Card component supports the following CSS variables, as defined in the [Mate
 --md-comp-outlined-card-container-shape
 --md-comp-outlined-card-outline-width
 --md-comp-outlined-card-outline-color
+--md-comp-outlined-card-disabled-container-color
 --md-comp-outlined-card-disabled-container-elevation
+--md-comp-outlined-card-disabled-container-opacity
 --md-comp-outlined-card-disabled-outline-color
 --md-comp-outlined-card-disabled-outline-opacity
 --md-comp-outlined-card-hover-container-elevation

@@ -27,27 +27,24 @@
 @use '../../styles/typography';
 
 .micl-textfield-filled > select {
-    --md-sys-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
+    --md-comp-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
 }
 .micl-textfield-outlined > select {
-    --md-sys-select-line-height: var(--md-sys-textfield-height);
+    --md-comp-select-line-height: var(--md-sys-textfield-height);
 }
 .micl-textfield-filled > select,
 .micl-textfield-outlined > select {
     --md-sys-divider-space: 8px;
-    --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-sys-select-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-sys-select-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-sys-select-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --md-sys-select-picker-origin: left top;
+    --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-comp-select-picker-origin: left top;
 
     appearance: base-select;
-    line-height: var(--md-sys-select-line-height);
+    line-height: var(--md-comp-select-line-height);
 
     &::picker-icon {
       color: var(--md-sys-color-on-surface-variant);
       transition: motion.$md-sys-motion-duration-medium4 rotate;
-      transform-origin: 50% calc((var(--md-sys-select-line-height) / 2) - 1px);
+      transform-origin: 50% calc((var(--md-comp-select-line-height) / 2) - 1px);
     }
     &:disabled::picker-icon {
         color: rgb(from var(--md-sys-color-on-surface-variant) r g b/var(--md-sys-state-disabled-state-layer-opacity, 38%));
@@ -55,35 +52,48 @@
     &:open::picker-icon {
       rotate: 180deg;
     }
+
     &::picker(select) {
+        --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+        --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+        --md-sys-divider-space: 0.5px;
+        --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
+        --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
+        --_list-item-background-opacity: 0%;
+
         appearance: base-select;
-        min-inline-size: max(anchor-size(self-inline), 112px);
-        max-inline-size: 280px;
-        position-try: most-block-size flip-block;
-        padding: var(--md-sys-list-padding, 8px) 0;
+        display: flex;
+        flex-direction: column;
+        position-try-order: most-block-size;
+        position-try-fallbacks: flip-block, flip-inline;
+        min-inline-size: max(anchor-size(self-inline), var(--md-comp-menu-width-min, 112px));
+        max-inline-size: var(--md-comp-menu-width-max, 320px);
+        gap: var(--md-comp-menu-gap, 2px);
+        padding: 4px;
+        border-radius: var(--_list-shape);
         border: none;
-        border-radius: var(--md-sys-shape-corner-extra-small, 4px);
-        background-color: var(--md-sys-color-surface-container);
-        box-shadow: var(--md-sys-elevation-level2);
+        outline: none;
+        background-color: var(--md-comp-menu-standard-container-color, var(--md-sys-color-surface-container-low));
+        box-shadow: var(--md-comp-menu-container-elevation, var(--md-sys-elevation-level2));
         opacity: 0;
         overflow-x: hidden;
         overflow-y: auto;
         transform: scaleY(0);
-        transform-origin: var(--md-sys-select-picker-origin);
+        transform-origin: var(--md-comp-select-picker-origin, left top);
         transition:
-            opacity var(--md-sys-select-motion-duration-reverse) linear,
-            transform var(--md-sys-select-motion-duration-reverse) var(--md-sys-select-motion-spatial),
-            overlay var(--md-sys-select-motion-duration-reverse) linear allow-discrete,
-            display var(--md-sys-select-motion-duration-reverse) linear allow-discrete;
+            opacity var(--md-comp-menu-motion-spatial-duration-reverse) linear,
+            transform var(--md-comp-menu-motion-spatial-duration-reverse) var(--md-comp-menu-motion-spatial),
+            overlay var(--md-comp-menu-motion-spatial-duration-reverse) linear allow-discrete,
+            display var(--md-comp-menu-motion-spatial-duration-reverse) linear allow-discrete;
 
         &:popover-open {
             opacity: 1;
             transform: scaleY(1);
             transition:
-                opacity var(--md-sys-select-motion-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
-                transform var(--md-sys-select-motion-duration) var(--md-sys-select-motion-spatial),
-                overlay var(--md-sys-select-motion-duration) linear allow-discrete,
-                display var(--md-sys-select-motion-duration) linear allow-discrete;
+                opacity var(--md-comp-menu-motion-spatial-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
+                transform var(--md-comp-menu-motion-spatial-duration) var(--md-comp-menu-motion-spatial),
+                overlay var(--md-comp-menu-motion-spatial-duration) linear allow-discrete,
+                display var(--md-comp-menu-motion-spatial-duration) linear allow-discrete;
 
             @starting-style {
                 opacity: 0;
@@ -93,50 +103,10 @@
     }
 
     option {
-        --md-sys-list-item-one-height: 48px;
-        --md-sys-list-item-two-height: 64px;
-        --md-sys-list-item-one-padding: 0;
-        --md-sys-list-item-two-padding: 0;
-        --md-sys-list-item-space: 12px;
-        --md-sys-list-item-container-color: var(--md-sys-color-surface-container);
-
         line-height: normal;
-        background-color: transparent;
 
-        &:not(:disabled) {
-            cursor: pointer;
-        }
-        &:checked {
-            background-color: var(--md-sys-color-secondary-container);
-
-            .micl-list-item__text {
-                color: var(--md-sys-color-on-secondary-container);
-
-                &::after {
-                    color: var(--md-sys-color-on-surface);
-                }
-            }
-        }
-        &:focus-visible {
-            outline-offset: calc(-1 * var(--md-sys-state-focus-indicator-thickness, 3px));
-            z-index: 1;
-        }
-
-        .micl-list-item__text {
-            @include typography.body-large;
-
-            color: var(--md-sys-color-on-surface);
-            white-space: normal;
-        }
         .micl-list-item__text::after {
-            @include typography.body-medium;
-
             content: attr(aria-description);
-            display: block;
-            color: var(--md-sys-color-on-surface-variant);
-            overflow-x: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
         &::checkmark {
             color: var(--md-sys-color-on-surface-variant);
@@ -144,20 +114,10 @@
     }
 }
 
-/* dialog.micl-dialog:has(.micl-textfield-filled > select), */
-/* dialog.micl-dialog:has(.micl-textfield-outlined > select), */
-/* dialog.micl-dialog-fullscreen:has(.micl-textfield-filled > select), */
-/* dialog.micl-dialog-fullscreen:has(.micl-textfield-outlined > select) { */
-    /* inset-block-start: 0; */
-    /* inset-inline-start: 0; */
-    /* margin: auto; */
-    /* transform: scale(50%); */
-
-    /* &:popover-open, */
-    /* &[open] { */
-        /* transform: scale(100%); */
-    /* } */
-/* } */
+[inert] .micl-textfield-filled > select::picker-icon,
+[inert] .micl-textfield-outlined > select::picker-icon {
+    display: none;
+}
 
 [dir=rtl] {
     .micl-textfield-filled > select,

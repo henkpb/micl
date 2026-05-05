@@ -33,6 +33,8 @@ $md-sys-state-focus-indicator-inner-offset: -3px;
 $md-sys-state-focus-indicator-outer-offset: 2px;
 $md-sys-state-focus-indicator-thickness: 3px;
 
+$md-sys-state-ripple-duration: 5000ms;
+
 :root {
     --md-sys-state-layer-size: #{$md-sys-state-layer-size};
     --md-sys-target-size: #{$md-sys-target-size};
@@ -47,6 +49,9 @@ $md-sys-state-focus-indicator-thickness: 3px;
     --md-sys-state-focus-indicator-inner-offset: #{$md-sys-state-focus-indicator-inner-offset};
     --md-sys-state-focus-indicator-outer-offset: #{$md-sys-state-focus-indicator-outer-offset};
     --md-sys-state-focus-indicator-thickness: #{$md-sys-state-focus-indicator-thickness};
+
+    --md-sys-state-ripple-opacity-factor: 0.6;
+    --md-sys-state-ripple-duration: #{$md-sys-state-ripple-duration};
 }
 
 @property --statelayer-color {
@@ -59,4 +64,9 @@ $md-sys-state-focus-indicator-thickness: 3px;
     syntax: '<percentage>';
     initial-value: 0%;
     inherits: false;
+}
+
+@keyframes micl-ripple {
+    from { background-size: 0%, 100%; }
+    to   { background-size: 10000%, 100%; }
 }

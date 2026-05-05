@@ -41,7 +41,6 @@ body {
     flex-direction: column;
     row-gap: var(--md-sys-padding-xl, 24px);
     margin: 0;
-    background-color: inherit;
 
     .micl-stepper__header {
         --md-sys-stepper-dot-size: 24px;
@@ -50,7 +49,6 @@ body {
         justify-content: space-between;
         align-items: flex-start;
         margin-inline: -10px;
-        background-color: inherit;
         background-image: linear-gradient(90deg, var(--md-sys-divider-color), var(--md-sys-divider-color));
         background-position: center;
         background-repeat: no-repeat;
@@ -58,7 +56,7 @@ body {
         counter-reset: dotnumber;
 
         button {
-            background-color: inherit;
+            background-color: var(--_card-background-color, inherit);
             pointer-events: none;
 
             &.micl-stepper__progress--done {
@@ -76,7 +74,6 @@ body {
         display: grid;
         grid-template-areas: "stepper-steps";
         overflow-x: hidden;
-        background-color: inherit;
 
         .micl-stepper__step {
             grid-area: stepper-steps;
@@ -87,7 +84,6 @@ body {
             padding: 0;
             border: none;
             opacity: 0%;
-            background-color: inherit;
             transform: translateX(100%);
             transition:
                 opacity var(--md-sys-stepper-motion-duration) linear,

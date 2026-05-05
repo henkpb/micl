@@ -95,7 +95,7 @@ export default (() =>
     const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
     {
         parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
-        parent.querySelectorAll<HTMLElement>('[class*="micl-"]').forEach(element =>
+        parent.querySelectorAll<HTMLElement>('[class*="micl-"], [class*="micl-"] > summary').forEach(element =>
         {
             if (rippleInitialized.has(element)) return;
 
@@ -111,10 +111,15 @@ export default (() =>
                     element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
                     element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
 
+                    element.classList.remove('micl-rippling');
+                    void element.offsetWidth;
+                    element.classList.add('micl-rippling');
+
                     const cleanup = (ev: AnimationEvent): void =>
                     {
                         if (ev.animationName !== 'micl-ripple') return;
 
+                        element.classList.remove('micl-rippling');
                         element.style.removeProperty('--micl-x');
                         element.style.removeProperty('--micl-y');
                         element.removeEventListener('animationend', cleanup);

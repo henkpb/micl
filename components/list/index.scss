@@ -20,48 +20,159 @@
 // SOFTWARE.
 
 @use '../../foundations';
+@use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
 :root {
-    --md-sys-list-padding: 8px;
-    --md-sys-list-item-one-height: 56px;
-    --md-sys-list-item-two-height: 72px;
-    --md-sys-list-item-three-height: 88px;
-    --md-sys-list-item-one-padding: 8px;
-    --md-sys-list-item-two-padding: 8px;
-    --md-sys-list-item-three-padding: 12px;
-    --md-sys-list-item-space: 16px;
-    --md-sys-list-item-padding-inline: 16px;
-    --md-sys-accordion-item-space: 0px;
+    --md-comp-accordion-item-space: 0px;
+}
+
+$item-padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
+$item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp-list-item-trailing-space, 16px);
+
+%shared-interactive-states {
+    cursor: pointer;
+
+    &:not(:has(input[type=checkbox]:checked)) {
+        &:hover {
+            --_list-item-shape: var(--md-comp-list-item-container-hovered-expressive-shape, var(--md-sys-shape-corner-medium, 12px));
+            --_headline-color: var(--md-comp-list-item-hover-label-text-color, var(--md-sys-color-on-surface));
+            --_leading-icon-color: var(--md-comp-list-item-hover-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_supporting-text-color: var(--md-comp-list-item-hover-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-icon-color: var(--md-comp-list-item-hover-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-text-color: var(--md-comp-list-item-hover-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --statelayer-color: var(--md-comp-list-item-hover-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity, 8%));
+        }
+        &:focus-visible {
+            --_list-item-shape: var(--md-comp-list-item-container-focused-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-focus-label-text-color, var(--md-sys-color-on-surface));
+            --_leading-icon-color: var(--md-comp-list-item-focus-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_supporting-text-color: var(--md-comp-list-item-focus-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-icon-color: var(--md-comp-list-item-focus-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-text-color: var(--md-comp-list-item-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --statelayer-color: var(--md-comp-list-item-focus-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity, 10%));
+
+            outline: var(--md-comp-list-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px)) solid var(--md-comp-list-item-focus-indicator-color, var(--md-sys-color-secondary));
+            outline-offset: var(--md-comp-list-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
+        }
+        &:active {
+            --_list-item-shape: var(--md-comp-list-item-container-pressed-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-pressed-label-text-color, var(--md-sys-color-on-surface));
+            --_leading-icon-color: var(--md-comp-list-item-pressed-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_supporting-text-color: var(--md-comp-list-item-pressed-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-icon-color: var(--md-comp-list-item-pressed-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-text-color: var(--md-comp-list-item-pressed-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --statelayer-color: var(--md-comp-list-item-pressed-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
+        }
+        &.micl-list-item--dragging {
+            --_list-item-shape: var(--md-comp-list-item-container-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-dragged-label-text-color, var(--md-sys-color-on-surface));
+            --_leading-icon-color: var(--md-comp-list-item-dragged-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_supporting-text-color: var(--md-comp-list-item-dragged-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-icon-color: var(--md-comp-list-item-dragged-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_trailing-text-color: var(--md-comp-list-item-dragged-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --statelayer-color: var(--md-comp-list-item-dragged-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity, 16%));
+
+            box-shadow: var(--md-comp-list-item-dragged-container-elevation, var(--md-sys-elevation-level4));
+            cursor: grabbing;
+        }
+    }
+    &:has(input[type=checkbox]:checked) {
+        &:hover {
+            --_list-item-shape: var(--md-comp-list-item-container-selected-hovered-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-selected-hover-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_leading-icon-color: var(--md-comp-list-item-selected-hover-leading-icon-color, var(--md-sys-color-on-surface));
+            --_supporting-text-color: var(--md-comp-list-item-selected-hover-supporting-text-color, var(--md-sys-color-on-surface));
+            --_trailing-icon-color: var(--md-comp-list-item-selected-hover-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_trailing-text-color: var(--md-comp-list-item-selected-hover-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --statelayer-color: var(--md-comp-list-item-selected-hover-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-selected-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity, 8%));
+        }
+        &:focus-visible {
+            --_list-item-shape: var(--md-comp-list-item-container-selected-focused-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-selected-focus-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_leading-icon-color: var(--md-comp-list-item-selected-focus-leading-icon-color, var(--md-sys-color-on-surface));
+            --_supporting-text-color: var(--md-comp-list-item-selected-focus-supporting-text-color, var(--md-sys-color-on-surface));
+            --_trailing-icon-color: var(--md-comp-list-item-selected-focus-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_trailing-text-color: var(--md-comp-list-item-selected-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --statelayer-color: var(--md-comp-list-item-selected-focus-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-selected-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity, 10%));
+
+            outline: var(--md-comp-list-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px)) solid var(--md-comp-list-item-focus-indicator-color, var(--md-sys-color-secondary));
+            outline-offset: var(--md-comp-list-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
+        }
+        &:active {
+            --_list-item-shape: var(--md-comp-list-item-container-selected-pressed-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-selected-pressed-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_leading-icon-color: var(--md-comp-list-item-selected-pressed-leading-icon-color, var(--md-sys-color-on-surface));
+            --_supporting-text-color: var(--md-comp-list-item-selected-pressed-supporting-text-color, var(--md-sys-color-on-surface));
+            --_trailing-icon-color: var(--md-comp-list-item-selected-pressed-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_trailing-text-color: var(--md-comp-list-item-selected-pressed-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --statelayer-color: var(--md-comp-list-item-selected-pressed-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-selected-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
+        }
+        &.micl-list-item--dragging {
+            --_list-item-shape: var(--md-comp-list-item-container-selected-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_headline-color: var(--md-comp-list-item-selected-dragged-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_leading-icon-color: var(--md-comp-list-item-selected-dragged-leading-icon-color, var(--md-sys-color-on-surface));
+            --_supporting-text-color: var(--md-comp-list-item-selected-dragged-supporting-text-color, var(--md-sys-color-on-surface));
+            --_trailing-icon-color: var(--md-comp-list-item-selected-dragged-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_trailing-text-color: var(--md-comp-list-item-selected-dragged-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --statelayer-color: var(--md-comp-list-item-selected-dragged-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-selected-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity, 16%));
+
+            box-shadow: var(--md-comp-list-item-selected-dragged-container-elevation, var(--md-sys-elevation-level4));
+        }
+    }
+    &.micl-rippling {
+        animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
+    }
 }
 
 .micl-list {
-    --md-sys-list-item-container-color: var(--md-sys-color-surface);
-    --md-sys-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-sys-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-sys-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-sys-divider-space: 8px;
+    --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-comp-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
+    --md-comp-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-sys-divider-space: 0.5px;
+    --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
+    --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
+    --_list-item-background-opacity: 0%;
 
-    margin: 0;
-    padding: var(--md-sys-list-padding, 8px) 0;
+    display: flex;
+    flex-direction: column;
+    margin: var(--md-comp-list-container-space, 0px) 0;
+    padding: 0;
+    border-radius: var(--_list-shape);
     interpolate-size: allow-keywords;
     list-style-type: none;
-    overflow-x: hidden;
+    background-color: var(--md-comp-list-container-color, transparent);
+
+    &.micl-list--segmented {
+        --_list-item-background-color: var(--md-comp-list-item-segmented-container-color, var(--md-sys-color-surface));
+        --_list-item-background-opacity: 100%;
+
+        row-gap: var(--md-comp-list-segment-gap, 2px);
+    }
 
     &> details {
         &::details-content {
             block-size: 0;
             overflow: hidden;
             transition:
-                block-size var( --md-sys-accordion-motion-duration) var(--md-sys-accordion-motion-spatial),
-                content-visibility var(--md-sys-accordion-motion-duration) linear allow-discrete;
+                block-size var( --md-comp-accordion-motion-duration) var(--md-comp-accordion-motion-spatial),
+                content-visibility var(--md-comp-accordion-motion-duration) linear allow-discrete;
         }
         &[open]::details-content {
             block-size: auto;
-            margin-block-end: var(--md-sys-accordion-item-space, 0px);
+            margin-block-end: var(--md-comp-accordion-item-space, 0px);
         }
         &[open] .micl-list-item__icon--expander {
             transform: rotate(180deg);
@@ -79,51 +190,22 @@
                 pointer-events: none;
             }
             &:not(.micl-list-item--disabled) {
-                cursor: pointer;
+                @extend %shared-interactive-states;
             }
         }
         .micl-list-item__content {
             box-sizing: border-box;
-            padding-inline: var(--md-sys-list-item-padding-inline, 16px);
-            background-color: var(--md-sys-list-item-container-color);
+            padding-inline-start: var(--md-comp-list-item-leading-space, 16px);
+            background-color: rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity));
             overflow: hidden;
         }
     }
 }
 
-.micl-list:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]),
-select {
-    .micl-list-item-one:not(:disabled):not(.micl-list-item--disabled),
-    .micl-list-item-two:not(:disabled):not(.micl-list-item--disabled),
-    .micl-list-item-three:not(:disabled):not(.micl-list-item--disabled) {
-        cursor: pointer;
-
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: var(--md-sys-state-focus-indicator-inner-offset, -3px);
-
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
-
-            background-size: 0%, 100%;
-            transition: background-size 0ms;
-
-            .micl-list-item__icon {
-                font-variation-settings: 'FILL' 1;
-            }
+.micl-list:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]), select {
+    .micl-list-item-one, .micl-list-item-two, .micl-list-item-three {
+        &:not(:disabled):not(.micl-list-item--disabled) {
+            @extend %shared-interactive-states;
         }
     }
 }
@@ -132,28 +214,49 @@ select {
 .micl-list-item-two,
 .micl-list-item-three {
     --statelayer-color: var(--md-sys-color-on-surface);
-    --md-sys-list-item-thumbnail-aspect-ratio: 1.778;
+    --_list-item-shape: var(--md-comp-list-item-container-expressive-shape, var(--md-sys-shape-corner-extra-small, 4px));
+    --_overline-color: var(--md-comp-list-item-overline-color, var(--md-sys-color-on-surface-variant));
+    --_headline-color: var(--md-comp-list-item-label-text-color, var(--md-sys-color-on-surface));
+    --_leading-icon-color: var(--md-comp-list-item-leading-icon-color, var(--md-sys-color-on-surface-variant));
+    --_supporting-text-color: var(--md-comp-list-item-supporting-text-color, var(--md-sys-color-on-surface-variant));
+    --_trailing-text-color: var(--md-comp-list-item-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+    --_trailing-icon-color: var(--md-comp-list-item-trailing-icon-color, var(--md-sys-color-on-surface-variant));
 
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    column-gap: var(--md-sys-list-item-space, 16px);
-    padding-inline: var(--md-sys-list-item-space, 16px);
+    column-gap: var(--md-comp-list-item-between-space, 12px);
+    padding-block: $item-padding-block;
+    padding-inline: $item-padding-inline;
     border: none;
-    border-radius: var(--md-sys-shape-corner-none, 0px);
+    border-radius: var(--_list-item-shape);
     outline: none;
-    background-color: var(--md-sys-list-item-container-color);
+    background-color: rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity));
     background-image:
-        radial-gradient(circle at var(--micl-x, center) var(--micl-y, center), transparent 0%, rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)) 10%, transparent 10%),
+        radial-gradient(
+            circle at var(--micl-x, center) var(--micl-y, center),
+            transparent 0%,
+            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+            transparent 10%
+        ),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
-    background-size: 10000%, 100%;
+    background-size: 0%, 100%;
     list-style: none;
     transition:
-        background-size 3000ms,
-        --statelayer-opacity var(--md-sys-list-motion-duration) linear;
+        border-radius var(--md-comp-list-motion-duration) var(--md-comp-list-motion-effects),
+        background-size 0ms,
+        --statelayer-opacity var(--md-comp-list-motion-duration) linear;
     -webkit-tap-highlight-color: transparent;
 
+    &:first-of-type {
+        border-start-start-radius: max(var(--_list-item-shape), var(--_list-shape));
+        border-start-end-radius: max(var(--_list-item-shape), var(--_list-shape));
+    }
+    &:last-of-type {
+        border-end-start-radius: max(var(--_list-item-shape), var(--_list-shape));
+        border-end-end-radius: max(var(--_list-item-shape), var(--_list-shape));
+    }
     &:not(:has(> button)) {
         --micl-ripple: 1;
     }
@@ -166,7 +269,8 @@ select {
         column-gap: inherit;
         min-block-size: inherit;
         inline-size: 100%;
-        padding-inline: var(--md-sys-list-item-space, 16px);
+        padding-block: $item-padding-block;
+        padding-inline: $item-padding-inline;
         border: none;
         border-radius: inherit;
         background-color: transparent;
@@ -174,39 +278,57 @@ select {
         cursor: pointer;
     }
     &:has(> a,> button,> label) {
-        padding-inline: 0;
+        padding: 0;
     }
     &:disabled,
     &.micl-list-item--disabled {
-        .micl-list-item__icon,
-        .micl-list-item__headline,
-        .micl-list-item__supporting-text,
-        .micl-list-item__text,
-        .micl-list-item__text::after,
-        .micl-list-item__trailing-text {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
-        }
-        .micl-list-item__image,
-        .micl-list-item__thumbnail {
-            opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
-        }
+        --_list-item-shape: var(--md-comp-list-item-container-disabled-expressive-shape, var(--md-sys-shape-corner-extra-small, 4px));
+        --_overline-color: rgb(from var(--md-comp-list-item-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_headline-color: rgb(from var(--md-comp-list-item-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_leading-icon-color: rgb(from var(--md-comp-list-item-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_supporting-text-color: rgb(from var(--md-comp-list-item-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_trailing-icon-color: rgb(from var(--md-comp-list-item-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_trailing-text-color: rgb(from var(--md-comp-list-item-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --statelayer-color: var(--md-comp-list-item-disabled-state-layer-color, var(--md-sys-color-on-surface));
+        --statelayer-opacity: var(--md-comp-list-item-disabled-state-layer-opacity, 0%);
+
         a, button, label {
             pointer-events: none;
             cursor: auto;
         }
+
+        .micl-list-item__image,
+        .micl-list-item__thumbnail {
+            opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
+        }
+
+        &:checked, &:has(input[type=checkbox]:checked) {
+            --_list-item-background-color: var(--md-comp-list-item-selected-disabled-container-color, var(--md-sys-color-on-surface));
+            --_list-item-background-opacity: var(--md-comp-list-item-selected-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+            --_list-item-shape: var(--md-comp-list-item-container-selected-disabled-expressive-shape, var(--md-sys-shape-corner-large, 16px));
+            --_overline-color: rgb(from var(--md-comp-list-item-selected-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_headline-color: rgb(from var(--md-comp-list-item-selected-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_leading-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_supporting-text-color: rgb(from var(--md-comp-list-item-selected-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_trailing-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --statelayer-color: var(--md-comp-list-item-selected-disabled-state-layer-color, var(--md-sys-color-on-surface));
+            --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 0%);
+        }
+    }
+    &:checked, &:has(input[type=checkbox]:checked) {
+        --_list-item-background-color: var(--md-comp-list-item-selected-container-color, var(--md-sys-color-secondary-container));
+        --_list-item-background-opacity: 100%;
+        --_overline-color: var(--md-comp-list-item-selected-overline-color, var(--md-sys-color-on-secondary-container));
+        --_headline-color: var(--md-comp-list-item-selected-label-text-color, var(--md-sys-color-on-secondary-container));
+        --_leading-icon-color: var(--md-comp-list-item-selected-leading-icon-color, var(--md-sys-color-on-secondary-container));
+        --_supporting-text-color: var(--md-comp-list-item-selected-supporting-text-color, var(--md-sys-color-on-secondary-container));
+        --_trailing-text-color: var(--md-comp-list-item-selected-trailing-supporting-text-color, var(--md-sys-color-on-secondary-container));
+        --_trailing-icon-color: var(--md-comp-list-item-selected-trailing-icon-color, var(--md-sys-color-on-secondary-container));
     }
     &:not(:disabled):not(.micl-list-item--disabled) {
-        &:has(input[type=checkbox]:checked) {
-            background-color: var(--md-sys-color-secondary-container);
-
-            .micl-list-item__headline {
-                color: var(--md-sys-color-on-secondary-container);
-            }
-            .micl-list-item__icon,
-            .micl-list-item__supporting-text,
-            .micl-list-item__trailing-text {
-                color: var(--md-sys-color-on-surface);
-            }
+        &:checked, &:has(input[type=checkbox]:checked) {
+            --_list-item-shape: var(--md-comp-list-item-container-selected-expressive-shape, var(--md-sys-shape-corner-large, 16px));
         }
         input[type=checkbox]:not(:disabled):hover,
         input[type=checkbox]:not(:disabled):active {
@@ -220,100 +342,29 @@ select {
 }
 
 .micl-list-item-one {
-    min-block-size: var(--md-sys-list-item-one-height);
-
-    &:not(:has(> a,> button,> label)) {
-        padding-block-start: var(--md-sys-list-item-one-padding);
-        padding-block-end: var(--md-sys-list-item-one-padding);
-
-        &:has(.micl-list-item__thumbnail) {
-            padding-block-start: var(--md-sys-list-item-three-padding);
-            padding-block-end: var(--md-sys-list-item-three-padding);
-            padding-inline-start: 0px;
-        }
-    }
-    &> a,
-    &> button,
-    &> label {
-        padding-block-start: var(--md-sys-list-item-one-padding);
-        padding-block-end: var(--md-sys-list-item-one-padding);
-
-        &:has(.micl-list-item__thumbnail) {
-            padding-block-start: var(--md-sys-list-item-three-padding);
-            padding-block-end: var(--md-sys-list-item-three-padding);
-            padding-inline-start: 0px;
-        }
-    }
+    min-block-size: var(--md-comp-list-item-one-line-container-height, 56px);
 }
 .micl-list-item-two {
-    min-block-size: var(--md-sys-list-item-two-height);
+    min-block-size: var(--md-comp-list-item-two-line-container-height, 72px);
 
-    &:not(:has(> a,> button,> label)) {
-        padding-block-start: var(--md-sys-list-item-two-padding);
-        padding-block-end: var(--md-sys-list-item-two-padding);
-
-        &:has(.micl-list-item__thumbnail) {
-            padding-inline-start: 0px;
-            padding-block-start: 12px;
-            padding-block-end: 12px;
-        }
-    }
-    &> a,
-    &> button,
-    &> label {
-        padding-block-start: var(--md-sys-list-item-two-padding);
-        padding-block-end: var(--md-sys-list-item-two-padding);
-
-        &:has(.micl-list-item__thumbnail) {
-            padding-inline-start: 0px;
-            padding-block-start: 12px;
-            padding-block-end: 12px;
-        }
-    }
     .micl-list-item__supporting-text {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    input[type=checkbox].micl-checkbox {
-        block-size: 24px;
-        min-block-size: 24px;
-        inline-size: 24px;
-        min-inline-size: 24px;
-    }
 }
 .micl-list-item-three {
-    min-block-size: var(--md-sys-list-item-three-height);
+    min-block-size: var(--md-comp-list-item-three-line-container-height, 88px);
     align-items: flex-start;
 
-    &:not(:has(> a,> button,> label)) {
-        padding-block-start: var(--md-sys-list-item-three-padding);
-        padding-block-end: var(--md-sys-list-item-three-padding);
-
-        &:has(.micl-list-item__thumbnail) {
-            padding-block-start: var(--md-sys-list-item-three-padding);
-            padding-block-end: var(--md-sys-list-item-three-padding);
-            padding-inline-start: 0px;
-        }
-    }
-    &> a,
-    &> button,
-    &> label {
-        padding-block-start: var(--md-sys-list-item-three-padding);
-        padding-block-end: var(--md-sys-list-item-three-padding);
-
-        &:has(.micl-list-item__thumbnail) {
-            padding-block-start: var(--md-sys-list-item-three-padding);
-            padding-block-end: var(--md-sys-list-item-three-padding);
-            padding-inline-start: 0px;
-        }
-    }
     .micl-list-item__supporting-text {
         display: -webkit-box;
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
     }
+}
+.micl-list-item-one, .micl-list-item-two, .micl-list-item-three {
     input[type=checkbox].micl-checkbox {
         block-size: 24px;
         min-block-size: 24px;
@@ -323,71 +374,86 @@ select {
 }
 
 .micl-list-item__icon {
-    min-inline-size: var(--md-sys-icon-size, 24px);
-    font-size: var(--md-sys-icon-size, 24px);
+    min-inline-size: var(--md-comp-list-item-leading-icon-expressive-size, 20px);
+    font-size: var(--md-comp-list-item-leading-icon-expressive-size, 20px);
     font-variation-settings: 'FILL' 0;
-    color: var(--md-sys-color-on-surface-variant);
-    transition: font-variation-settings var(--md-sys-list-motion-duration) linear;
+    color: var(--_leading-icon-color);
+    transition: font-variation-settings var(--md-comp-list-motion-duration) linear;
 
     &.micl-list-item__icon--expander {
         transform: rotate(0deg);
-        transition: transform var(--md-sys-list-motion-duration) linear;
+        transition: transform var(--md-comp-list-motion-duration) linear;
     }
 }
+.micl-list-item__text ~ .micl-list-item__icon {
+    min-inline-size: var(--md-comp-list-item-trailing-icon-expressive-size, 20px);
+    font-size: var(--md-comp-list-item-trailing-icon-expressive-size, 20px);
+    color: var(--_trailing-icon-color);
+}
+
 .micl-list-item__avatar {
     @include typography.title-medium;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    block-size: 40px;
-    min-inline-size: 40px;
-    border-radius: var(--md-sys-shape-corner-full, 50%);
-    color: var(--md-sys-color-on-primary-container);
-    background-color: var(--md-sys-color-primary-container);
+    block-size: var(--md-comp-list-item-leading-avatar-size, 40px);
+    min-inline-size: var(--md-comp-list-item-leading-avatar-size, 40px);
+    border-radius: var(--md-comp-list-item-leading-avatar-shape, var(--md-sys-shape-corner-full, 50%));
+    color: var(--md-comp-list-item-leading-avatar-label-color, var(--md-sys-color-on-primary-container));
+    background-color: var(--md-comp-list-item-leading-avatar-color, var(--md-sys-color-primary-container));
 }
 .micl-list-item__image {
+    align-self: stretch;
     display: inline-block;
-    block-size: 56px;
-    min-inline-size: 56px;
-    border-radius: var(--md-sys-shape-corner-none, 0px);
+    max-block-size: var(--md-comp-list-item-leading-image-height, 56px);
+    inline-size: var(--md-comp-list-item-leading-image-width, 56px);
+    max-inline-size: var(--md-comp-list-item-leading-image-width, 56px);
+    min-inline-size: var(--md-comp-list-item-leading-image-width, 56px);
+    border-radius: var(--md-comp-list-item-leading-image-expressive-shape, var(--md-sys-shape-corner-small, 8px));
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .micl-list-item__thumbnail {
+    align-self: stretch;
     display: inline-block;
-    block-size: 64px;
-    min-inline-size: calc(64px * var(--md-sys-list-item-thumbnail-aspect-ratio));
-    border-radius: var(--md-sys-shape-corner-none, 0px);
+    max-block-size: var(--md-comp-list-item-leading-video-height, 56px);
+    inline-size: var(--md-comp-list-item-leading-video-width, 100px);
+    max-inline-size: var(--md-comp-list-item-leading-video-width, 100px);
+    min-inline-size: var(--md-comp-list-item-leading-video-width, 100px);
+    border-radius: var(--md-comp-list-item-leading-video-shape, var(--md-sys-shape-corner-small, 8px));
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .micl-list-item__text {
+    @include typography.body-large;
+
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     min-inline-size: 0;
     text-align: start;
+    color: var(--_headline-color);
 
-    .micl-list-item__headline {
-        @include typography.body-large;
-
-        color: var(--md-sys-color-on-surface);
+    .micl-list-item__overline {
+        @include typography.label-small;
+        color: var(--_overline-color);
     }
-    .micl-list-item__supporting-text {
+    .micl-list-item__headline {
+        color: var(--_headline-color);
+    }
+    &::after, .micl-list-item__supporting-text {
         @include typography.body-medium;
-
-        color: var(--md-sys-color-on-surface-variant);
+        color: var(--_supporting-text-color);
     }
 }
 
 .micl-list-item__trailing-text {
     @include typography.label-small;
-
-    color: var(--md-sys-color-on-surface-variant);
+    color: var(--_trailing-text-color);
 }
 
 [dir=rtl] .micl-list details[open] .micl-list-item__icon--expander {

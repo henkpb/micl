@@ -44,6 +44,8 @@ dialog.micl-dialog {
     --md-sys-dialog-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-dialog-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
 
+    --_dialog-background-color: var(--md-sys-color-surface-container-high);
+
     box-sizing: border-box;
     display: none;
     flex-direction: column;
@@ -58,7 +60,7 @@ dialog.micl-dialog {
     outline: none;
     border: none;
     border-radius: var(--md-sys-shape-corner-extra-large);
-    background-color: var(--md-sys-color-surface-container-high);
+    background-color: var(--_dialog-background-color);
     background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
     box-shadow: var(--md-sys-elevation-level3);
@@ -199,13 +201,9 @@ dialog.micl-dialog {
 
         color: var(--md-sys-color-on-surface-variant);
     }
-    form {
-        background-color: inherit;
-    }
     .micl-dialog__content {
         flex-shrink: 1;
         padding-inline: var(--md-sys-dialog-padding, 24px);
-        background-color: inherit;
         overflow-y: auto;
     }
     .micl-dialog__actions {
@@ -224,11 +222,12 @@ dialog.micl-dialog {
 
 dialog.micl-dialog.micl-dialog--fullscreen {
     @media (max-width: 560px) {
+        --_dialog-background-color: var(--md-sys-color-surface);
+
         inline-size: 100vw;
         block-size: 100vh;
         max-inline-size: 100vw;
         border-radius: var(--md-sys-shape-corner-none, 0px);
-        background-color: var(--md-sys-color-surface);
         box-shadow: var(--md-sys-elevation-level0);
         timeline-scope: --headlineTimeline;
 
