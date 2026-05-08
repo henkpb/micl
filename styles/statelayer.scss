@@ -37,12 +37,19 @@ $_tokens: (
     focus-state-layer-opacity:     10%,
     pressed-state-layer-opacity:   10%,
     dragged-state-layer-opacity:   16%,
+    // TODO: misnamed vs M3 spec — value 38% matches DisabledLabelTextOpacity / DisabledIconOpacity
+    // (content fade), but M3's `disabled.state-layer.opacity` is 12% (container background).
+    // Either rename to --md-sys-state-disabled-opacity (breaking) or split into two tokens.
     disabled-state-layer-opacity:  38%,
     focus-indicator-inner-offset:  -3px,
     focus-indicator-outer-offset:  2px,
     focus-indicator-thickness:     3px,
     backdrop-opacity:              32%,
     ripple-opacity-factor:         0.6,
+    // TODO: 5000ms is well outside M3's motion scale (max DurationExtraLong4 = 1000ms;
+    // standard ripples ~300ms). Used here as an upper-bound cap on the @keyframes spread,
+    // not as a perceived animation duration. Consider renaming to ripple-spread-cap or
+    // aligning with an M3 motion token.
     ripple-duration:               5000ms,
 );
 
