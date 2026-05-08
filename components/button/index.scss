@@ -44,6 +44,11 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
+@include typography.scale('headline-large');
+@include typography.scale('headline-small');
+@include typography.scale('title-medium');
+@include typography.scale('label-large');
+
 button.micl-button-text-xs,
 a.micl-button-text-xs,
 button.micl-button-text-s,

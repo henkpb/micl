@@ -33,6 +33,11 @@
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 
+@include typography.scale('label-medium');
+
+@include motion.duration('medium2');
+@include motion.duration('long2');
+
 @mixin slider-track() {
     block-size: var(--md-sys-slider-track-height);
     border-radius: var(--md-sys-slider-track-radius);

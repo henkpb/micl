@@ -47,6 +47,9 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
+@include typography.scale('title-medium');
+@include typography.scale('body-smallmedium');
+
 @mixin card-variant(
     $name,
     $bg-default,

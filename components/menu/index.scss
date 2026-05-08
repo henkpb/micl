@@ -39,6 +39,10 @@
 @include statelayer.token('focus-indicator-inner-offset');
 @include statelayer.token('backdrop-opacity');
 
+@include typography.scale('label-large');
+@include typography.scale('label-small');
+@include typography.scale('body-small');
+
 :root {
     --md-comp-menu-width-max: 320px;
     --md-comp-menu-width-min: 112px;

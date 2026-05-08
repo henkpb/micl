@@ -41,6 +41,9 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
+@include typography.scale('label-large');
+@include typography.scale('label-medium');
+
 .micl-navigationrail {
     --md-comp-nav-rail-spring-buffer: 100px;
     --md-comp-nav-rail-divider-thickness: 0px;

@@ -46,6 +46,11 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
+@include typography.scale('title-medium');
+@include typography.scale('body-large');
+@include typography.scale('body-medium');
+@include typography.scale('label-small');
+
 :root {
     --md-comp-accordion-item-space: 0px;
 }

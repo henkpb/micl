@@ -25,13 +25,12 @@
 @use 'styles/shapes' with ($master: true);
 @use 'styles/elevation' with ($master: true);
 @use 'styles/statelayer' with ($master: true);
+@use 'styles/typography' with ($master: true);
+@use 'styles/motion' with ($master: true);
 
 @use 'foundations';
 @use 'foundations/layout';
 @use 'foundations/scrollbar';
-
-@use 'styles/typography';
-@use 'styles/motion';
 
 @use 'components/divider';
 @use 'components/alert';

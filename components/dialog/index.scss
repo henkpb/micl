@@ -37,6 +37,11 @@
 @include statelayer.token('backdrop-opacity');
 @include statelayer.property;
 
+@include typography.scale('headline-small');
+@include typography.scale('title-large');
+@include typography.scale('title-medium');
+@include typography.scale('body-medium');
+
 :root {
     --md-sys-dialog-min-width: 280px;
     --md-sys-dialog-max-width: 560px;

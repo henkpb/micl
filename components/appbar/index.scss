@@ -31,6 +31,13 @@
 
 @include shapes.corner('none');
 
+@include typography.scale('display-small');
+@include typography.scale('headline-medium');
+@include typography.scale('title-large');
+@include typography.scale('title-medium');
+@include typography.scale('title-small');
+@include typography.scale('label-medium');
+
 @mixin appbar-sticky() {
     position: sticky;
     inset: unset;

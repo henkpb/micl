@@ -35,6 +35,8 @@
 
 @include statelayer.token('backdrop-opacity');
 
+@include typography.scale('title-large');
+
 :root {
     --md-sys-sidesheet-width: 256px;
     --md-sys-sidesheet-maxwidth: 400px;

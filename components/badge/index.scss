@@ -22,6 +22,8 @@
 @use '../../foundations';
 @use '../../styles/typography';
 
+@include typography.scale('label-small');
+
 :root {
     --md-sys-badge-small-size: 6px;
     --md-sys-badge-large-size: 16px;

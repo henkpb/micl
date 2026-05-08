@@ -31,6 +31,9 @@
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.property;
 
+@include typography.scale('body-large');
+@include typography.scale('body-small');
+
 .micl-textfield-filled,
 .micl-textfield-outlined {
     --md-sys-textfield-height: 56px;
