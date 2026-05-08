@@ -34,6 +34,18 @@
 @include shapes.corner('large');
 @include shapes.corner('full');
 
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('dragged-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('focus-indicator-inner-offset');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
 :root {
     --md-comp-accordion-item-space: 0px;
 }

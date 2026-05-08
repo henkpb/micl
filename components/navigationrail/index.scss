@@ -32,6 +32,15 @@
 
 @include shapes.corner('large');
 
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('backdrop-opacity');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
 .micl-navigationrail {
     --md-comp-nav-rail-spring-buffer: 100px;
     --md-comp-nav-rail-divider-thickness: 0px;

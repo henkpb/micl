@@ -34,6 +34,16 @@
 @include shapes.corner('large');
 @include shapes.corner('extra-large');
 
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
 button.micl-button-text-xs,
 a.micl-button-text-xs,
 button.micl-button-text-s,

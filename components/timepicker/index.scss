@@ -28,6 +28,12 @@
 @include shapes.corner('small');
 @include shapes.corner('full');
 
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.property;
+
 :root {
     --md-sys-timepicker-input-height: 72px;
     --md-sys-timepicker-input-width: 96px;

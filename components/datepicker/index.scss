@@ -28,6 +28,12 @@
 @include shapes.corner('large');
 @include shapes.corner('full');
 
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.property;
+
 :root {
     --md-comp-date-picker-docked-container-width: 360px;
     --md-comp-date-picker-modal-container-width: 360px;

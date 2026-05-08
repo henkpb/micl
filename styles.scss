@@ -24,6 +24,7 @@
 // otherwise Sass errors with "module already loaded".
 @use 'styles/shapes' with ($master: true);
 @use 'styles/elevation' with ($master: true);
+@use 'styles/statelayer' with ($master: true);
 
 @use 'foundations';
 @use 'foundations/layout';
@@ -31,7 +32,6 @@
 
 @use 'styles/typography';
 @use 'styles/motion';
-@use 'styles/statelayer';
 
 @use 'components/divider';
 @use 'components/alert';

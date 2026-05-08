@@ -33,6 +33,10 @@
 @include shapes.corner('none');
 @include shapes.corner('extra-large');
 
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('backdrop-opacity');
+@include statelayer.property;
+
 :root {
     --md-sys-dialog-min-width: 280px;
     --md-sys-dialog-max-width: 560px;
