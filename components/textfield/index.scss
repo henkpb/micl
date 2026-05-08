@@ -25,6 +25,8 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('extra-small');
+
 .micl-textfield-filled,
 .micl-textfield-outlined {
     --md-sys-textfield-height: 56px;

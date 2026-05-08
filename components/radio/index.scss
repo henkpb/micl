@@ -24,6 +24,8 @@
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
+@include shapes.corner('full');
+
 :root {
     --md-sys-radio-border-width: 2px;
     --md-sys-radio-container-size: 20px;

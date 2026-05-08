@@ -23,6 +23,8 @@
 @use '../../styles/shapes';
 @use '../../styles/typography';
 
+@include shapes.corner('small');
+
 :root {
     --md-sys-alert-padding: 16px;
     --md-sys-alert-space: 16px;

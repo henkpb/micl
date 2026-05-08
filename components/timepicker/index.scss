@@ -25,6 +25,9 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('small');
+@include shapes.corner('full');
+
 :root {
     --md-sys-timepicker-input-height: 72px;
     --md-sys-timepicker-input-width: 96px;

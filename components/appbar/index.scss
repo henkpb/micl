@@ -29,6 +29,8 @@
 @include elevation.level(0);
 @include elevation.level(2);
 
+@include shapes.corner('none');
+
 @mixin appbar-sticky() {
     position: sticky;
     inset: unset;

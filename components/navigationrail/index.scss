@@ -30,6 +30,8 @@
 @include elevation.level(0);
 @include elevation.level(2);
 
+@include shapes.corner('large');
+
 .micl-navigationrail {
     --md-comp-nav-rail-spring-buffer: 100px;
     --md-comp-nav-rail-divider-thickness: 0px;

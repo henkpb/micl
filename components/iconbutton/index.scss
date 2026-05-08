@@ -27,6 +27,12 @@
 
 @include elevation.level(0);
 
+@include shapes.corner('small');
+@include shapes.corner('medium');
+@include shapes.corner('large');
+@include shapes.corner('extra-large');
+@include shapes.corner('full');
+
 button.micl-iconbutton-standard-xs,
 a.micl-iconbutton-standard-xs,
 button.micl-iconbutton-standard-s,

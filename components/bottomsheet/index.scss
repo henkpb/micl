@@ -27,6 +27,9 @@
 
 @include elevation.level(1);
 
+@include shapes.corner('extra-large');
+@include shapes.corner('small');
+
 dialog.micl-bottomsheet {
     --md-sys-bottomsheet-height: max-content;
     --md-sys-bottomsheet-margin: 56px;

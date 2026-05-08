@@ -25,6 +25,8 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('full');
+
 :root {
     --md-sys-switch-handle-size: 16px;
     --md-sys-switch-handle-selected-size: 24px;

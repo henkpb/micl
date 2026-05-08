@@ -28,6 +28,8 @@
 
 @include elevation.level(3);
 
+@include shapes.corner('extra-small');
+
 :root {
     --md-comp-snackbar-margin: 24px;
     --md-comp-snackbar-padding: 16px;

@@ -33,6 +33,8 @@
 @include elevation.level(3);
 @include elevation.level(4);
 
+@include shapes.corner('medium');
+
 @mixin card-variant(
     $name,
     $bg-default,

@@ -29,6 +29,9 @@
 @include elevation.level(0);
 @include elevation.level(1);
 
+@include shapes.corner('none');
+@include shapes.corner('large');
+
 :root {
     --md-sys-sidesheet-width: 256px;
     --md-sys-sidesheet-maxwidth: 400px;

@@ -29,6 +29,11 @@
 @include elevation.level(0);
 @include elevation.level(1);
 
+@include shapes.corner('small');
+@include shapes.corner('medium');
+@include shapes.corner('large');
+@include shapes.corner('extra-large');
+
 button.micl-button-text-xs,
 a.micl-button-text-xs,
 button.micl-button-text-s,

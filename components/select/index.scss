@@ -28,6 +28,8 @@
 
 @include elevation.level(2);
 
+@include shapes.corner('large');
+
 .micl-textfield-filled > select {
     --md-comp-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
 }

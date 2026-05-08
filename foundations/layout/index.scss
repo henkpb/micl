@@ -21,6 +21,8 @@
 
 @use '../../styles/shapes';
 
+@include shapes.corner('medium');
+
 $md-sys-window-compact-max: 599px;
 $md-sys-window-medium-min: 600px;
 $md-sys-window-medium-max: 839px;

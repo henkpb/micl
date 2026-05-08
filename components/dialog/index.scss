@@ -30,6 +30,9 @@
 @include elevation.level(2);
 @include elevation.level(3);
 
+@include shapes.corner('none');
+@include shapes.corner('extra-large');
+
 :root {
     --md-sys-dialog-min-width: 280px;
     --md-sys-dialog-max-width: 560px;

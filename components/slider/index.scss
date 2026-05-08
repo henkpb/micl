@@ -25,6 +25,11 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('small');
+@include shapes.corner('medium');
+@include shapes.corner('large');
+@include shapes.corner('extra-large');
+
 @mixin slider-track() {
     block-size: var(--md-sys-slider-track-height);
     border-radius: var(--md-sys-slider-track-radius);

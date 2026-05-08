@@ -27,6 +27,9 @@
 
 @include elevation.level(2);
 
+@include shapes.corner('small');
+@include shapes.corner('large');
+
 :root {
     --md-comp-menu-width-max: 320px;
     --md-comp-menu-width-min: 112px;
