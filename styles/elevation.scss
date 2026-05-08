@@ -22,10 +22,9 @@
 @use 'sass:map';
 
 //
-// Set $master: true (via @use ... with) to install all six levels in a single
-// :root block — used by the master bundle. When false (default), components
-// opt into individual levels via @include level($n), so per-component CSS
-// bundles only carry the levels they actually reference.
+// Set $master: true (via @use ... with) to install all six levels in a single :root block —
+// used by the master bundle. When false (default), components opt into individual levels via
+// @include level($n), so per-component CSS bundles only carry the levels they actually reference.
 //
 $master: false !default;
 
