@@ -26,6 +26,9 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(2);
+
 @mixin appbar-sticky() {
     position: sticky;
     inset: unset;

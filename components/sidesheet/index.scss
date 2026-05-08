@@ -26,6 +26,9 @@
 @use '../../styles/shapes';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(1);
+
 :root {
     --md-sys-sidesheet-width: 256px;
     --md-sys-sidesheet-maxwidth: 400px;

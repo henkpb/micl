@@ -26,6 +26,8 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(2);
+
 .micl-textfield-filled > select {
     --md-comp-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
 }

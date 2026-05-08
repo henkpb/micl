@@ -25,6 +25,8 @@
 @use '../../styles/shapes';
 @use '../../styles/typography';
 
+@include elevation.level(2);
+
 :root {
     --md-comp-menu-width-max: 320px;
     --md-comp-menu-width-min: 112px;

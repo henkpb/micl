@@ -5,10 +5,18 @@ This guide covers the fundamental visual settings used by components, all based 
 Elevation represents the distance between surfaces on the z-axis, creating a sense of depth and hierarchy. It's a realization of the [Material Design 3 Elevation](https://m3.material.io/styles/elevation/overview) system.
 
 ### CSS
-Import the elevation styles into your project:
+Import the elevation styles into your project. To install all six elevation levels at once, configure the module in master mode:
+
+```CSS
+@use "material-inspired-component-library/styles/elevation" with ($master: true);
+```
+
+To install only specific levels (useful when you build your own subset bundle), use the `level` mixin:
 
 ```CSS
 @use "material-inspired-component-library/styles/elevation";
+@include elevation.level(1);
+@include elevation.level(2);
 ```
 
 ### Customizations

@@ -25,6 +25,8 @@
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
+@include elevation.level(1);
+
 dialog.micl-bottomsheet {
     --md-sys-bottomsheet-height: max-content;
     --md-sys-bottomsheet-margin: 56px;

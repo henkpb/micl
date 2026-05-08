@@ -26,6 +26,9 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(1);
+
 button.micl-button-text-xs,
 a.micl-button-text-xs,
 button.micl-button-text-s,

@@ -26,6 +26,8 @@
 @use '../../styles/shapes';
 @use '../../styles/typography';
 
+@include elevation.level(3);
+
 :root {
     --md-comp-snackbar-margin: 24px;
     --md-comp-snackbar-padding: 16px;

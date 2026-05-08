@@ -25,7 +25,7 @@
 
 @use 'styles/typography';
 @use 'styles/shapes';
-@use 'styles/elevation';
+@use 'styles/elevation' with ($master: true);
 @use 'styles/motion';
 @use 'styles/statelayer';
 

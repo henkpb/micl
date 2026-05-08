@@ -26,6 +26,8 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(4);
+
 :root {
     --md-comp-accordion-item-space: 0px;
 }

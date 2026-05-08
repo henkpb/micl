@@ -27,6 +27,12 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(1);
+@include elevation.level(2);
+@include elevation.level(3);
+@include elevation.level(4);
+
 @mixin card-variant(
     $name,
     $bg-default,

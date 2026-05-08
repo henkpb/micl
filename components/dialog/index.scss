@@ -26,6 +26,10 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(2);
+@include elevation.level(3);
+
 :root {
     --md-sys-dialog-min-width: 280px;
     --md-sys-dialog-max-width: 560px;

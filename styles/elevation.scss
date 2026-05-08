@@ -19,18 +19,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-$md-sys-elevation-level0: rgba(0, 0, 0, 0.2) 0px 0px 0px 0px, rgba(0, 0, 0, 0.14) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 0px 0px 0px;
-$md-sys-elevation-level1: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-$md-sys-elevation-level2: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
-$md-sys-elevation-level3: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
-$md-sys-elevation-level4: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
-$md-sys-elevation-level5: rgba(0, 0, 0, 0.2) 0px 7px 8px -4px, rgba(0, 0, 0, 0.14) 0px 12px 17px 2px, rgba(0, 0, 0, 0.12) 0px 5px 22px 4px;
+@use 'sass:map';
 
-:root {
-    --md-sys-elevation-level0: #{$md-sys-elevation-level0};
-    --md-sys-elevation-level1: #{$md-sys-elevation-level1};
-    --md-sys-elevation-level2: #{$md-sys-elevation-level2};
-    --md-sys-elevation-level3: #{$md-sys-elevation-level3};
-    --md-sys-elevation-level4: #{$md-sys-elevation-level4};
-    --md-sys-elevation-level5: #{$md-sys-elevation-level5};
+//
+// Set $master: true (via @use ... with) to install all six levels in a single
+// :root block — used by the master bundle. When false (default), components
+// opt into individual levels via @include level($n), so per-component CSS
+// bundles only carry the levels they actually reference.
+//
+$master: false !default;
+
+$_levels: (
+    0: none,
+    1: (
+        rgb(from var(--md-sys-color-shadow) r g b / 0.3) 0 1px 2px 0,
+        rgb(from var(--md-sys-color-shadow) r g b / 0.15) 0 1px 3px 1px
+    ),
+    2: (
+        rgb(from var(--md-sys-color-shadow) r g b / 0.3) 0 1px 2px 0,
+        rgb(from var(--md-sys-color-shadow) r g b / 0.15) 0 2px 6px 2px
+    ),
+    3: (
+        rgb(from var(--md-sys-color-shadow) r g b / 0.3) 0 1px 3px 0,
+        rgb(from var(--md-sys-color-shadow) r g b / 0.15) 0 4px 8px 3px
+    ),
+    4: (
+        rgb(from var(--md-sys-color-shadow) r g b / 0.3) 0 2px 3px 0,
+        rgb(from var(--md-sys-color-shadow) r g b / 0.15) 0 6px 10px 4px
+    ),
+    5: (
+        rgb(from var(--md-sys-color-shadow) r g b / 0.3) 0 4px 4px 0,
+        rgb(from var(--md-sys-color-shadow) r g b / 0.15) 0 8px 12px 6px
+    )
+);
+
+@if $master {
+    body {
+        @each $n, $v in $_levels {
+            --md-sys-elevation-level#{$n}: #{$v};
+        }
+    }
+}
+
+@mixin level($n) {
+    @if not $master {
+        body {
+            --md-sys-elevation-level#{$n}: #{map.get($_levels, $n)};
+        }
+    }
 }

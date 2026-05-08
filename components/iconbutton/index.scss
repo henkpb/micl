@@ -25,6 +25,8 @@
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
+@include elevation.level(0);
+
 button.micl-iconbutton-standard-xs,
 a.micl-iconbutton-standard-xs,
 button.micl-iconbutton-standard-s,
