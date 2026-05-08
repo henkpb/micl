@@ -43,18 +43,10 @@ Import the motion styles into your project:
 ```
 
 
-## Shapes
-Shapes add decorative flair and help emphasize elements. These styles adhere to the [Material Design 3 Shape](https://m3.material.io/styles/shape/overview-principles) principles.
+## Shape corner-radius tokens
+Shape tokens define the corner radii used across every component, following the [Material Design 3 Shape](https://m3.material.io/styles/shape/overview-principles) principles. Components import these automatically — there is nothing to opt into.
 
-### CSS
-Import the shape styles into your project:
-
-```CSS
-@use "material-inspired-component-library/styles/shapes";
-```
-
-### Customizations
-You can customize a component's shape by overriding its global CSS variables, such as adjusting the corner radius.
+Corner radii are exposed as CSS custom properties (`--md-sys-shape-corner-extra-small`, `--md-sys-shape-corner-medium`, `--md-sys-shape-corner-full`, etc.) and can be overridden anywhere in the cascade.
 
 **Example: Changing the corner radius of a card:**
 
@@ -64,6 +56,8 @@ You can customize a component's shape by overriding its global CSS variables, su
   </div>
 </div>
 ```
+
+The decorative shape gallery (heart, cookie, clover, sunny, …) is **not** part of these tokens. It is shipped as an opt-in component — see [components/shape](../components/shape/README.md).
 
 
 ## State layers

@@ -50,7 +50,9 @@
   "main": "dist/micl.js",
   "types": "dist/micl.d.ts",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "gen:shapes": "node tools/shapes/generate.mjs",
+    "check:shapes": "node tools/shapes/check.mjs"
   },
   "sideEffects": false,
   "devDependencies": {

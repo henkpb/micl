@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Shapes">
+    <title>MICL Shapes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shape.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        figure {
+            margin: 24px;
+        }
+        .shape-primary {
+            --micl-shape-background-color: var(--md-sys-color-primary-container);
+            block-size: 96px;
+            inline-size: 96px;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <main class="micl-body micl-body--stacked-to-large">
+        <section class="micl-pane">
+            <header class="micl-appbar">
+                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
+                </a>
+                <div class="micl-appbar__headline micl-appbar__headline--center">
+                    <h1>Shapes</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL shapes</p>
+                </div>
+                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
+            </header>
+
+            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column">
+                    <div class="micl-card-elevated">
+                        <div class="micl-card__content" style="display:flex">
+                            <svg class="micl-shape micl-shape-square" viewBox="-10 0 120 100" style="inline-size:120px;block-size:100px"><path /></svg>
+                            <svg class="micl-shape micl-shape-square" viewBox="-10 0 120 100" style="inline-size:120px;block-size:100px">
+                                <defs>
+                                    <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
+                                        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/A_Brouhot_car_in_Paris%2C_1910.jpg/330px-A_Brouhot_car_in_Paris%2C_1910.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
+                                    </pattern>
+                                </defs>
+                                <path fill="url(#photo-1)" />
+                            </svg>
+
+                            <div style="display:flex;gap:8px;align-self:center;flex-wrap:wrap">
+                                <button type="button" data-target="circle"         class="micl-button-outlined-s">Circle</button>
+                                <button type="button" data-target="square"         class="micl-button-outlined-s">Square</button>
+                                <button type="button" data-target="slanted"        class="micl-button-outlined-s">Slanted</button>
+                                <button type="button" data-target="arch"           class="micl-button-outlined-s">Arch</button>
+                                <button type="button" data-target="semicircle"     class="micl-button-outlined-s">Semi-circle</button>
+                                <button type="button" data-target="oval"           class="micl-button-outlined-s">Oval</button>
+                                <button type="button" data-target="pill"           class="micl-button-outlined-s">Pill</button>
+                                <button type="button" data-target="triangle"       class="micl-button-outlined-s">Triangle</button>
+                                <button type="button" data-target="arrow"          class="micl-button-outlined-s">Arrow</button>
+                                <button type="button" data-target="fan"            class="micl-button-outlined-s">Fan</button>
+                                <button type="button" data-target="diamond"        class="micl-button-outlined-s">Diamond</button>
+                                <button type="button" data-target="clamshell"      class="micl-button-outlined-s">Clamshell</button>
+                                <button type="button" data-target="pentagon"       class="micl-button-outlined-s">Pentagon</button>
+                                <button type="button" data-target="gem"            class="micl-button-outlined-s">Gem</button>
+                                <button type="button" data-target="very-sunny"     class="micl-button-outlined-s">Very-sunny</button>
+                                <button type="button" data-target="sunny"          class="micl-button-outlined-s">Sunny</button>
+                                <button type="button" data-target="cookie-4"       class="micl-button-outlined-s">4-cookie</button>
+                                <button type="button" data-target="cookie-6"       class="micl-button-outlined-s">6-cookie</button>
+                                <button type="button" data-target="cookie-7"       class="micl-button-outlined-s">7-cookie</button>
+                                <button type="button" data-target="cookie-9"       class="micl-button-outlined-s">9-cookie</button>
+                                <button type="button" data-target="cookie-12"      class="micl-button-outlined-s">12-cookie</button>
+                                <button type="button" data-target="clover-4"       class="micl-button-outlined-s">4-leaf clover</button>
+                                <button type="button" data-target="clover-8"       class="micl-button-outlined-s">8-leaf clover</button>
+                                <button type="button" data-target="burst"          class="micl-button-outlined-s">Burst</button>
+                                <button type="button" data-target="soft-burst"     class="micl-button-outlined-s">Soft-burst</button>
+                                <button type="button" data-target="boom"           class="micl-button-outlined-s">Boom</button>
+                                <button type="button" data-target="soft-boom"      class="micl-button-outlined-s">Soft-boom</button>
+                                <button type="button" data-target="flower"         class="micl-button-outlined-s">Flower</button>
+                                <button type="button" data-target="puffy"          class="micl-button-outlined-s">Puffy</button>
+                                <button type="button" data-target="puffy-diamond"  class="micl-button-outlined-s">Puffy-diamond</button>
+                                <button type="button" data-target="ghost-ish"      class="micl-button-outlined-s">Ghost-ish</button>
+                                <button type="button" data-target="pixel-circle"   class="micl-button-outlined-s">Pixel-circle</button>
+                                <button type="button" data-target="pixel-triangle" class="micl-button-outlined-s">Pixel-triangle</button>
+                                <button type="button" data-target="bun"            class="micl-button-outlined-s">Bun</button>
+                                <button type="button" data-target="heart"          class="micl-button-outlined-s">Heart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="micl-pane">
+            <div class="micl-card-filled" style="margin-top:8px">
+                <div class="micl-card__headline-s">
+                    <h2>Code example</h2>
+                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
+                </div>
+                <div class="micl-card__content docs-code">
+                    <pre tabindex="-1"><code>&lt;hr class="micl-divider"&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+    <script>
+        const SHAPES = [
+            'circle', 'square', 'slanted', 'arch', 'semicircle',
+            'oval', 'pill', 'triangle', 'arrow', 'fan',
+            'diamond', 'clamshell', 'pentagon', 'gem', 'very-sunny',
+            'sunny', 'cookie-4', 'cookie-6', 'cookie-7', 'cookie-9',
+            'cookie-12', 'clover-4', 'clover-8', 'burst', 'soft-burst',
+            'boom', 'soft-boom', 'flower', 'puffy', 'puffy-diamond',
+            'ghost-ish', 'pixel-circle', 'pixel-triangle', 'bun', 'heart'
+        ];
+
+        document.querySelector('.micl-shape').addEventListener('morph', event =>
+        {
+            const el = event.currentTarget;
+            el.style.setProperty('--morph-duration', `${event.detail.duration}ms`);
+            if (event.detail.easing) {
+                el.style.setProperty('--morph-easing', event.detail.easing);
+            }
+            SHAPES.forEach(shape => el.classList.remove(`micl-shape-${shape}`));
+            el.classList.add(`micl-shape-${event.detail.shape}`);
+        });
+
+        document.querySelectorAll('button[data-target]').forEach(button =>
+        {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.micl-shape').forEach(el => {
+                    el.dispatchEvent(new CustomEvent('morph', {
+                        detail: {
+                            shape:    button.dataset.target,
+                            duration: 2000,
+                            easing:   'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                        }
+                    }));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
