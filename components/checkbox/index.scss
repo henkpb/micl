@@ -38,6 +38,9 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
+@include motion.duration('short3');
+@include motion.duration('long4');
+
 :root {
     --md-sys-checkbox-border-width: 2px;
     --md-sys-checkbox-check-thickness: 2px;
