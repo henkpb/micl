@@ -98,6 +98,7 @@ $md-sys-pane-spacer: 24px;
     }
 }
 .micl-body {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     gap: var(--md-sys-comp-margin, 8px) var(--md-sys-layout-pane-spacer);
