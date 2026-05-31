@@ -50,7 +50,7 @@ For **spatial environments** where the main layout parts are visually separated,
 ```
 
 ### Navigation region
-Use the dedicated [Navigation Rail](../components/navigationrail/README.md) component to display the main destinations in your application.
+Use the dedicated [Navigation Rail](../../components/navigationrail/README.md) component to display the main destinations in your application.
 
 ### Body region
 The body region holds the majority of your app's content. Use the `<main>` element with the `micl-body` class to define this area.
