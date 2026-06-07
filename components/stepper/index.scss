@@ -23,6 +23,8 @@
 @use '../../styles/motion';
 @use '../../styles/statelayer';
 
+@include statelayer.token('disabled-state-layer-opacity');
+
 :root {
     --md-sys-stepper-counter-style: decimal;
     --md-sys-stepper-dot-size: 12px;

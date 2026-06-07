@@ -26,6 +26,22 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(2);
+@include elevation.level(3);
+
+@include shapes.corner('none');
+@include shapes.corner('extra-large');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('backdrop-opacity');
+@include statelayer.property;
+
+@include typography.scale('headline-small');
+@include typography.scale('title-large');
+@include typography.scale('title-medium');
+@include typography.scale('body-medium');
+
 :root {
     --md-sys-dialog-min-width: 280px;
     --md-sys-dialog-max-width: 560px;

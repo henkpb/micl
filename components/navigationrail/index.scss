@@ -27,6 +27,23 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(2);
+
+@include shapes.corner('large');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('backdrop-opacity');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
+@include typography.scale('label-large');
+@include typography.scale('label-medium');
+
 .micl-navigationrail {
     --md-comp-nav-rail-spring-buffer: 100px;
     --md-comp-nav-rail-divider-thickness: 0px;

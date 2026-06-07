@@ -7,6 +7,12 @@ const docsDir = path.resolve(__dirname, 'docs');
 
 const scssFiles = glob.sync('{./foundations/**/*.scss,./components/**/*.scss}');
 const scssEntries = scssFiles.reduce((entries, filePath) => {
+    // The shape gallery has two SCSS files: index.scss (the partial that
+    // consumers @use to opt into individual shapes) and master.scss (the
+    // dist-bundle entry that installs all shapes). Only the latter should
+    // be compiled as a webpack entry.
+    const normalized = filePath.replace(/\\/g, '/');
+    if (normalized.endsWith('components/shape/index.scss')) return entries;
     const componentName = path.dirname(filePath).split('\\').pop();
     entries[componentName] = './' + filePath;
     return entries;
@@ -61,7 +67,8 @@ module.exports = [{
 }, {
     mode: 'production',
     entry: {
-        micl: ['./styles.scss', './micl.ts']
+        micl: ['./styles.scss', './micl.ts'],
+        shape: './components/shape/master.scss'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']

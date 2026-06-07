@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Progress Indicators">
+    <title>MICL Progress Indicators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-row {
+            display: flex;
+            flex-direction: column;
+            row-gap: 28px;
+            padding-block: 16px;
+        }
+        .docs-field label {
+            display: block;
+            margin-block-end: 12px;
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-circular-row {
+            display: flex;
+            align-items: center;
+            column-gap: 32px;
+            padding-block: 16px;
+        }
+        .docs-circular-row figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 12px;
+            margin: 0;
+        }
+        .docs-circular-row figcaption {
+            color: var(--md-sys-color-on-surface);
+        }
+        .box {
+          --mask: 
+            radial-gradient(15.12px at 50% calc(100% + 8.5px),#0000 calc(99% - 4px),#000 calc(101% - 4px) 99%,#0000 101%) calc(50% - 20px) calc(50% - 7px + .5px)/40px 14px repeat-x,
+            radial-gradient(15.12px at 50% -8.5px,#0000 calc(99% - 4px),#000 calc(101% - 4px) 99%,#0000 101%) 50% calc(50% + 7px)/40px 14px repeat-x;
+        }
+        .sine-wave-bg0 {
+          width: 100%;
+          height: 200px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath fill='none' stroke='%23007bff' stroke-width='2' d='M0 10 Q 25 0 50 10 T 100 10' /%3E%3C/svg%3E");
+          background-repeat: repeat-x;
+          background-size: 200px 40px;
+        }
+        .sine-wave-bg1 {
+          width: 100%;
+          height: 12px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10'%3E%3Cpath fill='none' stroke='currentColor' stroke-width='2' d='M 0 5 C 4.244 -1.667 5.756 -1.667 10 5 C 14.244 11.667 15.756 11.667 20 5 C 24.244 -1.667 25.756 -1.667 30 5 C 34.244 11.667 35.756 11.667 40 5 C 44.244 -1.667 45.756 -1.667 50 5 C 54.244 11.667 55.756 11.667 60 5 C 64.244 -1.667 65.756 -1.667 70 5 C 74.244 11.667 75.756 11.667 80 5 C 84.244 -1.667 85.756 -1.667 90 5 C 94.244 11.667 95.756 11.667 100 5 C 104.244 -1.667 105.756 -1.667 110 5 C 114.244 11.667 115.756 11.667 120 5 C 124.244 -1.667 125.756 -1.667 130 5 C 134.244 11.667 135.756 11.667 140 5 C 144.244 -1.667 145.756 -1.667 150 5 C 154.244 11.667 155.756 11.667 160 5 C 164.244 -1.667 165.756 -1.667 170 5 C 174.244 11.667 175.756 11.667 180 5 C 184.244 -1.667 185.756 -1.667 190 5 C 194.244 11.667 195.756 11.667 200 5' /%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-size: 200px 12px;
+        }
+        .sine-wave-bg2 {
+            position: relative;
+            width: 100%;
+            height: 12px;
+            background-color: var(--md-sys-color-primary);
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2' d='M 0 6 C 4.244 -0.667 5.756 -0.667 10 6 C 14.244 12.667 15.756 12.667   20 6 C 24.244 -0.667 25.756 -0.667 30 6 C 34.244 12.667 35.756 12.667 40 6 C 44.244 -0.667 45.756 -0.667 50 6 C 54.244    12.667 55.756 12.667 60 6 C 64.244 -0.667 65.756 -0.667 70 6 C 74.244 12.667 75.756 12.667 80 6 C 84.244 -0.667   85.756 -0.667 90 6 C 94.244 12.667 95.756 12.667 100 6 C 104.244 -0.667 105.756 -0.667 110 6 C 114.244 12.667 115.756   12.667 120 6 C 124.244 -0.667 125.756 -0.667 130 6 C 134.244 12.667 135.756 12.667 140 6 C 144.244 -0.667 145.756   -0.667 150 6 C 154.244 12.667 155.756 12.667 160 6 C 164.244 -0.667 165.756 -0.667 170 6 C 174.244 12.667 175.756   12.667 180 6 C 184.244 -0.667 185.756 -0.667 190 6 C 194.244 12.667 195.756 12.667 200 6' /%3E%3C/svg%3E") no-repeat;
+            mask-size: 200px 12px;
+            clip-path: rect(0 100% 100% 0);
+            animation: clipping 10s ease-in-out infinite alternate;
+        }
+        .sine-wave-bg2::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            inset-block-start: 4px;
+            inset-inline-start: 0;
+            width: 100%;
+            height: 8px;
+            background-color: var(--md-sys-color-secondary-fixed-dim);
+        }
+        .sine-wave-bg3 {
+            position: relative;
+            block-size: 3px;
+            margin-block: 4.5px;
+            padding-inline-start: 0%;
+            background-color: var(--md-sys-color-secondary-fixed-dim);
+            background-clip: content-box;
+            animation: padding 2s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate
+        }
+        .sine-wave-bg3::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            inset-block-start: -4px;
+            inset-inline-start: 0;
+            width: 100%;
+            height: 12px;
+            background-color: var(--md-sys-color-primary);
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 8'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2' d='M 0 4 C 5.093 0 6.907 0 12 4 C 17.093 8 18.907 8 24 4 C 29.093 0 30.907 0 36 4 C 41.093 8 42.907 8 48 4 C 53.093 0 54.907 0 60 4 C 65.093 8 66.907 8 72 4 C 77.093 0 78.907 0 84 4 C 89.093 8 90.907 8 96 4 C 101.093 0 102.907 0 108 4 C 113.093 8 114.907 8 120 4 C 125.093 0 126.907 0 132 4 C 137.093 8 138.907 8 144 4 C 149.093 0 150.907 0 156 4 C 161.093 8 162.907 8 168 4 C 173.093 0 174.907 0 180 4 C 185.093 8 186.907 8 192 4 C 197.093 0 198.907 0 204 4 C 209.093 8 210.907 8 216 4 C 221.093 0 222.907 0 228 4 C 233.093 8 234.907 8 240 4' /%3E%3C/svg%3E") no-repeat;
+            mask-size: 240px 12px;
+            clip-path: rect(0 100% 100% 0);
+            animation: clipping 2s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+        }
+        .sine-wave-bg3::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            inset-block-start: -0.5px;
+            inset-inline-start: auto;
+            width: 4px;
+            height: 4px;
+            border-radius: 2px;
+            background-color: black;
+        }
+        @keyframes padding {
+            0% {
+                padding-inline-start: 4px;
+            }
+            100% {
+                padding-inline-start: calc(100% + 4px);
+            }
+        }
+        @keyframes clipping {
+            0% {
+                clip-path: rect(0 0 100% 0);
+                inset-inline-start: 0;
+            }
+            100% {
+                clip-path: rect(0 100% 100% 0);
+                inset-inline-start: -20%;
+            }
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <main class="micl-body micl-body--stacked-to-large">
+        <section class="micl-pane">
+            <header class="micl-appbar">
+                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
+                </a>
+                <div class="micl-appbar__headline micl-appbar__headline--center">
+                    <h1>Progress Indicators</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL progress indicators</p>
+                </div>
+                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
+            </header>
+
+            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column">
+                    <div class="micl-card-elevated">
+                        <div class="micl-card__headline-s">
+                            <h2>Linear &mdash; determinate</h2>
+                        </div>
+                        <div class="micl-card__content docs-row">
+                            <div class="docs-field">
+                                <label class="md-sys-typescale-body-medium">Downloading&hellip; <span id="pct">0%</span></label>
+                                <progress class="micl-progress-linear" id="linear-demo" value="0" max="1"></progress>
+                            </div>
+                            <div class="docs-field">
+                                <label class="md-sys-typescale-body-medium">Static value (40%)</label>
+                                <progress class="micl-progress-linear" value="0.4" max="1"></progress>
+                            </div>
+                            <div class="docs-field">
+                                <label class="md-sys-typescale-body-medium">Flat active indicator (wave disabled, 70%)</label>
+                                <progress class="micl-progress-linear" value="0.7" max="1" style="--md-comp-progress-wave-amplitude:0"></progress>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="micl-card-filled"> -->
+                        <!-- <div class="micl-card__headline-s"> -->
+                            <!-- <h2>Linear &mdash; indeterminate</h2> -->
+                        <!-- </div> -->
+                        <!-- <div class="micl-card__content docs-row"> -->
+                            <!-- <div class="docs-field"> -->
+                                <!-- <label class="md-sys-typescale-body-medium">Loading&hellip;</label> -->
+                                <!-- <progress class="micl-progress-linear"></progress> -->
+                            <!-- </div> -->
+                            <!-- <div class="docs-field"> -->
+                                <!-- <label class="md-sys-typescale-body-medium">Thicker track (8px)</label> -->
+                                <!-- <progress class="micl-progress-linear" style="--md-comp-progress-thickness:8px"></progress> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+
+                    <div class="micl-card-filled">
+                        <div class="micl-card__headline-s">
+                            <h2>Linear &mdash; Test</h2>
+                        </div>
+                        <div class="micl-card__content docs-row">
+                            <div class="docs-field" style="overflow:hidden">
+                                <label class="md-sys-typescale-body-medium">Loading&hellip;</label>
+                                <div class="sine-wave-bg1"></div>
+                                <div class="sine-wave-bg2"></div>
+                                <div class="sine-wave-bg3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="micl-pane__column"> -->
+                    <!-- <div class="micl-card-outlined"> -->
+                        <!-- <div class="micl-card__headline-s"> -->
+                            <!-- <h2>Circular &mdash; determinate</h2> -->
+                        <!-- </div> -->
+                        <!-- <div class="micl-card__content docs-circular-row"> -->
+                            <!-- <figure> -->
+                                <!-- <progress class="micl-progress-circular micl-progress-circular--s" value="25" max="100"></progress> -->
+                                <!-- <figcaption class="md-sys-typescale-body-small">Small &middot; 25%</figcaption> -->
+                            <!-- </figure> -->
+                            <!-- <figure> -->
+                                <!-- <progress class="micl-progress-circular micl-progress-circular--m" id="circular-demo" value="0" max="100"></progress> -->
+                                <!-- <figcaption class="md-sys-typescale-body-small">Medium &middot; animated</figcaption> -->
+                            <!-- </figure> -->
+                            <!-- <figure> -->
+                                <!-- <progress class="micl-progress-circular micl-progress-circular--l" value="75" max="100"></progress> -->
+                                <!-- <figcaption class="md-sys-typescale-body-small">Large &middot; 75%</figcaption> -->
+                            <!-- </figure> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+
+                    <!-- <div class="micl-card-elevated"> -->
+                        <!-- <div class="micl-card__headline-s"> -->
+                            <!-- <h2>Circular &mdash; indeterminate</h2> -->
+                        <!-- </div> -->
+                        <!-- <div class="micl-card__content docs-circular-row"> -->
+                            <!-- <figure> -->
+                                <!-- <progress class="micl-progress-circular micl-progress-circular--s"></progress> -->
+                                <!-- <figcaption class="md-sys-typescale-body-small">Small</figcaption> -->
+                            <!-- </figure> -->
+                            <!-- <figure> -->
+                                <!-- <progress class="micl-progress-circular micl-progress-circular--m"></progress> -->
+                                <!-- <figcaption class="md-sys-typescale-body-small">Medium</figcaption> -->
+                            <!-- </figure> -->
+                            <!-- <figure> -->
+                                <!-- <progress class="micl-progress-circular micl-progress-circular--l"></progress> -->
+                                <!-- <figcaption class="md-sys-typescale-body-small">Large</figcaption> -->
+                            <!-- </figure> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            </div>
+        </section>
+        <section class="micl-pane">
+            <div class="micl-card-filled" style="margin-top:8px">
+                <div class="micl-card__headline-s">
+                    <h2>Code example</h2>
+                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
+                </div>
+                <div class="micl-card__content docs-code">
+                    <pre tabindex="-1"><code>&lt;!-- Determinate --&gt;
+&lt;progress class="micl-progress-linear" value="0.6" max="1"&gt;&lt;/progress&gt;
+&lt;progress class="micl-progress-circular" value="60" max="100"&gt;&lt;/progress&gt;
+
+&lt;!-- Indeterminate (omit the value attribute) --&gt;
+&lt;progress class="micl-progress-linear"&gt;&lt;/progress&gt;
+&lt;progress class="micl-progress-circular"&gt;&lt;/progress&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+    <script>
+        <!-- const animate = () => { -->
+            <!-- const linear = document.getElementById('linear-demo'); -->
+            <!-- const circular = document.getElementById('circular-demo'); -->
+            <!-- const pct = document.getElementById('pct'); -->
+            <!-- let v = 0; -->
+            <!-- setInterval(() => { -->
+                <!-- v = v >= 1 ? 0 : Math.min(1, v + 0.01); -->
+                <!-- linear.setAttribute('value', v.toFixed(2)); -->
+                <!-- circular.setAttribute('value', Math.round(v * 100)); -->
+                <!-- pct.textContent = Math.round(v * 100) + '%'; -->
+            <!-- }, 80); -->
+        <!-- }; -->
+        <!-- if (document.readyState !== 'loading') { -->
+            <!-- animate(); -->
+        <!-- } -->
+        <!-- else { -->
+            <!-- document.addEventListener('DOMContentLoaded', animate); -->
+        <!-- } -->
+    </script>
+</body>
+</html>

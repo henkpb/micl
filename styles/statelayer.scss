@@ -19,54 +19,101 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-$md-sys-state-layer-size: 40px;
-$md-sys-target-size: 48px;
+@use 'sass:map';
 
-$md-sys-state-hover-state-layer-opacity: 8%;
-$md-sys-state-focus-state-layer-opacity: 10%;
-$md-sys-state-pressed-state-layer-opacity: 10%;
-$md-sys-state-dragged-state-layer-opacity: 16%;
-$md-sys-state-disabled-state-layer-opacity: 38%;
-$md-sys-state-backdrop-opacity: 32%;
+//
+// Set $master: true (via @use ... with) to install every state-layer token, the @property
+// registrations, and the ripple keyframes — used by the master bundle. When false (default),
+// components opt into individual tokens via @include token('hover-state-layer-opacity'),
+// the animatable @property registrations via @include property, and the ripple keyframes via
+// @include keyframes — so per-component CSS bundles only carry what they actually reference.
+//
+$master: false !default;
 
-$md-sys-state-focus-indicator-inner-offset: -3px;
-$md-sys-state-focus-indicator-outer-offset: 2px;
-$md-sys-state-focus-indicator-thickness: 3px;
+$_tokens: (
+    layer-size:                    40px,
+    target-size:                   48px,
+    hover-state-layer-opacity:     8%,
+    focus-state-layer-opacity:     10%,
+    pressed-state-layer-opacity:   10%,
+    dragged-state-layer-opacity:   16%,
+    // TODO: misnamed vs M3 spec — value 38% matches DisabledLabelTextOpacity / DisabledIconOpacity
+    // (content fade), but M3's `disabled.state-layer.opacity` is 12% (container background).
+    // Either rename to --md-sys-state-disabled-opacity (breaking) or split into two tokens.
+    disabled-state-layer-opacity:  38%,
+    focus-indicator-inner-offset:  -3px,
+    focus-indicator-outer-offset:  2px,
+    focus-indicator-thickness:     3px,
+    backdrop-opacity:              32%,
+    ripple-opacity-factor:         0.6,
+    // TODO: 5000ms is well outside M3's motion scale (max DurationExtraLong4 = 1000ms;
+    // standard ripples ~300ms). Used here as an upper-bound cap on the @keyframes spread,
+    // not as a perceived animation duration. Consider renaming to ripple-spread-cap or
+    // aligning with an M3 motion token.
+    ripple-duration:               5000ms,
+);
 
-$md-sys-state-ripple-duration: 5000ms;
-
-:root {
-    --md-sys-state-layer-size: #{$md-sys-state-layer-size};
-    --md-sys-target-size: #{$md-sys-target-size};
-
-    --md-sys-state-hover-state-layer-opacity: #{$md-sys-state-hover-state-layer-opacity};
-    --md-sys-state-focus-state-layer-opacity: #{$md-sys-state-focus-state-layer-opacity};
-    --md-sys-state-pressed-state-layer-opacity: #{$md-sys-state-pressed-state-layer-opacity};
-    --md-sys-state-dragged-state-layer-opacity: #{$md-sys-state-dragged-state-layer-opacity};
-    --md-sys-state-disabled-state-layer-opacity: #{$md-sys-state-disabled-state-layer-opacity};
-    --md-sys-state-backdrop-opacity: #{$md-sys-state-backdrop-opacity};
-
-    --md-sys-state-focus-indicator-inner-offset: #{$md-sys-state-focus-indicator-inner-offset};
-    --md-sys-state-focus-indicator-outer-offset: #{$md-sys-state-focus-indicator-outer-offset};
-    --md-sys-state-focus-indicator-thickness: #{$md-sys-state-focus-indicator-thickness};
-
-    --md-sys-state-ripple-opacity-factor: 0.6;
-    --md-sys-state-ripple-duration: #{$md-sys-state-ripple-duration};
+@mixin token($name) {
+    @if not $master {
+        :root {
+            --md-sys-state-#{$name}: #{map.get($_tokens, $name)};
+        }
+    }
 }
 
-@property --statelayer-color {
-    syntax: '<color>';
-    initial-value: transparent;
-    inherits: false;
+//
+// CSS @property registrations for the ripple animation. Components that animate --statelayer-color
+// or --statelayer-opacity (typed-property interpolation) must include this mixin; otherwise the
+// variables fall back to untyped strings and the browser cannot transition between values.
+//
+@mixin property {
+    @if not $master {
+        @property --statelayer-color {
+            syntax: '<color>';
+            initial-value: transparent;
+            inherits: false;
+        }
+        @property --statelayer-opacity {
+            syntax: '<percentage>';
+            initial-value: 0%;
+            inherits: false;
+        }
+    }
 }
 
-@property --statelayer-opacity {
-    syntax: '<percentage>';
-    initial-value: 0%;
-    inherits: false;
+//
+// Ripple keyframes only required by components that actually run the ripple background-size
+// animation.
+//
+@mixin keyframes {
+    @if not $master {
+        @keyframes micl-ripple {
+            from { background-size: 0%, 100%; }
+            to   { background-size: 10000%, 100%; }
+        }
+    }
 }
 
-@keyframes micl-ripple {
-    from { background-size: 0%, 100%; }
-    to   { background-size: 10000%, 100%; }
+@if $master {
+    :root {
+        @each $name, $value in $_tokens {
+            --md-sys-state-#{$name}: #{$value};
+        }
+    }
+
+    @property --statelayer-color {
+        syntax: '<color>';
+        initial-value: transparent;
+        inherits: false;
+    }
+    @property --statelayer-opacity {
+        syntax: '<percentage>';
+        initial-value: 0%;
+        inherits: false;
+    }
+
+    @keyframes micl-ripple {
+        from { background-size: 0%, 100%; }
+        to   { background-size: 10000%, 100%; }
+    }
 }

@@ -24,7 +24,18 @@
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
+@use '../../styles/statelayer';
 @use '../../styles/typography';
+
+@include elevation.level(0);
+@include elevation.level(1);
+
+@include shapes.corner('none');
+@include shapes.corner('large');
+
+@include statelayer.token('backdrop-opacity');
+
+@include typography.scale('title-large');
 
 :root {
     --md-sys-sidesheet-width: 256px;

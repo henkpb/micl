@@ -24,7 +24,19 @@
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shapes';
+@use '../../styles/statelayer';
 @use '../../styles/typography';
+
+@include elevation.level(3);
+
+@include shapes.corner('extra-small');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.property;
+
+@include typography.scale('body-medium');
 
 :root {
     --md-comp-snackbar-margin: 24px;

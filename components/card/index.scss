@@ -27,6 +27,29 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(0);
+@include elevation.level(1);
+@include elevation.level(2);
+@include elevation.level(3);
+@include elevation.level(4);
+
+@include shapes.corner('medium');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('dragged-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('focus-indicator-outer-offset');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
+@include typography.scale('title-medium');
+@include typography.scale('body-smallmedium');
+
 @mixin card-variant(
     $name,
     $bg-default,
@@ -385,4 +408,11 @@
     gap: 8px;
     padding-block: 0 var(--md-comp-card-content-padding-block, 16px);
     padding-inline: var(--md-comp-card-padding-inline, 16px);
+
+    &.micl-card__actions--outset-start {
+        padding-inline-start: calc(var(--md-comp-card-padding-inline, 16px) - 16px);
+    }
+    &.micl-card__actions--outset-end {
+        padding-inline-end: calc(var(--md-comp-card-padding-inline, 16px) - 16px);
+    }
 }

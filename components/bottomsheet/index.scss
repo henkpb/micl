@@ -25,6 +25,15 @@
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
+@include elevation.level(1);
+
+@include shapes.corner('extra-large');
+@include shapes.corner('small');
+
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('focus-indicator-outer-offset');
+@include statelayer.token('backdrop-opacity');
+
 dialog.micl-bottomsheet {
     --md-sys-bottomsheet-height: max-content;
     --md-sys-bottomsheet-margin: 56px;

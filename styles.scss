@@ -19,15 +19,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Configured imports first: $master must be set on each module before any
+// transitive consumer (e.g. foundations/layout) loads it with defaults,
+// otherwise Sass errors with "module already loaded".
+@use 'styles/shapes' with ($master: true);
+@use 'styles/elevation' with ($master: true);
+@use 'styles/statelayer' with ($master: true);
+@use 'styles/typography' with ($master: true);
+@use 'styles/motion' with ($master: true);
+
 @use 'foundations';
 @use 'foundations/layout';
 @use 'foundations/scrollbar';
-
-@use 'styles/typography';
-@use 'styles/shapes';
-@use 'styles/elevation';
-@use 'styles/motion';
-@use 'styles/statelayer';
 
 @use 'components/divider';
 @use 'components/alert';
@@ -49,6 +52,7 @@
 @use 'components/sidesheet';
 @use 'components/bottomsheet';
 @use 'components/navigationrail';
+@use 'components/progressindicator';
 @use 'components/stepper';
 @use 'components/datepicker';
 @use 'components/timepicker';

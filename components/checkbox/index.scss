@@ -21,8 +21,25 @@
 
 @use '../../foundations';
 @use '../../styles/motion';
+@use '../../styles/shapes';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+
+@include shapes.corner('full');
+
+@include statelayer.token('layer-size');
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
+@include motion.duration('short3');
+@include motion.duration('long4');
 
 :root {
     --md-sys-checkbox-border-width: 2px;

@@ -25,6 +25,24 @@
 @use '../../styles/shapes';
 @use '../../styles/statelayer';
 
+@include elevation.level(0);
+
+@include shapes.corner('small');
+@include shapes.corner('medium');
+@include shapes.corner('large');
+@include shapes.corner('extra-large');
+@include shapes.corner('full');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
 button.micl-iconbutton-standard-xs,
 a.micl-iconbutton-standard-xs,
 button.micl-iconbutton-standard-s,

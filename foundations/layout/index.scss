@@ -21,6 +21,8 @@
 
 @use '../../styles/shapes';
 
+@include shapes.corner('medium');
+
 $md-sys-window-compact-max: 599px;
 $md-sys-window-medium-min: 600px;
 $md-sys-window-medium-max: 839px;
@@ -96,6 +98,7 @@ $md-sys-pane-spacer: 24px;
     }
 }
 .micl-body {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     gap: var(--md-sys-comp-margin, 8px) var(--md-sys-layout-pane-spacer);

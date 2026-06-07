@@ -25,6 +25,22 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('small');
+@include shapes.corner('full');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.property;
+
+@include typography.scale('display-large');
+@include typography.scale('display-medium');
+@include typography.scale('title-medium');
+@include typography.scale('body-large');
+@include typography.scale('body-small');
+@include typography.scale('label-medium');
+
 :root {
     --md-sys-timepicker-input-height: 72px;
     --md-sys-timepicker-input-width: 96px;

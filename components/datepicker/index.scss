@@ -25,6 +25,19 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('large');
+@include shapes.corner('full');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.property;
+
+@include typography.scale('headline-large');
+@include typography.scale('body-large');
+@include typography.scale('label-large');
+
 :root {
     --md-comp-date-picker-docked-container-width: 360px;
     --md-comp-date-picker-modal-container-width: 360px;

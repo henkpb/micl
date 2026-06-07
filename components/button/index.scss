@@ -26,35 +26,55 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
-button.micl-button-text-xs,
-a.micl-button-text-xs,
-button.micl-button-text-s,
-a.micl-button-text-s,
-button.micl-button-text-m,
-a.micl-button-text-m,
-button.micl-button-text-l,
-button.micl-button-text-l,
-button.micl-button-text-xl,
-button.micl-button-elevated-xs,
-button.micl-button-elevated-s,
-button.micl-button-elevated-m,
-button.micl-button-elevated-l,
-button.micl-button-elevated-xl,
-button.micl-button-filled-xs,
-button.micl-button-filled-s,
-button.micl-button-filled-m,
-button.micl-button-filled-l,
-button.micl-button-filled-xl,
-button.micl-button-tonal-xs,
-button.micl-button-tonal-s,
-button.micl-button-tonal-m,
-button.micl-button-tonal-l,
-button.micl-button-tonal-xl,
-button.micl-button-outlined-xs,
-button.micl-button-outlined-s,
-button.micl-button-outlined-m,
-button.micl-button-outlined-l,
-button.micl-button-outlined-xl {
+@include elevation.level(0);
+@include elevation.level(1);
+
+@include shapes.corner('small');
+@include shapes.corner('medium');
+@include shapes.corner('large');
+@include shapes.corner('extra-large');
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
+@include typography.scale('headline-large');
+@include typography.scale('headline-small');
+@include typography.scale('title-medium');
+@include typography.scale('label-large');
+
+.micl-button-text-xs,
+.micl-button-text-s,
+.micl-button-text-m,
+.micl-button-text-l,
+.micl-button-text-l,
+.micl-button-text-xl,
+.micl-button-elevated-xs,
+.micl-button-elevated-s,
+.micl-button-elevated-m,
+.micl-button-elevated-l,
+.micl-button-elevated-xl,
+.micl-button-filled-xs,
+.micl-button-filled-s,
+.micl-button-filled-m,
+.micl-button-filled-l,
+.micl-button-filled-xl,
+.micl-button-tonal-xs,
+.micl-button-tonal-s,
+.micl-button-tonal-m,
+.micl-button-tonal-l,
+.micl-button-tonal-xl,
+.micl-button-outlined-xs,
+.micl-button-outlined-s,
+.micl-button-outlined-m,
+.micl-button-outlined-l,
+.micl-button-outlined-xl {
     --md-sys-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-button-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
@@ -112,12 +132,11 @@ button.micl-button-outlined-xl {
     }
 }
 
-button.micl-button-text-xs,
-a.micl-button-text-xs,
-button.micl-button-elevated-xs,
-button.micl-button-filled-xs,
-button.micl-button-tonal-xs,
-button.micl-button-outlined-xs {
+.micl-button-text-xs,
+.micl-button-elevated-xs,
+.micl-button-filled-xs,
+.micl-button-tonal-xs,
+.micl-button-outlined-xs {
     @include typography.label-large;
 
     --micl-width: 32px;
@@ -160,12 +179,11 @@ button.micl-button-outlined-xs {
     }
 }
 
-button.micl-button-text-s,
-a.micl-button-text-s,
-button.micl-button-elevated-s,
-button.micl-button-filled-s,
-button.micl-button-tonal-s,
-button.micl-button-outlined-s {
+.micl-button-text-s,
+.micl-button-elevated-s,
+.micl-button-filled-s,
+.micl-button-tonal-s,
+.micl-button-outlined-s {
     @include typography.label-large;
 
     --micl-width: 40px;
@@ -207,12 +225,11 @@ button.micl-button-outlined-s {
     }
 }
 
-button.micl-button-text-m,
-a.micl-button-text-m,
-button.micl-button-elevated-m,
-button.micl-button-filled-m,
-button.micl-button-tonal-m,
-button.micl-button-outlined-m {
+.micl-button-text-m,
+.micl-button-elevated-m,
+.micl-button-filled-m,
+.micl-button-tonal-m,
+.micl-button-outlined-m {
     @include typography.title-medium;
 
     --micl-width: 56px;
@@ -245,11 +262,11 @@ button.micl-button-outlined-m {
     }
 }
 
-button.micl-button-text-l,
-button.micl-button-elevated-l,
-button.micl-button-filled-l,
-button.micl-button-tonal-l,
-button.micl-button-outlined-l {
+.micl-button-text-l,
+.micl-button-elevated-l,
+.micl-button-filled-l,
+.micl-button-tonal-l,
+.micl-button-outlined-l {
     @include typography.headline-small;
 
     --micl-width: 96px;
@@ -282,11 +299,11 @@ button.micl-button-outlined-l {
     }
 }
 
-button.micl-button-text-xl,
-button.micl-button-elevated-xl,
-button.micl-button-filled-xl,
-button.micl-button-tonal-xl,
-button.micl-button-outlined-xl {
+.micl-button-text-xl,
+.micl-button-elevated-xl,
+.micl-button-filled-xl,
+.micl-button-tonal-xl,
+.micl-button-outlined-xl {
     @include typography.headline-large;
 
     --micl-width: 136px;
@@ -319,14 +336,11 @@ button.micl-button-outlined-xl {
     }
 }
 
-button.micl-button-text-xs,
-a.micl-button-text-xs,
-button.micl-button-text-s,
-a.micl-button-text-s,
-button.micl-button-text-m,
-a.micl-button-text-m,
-button.micl-button-text-l,
-button.micl-button-text-xl {
+.micl-button-text-xs,
+.micl-button-text-s,
+.micl-button-text-m,
+.micl-button-text-l,
+.micl-button-text-xl {
     --statelayer-color: var(--md-sys-color-primary);
 
     background-color: transparent;
@@ -350,11 +364,11 @@ button.micl-button-text-xl {
     }
 }
 
-button.micl-button-elevated-xs,
-button.micl-button-elevated-s,
-button.micl-button-elevated-m,
-button.micl-button-elevated-l,
-button.micl-button-elevated-xl {
+.micl-button-elevated-xs,
+.micl-button-elevated-s,
+.micl-button-elevated-m,
+.micl-button-elevated-l,
+.micl-button-elevated-xl {
     --statelayer-color: var(--md-sys-color-primary);
 
     background-color: var(--md-sys-color-surface-container-low);
@@ -387,20 +401,20 @@ button.micl-button-elevated-xl {
         }
     }
 }
-button.micl-button-elevated-xs {
+.micl-button-elevated-xs {
     block-size: 32px;
     border: none;
 }
-button.micl-button-elevated-s {
+.micl-button-elevated-s {
     block-size: 40px;
     border: none;
 }
 
-button.micl-button-filled-xs,
-button.micl-button-filled-s,
-button.micl-button-filled-m,
-button.micl-button-filled-l,
-button.micl-button-filled-xl {
+.micl-button-filled-xs,
+.micl-button-filled-s,
+.micl-button-filled-m,
+.micl-button-filled-l,
+.micl-button-filled-xl {
     --statelayer-color: var(--md-sys-color-on-primary);
 
     background-color: var(--md-sys-color-primary);
@@ -434,11 +448,11 @@ button.micl-button-filled-xl {
     }
 }
 
-button.micl-button-tonal-xs,
-button.micl-button-tonal-s,
-button.micl-button-tonal-m,
-button.micl-button-tonal-l,
-button.micl-button-tonal-xl {
+.micl-button-tonal-xs,
+.micl-button-tonal-s,
+.micl-button-tonal-m,
+.micl-button-tonal-l,
+.micl-button-tonal-xl {
     --statelayer-color: var(--md-sys-color-on-secondary-container);
 
     background-color: var(--md-sys-color-secondary-container);
@@ -471,11 +485,11 @@ button.micl-button-tonal-xl {
     }
 }
 
-button.micl-button-outlined-xs,
-button.micl-button-outlined-s,
-button.micl-button-outlined-m,
-button.micl-button-outlined-l,
-button.micl-button-outlined-xl {
+.micl-button-outlined-xs,
+.micl-button-outlined-s,
+.micl-button-outlined-m,
+.micl-button-outlined-l,
+.micl-button-outlined-xl {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
 
     background-color: transparent;
@@ -507,14 +521,14 @@ button.micl-button-outlined-xl {
         }
     }
 }
-button.micl-button-outlined-xs,
-button.micl-button-outlined-s,
-button.micl-button-outlined-m {
+.micl-button-outlined-xs,
+.micl-button-outlined-s,
+.micl-button-outlined-m {
     border: 1px solid var(--md-sys-color-outline-variant);
 }
-button.micl-button-outlined-l {
+.micl-button-outlined-l {
     border: 2px solid var(--md-sys-color-outline-variant);
 }
-button.micl-button-outlined-xl {
+.micl-button-outlined-xl {
     border: 3px solid var(--md-sys-color-outline-variant);
 }

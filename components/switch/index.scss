@@ -25,6 +25,15 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include shapes.corner('full');
+
+@include statelayer.token('layer-size');
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+
 :root {
     --md-sys-switch-handle-size: 16px;
     --md-sys-switch-handle-selected-size: 24px;

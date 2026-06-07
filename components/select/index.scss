@@ -26,6 +26,12 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
+@include elevation.level(2);
+
+@include shapes.corner('large');
+
+@include statelayer.token('disabled-state-layer-opacity');
+
 .micl-textfield-filled > select {
     --md-comp-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
 }
@@ -107,6 +113,8 @@
 
         .micl-list-item__text::after {
             content: attr(aria-description);
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         &::checkmark {
             color: var(--md-sys-color-on-surface-variant);

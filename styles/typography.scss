@@ -19,6 +19,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use 'sass:map';
+
+//
+// Set $master: true (via @use ... with) to install every typescale token, the @supports
+// narrow-tracking overrides, and the .md-sys-typescale-* utility classes — used by the
+// master bundle. When false (default), components opt into individual typescales via @include
+// scale('body-large'), so per-component CSS bundles only carry the typescale tokens they
+// actually reference.
+//
+$master: false !default;
+
 :root {
     --md-ref-typeface-plain: Google Sans, system-ui, sans-serif;
     --md-ref-typeface-plain-narrow: 0;
@@ -26,212 +37,85 @@
     --md-ref-typeface-weight-regular: 400;
     --md-ref-typeface-weight-medium: 500;
     --md-ref-typeface-weight-bold: 700;
-
-    --md-sys-typescale-display-large-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-display-large-size: 3.5625rem; // 57px
-    --md-sys-typescale-display-large-line-height: 4rem; // 64px
-    --md-sys-typescale-display-large-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-display-large-tracking: -0.015625rem; // ~0.25px letter-spacing
-
-    --md-sys-typescale-display-medium-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-display-medium-size: 2.8125rem; // 45px
-    --md-sys-typescale-display-medium-line-height: 3.25rem; // 52px
-    --md-sys-typescale-display-medium-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-display-medium-tracking: 0;
-
-    --md-sys-typescale-display-small-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-display-small-size: 2.25rem; // 36px
-    --md-sys-typescale-display-small-line-height: 2.75rem; // 44px
-    --md-sys-typescale-display-small-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-display-small-tracking: 0;
-
-    --md-sys-typescale-headline-large-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-headline-large-size: 2rem; // 32px
-    --md-sys-typescale-headline-large-line-height: 2.5rem; // 40px
-    --md-sys-typescale-headline-large-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-headline-large-tracking: 0;
-
-    --md-sys-typescale-headline-medium-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-headline-medium-size: 1.75rem; // 28px
-    --md-sys-typescale-headline-medium-line-height: 2.25rem; // 36px
-    --md-sys-typescale-headline-medium-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-headline-medium-tracking: 0;
-
-    --md-sys-typescale-headline-small-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-headline-small-size: 1.5rem; // 24px
-    --md-sys-typescale-headline-small-line-height: 2rem; // 32px
-    --md-sys-typescale-headline-small-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-headline-small-tracking: 0;
-
-    --md-sys-typescale-title-large-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-title-large-size: 1.375rem; // 22px
-    --md-sys-typescale-title-large-line-height: 1.75rem; // 28px
-    --md-sys-typescale-title-large-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-title-large-tracking: 0;
-
-    --md-sys-typescale-title-medium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-title-medium-size: 1rem; // 16px
-    --md-sys-typescale-title-medium-line-height: 1.5rem; // 24px
-    --md-sys-typescale-title-medium-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-title-medium-tracking: 0.009375rem; // ~0.15px letter-spacing
-
-    --md-sys-typescale-title-small-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-title-small-size: 0.875rem; // 14px
-    --md-sys-typescale-title-small-line-height: 1.25rem; // 20px
-    --md-sys-typescale-title-small-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-title-small-tracking: 0.00625rem; // ~0.1px letter-spacing
-
-    --md-sys-typescale-body-large-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-body-large-size: 1rem; // 16px
-    --md-sys-typescale-body-large-line-height: 1.5rem; // 24px
-    --md-sys-typescale-body-large-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-body-large-tracking: 0.03125rem; // ~0.5px letter-spacing
-
-    --md-sys-typescale-body-medium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-body-medium-size: 0.875rem; // 14px
-    --md-sys-typescale-body-medium-line-height: 1.25rem; // 20px
-    --md-sys-typescale-body-medium-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-body-medium-tracking: 0.015625rem; // ~0.25px letter-spacing
-
-    --md-sys-typescale-body-smallmedium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-body-smallmedium-size: 0.8125rem; // 13px
-    --md-sys-typescale-body-smallmedium-line-height: 1.125rem; // 18px
-    --md-sys-typescale-body-smallmedium-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-body-smallmedium-tracking: 0.025rem; // ~0.4px letter-spacing
-
-    --md-sys-typescale-body-small-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-body-small-size: 0.75rem; // 12px
-    --md-sys-typescale-body-small-line-height: 1rem; // 16px
-    --md-sys-typescale-body-small-weight: var(--md-ref-typeface-weight-regular);
-    --md-sys-typescale-body-small-tracking: 0.025rem; // ~0.4px letter-spacing
-
-    --md-sys-typescale-label-large-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-label-large-size: 0.875rem; // 14px
-    --md-sys-typescale-label-large-line-height: 1.25rem; // 20px
-    --md-sys-typescale-label-large-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-label-large-tracking: 0.00625rem; // ~0.1px letter-spacing
-
-    --md-sys-typescale-label-medium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-label-medium-size: 0.75rem; // 12px
-    --md-sys-typescale-label-medium-line-height: 1rem; // 16px
-    --md-sys-typescale-label-medium-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-label-medium-tracking: 0.03125rem; // ~0.5px letter-spacing
-
-    --md-sys-typescale-label-small-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-label-small-size: 0.6875rem; // 11px
-    --md-sys-typescale-label-small-line-height: 1rem; // 16px
-    --md-sys-typescale-label-small-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-label-small-tracking: 0.03125rem; // ~0.5px letter-spacing
-
-    --md-sys-typescale-emphasized-display-large-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-display-large-size: 3.5625rem; // 57px
-    --md-sys-typescale-emphasized-display-large-line-height: 4rem; // 64px
-    --md-sys-typescale-emphasized-display-large-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-display-large-tracking: -0.015625rem; // ~0.25px letter-spacing
-
-    --md-sys-typescale-emphasized-display-medium-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-display-medium-size: 2.8125rem; // 45px
-    --md-sys-typescale-emphasized-display-medium-line-height: 3.25rem; // 52px
-    --md-sys-typescale-emphasized-display-medium-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-display-medium-tracking: 0;
-
-    --md-sys-typescale-emphasized-display-small-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-display-small-size: 2.25rem; // 36px
-    --md-sys-typescale-emphasized-display-small-line-height: 2.75rem; // 44px
-    --md-sys-typescale-emphasized-display-small-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-display-small-tracking: 0;
-
-    --md-sys-typescale-emphasized-headline-large-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-headline-large-size: 2rem; // 32px
-    --md-sys-typescale-emphasized-headline-large-line-height: 2.5rem; // 40px
-    --md-sys-typescale-emphasized-headline-large-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-headline-large-tracking: 0;
-
-    --md-sys-typescale-emphasized-headline-medium-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-headline-medium-size: 1.75rem; // 28px
-    --md-sys-typescale-emphasized-headline-medium-line-height: 2.25rem; // 36px
-    --md-sys-typescale-emphasized-headline-medium-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-headline-medium-tracking: 0;
-
-    --md-sys-typescale-emphasized-headline-small-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-headline-small-size: 1.5rem; // 24px
-    --md-sys-typescale-emphasized-headline-small-line-height: 2rem; // 32px
-    --md-sys-typescale-emphasized-headline-small-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-headline-small-tracking: 0;
-
-    --md-sys-typescale-emphasized-title-large-font: var(--md-ref-typeface-brand);
-    --md-sys-typescale-emphasized-title-large-size: 1.375rem; // 22px
-    --md-sys-typescale-emphasized-title-large-line-height: 1.75rem; // 28px
-    --md-sys-typescale-emphasized-title-large-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-title-large-tracking: 0;
-
-    --md-sys-typescale-emphasized-title-medium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-title-medium-size: 1rem; // 16px
-    --md-sys-typescale-emphasized-title-medium-line-height: 1.5rem; // 24px
-    --md-sys-typescale-emphasized-title-medium-weight: var(--md-ref-typeface-weight-bold);
-    --md-sys-typescale-emphasized-title-medium-tracking: 0.009375rem; // ~0.15px letter-spacing
-
-    --md-sys-typescale-emphasized-title-small-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-title-small-size: 0.875rem; // 14px
-    --md-sys-typescale-emphasized-title-small-line-height: 1.25rem; // 20px
-    --md-sys-typescale-emphasized-title-small-weight: var(--md-ref-typeface-weight-bold);
-    --md-sys-typescale-emphasized-title-small-tracking: 0.00625rem; // ~0.1px letter-spacing
-
-    --md-sys-typescale-emphasized-body-large-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-body-large-size: 1rem; // 16px
-    --md-sys-typescale-emphasized-body-large-line-height: 1.5rem; // 24px
-    --md-sys-typescale-emphasized-body-large-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-body-large-tracking: 0.03125rem; // ~0.5px letter-spacing
-
-    --md-sys-typescale-emphasized-body-medium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-body-medium-size: 0.875rem; // 14px
-    --md-sys-typescale-emphasized-body-medium-line-height: 1.25rem; // 20px
-    --md-sys-typescale-emphasized-body-medium-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-body-medium-tracking: 0.015625rem; // ~0.25px letter-spacing
-
-    --md-sys-typescale-emphasized-body-small-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-body-small-size: 0.75rem; // 12px
-    --md-sys-typescale-emphasized-body-small-line-height: 1rem; // 16px
-    --md-sys-typescale-emphasized-body-small-weight: var(--md-ref-typeface-weight-medium);
-    --md-sys-typescale-emphasized-body-small-tracking: 0.025rem; // ~0.4px letter-spacing
-
-    --md-sys-typescale-emphasized-label-large-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-label-large-size: 0.875rem; // 14px
-    --md-sys-typescale-emphasized-label-large-line-height: 1.25rem; // 20px
-    --md-sys-typescale-emphasized-label-large-weight: var(--md-ref-typeface-weight-bold);
-    --md-sys-typescale-emphasized-label-large-tracking: 0.00625rem; // ~0.1px letter-spacing
-
-    --md-sys-typescale-emphasized-label-medium-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-label-medium-size: 0.75rem; // 12px
-    --md-sys-typescale-emphasized-label-medium-line-height: 1rem; // 16px
-    --md-sys-typescale-emphasized-label-medium-weight: var(--md-ref-typeface-weight-bold);
-    --md-sys-typescale-emphasized-label-medium-tracking: 0.03125rem; // ~0.5px letter-spacing
-
-    --md-sys-typescale-emphasized-label-small-font: var(--md-ref-typeface-plain);
-    --md-sys-typescale-emphasized-label-small-size: 0.6875rem; // 11px
-    --md-sys-typescale-emphasized-label-small-line-height: 1rem; // 16px
-    --md-sys-typescale-emphasized-label-small-weight: var(--md-ref-typeface-weight-bold);
-    --md-sys-typescale-emphasized-label-small-tracking: 0.03125rem; // ~0.5px letter-spacing
 }
-@supports (letter-spacing: if(style(--md-ref-typeface-plain-narrow: 1): 0; else: 0)) {
+
+$_scales: (
+    display-large:              (font: brand, size: 3.5625rem, line-height: 4rem,     weight: regular, tracking: -0.0125rem),
+    display-medium:             (font: brand, size: 2.8125rem, line-height: 3.25rem,  weight: regular, tracking: 0),
+    display-small:              (font: brand, size: 2.25rem,   line-height: 2.75rem,  weight: regular, tracking: 0),
+    headline-large:             (font: brand, size: 2rem,      line-height: 2.5rem,   weight: regular, tracking: 0),
+    headline-medium:            (font: brand, size: 1.75rem,   line-height: 2.25rem,  weight: regular, tracking: 0),
+    headline-small:             (font: brand, size: 1.5rem,    line-height: 2rem,     weight: regular, tracking: 0),
+    title-large:                (font: brand, size: 1.375rem,  line-height: 1.75rem,  weight: regular, tracking: 0),
+    title-medium:               (font: plain, size: 1rem,      line-height: 1.5rem,   weight: medium,  tracking: 0.0125rem),
+    title-small:                (font: plain, size: 0.875rem,  line-height: 1.25rem,  weight: medium,  tracking: 0.00625rem),
+    body-large:                 (font: plain, size: 1rem,      line-height: 1.5rem,   weight: regular, tracking: 0.03125rem),
+    body-medium:                (font: plain, size: 0.875rem,  line-height: 1.25rem,  weight: regular, tracking: 0.0125rem),
+    body-smallmedium:           (font: plain, size: 0.8125rem, line-height: 1.125rem, weight: regular, tracking: 0.025rem),
+    body-small:                 (font: plain, size: 0.75rem,   line-height: 1rem,     weight: regular, tracking: 0.025rem),
+    label-large:                (font: plain, size: 0.875rem,  line-height: 1.25rem,  weight: medium,  tracking: 0.00625rem),
+    label-medium:               (font: plain, size: 0.75rem,   line-height: 1rem,     weight: medium,  tracking: 0.03125rem),
+    label-small:                (font: plain, size: 0.6875rem, line-height: 1rem,     weight: medium,  tracking: 0.03125rem),
+    emphasized-display-large:   (font: brand, size: 3.5625rem, line-height: 4rem,     weight: medium,  tracking: 0),
+    emphasized-display-medium:  (font: brand, size: 2.8125rem, line-height: 3.25rem,  weight: medium,  tracking: 0),
+    emphasized-display-small:   (font: brand, size: 2.25rem,   line-height: 2.75rem,  weight: medium,  tracking: 0),
+    emphasized-headline-large:  (font: brand, size: 2rem,      line-height: 2.5rem,   weight: medium,  tracking: 0),
+    emphasized-headline-medium: (font: brand, size: 1.75rem,   line-height: 2.25rem,  weight: medium,  tracking: 0),
+    emphasized-headline-small:  (font: brand, size: 1.5rem,    line-height: 2rem,     weight: medium,  tracking: 0),
+    emphasized-title-large:     (font: brand, size: 1.375rem,  line-height: 1.75rem,  weight: medium,  tracking: 0),
+    emphasized-title-medium:    (font: plain, size: 1rem,      line-height: 1.5rem,   weight: bold,    tracking: 0.009375rem),
+    emphasized-title-small:     (font: plain, size: 0.875rem,  line-height: 1.25rem,  weight: bold,    tracking: 0.00625rem),
+    emphasized-body-large:      (font: plain, size: 1rem,      line-height: 1.5rem,   weight: medium,  tracking: 0.009375rem),
+    emphasized-body-medium:     (font: plain, size: 0.875rem,  line-height: 1.25rem,  weight: medium,  tracking: 0.015625rem),
+    emphasized-body-small:      (font: plain, size: 0.75rem,   line-height: 1rem,     weight: medium,  tracking: 0.025rem),
+    emphasized-label-large:     (font: plain, size: 0.875rem,  line-height: 1.25rem,  weight: bold,    tracking: 0.00625rem),
+    emphasized-label-medium:    (font: plain, size: 0.75rem,   line-height: 1rem,     weight: bold,    tracking: 0.03125rem),
+    emphasized-label-small:     (font: plain, size: 0.6875rem, line-height: 1rem,     weight: bold,    tracking: 0.03125rem),
+);
+
+$_narrow-tracking: (
+    title-medium, title-small,
+    body-large, body-medium, body-smallmedium, body-small,
+    label-large, label-medium, label-small,
+    emphasized-title-medium, emphasized-title-small,
+    emphasized-body-large, emphasized-body-medium, emphasized-body-small,
+    emphasized-label-large, emphasized-label-medium, emphasized-label-small
+);
+
+@mixin _emit-scale-tokens($name) {
+    $s: map.get($_scales, $name);
+    --md-sys-typescale-#{$name}-font:        var(--md-ref-typeface-#{map.get($s, 'font')});
+    --md-sys-typescale-#{$name}-size:        #{map.get($s, 'size')};
+    --md-sys-typescale-#{$name}-line-height: #{map.get($s, 'line-height')};
+    --md-sys-typescale-#{$name}-weight:      var(--md-ref-typeface-weight-#{map.get($s, 'weight')});
+    --md-sys-typescale-#{$name}-tracking:    #{map.get($s, 'tracking')};
+}
+
+@mixin scale($name) {
+    @if not $master {
+        @if not map.has-key($_scales, $name) {
+            @error "Unknown typescale '#{$name}'. Available: #{map.keys($_scales)}.";
+        }
+        :root {
+            @include _emit-scale-tokens($name);
+        }
+    }
+}
+
+@if $master {
     :root {
-        --md-sys-typescale-title-medium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.009375rem; else: 0px);
-        --md-sys-typescale-title-small-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.00625rem; else: 0px);
-        --md-sys-typescale-body-large-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.03125rem; else: 0px);
-        --md-sys-typescale-body-medium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.015625rem; else: 0px);
-        --md-sys-typescale-body-smallmedium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.025rem; else: 0px);
-        --md-sys-typescale-body-small-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.025rem; else: 0px);
-        --md-sys-typescale-label-large-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.00625rem; else: 0px);
-        --md-sys-typescale-label-medium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.03125rem; else: 0px);
-        --md-sys-typescale-label-small-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.03125rem; else: 0px);
-        --md-sys-typescale-emphasized-title-medium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.009375rem; else: 0px);
-        --md-sys-typescale-emphasized-title-small-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.00625rem; else: 0px);
-        --md-sys-typescale-emphasized-body-large-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.03125rem; else: 0px);
-        --md-sys-typescale-emphasized-body-medium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.015625rem; else: 0px);
-        --md-sys-typescale-emphasized-body-small-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.025rem; else: 0px);
-        --md-sys-typescale-emphasized-label-large-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.00625rem; else: 0px);
-        --md-sys-typescale-emphasized-label-medium-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.03125rem; else: 0px);
-        --md-sys-typescale-emphasized-label-small-tracking: if(style(--md-ref-typeface-plain-narrow: 1): 0.03125rem; else: 0px);
+        @each $name, $_ in $_scales {
+            @include _emit-scale-tokens($name);
+        }
+    }
+
+    @supports (letter-spacing: if(style(--md-ref-typeface-plain-narrow: 1): 0; else: 0)) {
+        :root {
+            @each $name in $_narrow-tracking {
+                $t: map.get(map.get($_scales, $name), 'tracking');
+                --md-sys-typescale-#{$name}-tracking: if(style(--md-ref-typeface-plain-narrow: 1): #{$t}; else: 0px);
+            }
+        }
     }
 }
 
@@ -483,122 +367,36 @@
     letter-spacing: var(--md-sys-typescale-emphasized-label-small-tracking);
 }
 
-.md-sys-typescale-display-large {
-    @include display-large;
-}
-
-.md-sys-typescale-display-medium {
-    @include display-medium;
-}
-
-.md-sys-typescale-display-small {
-    @include display-small;
-}
-
-.md-sys-typescale-headline-large {
-    @include headline-large;
-}
-
-.md-sys-typescale-headline-medium {
-    @include headline-medium;
-}
-
-.md-sys-typescale-headline-small {
-    @include headline-small;
-}
-
-.md-sys-typescale-title-large {
-    @include title-large;
-}
-
-.md-sys-typescale-title-medium {
-    @include title-medium;
-}
-
-.md-sys-typescale-title-small {
-    @include title-small;
-}
-
-.md-sys-typescale-body-large {
-    @include body-large;
-}
-
-.md-sys-typescale-body-medium {
-    @include body-medium;
-}
-
-.md-sys-typescale-body-small {
-    @include body-small;
-}
-
-.md-sys-typescale-label-large {
-    @include label-large;
-}
-
-.md-sys-typescale-label-medium {
-    @include label-medium;
-}
-
-.md-sys-typescale-label-small {
-    @include label-small;
-}
-
-.md-sys-typescale-emphasized-display-large {
-    @include emphasized-display-large;
-}
-
-.md-sys-typescale-emphasized-display-medium {
-    @include emphasized-display-medium;
-}
-
-.md-sys-typescale-emphasized-display-small {
-    @include emphasized-display-small;
-}
-
-.md-sys-typescale-emphasized-headline-large {
-    @include emphasized-headline-large;
-}
-
-.md-sys-typescale-emphasized-headline-medium {
-    @include emphasized-headline-medium;
-}
-
-.md-sys-typescale-emphasized-headline-small {
-    @include emphasized-headline-small;
-}
-
-.md-sys-typescale-emphasized-title-large {
-    @include emphasized-title-large;
-}
-
-.md-sys-typescale-emphasized-title-medium {
-    @include emphasized-title-medium;
-}
-
-.md-sys-typescale-emphasized-title-small {
-    @include emphasized-title-small;
-}
-
-.md-sys-typescale-emphasized-body-large {
-    @include emphasized-body-large;
-}
-
-.md-sys-typescale-emphasized-body-medium {
-    @include emphasized-body-medium;
-}
-
-.md-sys-typescale-emphasized-body-small {
-    @include emphasized-body-small;
-}
-
-.md-sys-typescale-emphasized-label-large {
-    @include emphasized-label-large;
-}
-
-.md-sys-typescale-emphasized-label-medium {
-    @include emphasized-label-medium;
-}
-
-.md-sys-typescale-emphasized-label-small {
-    @include emphasized-label-small;
+@if $master {
+    .md-sys-typescale-display-large              { @include display-large; }
+    .md-sys-typescale-display-medium             { @include display-medium; }
+    .md-sys-typescale-display-small              { @include display-small; }
+    .md-sys-typescale-headline-large             { @include headline-large; }
+    .md-sys-typescale-headline-medium            { @include headline-medium; }
+    .md-sys-typescale-headline-small             { @include headline-small; }
+    .md-sys-typescale-title-large                { @include title-large; }
+    .md-sys-typescale-title-medium               { @include title-medium; }
+    .md-sys-typescale-title-small                { @include title-small; }
+    .md-sys-typescale-body-large                 { @include body-large; }
+    .md-sys-typescale-body-medium                { @include body-medium; }
+    .md-sys-typescale-body-smallmedium           { @include body-smallmedium; }
+    .md-sys-typescale-body-small                 { @include body-small; }
+    .md-sys-typescale-label-large                { @include label-large; }
+    .md-sys-typescale-label-medium               { @include label-medium; }
+    .md-sys-typescale-label-small                { @include label-small; }
+    .md-sys-typescale-emphasized-display-large   { @include emphasized-display-large; }
+    .md-sys-typescale-emphasized-display-medium  { @include emphasized-display-medium; }
+    .md-sys-typescale-emphasized-display-small   { @include emphasized-display-small; }
+    .md-sys-typescale-emphasized-headline-large  { @include emphasized-headline-large; }
+    .md-sys-typescale-emphasized-headline-medium { @include emphasized-headline-medium; }
+    .md-sys-typescale-emphasized-headline-small  { @include emphasized-headline-small; }
+    .md-sys-typescale-emphasized-title-large     { @include emphasized-title-large; }
+    .md-sys-typescale-emphasized-title-medium    { @include emphasized-title-medium; }
+    .md-sys-typescale-emphasized-title-small     { @include emphasized-title-small; }
+    .md-sys-typescale-emphasized-body-large      { @include emphasized-body-large; }
+    .md-sys-typescale-emphasized-body-medium     { @include emphasized-body-medium; }
+    .md-sys-typescale-emphasized-body-small      { @include emphasized-body-small; }
+    .md-sys-typescale-emphasized-label-large     { @include emphasized-label-large; }
+    .md-sys-typescale-emphasized-label-medium    { @include emphasized-label-medium; }
+    .md-sys-typescale-emphasized-label-small     { @include emphasized-label-small; }
 }
