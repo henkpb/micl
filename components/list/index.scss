@@ -58,10 +58,12 @@
 $item-padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
 $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp-list-item-trailing-space, 16px);
 
+$open-accordion: ':where(details[open] > *)';
+
 %shared-interactive-states {
     cursor: pointer;
 
-    &:not(:has(input[type=checkbox]:checked)) {
+    &:not(:has(input[type=checkbox]:checked)):not(#{$open-accordion}) {
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-hovered-expressive-shape, var(--md-sys-shape-corner-medium, 12px));
             --_headline-color: var(--md-comp-list-item-hover-label-text-color, var(--md-sys-color-on-surface));
@@ -109,7 +111,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             cursor: grabbing;
         }
     }
-    &:has(input[type=checkbox]:checked) {
+    &:is(:has(input[type=checkbox]:checked), #{$open-accordion}) {
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-selected-hovered-expressive-shape, var(--md-sys-shape-corner-large, 16px));
             --_headline-color: var(--md-comp-list-item-selected-hover-label-text-color, var(--md-sys-color-on-secondary-container));
@@ -327,7 +329,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         }
 
-        &:checked, &:has(input[type=checkbox]:checked) {
+        &:checked, &:has(input[type=checkbox]:checked), &#{$open-accordion} {
             --_list-item-background-color: var(--md-comp-list-item-selected-disabled-container-color, var(--md-sys-color-on-surface));
             --_list-item-background-opacity: var(--md-comp-list-item-selected-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
             --_list-item-shape: var(--md-comp-list-item-container-selected-disabled-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -341,7 +343,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
             --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 0%);
         }
     }
-    &:checked, &:has(input[type=checkbox]:checked) {
+    &:checked, &:has(input[type=checkbox]:checked), &#{$open-accordion} {
         --_list-item-background-color: var(--md-comp-list-item-selected-container-color, var(--md-sys-color-secondary-container));
         --_list-item-background-opacity: 100%;
         --_overline-color: var(--md-comp-list-item-selected-overline-color, var(--md-sys-color-on-secondary-container));
@@ -352,7 +354,7 @@ $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp
         --_trailing-icon-color: var(--md-comp-list-item-selected-trailing-icon-color, var(--md-sys-color-on-secondary-container));
     }
     &:not(:disabled):not(.micl-list-item--disabled) {
-        &:checked, &:has(input[type=checkbox]:checked) {
+        &:checked, &:has(input[type=checkbox]:checked), &#{$open-accordion} {
             --_list-item-shape: var(--md-comp-list-item-container-selected-expressive-shape, var(--md-sys-shape-corner-large, 16px));
         }
         input[type=checkbox]:not(:disabled):hover,
