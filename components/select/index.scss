@@ -113,6 +113,8 @@
 
         .micl-list-item__text::after {
             content: attr(aria-description);
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         &::checkmark {
             color: var(--md-sys-color-on-surface-variant);
