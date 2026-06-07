@@ -408,4 +408,11 @@
     gap: 8px;
     padding-block: 0 var(--md-comp-card-content-padding-block, 16px);
     padding-inline: var(--md-comp-card-padding-inline, 16px);
+
+    &.micl-card__actions--outset-start {
+        padding-inline-start: calc(var(--md-comp-card-padding-inline, 16px) - 16px);
+    }
+    &.micl-card__actions--outset-end {
+        padding-inline-end: calc(var(--md-comp-card-padding-inline, 16px) - 16px);
+    }
 }
