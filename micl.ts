@@ -26,6 +26,7 @@ import _datepicker, { datepickerSelector } from './components/datepicker';
 import _list, { listSelector } from './components/list';
 import _menu, { menuSelector } from './components/menu';
 import _navigationrail, { navigationrailSelector } from './components/navigationrail';
+import _progressindicator, { progressindicatorSelector } from './components/progressindicator';
 import _slider, { sliderSelector } from './components/slider';
 import _snackbar, { snackbarSelector } from './components/snackbar';
 import _stepper, { stepperSelector } from './components/stepper';
@@ -58,6 +59,7 @@ export default (() =>
         [listSelector]          : { component: _list, type: HTMLElement },
         [menuSelector]          : { component: _menu, type: HTMLElement },
         [navigationrailSelector]: { component: _navigationrail, type: HTMLElement },
+        [progressindicatorSelector]: { component: _progressindicator, type: HTMLProgressElement },
         [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
         [sliderSelector]        : { component: _slider, type: HTMLInputElement },
         [snackbarSelector]      : { component: _snackbar, type: HTMLElement },

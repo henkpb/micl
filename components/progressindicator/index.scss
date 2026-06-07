@@ -1,0 +1,225 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../foundations';
+@use '../../styles/motion';
+
+@include motion.duration('long2');
+@include motion.duration('extra-long4');
+
+// Registered so determinate updates from the JS handler interpolate smoothly.
+// Never keyframe-animated.
+@property --md-comp-progress-fraction {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: true;
+}
+
+// Non-themed defaults. Declared on :root so they can be overridden on :root or
+// any parent element (consistent with the other MICL components). The colour
+// roles are resolved per the M3 progress-indicator spec at the point of use
+// (see $active/$track/$stop) because the theme palette is scoped to the
+// .light/.dark window class and is therefore NOT in scope at :root.
+:root {
+    --md-comp-progress-thickness: 4px;
+    --md-comp-progress-track-gap: 4px;
+    --md-comp-progress-stop-size: 4px;
+    --md-comp-progress-linear-width: 100%;
+    --md-comp-progress-wave-wavelength: 40px;
+    --md-comp-progress-wave-amplitude: 3px;
+    --md-comp-progress-indeterminate-duration: var(--md-sys-motion-duration-extra-long4);
+    --md-comp-progress-circular-size: 48px;
+    --md-comp-progress-amplitude-scale: 1;
+
+    // One wavelength of a sine ribbon, stroked at a constant width, used as a
+    // static mask so the active indicator takes a wavy shape. Painted once —
+    // no animation, no per-frame cost. The stroke is WHITE so it reveals
+    // correctly whether the browser treats the SVG mask as alpha (white =
+    // opaque) or luminance (white = 1).
+    --md-comp-progress-wave-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10' preserveAspectRatio='none'%3E%3Cpath d='M0 5 Q10 -1 20 5 T40 5' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+// M3 progress-indicator colour mapping. Resolved on the component element so
+// the system palette (scoped to the themed window ancestor) is in scope; a
+// consumer-supplied --md-comp-progress-*-color on any ancestor still wins.
+$active: var(--md-comp-progress-active-color, var(--md-sys-color-primary));
+$track:  var(--md-comp-progress-track-color, var(--md-sys-color-secondary-container));
+$stop:   var(--md-comp-progress-stop-color, var(--md-sys-color-primary));
+
+%progress-reset {
+    -webkit-appearance: none;
+            appearance: none;
+    border: none;
+    margin: 0;
+    background-color: transparent;
+    color: $active;
+    vertical-align: middle;
+}
+
+// Static wavy active indicator. No animation: the mask is rasterised once and
+// never sampled again, so a screen full of determinate indicators costs
+// nothing per frame.
+@mixin wave {
+    background-color: $active;
+    -webkit-mask-image: var(--md-comp-progress-wave-image);
+            mask-image: var(--md-comp-progress-wave-image);
+    -webkit-mask-repeat: repeat-x;
+            mask-repeat: repeat-x;
+    -webkit-mask-position: 0 center;
+            mask-position: 0 center;
+    -webkit-mask-size: var(--md-comp-progress-wave-wavelength)
+        calc(var(--md-comp-progress-thickness) + 2 * var(--md-comp-progress-wave-amplitude) * var(--md-comp-progress-amplitude-scale, 1));
+            mask-size: var(--md-comp-progress-wave-wavelength)
+        calc(var(--md-comp-progress-thickness) + 2 * var(--md-comp-progress-wave-amplitude) * var(--md-comp-progress-amplitude-scale, 1));
+}
+
+//
+// Linear progress indicator
+//
+progress.micl-progress-linear {
+    @extend %progress-reset;
+
+    display: inline-block;
+    inline-size: var(--md-comp-progress-linear-width);
+    block-size: calc(var(--md-comp-progress-thickness) + 2 * var(--md-comp-progress-wave-amplitude));
+
+    // Track (remaining portion) + end stop indicator. Starts one track-gap
+    // after the active indicator, clipped to --thickness tall and centred.
+    @mixin track {
+        background-color: transparent;
+        background-image:
+            radial-gradient(circle, #{$stop} 0 50%, transparent 50%),
+            linear-gradient(90deg,
+                transparent 0 calc(var(--md-comp-progress-fraction, 0) * 100% + var(--md-comp-progress-track-gap)),
+                #{$track} calc(var(--md-comp-progress-fraction, 0) * 100% + var(--md-comp-progress-track-gap)) 100%);
+        background-repeat: no-repeat;
+        background-position: right center, left center;
+        background-size:
+            var(--md-comp-progress-stop-size) var(--md-comp-progress-stop-size),
+            100% var(--md-comp-progress-thickness);
+        border-radius: calc(var(--md-comp-progress-thickness) / 2);
+    }
+
+    &::-webkit-progress-bar  { @include track; }
+    &::-webkit-progress-value { @include wave; }
+    &::-moz-progress-bar      { @include wave; }
+
+    // Firefox renders the track on the element itself.
+    @-moz-document url-prefix() {
+        @include track;
+    }
+
+    // Indeterminate: a comet sweeping a transparent track. Only this transient
+    // state animates; the move is a single small repainted strip.
+    &:indeterminate {
+        background-image:
+            linear-gradient(90deg, transparent, #{$active}, transparent),
+            linear-gradient(#{$track}, #{$track});
+        background-repeat: no-repeat;
+        background-position: -40% center, left center;
+        background-size: 40% var(--md-comp-progress-thickness), 100% var(--md-comp-progress-thickness);
+        border-radius: calc(var(--md-comp-progress-thickness) / 2);
+        animation: micl-progress-linear-indeterminate var(--md-comp-progress-indeterminate-duration) var(--md-sys-motion-easing-standard, ease-in-out) infinite;
+
+        &::-webkit-progress-bar,
+        &::-webkit-progress-value { background: transparent; }
+        &::-moz-progress-bar      { background: transparent; }
+    }
+}
+
+@keyframes micl-progress-linear-indeterminate {
+    0%   { background-position: -40% center, left center; }
+    100% { background-position: 140% center, left center; }
+}
+
+//
+// Circular progress indicator
+//
+// Determinate: a static conic-gradient ring punched by a radial mask (white =
+// kept under both alpha and luminance masking). It is painted once and never
+// animated, so it costs nothing per frame.
+//
+progress.micl-progress-circular {
+    @extend %progress-reset;
+
+    --md-comp-progress-circular-gap-deg: 12deg;
+
+    display: inline-block;
+    box-sizing: border-box;
+    inline-size: var(--md-comp-progress-circular-size);
+    block-size: var(--md-comp-progress-circular-size);
+    border-radius: 50%;
+    background-image: conic-gradient(
+        #{$active} 0
+            max(0deg, calc(var(--md-comp-progress-fraction, 0) * 360deg - var(--md-comp-progress-circular-gap-deg))),
+        transparent
+            max(0deg, calc(var(--md-comp-progress-fraction, 0) * 360deg - var(--md-comp-progress-circular-gap-deg)))
+            calc(var(--md-comp-progress-fraction, 0) * 360deg),
+        #{$track} calc(var(--md-comp-progress-fraction, 0) * 360deg) 360deg);
+    -webkit-mask: radial-gradient(farthest-side,
+        transparent calc(100% - var(--md-comp-progress-thickness)),
+        #fff calc(100% - var(--md-comp-progress-thickness)));
+            mask: radial-gradient(farthest-side,
+        transparent calc(100% - var(--md-comp-progress-thickness)),
+        #fff calc(100% - var(--md-comp-progress-thickness)));
+
+    &::-webkit-progress-bar,
+    &::-webkit-progress-value { background: transparent; }
+    &::-moz-progress-bar      { background: transparent; }
+
+    &.micl-progress-circular--s { --md-comp-progress-circular-size: 28px; }
+    &.micl-progress-circular--m { --md-comp-progress-circular-size: 48px; }
+    &.micl-progress-circular--l { --md-comp-progress-circular-size: 64px; }
+
+    // Indeterminate: the canonical lightweight CSS spinner — a plain bordered
+    // ring (no gradient, no mask) rotated by transform. Chrome promotes this to
+    // a compositor layer, rasterises it once, and spins the texture on the GPU,
+    // so it is essentially free per frame regardless of how many are visible.
+    &:indeterminate {
+        background-image: none;
+        -webkit-mask: none;
+                mask: none;
+        border: var(--md-comp-progress-thickness) solid #{$track};
+        border-block-start-color: $active;
+        animation: micl-progress-circular-spin var(--md-comp-progress-indeterminate-duration) linear infinite;
+    }
+}
+
+@keyframes micl-progress-circular-spin {
+    to { transform: rotate(360deg); }
+}
+
+//
+// Right-to-left: mirror the linear sweep direction.
+//
+[dir=rtl] progress.micl-progress-linear {
+    transform: scaleX(-1);
+}
+
+//
+// Honour reduced-motion: stop the only two animated (loading) states.
+//
+@media (prefers-reduced-motion: reduce) {
+    progress.micl-progress-linear:indeterminate,
+    progress.micl-progress-circular:indeterminate {
+        animation: none;
+    }
+}
