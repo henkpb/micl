@@ -18,10 +18,18 @@ const scssEntries = scssFiles.reduce((entries, filePath) => {
     return entries;
 }, {});
 
+const tsEntries = glob.sync('./foundations/**/*.ts').reduce((entries, filePath) => {
+    const normalized = filePath.replace(/\\/g, '/').replace(/^\.\//, '');
+    if (normalized.endsWith('.d.ts')) return entries;
+    entries[normalized.replace(/\.ts$/, '')] = './' + normalized;
+    return entries;
+}, {});
+
 module.exports = [{
     mode: 'production',
     entry: {
         ...scssEntries,
+        ...tsEntries,
         micl: ['./styles.scss', './micl.ts']
     },
     resolve: {
