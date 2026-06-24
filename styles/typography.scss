@@ -22,11 +22,10 @@
 @use 'sass:map';
 
 //
-// Set $master: true (via @use ... with) to install every typescale token, the @supports
-// narrow-tracking overrides, and the .md-sys-typescale-* utility classes — used by the
-// master bundle. When false (default), components opt into individual typescales via @include
-// scale('body-large'), so per-component CSS bundles only carry the typescale tokens they
-// actually reference.
+// Set $master: true (@use 'styles/typography' with ($master: true)) to install every typescale
+// token, the @supports narrow-tracking overrides, and the .md-sys-typescale-* utility classes —
+// used by the master bundle. When false (default), components opt into individual typescales via
+// @include scale('body-large').
 //
 $master: false !default;
 

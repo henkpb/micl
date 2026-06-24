@@ -22,19 +22,12 @@
 @use 'sass:map';
 
 //
-// Set $master: true (via @use ... with) to install every duration token + path on :root —
-// used by the master bundle. When false (default), components opt into individual duration
-// tokens via @include duration('medium2'), so per-component CSS bundles only carry what they
-// reference via var(--md-sys-motion-duration-...).
+// Set $master: true (via @use 'styles/motion' with ($master: true)) to install every duration
+// token + path on :root — used by the master bundle. When false (default), components opt into
+// individual duration tokens via @include duration('medium2').
 //
 $master: false !default;
 
-//
-// Project-tuned cubic-bezier approximations of M3 spring-based motion. M3 itself defines
-// fast/default/slow × spatial/effects motion as spring physics (damping/stiffness pairs),
-// but CSS transitions don't have a native spring() timing function, so these bezier curves
-// stand in. Y values >1 in the spatial easings produce the characteristic M3 Expressive overshoot.
-//
 $md-sys-motion-expressive-fast-spatial: cubic-bezier(0.42, 1.67, 0.21, 0.90);
 $md-sys-motion-expressive-fast-spatial-duration: 350ms;
 $md-sys-motion-expressive-fast-effects: cubic-bezier(0.31, 0.94, 0.34, 1.00);
@@ -110,6 +103,15 @@ $_durations: (
     extra-long4:  $md-sys-motion-duration-extra-long4,
 );
 
+@if $master {
+    :root {
+        @each $name, $value in $_durations {
+            --md-sys-motion-duration-#{$name}: #{$value};
+        }
+        --md-sys-motion-path: #{$md-sys-motion-path};
+    }
+}
+
 @mixin duration($name) {
     @if not $master {
         @if not map.has-key($_durations, $name) {
@@ -118,14 +120,5 @@ $_durations: (
         :root {
             --md-sys-motion-duration-#{$name}: #{map.get($_durations, $name)};
         }
-    }
-}
-
-@if $master {
-    :root {
-        @each $name, $value in $_durations {
-            --md-sys-motion-duration-#{$name}: #{$value};
-        }
-        --md-sys-motion-path: #{$md-sys-motion-path};
     }
 }
