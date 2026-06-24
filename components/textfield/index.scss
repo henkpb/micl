@@ -21,11 +21,11 @@
 
 @use '../../foundations';
 @use '../../styles/motion';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
-@include shapes.corner('extra-small');
+@include shape.corner('extra-small');
 
 @include statelayer.token('hover-state-layer-opacity');
 @include statelayer.token('disabled-state-layer-opacity');

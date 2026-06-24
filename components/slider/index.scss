@@ -21,14 +21,14 @@
 
 @use '../../foundations';
 @use '../../styles/motion';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
-@include shapes.corner('small');
-@include shapes.corner('medium');
-@include shapes.corner('large');
-@include shapes.corner('extra-large');
+@include shape.corner('small');
+@include shape.corner('medium');
+@include shape.corner('large');
+@include shape.corner('extra-large');
 
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');

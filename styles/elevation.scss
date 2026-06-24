@@ -22,9 +22,9 @@
 @use 'sass:map';
 
 //
-// Set $master: true (via @use ... with) to install all six levels in a single :root block —
-// used by the master bundle. When false (default), components opt into individual levels via
-// @include level($n), so per-component CSS bundles only carry the levels they actually reference.
+// Set $master: true (@use 'styles/elevation' with ($master: true)) to install all six levels in
+// a single body block — used by the master bundle. When false (default), components opt into
+// individual levels via @include level($n).
 //
 $master: false !default;
 
@@ -54,16 +54,19 @@ $_levels: (
 
 @if $master {
     body {
-        @each $n, $v in $_levels {
-            --md-sys-elevation-level#{$n}: #{$v};
+        @each $name, $value in $_levels {
+            --md-sys-elevation-level#{$name}: #{$value};
         }
     }
 }
 
-@mixin level($n) {
+@mixin level($name) {
     @if not $master {
+        @if not map.has-key($_levels, $name) {
+            @error "Unknown elevation level '#{$name}'. Available: #{map.keys($_levels)}.";
+        }
         body {
-            --md-sys-elevation-level#{$n}: #{map.get($_levels, $n)};
+            --md-sys-elevation-level#{$name}: #{map.get($_levels, $name)};
         }
     }
 }

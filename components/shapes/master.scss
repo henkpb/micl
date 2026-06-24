@@ -20,9 +20,9 @@
 // SOFTWARE.
 
 //
-// Webpack entry for the standalone dist/shape.css bundle. Loads index.scss in master mode so the
-// bundle ships every shape. Consumers who want a subset should @use components/shape directly and
-// call shape.use(<names>...).
+// Webpack entry for the standalone dist/shapes.css bundle. Loads index.scss in master mode so the
+// bundle ships every shape. Consumers who want a subset should @use components/shapes directly and
+// call shapes.use(<names>...).
 //
 
 @use 'index' with ($master: true);

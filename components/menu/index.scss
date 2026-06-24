@@ -22,14 +22,14 @@
 @use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
 @include elevation.level(2);
 
-@include shapes.corner('small');
-@include shapes.corner('large');
+@include shape.corner('small');
+@include shape.corner('large');
 
 @include statelayer.token('hover-state-layer-opacity');
 @include statelayer.token('focus-state-layer-opacity');

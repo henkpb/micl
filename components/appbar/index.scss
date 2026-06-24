@@ -22,14 +22,14 @@
 @use '../../foundations';
 @use '../../foundations/layout';
 @use '../../styles/elevation';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
 @include elevation.level(0);
 @include elevation.level(2);
 
-@include shapes.corner('none');
+@include shape.corner('none');
 
 @include typography.scale('display-small');
 @include typography.scale('headline-medium');

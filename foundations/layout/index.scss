@@ -19,9 +19,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../styles/shapes';
+@use '../../styles/shape';
 
-@include shapes.corner('medium');
+@include shape.corner('medium');
 
 $md-sys-window-compact-max: 599px;
 $md-sys-window-medium-min: 600px;
