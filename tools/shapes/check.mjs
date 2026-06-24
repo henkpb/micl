@@ -24,7 +24,7 @@ import path from 'node:path';
 import { generatePathsScss, TARGET_PATH } from './generate.mjs';
 
 //
-// CI staleness gate. Compares the on-disk components/shape/_paths.generated.scss
+// CI staleness gate. Compares the on-disk components/shapes/_paths.generated.scss
 // against what the generator would produce now. Exits non-zero if they differ,
 // instructing the developer to run `npm run gen:shapes` and commit the result.
 //

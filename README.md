@@ -114,6 +114,7 @@ The library currently consists of the following components:
 - [x] [Navigation rail](components/navigationrail/README.md)
 - [x] [Radio button](components/radio/README.md)
 - [x] [Select](components/select/README.md)
+- [x] [Shapes](components/shapes/README.md)
 - [x] [Side sheet](components/sidesheet/README.md)
 - [x] [Slider](components/slider/README.md)
 - [x] [Snackbar](components/snackbar/README.md)
@@ -123,6 +124,9 @@ The library currently consists of the following components:
 - [x] [Time picker](components/timepicker/README.md)
 
 ## Change Log ↪️
+
+### 8.1.0 (24.06.2026)
+- **Shapes**: The Material shape library supported as the 'Shapes' component.
 
 ### 8.0.0 (05.05.2026)
 - **BREAKING**: Renamed many CSS custom properties from --md-sys- to --md-comp-.

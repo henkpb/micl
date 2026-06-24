@@ -12,7 +12,7 @@ const scssEntries = scssFiles.reduce((entries, filePath) => {
     // dist-bundle entry that installs all shapes). Only the latter should
     // be compiled as a webpack entry.
     const normalized = filePath.replace(/\\/g, '/');
-    if (normalized.endsWith('components/shape/index.scss')) return entries;
+    if (normalized.endsWith('components/shapes/index.scss')) return entries;
     const componentName = path.dirname(filePath).split('\\').pop();
     entries[componentName] = './' + filePath;
     return entries;
@@ -68,7 +68,7 @@ module.exports = [{
     mode: 'production',
     entry: {
         micl: ['./styles.scss', './micl.ts'],
-        shape: './components/shape/master.scss'
+        shapes: './components/shapes/master.scss'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']

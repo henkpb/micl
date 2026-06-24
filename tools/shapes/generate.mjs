@@ -25,19 +25,13 @@ import { fileURLToPath } from 'node:url';
 
 //
 // Shape-path generator. Run via `npm run gen:shapes`. Writes
-// components/shape/_paths.generated.scss with one map entry per shape; the
+// components/shapes/_paths.generated.scss with one map entry per shape; the
 // SCSS partial then looks up the path strings without doing any math at
 // compile time.
 //
-// This file is a faithful port of the Sass math that previously lived in
-// styles/shapes.scss / components/shape/index.scss. Numeric output is
-// formatted to match Sass's default $number-precision: 10 with trailing
-// zeros stripped, so the emitted `d` strings are byte-identical to the
-// Sass-rendered ones.
-//
 
 const __dirname  = path.dirname(fileURLToPath(import.meta.url));
-const targetPath = path.resolve(__dirname, '../../components/shape/_paths.generated.scss');
+const targetPath = path.resolve(__dirname, '../../components/shapes/_paths.generated.scss');
 
 // Sass's default precision is 10 decimal places. Match that, then strip
 // trailing zeros so e.g. 50.0000000000 → 50, 3.1400000000 → 3.14.

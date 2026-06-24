@@ -11,16 +11,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
-    <link rel="stylesheet" href="shape.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        figure {
-            margin: 24px;
+        .shapes {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-inline-end: 16px;
         }
-        .shape-primary {
-            --micl-shape-background-color: var(--md-sys-color-primary-container);
-            block-size: 96px;
-            inline-size: 96px;
+        .buttons {
+            display: flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .micl-shapes {
+            block-size: 140px;
+            inline-size: 140px;
         }
     </style>
 </head>
@@ -42,17 +50,20 @@
                 <div class="micl-pane__column">
                     <div class="micl-card-elevated">
                         <div class="micl-card__content" style="display:flex">
-                            <svg class="micl-shape micl-shape-square" viewBox="-10 0 120 100" style="inline-size:120px;block-size:100px"><path /></svg>
-                            <svg class="micl-shape micl-shape-square" viewBox="-10 0 120 100" style="inline-size:120px;block-size:100px">
-                                <defs>
-                                    <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
-                                        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/A_Brouhot_car_in_Paris%2C_1910.jpg/330px-A_Brouhot_car_in_Paris%2C_1910.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
-                                    </pattern>
-                                </defs>
-                                <path fill="url(#photo-1)" />
-                            </svg>
-
-                            <div style="display:flex;gap:8px;align-self:center;flex-wrap:wrap">
+                            <div class="shapes">
+                                <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--square micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100">
+                                    <defs>
+                                        <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
+                                            <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
+                                        </pattern>
+                                    </defs>
+                                    <path fill="url(#photo-1)" />
+                                </svg>
+                                <svg class="micl-shapes micl-shapes--square micl-shapes--shadowed" viewBox="-10 0 120 100" style="fill:var(--md-sys-color-tertiary)"><path /></svg>
+                            </div>
+                            <div class="buttons">
                                 <button type="button" data-target="circle"         class="micl-button-outlined-s">Circle</button>
                                 <button type="button" data-target="square"         class="micl-button-outlined-s">Square</button>
                                 <button type="button" data-target="slanted"        class="micl-button-outlined-s">Slanted</button>
@@ -94,14 +105,14 @@
                 </div>
             </div>
         </section>
-        <section class="micl-pane">
+        <section class="micl-pane" style="min-inline-size:328px">
             <div class="micl-card-filled" style="margin-top:8px">
                 <div class="micl-card__headline-s">
                     <h2>Code example</h2>
                     <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
                 </div>
                 <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;hr class="micl-divider"&gt;</code></pre>
+                    <pre tabindex="-1"><code>&lt;svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100"&gt;&lt;path /&gt;&lt;/svg&gt;</code></pre>
                 </div>
             </div>
         </section>
@@ -111,35 +122,33 @@
     <script src="docs.js"></script>
     <script>
         const SHAPES = [
-            'circle', 'square', 'slanted', 'arch', 'semicircle',
-            'oval', 'pill', 'triangle', 'arrow', 'fan',
-            'diamond', 'clamshell', 'pentagon', 'gem', 'very-sunny',
-            'sunny', 'cookie-4', 'cookie-6', 'cookie-7', 'cookie-9',
-            'cookie-12', 'clover-4', 'clover-8', 'burst', 'soft-burst',
-            'boom', 'soft-boom', 'flower', 'puffy', 'puffy-diamond',
+            'circle', 'square', 'slanted', 'arch', 'semicircle', 'oval', 'pill', 'triangle',
+            'arrow', 'fan', 'diamond', 'clamshell', 'pentagon', 'gem', 'very-sunny', 'sunny',
+            'cookie-4', 'cookie-6', 'cookie-7', 'cookie-9', 'cookie-12', 'clover-4', 'clover-8',
+            'burst', 'soft-burst', 'boom', 'soft-boom', 'flower', 'puffy', 'puffy-diamond',
             'ghost-ish', 'pixel-circle', 'pixel-triangle', 'bun', 'heart'
         ];
 
-        document.querySelector('.micl-shape').addEventListener('morph', event =>
-        {
-            const el = event.currentTarget;
-            el.style.setProperty('--morph-duration', `${event.detail.duration}ms`);
-            if (event.detail.easing) {
-                el.style.setProperty('--morph-easing', event.detail.easing);
-            }
-            SHAPES.forEach(shape => el.classList.remove(`micl-shape-${shape}`));
-            el.classList.add(`micl-shape-${event.detail.shape}`);
+        document.querySelectorAll('.micl-shapes').forEach(el => {
+            el.addEventListener('morph', event => {
+                const target = event.currentTarget;
+                target.style.setProperty('--micl-shapes-morph-duration', `${event.detail.duration}ms`);
+                if (event.detail.easing) {
+                    target.style.setProperty('--micl-shapes-morph-easing', event.detail.easing);
+                }
+                SHAPES.forEach(shape => target.classList.remove(`micl-shapes--${shape}`));
+                target.classList.add(`micl-shapes--${event.detail.shape}`);
+            });
         });
 
-        document.querySelectorAll('button[data-target]').forEach(button =>
-        {
+        document.querySelectorAll('button[data-target]').forEach(button => {
             button.addEventListener('click', () => {
-                document.querySelectorAll('.micl-shape').forEach(el => {
+                document.querySelectorAll('.micl-shapes').forEach(el => {
                     el.dispatchEvent(new CustomEvent('morph', {
                         detail: {
-                            shape:    button.dataset.target,
+                            shape   : button.dataset.target,
                             duration: 2000,
-                            easing:   'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                            easing  : 'cubic-bezier(0.34, 1.56, 0.64, 1)'
                         }
                     }));
                 });

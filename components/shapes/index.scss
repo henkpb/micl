@@ -24,28 +24,28 @@
 
 //
 // Set $master: true to install the base styles + every shape in one go. When false (default),
-// consumers opt in via `@include shape.base` and `@include shape.use(<names>...)`.
+// consumers opt in via `@include shapes.base` and `@include shapes.use(<names>...)`.
 //
 $master: false !default;
 
 @mixin base {
-    .micl-shape {
-        --md-sys-shape-aspect-ratio: 1;
+    .micl-shapes {
+        --md-sys-shapes-aspect-ratio: 1;
         inline-size: 100px;
         block-size: 100px;
-        fill: green;
+        fill: var(--md-sys-color-primary);
         overflow: visible; 
     }
-    .micl-shape > path {
-        transition: d var(--morph-duration, 0ms) var(--morph-easing, ease-in-out);
+    .micl-shapes > path {
+        transition: d var(--micl-shapes-morph-duration, 0ms) var(--micl-shapes-morph-easing, ease-in-out);
     }
-    .micl-shape--outlined {
+    .micl-shapes--outlined {
         fill: none;
-        stroke: green;
+        stroke: var(--md-sys-color-primary);
         stroke-width: 2;
         stroke-linejoin: round;
     }
-    .micl-shape--shadowed {
+    .micl-shapes--shadowed {
         filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.25));
     }
 }
@@ -56,7 +56,7 @@ $master: false !default;
         @if $d == null {
             @error "Unknown shape '#{$name}'. Available: #{map.keys(paths.$paths)}.";
         }
-        .micl-shape-#{$name} > path { d: path('#{$d}'); }
+        .micl-shapes--#{$name} > path { d: path('#{$d}'); }
     }
 }
 
