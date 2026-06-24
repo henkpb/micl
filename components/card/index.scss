@@ -23,7 +23,7 @@
 @use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
@@ -33,7 +33,7 @@
 @include elevation.level(3);
 @include elevation.level(4);
 
-@include shapes.corner('medium');
+@include shape.corner('medium');
 
 @include statelayer.token('hover-state-layer-opacity');
 @include statelayer.token('focus-state-layer-opacity');
@@ -236,7 +236,7 @@
 
         .micl-card__image {
             grid-column: 1;
-            grid-row: 1 / -1;
+            grid-row: 1 / span 4;
             block-size: 100%;
             background-size: cover;
         }

@@ -22,13 +22,13 @@
 @use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/statelayer';
 
 @include elevation.level(1);
 
-@include shapes.corner('extra-large');
-@include shapes.corner('small');
+@include shape.corner('extra-large');
+@include shape.corner('small');
 
 @include statelayer.token('focus-indicator-thickness');
 @include statelayer.token('focus-indicator-outer-offset');

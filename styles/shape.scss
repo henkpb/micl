@@ -22,10 +22,9 @@
 @use 'sass:map';
 
 //
-// Set $master: true (via @use ... with) to install every corner token in a single body block —
-// used by the master bundle. When false (default), components opt into individual tokens via
-// @include corner('medium'), so per-component CSS bundles only carry the tokens they actually
-// reference.
+// Set $master: true (via @use 'styles/shape' with ($master: true)) to install every corner token
+// in a single root block — used by the master bundle. When false (default), components opt into
+// individual tokens via @include corner('medium').
 //
 $master: false !default;
 
@@ -57,6 +56,9 @@ $_corners: (
 
 @mixin corner($name) {
     @if not $master {
+        @if not map.has-key($_corners, $name) {
+            @error "Unknown corner rounding '#{$name}'. Available: #{map.keys($_corners)}.";
+        }
         :root {
             --md-sys-shape-corner-#{$name}: #{map.get($_corners, $name)};
         }

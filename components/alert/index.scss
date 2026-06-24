@@ -20,10 +20,10 @@
 // SOFTWARE.
 
 @use '../../foundations';
-@use '../../styles/shapes';
+@use '../../styles/shape';
 @use '../../styles/typography';
 
-@include shapes.corner('small');
+@include shape.corner('small');
 
 @include typography.scale('title-medium');
 @include typography.scale('body-medium');
