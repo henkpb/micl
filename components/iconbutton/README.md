@@ -25,7 +25,7 @@ Or import all MICL styles:
 ```
 
 ### JavaScript
-This component requires JavaScript for interactive features like the **toggle logic**:
+This component requires JavaScript for to support the **toggle logic**:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
@@ -60,9 +60,9 @@ To reduce the width of an icon button, add the `micl-iconbutton--narrow` class. 
 Adding the `disabled` boolean attribute to the button causes the button to be displayed in a disabled state.
 
 ### Toggle Button
-A toggle button has two states: **on** (selected) and **off** (unselected). To create one, add the `micl-button--toggle` class.
-- **Off state**: The button has the `micl-button--toggle` class.
-- **On state**: The button has both the `micl-button--toggle` and `micl-button--selected` classes.
+A toggle button has two states: **on** (pressed) and **off** (unpressed). To create one, add the `micl-button--toggle` class and an `aria-pressed` attribute.
+- **Off state**: The button has the `micl-button--toggle` class and `aria-pressed="false"`.
+- **On state**: The button has the `micl-button--toggle` class and `aria-pressed="true"`.
 
 **Example: A selected toggle button**
 
@@ -70,21 +70,22 @@ A toggle button has two states: **on** (selected) and **off** (unselected). To c
 <button
   type="button"
   id="id0"
-  class="micl-iconbutton-outlined-l micl-button--toggle micl-button--selected material-symbols-outlined"
+  class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined"
+  aria-pressed="true"
   commandfor="id0"
   command="--micl-toggle"
   aria-label="Control Panel"
 >settings</button>
 ```
 
-The self-targeting `command` property (`--micl-toggle`) toggles the button state whenever the user interacts with the button.
+The self-targeting `command` property (`--micl-toggle`) flips `aria-pressed` whenever the user interacts with the button.
 
-To use different icons for the **on** state and the **off** state, remove the icon name from the button and add the `data-miclicon` (the name of the **on** icon) and `data-micliconselected` (the name of the **off** icon) attributes:
+To use different icons for the **on** state and the **off** state, remove the icon name from the button and add the `data-miclicon` (the name of the **off** icon) and `data-micliconselected` (the name of the **on** icon) attributes:
 
 ```HTML
   ...
-  data-miclicon="icon_for_on"
-  data-micliconselected="icon_for_off"
+  data-miclicon="icon_for_off"
+  data-micliconselected="icon_for_on"
 ></button>
 ```
 
@@ -104,6 +105,51 @@ You can also use other icon libraries. For example, with the [Bootstrap Icons li
   <i class="bi bi-gear"></i>
 </button>
 ```
+
+## Theming
+Each icon button style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Note that the `selected-*` and `unselected-*` properties only apply to [toggle buttons](#toggle-button).
+
+### Standard
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-icon-button-icon-color` | Icon colour | `--md-sys-color-on-surface-variant` |
+| `--md-comp-icon-button-selected-icon-color` | Icon colour when selected | `--md-sys-color-primary` |
+| `--md-comp-icon-button-disabled-icon-color` | Icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-icon-button-disabled-icon-opacity` | Icon opacity when disabled | `38%` |
+
+### Filled
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-filled-icon-button-container-color` | Container background (also the selected state) | `--md-sys-color-primary` |
+| `--md-comp-filled-icon-button-icon-color` | Icon colour (also the selected state) | `--md-sys-color-on-primary` |
+| `--md-comp-filled-icon-button-unselected-container-color` | Container background when an unselected toggle | `--md-sys-color-surface-container` |
+| `--md-comp-filled-icon-button-unselected-icon-color` | Icon colour when an unselected toggle | `--md-sys-color-on-surface-variant` |
+| `--md-comp-filled-icon-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-icon-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
+| `--md-comp-filled-icon-button-disabled-icon-color` | Icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-icon-button-disabled-icon-opacity` | Icon opacity when disabled | `38%` |
+
+### Tonal
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-filled-tonal-icon-button-container-color` | Container background | `--md-sys-color-secondary-container` |
+| `--md-comp-filled-tonal-icon-button-icon-color` | Icon colour | `--md-sys-color-on-secondary-container` |
+| `--md-comp-filled-tonal-icon-button-selected-container-color` | Container background when selected | `--md-sys-color-secondary` |
+| `--md-comp-filled-tonal-icon-button-selected-icon-color` | Icon colour when selected | `--md-sys-color-on-secondary` |
+| `--md-comp-filled-tonal-icon-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-tonal-icon-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
+| `--md-comp-filled-tonal-icon-button-disabled-icon-color` | Icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-tonal-icon-button-disabled-icon-opacity` | Icon opacity when disabled | `38%` |
+
+### Outlined
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-outlined-icon-button-icon-color` | Icon colour | `--md-sys-color-on-surface-variant` |
+| `--md-comp-outlined-icon-button-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
+| `--md-comp-outlined-icon-button-selected-container-color` | Container background when selected | `--md-sys-color-inverse-surface` |
+| `--md-comp-outlined-icon-button-selected-icon-color` | Icon colour when selected | `--md-sys-color-inverse-on-surface` |
+| `--md-comp-outlined-icon-button-disabled-icon-color` | Icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-outlined-icon-button-disabled-icon-opacity` | Icon opacity when disabled | `38%` |
 
 ## Compatibility
 This component utilizes relative RGB color values, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.

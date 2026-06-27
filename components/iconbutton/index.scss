@@ -43,29 +43,10 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
-button.micl-iconbutton-standard-xs,
-a.micl-iconbutton-standard-xs,
-button.micl-iconbutton-standard-s,
-a.micl-iconbutton-standard-s,
-button.micl-iconbutton-standard-m,
-a.micl-iconbutton-standard-m,
-button.micl-iconbutton-standard-l,
-button.micl-iconbutton-standard-xl,
-button.micl-iconbutton-filled-xs,
-button.micl-iconbutton-filled-s,
-button.micl-iconbutton-filled-m,
-button.micl-iconbutton-filled-l,
-button.micl-iconbutton-filled-xl,
-button.micl-iconbutton-tonal-xs,
-button.micl-iconbutton-tonal-s,
-button.micl-iconbutton-tonal-m,
-button.micl-iconbutton-tonal-l,
-button.micl-iconbutton-tonal-xl,
-button.micl-iconbutton-outlined-xs,
-button.micl-iconbutton-outlined-s,
-button.micl-iconbutton-outlined-m,
-button.micl-iconbutton-outlined-l,
-button.micl-iconbutton-outlined-xl {
+[class*="micl-iconbutton-standard-"],
+[class*="micl-iconbutton-filled-"],
+[class*="micl-iconbutton-tonal-"],
+[class*="micl-iconbutton-outlined-"] {
     --md-sys-iconbutton-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-sys-iconbutton-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
@@ -89,7 +70,7 @@ button.micl-iconbutton-outlined-xl {
     background-repeat: no-repeat;
     background-size: 0%, 100%;
     -webkit-tap-highlight-color: transparent;
-    color: var(--md-sys-color-on-surface-variant);
+    color: var(--md-comp-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
     font-variation-settings: 'FILL' 0;
     cursor: pointer;
     transition:
@@ -99,37 +80,42 @@ button.micl-iconbutton-outlined-xl {
         --statelayer-opacity var(--md-sys-iconbutton-motion-duration) linear;
 
     &:disabled {
-        background-color: rgb(from var(--md-sys-color-on-surface) r g b / 10%);
-        color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
         box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }
     &:not(:disabled) {
+        &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+        }
         &:focus-visible {
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
+
             outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: 3px;
+        }
+        &:active {
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
         &.micl-rippling {
             animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
         }
     }
     &:hover:not(:disabled),
-    &.micl-button--toggle.micl-button--selected {
+    &.micl-button--toggle[aria-pressed="true"] {
         font-variation-settings: 'FILL' 1;
     }
-    &.micl-button--toggle:not(.micl-button--selected)::before {
+    &.micl-button--toggle:not([aria-pressed="true"])::before {
         content: attr(data-miclicon);
     }
-    &.micl-button--toggle.micl-button--selected::before {
+    &.micl-button--toggle[aria-pressed="true"]::before {
         content: attr(data-micliconselected);
     }
 }
 
-button.micl-iconbutton-standard-xs,
-a.micl-iconbutton-standard-xs,
-button.micl-iconbutton-filled-xs,
-button.micl-iconbutton-tonal-xs,
-button.micl-iconbutton-outlined-xs {
+.micl-iconbutton-standard-xs,
+.micl-iconbutton-filled-xs,
+.micl-iconbutton-tonal-xs,
+.micl-iconbutton-outlined-xs {
     --micl-width: 32px;
     --micl-height: 32px;
 
@@ -151,7 +137,7 @@ button.micl-iconbutton-outlined-xs {
         inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
         background-color: transparent;
     }
-    &.micl-button--toggle.micl-button--selected {
+    &.micl-button--toggle[aria-pressed="true"] {
         border-radius: var(--md-sys-shape-corner-medium);
     }
     &.micl-iconbutton--narrow {
@@ -165,22 +151,22 @@ button.micl-iconbutton-outlined-xs {
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-medium);
 
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             border-radius: var(--md-sys-shape-corner-full);
         }
     }
-    &:not(:disabled) {
-        &:active {
+    &:not(:disabled):active {
+        &,
+        &.micl-button--square {
             border-radius: var(--md-sys-shape-corner-small);
         }
     }
 }
 
-button.micl-iconbutton-standard-s,
-a.micl-iconbutton-standard-s,
-button.micl-iconbutton-filled-s,
-button.micl-iconbutton-tonal-s,
-button.micl-iconbutton-outlined-s {
+.micl-iconbutton-standard-s,
+.micl-iconbutton-filled-s,
+.micl-iconbutton-tonal-s,
+.micl-iconbutton-outlined-s {
     --micl-width: 40px;
     --micl-height: 40px;
 
@@ -202,7 +188,7 @@ button.micl-iconbutton-outlined-s {
         inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
         background-color: transparent;
     }
-    &.micl-button--toggle.micl-button--selected {
+    &.micl-button--toggle[aria-pressed="true"] {
         border-radius: var(--md-sys-shape-corner-medium);
     }
     &.micl-iconbutton--narrow {
@@ -216,22 +202,22 @@ button.micl-iconbutton-outlined-s {
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-medium);
 
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             border-radius: var(--md-sys-shape-corner-full);
         }
     }
-    &:not(:disabled) {
-        &:active {
+    &:not(:disabled):active {
+        &,
+        &.micl-button--square {
             border-radius: var(--md-sys-shape-corner-small);
         }
     }
 }
 
-button.micl-iconbutton-standard-m,
-a.micl-iconbutton-standard-m,
-button.micl-iconbutton-filled-m,
-button.micl-iconbutton-tonal-m,
-button.micl-iconbutton-outlined-m {
+.micl-iconbutton-standard-m,
+.micl-iconbutton-filled-m,
+.micl-iconbutton-tonal-m,
+.micl-iconbutton-outlined-m {
     --micl-width: 56px;
     --micl-height: 56px;
 
@@ -240,7 +226,7 @@ button.micl-iconbutton-outlined-m {
     block-size: var(--micl-height);
     font-size: var(--md-sys-icon-size, 24px);
 
-    &.micl-button--toggle.micl-button--selected {
+    &.micl-button--toggle[aria-pressed="true"] {
         border-radius: var(--md-sys-shape-corner-large);
     }
     &.micl-iconbutton--narrow {
@@ -254,21 +240,22 @@ button.micl-iconbutton-outlined-m {
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-large);
 
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             border-radius: var(--md-sys-shape-corner-full);
         }
     }
-    &:not(:disabled) {
-        &:active {
+    &:not(:disabled):active {
+        &,
+        &.micl-button--square {
             border-radius: var(--md-sys-shape-corner-medium);
         }
     }
 }
 
-button.micl-iconbutton-standard-l,
-button.micl-iconbutton-filled-l,
-button.micl-iconbutton-tonal-l,
-button.micl-iconbutton-outlined-l {
+.micl-iconbutton-standard-l,
+.micl-iconbutton-filled-l,
+.micl-iconbutton-tonal-l,
+.micl-iconbutton-outlined-l {
     --micl-width: 96px;
     --micl-height: 96px;
 
@@ -277,7 +264,7 @@ button.micl-iconbutton-outlined-l {
     block-size: var(--micl-height);
     font-size: 32px;
 
-    &.micl-button--toggle.micl-button--selected {
+    &.micl-button--toggle[aria-pressed="true"] {
         border-radius: var(--md-sys-shape-corner-extra-large);
     }
     &.micl-iconbutton--narrow {
@@ -291,21 +278,22 @@ button.micl-iconbutton-outlined-l {
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-extra-large);
 
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             border-radius: var(--md-sys-shape-corner-full);
         }
     }
-    &:not(:disabled) {
-        &:active {
+    &:not(:disabled):active {
+        &,
+        &.micl-button--square {
             border-radius: var(--md-sys-shape-corner-large);
         }
     }
 }
 
-button.micl-iconbutton-standard-xl,
-button.micl-iconbutton-filled-xl,
-button.micl-iconbutton-tonal-xl,
-button.micl-iconbutton-outlined-xl {
+.micl-iconbutton-standard-xl,
+.micl-iconbutton-filled-xl,
+.micl-iconbutton-tonal-xl,
+.micl-iconbutton-outlined-xl {
     --micl-width: 136px;
     --micl-height: 136px;
 
@@ -314,7 +302,7 @@ button.micl-iconbutton-outlined-xl {
     block-size: var(--micl-height);
     font-size: 40px;
 
-    &.micl-button--toggle.micl-button--selected {
+    &.micl-button--toggle[aria-pressed="true"] {
         border-radius: var(--md-sys-shape-corner-extra-large);
     }
     &.micl-iconbutton--narrow {
@@ -328,151 +316,105 @@ button.micl-iconbutton-outlined-xl {
     &.micl-button--square {
         border-radius: var(--md-sys-shape-corner-extra-large);
 
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             border-radius: var(--md-sys-shape-corner-full);
         }
     }
-    &:not(:disabled) {
-        &:active {
+    &:not(:disabled):active {
+        &,
+        &.micl-button--square {
             border-radius: var(--md-sys-shape-corner-large);
         }
     }
 }
 
-button.micl-iconbutton-standard-xs,
-a.micl-iconbutton-standard-xs,
-button.micl-iconbutton-standard-s,
-a.micl-iconbutton-standard-s,
-button.micl-iconbutton-standard-m,
-a.micl-iconbutton-standard-m,
-button.micl-iconbutton-standard-l,
-button.micl-iconbutton-standard-xl {
+[class*="micl-iconbutton-standard-"] {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
 
     text-decoration: none;
 
     &:disabled {
         background-color: transparent;
+        color: var(--md-comp-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-icon-button-disabled-icon-opacity, 38%)));
     }
     &:not(:disabled) {
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             --statelayer-color: var(--md-sys-color-primary);
 
-            color: var(--md-sys-color-primary);
-        }
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+            color: var(--md-comp-icon-button-selected-icon-color, var(--md-sys-color-primary));
         }
     }
 }
 
 
-button.micl-iconbutton-filled-xs,
-button.micl-iconbutton-filled-s,
-button.micl-iconbutton-filled-m,
-button.micl-iconbutton-filled-l,
-button.micl-iconbutton-filled-xl {
+[class*="micl-iconbutton-filled-"] {
     --statelayer-color: var(--md-sys-color-on-primary);
 
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
+    background-color: var(--md-comp-filled-icon-button-container-color, var(--md-sys-color-primary));
+    color: var(--md-comp-filled-icon-button-icon-color, var(--md-sys-color-on-primary));
 
+    &:disabled {
+        background-color: var(--md-comp-filled-icon-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-icon-button-disabled-container-opacity, 10%)));
+        color: var(--md-comp-filled-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-icon-button-disabled-icon-opacity, 38%)));
+    }
     &:not(:disabled) {
-        &.micl-button--toggle:not(.micl-button--selected) {
+        &.micl-button--toggle:not([aria-pressed="true"]) {
             --statelayer-color: var(--md-sys-color-on-surface-variant);
 
-            background-color: var(--md-sys-color-surface-container);
-            color: var(--md-sys-color-on-surface-variant);
-        }
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+            background-color: var(--md-comp-filled-icon-button-unselected-container-color, var(--md-sys-color-surface-container));
+            color: var(--md-comp-filled-icon-button-unselected-icon-color, var(--md-sys-color-on-surface-variant));
         }
     }
 }
 
-button.micl-iconbutton-tonal-xs,
-button.micl-iconbutton-tonal-s,
-button.micl-iconbutton-tonal-m,
-button.micl-iconbutton-tonal-l,
-button.micl-iconbutton-tonal-xl {
+[class*="micl-iconbutton-tonal-"] {
     --statelayer-color: var(--md-sys-color-on-secondary-container);
 
-    background-color: var(--md-sys-color-secondary-container);
-    color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-comp-filled-tonal-icon-button-container-color, var(--md-sys-color-secondary-container));
+    color: var(--md-comp-filled-tonal-icon-button-icon-color, var(--md-sys-color-on-secondary-container));
 
+    &:disabled {
+        background-color: var(--md-comp-filled-tonal-icon-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-tonal-icon-button-disabled-container-opacity, 10%)));
+        color: var(--md-comp-filled-tonal-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-tonal-icon-button-disabled-icon-opacity, 38%)));
+    }
     &:not(:disabled) {
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             --statelayer-color: var(--md-sys-color-on-secondary);
 
-            background-color: var(--md-sys-color-secondary);
-            color: var(--md-sys-color-on-secondary);
-        }
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+            background-color: var(--md-comp-filled-tonal-icon-button-selected-container-color, var(--md-sys-color-secondary));
+            color: var(--md-comp-filled-tonal-icon-button-selected-icon-color, var(--md-sys-color-on-secondary));
         }
     }
 }
 
-button.micl-iconbutton-outlined-xs,
-button.micl-iconbutton-outlined-s,
-button.micl-iconbutton-outlined-m,
-button.micl-iconbutton-outlined-l,
-button.micl-iconbutton-outlined-xl {
+[class*="micl-iconbutton-outlined-"] {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
 
     background-color: transparent;
-    color: var(--md-sys-color-on-surface-variant);
+    color: var(--md-comp-outlined-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
 
-    &.micl-iconbutton-outlined-xs,
-    &.micl-iconbutton-outlined-s,
-    &.micl-iconbutton-outlined-m {
-        // border-color: var(--md-sys-color-outline);
-        border: 1px solid var(--md-sys-color-outline-variant);
-    }
-    &.micl-iconbutton-outlined-l {
-        // border: 2px solid var(--md-sys-color-outline);
-        border: 2px solid var(--md-sys-color-outline-variant);
-    }
-    &.micl-iconbutton-outlined-xl {
-        // border: 3px solid var(--md-sys-color-outline);
-        border: 3px solid var(--md-sys-color-outline-variant);
-    }
     &:disabled {
         background-color: transparent;
+        color: var(--md-comp-outlined-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-disabled-icon-opacity, 38%)));
     }
     &:not(:disabled) {
-        &.micl-button--toggle.micl-button--selected {
+        &.micl-button--toggle[aria-pressed="true"] {
             --statelayer-color: var(--md-sys-color-inverse-on-surface);
 
-            background-color: var(--md-sys-color-inverse-surface);
-            color: var(--md-sys-color-inverse-on-surface);
-        }
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+            border: none;
+            background-color: var(--md-comp-outlined-icon-button-selected-container-color, var(--md-sys-color-inverse-surface));
+            color: var(--md-comp-outlined-icon-button-selected-icon-color, var(--md-sys-color-inverse-on-surface));
         }
     }
+}
+.micl-iconbutton-outlined-xs,
+.micl-iconbutton-outlined-s,
+.micl-iconbutton-outlined-m {
+    border: 1px solid var(--md-comp-outlined-icon-button-outline-color, var(--md-sys-color-outline-variant));
+}
+.micl-iconbutton-outlined-l {
+    border: 2px solid var(--md-comp-outlined-icon-button-outline-color, var(--md-sys-color-outline-variant));
+}
+.micl-iconbutton-outlined-xl {
+    border: 3px solid var(--md-comp-outlined-icon-button-outline-color, var(--md-sys-color-outline-variant));
 }

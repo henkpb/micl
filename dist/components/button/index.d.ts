@@ -1,4 +1,4 @@
-export declare const buttonSelector = "button.micl-button--toggle";
+export declare const buttonSelector = ".micl-button--toggle";
 declare const _default: {
     command: (event: Event) => void;
     initialize: (element: HTMLButtonElement) => void;

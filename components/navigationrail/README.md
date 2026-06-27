@@ -53,6 +53,7 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
       type="button"
       id="mybutton"
       class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined"
+      aria-pressed="false"
       command="--micl-toggle"
       commandfor="mybutton"
       data-miclicon="menu"
@@ -66,7 +67,7 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
 </nav>
 ```
 
-When the user clicks the menu button, the navigation rail is expanded and the toggle button is given the `micl-button--selected` class and the `micl-button--toggled` class that indicates that the toggle button has been clicked at least once.
+When the user clicks the menu button, the navigation rail is expanded and the toggle button is given `aria-pressed="true"` and the `micl-button--toggled` class that indicates that the toggle button has been clicked at least once.
 
 ### Modal navigation rail
 
