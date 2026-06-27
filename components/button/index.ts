@@ -19,13 +19,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const buttonSelector = 'button.micl-button--toggle';
+export const buttonSelector = '.micl-button--toggle';
 
 const toggleIcon = (button: HTMLButtonElement): void =>
 {
     const element = button.querySelector<HTMLElement>('.micl-button__icon') ?? button;
 
-    const selected = button.classList.contains('micl-button--selected');
+    const selected = button.getAttribute('aria-pressed') === 'true';
     if (element.dataset.micliconselected) {
         element.classList.toggle(element.dataset.micliconselected, selected);
     }
@@ -47,7 +47,7 @@ export default (() =>
                 && (event as any).command === '--micl-toggle'
             ) {
                 target.classList.add('micl-button--toggled');
-                target.classList.toggle('micl-button--selected');
+                target.setAttribute('aria-pressed', String(target.getAttribute('aria-pressed') !== 'true'));
 
                 toggleIcon(target);
             }
@@ -71,7 +71,7 @@ export default (() =>
         cleanup: function(element: HTMLButtonElement): void
         {
             if (element.matches(buttonSelector)) {
-                document.removeEventListener('command', this.command);
+                element.removeEventListener('command', this.command);
                 delete element.dataset.miclinitialized;
             }
         }

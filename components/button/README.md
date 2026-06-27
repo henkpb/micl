@@ -23,7 +23,7 @@ Or import all MICL styles:
 ```
 
 ### JavaScript
-This component requires JavaScript for interactive features like the **toggle logic**:
+This component requires JavaScript to support the **toggle logic**:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
@@ -40,7 +40,7 @@ Buttons come in **five sizes**: extra small (`xs`), small (`s`), medium (`m`), l
 **Example: An extra-large text button**
 
 ```HTML
-<button type="button" class="micl-button-text-xl>Save</button>
+<button type="button" class="micl-button-text-xl">Save</button>
 ```
 
 Material Design provides **five distinct styles**: `text`, `elevated`, `filled`, `tonal` and `outlined`. To use a style other than the `text` style used above, apply the corresponding class to the button:
@@ -56,9 +56,9 @@ By default, buttons have a **rounded shape**. For a more square-like appearance,
 Adding the `disabled` boolean attribute to the button causes the button to be displayed in a disabled state.
 
 ### Toggle Button
-A toggle button has two states: **on** (selected) and **off** (unselected). To create one, add the `micl-button--toggle` class.
-- **Off state**: The button has the `micl-button--toggle` class.
-- **On state**: The button has both the `micl-button--toggle` and `micl-button--selected` classes.
+A toggle button has two states: **on** (pressed) and **off** (unpressed). To create one, add the `micl-button--toggle` class and an `aria-pressed` attribute.
+- **Off state**: The button has the `micl-button--toggle` class and `aria-pressed="false"`.
+- **On state**: The button has the `micl-button--toggle` class and `aria-pressed="true"`.
 
 **Example: A selected toggle button**
 
@@ -66,13 +66,14 @@ A toggle button has two states: **on** (selected) and **off** (unselected). To c
 <button
   type="button"
   id="id0"
-  class="micl-button-tonal-s micl-button--toggle micl-button--selected"
+  class="micl-button-tonal-s micl-button--toggle"
+  aria-pressed="true"
   commandfor="id0"
   command="--micl-toggle"
 >Selected</button>
 ```
 
-The self-targeting `command` property (`--micl-toggle`) toggles the button state whenever the user interacts with the button.
+The self-targeting `command` property (`--micl-toggle`) flips `aria-pressed` whenever the user interacts with the button.
 
 ## Icons
 To add a leading icon to a button, include an element with the `micl-button__icon` class inside the `<button>`:
@@ -84,14 +85,14 @@ To add a leading icon to a button, include an element with the `micl-button__ico
 </button>
 ```
 
-To use different icons for the **on** state and the **off** state in a toggle button, remove the icon name from the `micl-button__icon` element and add the `data-miclicon` (the name of the **on** icon) and `data-micliconselected` (the name of the **off** icon) attributes:
+To use different icons for the **on** state and the **off** state in a toggle button, remove the icon name from the `micl-button__icon` element and add the `data-miclicon` (the name of the **off** icon) and `data-micliconselected` (the name of the **on** icon) attributes:
 
 ```HTML
   ...
   <span
     class="micl-button__icon material-symbols-outlined"
-    data-miclicon="icon_for_on"
-    data-micliconselected="icon_for_off"
+    data-miclicon="icon_for_off"
+    data-micliconselected="icon_for_on"
     aria-hidden="true"
   ><span>
   ...
@@ -113,6 +114,63 @@ You can also use other icon libraries. For example, with the [Bootstrap Icons li
   Settings
 </button>
 ```
+
+## Theming
+Each button style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Note that the `selected-*` and `unselected-*` properties only apply to [toggle buttons](#toggle-button).
+
+### Text
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-text-button-label-text-color` | Label & icon colour | `--md-sys-color-primary` |
+| `--md-comp-text-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-text-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
+
+### Elevated
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-elevated-button-container-color` | Container background | `--md-sys-color-surface-container-low` |
+| `--md-comp-elevated-button-container-elevation` | Container elevation (shadow) | `--md-sys-elevation-level1` |
+| `--md-comp-elevated-button-label-text-color` | Label & icon colour | `--md-sys-color-primary` |
+| `--md-comp-elevated-button-selected-container-color` | Container background when selected | `--md-sys-color-primary` |
+| `--md-comp-elevated-button-selected-label-text-color` | Label & icon colour when selected | `--md-sys-color-on-primary` |
+| `--md-comp-elevated-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-elevated-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
+| `--md-comp-elevated-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-elevated-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
+
+### Filled
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-filled-button-container-color` | Container background (also the selected state) | `--md-sys-color-primary` |
+| `--md-comp-filled-button-label-text-color` | Label & icon colour (also the selected state) | `--md-sys-color-on-primary` |
+| `--md-comp-filled-button-unselected-container-color` | Container background when an unselected toggle | `--md-sys-color-surface-container` |
+| `--md-comp-filled-button-unselected-label-text-color` | Label & icon colour when an unselected toggle | `--md-sys-color-on-surface-variant` |
+| `--md-comp-filled-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
+| `--md-comp-filled-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
+
+### Tonal
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-filled-tonal-button-container-color` | Container background | `--md-sys-color-secondary-container` |
+| `--md-comp-filled-tonal-button-label-text-color` | Label & icon colour | `--md-sys-color-on-secondary-container` |
+| `--md-comp-filled-tonal-button-selected-container-color` | Container background when selected | `--md-sys-color-secondary` |
+| `--md-comp-filled-tonal-button-selected-label-text-color` | Label & icon colour when selected | `--md-sys-color-on-secondary` |
+| `--md-comp-filled-tonal-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-tonal-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
+| `--md-comp-filled-tonal-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-tonal-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
+
+### Outlined
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-outlined-button-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
+| `--md-comp-outlined-button-label-text-color` | Label & icon colour | `--md-sys-color-on-surface-variant` |
+| `--md-comp-outlined-button-selected-container-color` | Container background when selected | `--md-sys-color-inverse-surface` |
+| `--md-comp-outlined-button-selected-label-text-color` | Label & icon colour when selected | `--md-sys-color-inverse-on-surface` |
+| `--md-comp-outlined-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-outlined-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
 
 ## Compatibility
 This component utilizes relative RGB color values, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.

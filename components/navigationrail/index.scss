@@ -261,7 +261,7 @@
 }
 
 dialog.micl-navigationrail,
-nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--selected) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle[aria-pressed="true"]) {
     --_navigationrail-current-max-width: var(--md-comp-nav-rail-expanded-container-width-maximum, 360px);
     --_navigationrail-current-min-width: var(--md-comp-nav-rail-expanded-container-width-minimum, 220px);
     --_navigationrail-item-direction: row;
@@ -303,7 +303,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     }
 }
 
-nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not(.micl-button--selected)) {
+nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not([aria-pressed="true"])) {
     --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
     --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-collapsed;
 }
