@@ -229,8 +229,8 @@ $open-accordion: ':where(details[open] > *)';
     }
 }
 
-.micl-list:has(.micl-list-item-one[tabindex], .micl-list-item-two[tabindex], .micl-list-item-three[tabindex]), select {
-    .micl-list-item-one, .micl-list-item-two, .micl-list-item-three {
+.micl-list:has(> .micl-list-item-one[tabindex], > .micl-list-item-two[tabindex], > .micl-list-item-three[tabindex]), select {
+    > .micl-list-item-one, > .micl-list-item-two, > .micl-list-item-three {
         &:not(:disabled):not(.micl-list-item--disabled) {
             @extend %shared-interactive-states;
         }
