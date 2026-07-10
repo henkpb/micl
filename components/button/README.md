@@ -122,7 +122,7 @@ Each button style can be themed with CSS custom properties that follow the Mater
 | Custom property | Meaning | Default |
 |---|---|---|
 | `--md-comp-text-button-label-text-color` | Label & icon colour | `--md-sys-color-primary` |
-| `--md-comp-text-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-text-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface-variant` |
 | `--md-comp-text-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
 
 ### Elevated
@@ -135,7 +135,7 @@ Each button style can be themed with CSS custom properties that follow the Mater
 | `--md-comp-elevated-button-selected-label-text-color` | Label & icon colour when selected | `--md-sys-color-on-primary` |
 | `--md-comp-elevated-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
 | `--md-comp-elevated-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
-| `--md-comp-elevated-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-elevated-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface-variant` |
 | `--md-comp-elevated-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
 
 ### Filled
@@ -147,7 +147,7 @@ Each button style can be themed with CSS custom properties that follow the Mater
 | `--md-comp-filled-button-unselected-label-text-color` | Label & icon colour when an unselected toggle | `--md-sys-color-on-surface-variant` |
 | `--md-comp-filled-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
 | `--md-comp-filled-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
-| `--md-comp-filled-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface-variant` |
 | `--md-comp-filled-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
 
 ### Tonal
@@ -159,7 +159,7 @@ Each button style can be themed with CSS custom properties that follow the Mater
 | `--md-comp-filled-tonal-button-selected-label-text-color` | Label & icon colour when selected | `--md-sys-color-on-secondary` |
 | `--md-comp-filled-tonal-button-disabled-container-color` | Container background when disabled | `--md-sys-color-on-surface` |
 | `--md-comp-filled-tonal-button-disabled-container-opacity` | Container opacity when disabled | `10%` |
-| `--md-comp-filled-tonal-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-filled-tonal-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface-variant` |
 | `--md-comp-filled-tonal-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
 
 ### Outlined
@@ -169,7 +169,9 @@ Each button style can be themed with CSS custom properties that follow the Mater
 | `--md-comp-outlined-button-label-text-color` | Label & icon colour | `--md-sys-color-on-surface-variant` |
 | `--md-comp-outlined-button-selected-container-color` | Container background when selected | `--md-sys-color-inverse-surface` |
 | `--md-comp-outlined-button-selected-label-text-color` | Label & icon colour when selected | `--md-sys-color-inverse-on-surface` |
-| `--md-comp-outlined-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` |
+| `--md-comp-outlined-button-selected-disabled-container-color` | Container background when selected and disabled | `--md-sys-color-on-surface` |
+| `--md-comp-outlined-button-selected-disabled-container-opacity` | Container opacity when selected and disabled | `10%` |
+| `--md-comp-outlined-button-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface-variant` |
 | `--md-comp-outlined-button-disabled-label-text-opacity` | Label & icon opacity when disabled | `38%` |
 
 ## Compatibility
