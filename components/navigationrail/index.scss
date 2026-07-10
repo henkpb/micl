@@ -56,8 +56,10 @@
     --_navigationrail-current-max-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
     --_navigationrail-current-min-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
     --_navigationrail-item-direction: column;
-    --_navigationrail-item-width: var(--md-comp-nav-rail-item-short-container-height, 56px);
+    --_navigationrail-item-width: var(--md-comp-nav-rail-item-vertical-active-indicator-width, 56px);
     --_navigationrail-item-target-height: var(--_navigationrail-item-base-height);
+    // Closed-state (reverse) duration for the modal variant; [open] only flips this variable
+    --micl-duration: var(--md-comp-nav-rail-motion-duration-reverse);
 
     --_navigationrail-content-gap: var(--md-comp-nav-rail-item-container-vertical-space, 6px);
     --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
@@ -80,7 +82,6 @@
     border: none;
     border-radius: var(--md-comp-nav-rail-collapsed-container-shape, 0px);
     box-shadow: var(--md-comp-nav-rail-collapsed-container-elevation, var(--md-sys-elevation-level0));
-    opacity: 100%;
     overflow: hidden;
     z-index: 9;
     interpolate-size: allow-keywords;
@@ -105,7 +106,9 @@
         inline-size: 100%;
         row-gap: var(--_navigationrail-content-gap);
         padding-block: var(--md-comp-nav-rail-item-header-space-minimum, 40px) 16px;
-        padding-inline: 20px 0;
+        // explicit end padding: keeps the end-side space when the scrollbar appears
+        // or an expanded item's label runs long
+        padding-inline: 20px;
 
         overflow: hidden auto;
         transition: row-gap var(--_navigationrail-morph-speed) linear;
@@ -178,7 +181,7 @@
             padding-block: var(--_navigationrail-item-target-padding, var(--_navigationrail-item-padding-block));
             flex-direction: var(--_navigationrail-item-direction);
 
-            border-radius: calc(var(--_navigationrail-item-target-height, var(--_navigationrail-item-base-height)) / 2);
+            border-radius: var(--md-comp-nav-rail-item-container-shape, calc(var(--_navigationrail-item-target-height, var(--_navigationrail-item-base-height)) / 2));
 
             transition:
                 inline-size calc(var(--_navigationrail-morph-speed) / 2) var(--_navigationrail-item-delay) linear,
@@ -196,7 +199,7 @@
                 inline-size: var(--md-comp-nav-rail-item-icon-size, var(--md-sys-icon-size));
                 margin: 0;
                 padding-block: 4px;
-                padding-inline: 16px;
+                padding-inline: var(--md-comp-nav-rail-item-active-indicator-leading-space, 16px) var(--md-comp-nav-rail-item-active-indicator-trailing-space, 16px);
                 color: var(--md-sys-color-on-surface-variant);
                 font-variation-settings: 'FILL' 0;
             }
@@ -207,6 +210,13 @@
                 color: var(--md-sys-color-on-surface-variant);
                 overflow: hidden;
                 animation: var(--_navigationrail-text-animation);
+                // the typography and box switch discretely at the midpoint of the morph,
+                // while the animation above fades the text out and back in around it
+                transition:
+                    font 0s calc(var(--_navigationrail-morph-speed) / 2),
+                    letter-spacing 0s calc(var(--_navigationrail-morph-speed) / 2),
+                    margin 0s calc(var(--_navigationrail-morph-speed) / 2),
+                    padding 0s calc(var(--_navigationrail-morph-speed) / 2);
             }
 
             &:hover {
@@ -235,15 +245,12 @@
     }
 
     &[open] {
+        --micl-duration: var(--md-comp-nav-rail-motion-duration);
+
         border-start-end-radius: var(--md-comp-nav-rail-expanded-modal-container-shape, var(--md-sys-shape-corner-large));
         border-end-end-radius: var(--md-comp-nav-rail-expanded-modal-container-shape, var(--md-sys-shape-corner-large));
         box-shadow: var(--md-comp-nav-rail-expanded-modal-container-elevation, var(--md-sys-elevation-level2));
         background-color: var(--md-comp-nav-rail-expanded-modal-container-color, var(--md-sys-color-surface-container));
-        transition:
-            opacity var(--md-comp-nav-rail-motion-duration) linear,
-            margin-inline-start var(--md-comp-nav-rail-motion-duration) var(--md-comp-nav-rail-motion-spatial),
-            overlay var(--md-comp-nav-rail-motion-duration) linear allow-discrete,
-            display var(--md-comp-nav-rail-motion-duration) linear allow-discrete;
 
         &::backdrop {
             background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
@@ -254,9 +261,9 @@
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            background-color var(--md-comp-nav-rail-motion-duration) linear,
-            overlay var(--md-comp-nav-rail-motion-duration) linear allow-discrete,
-            display var(--md-comp-nav-rail-motion-duration) linear allow-discrete;
+            background-color var(--micl-duration) linear,
+            overlay var(--micl-duration) linear allow-discrete,
+            display var(--micl-duration) linear allow-discrete;
     }
 }
 
@@ -283,15 +290,18 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     background-color: var(--md-comp-nav-rail-expanded-container-color, var(--md-sys-color-surface));
 
     & > .micl-navigationrail__content > a.micl-navigationrail__item {
+        max-inline-size: 100%;
+
         &::before {
             content: "";
             position: absolute;
             inset: 0px;
-            inset-inline-end: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) - 16px - 100%));
+            inset-inline-end: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) - var(--md-comp-nav-rail-item-horizontal-full-width-trailing-space, 16px) - 100%));
             background-color: transparent;
         }
         .micl-navigationrail__text {
             @include typography.label-large;
+            margin-block-start: 0;
             margin-inline-start: var(--_navigationrail-expanded-text-margin);
             padding-inline-end: 16px;
         }
@@ -326,10 +336,10 @@ dialog.micl-navigationrail {
     opacity: 0%;
 
     transition:
-        opacity var(--md-comp-nav-rail-motion-duration-reverse) linear,
-        margin-inline-start var(--md-comp-nav-rail-motion-duration-reverse) var(--md-comp-nav-rail-motion-spatial),
-        overlay var(--md-comp-nav-rail-motion-duration-reverse) linear allow-discrete,
-        display var(--md-comp-nav-rail-motion-duration-reverse) linear allow-discrete;
+        opacity var(--micl-duration) linear,
+        margin-inline-start var(--micl-duration) var(--md-comp-nav-rail-motion-spatial),
+        overlay var(--micl-duration) linear allow-discrete,
+        display var(--micl-duration) linear allow-discrete;
 
     &[open] {
         display: flex;
@@ -343,68 +353,46 @@ dialog.micl-navigationrail {
     }
 }
 
-@keyframes navigationrail-text-to-collapsed {
-    0% {
-        @include typography.label-large;
-        margin-block-start: 0;
-        margin-inline-start: var(--_navigationrail-expanded-text-margin);
-        padding-inline-end: 16px;
-        opacity: 100%
-    }
-    49.9% {
-        @include typography.label-large;
-        margin-block-start: 0;
-        margin-inline-start: var(--_navigationrail-expanded-text-margin);
-        padding-inline-end: 16px;
-        opacity: 0%;
-    }
-    50.1% {
-        @include typography.label-medium;
-        min-block-size: var(--md-sys-typescale-label-medium-line-height);
-        margin-block-start: -16px;
-        margin-inline-start: 0px;
-        padding-inline-end: 0px;
-        opacity: 0%;
-    }
-    100% {
-        @include typography.label-medium;
-        min-block-size: var(--md-sys-typescale-label-medium-line-height);
-        margin-block-start: 4px;
-        margin-inline-start: 0px;
-        padding-inline-end: 0px;
-        opacity: 100%;
+// Adaptive rail: acts as a modal navigation rail below the named breakpoint and
+// as a permanently visible standard (expanded) rail at the breakpoint and above.
+$_breakpoints: (
+    medium:     layout.$md-sys-window-medium-min,
+    expanded:   layout.$md-sys-window-expanded-min,
+    large:      layout.$md-sys-window-large-min,
+    extralarge: layout.$md-sys-window-extralarge-min,
+);
+
+@each $name, $min in $_breakpoints {
+    @media (min-width: $min) {
+        dialog.micl-navigationrail--modal-to-#{$name}:not([open]) {
+            display: flex;
+            position: sticky;
+            float: inline-start;
+            inset: unset;
+            inset-block-start: 0;
+            inset-inline-start: 0;
+            min-inline-size: var(--_navigationrail-current-min-width);
+            max-inline-size: var(--_navigationrail-current-max-width);
+            margin-inline: calc(-1 * var(--md-sys-layout-window-margin, 0px)) auto;
+            padding-inline: 0;
+            opacity: 100%;
+            border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-sys-divider-color));
+        }
     }
 }
 
+// The static rules plus the delayed transitions above carry the typography switch;
+// the keyframes only fade the text and slide it along the block axis.
+@keyframes navigationrail-text-to-collapsed {
+    0%   { margin-block-start: 0;     opacity: 100%; }
+    45%  { margin-block-start: 0;     opacity: 0%; }
+    55%  { margin-block-start: -16px; opacity: 0%; }
+    100% { margin-block-start: 4px;   opacity: 100%; }
+}
+
 @keyframes navigationrail-text-to-expanded {
-    0% {
-        @include typography.label-medium;
-        min-block-size: var(--md-sys-typescale-label-medium-line-height);
-        margin-block-start: 4px;
-        margin-inline-start: 0px;
-        padding-inline-end: 0px;
-        opacity: 100%;
-    }
-    49.9% {
-        @include typography.label-medium;
-        min-block-size: var(--md-sys-typescale-label-medium-line-height);
-        margin-block-start: -16px;
-        margin-inline-start: 0px;
-        padding-inline-end: 0px;
-        opacity: 0%;
-    }
-    50.1% {
-        @include typography.label-large;
-        margin-block-start: 0px;
-        margin-inline-start: var(--_navigationrail-expanded-text-margin);
-        padding-inline-end: 16px;
-        opacity: 0%;
-    }
-    100% {
-        @include typography.label-large;
-        margin-block-start: 0px;
-        margin-inline-start: var(--_navigationrail-expanded-text-margin);
-        padding-inline-end: 16px;
-        opacity: 100%;
-    }
+    0%   { margin-block-start: 4px;   opacity: 100%; }
+    45%  { margin-block-start: -16px; opacity: 0%; }
+    55%  { margin-block-start: 0;     opacity: 0%; }
+    100% { margin-block-start: 0;     opacity: 100%; }
 }

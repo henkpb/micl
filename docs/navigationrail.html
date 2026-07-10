@@ -17,12 +17,17 @@
             height: 420px;
             width: 360px;
         }
+        @media (min-width: 840px) {
+            [commandfor="mynavigationrail4"] {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="micl-window light">
     <nav id="mynavigationrail1" class="micl-navigationrail micl-hidden">
-        <div class="micl-navigationrail__content" role="menu" role="menuitem" aria-current="page">
-            <a href="#" class="micl-navigationrail__item">
+        <div class="micl-navigationrail__content" role="menu" aria-current="page">
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
             </a>
@@ -53,7 +58,37 @@
         </div>
     </nav>
 
-    <dialog id="mynavigationrail4" class="micl-navigationrail micl-hidden" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest" aria-modal="true">
+    <dialog id="mynavigationrail3" class="micl-navigationrail micl-hidden" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest" aria-modal="true">
+        <div class="micl-navigationrail__headline">
+            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail3" aria-label="Close navigation rail" autofocus>menu_open</button>
+        </div>
+        <div class="micl-navigationrail__content" role="menu">
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationrail__text">Inbox</span>
+                <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-inline-offset:-16px">97</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationrail__text">Outbox</span>
+            </a>
+            <a href="https://www.nytimes.com" class="micl-navigationrail__item">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
+                <span class="micl-navigationrail__text">Newspaper</span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationrail__text">Favorites</span>
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-inline-offset:-16px"></span>
+            </a>
+            <a href="#" class="micl-navigationrail__item" role="menuitem">
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                <span class="micl-navigationrail__text">Trash</span>
+            </a>
+        </div>
+    </dialog>
+
+    <dialog id="mynavigationrail4" class="micl-navigationrail micl-navigationrail--modal-to-expanded micl-hidden" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest">
         <div class="micl-navigationrail__headline">
             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail4" aria-label="Close navigation rail" autofocus>menu_open</button>
         </div>
@@ -85,6 +120,7 @@
     <main class="micl-body">
         <section class="micl-pane">
             <header class="micl-appbar micl-appbar--large">
+                <button type="button" id="btn3" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined micl-hidden" command="show-modal" commandfor="mynavigationrail3" aria-label="Toggle navigation rail">menu</button>
                 <button type="button" id="btn4" class="micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined micl-hidden" command="show-modal" commandfor="mynavigationrail4" aria-label="Toggle navigation rail">menu</button>
                 <div class="micl-appbar__headline">
                     <h1>Navigation rails</h1>
@@ -103,8 +139,12 @@
                         <label for="nav2">Collapsed rail with toggle button</label>
                     </div>
                     <div class="micl-flex--vcenter">
+                        <input type="radio" id="nav3" name="nav" class="micl-radio" value="3">
+                        <label for="nav3">Modal navigation rail</label>
+                    </div>
+                    <div class="micl-flex--vcenter">
                         <input type="radio" id="nav4" name="nav" class="micl-radio" value="4">
-                        <label for="nav4">Modal navigation rail</label>
+                        <label for="nav4">Adaptive navigation rail</label>
                     </div>
                 </div>
                 <div class="micl-card-filled"></div>
@@ -130,6 +170,7 @@
                 document.querySelectorAll('.micl-navigationrail').forEach(rail => {
                     rail.classList.toggle('micl-hidden', !rail.matches(`#mynavigationrail${radio.value}`));
                 });
+                document.getElementById('btn3')?.classList.toggle('micl-hidden', radio.value != '3');
                 document.getElementById('btn4')?.classList.toggle('micl-hidden', radio.value != '4');
             });
         });
