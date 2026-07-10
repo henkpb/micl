@@ -118,7 +118,7 @@ You can customize the appearance of the Accordion component by overriding its ow
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| --md-sys-accordion-item-space | 0px | The space between an opened accordion item and its next neighbour. |
+| --md-comp-accordion-item-space | 0px | The space between an opened accordion item and its next neighbour. |
 
 **Example: Changing the margin between an opened item and the next**
 
