@@ -52,6 +52,7 @@
     --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --micl-ripple: 1;
 
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -91,7 +92,7 @@
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
             outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: 3px;
+            outline-offset: 2px;
         }
         &:active {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
@@ -396,6 +397,11 @@
     &:disabled {
         background-color: transparent;
         color: var(--md-comp-outlined-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-disabled-icon-opacity, 38%)));
+
+        &.micl-button--toggle[aria-pressed="true"] {
+            border: none;
+            background-color: var(--md-comp-outlined-icon-button-selected-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-selected-disabled-container-opacity, 10%)));
+        }
     }
     &:not(:disabled) {
         &.micl-button--toggle[aria-pressed="true"] {

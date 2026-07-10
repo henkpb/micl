@@ -148,6 +148,8 @@ Each icon button style can be themed with CSS custom properties that follow the 
 | `--md-comp-outlined-icon-button-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
 | `--md-comp-outlined-icon-button-selected-container-color` | Container background when selected | `--md-sys-color-inverse-surface` |
 | `--md-comp-outlined-icon-button-selected-icon-color` | Icon colour when selected | `--md-sys-color-inverse-on-surface` |
+| `--md-comp-outlined-icon-button-selected-disabled-container-color` | Container background when selected and disabled | `--md-sys-color-on-surface` |
+| `--md-comp-outlined-icon-button-selected-disabled-container-opacity` | Container opacity when selected and disabled | `10%` |
 | `--md-comp-outlined-icon-button-disabled-icon-color` | Icon colour when disabled | `--md-sys-color-on-surface` |
 | `--md-comp-outlined-icon-button-disabled-icon-opacity` | Icon opacity when disabled | `38%` |
 
