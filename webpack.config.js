@@ -14,6 +14,8 @@ const scssEntries = scssFiles.reduce((entries, filePath) => {
     // be compiled as a webpack entry.
     const normalized = filePath.replace(/\\/g, '/');
     if (normalized.endsWith('components/shapes/index.scss')) return entries;
+    // Sass partials (leading underscore) are shared modules, not entry points.
+    if (path.basename(normalized).startsWith('_')) return entries;
     const componentName = path.dirname(filePath).split('\\').pop();
 
     // Pair each component's stylesheet with its sibling TypeScript handler (if

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Navigation Bars">
+    <title>MICL Navigation Bar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=dark_mode,delete,favorite,inbox,outbox&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .micl-card-filled {
+            height: 420px;
+            width: 360px;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <nav id="mynavigationbar" class="micl-navigationbar">
+        <div class="micl-navigationbar__content" role="menu">
+            <a href="#" class="micl-navigationbar__item" role="menuitem" aria-current="page">
+                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationbar__text">Inbox</span>
+                <span class="micl-badge" style="position-anchor:--inbox;--md-sys-badge-inline-offset:-16px">97</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item" role="menuitem">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationbar__text">Outbox</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item" role="menuitem">
+                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationbar__text">Favorites</span>
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-sys-badge-inline-offset:-16px"></span>
+            </a>
+            <a href="#" class="micl-navigationbar__item" role="menuitem">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                <span class="micl-navigationbar__text">Trash</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="micl-body">
+        <section class="micl-pane">
+            <header class="micl-appbar micl-appbar--large">
+                <div class="micl-appbar__headline">
+                    <h1>Navigation bars</h1>
+                    <p class="micl-appbar__subtitle">Showcasing MICL navigation bars</p>
+                </div>
+                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
+            </header>
+            <div style="display:flex;flex-wrap:wrap">
+                <div class="micl-card-filled md-sys-typescale-body-medium" style="box-sizing:border-box;padding:16px">
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="bar1" name="bar" class="micl-radio" value="" checked>
+                        <label for="bar1">Navigation bar</label>
+                    </div>
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="bar2" name="bar" class="micl-radio" value="micl-navigationbar--horizontal">
+                        <label for="bar2">Navigation bar with horizontal items</label>
+                    </div>
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="bar3" name="bar" class="micl-radio" value="micl-navigationbar--tall">
+                        <label for="bar3">Tall navigation bar</label>
+                    </div>
+                    <div class="micl-flex--vcenter">
+                        <input type="radio" id="bar4" name="bar" class="micl-radio" value="micl-navigationbar--bar-to-expanded">
+                        <label for="bar4">Adaptive navigation (rail from 840px)</label>
+                    </div>
+                </div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+                <div class="micl-card-filled"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+    <script>
+        const navigationbar = document.getElementById('mynavigationbar');
+        document.querySelectorAll('.micl-radio').forEach(radio => {
+            radio.addEventListener('change', () => {
+                navigationbar.classList.remove('micl-navigationbar--horizontal', 'micl-navigationbar--tall', 'micl-navigationbar--bar-to-expanded');
+                if (radio.value) {
+                    navigationbar.classList.add(radio.value);
+                }
+            });
+        });
+        navigationbar.querySelectorAll('.micl-navigationbar__item').forEach(item => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                navigationbar.querySelector('[aria-current="page"]')?.removeAttribute('aria-current');
+                item.setAttribute('aria-current', 'page');
+            });
+        });
+    </script>
+</body>
+</html>

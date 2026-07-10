@@ -111,6 +111,7 @@ The library currently consists of the following components:
 - [x] [Icon button](components/iconbutton/README.md)
 - [x] [List](components/list/README.md)
 - [x] [Menu](components/menu/README.md)
+- [x] [Navigation bar](components/navigationbar/README.md)
 - [x] [Navigation rail](components/navigationrail/README.md)
 - [x] [Radio button](components/radio/README.md)
 - [x] [Select](components/select/README.md)
