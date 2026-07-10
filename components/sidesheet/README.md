@@ -90,19 +90,26 @@ The back-button and the actions-container are optional. To remove the vertical d
 > transition: ...transition on max-inline-size...
 > ```
 
-## Customizations
-You can customize the appearance of the Side sheet component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child side sheets.
+## Theming
+Each side sheet style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-sidesheet-width | 256px | The default (and minimum allowed) width of the side sheet |
-| --md-sys-sidesheet-maxwidth | 400px | The largest allowed width of the side sheet |
-| --md-sys-sidesheet-padding-standard | 24px | The amount of space between the vertical edges and the content |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-sidesheet-container-width` | The default (and minimum allowed) width of the side sheet | 256px |
+| `--md-comp-sidesheet-container-max-width` | The largest allowed width of the side sheet | 400px |
+| `--md-comp-sidesheet-padding` | The amount of space between the vertical edges and the content | `--md-sys-layout-window-margin` (24px) |
+| `--md-comp-sidesheet-container-shape` | The corner rounding of the standard side sheet | `--md-sys-shape-corner-none` (0px) |
+| `--md-comp-sidesheet-standard-container-color` | The background color of the standard side sheet | `--md-sys-color-surface` |
+| `--md-comp-sidesheet-standard-container-elevation` | The shadow (elevation) of the standard side sheet | `--md-sys-elevation-level0` (none) |
+| `--md-comp-sidesheet-modal-container-color` | The background color of the modal side sheet | `--md-sys-color-surface-container-low` |
+| `--md-comp-sidesheet-modal-container-elevation` | The shadow (elevation) of the modal side sheet | `--md-sys-elevation-level1` |
+| `--md-comp-sidesheet-modal-container-shape` | The corner rounding of the modal side sheet, applied to the two corners facing the content | `--md-sys-shape-corner-large` (16px) |
+
 
 **Example: Changing the width of the sidesheet**
 
 ```HTML
-<body style="--md-sys-sidesheet-width:320px">
+<body style="--md-comp-sidesheet-container-width:320px">
   <dialog id="mysidesheet" class="micl-sidesheet" popover>
     ...
   </dialog>
