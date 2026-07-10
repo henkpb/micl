@@ -25,17 +25,20 @@ export default (() =>
 {
     const getSnapHeights = (dialog: HTMLDialogElement): number[] =>
     {
-        let fitHeight   = parseInt(dialog.dataset.miclfitheight || '0', 10),
-            maxHeight   = parseInt(window.getComputedStyle(dialog).getPropertyValue('max-block-size'), 10),
+        let fitHeight = parseInt(dialog.dataset.miclfitheight || '0', 10);
+
+        if (fitHeight < 1) {
+            fitHeight = dialog.getBoundingClientRect().height;
+            dialog.dataset.miclfitheight = `${fitHeight}`;
+        }
+
+        // data-miclfitheight is now set, so this resolves to the lifted resizing ceiling
+        let maxHeight   = parseInt(window.getComputedStyle(dialog).getPropertyValue('max-block-size'), 10),
             snapHeights = (dialog.dataset.miclsnapheights || '').split(',').map(Number).filter(
                 n => !isNaN(n) && (n >= 0) && (n <= maxHeight)
             );
 
-        if (fitHeight < 1) {
-            fitHeight = Math.min(dialog.getBoundingClientRect().height, maxHeight);
-            dialog.dataset.miclfitheight = `${fitHeight}`;
-        }
-        return [...new Set(snapHeights.concat([fitHeight]).sort())];
+        return [...new Set(snapHeights.concat([Math.min(fitHeight, maxHeight)]).sort((a, b) => a - b))];
     };
 
     const getNextSnapHeight = (dialog: HTMLDialogElement, isResizing: boolean): number =>
@@ -49,8 +52,9 @@ export default (() =>
 
     const getPreviousSnapHeight = (dialog: HTMLDialogElement): number =>
     {
+        // 0 (closing) is excluded: closing requires dragging below the 48px threshold
         let currentHeight = dialog.getBoundingClientRect().height,
-            snapHeights   = getSnapHeights(dialog),
+            snapHeights   = getSnapHeights(dialog).filter(height => height > 0),
             smallerSnaps  = snapHeights.filter(height => height < currentHeight - 4);
 
         return smallerSnaps[smallerSnaps.length - 1] || snapHeights[0];
@@ -60,11 +64,11 @@ export default (() =>
     {
         if (value < 1) {
             delete dialog.dataset.miclfitheight;
-            dialog.style.removeProperty('--md-sys-bottomsheet-height');
+            dialog.style.removeProperty('--md-comp-bottomsheet-height');
             dialog[!dialog.popover ? 'close' : 'hidePopover']();
         }
         else {
-            dialog.style.setProperty('--md-sys-bottomsheet-height', `${value}px`);
+            dialog.style.setProperty('--md-comp-bottomsheet-height', `${value}px`);
         }
     }
 
@@ -85,49 +89,61 @@ export default (() =>
             }
             const draghandle = headline.querySelector('.micl-bottomsheet__draghandle') as HTMLElement;
 
+            let isPreparing = false,
+                isResizing  = false,
+                wasResized  = false,
+                initialPointerY: number,
+                initialHeight: number;
+
             draghandle?.addEventListener('click', () =>
             {
+                if (wasResized) {
+                    return;
+                }
                 setHeight(element, getNextSnapHeight(element, false));
             });
 
-            let isPreparing = false,
-                isResizing  = false,
-                initialMouseY: number,
-                initialHeight: number;
-
-            headline.addEventListener('mousedown', (event: Event) =>
+            headline.addEventListener('pointerdown', (event: Event) =>
             {
-                if (event.eventPhase === Event.AT_TARGET) {
+                if ((event.target === headline) || (event.target === draghandle)) {
                     isPreparing = true;
+                    wasResized  = false;
                     event.preventDefault();
-                    initialMouseY = (event as MouseEvent).clientY;
+                    initialPointerY = (event as PointerEvent).clientY;
                     initialHeight = element.getBoundingClientRect().height;
-                    document.addEventListener('mousemove', onMouseMove);
-                    document.addEventListener('mouseup', onMouseUp);
+                    document.addEventListener('pointermove', onPointerMove);
+                    document.addEventListener('pointerup', onPointerUp);
                 }
             });
 
-            function onMouseMove(event: Event)
+            function onPointerMove(event: Event)
             {
-                const currentMouseY = (event as MouseEvent).clientY;
-                if (isPreparing && (Math.abs(initialMouseY - currentMouseY) > 4)) {
+                const currentPointerY = (event as PointerEvent).clientY;
+                if (isPreparing && (Math.abs(initialPointerY - currentPointerY) > 4)) {
                     isPreparing = false;
                     isResizing  = true;
                     element.classList.add('micl-bottomsheet--resizing');
                 }
                 if (isResizing) {
-                    setHeight(element, initialHeight + initialMouseY - currentMouseY);
+                    const targetHeight = Math.max(1, initialHeight + initialPointerY - currentPointerY),
+                          snapHeight   = getSnapHeights(element).find(
+                              height => (height > 0) && (Math.abs(height - targetHeight) <= 12)
+                          );
+                    setHeight(element, snapHeight || targetHeight);
                 }
             }
-            function onMouseUp(event: Event)
+            function onPointerUp(event: Event)
             {
                 isPreparing = false;
                 element.classList.remove('micl-bottomsheet--resizing');
+                document.removeEventListener('pointermove', onPointerMove);
+                document.removeEventListener('pointerup', onPointerUp);
                 if (isResizing) {
                     isResizing = false;
+                    wasResized = true;
 
-                    const currentMouseY = (event as MouseEvent).clientY;
-                    if (currentMouseY < initialMouseY) {
+                    const currentPointerY = (event as PointerEvent).clientY;
+                    if (currentPointerY < initialPointerY) {
                         setHeight(element, getNextSnapHeight(element, true));
                     }
                     else if (element.getBoundingClientRect().height < 48) {
@@ -136,8 +152,6 @@ export default (() =>
                     else {
                         setHeight(element, getPreviousSnapHeight(element));
                     }
-                    document.removeEventListener('mousemove', onMouseMove);
-                    document.removeEventListener('mouseup', onMouseUp);
                 }
             }
         },
