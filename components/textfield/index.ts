@@ -44,7 +44,7 @@ export default (() =>
         }
     };
 
-    const formatAsDate = (input: HTMLInputElement, inputType: string): void =>
+    const formatAsDate = (input: HTMLInputElement, inputType: string | undefined): void =>
     {
         const partsRegex = /([DMY]{2,4})([^DMY])?([DMY]{2,4})([^DMY])?([DMY]{2,4})/;
         const match      = (input.dataset.micldateformat || '').match(partsRegex);
@@ -82,7 +82,7 @@ export default (() =>
         input.value = formattedValue.substring(0, input.maxLength);
         const newLength = input.value.length;
 
-        if (inputType.startsWith('deleteContent')) {
+        if (inputType?.startsWith('deleteContent')) {
             if (cursorPosition > 0) {
                 input.setSelectionRange(cursorPosition, cursorPosition);
             }
