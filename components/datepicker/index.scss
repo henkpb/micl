@@ -35,6 +35,7 @@
 @include statelayer.property;
 
 @include typography.scale('headline-large');
+@include typography.scale('title-large');
 @include typography.scale('body-large');
 @include typography.scale('label-large');
 
@@ -68,13 +69,13 @@
     transition: --statelayer-opacity var(--md-comp-date-picker-button-motion-duration) linear;
 
     &:hover {
-        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
     }
     &:focus-visible {
-        --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
+        --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
     }
     &:active {
-        --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+        --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
     }
 }
 
@@ -84,6 +85,9 @@ dialog.micl-dialog.micl-datepicker {
     --md-comp-date-picker-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-comp-date-picker-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-effects-duration};
     --md-comp-date-picker-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+
+    // Internal alias: the target size is referenced from many descendants.
+    --_target: var(--md-sys-target-size, 48px);
 
     inline-size: var(--md-comp-date-picker-modal-container-width, 360px);
 
@@ -104,7 +108,7 @@ dialog.micl-dialog.micl-datepicker {
     .micl-dialog__headline {
         display: grid;
         gap: 0;
-        grid-template-columns: max-content 1fr var(--md-sys-target-size, 48px);
+        grid-template-columns: max-content 1fr var(--_target);
         grid-template-areas:
             "sup sup sup"
             "close act act"
@@ -132,6 +136,13 @@ dialog.micl-dialog.micl-datepicker {
             margin-block-start: 11.5px;
             margin-inline: -24px;
         }
+    }
+    // The range headline holds two dates, so the spec drops it to title-large.
+    // The larger margin keeps the divider below it in place.
+    &.micl-datepicker--range .micl-dialog__headline :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
+        @include typography.title-large;
+
+        margin-block-start: 48px;
     }
 
     .micl-dialog__content {
@@ -180,7 +191,7 @@ dialog.micl-dialog.micl-datepicker {
 .micl-datepicker__month-selector,
 .micl-datepicker__year-selector {
     display: grid;
-    grid-template-rows: var(--md-sys-target-size, 48px);
+    grid-template-rows: var(--_target);
     align-items: center;
 
     &.micl-datepicker__view-hidden {
@@ -190,7 +201,7 @@ dialog.micl-dialog.micl-datepicker {
 .micl-datepicker__month-selector {
     grid-area: msel;
     grid-template-areas: "mprev mnext";
-    grid-template-columns: var(--md-sys-target-size, 48px) var(--md-sys-target-size, 48px);
+    grid-template-columns: var(--_target) var(--_target);
     justify-items: flex-end;
     justify-content: flex-end;
 
@@ -233,9 +244,11 @@ dialog.micl-dialog.micl-datepicker {
 }
 
 .micl-dialog--docked {
+    :is(.micl-datepicker__month-selector, .micl-datepicker__year-selector) {
+        grid-template-columns: var(--_target) 1fr var(--_target);
+    }
     .micl-datepicker__month-selector {
         grid-template-areas: "mprev mon mnext";
-        grid-template-columns: var(--md-sys-target-size, 48px) 1fr var(--md-sys-target-size, 48px);
 
         .micl-datepicker__month {
             display: inline-flex;
@@ -244,7 +257,6 @@ dialog.micl-dialog.micl-datepicker {
     }
     .micl-datepicker__year-selector {
         grid-template-areas: "yprev yr ynext";
-        grid-template-columns: var(--md-sys-target-size, 48px) 1fr var(--md-sys-target-size, 48px);
 
         :is(.micl-datepicker__previous, .micl-datepicker__next) {
             display: block;
@@ -293,8 +305,8 @@ dialog.micl-dialog.micl-datepicker {
 
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(7, var(--md-sys-target-size, 48px));
-    grid-template-rows: 40px repeat(6, var(--md-sys-target-size, 48px));
+    grid-template-columns: repeat(7, var(--_target));
+    grid-template-rows: 40px repeat(6, var(--_target));
     block-size: 100%;
     inline-size: 100%;
     padding-inline: 12px;
@@ -326,12 +338,39 @@ dialog.micl-dialog.micl-datepicker {
             background-color: var(--md-comp-date-picker-date-selected-container-color, var(--md-sys-color-primary));
             color: var(--md-comp-date-picker-date-selected-label-text-color, var(--md-sys-color-on-primary));
         }
+        // The active-indicator band of a range is painted by a pseudo-element
+        // on a negative z-index: below the cell's own state layer, selection
+        // circle and today-outline, which stay clipped by the circular
+        // border-radius (an element background cannot escape it). The band
+        // bleeds into the 4px transparent borders to meet the neighbour cells.
+        &:is(.micl-datepicker__inrange, .micl-datepicker__range-start, .micl-datepicker__range-end) {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                z-index: -1;
+                inset-block: 0;
+                inset-inline: -4px;
+                background-color: var(--md-comp-date-picker-range-selection-active-indicator-container-color, var(--md-sys-color-secondary-container));
+            }
+        }
+        &.micl-datepicker__inrange {
+            color: var(--md-comp-date-picker-selection-date-in-range-label-text-color, var(--md-sys-color-on-secondary-container));
+        }
+        // The endpoints only paint the half band facing the inside of the range.
+        &.micl-datepicker__range-start::before {
+            inset-inline: 50% -4px;
+        }
+        &.micl-datepicker__range-end::before {
+            inset-inline: -4px 50%;
+        }
         // The state layer of a highlighted date follows its label color.
         &:is(.micl-datepicker__today, .micl-datepicker__selected):is(:hover, :focus-visible, :active) {
             --statelayer-color: currentColor;
         }
         &.micl-datepicker__outside {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity));
         }
         &:not(.micl-datepicker__outside) {
             cursor: pointer;
@@ -357,16 +396,12 @@ dialog.micl-dialog.micl-datepicker {
 
         display: flex;
         align-items: center;
-        block-size: var(--md-sys-target-size, 48px);
+        block-size: var(--_target);
         gap: 8px;
         padding-inline-start: 16px;
         color: var(--md-sys-color-on-surface);
         cursor: pointer;
 
-        input[type=radio] {
-            appearance: none;
-            margin: 0;
-        }
         span {
             visibility: hidden;
             color: var(--md-sys-color-on-surface);
@@ -400,8 +435,8 @@ dialog.micl-dialog.micl-datepicker {
         block-size: 36px;
         inline-size: 72px;
         margin: 8px;
-        border: calc((var(--md-sys-target-size, 48px) - 36px) / 2) solid transparent;
-        border-radius: calc(var(--md-sys-target-size, 48px) / 2);
+        border: calc((var(--_target) - 36px) / 2) solid transparent;
+        border-radius: calc(var(--_target) / 2);
         color: var(--md-comp-date-picker-selection-year-unselected-label-text-color, var(--md-sys-color-on-surface-variant));
         cursor: pointer;
 
@@ -414,12 +449,11 @@ dialog.micl-dialog.micl-datepicker {
                 --statelayer-color: currentColor;
             }
         }
-
-        input[type=radio] {
-            appearance: none;
-            margin: 0;
-        }
     }
+}
+:is(.micl-datepicker__months, .micl-datepicker__years) input[type=radio] {
+    appearance: none;
+    margin: 0;
 }
 .micl-datepicker .micl-datepicker__input {
     padding-inline: 16px;
@@ -429,5 +463,15 @@ dialog.micl-dialog.micl-datepicker {
     input[type=date]::-webkit-calendar-picker-indicator,
     input[type=date]::-webkit-inner-spin-button {
         display: none;
+    }
+}
+// In range mode the input view holds the start and end field side by side.
+.micl-datepicker--range .micl-datepicker__input {
+    display: flex;
+    column-gap: 8px;
+
+    > * {
+        flex: 1 1 0;
+        min-inline-size: 0;
     }
 }

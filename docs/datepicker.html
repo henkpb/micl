@@ -223,6 +223,62 @@
                                             </form>
                                         </dialog>
                                     </div>
+                                    <div>
+                                        <p class="md-sys-typescale-body-medium">Date range selection using a pair of date fields</p>
+                                        <div class="micl-flex--vcenter" style="column-gap:8px">
+                                            <div class="micl-textfield-outlined" style="width:fit-content">
+                                                <label for="myrangestart">From</label>
+                                                <input type="date" id="myrangestart" data-datepicker="mydatepicker5" data-miclrangeto="myrangeend" value="2025-12-02">
+                                            </div>
+                                            <div class="micl-textfield-outlined" style="width:fit-content">
+                                                <label for="myrangeend">To</label>
+                                                <input type="date" id="myrangeend" data-datepicker="mydatepicker5" value="2025-12-10">
+                                            </div>
+                                        </div>
+                                        <dialog id="mydatepicker5" class="micl-dialog micl-datepicker micl-datepicker--range" closedby="closerequest" aria-labelledby="mytitle5">
+                                            <form method="dialog">
+                                                <div class="micl-dialog__headline">
+                                                    <h2 id="mytitle5">Enter dates</h2>
+                                                    <span class="micl-dialog__supporting-text">Select range</span>
+                                                    <button type="button" id="btn5" class="micl-datepicker__inputmode micl-iconbutton-standard-s micl-button--toggle material-symbols-outlined" commandfor="btn5" command="--micl-toggle" data-miclicon="edit" data-micliconselected="calendar_today"></button>
+                                                    <hr class="micl-divider">
+                                                    <div class="micl-datepicker__month-selector">
+                                                        <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous month">chevron_backward</button>
+                                                        <button type="button" class="micl-datepicker__month micl-button-text-xs">
+                                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+                                                        </button>
+                                                        <button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next month">chevron_forward</button>
+                                                    </div>
+                                                    <div class="micl-datepicker__year-selector">
+                                                        <button type="button" class="micl-datepicker__previous micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Previous year">chevron_backward</button>
+                                                        <button type="button" class="micl-datepicker__year micl-button-text-xs">
+                                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+                                                        </button>
+                                                        <button type="button" class="micl-datepicker__next micl-iconbutton-standard-xs material-symbols-outlined" aria-label="Next year">chevron_forward</button>
+                                                    </div>
+                                                </div>
+                                                <div class="micl-dialog__content">
+                                                    <div class="micl-datepicker__calendars"></div>
+                                                    <div class="micl-datepicker__years"></div>
+                                                    <div class="micl-datepicker__months"></div>
+                                                    <div class="micl-datepicker__input">
+                                                        <div class="micl-textfield-outlined">
+                                                            <label for="myrange1">From</label>
+                                                            <input type="text" id="myrange1">
+                                                        </div>
+                                                        <div class="micl-textfield-outlined">
+                                                            <label for="myrange2">To</label>
+                                                            <input type="text" id="myrange2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="micl-dialog__actions">
+                                                    <button class="micl-button-text-s" value="">Cancel</button>
+                                                    <button class="micl-button-text-s" value="OK">OK</button>
+                                                </div>
+                                            </form>
+                                        </dialog>
+                                    </div>
                                 </template>
                             </div>
                         </div>
