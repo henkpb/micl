@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const sliderSelector = 'input[type=range].micl-slider-xs,input[type=range].micl-slider-s,input[type=range].micl-slider-m,input[type=range].micl-slider-l,input[type=range].micl-slider-xl';
+export const sliderSelector = 'input[type=range][class*=micl-slider-]';
 
 export default (() =>
 {
@@ -49,14 +49,14 @@ export default (() =>
         setMax = (element: HTMLInputElement): void =>
         {
             let max = element.max || '100';
-            getWrapper(element)?.style.setProperty('--md-sys-slider-max', max);
-            element.style.setProperty('--md-sys-slider-max', max);
+            getWrapper(element)?.style.setProperty('--micl-slider-max', max);
+            element.style.setProperty('--micl-slider-max', max);
         },
         setMin = (element: HTMLInputElement): void =>
         {
             let min = element.min || '0';
-            getWrapper(element)?.style.setProperty('--md-sys-slider-min', min);
-            element.style.setProperty('--md-sys-slider-min', min);
+            getWrapper(element)?.style.setProperty('--micl-slider-min', min);
+            element.style.setProperty('--micl-slider-min', min);
         },
         setTickString = (element: HTMLInputElement, tickString: string): void =>
         {
@@ -68,18 +68,18 @@ export default (() =>
             let tip = JSON.stringify(element.value + ''),
                 wrapper = getWrapper(element);
             if (wrapper) {
-                wrapper.style.setProperty('--md-sys-slider-value', element.value);
-                wrapper.style.setProperty('--md-sys-slider-tip', tip);
+                wrapper.style.setProperty('--micl-slider-value', element.value);
+                wrapper.style.setProperty('--micl-slider-tip', tip);
             }
-            element.style.setProperty('--md-sys-slider-value', element.value);
-            element.style.setProperty('--md-sys-slider-tip', tip);
+            element.style.setProperty('--micl-slider-value', element.value);
+            element.style.setProperty('--micl-slider-tip', tip);
         },
         setVars = (element: HTMLInputElement): void =>
         {
             let wrapper = getWrapper(element);
             if (wrapper) {
                 const computedStyles = window.getComputedStyle(element);
-                ['--md-sys-slider-handle-height', '--md-sys-slider-track-height'].forEach(name => {
+                ['--_handle-height', '--_track-height'].forEach(name => {
                     wrapper.style.setProperty(name, computedStyles.getPropertyValue(name));
                 });
             }

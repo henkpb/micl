@@ -68,6 +68,27 @@ Adding the `disabled` boolean attribute to the `input` element causes the slider
 
 The Slider component is aware of the `dir` global attribute that indicates the directionality of text.
 
+## Theming
+Each slider can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. The size properties default to the values of the chosen size class.
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-slider-track-height | The height of the slider track | 16px / 24px / 40px / 56px / 96px per size |
+| --md-comp-slider-handle-height | The height of the slider handle | 44px / 44px / 52px / 68px / 108px per size |
+| --md-comp-slider-track-shape | The corner rounding of the track | small / small / medium / large / extra-large per size |
+| --md-comp-slider-active-track-color | The color of the active (filled) part of the track | --md-sys-color-primary |
+| --md-comp-slider-inactive-track-color | The color of the inactive part of the track | --md-sys-color-secondary-container |
+| --md-comp-slider-handle-color | The color of the handle | --md-sys-color-primary |
+| --md-comp-slider-stop-indicator-color | The color of the tick marks (blended with the track) | --md-sys-color-on-primary |
+| --md-comp-slider-value-indicator-container-color | The background color of the value indicator | --md-sys-color-inverse-surface |
+| --md-comp-slider-value-indicator-label-text-color | The text color of the value indicator | --md-sys-color-inverse-on-surface |
+
+**Example: Changing the track colors**
+
+```HTML
+<input type="range" class="micl-slider-m" style="--md-comp-slider-active-track-color:var(--md-sys-color-tertiary)">
+```
+
 ## Compatibility
 This component uses the `color-mix` CSS functional notation, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix#browser_compatibility) for details.
 

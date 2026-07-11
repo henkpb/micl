@@ -33,32 +33,28 @@
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 
-@include typography.scale('label-medium');
+@include typography.scale('label-large');
 
 @include motion.duration('medium2');
 @include motion.duration('long2');
 
 @mixin slider-track() {
-    block-size: var(--md-sys-slider-track-height);
-    border-radius: var(--md-sys-slider-track-radius);
+    block-size: var(--_track-height);
+    border-radius: var(--_track-shape);
     background-color: inherit;
     background-image: linear-gradient(
-        var(--md-sys-slider-track-direction),
-        var(--md-sys-color-primary) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
-        transparent calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
-        var(--md-sys-color-secondary-container) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
-        var(--md-sys-color-secondary-container) 100%,
-        transparent
+        var(--_direction),
+        var(--_active-track-color) var(--_thumb-position),
+        transparent var(--_thumb-position) calc(var(--_thumb-position) + 16px),
+        var(--_inactive-track-color) calc(var(--_thumb-position) + 16px)
     );
 }
 @mixin slider-track-disabled() {
     background-image: linear-gradient(
-        var(--md-sys-slider-track-direction),
-        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity, 38%), transparent) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
-        transparent calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
-        color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent) calc(100% * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min))),
-        color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent) 100%,
-        transparent
+        var(--_direction),
+        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity), transparent) var(--_thumb-position),
+        transparent var(--_thumb-position) calc(var(--_thumb-position) + 16px),
+        color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent) calc(var(--_thumb-position) + 16px)
     );
 }
 @mixin slider-thumb() {
@@ -66,19 +62,18 @@
     box-sizing: content-box;
     position: relative;
     inline-size: 16px;
-    block-size: var(--md-sys-slider-handle-height);
+    block-size: var(--_handle-height);
     inset: 0;
-    inset-block-start: calc(-1 * (var(--md-sys-slider-handle-height) - var(--md-sys-slider-track-height) + 8px) / 2);
+    inset-block-start: calc(-1 * (var(--_handle-height) - var(--_track-height) + 8px) / 2);
     padding-block: 4px;
     border: none;
     border-radius: 8px;
-    background-color: inherit;
     background-image: linear-gradient(
-        var(--md-sys-slider-track-direction),
+        var(--_direction),
         transparent 0px,
-        transparent var(--md-sys-slider-thumb-space),
-        var(--md-sys-color-primary) var(--md-sys-slider-thumb-space),
-        var(--md-sys-color-primary) 10px,
+        transparent var(--_thumb-space),
+        var(--_handle-color) var(--_thumb-space),
+        var(--_handle-color) 10px,
         transparent 10px,
         transparent 16px
     );
@@ -87,59 +82,96 @@
     z-index: 2;
 }
 @mixin slider-thumb-disabled() {
-    background-color: inherit;
     background-image: linear-gradient(
-        var(--md-sys-slider-track-direction),
+        var(--_direction),
         transparent 0px,
-        transparent var(--md-sys-slider-thumb-space),
-        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity, 38%), var(--md-sys-color-surface)) var(--md-sys-slider-thumb-space),
-        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity, 38%), var(--md-sys-color-surface)) 10px,
+        transparent var(--_thumb-space),
+        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity), var(--md-sys-color-surface)) var(--_thumb-space),
+        color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-disabled-state-layer-opacity), var(--md-sys-color-surface)) 10px,
         transparent 10px,
         transparent 16px
     );
     cursor: default;
 }
+// The 4px wide handle narrows to 2px while pressed.
+@mixin slider-thumb-active() {
+    background-image: linear-gradient(
+        var(--_direction),
+        transparent 0px,
+        transparent calc(var(--_thumb-space) + 1px),
+        var(--_handle-color) calc(var(--_thumb-space) + 1px),
+        var(--_handle-color) calc(var(--_thumb-space) + 3px),
+        transparent calc(var(--_thumb-space) + 3px),
+        transparent calc(2 * var(--_thumb-space) + 4px)
+    );
+    outline: none;
+    cursor: grabbing;
+}
+@mixin slider-tip() {
+    @include typography.label-large;
+    --_tip-space: 4px;
+
+    content: var(--micl-slider-tip);
+    box-sizing: border-box;
+    position: absolute;
+    inline-size: fit-content;
+    min-inline-size: 48px;
+    block-size: 40px;
+    inset: 0;
+    inset-block-start: calc(-1 * ((var(--_handle-height) - var(--_track-height)) / 2) - 40px - var(--_tip-space));
+    inset-inline-start: calc(-16px + (100% - 16px) * var(--_fraction));
+    padding-block: 12px;
+    padding-inline: 16px;
+    border-radius: 20px;
+    background-color: var(--md-comp-slider-value-indicator-container-color, var(--md-sys-color-inverse-surface));
+    color: var(--md-comp-slider-value-indicator-label-text-color, var(--md-sys-color-inverse-on-surface));
+    text-align: center;
+    opacity: 0;
+    z-index: 3;
+    transition: opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+}
 @mixin slider-progress() {
-    block-size: var(--md-sys-slider-track-height);
+    block-size: var(--_track-height);
 }
 
 input[type=range].micl-slider-xs {
-    --md-sys-slider-handle-height: 44px;
-    --md-sys-slider-track-height: 16px;
-    --md-sys-slider-track-radius: var(--md-sys-shape-corner-small);
+    --_handle-height: var(--md-comp-slider-handle-height, 44px);
+    --_track-height: var(--md-comp-slider-track-height, 16px);
+    --_track-shape: var(--md-comp-slider-track-shape, var(--md-sys-shape-corner-small));
 }
 input[type=range].micl-slider-s {
-    --md-sys-slider-handle-height: 44px;
-    --md-sys-slider-track-height: 24px;
-    --md-sys-slider-track-radius: var(--md-sys-shape-corner-small);
+    --_handle-height: var(--md-comp-slider-handle-height, 44px);
+    --_track-height: var(--md-comp-slider-track-height, 24px);
+    --_track-shape: var(--md-comp-slider-track-shape, var(--md-sys-shape-corner-small));
 }
 input[type=range].micl-slider-m {
-    --md-sys-slider-handle-height: 52px;
-    --md-sys-slider-track-height: 40px;
-    --md-sys-slider-track-radius: var(--md-sys-shape-corner-medium);
+    --_handle-height: var(--md-comp-slider-handle-height, 52px);
+    --_track-height: var(--md-comp-slider-track-height, 40px);
+    --_track-shape: var(--md-comp-slider-track-shape, var(--md-sys-shape-corner-medium));
 }
 input[type=range].micl-slider-l {
-    --md-sys-slider-handle-height: 68px;
-    --md-sys-slider-track-height: 56px;
-    --md-sys-slider-track-radius: var(--md-sys-shape-corner-large);
+    --_handle-height: var(--md-comp-slider-handle-height, 68px);
+    --_track-height: var(--md-comp-slider-track-height, 56px);
+    --_track-shape: var(--md-comp-slider-track-shape, var(--md-sys-shape-corner-large));
 }
 input[type=range].micl-slider-xl {
-    --md-sys-slider-handle-height: 108px;
-    --md-sys-slider-track-height: 96px;
-    --md-sys-slider-track-radius: var(--md-sys-shape-corner-extra-large);
+    --_handle-height: var(--md-comp-slider-handle-height, 108px);
+    --_track-height: var(--md-comp-slider-track-height, 96px);
+    --_track-shape: var(--md-comp-slider-track-shape, var(--md-sys-shape-corner-extra-large));
 }
 
-input[type=range].micl-slider-xs,
-input[type=range].micl-slider-s,
-input[type=range].micl-slider-m,
-input[type=range].micl-slider-l,
-input[type=range].micl-slider-xl {
-    --md-sys-slider-thumb-space: 6px;
-    --md-sys-slider-track-direction: to right;
+input[type=range][class*=micl-slider-] {
+    --_thumb-space: 6px;
+    --_direction: to right;
+    --_fraction: calc((var(--micl-slider-value) - var(--micl-slider-min)) / (var(--micl-slider-max) - var(--micl-slider-min)));
+    --_thumb-position: calc(var(--_fraction) * (100% - 16px));
+    --_active-track-color: var(--md-comp-slider-active-track-color, var(--md-sys-color-primary));
+    --_inactive-track-color: var(--md-comp-slider-inactive-track-color, var(--md-sys-color-secondary-container));
+    --_handle-color: var(--md-comp-slider-handle-color, var(--md-sys-color-primary));
 
     appearance: none;
     position: relative;
-    block-size: var(--md-sys-slider-track-height);
+    block-size: var(--_track-height);
     margin: 0;
     outline: none;
     color: var(--md-sys-color-surface-container-low);
@@ -152,37 +184,17 @@ input[type=range].micl-slider-xl {
         position: absolute;
         inline-size: 100%;
         max-inline-size: 100%;
-        block-size: var(--md-sys-slider-track-height);
-        line-height: var(--md-sys-slider-track-height);
+        block-size: var(--_track-height);
+        line-height: var(--_track-height);
         padding: 0 4px;
         inset: 0;
-        color: var(--md-sys-color-on-primary);
+        color: var(--md-comp-slider-stop-indicator-color, var(--md-sys-color-on-primary));
         mix-blend-mode: difference;
         text-align: end;
         text-wrap-mode: nowrap;
     }
     &::after {
-        @include typography.label-medium;
-        --md-sys-slider-tip-space: 4px;
-
-        content: var(--md-sys-slider-tip);
-        box-sizing: border-box;
-        position: absolute;
-        inline-size: fit-content;
-        min-inline-size: 48px;
-        block-size: 40px;
-        inset: 0;
-        inset-block-start: calc(-1 * ((var(--md-sys-slider-handle-height) - var(--md-sys-slider-track-height)) / 2) - 40px - var(--md-sys-slider-tip-space));
-        inset-inline-start: calc(-16px + (100% - 16px) * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min)));
-        padding-block: 12px;
-        padding-inline: 16px;
-        border-radius: 20px;
-        background-color: var(--md-sys-color-inverse-surface);
-        color: var(--md-sys-color-inverse-on-surface);
-        text-align: center;
-        opacity: 0;
-        z-index: 3;
-        transition: opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+        @include slider-tip;
     }
     &::-webkit-slider-container {
         background-color: inherit;
@@ -217,12 +229,12 @@ input[type=range].micl-slider-xl {
         }
     }
     &.micl-slider--vertical {
-        --md-sys-slider-track-direction: to top;
+        --_direction: to top;
 
         writing-mode: sideways-lr;
 
         &::after {
-            --md-sys-slider-tip-space: 8px;
+            --_tip-space: 8px;
 
             transform: rotate(90deg);
         }
@@ -236,38 +248,18 @@ input[type=range].micl-slider-xl {
         }
         &:focus-visible {
             &::-webkit-slider-thumb {
-                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
             }
             &::-moz-range-thumb {
-                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+                outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
             }
         }
         &:active {
             &::-webkit-slider-thumb {
-                background-image: linear-gradient(
-                    var(--md-sys-slider-track-direction),
-                    transparent 0px,
-                    transparent calc(var(--md-sys-slider-thumb-space) + 1px),
-                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 1px),
-                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 3px),
-                    transparent calc(var(--md-sys-slider-thumb-space) + 3px),
-                    transparent calc(2 * var(--md-sys-slider-thumb-space) + 4px)
-                );
-                outline: none;
-                cursor: grabbing;
+                @include slider-thumb-active;
             }
             &::-moz-range-thumb {
-                background-image: linear-gradient(
-                    var(--md-sys-slider-track-direction),
-                    transparent 0px,
-                    transparent calc(var(--md-sys-slider-thumb-space) + 1px),
-                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 1px),
-                    var(--md-sys-color-primary) calc(var(--md-sys-slider-thumb-space) + 3px),
-                    transparent calc(var(--md-sys-slider-thumb-space) + 3px),
-                    transparent calc(2 * var(--md-sys-slider-thumb-space) + 4px)
-                );
-                outline: none;
-                cursor: grabbing;
+                @include slider-thumb-active;
             }
         }
     }
@@ -301,33 +293,17 @@ input[type=range].micl-slider-xl {
     }
 }
 
+// Gecko does not render generated content on <input>: the value indicator is
+// repeated on the container, which mirrors the slider variables (see index.ts).
 @supports (-moz-appearance:none) {
     .micl-slider__container {
         &:has(> input[type=range]) {
+            --_fraction: calc((var(--micl-slider-value) - var(--micl-slider-min)) / (var(--micl-slider-max) - var(--micl-slider-min)));
+
             position: relative;
 
             &::after {
-                @include typography.label-medium;
-                --md-sys-slider-tip-space: 4px;
-
-                content: var(--md-sys-slider-tip);
-                box-sizing: border-box;
-                position: absolute;
-                inline-size: fit-content;
-                min-inline-size: 48px;
-                block-size: 40px;
-                inset: 0;
-                inset-block-start: calc(-1 * ((var(--md-sys-slider-handle-height) - var(--md-sys-slider-track-height)) / 2) - 40px - var(--md-sys-slider-tip-space));
-                inset-inline-start: calc(-16px + (100% - 16px) * (var(--md-sys-slider-value) - var(--md-sys-slider-min)) / (var(--md-sys-slider-max) - var(--md-sys-slider-min)));
-                padding-block: 12px;
-                padding-inline: 16px;
-                border-radius: 20px;
-                background-color: var(--md-sys-color-inverse-surface);
-                color: var(--md-sys-color-inverse-on-surface);
-                text-align: center;
-                opacity: 0;
-                z-index: 3;
-                transition: opacity var(--md-sys-motion-duration-long2) motion.$md-sys-motion-easing-emphasized-decelerate;
+                @include slider-tip;
             }
         }
         &:has(> input[type=range]:not(:disabled):active)::after,
@@ -336,11 +312,11 @@ input[type=range].micl-slider-xl {
             opacity: 1;
         }
         &:has(> input[type=range].micl-slider--vertical) {
-            --md-sys-slider-track-direction: to top;
+            --_direction: to top;
             writing-mode: sideways-lr;
 
             &::after {
-                --md-sys-slider-tip-space: 8px;
+                --_tip-space: 8px;
                 transform: rotate(90deg);
             }
         }
@@ -356,11 +332,7 @@ input[type=range].micl-slider-xl {
             transform: rotate(-90deg);
         }
     }
-    input[type=range].micl-slider-xs:not(.micl-slider--vertical),
-    input[type=range].micl-slider-s:not(.micl-slider--vertical),
-    input[type=range].micl-slider-m:not(.micl-slider--vertical),
-    input[type=range].micl-slider-l:not(.micl-slider--vertical),
-    input[type=range].micl-slider-xl:not(.micl-slider--vertical) {
-        --md-sys-slider-track-direction: to left;
+    input[type=range][class*=micl-slider-]:not(.micl-slider--vertical) {
+        --_direction: to left;
     }
 }

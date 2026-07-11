@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home,volume_up&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,home,volume_up&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -48,26 +48,36 @@
                 <div class="micl-pane__column">
                     <div class="micl-card-elevated">
                         <div class="micl-card__content">
-                            <input type="range" class="micl-slider-xs" min="1" max="10" value="6">
-                            <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="markers1">
-                            <datalist id="markers1">
-                              <option value="0"></option>
-                              <option value="25"></option>
-                              <option value="50"></option>
-                              <option value="75"></option>
-                              <option value="100"></option>
-                            </datalist>
-                            <div class="range micl-slider__container">
-                                <span class="micl-slider__icon material-symbols-outlined" aria-hidden="true">volume_up</span>
-                                <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5">
+                            <div class="docs-example">
+                                <template>
+                                    <input type="range" class="micl-slider-xs" min="1" max="10" value="6">
+                                    <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="markers">
+                                    <datalist id="markers">
+                                      <option value="0"></option>
+                                      <option value="25"></option>
+                                      <option value="50"></option>
+                                      <option value="75"></option>
+                                      <option value="100"></option>
+                                    </datalist>
+                                    <div class="range micl-slider__container">
+                                        <span class="micl-slider__icon material-symbols-outlined" aria-hidden="true">volume_up</span>
+                                        <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5">
+                                    </div>
+                                    <input type="range" class="micl-slider-l" value="0">
+                                    <input type="range" class="micl-slider-xl" disabled>
+                                </template>
                             </div>
-                            <input type="range" class="micl-slider-l" value="0">
-                            <input type="range" class="micl-slider-xl" disabled>
                         </div>
                     </div>
+                </div>
+                <div class="micl-pane__column">
                     <div class="micl-card-filled">
                         <div class="micl-card__content">
-                            <input type="range" class="micl-slider-xl micl-slider--vertical">
+                            <div class="docs-example">
+                                <template>
+                                    <input type="range" class="micl-slider-xl micl-slider--vertical">
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,59 +87,51 @@
                             <h2>Gecko browsers</h2>
                         </div>
                         <div class="micl-card__content">
-                            <div class="micl-slider__container">
-                                <input type="range" class="micl-slider-xs" min="1" max="10" value="6">
-                            </div>
-                            <div class="micl-slider__container">
-                                <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="markers2">
-                            </div>
-                            <datalist id="markers2">
-                                <option value="0"></option>
-                                <option value="25"></option>
-                                <option value="50"></option>
-                                <option value="75"></option>
-                                <option value="100"></option>
-                            </datalist>
-                            <div class="micl-slider__container">
-                                <span class="micl-slider__icon material-symbols-outlined" aria-hidden="true">volume_up</span>
-                                <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5">
-                            </div>
-                            <div class="micl-slider__container">
-                                <input type="range" class="micl-slider-l" value="0">
-                            </div>
-                            <div class="micl-slider__container">
-                                <input type="range" class="micl-slider-xl" disabled>
+                            <div class="docs-example">
+                                <template>
+                                    <div class="micl-slider__container">
+                                        <input type="range" class="micl-slider-xs" min="1" max="10" value="6">
+                                    </div>
+                                    <div class="micl-slider__container">
+                                        <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="ticks">
+                                    </div>
+                                    <datalist id="ticks">
+                                        <option value="0"></option>
+                                        <option value="25"></option>
+                                        <option value="50"></option>
+                                        <option value="75"></option>
+                                        <option value="100"></option>
+                                    </datalist>
+                                    <div class="micl-slider__container">
+                                        <span class="micl-slider__icon material-symbols-outlined" aria-hidden="true">volume_up</span>
+                                        <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5">
+                                    </div>
+                                    <div class="micl-slider__container">
+                                        <input type="range" class="micl-slider-l" value="0">
+                                    </div>
+                                    <div class="micl-slider__container">
+                                        <input type="range" class="micl-slider-xl" disabled>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="micl-pane__column">
                     <div class="micl-card-filled">
                         <div class="micl-card__headline-s">
                             <h2>Gecko browsers</h2>
                         </div>
                         <div class="micl-card__content">
-                            <div class="micl-slider__container">
-                                <input type="range" class="micl-slider-xl micl-slider--vertical">
+                            <div class="docs-example">
+                                <template>
+                                    <div class="micl-slider__container">
+                                        <input type="range" class="micl-slider-xl micl-slider--vertical">
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="id0"&gt;
-&lt;datalist id="id0"&gt;
-  &lt;option value="0"&gt;&lt;/option&gt;
-  &lt;option value="25"&gt;&lt;/option&gt;
-  &lt;option value="50"&gt;&lt;/option&gt;
-  &lt;option value="75"&gt;&lt;/option&gt;
-  &lt;option value="100"&gt;&lt;/option&gt;
-&lt;/datalist&gt;</code></pre>
                 </div>
             </div>
         </section>
