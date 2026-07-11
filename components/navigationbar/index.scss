@@ -154,7 +154,7 @@ $_breakpoints: (
             background-color: var(--md-comp-nav-rail-collapsed-container-color, var(--md-sys-color-surface));
             box-shadow: var(--md-comp-nav-rail-collapsed-container-elevation, var(--md-sys-elevation-level0));
             border-radius: var(--md-comp-nav-rail-collapsed-container-shape, 0px);
-            border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-sys-divider-color));
+            border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color));
             overflow: hidden;
 
             &> .micl-navigationbar__content {

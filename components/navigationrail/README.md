@@ -137,7 +137,7 @@ Each navigation rail can be themed with CSS custom properties that follow the Ma
 | Custom property | Meaning | Default |
 |---|---|---|
 | `--md-comp-nav-rail-divider-thickness` | The width of the vertical divider at the end of the rail | 0px |
-| `--md-comp-nav-rail-divider-color` | The color of the vertical divider | `--md-sys-divider-color` |
+| `--md-comp-nav-rail-divider-color` | The color of the vertical divider | `--md-comp-divider-color` |
 | `--md-comp-nav-rail-collapsed-container-width` | The width of the collapsed navigation rail | 96px |
 | `--md-comp-nav-rail-collapsed-container-color` | The background color of the collapsed navigation rail | `--md-sys-color-surface` |
 | `--md-comp-nav-rail-collapsed-container-elevation` | The shadow (elevation) of the collapsed navigation rail | `--md-sys-elevation-level0` |

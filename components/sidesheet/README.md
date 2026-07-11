@@ -77,7 +77,7 @@ To open a standard or modal side sheet, link a button to the side sheet's ID usi
 The back-button and the actions-container are optional. To remove the vertical divider of the standard side sheet, assign zero to the following CSS variable:
 ```CSS
 #mysidesheet {
-  --md-sys-divider-thickness: 0;
+  --md-comp-sidesheet-divider-thickness: 0;
 }
 ```
 
@@ -100,6 +100,8 @@ Each side sheet style can be themed with CSS custom properties that follow the M
 | `--md-comp-sidesheet-padding` | The amount of space between the vertical edges and the content | `--md-sys-layout-window-margin` |
 | `--md-comp-sidesheet-container-shape` | The corner rounding of the standard side sheet | `--md-sys-shape-corner-none` |
 | `--md-comp-sidesheet-standard-container-color` | The background color of the standard side sheet | `--md-sys-color-surface` |
+| `--md-comp-sidesheet-divider-thickness` | The thickness of the vertical divider of the standard side sheet | 1px |
+| `--md-comp-sidesheet-divider-color` | The color of the vertical divider of the standard side sheet | `--md-sys-color-outline` |
 | `--md-comp-sidesheet-standard-container-elevation` | The shadow (elevation) of the standard side sheet | `--md-sys-elevation-level0` |
 | `--md-comp-sidesheet-modal-container-color` | The background color of the modal side sheet | `--md-sys-color-surface-container-low` |
 | `--md-comp-sidesheet-modal-container-elevation` | The shadow (elevation) of the modal side sheet | `--md-sys-elevation-level1` |

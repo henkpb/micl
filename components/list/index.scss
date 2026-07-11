@@ -168,7 +168,7 @@ $open-accordion: ':where(details[open] > *)';
     --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-comp-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-comp-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-sys-divider-space: 0.5px;
+    --md-comp-divider-space: 0.5px;
     --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
     --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
     --_list-item-background-opacity: 0%;

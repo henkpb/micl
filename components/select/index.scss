@@ -40,7 +40,7 @@
 }
 .micl-textfield-filled > select,
 .micl-textfield-outlined > select {
-    --md-sys-divider-space: 8px;
+    --md-comp-divider-space: 8px;
     --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
     --md-comp-select-picker-origin: left top;
 
@@ -62,7 +62,7 @@
     &::picker(select) {
         --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
         --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-        --md-sys-divider-space: 0.5px;
+        --md-comp-divider-space: 0.5px;
         --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
         --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
         --_list-item-background-opacity: 0%;
