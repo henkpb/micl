@@ -41,20 +41,43 @@
 @include typography.scale('body-small');
 @include typography.scale('label-medium');
 
-:root {
-    --md-sys-timepicker-input-height: 72px;
-    --md-sys-timepicker-input-width: 96px;
-    --md-sys-timepicker-input-width-24h: 114px;
-    --md-sys-timepicker-separator-width: 24px;
-    --md-sys-timepicker-period-height: 72px;
-    --md-sys-timepicker-period-width: 52px;
-    --md-sys-timepicker-dial-size: 256px;
-    --md-sys-timepicker-dial-center-size: 8px;
-    --md-sys-timepicker-dial-track-width: 2px;
+// State layer background shared by the time fields and the AM/PM toggles.
+// The state layer color follows the label color of the current state.
+%statelayer-background {
+    --statelayer-color: currentColor;
+
+    background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    -webkit-tap-highlight-color: transparent;
+    transition: --statelayer-opacity var(--md-comp-time-picker-motion-duration) linear;
+
+    &:hover {
+        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
+    }
+    &:focus-visible {
+        --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
+    }
+    &:active {
+        --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
+    }
 }
 
 dialog.micl-dialog.micl-timepicker {
-    --md-sys-timepicker-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-comp-time-picker-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+
+    // Internal aliases: each public token is referenced from many descendants.
+    // The keyboard-input mode uses the (smaller) time-input defaults; the
+    // dial modes below re-declare the aliases with the time-picker defaults.
+    --_input-height: var(--md-comp-time-picker-time-selector-container-height, 72px);
+    --_input-width: var(--md-comp-time-picker-time-selector-container-width, 96px);
+    --_separator-width: var(--md-comp-time-picker-separator-width, 24px);
+    --_period-height: var(--md-comp-time-picker-period-selector-container-height, 72px);
+    --_period-width: var(--md-comp-time-picker-period-selector-container-width, 52px);
+    --_dial-size: var(--md-comp-time-picker-clock-dial-container-size, 256px);
+    --_center-size: var(--md-comp-time-picker-clock-dial-selector-center-container-size, 8px);
+    --_track-width: var(--md-comp-time-picker-clock-dial-selector-track-container-width, 2px);
+    --_target: var(--md-sys-target-size, 48px);
 
     .micl-dialog__headline {
         padding-block-end: 20px;
@@ -62,17 +85,17 @@ dialog.micl-dialog.micl-timepicker {
         h2 {
             @include typography.label-medium;
 
-            color: var(--md-sys-color-on-surface-variant);
+            color: var(--md-comp-time-picker-headline-color, var(--md-sys-color-on-surface-variant));
         }
     }
     .micl-dialog__content {
         display: grid;
         padding-block-start: 1px;
         grid-template-areas:
-            "timepicker-hour timepicker-separator timepicker-minute timepicker-period"
-            "timepicker-hour-supporting timepicker-hour-supporting timepicker-minute-supporting timepicker-minute-supporting"
-            "timepicker-dial timepicker-dial timepicker-dial timepicker-dial";
-        grid-template-columns: auto var(--md-sys-timepicker-separator-width) var(--md-sys-timepicker-input-width) auto;
+            "hr sep min per"
+            "hsup hsup msup msup"
+            "dial dial dial dial";
+        grid-template-columns: auto var(--_separator-width) var(--_input-width) auto;
     }
     .micl-dialog__actions {
         &:has(.micl-timepicker__inputmode) {
@@ -85,25 +108,25 @@ dialog.micl-dialog.micl-timepicker {
     }
 
     &:has(.micl-timepicker__dial:not(.micl-hidden)) {
-        --md-sys-timepicker-input-height: 80px;
-        --md-sys-timepicker-period-height: 80px;
+        --_input-height: var(--md-comp-time-picker-time-selector-container-height, 80px);
+        --_period-height: var(--md-comp-time-picker-period-selector-container-height, 80px);
 
         &.micl-timepicker--horizontal {
-            --md-sys-timepicker-period-height: 38px;
+            --_period-height: var(--md-comp-time-picker-period-selector-container-height, 38px);
 
             .micl-dialog__headline {
                 padding-block-end: 0;
             }
             .micl-dialog__content {
                 grid-template-areas:
-                    "timepicker-dummy timepicker-dummy timepicker-dummy timepicker-dial"
-                    "timepicker-hour timepicker-separator timepicker-minute timepicker-dial"
-                    "timepicker-period timepicker-period timepicker-period timepicker-dial";
-                grid-template-rows: 72px var(--md-sys-timepicker-input-height) auto;
+                    "x x x dial"
+                    "hr sep min dial"
+                    "per per per dial";
+                grid-template-rows: 72px var(--_input-height) auto;
 
                 .micl-timepicker__period {
-                    --md-sys-timepicker-ampm-height: var(--md-sys-timepicker-period-height);
-                    --md-sys-timepicker-period-width: calc(2 * var(--md-sys-timepicker-input-width) + var(--md-sys-timepicker-separator-width));
+                    --_ampm-height: var(--_period-height);
+                    --_period-width: calc(2 * var(--_input-width) + var(--_separator-width));
 
                     display: flex;
                     align-self: flex-start;
@@ -137,28 +160,22 @@ dialog.micl-dialog.micl-timepicker {
 .micl-timepicker {
     input[name=hour],
     input[name=minute] {
-        --statelayer-color: var(--md-sys-color-on-surface);
-
+        @extend %statelayer-background;
         @include typography.display-medium;
 
         box-sizing: border-box;
-        inline-size: var(--md-sys-timepicker-input-width);
-        block-size: var(--md-sys-timepicker-input-height);
+        inline-size: var(--_input-width);
+        block-size: var(--_input-height);
         margin: 0;
         padding: 0;
         border: none;
         outline: none;
         border-radius: var(--md-sys-shape-corner-small);
-        background-color: var(--md-sys-color-surface-container-highest);
-        background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-        background-repeat: no-repeat;
-        background-size: 100%;
-        color: var(--md-sys-color-on-surface);
+        background-color: var(--md-comp-time-picker-time-selector-unselected-container-color, var(--md-sys-color-surface-container-highest));
+        color: var(--md-comp-time-picker-time-selector-unselected-label-text-color, var(--md-sys-color-on-surface));
         text-align: center;
         user-select: none;
-        -webkit-tap-highlight-color: transparent;
         -moz-appearance: textfield;
-        transition: --statelayer-opacity var(--md-sys-timepicker-motion-duration) linear;
 
         &::-webkit-inner-spin-button,
         &::-webkit-outer-spin-button {
@@ -168,28 +185,17 @@ dialog.micl-dialog.micl-timepicker {
             background-color: transparent;
         }
         &.micl-timepicker--selected {
-            --statelayer-color: var(--md-sys-color-on-primary-container);
-
-            background-color: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            border: 2px solid var(--md-sys-color-primary);
-        }
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+            background-color: var(--md-comp-time-picker-time-selector-selected-container-color, var(--md-sys-color-primary-container));
+            color: var(--md-comp-time-picker-time-selector-selected-label-text-color, var(--md-sys-color-on-primary-container));
+            border: 2px solid var(--md-comp-time-input-focus-outline-color, var(--md-sys-color-primary));
         }
     }
     input[name=hour] {
-        grid-area: timepicker-hour;
+        grid-area: hr;
         justify-self: flex-end;
     }
     input[name=minute] {
-        grid-area: timepicker-minute;
+        grid-area: min;
     }
     &:has(.micl-timepicker__dial:not(.micl-hidden)) {
         input[name=hour],
@@ -201,34 +207,33 @@ dialog.micl-dialog.micl-timepicker {
         }
     }
     &:not(:has(.micl-timepicker__am)):not(:has(.micl-timepicker__dial:not(.micl-hidden))) {
-        --md-sys-timepicker-input-width: var(--md-sys-timepicker-input-width-24h);
+        --_input-width: var(--md-comp-time-picker-time-selector-24h-container-width, 114px);
     }
 }
 .micl-timepicker__separator {
     @include typography.display-large;
 
-    grid-area: timepicker-separator;
-    block-size: var(--md-sys-timepicker-input-height);
-    line-height: var(--md-sys-timepicker-input-height);
-    inline-size: var(--md-sys-timepicker-separator-width);
+    grid-area: sep;
+    block-size: var(--_input-height);
+    line-height: var(--_input-height);
+    inline-size: var(--_separator-width);
     text-align: center;
-    color: var(--md-sys-color-on-surface);
+    color: var(--md-comp-time-picker-separator-color, var(--md-sys-color-on-surface));
 }
 .micl-timepicker__period {
-    --md-sys-timepicker-ampm-height: calc(var(--md-sys-timepicker-period-height) / 2);
+    --_ampm-height: calc(var(--_period-height) / 2);
 
-    grid-area: timepicker-period;
-    block-size: var(--md-sys-timepicker-period-height);
+    grid-area: per;
+    block-size: var(--_period-height);
     inline-size: 0;
 
     &:has(.micl-timepicker__am) {
-        inline-size: var(--md-sys-timepicker-period-width);
+        inline-size: var(--_period-width);
         margin-inline: 12px 0;
     }
     .micl-timepicker__am,
     .micl-timepicker__pm {
-        --statelayer-color: var(--md-sys-color-on-surface-variant);
-
+        @extend %statelayer-background;
         @include typography.title-medium;
 
         appearance: none;
@@ -236,20 +241,15 @@ dialog.micl-dialog.micl-timepicker {
         position: relative;
         display: flex;
         align-items: center;
-        inline-size: var(--md-sys-timepicker-period-width);
-        block-size: var(--md-sys-timepicker-ampm-height);
-        min-block-size: var(--md-sys-timepicker-ampm-height);
+        inline-size: var(--_period-width);
+        block-size: var(--_ampm-height);
+        min-block-size: var(--_ampm-height);
         margin: 0;
-        border: 1px solid var(--md-sys-color-outline);
+        border: 1px solid var(--md-comp-time-picker-period-selector-outline-color, var(--md-sys-color-outline));
         outline: none;
-        color: var(--md-sys-color-on-surface-variant);
+        color: var(--md-comp-time-picker-period-selector-unselected-label-text-color, var(--md-sys-color-on-surface-variant));
         background-color: transparent;
-        background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-        background-repeat: no-repeat;
-        background-size: 100%;
         cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-        transition: --statelayer-opacity var(--md-sys-timepicker-motion-duration) linear;
 
         &::before {
             content: "AM";
@@ -258,33 +258,12 @@ dialog.micl-dialog.micl-timepicker {
             text-align: center;
         }
         &:checked {
-            color: var(--md-sys-color-on-tertiary-container);
-            background-color: var(--md-sys-color-tertiary-container);
-        }
-        &:hover,
-        &:focus-visible,
-        &:active {
-            &:checked {
-                --statelayer-color: var(--md-sys-color-on-tertiary-container);
-            }
-            &::after {
-                border-color: var(--md-sys-color-on-surface);
-            }
-            &:checked::after {
-                border-color: var(--md-sys-color-primary);
-            }
-        }
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+            color: var(--md-comp-time-picker-period-selector-selected-label-text-color, var(--md-sys-color-on-tertiary-container));
+            background-color: var(--md-comp-time-picker-period-selector-selected-container-color, var(--md-sys-color-tertiary-container));
         }
         &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
             outline-offset: -2px;
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
     }
     .micl-timepicker__am {
@@ -306,34 +285,34 @@ dialog.micl-dialog.micl-timepicker {
 .micl-timepicker__supporting-text-minute {
     @include typography.body-small;
 
-    grid-area: timepicker-hour-supporting;
+    grid-area: hsup;
     padding-block: 4px 0;
-    color: var(--md-sys-color-on-surface-variant);
+    color: var(--md-comp-time-picker-supporting-text-color, var(--md-sys-color-on-surface-variant));
 }
 .micl-timepicker__supporting-text-minute {
-    grid-area: timepicker-minute-supporting;
+    grid-area: msup;
 }
 
 .micl-timepicker .micl-timepicker__dial {
-    --micl-dial-radius: calc((var(--md-sys-timepicker-dial-size, 256px) - var(--md-sys-target-size, 48px)) / 2);
+    --micl-dial-radius: calc((var(--_dial-size) - var(--_target)) / 2);
     --micl-hour-radius: var(--micl-dial-radius);
     --micl-angle: 0deg;
 
     position: relative;
-    grid-area: timepicker-dial;
+    grid-area: dial;
     justify-self: center;
-    block-size: var(--md-sys-timepicker-dial-size, 256px);
-    inline-size: var(--md-sys-timepicker-dial-size, 256px);
+    block-size: var(--_dial-size);
+    inline-size: var(--_dial-size);
     margin-block: 36px 0;
     margin-inline: 0;
     outline: none;
     border-radius: var(--md-sys-shape-corner-full);
-    background-color: var(--md-sys-color-surface-container-highest);
+    background-color: var(--md-comp-time-picker-clock-dial-color, var(--md-sys-color-surface-container-highest));
     list-style-type: none;
     touch-action: none;
 
     data.micl-timepicker__dial-inner {
-        --micl-hour-radius: calc(var(--micl-dial-radius) - var(--md-sys-target-size, 48px) + 12px);
+        --micl-hour-radius: calc(var(--micl-dial-radius) - var(--_target) + 12px);
 
         z-index: 2;
         &::before {
@@ -349,31 +328,31 @@ dialog.micl-dialog.micl-timepicker {
         position: absolute;
         display: grid;
         place-content: center;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: var(--md-sys-target-size, 48px);
+        block-size: var(--_target);
+        inline-size: var(--_target);
         inset-inline-start: var(--micl-a);
         inset-block-start: var(--micl-b);
         outline: none;
         border-radius: var(--md-sys-shape-corner-full);
-        color: var(--md-sys-color-on-surface);
+        color: var(--md-comp-time-picker-clock-dial-unselected-label-text-color, var(--md-sys-color-on-surface));
         cursor: pointer;
         z-index: 1;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
 
         &.micl-timepicker__time--selected {
-            color: var(--md-sys-color-on-primary);
-            background-color: var(--md-sys-color-primary);
+            color: var(--md-comp-time-picker-clock-dial-selected-label-text-color, var(--md-sys-color-on-primary));
+            background-color: var(--md-comp-time-picker-clock-dial-selector-handle-container-color, var(--md-sys-color-primary));
         }
         &::before {
             content: "";
             position: absolute;
-            block-size: var(--md-sys-target-size, 48px);
-            inline-size: calc(2 * var(--md-sys-target-size, 48px));
+            block-size: var(--_target);
+            inline-size: calc(2 * var(--_target));
             inset-inline-start: 0;
             inset-block-end: 0;
-            transform: rotate(var(--micl-angle)) translate(calc(-1 * var(--md-sys-target-size, 48px)));
-            transform-origin: calc(var(--md-sys-target-size, 48px) / 2) center;
+            transform: rotate(var(--micl-angle)) translate(calc(-1 * var(--_target)));
+            transform-origin: calc(var(--_target) / 2) center;
             z-index: 1;
         }
     }
@@ -383,12 +362,12 @@ dialog.micl-dialog.micl-timepicker {
 
         position: relative;
         display: block;
-        inline-size: var(--md-sys-timepicker-dial-track-width, 2px);
+        inline-size: var(--_track-width);
         block-size: var(--micl-track-length);
-        inset-inline-start: calc((var(--md-sys-timepicker-dial-size, 256px) - var(--md-sys-timepicker-dial-track-width, 2px)) / 2);
-        inset-block-start: calc((var(--md-sys-timepicker-dial-size, 256px) / 2) - var(--micl-track-length));
-        border-radius: calc(var(--md-sys-timepicker-dial-track-width, 2px) * 2);
-        background-color: var(--md-sys-color-primary);
+        inset-inline-start: calc((var(--_dial-size) - var(--_track-width)) / 2);
+        inset-block-start: calc((var(--_dial-size) / 2) - var(--micl-track-length));
+        border-radius: calc(var(--_track-width) * 2);
+        background-color: var(--md-comp-time-picker-clock-dial-selector-track-container-color, var(--md-sys-color-primary));
         transform: rotate(calc(90deg + var(--micl-angle)));
         transform-origin: bottom;
 
@@ -396,12 +375,12 @@ dialog.micl-dialog.micl-timepicker {
             content: "";
             position: absolute;
             display: block;
-            block-size: var(--md-sys-timepicker-dial-center-size, 8px);
-            inline-size: var(--md-sys-timepicker-dial-center-size, 8px);
+            block-size: var(--_center-size);
+            inline-size: var(--_center-size);
             inset-block-end: -3px;
             inset-inline-start: -3px;
             border-radius: var(--md-sys-shape-corner-full);
-            background-color: var(--md-sys-color-primary);
+            background-color: var(--md-comp-time-picker-clock-dial-selector-center-container-color, var(--md-sys-color-primary));
         }
     }
 }
