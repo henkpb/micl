@@ -19,156 +19,153 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export default (() =>
+const isCVElement = (element: Element): element is
+    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLFieldSetElement =>
+    'willValidate' in element;
+
+const setErrorStateCheckbox = (element: HTMLInputElement): boolean =>
 {
-    const isCVElement = (element: Element): element is
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLFieldSetElement =>
-        'willValidate' in element;
+    element.classList.toggle('micl-checkbox--error', !!element.validationMessage);
 
-    const setErrorStateCheckbox = (element: HTMLInputElement): boolean =>
-    {
-        element.classList.toggle('micl-checkbox--error', !!element.validationMessage);
+    return false;
+};
 
-        return false;
-    };
+const setErrorStateTextField = (textField: HTMLElement, message: string): boolean =>
+{
+    textField.classList.toggle('micl-textfield--error', !!message);
 
-    const setErrorStateTextField = (textField: HTMLElement, message: string): boolean =>
-    {
-        textField.classList.toggle('micl-textfield--error', !!message);
+    const supporting = textField.querySelector(
+        '.micl-textfield__supporting-text'
+    ) as HTMLElement;
 
-        const supporting = textField.querySelector(
-            '.micl-textfield__supporting-text'
-        ) as HTMLElement;
-
-        if (supporting) {
-            if (!message) {
-                if ('micltext' in supporting.dataset) {
-                    supporting.textContent = supporting.dataset.micltext || '';
-                }
-            }
-            else {
-                if (!supporting.dataset.micltext) {
-                    supporting.dataset.micltext = supporting.textContent;
-                }
-                supporting.textContent = message;
-            }
-        }
-
-        return !!message && !!supporting;
-    };
-
-    const setErrorState = (element: HTMLElement): boolean =>
-    {
-        if (
-            !element.parentElement
-            || !isCVElement(element)
-        ) {
-            return false;
-        }
-        let reported = false;
-
-        if (
-            element instanceof HTMLInputElement
-            && (element.type === 'checkbox')
-            && element.classList.contains('micl-checkbox')
-        ) {
-            reported = setErrorStateCheckbox(element);
-        }
-        else if (
-            element.parentElement.classList.contains('micl-textfield-outlined')
-            || element.parentElement.classList.contains('micl-textfield-filled')
-        ) {
-            reported = setErrorStateTextField(element.parentElement, element.validationMessage);
-        }
-
-        return reported;
-    };
-
-    const clearCustomValidity = (event: Event): void =>
-    {
-        const element = event.target as Element;
-        if (isCVElement(element)) {
-            element.setCustomValidity('');
-        }
-    };
-
-    const setCustomValidityFieldSet = (fieldset: HTMLFieldSetElement): void =>
-    {
-        const message = fieldset.dataset.miclvalidateMessage || '';
+    if (supporting) {
         if (!message) {
-            return;
+            if ('micltext' in supporting.dataset) {
+                supporting.textContent = supporting.dataset.micltext || '';
+            }
         }
+        else {
+            if (!supporting.dataset.micltext) {
+                supporting.dataset.micltext = supporting.textContent;
+            }
+            supporting.textContent = message;
+        }
+    }
 
-        if (fieldset.matches('[data-miclvalidate-checkboxes-name]')) {
-            const name       = fieldset.dataset.miclvalidateCheckboxesName || '';
-            const countEqual = fieldset.dataset.miclvalidateCheckboxesCountEqual || '';
-            const countMax   = fieldset.dataset.miclvalidateCheckboxesCountMax || '';
-            const countMin   = fieldset.dataset.miclvalidateCheckboxesCountMin || '';
+    return !!message && !!supporting;
+};
 
-            if (name && (countEqual || countMax || countMin)) {
-                const checkedCount = fieldset.querySelectorAll<HTMLInputElement>(
-                    `input[type="checkbox"][name="${name}"]:checked`
-                ).length;
-                const expectedCountEqual = parseInt(countEqual, 10);
-                const expectedCountMax   = parseInt(countMax, 10);
-                const expectedCountMin   = parseInt(countMin, 10);
+const setErrorState = (element: HTMLElement): boolean =>
+{
+    if (
+        !element.parentElement
+        || !isCVElement(element)
+    ) {
+        return false;
+    }
+    let reported = false;
 
-                let invalid = (!isNaN(expectedCountEqual) && (checkedCount != expectedCountEqual))
-                              || (!isNaN(expectedCountMax) && (checkedCount > expectedCountMax))
-                              || (!isNaN(expectedCountMin) && (checkedCount < expectedCountMin));
+    if (
+        element instanceof HTMLInputElement
+        && (element.type === 'checkbox')
+        && element.classList.contains('micl-checkbox')
+    ) {
+        reported = setErrorStateCheckbox(element);
+    }
+    else if (
+        element.parentElement.classList.contains('micl-textfield-outlined')
+        || element.parentElement.classList.contains('micl-textfield-filled')
+    ) {
+        reported = setErrorStateTextField(element.parentElement, element.validationMessage);
+    }
 
-                fieldset.setCustomValidity(invalid ? message : '');
+    return reported;
+};
 
-                const firstCheckbox = fieldset.querySelector<HTMLInputElement>(
-                    `input[type="checkbox"][name="${name}"]`
-                );
-                if (firstCheckbox) {
-                    firstCheckbox.setCustomValidity(invalid ? message : '');
-                    if (invalid) {
-                        firstCheckbox.addEventListener('change', clearCustomValidity);
-                    }
-                    else {
-                        firstCheckbox.removeEventListener('change', clearCustomValidity);
-                    }
+const clearCustomValidity = (event: Event): void =>
+{
+    const element = event.target as Element;
+    if (isCVElement(element)) {
+        element.setCustomValidity('');
+    }
+};
+
+const setCustomValidityFieldSet = (fieldset: HTMLFieldSetElement): void =>
+{
+    const message = fieldset.dataset.miclvalidateMessage || '';
+    if (!message) {
+        return;
+    }
+
+    if (fieldset.matches('[data-miclvalidate-checkboxes-name]')) {
+        const name       = fieldset.dataset.miclvalidateCheckboxesName || '';
+        const countEqual = fieldset.dataset.miclvalidateCheckboxesCountEqual || '';
+        const countMax   = fieldset.dataset.miclvalidateCheckboxesCountMax || '';
+        const countMin   = fieldset.dataset.miclvalidateCheckboxesCountMin || '';
+
+        if (name && (countEqual || countMax || countMin)) {
+            const checkedCount = fieldset.querySelectorAll<HTMLInputElement>(
+                `input[type="checkbox"][name="${name}"]:checked`
+            ).length;
+            const expectedCountEqual = parseInt(countEqual, 10);
+            const expectedCountMax   = parseInt(countMax, 10);
+            const expectedCountMin   = parseInt(countMin, 10);
+
+            let invalid = (!isNaN(expectedCountEqual) && (checkedCount != expectedCountEqual))
+                          || (!isNaN(expectedCountMax) && (checkedCount > expectedCountMax))
+                          || (!isNaN(expectedCountMin) && (checkedCount < expectedCountMin));
+
+            fieldset.setCustomValidity(invalid ? message : '');
+
+            const firstCheckbox = fieldset.querySelector<HTMLInputElement>(
+                `input[type="checkbox"][name="${name}"]`
+            );
+            if (firstCheckbox) {
+                firstCheckbox.setCustomValidity(invalid ? message : '');
+                if (invalid) {
+                    firstCheckbox.addEventListener('change', clearCustomValidity);
+                }
+                else {
+                    firstCheckbox.removeEventListener('change', clearCustomValidity);
                 }
             }
         }
-    };
+    }
+};
 
-    const validity = (container: HTMLFormElement | HTMLFieldSetElement, doReport?: boolean): boolean =>
+const validity = (container: HTMLFormElement | HTMLFieldSetElement, doReport?: boolean): boolean =>
+{
+    let invalid = false;
+
+    container.querySelectorAll<HTMLFieldSetElement>(
+        'fieldset'
+    ).forEach(setCustomValidityFieldSet);
+
+    Array.from(container.elements).forEach(element =>
     {
-        let invalid = false;
-
-        container.querySelectorAll<HTMLFieldSetElement>(
-            'fieldset'
-        ).forEach(setCustomValidityFieldSet);
-
-        Array.from(container.elements).forEach(element =>
-        {
-            if (isCVElement(element) && element.willValidate) {
-                if (!element.checkValidity()) {
-                    invalid = true;
-                }
-                let reported = setErrorState(element);
-                if (!reported && doReport) {
-                    element.reportValidity();
-                }
+        if (isCVElement(element) && element.willValidate) {
+            if (!element.checkValidity()) {
+                invalid = true;
             }
-        });
-
-        return !invalid;
-    };
-
-    return {
-        validateFieldSet: (fieldset: HTMLFieldSetElement, doReport?: boolean): boolean =>
-        {
-            setCustomValidityFieldSet(fieldset);
-            return validity(fieldset, doReport);
-        },
-
-        validateForm: (form: HTMLFormElement, doReport?: boolean): boolean =>
-        {
-            return validity(form, doReport);
+            let reported = setErrorState(element);
+            if (!reported && doReport) {
+                element.reportValidity();
+            }
         }
-    };
-})();
+    });
+
+    return !invalid;
+};
+
+export default {
+    validateFieldSet: (fieldset: HTMLFieldSetElement, doReport?: boolean): boolean =>
+    {
+        setCustomValidityFieldSet(fieldset);
+        return validity(fieldset, doReport);
+    },
+
+    validateForm: (form: HTMLFormElement, doReport?: boolean): boolean =>
+    {
+        return validity(form, doReport);
+    }
+};

@@ -49,173 +49,170 @@ interface ComponentEntry<T extends HTMLElement> {
 
 type EventHandlerKey = keyof ComponentEventHandlers;
 
-export default (() =>
+const componentMap: Record<string, ComponentEntry<any>> = {
+    [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
+    [buttonSelector]        : { component: _button, type: HTMLButtonElement },
+    [checkboxGroupSelector] : { component: _checkboxgroup, type: HTMLElement },
+    [datepickerSelector]    : { component: _datepicker, type: HTMLDialogElement },
+    [listSelector]          : { component: _list, type: HTMLElement },
+    [menuSelector]          : { component: _menu, type: HTMLElement },
+    [navigationrailSelector]: { component: _navigationrail, type: HTMLElement },
+    [progressindicatorSelector]: { component: _progressindicator, type: HTMLProgressElement },
+    [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
+    [sliderSelector]        : { component: _slider, type: HTMLInputElement },
+    [snackbarSelector]      : { component: _snackbar, type: HTMLElement },
+    [stepperSelector]       : { component: _stepper, type: HTMLElement },
+    [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
+    [textfieldSelector]     : { component: _textfield, type: HTMLInputElement },
+    [timepickerSelector]    : { component: _timepicker, type: HTMLDialogElement }
+};
+
+const selector = Object.keys(componentMap).join(',');
+
+const findEntry = (element: HTMLElement): ComponentEntry<HTMLElement> | undefined =>
+    Object.entries(componentMap)
+        .find(([selector, { type }]) => element.matches(selector) && element instanceof type)
+        ?.[1];
+
+const initializeScrollbars = (): void =>
 {
-    const componentMap: Record<string, ComponentEntry<any>> = {
-        [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
-        [buttonSelector]        : { component: _button, type: HTMLButtonElement },
-        [checkboxGroupSelector] : { component: _checkboxgroup, type: HTMLElement },
-        [datepickerSelector]    : { component: _datepicker, type: HTMLDialogElement },
-        [listSelector]          : { component: _list, type: HTMLElement },
-        [menuSelector]          : { component: _menu, type: HTMLElement },
-        [navigationrailSelector]: { component: _navigationrail, type: HTMLElement },
-        [progressindicatorSelector]: { component: _progressindicator, type: HTMLProgressElement },
-        [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
-        [sliderSelector]        : { component: _slider, type: HTMLInputElement },
-        [snackbarSelector]      : { component: _snackbar, type: HTMLElement },
-        [stepperSelector]       : { component: _stepper, type: HTMLElement },
-        [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
-        [textfieldSelector]     : { component: _textfield, type: HTMLInputElement },
-        [timepickerSelector]    : { component: _timepicker, type: HTMLDialogElement }
-    };
+    document.documentElement.style.setProperty(
+        '--md-sys-scrollbar-thumb-color',
+        window.getComputedStyle(document.body).getPropertyValue('--md-sys-color-outline').trim()
+    );
+};
 
-    const selector = Object.keys(componentMap).join(',');
+const initializeComponent = (element: HTMLElement): void =>
+{
+    const entry = findEntry(element);
+    if (entry && typeof entry.component.initialize === 'function') {
+        entry.component.initialize(element);
+    }
+};
 
-    const findEntry = (element: HTMLElement): ComponentEntry<HTMLElement> | undefined =>
-        Object.entries(componentMap)
-            .find(([selector, { type }]) => element.matches(selector) && element instanceof type)
-            ?.[1];
+const rippleInitialized = new WeakSet<HTMLElement>();
 
-    const initializeScrollbars = (): void =>
+const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
+{
+    parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
+    parent.querySelectorAll<HTMLElement>('[class*="micl-"], [class*="micl-"] > summary').forEach(element =>
     {
-        document.documentElement.style.setProperty(
-            '--md-sys-scrollbar-thumb-color',
-            window.getComputedStyle(document.body).getPropertyValue('--md-sys-color-outline').trim()
-        );
-    };
+        if (rippleInitialized.has(element)) return;
 
-    const initializeComponent = (element: HTMLElement): void =>
-    {
-        const entry = findEntry(element);
-        if (entry && typeof entry.component.initialize === 'function') {
-            entry.component.initialize(element);
-        }
-    };
-
-    const rippleInitialized = new WeakSet<HTMLElement>();
-
-    const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
-    {
-        parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
-        parent.querySelectorAll<HTMLElement>('[class*="micl-"], [class*="micl-"] > summary').forEach(element =>
-        {
-            if (rippleInitialized.has(element)) return;
-
-            if (window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1') {
-                element.addEventListener('pointerdown', (e: PointerEvent) =>
-                {
-                    if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
-                        return;
-                    }
-                    e.stopPropagation();
-
-                    const r = element.getBoundingClientRect();
-                    element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
-                    element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
-
-                    element.classList.remove('micl-rippling');
-                    void element.offsetWidth;
-                    element.classList.add('micl-rippling');
-
-                    const cleanup = (ev: AnimationEvent): void =>
-                    {
-                        if (ev.animationName !== 'micl-ripple') return;
-
-                        element.classList.remove('micl-rippling');
-                        element.style.removeProperty('--micl-x');
-                        element.style.removeProperty('--micl-y');
-                        element.removeEventListener('animationend', cleanup);
-                    };
-
-                    element.addEventListener('animationend', cleanup);
-                });
-
-                rippleInitialized.add(element);
-            }
-        });
-
-        initializeScrollbars();
-    };
-
-    const cleanupComponent = (element: HTMLElement): void =>
-    {
-        const entry = findEntry(element);
-        if (entry && typeof entry.component.cleanup === 'function') {
-            entry.component.cleanup(element);
-        }
-    };
-
-    const cleanupComponents = (parent: HTMLDocument | HTMLElement): void =>
-    {
-        parent.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
-    };
-
-    const handleEvent = (event: Event): void =>
-    {
-        const target = (event.target as Element).closest(selector);
-        if (!(target instanceof HTMLElement)) return;
-
-        const entry = findEntry(target);
-        const key   = event.type as EventHandlerKey;
-        if (entry && typeof entry.component[key] === 'function') {
-            entry.component[key]?.(event);
-        }
-    };
-
-    const activate = () =>
-    {
-        const observer = new MutationObserver(mutations =>
-        {
-            mutations.forEach(mutation =>
+        if (window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1') {
+            element.addEventListener('pointerdown', (e: PointerEvent) =>
             {
-                if (mutation.type !== 'childList') {
+                if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
                     return;
                 }
-                mutation.addedNodes.forEach(node =>
+                e.stopPropagation();
+
+                const r = element.getBoundingClientRect();
+                element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
+                element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
+
+                element.classList.remove('micl-rippling');
+                void element.offsetWidth;
+                element.classList.add('micl-rippling');
+
+                const cleanup = (ev: AnimationEvent): void =>
                 {
-                    if (node instanceof HTMLElement) {
-                        if (node.matches(selector)) {
-                            initializeComponent(node);
-                        }
-                        node.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
+                    if (ev.animationName !== 'micl-ripple') return;
+
+                    element.classList.remove('micl-rippling');
+                    element.style.removeProperty('--micl-x');
+                    element.style.removeProperty('--micl-y');
+                    element.removeEventListener('animationend', cleanup);
+                };
+
+                element.addEventListener('animationend', cleanup);
+            });
+
+            rippleInitialized.add(element);
+        }
+    });
+
+    initializeScrollbars();
+};
+
+const cleanupComponent = (element: HTMLElement): void =>
+{
+    const entry = findEntry(element);
+    if (entry && typeof entry.component.cleanup === 'function') {
+        entry.component.cleanup(element);
+    }
+};
+
+const cleanupComponents = (parent: HTMLDocument | HTMLElement): void =>
+{
+    parent.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
+};
+
+const handleEvent = (event: Event): void =>
+{
+    const target = (event.target as Element).closest(selector);
+    if (!(target instanceof HTMLElement)) return;
+
+    const entry = findEntry(target);
+    const key   = event.type as EventHandlerKey;
+    if (entry && typeof entry.component[key] === 'function') {
+        entry.component[key]?.(event);
+    }
+};
+
+const activate = () =>
+{
+    const observer = new MutationObserver(mutations =>
+    {
+        mutations.forEach(mutation =>
+        {
+            if (mutation.type !== 'childList') {
+                return;
+            }
+            mutation.addedNodes.forEach(node =>
+            {
+                if (node instanceof HTMLElement) {
+                    if (node.matches(selector)) {
+                        initializeComponent(node);
                     }
-                });
-                mutation.removedNodes.forEach(node =>
-                {
-                    if (node instanceof HTMLElement) {
-                        if (node.matches(selector)) {
-                            cleanupComponent(node);
-                        }
-                        cleanupComponents(node);
+                    node.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
+                }
+            });
+            mutation.removedNodes.forEach(node =>
+            {
+                if (node instanceof HTMLElement) {
+                    if (node.matches(selector)) {
+                        cleanupComponent(node);
                     }
-                });
+                    cleanupComponents(node);
+                }
             });
         });
-        observer.observe(document.body, { childList: true, subtree: true });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-        initializeComponents(document);
+    initializeComponents(document);
 
-        // Delegated Event Handlers
-        document.addEventListener('change', handleEvent);
-        document.addEventListener('input', handleEvent);
-        document.addEventListener('keydown', handleEvent);
-    };
+    // Delegated Event Handlers
+    document.addEventListener('change', handleEvent);
+    document.addEventListener('input', handleEvent);
+    document.addEventListener('keydown', handleEvent);
+};
 
-    const loaded = () =>
-    {
-        document.removeEventListener('DOMContentLoaded', loaded);
-        activate();
-    };
+const loaded = () =>
+{
+    document.removeEventListener('DOMContentLoaded', loaded);
+    activate();
+};
 
-    if (document.readyState !== 'loading') {
-        activate();
-    }
-    else {
-        document.addEventListener('DOMContentLoaded', loaded);
-    }
+if (document.readyState !== 'loading') {
+    activate();
+}
+else {
+    document.addEventListener('DOMContentLoaded', loaded);
+}
 
-    return {
-        initialize: () => initializeComponents(document),
-        cleanup   : () => cleanupComponents(document)
-    };
-})();
+export default {
+    initialize: () => initializeComponents(document),
+    cleanup   : () => cleanupComponents(document)
+};

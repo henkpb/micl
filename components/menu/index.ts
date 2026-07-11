@@ -21,125 +21,122 @@
 
 export const menuSelector = '.micl-menu[popover]';
 
-export default (() =>
+const getOrigin = (invoker: Element, popover: Element): string =>
 {
-    const getOrigin = (invoker: Element, popover: Element): string =>
+    const invokerRect = invoker.getBoundingClientRect();
+    const popoverRect = popover.getBoundingClientRect();
+
+    return ((invokerRect.x > popoverRect.x) ? 'right ' : 'left ') +
+           ((invokerRect.y > popoverRect.y) ? 'bottom' : 'top');
+};
+
+const navigableItems = (list: Element): HTMLElement[] =>
+    Array.from(list.children).filter((child): child is HTMLElement =>
+        child instanceof HTMLLIElement
+        && child.getAttribute('role') !== 'separator'
+        && !child.classList.contains('micl-list-item--disabled')
+        && child.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
+    );
+
+export default {
+    initialize: (element: HTMLElement): void =>
     {
-        const invokerRect = invoker.getBoundingClientRect();
-        const popoverRect = popover.getBoundingClientRect();
+        if (
+            !element.matches('.micl-menu[popover]')
+            || element.dataset.miclinitialized
+        ) {
+            return;
+        }
+        element.dataset.miclinitialized = '1';
 
-        return ((invokerRect.x > popoverRect.x) ? 'right ' : 'left ') +
-               ((invokerRect.y > popoverRect.y) ? 'bottom' : 'top');
-    };
+        const invoker = document.querySelector(`[popovertarget="${element.id}"]`);
 
-    const navigableItems = (list: Element): HTMLElement[] =>
-        Array.from(list.children).filter((child): child is HTMLElement =>
-            child instanceof HTMLLIElement
-            && child.getAttribute('role') !== 'separator'
-            && !child.classList.contains('micl-list-item--disabled')
-            && child.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
-        );
-
-    return {
-        initialize: (element: HTMLElement): void =>
+        invoker && element.addEventListener('beforetoggle', () =>
         {
+            element.style.transformOrigin = getOrigin(invoker, element);
+        });
+
+        element.addEventListener('keydown', (event: KeyboardEvent) =>
+        {
+            if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+
+            const target = event.target;
             if (
-                !element.matches('.micl-menu[popover]')
-                || element.dataset.miclinitialized
+                !(target instanceof HTMLElement)
+                || !target.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
             ) {
                 return;
             }
-            element.dataset.miclinitialized = '1';
 
-            const invoker = document.querySelector(`[popovertarget="${element.id}"]`);
+            const currentList = target.parentElement;
+            if (!currentList?.matches('ul.micl-list')) return;
+            if (currentList.parentElement !== element) return;
 
-            invoker && element.addEventListener('beforetoggle', () =>
-            {
-                element.style.transformOrigin = getOrigin(invoker, element);
-            });
+            const lists = Array.from(element.querySelectorAll<HTMLElement>(':scope > ul.micl-list'));
+            if (lists.length < 2) return;
 
-            element.addEventListener('keydown', (event: KeyboardEvent) =>
-            {
-                if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+            const listIndex = lists.indexOf(currentList as HTMLElement);
+            const items = navigableItems(currentList);
+            const itemIndex = items.indexOf(target);
+            if (itemIndex === -1) return;
 
-                const target = event.target;
-                if (
-                    !(target instanceof HTMLElement)
-                    || !target.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
-                ) {
-                    return;
-                }
+            let nextItem: HTMLElement | undefined;
 
-                const currentList = target.parentElement;
-                if (!currentList?.matches('ul.micl-list')) return;
-                if (currentList.parentElement !== element) return;
+            if (event.key === 'ArrowDown' && itemIndex === items.length - 1) {
+                const nextListIndex = (listIndex + 1) % lists.length;
+                nextItem = navigableItems(lists[nextListIndex])[0];
+            }
+            else if (event.key === 'ArrowUp' && itemIndex === 0) {
+                const prevListIndex = (listIndex - 1 + lists.length) % lists.length;
+                const prev = navigableItems(lists[prevListIndex]);
+                nextItem = prev[prev.length - 1];
+            }
 
-                const lists = Array.from(element.querySelectorAll<HTMLElement>(':scope > ul.micl-list'));
-                if (lists.length < 2) return;
+            if (nextItem) {
+                event.preventDefault();
+                event.stopPropagation();
+                target.setAttribute('tabindex', '-1');
+                nextItem.setAttribute('tabindex', '0');
+                nextItem.focus();
+            }
+        }, true);
 
-                const listIndex = lists.indexOf(currentList as HTMLElement);
-                const items = navigableItems(currentList);
-                const itemIndex = items.indexOf(target);
-                if (itemIndex === -1) return;
+        element.querySelectorAll<HTMLButtonElement>(
+            ':scope > ul.micl-list > li > button[popovertarget]'
+        ).forEach(submenuinvoker =>
+        {
+            if (submenuinvoker.popoverTargetElement?.matches('.micl-menu[popover]')) {
+                const popover = submenuinvoker.popoverTargetElement as HTMLElement;
+                const id = `--${popover.id}`;
+                let hoverTimeout: ReturnType<typeof setTimeout>;
 
-                let nextItem: HTMLElement | undefined;
+                submenuinvoker.style.setProperty('anchor-name', id);
+                popover.style.insetBlockStart = `anchor(${id} start)`;
+                popover.style.insetInlineStart = `anchor(${id} end)`;
 
-                if (event.key === 'ArrowDown' && itemIndex === items.length - 1) {
-                    const nextListIndex = (listIndex + 1) % lists.length;
-                    nextItem = navigableItems(lists[nextListIndex])[0];
-                }
-                else if (event.key === 'ArrowUp' && itemIndex === 0) {
-                    const prevListIndex = (listIndex - 1 + lists.length) % lists.length;
-                    const prev = navigableItems(lists[prevListIndex]);
-                    nextItem = prev[prev.length - 1];
-                }
-
-                if (nextItem) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    target.setAttribute('tabindex', '-1');
-                    nextItem.setAttribute('tabindex', '0');
-                    nextItem.focus();
-                }
-            }, true);
-
-            element.querySelectorAll<HTMLButtonElement>(
-                ':scope > ul.micl-list > li > button[popovertarget]'
-            ).forEach(submenuinvoker =>
-            {
-                if (submenuinvoker.popoverTargetElement?.matches('.micl-menu[popover]')) {
-                    const popover = submenuinvoker.popoverTargetElement as HTMLElement;
-                    const id = `--${popover.id}`;
-                    let hoverTimeout: ReturnType<typeof setTimeout>;
-
-                    submenuinvoker.style.setProperty('anchor-name', id);
-                    popover.style.insetBlockStart = `anchor(${id} start)`;
-                    popover.style.insetInlineStart = `anchor(${id} end)`;
-
-                    const scheduleClose = () =>
+                const scheduleClose = () =>
+                {
+                    clearTimeout(hoverTimeout);
+                    hoverTimeout = setTimeout(() =>
                     {
-                        clearTimeout(hoverTimeout);
-                        hoverTimeout = setTimeout(() =>
-                        {
-                            if (!submenuinvoker.matches(':hover') && !popover.matches(':hover')) {
-                                popover.hidePopover();
-                            }
-                        }, 300);
-                    };
+                        if (!submenuinvoker.matches(':hover') && !popover.matches(':hover')) {
+                            popover.hidePopover();
+                        }
+                    }, 300);
+                };
 
-                    submenuinvoker.addEventListener('mouseenter', () =>
-                    {
-                        clearTimeout(hoverTimeout);
-                        popover.showPopover();
-                    });
-                    submenuinvoker.addEventListener('mouseleave', scheduleClose);
-                    popover.addEventListener('mouseenter', () =>
-                    {
-                        clearTimeout(hoverTimeout);
-                    });
-                    popover.addEventListener('mouseleave', scheduleClose);
-                }
-            });
-        }
-    };
-})();
+                submenuinvoker.addEventListener('mouseenter', () =>
+                {
+                    clearTimeout(hoverTimeout);
+                    popover.showPopover();
+                });
+                submenuinvoker.addEventListener('mouseleave', scheduleClose);
+                popover.addEventListener('mouseenter', () =>
+                {
+                    clearTimeout(hoverTimeout);
+                });
+                popover.addEventListener('mouseleave', scheduleClose);
+            }
+        });
+    }
+};

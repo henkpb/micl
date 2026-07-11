@@ -592,244 +592,241 @@ const setInputDate = (dialog: HTMLDialogElement, index: number, dateStr: string)
     renderCalendar(dialog, state);
 };
 
-export default (() =>
-{
-    return {
-        keydown: (event: Event): void =>
-        {
-            if (
-                !(event instanceof KeyboardEvent)
-                || !(event.target instanceof Element)
-            ) {
-                return;
-            }
-            const dialog = event.target.closest(datepickerSelector) as HTMLDialogElement;
-            if (!dialog) {
-                return;
-            }
-
-            switch (event.key) {
-                case 'Enter':
-                case ' ':
-                    if (event.target instanceof HTMLInputElement && event.target.type === 'date') {
-                        event.preventDefault();
-                    }
-                    break;
-                case 'M':
-                    toggleView(dialog, 'months');
-                    break;
-                case 'Y':
-                    toggleView(dialog, 'years');
-                    break;
-                case 'PageUp':
-                case 'PageDown':
-                    changePeriod(dialog, event.key === 'PageUp' ? 1 : -1, event.shiftKey ? 'year' : 'month');
-                    break;
-                default:
-            }
-        },
-
-        initialize: (dialog: HTMLDialogElement): void =>
-        {
-            if (dialog.dataset.miclinitialized) {
-                return;
-            }
-
-            const form    = dialog.querySelector('form');
-            const content = dialog.querySelector('.micl-dialog__content');
-            if (!form || !content) {
-                return;
-            }
-            dialog.dataset.miclinitialized = '1';
-
-            dialog.addEventListener('click', event =>
-            {
-                const target = event.target as HTMLElement;
-                const btn    = target.closest('button');
-
-                if (btn) {
-                    const forMonth = btn.parentElement?.classList.contains(`${classPrefix}month-selector`);
-                    const isNext   = btn.classList.contains(`${classPrefix}next`);
-                    const isPrev   = btn.classList.contains(`${classPrefix}previous`);
-
-                    if (isNext || isPrev) {
-                        changePeriod(dialog, isNext ? 1 : -1, forMonth ? 'month' : 'year');
-                        return;
-                    }
-                }
-
-                if (target.closest(`.${classPrefix}month`)) toggleView(dialog, 'months');
-                if (target.closest(`.${classPrefix}year`)) toggleView(dialog, 'years');
-
-                const mode = target.closest(`.${classPrefix}inputmode`) as HTMLElement;
-                if (mode) {
-                    toggleView(dialog, !dialog.querySelector(
-                        `.${classPrefix}input.${classPrefix}view-hidden`
-                    ) ? 'calendars' : 'input');
-                }
-
-                const time = target.closest('time');
-                if (time && time.dateTime) {
-                    selectDate(dialog, time.dateTime);
-                }
-
-                if (
-                    target instanceof HTMLInputElement
-                    && (target.name === 'miclmonth' || target.name === 'miclyear')
-                ) {
-                    const state = stateMap.get(dialog);
-                    if (state) {
-                        const value = parseInt(target.value, 10);
-                        if (target.name === 'miclmonth') {
-                            state.viewDate.setMonth(value);
-                        }
-                        else {
-                            state.viewDate.setFullYear(value);
-                        }
-                        if (state.viewDate < state.min) {
-                            state.viewDate = state.min;
-                        }
-                        else if (state.viewDate > state.max) {
-                            state.viewDate = state.max;
-                        }
-                        renderCalendar(dialog, state);
-                        toggleView(dialog, 'calendars');
-                    }
-                }
-            });
-
-            dialog.addEventListener('focusout', (event: Event): void =>
-            {
-                const input = event.target;
-                if (!(input instanceof HTMLInputElement) || !input.closest(`.${classPrefix}input`)) {
-                    return;
-                }
-                const inputs = dialog.querySelectorAll<HTMLInputElement>(`.${classPrefix}input input`);
-                setInputDate(dialog, Array.prototype.indexOf.call(inputs, input), input.value);
-            });
-
-            dialog.addEventListener('beforetoggle', (event: any): void =>
-            {
-                if (event.newState !== 'open') {
-                    return;
-                }
-                const isInvoker = (e: Element | null): e is ValueElement => e instanceof HTMLInputElement || e instanceof HTMLButtonElement;
-
-                let invoker = document.activeElement;
-                if (
-                    !isInvoker(invoker)
-                    || (invoker.dataset.datepicker !== dialog.id
-                        && invoker.popoverTargetElement !== dialog
-                        && (invoker as any).commandForElement !== dialog)
-                ) {
-                    invoker = document.querySelector(
-                        `[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
-                    );
-                }
-                if (!isInvoker(invoker)) {
-                    return;
-                }
-
-                const range = dialog.classList.contains('micl-datepicker--range');
-                let invokerStart: ValueElement = invoker;
-                let invokerEnd: HTMLInputElement | null = null;
-
-                if (range && invoker instanceof HTMLInputElement) {
-                    if (invoker.dataset.miclrangeto) {
-                        const end = document.getElementById(invoker.dataset.miclrangeto);
-                        invokerEnd = end instanceof HTMLInputElement ? end : null;
-                    }
-                    else if (invoker.id) {
-                        // the picker was invoked by the end input of a pair
-                        const start = document.querySelector<HTMLInputElement>(`input[data-miclrangeto="${invoker.id}"]`);
-                        if (start) {
-                            invokerEnd   = invoker;
-                            invokerStart = start;
-                        }
-                    }
-                }
-
-                let initialDate = new Date();
-                let initialEnd: Date | null = null;
-                let min = new Date(1900, 0, 1);
-                let max = new Date(2099, 11, 31);
-
-                if (invokerStart instanceof HTMLInputElement) {
-                    initialDate = readInputDate(invokerStart) || initialDate;
-                    if (invokerStart.min) min = new Date(invokerStart.min);
-                    if (invokerStart.max) max = new Date(invokerStart.max);
-                }
-                else {
-                    // a single range invoker holds an ISO 8601 interval (start/end)
-                    const [startStr, endStr] = (invokerStart.value || invokerStart.textContent || '').split('/');
-                    const parsed = new Date(startStr);
-                    if (isValidDate(parsed)) {
-                        initialDate = parsed;
-                    }
-                    if (range && endStr) {
-                        initialEnd = new Date(endStr);
-                    }
-                }
-                if (invokerEnd) {
-                    initialEnd = readInputDate(invokerEnd);
-                    if (invokerEnd.max) max = new Date(invokerEnd.max);
-                }
-
-                if (!isValidDate(initialDate)) initialDate = new Date();
-                initialDate = toLocalMidnight(initialDate);
-
-                if (initialEnd && isValidDate(initialEnd)) {
-                    initialEnd = toLocalMidnight(initialEnd);
-                    if (initialEnd < initialDate) {
-                        [initialDate, initialEnd] = [initialEnd, initialDate];
-                    }
-                }
-                else {
-                    initialEnd = null;
-                }
-
-                const state: DatePickerState = {
-                    invoker    : invokerStart,
-                    invokerEnd,
-                    selected   : initialDate,
-                    selectedEnd: range ? initialEnd : null,
-                    range,
-                    viewDate   : new Date(initialDate),
-                    min,
-                    max
-                };
-                stateMap.set(dialog, state);
-
-                initPeriodPickers(dialog, min, max);
-                toggleView(dialog, 'calendars');
-                renderCalendar(dialog, state);
-            });
-
-            dialog.addEventListener('close', (): void =>
-            {
-                const state = stateMap.get(dialog);
-                if (!state?.invoker || dialog.returnValue === '') {
-                    return;
-                }
-
-                // An incomplete range is committed as a single-day range.
-                const end = state.selectedEnd || state.selected;
-
-                if (state.range && !state.invokerEnd) {
-                    // a single invoker holds the range as an ISO 8601 interval
-                    commitValue(
-                        state.invoker,
-                        `${formatToInputDateValue(state.selected)}/${formatToInputDateValue(end)}`,
-                        `${state.selected.toLocaleDateString()} – ${end.toLocaleDateString()}`
-                    );
-                }
-                else {
-                    commitValue(state.invoker, formatToInputDateValue(state.selected), state.selected.toLocaleDateString());
-                    if (state.invokerEnd) {
-                        commitValue(state.invokerEnd, formatToInputDateValue(end), end.toLocaleDateString());
-                    }
-                }
-            });
+export default {
+    keydown: (event: Event): void =>
+    {
+        if (
+            !(event instanceof KeyboardEvent)
+            || !(event.target instanceof Element)
+        ) {
+            return;
         }
-    };
-})();
+        const dialog = event.target.closest(datepickerSelector) as HTMLDialogElement;
+        if (!dialog) {
+            return;
+        }
+
+        switch (event.key) {
+            case 'Enter':
+            case ' ':
+                if (event.target instanceof HTMLInputElement && event.target.type === 'date') {
+                    event.preventDefault();
+                }
+                break;
+            case 'M':
+                toggleView(dialog, 'months');
+                break;
+            case 'Y':
+                toggleView(dialog, 'years');
+                break;
+            case 'PageUp':
+            case 'PageDown':
+                changePeriod(dialog, event.key === 'PageUp' ? 1 : -1, event.shiftKey ? 'year' : 'month');
+                break;
+            default:
+        }
+    },
+
+    initialize: (dialog: HTMLDialogElement): void =>
+    {
+        if (dialog.dataset.miclinitialized) {
+            return;
+        }
+
+        const form    = dialog.querySelector('form');
+        const content = dialog.querySelector('.micl-dialog__content');
+        if (!form || !content) {
+            return;
+        }
+        dialog.dataset.miclinitialized = '1';
+
+        dialog.addEventListener('click', event =>
+        {
+            const target = event.target as HTMLElement;
+            const btn    = target.closest('button');
+
+            if (btn) {
+                const forMonth = btn.parentElement?.classList.contains(`${classPrefix}month-selector`);
+                const isNext   = btn.classList.contains(`${classPrefix}next`);
+                const isPrev   = btn.classList.contains(`${classPrefix}previous`);
+
+                if (isNext || isPrev) {
+                    changePeriod(dialog, isNext ? 1 : -1, forMonth ? 'month' : 'year');
+                    return;
+                }
+            }
+
+            if (target.closest(`.${classPrefix}month`)) toggleView(dialog, 'months');
+            if (target.closest(`.${classPrefix}year`)) toggleView(dialog, 'years');
+
+            const mode = target.closest(`.${classPrefix}inputmode`) as HTMLElement;
+            if (mode) {
+                toggleView(dialog, !dialog.querySelector(
+                    `.${classPrefix}input.${classPrefix}view-hidden`
+                ) ? 'calendars' : 'input');
+            }
+
+            const time = target.closest('time');
+            if (time && time.dateTime) {
+                selectDate(dialog, time.dateTime);
+            }
+
+            if (
+                target instanceof HTMLInputElement
+                && (target.name === 'miclmonth' || target.name === 'miclyear')
+            ) {
+                const state = stateMap.get(dialog);
+                if (state) {
+                    const value = parseInt(target.value, 10);
+                    if (target.name === 'miclmonth') {
+                        state.viewDate.setMonth(value);
+                    }
+                    else {
+                        state.viewDate.setFullYear(value);
+                    }
+                    if (state.viewDate < state.min) {
+                        state.viewDate = state.min;
+                    }
+                    else if (state.viewDate > state.max) {
+                        state.viewDate = state.max;
+                    }
+                    renderCalendar(dialog, state);
+                    toggleView(dialog, 'calendars');
+                }
+            }
+        });
+
+        dialog.addEventListener('focusout', (event: Event): void =>
+        {
+            const input = event.target;
+            if (!(input instanceof HTMLInputElement) || !input.closest(`.${classPrefix}input`)) {
+                return;
+            }
+            const inputs = dialog.querySelectorAll<HTMLInputElement>(`.${classPrefix}input input`);
+            setInputDate(dialog, Array.prototype.indexOf.call(inputs, input), input.value);
+        });
+
+        dialog.addEventListener('beforetoggle', (event: any): void =>
+        {
+            if (event.newState !== 'open') {
+                return;
+            }
+            const isInvoker = (e: Element | null): e is ValueElement => e instanceof HTMLInputElement || e instanceof HTMLButtonElement;
+
+            let invoker = document.activeElement;
+            if (
+                !isInvoker(invoker)
+                || (invoker.dataset.datepicker !== dialog.id
+                    && invoker.popoverTargetElement !== dialog
+                    && (invoker as any).commandForElement !== dialog)
+            ) {
+                invoker = document.querySelector(
+                    `[data-datepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
+                );
+            }
+            if (!isInvoker(invoker)) {
+                return;
+            }
+
+            const range = dialog.classList.contains('micl-datepicker--range');
+            let invokerStart: ValueElement = invoker;
+            let invokerEnd: HTMLInputElement | null = null;
+
+            if (range && invoker instanceof HTMLInputElement) {
+                if (invoker.dataset.miclrangeto) {
+                    const end = document.getElementById(invoker.dataset.miclrangeto);
+                    invokerEnd = end instanceof HTMLInputElement ? end : null;
+                }
+                else if (invoker.id) {
+                    // the picker was invoked by the end input of a pair
+                    const start = document.querySelector<HTMLInputElement>(`input[data-miclrangeto="${invoker.id}"]`);
+                    if (start) {
+                        invokerEnd   = invoker;
+                        invokerStart = start;
+                    }
+                }
+            }
+
+            let initialDate = new Date();
+            let initialEnd: Date | null = null;
+            let min = new Date(1900, 0, 1);
+            let max = new Date(2099, 11, 31);
+
+            if (invokerStart instanceof HTMLInputElement) {
+                initialDate = readInputDate(invokerStart) || initialDate;
+                if (invokerStart.min) min = new Date(invokerStart.min);
+                if (invokerStart.max) max = new Date(invokerStart.max);
+            }
+            else {
+                // a single range invoker holds an ISO 8601 interval (start/end)
+                const [startStr, endStr] = (invokerStart.value || invokerStart.textContent || '').split('/');
+                const parsed = new Date(startStr);
+                if (isValidDate(parsed)) {
+                    initialDate = parsed;
+                }
+                if (range && endStr) {
+                    initialEnd = new Date(endStr);
+                }
+            }
+            if (invokerEnd) {
+                initialEnd = readInputDate(invokerEnd);
+                if (invokerEnd.max) max = new Date(invokerEnd.max);
+            }
+
+            if (!isValidDate(initialDate)) initialDate = new Date();
+            initialDate = toLocalMidnight(initialDate);
+
+            if (initialEnd && isValidDate(initialEnd)) {
+                initialEnd = toLocalMidnight(initialEnd);
+                if (initialEnd < initialDate) {
+                    [initialDate, initialEnd] = [initialEnd, initialDate];
+                }
+            }
+            else {
+                initialEnd = null;
+            }
+
+            const state: DatePickerState = {
+                invoker    : invokerStart,
+                invokerEnd,
+                selected   : initialDate,
+                selectedEnd: range ? initialEnd : null,
+                range,
+                viewDate   : new Date(initialDate),
+                min,
+                max
+            };
+            stateMap.set(dialog, state);
+
+            initPeriodPickers(dialog, min, max);
+            toggleView(dialog, 'calendars');
+            renderCalendar(dialog, state);
+        });
+
+        dialog.addEventListener('close', (): void =>
+        {
+            const state = stateMap.get(dialog);
+            if (!state?.invoker || dialog.returnValue === '') {
+                return;
+            }
+
+            // An incomplete range is committed as a single-day range.
+            const end = state.selectedEnd || state.selected;
+
+            if (state.range && !state.invokerEnd) {
+                // a single invoker holds the range as an ISO 8601 interval
+                commitValue(
+                    state.invoker,
+                    `${formatToInputDateValue(state.selected)}/${formatToInputDateValue(end)}`,
+                    `${state.selected.toLocaleDateString()} – ${end.toLocaleDateString()}`
+                );
+            }
+            else {
+                commitValue(state.invoker, formatToInputDateValue(state.selected), state.selected.toLocaleDateString());
+                if (state.invokerEnd) {
+                    commitValue(state.invokerEnd, formatToInputDateValue(end), end.toLocaleDateString());
+                }
+            }
+        });
+    }
+};
