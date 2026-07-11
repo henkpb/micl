@@ -108,91 +108,103 @@ Add the `micl-card--compact` to the main `<div>` element (or, the `<summary>` el
 
 - **Dragging State**: When implementing drag-and-drop functionality for cards, apply the `micl-card--dragging` class to the card container to provide visual feedback during the drag operation.
 
-## Customizations
-You can customize the appearance of the Card component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child cards.
+## Theming
+Each card can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
 
-| Variable name | Default Value | Description |
-| ------------- | ----- | ----------- |
-| --md-comp-card-margin | 8px | Sets the spacing between adjacent cards both horizontally and vertically |
-| --md-comp-card-padding-inline | 16px | Defines the amount of space between the left and right edges of a card and its content |
-| --md-comp-card-content-padding-block | 16px | The amount of vertical padding reserved for the content area |
-| --md-comp-card-gap | 8px | Defines the amount of vertical space between structural elements inside the card |
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-card-margin | Sets the spacing between adjacent cards both horizontally and vertically | 8px |
+| --md-comp-card-padding-inline | Defines the amount of space between the left and right edges of a card and its content | 16px |
+| --md-comp-card-content-padding-block | The amount of vertical padding reserved for the content area | 16px |
+| --md-comp-card-gap | Defines the amount of vertical space between structural elements inside the card | 8px |
 
-The Card component supports the following CSS variables, as defined in the [Material Design 3 Expressive Card Specification](https://m3.material.io/components/cards/specs):
+Each card style additionally supports the following CSS custom properties, as defined in the [Material Design 3 Expressive Card Specification](https://m3.material.io/components/cards/specs). The hover, focus, pressed and dragged properties only apply to actionable cards.
 
-```CSS
---md-comp-elevated-card-container-color
---md-comp-elevated-card-container-elevation
---md-comp-elevated-card-container-shape
---md-comp-elevated-card-disabled-container-elevation
---md-comp-elevated-card-disabled-container-color
---md-comp-elevated-card-disabled-container-opacity
---md-comp-elevated-card-hover-container-elevation
---md-comp-elevated-card-hover-state-layer-color
---md-comp-elevated-card-hover-state-layer-opacity
---md-comp-elevated-card-focus-indicator-color
---md-comp-elevated-card-focus-indicator-thickness
---md-comp-elevated-card-focus-indicator-outline-offset
---md-comp-elevated-card-focus-container-elevation
---md-comp-elevated-card-focus-state-layer-color
---md-comp-elevated-card-focus-state-layer-opacity
---md-comp-elevated-card-pressed-container-elevation
---md-comp-elevated-card-pressed-state-layer-color
---md-comp-elevated-card-pressed-state-layer-opacity
---md-comp-elevated-card-dragged-container-elevation
---md-comp-elevated-card-dragged-state-layer-color
---md-comp-elevated-card-dragged-state-layer-opacity
---md-comp-filled-card-container-color
---md-comp-filled-card-container-elevation
---md-comp-filled-card-container-shape
---md-comp-filled-card-disabled-container-elevation
---md-comp-filled-card-disabled-container-color
---md-comp-filled-card-disabled-container-opacity
---md-comp-filled-card-hover-container-elevation
---md-comp-filled-card-hover-state-layer-color
---md-comp-filled-card-hover-state-layer-opacity
---md-comp-filled-card-focus-indicator-color
---md-comp-filled-card-focus-indicator-thickness
---md-comp-filled-card-focus-indicator-outline-offset
---md-comp-filled-card-focus-container-elevation
---md-comp-filled-card-focus-state-layer-color
---md-comp-filled-card-focus-state-layer-opacity
---md-comp-filled-card-pressed-container-elevation
---md-comp-filled-card-pressed-state-layer-color
---md-comp-filled-card-pressed-state-layer-opacity
---md-comp-filled-card-dragged-container-elevation
---md-comp-filled-card-dragged-state-layer-color
---md-comp-filled-card-dragged-state-layer-opacity
---md-comp-outlined-card-container-color
---md-comp-outlined-card-container-elevation
---md-comp-outlined-card-container-shape
---md-comp-outlined-card-outline-width
---md-comp-outlined-card-outline-color
---md-comp-outlined-card-disabled-container-color
---md-comp-outlined-card-disabled-container-elevation
---md-comp-outlined-card-disabled-container-opacity
---md-comp-outlined-card-disabled-outline-color
---md-comp-outlined-card-disabled-outline-opacity
---md-comp-outlined-card-hover-container-elevation
---md-comp-outlined-card-hover-outline-color
---md-comp-outlined-card-hover-state-layer-color
---md-comp-outlined-card-hover-state-layer-opacity
---md-comp-outlined-card-focus-indicator-color
---md-comp-outlined-card-focus-indicator-thickness
---md-comp-outlined-card-focus-indicator-outline-offset
---md-comp-outlined-card-focus-container-elevation
---md-comp-outlined-card-focus-outline-color
---md-comp-outlined-card-focus-state-layer-color
---md-comp-outlined-card-focus-state-layer-opacity
---md-comp-outlined-card-pressed-container-elevation
---md-comp-outlined-card-pressed-outline-color
---md-comp-outlined-card-pressed-state-layer-color
---md-comp-outlined-card-pressed-state-layer-opacity
---md-comp-outlined-card-dragged-container-elevation
---md-comp-outlined-card-dragged-outline-color
---md-comp-outlined-card-dragged-state-layer-color
---md-comp-outlined-card-dragged-state-layer-opacity
-```
+### Elevated card
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-elevated-card-container-color | The background color of the card | --md-sys-color-surface-container-low |
+| --md-comp-elevated-card-container-elevation | The shadow (elevation) of the card | --md-sys-elevation-level1 |
+| --md-comp-elevated-card-container-shape | The corner rounding of the card | --md-sys-shape-corner-medium |
+| --md-comp-elevated-card-disabled-container-elevation | The shadow of a disabled card | --md-sys-elevation-level1 |
+| --md-comp-elevated-card-disabled-container-color | The background color of a disabled card | --md-sys-color-surface |
+| --md-comp-elevated-card-disabled-container-opacity | The opacity of a disabled card | --md-sys-state-disabled-state-layer-opacity |
+| --md-comp-elevated-card-hover-container-elevation | The shadow of the card while hovered | --md-sys-elevation-level2 |
+| --md-comp-elevated-card-hover-state-layer-color | The state layer color of the card while hovered | --md-sys-color-on-surface |
+| --md-comp-elevated-card-hover-state-layer-opacity | The state layer opacity of the card while hovered | --md-sys-state-hover-state-layer-opacity |
+| --md-comp-elevated-card-focus-indicator-color | The color of the focus indicator ring | --md-sys-color-secondary |
+| --md-comp-elevated-card-focus-indicator-thickness | The thickness of the focus indicator ring | --md-sys-state-focus-indicator-thickness |
+| --md-comp-elevated-card-focus-indicator-outline-offset | The distance between the card and the focus indicator ring | --md-sys-state-focus-indicator-outer-offset |
+| --md-comp-elevated-card-focus-container-elevation | The shadow of the card while focused | --md-sys-elevation-level1 |
+| --md-comp-elevated-card-focus-state-layer-color | The state layer color of the card while focused | --md-sys-color-on-surface |
+| --md-comp-elevated-card-focus-state-layer-opacity | The state layer opacity of the card while focused | --md-sys-state-focus-state-layer-opacity |
+| --md-comp-elevated-card-pressed-container-elevation | The shadow of the card while pressed | --md-sys-elevation-level1 |
+| --md-comp-elevated-card-pressed-state-layer-color | The state layer color of the card while pressed | --md-sys-color-on-surface |
+| --md-comp-elevated-card-pressed-state-layer-opacity | The state layer opacity of the card while pressed | --md-sys-state-pressed-state-layer-opacity |
+| --md-comp-elevated-card-dragged-container-elevation | The shadow of the card while dragged | --md-sys-elevation-level4 |
+| --md-comp-elevated-card-dragged-state-layer-color | The state layer color of the card while dragged | --md-sys-color-on-surface |
+| --md-comp-elevated-card-dragged-state-layer-opacity | The state layer opacity of the card while dragged | --md-sys-state-dragged-state-layer-opacity |
+
+### Filled card
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-filled-card-container-color | The background color of the card | --md-sys-color-surface-container-highest |
+| --md-comp-filled-card-container-elevation | The shadow (elevation) of the card | --md-sys-elevation-level0 |
+| --md-comp-filled-card-container-shape | The corner rounding of the card | --md-sys-shape-corner-medium |
+| --md-comp-filled-card-disabled-container-elevation | The shadow of a disabled card | --md-sys-elevation-level0 |
+| --md-comp-filled-card-disabled-container-color | The background color of a disabled card | --md-sys-color-surface-variant |
+| --md-comp-filled-card-disabled-container-opacity | The opacity of a disabled card | --md-sys-state-disabled-state-layer-opacity |
+| --md-comp-filled-card-hover-container-elevation | The shadow of the card while hovered | --md-sys-elevation-level1 |
+| --md-comp-filled-card-hover-state-layer-color | The state layer color of the card while hovered | --md-sys-color-on-surface |
+| --md-comp-filled-card-hover-state-layer-opacity | The state layer opacity of the card while hovered | --md-sys-state-hover-state-layer-opacity |
+| --md-comp-filled-card-focus-indicator-color | The color of the focus indicator ring | --md-sys-color-secondary |
+| --md-comp-filled-card-focus-indicator-thickness | The thickness of the focus indicator ring | --md-sys-state-focus-indicator-thickness |
+| --md-comp-filled-card-focus-indicator-outline-offset | The distance between the card and the focus indicator ring | --md-sys-state-focus-indicator-outer-offset |
+| --md-comp-filled-card-focus-container-elevation | The shadow of the card while focused | --md-sys-elevation-level0 |
+| --md-comp-filled-card-focus-state-layer-color | The state layer color of the card while focused | --md-sys-color-on-surface |
+| --md-comp-filled-card-focus-state-layer-opacity | The state layer opacity of the card while focused | --md-sys-state-focus-state-layer-opacity |
+| --md-comp-filled-card-pressed-container-elevation | The shadow of the card while pressed | --md-sys-elevation-level0 |
+| --md-comp-filled-card-pressed-state-layer-color | The state layer color of the card while pressed | --md-sys-color-on-surface |
+| --md-comp-filled-card-pressed-state-layer-opacity | The state layer opacity of the card while pressed | --md-sys-state-pressed-state-layer-opacity |
+| --md-comp-filled-card-dragged-container-elevation | The shadow of the card while dragged | --md-sys-elevation-level3 |
+| --md-comp-filled-card-dragged-state-layer-color | The state layer color of the card while dragged | --md-sys-color-on-surface |
+| --md-comp-filled-card-dragged-state-layer-opacity | The state layer opacity of the card while dragged | --md-sys-state-dragged-state-layer-opacity |
+
+### Outlined card
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-outlined-card-container-color | The background color of the card | --md-sys-color-surface |
+| --md-comp-outlined-card-container-elevation | The shadow (elevation) of the card | --md-sys-elevation-level0 |
+| --md-comp-outlined-card-container-shape | The corner rounding of the card | --md-sys-shape-corner-medium |
+| --md-comp-outlined-card-outline-width | The thickness of the card's outline | 1px |
+| --md-comp-outlined-card-outline-color | The color of the card's outline | --md-sys-color-outline-variant |
+| --md-comp-outlined-card-disabled-container-color | The background color of a disabled card | --md-sys-color-surface |
+| --md-comp-outlined-card-disabled-container-elevation | The shadow of a disabled card | --md-sys-elevation-level0 |
+| --md-comp-outlined-card-disabled-container-opacity | The opacity of a disabled card | --md-sys-state-disabled-state-layer-opacity |
+| --md-comp-outlined-card-disabled-outline-color | The outline color of a disabled card | --md-sys-color-outline |
+| --md-comp-outlined-card-disabled-outline-opacity | The outline opacity of a disabled card | 12% |
+| --md-comp-outlined-card-hover-container-elevation | The shadow of the card while hovered | --md-sys-elevation-level1 |
+| --md-comp-outlined-card-hover-outline-color | The outline color of the card while hovered | --md-sys-color-outline-variant |
+| --md-comp-outlined-card-hover-state-layer-color | The state layer color of the card while hovered | --md-sys-color-on-surface |
+| --md-comp-outlined-card-hover-state-layer-opacity | The state layer opacity of the card while hovered | --md-sys-state-hover-state-layer-opacity |
+| --md-comp-outlined-card-focus-indicator-color | The color of the focus indicator ring | --md-sys-color-secondary |
+| --md-comp-outlined-card-focus-indicator-thickness | The thickness of the focus indicator ring | --md-sys-state-focus-indicator-thickness |
+| --md-comp-outlined-card-focus-indicator-outline-offset | The distance between the card and the focus indicator ring | --md-sys-state-focus-indicator-outer-offset |
+| --md-comp-outlined-card-focus-container-elevation | The shadow of the card while focused | --md-sys-elevation-level0 |
+| --md-comp-outlined-card-focus-outline-color | The outline color of the card while focused | --md-sys-color-on-surface |
+| --md-comp-outlined-card-focus-state-layer-color | The state layer color of the card while focused | --md-sys-color-on-surface |
+| --md-comp-outlined-card-focus-state-layer-opacity | The state layer opacity of the card while focused | --md-sys-state-focus-state-layer-opacity |
+| --md-comp-outlined-card-pressed-container-elevation | The shadow of the card while pressed | --md-sys-elevation-level0 |
+| --md-comp-outlined-card-pressed-outline-color | The outline color of the card while pressed | --md-sys-color-outline-variant |
+| --md-comp-outlined-card-pressed-state-layer-color | The state layer color of the card while pressed | --md-sys-color-on-surface |
+| --md-comp-outlined-card-pressed-state-layer-opacity | The state layer opacity of the card while pressed | --md-sys-state-pressed-state-layer-opacity |
+| --md-comp-outlined-card-dragged-container-elevation | The shadow of the card while dragged | --md-sys-elevation-level3 |
+| --md-comp-outlined-card-dragged-outline-color | The outline color of the card while dragged | --md-sys-color-outline-variant |
+| --md-comp-outlined-card-dragged-state-layer-color | The state layer color of the card while dragged | --md-sys-color-on-surface |
+| --md-comp-outlined-card-dragged-state-layer-opacity | The state layer opacity of the card while dragged | --md-sys-state-dragged-state-layer-opacity |
 
 **Example: Changing the card margins**
 
