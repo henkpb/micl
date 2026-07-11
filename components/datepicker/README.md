@@ -145,3 +145,30 @@ You can trigger the picker from a button using the standard `popovertarget` attr
 
 - **Behavior**: The Date picker reads from and writes to the button's value attribute.
 - **Formatting**: The component automatically updates the button's text content with the selected date, formatted according to the user's locale.
+
+## Theming
+Each date picker can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. The container color, shape and elevation are inherited from the [Dialog component](../dialog/README.md).
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-date-picker-modal-container-width | The width of the modal date picker | 360px |
+| --md-comp-date-input-modal-container-width | The width of the modal date picker in text input mode | 328px |
+| --md-comp-date-picker-docked-container-width | The width of the docked date picker | 360px |
+| --md-comp-date-picker-header-headline-color | The text color of the headline showing the selected date | --md-sys-color-on-surface-variant |
+| --md-comp-date-picker-weekdays-label-text-color | The text color of the weekday labels | --md-sys-color-on-surface |
+| --md-comp-date-picker-date-unselected-label-text-color | The text color of the selectable dates | --md-sys-color-on-surface |
+| --md-comp-date-picker-date-selected-container-color | The background color of the selected date | --md-sys-color-primary |
+| --md-comp-date-picker-date-selected-label-text-color | The text color of the selected date | --md-sys-color-on-primary |
+| --md-comp-date-picker-date-today-container-outline-color | The outline color of today's date | --md-sys-color-primary |
+| --md-comp-date-picker-date-today-label-text-color | The text color of today's date | --md-sys-color-primary |
+| --md-comp-date-picker-selection-year-unselected-label-text-color | The text color of the selectable years | --md-sys-color-on-surface-variant |
+| --md-comp-date-picker-selection-year-selected-container-color | The background color of the selected year | --md-sys-color-primary |
+| --md-comp-date-picker-selection-year-selected-label-text-color | The text color of the selected year | --md-sys-color-on-primary |
+
+**Example: Changing the width of the modal date picker**
+
+```CSS
+#mydatepicker {
+  --md-comp-date-picker-modal-container-width: 400px;
+}
+```

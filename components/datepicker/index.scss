@@ -38,12 +38,6 @@
 @include typography.scale('body-large');
 @include typography.scale('label-large');
 
-:root {
-    --md-comp-date-picker-docked-container-width: 360px;
-    --md-comp-date-picker-modal-container-width: 360px;
-    --md-comp-date-input-modal-container-width: 328px;
-}
-
 %view-transition-base {
     block-size: fit-content;
     opacity: 1;
@@ -59,6 +53,28 @@
         transition-behavior: allow-discrete;
         transition-property: opacity, display, block-size;
         transition-timing-function: linear;
+    }
+}
+
+// State layer background shared by the date cells and the year chips.
+%statelayer-background {
+    --statelayer-color: var(--md-sys-color-on-surface-variant);
+    --statelayer-opacity: 0%;
+
+    background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-clip: content-box;
+    transition: --statelayer-opacity var(--md-comp-date-picker-button-motion-duration) linear;
+
+    &:hover {
+        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+    }
+    &:focus-visible {
+        --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
+    }
+    &:active {
+        --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
     }
 }
 
@@ -90,94 +106,37 @@ dialog.micl-dialog.micl-datepicker {
         gap: 0;
         grid-template-columns: max-content 1fr var(--md-sys-target-size, 48px);
         grid-template-areas:
-            "datepicker-supporting datepicker-supporting datepicker-supporting"
-            "datepicker-close datepicker-action datepicker-action"
-            "datepicker-close datepicker-headline datepicker-mode"
-            "datepicker-divider datepicker-divider datepicker-divider"
-            "datepicker-year-selector datepicker-year-selector datepicker-month-selector";
+            "sup sup sup"
+            "close act act"
+            "close head mode"
+            "div div div"
+            "ysel ysel msel";
         padding-inline-end: 12px;
         padding-block: 16px 4px;
 
-        h1, h2, h3, h4, h5, h6, .micl-heading {
+        :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
             @include typography.headline-large;
 
-            grid-area: datepicker-headline;
+            grid-area: head;
             margin-block-start: 36px;
-            color: var(--md-sys-color-on-surface-variant);
+            color: var(--md-comp-date-picker-header-headline-color, var(--md-sys-color-on-surface-variant));
         }
         .micl-dialog__supporting-text {
             @include typography.label-large;
 
-            grid-area: datepicker-supporting;
-        }
-        .micl-datepicker__inputmode {
-            grid-area: datepicker-mode;
-            align-self: flex-end;
-            justify-self: center;
+            grid-area: sup;
         }
         .micl-divider {
-            grid-area: datepicker-divider;
+            grid-area: div;
             inline-size: calc(100% + 36px);
             margin-block-start: 11.5px;
             margin-inline: -24px;
-        }
-        .micl-datepicker__month-selector,
-        .micl-datepicker__year-selector {
-            display: grid;
-            grid-template-rows: var(--md-sys-target-size, 48px);
-            align-items: center;
-
-            &.micl-datepicker__view-hidden {
-                display: none;
-            }
-        }
-        .micl-datepicker__month-selector {
-            grid-area: datepicker-month-selector;
-            grid-template-areas: "datepicker-month-previous datepicker-month-next";
-            grid-template-columns: var(--md-sys-target-size, 48px) var(--md-sys-target-size, 48px);
-            justify-items: flex-end;
-            justify-content: flex-end;
-
-            .micl-datepicker__previous {
-                grid-area: datepicker-month-previous;
-            }
-            .micl-datepicker__next {
-                grid-area: datepicker-month-next;
-            }
-        }
-        .micl-datepicker__year-selector {
-            grid-area: datepicker-year-selector;
-            grid-template-areas: "datepicker-year";
-            grid-template-columns: 1fr;
-            justify-items: flex-start;
-            margin-inline-start: -8px;
-
-            .micl-datepicker__previous {
-                display: none;
-                grid-area: datepicker-year-previous;
-            }
-            .micl-datepicker__next {
-                display: none;
-                grid-area: datepicker-year-next;
-            }
-        }
-        .micl-datepicker__month {
-            display: none;
-            grid-area: datepicker-month;
-            margin-inline: -12px auto;
-        }
-        .micl-datepicker__year {
-            grid-area: datepicker-year;
-        }
-        .micl-datepicker__month:not(:disabled),
-        .micl-datepicker__year:not(:disabled) {
-            color: var(--md-sys-color-on-surface-variant);
         }
     }
 
     .micl-dialog__content {
         display: grid;
-        grid-template-areas: "datepicker-view";
+        grid-template-areas: "view";
         position: relative;
         inline-size: 100%;
         max-block-size: 336px;
@@ -185,228 +144,10 @@ dialog.micl-dialog.micl-datepicker {
         padding-inline: 0;
         overflow: hidden auto;
         transition: min-block-size var(--md-comp-date-picker-motion-spatial-duration) var(--md-comp-date-picker-motion-spatial);
-
-        .micl-datepicker__calendars {
-            display: flex;
-            grid-area: datepicker-view;
-            position: absolute;
-            inset-block-start: 0;
-            inset-inline-start: 0;
-            block-size: 100%;
-            inline-size: 200%;
-            opacity: 1;
-            overflow: hidden;
-            transform: translateX(0);
-            transition:
-                transform var(--md-comp-date-picker-motion-spatial-duration) var(--md-comp-date-picker-motion-spatial),
-                opacity var(--md-comp-date-picker-motion-duration-reverse) linear,
-                block-size var(--md-comp-date-picker-motion-duration-reverse) linear allow-discrete,
-                display var(--md-comp-date-picker-motion-duration-reverse) linear allow-discrete;
-
-            &.micl-datepicker__view-hidden {
-                block-size: 0%;
-                opacity: 0;
-                transition-property: none;
-            }
-            &.micl-startleft,
-            &.micl-moveright {
-                transform: translateX(0%);
-            }
-            &.micl-startright,
-            &.micl-moveleft {
-                transform: translateX(-50%);
-            }
-
-            .micl-datepicker__calendar {
-                flex-shrink: 0;
-                block-size: 100%;
-                inline-size: 50%;
-
-                .micl-datepicker__calendar-inner {
-                    @include typography.body-large;
-
-                    box-sizing: border-box;
-                    display: grid;
-                    grid-template-columns: repeat(7, var(--md-sys-target-size, 48px));
-                    grid-template-rows: 40px repeat(6, var(--md-sys-target-size, 48px));
-                    block-size: 100%;
-                    inline-size: 100%;
-                    padding-inline: 12px;
-
-                    span, time {
-                        box-sizing: border-box;
-                        display: inline-flex;
-                        justify-content: center;
-                        border: none;
-                        color: var(--md-sys-color-on-surface);
-                        -webkit-tap-highlight-color: transparent;
-                    }
-                    time {
-                        --statelayer-color: var(--md-sys-color-on-surface-variant);
-                        --statelayer-opacity: 0%;
-
-                        align-items: center;
-                        border: 4px solid transparent;
-                        border-radius: var(--md-sys-shape-corner-full);
-                        background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-                        background-repeat: no-repeat;
-                        background-size: 100%;
-                        background-clip: content-box;
-                        transition: --statelayer-opacity var(--md-comp-date-picker-button-motion-duration) linear;
-
-                        &.micl-datepicker__today {
-                            outline: 1px solid var(--md-sys-color-primary);
-                            outline-offset: -5px;
-                            color: var(--md-sys-color-primary);
-
-                            &:hover,
-                            &:focus-visible,
-                            &:active {
-                                --statelayer-color: var(--md-sys-color-primary);
-                            }
-                        }
-                        &.micl-datepicker__selected {
-                            background-color: var(--md-sys-color-primary);
-                            color: var(--md-sys-color-on-primary);
-
-                            &:hover,
-                            &:focus-visible,
-                            &:active {
-                                --statelayer-color: var(--md-sys-color-on-primary);
-                            }
-                        }
-                        &.micl-datepicker__outside {
-                            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
-                        }
-                        &:not(.micl-datepicker__outside) {
-                            cursor: pointer;
-                        }
-                        &:hover {
-                            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-                        }
-                        &:focus-visible {
-                            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-                        }
-                        &:active {
-                            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
-                        }
-                    }
-                }
-            }
-        }
-        .micl-datepicker__months,
-        .micl-datepicker__years,
-        .micl-datepicker__input {
-            grid-area: datepicker-view;
-            @extend %view-transition-base;
-        }
-        .micl-datepicker__months {
-            overflow-y: hidden;
-
-            .micl-datepicker__months-inner {
-                block-size: auto;
-                inline-size: 100%;
-            }
-            label {
-                @include typography.body-large;
-
-                display: flex;
-                align-items: center;
-                block-size: var(--md-sys-target-size, 48px);
-                gap: 8px;
-                padding-inline-start: 16px;
-                color: var(--md-sys-color-on-surface);
-                cursor: pointer;
-
-                input[type=radio] {
-                    appearance: none;
-                    margin: 0;
-                }
-                span {
-                    visibility: hidden;
-                    color: var(--md-sys-color-on-surface);
-                }
-                &:has(input:checked) {
-                    background-color: var(--md-sys-color-surface-variant);
-
-                    span {
-                        visibility: visible;
-                    }
-                }
-            }
-        }
-        .micl-datepicker__years {
-            overflow-y: hidden;
-
-            .micl-datepicker__years-inner {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                block-size: auto;
-                inline-size: 100%;
-            }
-            label {
-                --statelayer-color: var(--md-sys-color-on-surface-variant);
-                --statelayer-opacity: 0%;
-
-                @include typography.body-large;
-
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                block-size: 36px;
-                inline-size: 72px;
-                margin: 8px;
-                border: calc((var(--md-sys-target-size, 48px) - 36px) / 2) solid transparent;
-                border-radius: calc(var(--md-sys-target-size, 48px) / 2);
-                background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-                background-repeat: no-repeat;
-                background-size: 100%;
-                background-clip: content-box;
-                color: var(--md-sys-color-on-surface-variant);
-                cursor: pointer;
-                transition: --statelayer-opacity var(--md-comp-date-picker-button-motion-duration) linear;
-
-                &:hover {
-                    --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-                }
-                &:focus-visible {
-                    --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-                }
-                &:active {
-                    --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
-                }
-                &:has(input:checked) {
-                    color: var(--md-sys-color-on-primary);
-                    background-color: var(--md-sys-color-primary);
-
-                    &:hover,
-                    &:focus-visible,
-                    &:active {
-                        --statelayer-color: var(--md-sys-color-on-primary);
-                    }
-                }
-
-                input[type=radio] {
-                    appearance: none;
-                    margin: 0;
-                }
-            }
-        }
-        .micl-datepicker__input {
-            padding-inline: 16px;
-            margin-block-end: 16px;
-
-            &.micl-datepicker__view-hidden,
-            input[type=date]::-webkit-calendar-picker-indicator,
-            input[type=date]::-webkit-inner-spin-button {
-                display: none;
-            }
-        }
     }
 
     .micl-dialog__actions {
-        padding: 8px 12px 12px 12px;
+        padding: 8px 12px 12px;
     }
 
     &.micl-dialog--docked {
@@ -414,36 +155,279 @@ dialog.micl-dialog.micl-datepicker {
         border-radius: var(--md-sys-shape-corner-large);
 
         .micl-dialog__headline {
-            grid-template-areas: "datepicker-month-selector datepicker-year-selector";
+            grid-template-areas: "msel ysel";
             grid-template-columns: 1fr 1fr;
-            padding: 8px 12px 18px 12px;
+            padding: 8px 12px 18px;
 
-            h1, h2, h3, h4, h5, h6, .micl-heading,
+            :is(h1, h2, h3, h4, h5, h6, .micl-heading),
             .micl-dialog__supporting-text,
             .micl-datepicker__inputmode {
                 display: none;
-            }
-            .micl-datepicker__month-selector {
-                grid-template-areas: "datepicker-month-previous datepicker-month datepicker-month-next";
-                grid-template-columns: var(--md-sys-target-size, 48px) 1fr var(--md-sys-target-size, 48px);
-
-                .micl-datepicker__month {
-                    display: inline-flex;
-                    margin-inline: 0;
-                }
-            }
-            .micl-datepicker__year-selector {
-                grid-template-areas: "datepicker-year-previous datepicker-year datepicker-year-next";
-                grid-template-columns: var(--md-sys-target-size, 48px) 1fr var(--md-sys-target-size, 48px);
-
-                .micl-datepicker__previous,
-                .micl-datepicker__next {
-                    display: block;
-                }
             }
         }
         .micl-dialog__actions > button {
             margin-block: -2px;
         }
+    }
+}
+
+.micl-datepicker__inputmode {
+    grid-area: mode;
+    align-self: flex-end;
+    justify-self: center;
+}
+
+.micl-datepicker__month-selector,
+.micl-datepicker__year-selector {
+    display: grid;
+    grid-template-rows: var(--md-sys-target-size, 48px);
+    align-items: center;
+
+    &.micl-datepicker__view-hidden {
+        display: none;
+    }
+}
+.micl-datepicker__month-selector {
+    grid-area: msel;
+    grid-template-areas: "mprev mnext";
+    grid-template-columns: var(--md-sys-target-size, 48px) var(--md-sys-target-size, 48px);
+    justify-items: flex-end;
+    justify-content: flex-end;
+
+    .micl-datepicker__previous {
+        grid-area: mprev;
+    }
+    .micl-datepicker__next {
+        grid-area: mnext;
+    }
+}
+.micl-datepicker__year-selector {
+    grid-area: ysel;
+    grid-template-areas: "yr";
+    grid-template-columns: 1fr;
+    justify-items: flex-start;
+    margin-inline-start: -8px;
+
+    .micl-datepicker__previous {
+        display: none;
+        grid-area: yprev;
+    }
+    .micl-datepicker__next {
+        display: none;
+        grid-area: ynext;
+    }
+}
+.micl-datepicker__month {
+    grid-area: mon;
+    margin-inline: -12px auto;
+}
+.micl-datepicker__month-selector .micl-datepicker__month {
+    display: none;
+}
+.micl-datepicker__year {
+    grid-area: yr;
+}
+.micl-datepicker__month:not(:disabled),
+.micl-datepicker__year:not(:disabled) {
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.micl-dialog--docked {
+    .micl-datepicker__month-selector {
+        grid-template-areas: "mprev mon mnext";
+        grid-template-columns: var(--md-sys-target-size, 48px) 1fr var(--md-sys-target-size, 48px);
+
+        .micl-datepicker__month {
+            display: inline-flex;
+            margin-inline: 0;
+        }
+    }
+    .micl-datepicker__year-selector {
+        grid-template-areas: "yprev yr ynext";
+        grid-template-columns: var(--md-sys-target-size, 48px) 1fr var(--md-sys-target-size, 48px);
+
+        :is(.micl-datepicker__previous, .micl-datepicker__next) {
+            display: block;
+        }
+    }
+}
+
+.micl-datepicker__calendars {
+    display: flex;
+    grid-area: view;
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    block-size: 100%;
+    inline-size: 200%;
+    opacity: 1;
+    overflow: hidden;
+    transform: translateX(0);
+    transition:
+        transform var(--md-comp-date-picker-motion-spatial-duration) var(--md-comp-date-picker-motion-spatial),
+        opacity var(--md-comp-date-picker-motion-duration-reverse) linear,
+        block-size var(--md-comp-date-picker-motion-duration-reverse) linear allow-discrete,
+        display var(--md-comp-date-picker-motion-duration-reverse) linear allow-discrete;
+
+    &.micl-datepicker__view-hidden {
+        block-size: 0%;
+        opacity: 0;
+        transition-property: none;
+    }
+    &.micl-startleft,
+    &.micl-moveright {
+        transform: translateX(0%);
+    }
+    &.micl-startright,
+    &.micl-moveleft {
+        transform: translateX(-50%);
+    }
+}
+.micl-datepicker__calendar {
+    flex-shrink: 0;
+    block-size: 100%;
+    inline-size: 50%;
+}
+.micl-datepicker__calendar-inner {
+    @include typography.body-large;
+
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(7, var(--md-sys-target-size, 48px));
+    grid-template-rows: 40px repeat(6, var(--md-sys-target-size, 48px));
+    block-size: 100%;
+    inline-size: 100%;
+    padding-inline: 12px;
+
+    span, time {
+        box-sizing: border-box;
+        display: inline-flex;
+        justify-content: center;
+        border: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    span {
+        color: var(--md-comp-date-picker-weekdays-label-text-color, var(--md-sys-color-on-surface));
+    }
+    time {
+        @extend %statelayer-background;
+
+        align-items: center;
+        border: 4px solid transparent;
+        border-radius: var(--md-sys-shape-corner-full);
+        color: var(--md-comp-date-picker-date-unselected-label-text-color, var(--md-sys-color-on-surface));
+
+        &.micl-datepicker__today {
+            outline: 1px solid var(--md-comp-date-picker-date-today-container-outline-color, var(--md-sys-color-primary));
+            outline-offset: -5px;
+            color: var(--md-comp-date-picker-date-today-label-text-color, var(--md-sys-color-primary));
+        }
+        &.micl-datepicker__selected {
+            background-color: var(--md-comp-date-picker-date-selected-container-color, var(--md-sys-color-primary));
+            color: var(--md-comp-date-picker-date-selected-label-text-color, var(--md-sys-color-on-primary));
+        }
+        // The state layer of a highlighted date follows its label color.
+        &:is(.micl-datepicker__today, .micl-datepicker__selected):is(:hover, :focus-visible, :active) {
+            --statelayer-color: currentColor;
+        }
+        &.micl-datepicker__outside {
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+        }
+        &:not(.micl-datepicker__outside) {
+            cursor: pointer;
+        }
+    }
+}
+
+.micl-datepicker__months,
+.micl-datepicker__years,
+.micl-datepicker__input {
+    grid-area: view;
+    @extend %view-transition-base;
+}
+.micl-datepicker__months {
+    overflow-y: hidden;
+
+    .micl-datepicker__months-inner {
+        block-size: auto;
+        inline-size: 100%;
+    }
+    label {
+        @include typography.body-large;
+
+        display: flex;
+        align-items: center;
+        block-size: var(--md-sys-target-size, 48px);
+        gap: 8px;
+        padding-inline-start: 16px;
+        color: var(--md-sys-color-on-surface);
+        cursor: pointer;
+
+        input[type=radio] {
+            appearance: none;
+            margin: 0;
+        }
+        span {
+            visibility: hidden;
+            color: var(--md-sys-color-on-surface);
+        }
+        &:has(input:checked) {
+            background-color: var(--md-sys-color-surface-variant);
+
+            span {
+                visibility: visible;
+            }
+        }
+    }
+}
+.micl-datepicker__years {
+    overflow-y: hidden;
+
+    .micl-datepicker__years-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        block-size: auto;
+        inline-size: 100%;
+    }
+    label {
+        @extend %statelayer-background;
+        @include typography.body-large;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        block-size: 36px;
+        inline-size: 72px;
+        margin: 8px;
+        border: calc((var(--md-sys-target-size, 48px) - 36px) / 2) solid transparent;
+        border-radius: calc(var(--md-sys-target-size, 48px) / 2);
+        color: var(--md-comp-date-picker-selection-year-unselected-label-text-color, var(--md-sys-color-on-surface-variant));
+        cursor: pointer;
+
+        &:has(input:checked) {
+            color: var(--md-comp-date-picker-selection-year-selected-label-text-color, var(--md-sys-color-on-primary));
+            background-color: var(--md-comp-date-picker-selection-year-selected-container-color, var(--md-sys-color-primary));
+
+            // The state layer of the selected year follows its label color.
+            &:is(:hover, :focus-visible, :active) {
+                --statelayer-color: currentColor;
+            }
+        }
+
+        input[type=radio] {
+            appearance: none;
+            margin: 0;
+        }
+    }
+}
+.micl-datepicker .micl-datepicker__input {
+    padding-inline: 16px;
+    margin-block-end: 16px;
+
+    &.micl-datepicker__view-hidden,
+    input[type=date]::-webkit-calendar-picker-indicator,
+    input[type=date]::-webkit-inner-spin-button {
+        display: none;
     }
 }
