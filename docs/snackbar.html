@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,content_copy,dark_mode,home,person,restart_alt&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,person,restart_alt&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -28,6 +28,7 @@
             </header>
 
             <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column"></div>
                 <div class="micl-pane__column">
                     <div class="micl-card-filled">
                         <div class="micl-card__headline-s">
@@ -35,63 +36,69 @@
                         </div>
                         <p class="micl-card__supporting-text">Click a button to open one of the MICL snackbars.</p>
                         <div class="micl-card__content docs-buttons">
-                            <div id="mysnackbar1" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
-                                <span class="micl-snackbar__supporting-text">Message sent</span>
-                                <button type="button" class="micl-button-text-s">Action</button>
+                            <div class="docs-example">
+                                <template>
+                                    <div id="mysnackbar1" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                        <span class="micl-snackbar__supporting-text">Message sent</span>
+                                        <button type="button" class="micl-button-text-s">Action</button>
+                                    </div>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar1">Open Snackbar with action button</button>
+                                </template>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar1">Open Snackbar with action button</button>
-
-                            <div id="mysnackbar2" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
-                               <span class="micl-snackbar__supporting-text">Message sent</span>
-                               <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar2" popovertargetaction="hide">close</button>
+                            <div class="docs-example">
+                                <template>
+                                    <div id="mysnackbar2" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                       <span class="micl-snackbar__supporting-text">Message sent</span>
+                                       <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar2" popovertargetaction="hide">close</button>
+                                    </div>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar2">Open Snackbar with close button</button>
+                                </template>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar2">Open Snackbar with close button</button>
-
-                            <div id="mysnackbar3" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
-                               <span class="micl-snackbar__supporting-text">Message sent</span>
-                               <button type="button" class="micl-button-text-s">Action</button>
-                               <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar3" popovertargetaction="hide">close</button>
+                            <div class="docs-example">
+                                <template>
+                                    <div id="mysnackbar3" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                       <span class="micl-snackbar__supporting-text">Message sent</span>
+                                       <button type="button" class="micl-button-text-s">Action</button>
+                                       <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar3" popovertargetaction="hide">close</button>
+                                    </div>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar3">Open Snackbar with action- and close button</button>
+                                </template>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar3">Open Snackbar with action- and close button</button>
-
-                            <div id="mysnackbar4" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
-                                <span class="micl-snackbar__supporting-text">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</span>
+                            <div class="docs-example">
+                                <template>
+                                    <div id="mysnackbar4" class="micl-snackbar" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                        <span class="micl-snackbar__supporting-text">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</span>
+                                    </div>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar4">Open Snackbar with a long line of text</button>
+                                </template>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar4">Open Snackbar with a long line of text</button>
-
-                            <div id="mysnackbar5" class="micl-snackbar micl-snackbar--two" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
-                                <span>
-                                    <span class="micl-snackbar__supporting-text">Message sent</span>
-                                    <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
-                                </span>
+                            <div class="docs-example">
+                                <template>
+                                    <div id="mysnackbar5" class="micl-snackbar micl-snackbar--two" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                        <span>
+                                            <span class="micl-snackbar__supporting-text">Message sent</span>
+                                            <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
+                                        </span>
+                                    </div>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar5">Open Snackbar with 2 lines of text</button>
+                                </template>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar5">Open Snackbar with 2 lines of text</button>
-
-                            <div id="mysnackbar6" class="micl-snackbar micl-snackbar--two" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
-                                <span>
-                                    <span class="micl-snackbar__supporting-text">Message sent</span>
-                                    <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
-                                </span>
-                               <button type="button" class="micl-button-text-s">Action</button>
+                            <div class="docs-example">
+                                <template>
+                                    <div id="mysnackbar6" class="micl-snackbar micl-snackbar--two" popover="manual" data-micldelay="4000" role="status" aria-atomic="true">
+                                        <span>
+                                            <span class="micl-snackbar__supporting-text">Message sent</span>
+                                            <span class="micl-snackbar__supporting-text">An email has been sent to john@example.com</span>
+                                        </span>
+                                       <button type="button" class="micl-button-text-s">Action</button>
+                                    </div>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar6">Open Snackbar with 2 lines of text and action</button>
+                                </template>
                             </div>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mysnackbar6">Open Snackbar with 2 lines of text and action</button>
                         </div>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Code example</h2>
-                            <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                        </div>
-                        <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code>&lt;div id="mysnackbar" class="micl-snackbar" popover="manual" role="status" aria-atomic="true" data-micldelay="3000"&gt;
-    &lt;span class="micl-snackbar__supporting-text"&gt;Message sent&lt;/span&gt;
-    &lt;button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar"&gt;close&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
+                <div class="micl-pane__column"></div>
             </div>
         </section>
     </main>

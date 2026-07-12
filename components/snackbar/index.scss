@@ -38,22 +38,23 @@
 
 @include typography.scale('body-medium');
 
+// The direction factor must react to the dir attribute, so it cannot follow the
+// no-declaration convention of the public tokens.
 :root {
-    --md-comp-snackbar-margin: 24px;
-    --md-comp-snackbar-padding: 16px;
-    --md-comp-snackbar-dir-factor: 1;
+    --_snackbar-dir-factor: 1;
 }
 
 [dir=rtl] {
-    --md-comp-snackbar-dir-factor: -1;
+    --_snackbar-dir-factor: -1;
 }
 
 .micl-snackbar {
     --md-comp-snackbar-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-comp-snackbar-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
     --md-comp-snackbar-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --micl-duration: var(--md-comp-snackbar-motion-duration-reverse);
     --statelayer-color: var(--md-sys-color-inverse-primary);
-    --statelayer-opacity: 0;
+    --statelayer-opacity: 0%;
 
     box-sizing: border-box;
     position: fixed;
@@ -86,10 +87,10 @@
 
     opacity: 0;
     overflow-y: hidden;
-    translate: calc(var(--md-comp-snackbar-dir-factor, 1) * -50%);
+    translate: calc(var(--_snackbar-dir-factor, 1) * -50%);
 
     transition:
-        block-size var(--md-comp-snackbar-motion-duration-reverse) var(--md-comp-snackbar-motion-spatial),
+        block-size var(--micl-duration) var(--md-comp-snackbar-motion-spatial),
         opacity var(--md-comp-snackbar-motion-duration-reverse) linear,
         display var(--md-comp-snackbar-motion-duration-reverse) linear allow-discrete,
         overlay var(--md-comp-snackbar-motion-duration-reverse) linear allow-discrete,
@@ -109,12 +110,10 @@
     }
 
     &:popover-open {
+        --micl-duration: var(--md-comp-snackbar-motion-duration);
+
         block-size: var(--md-comp-snackbar-with-single-line-container-height, 48px);
         opacity: 1;
-        transition:
-            block-size var(--md-comp-snackbar-motion-duration) var(--md-comp-snackbar-motion-spatial),
-            opacity var(--md-comp-snackbar-motion-duration-reverse) linear,
-            --statelayer-opacity var(--md-comp-snackbar-motion-duration) linear;
 
         @starting-style {
             block-size: 0;
