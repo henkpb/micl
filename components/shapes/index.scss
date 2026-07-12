@@ -30,7 +30,6 @@ $master: false !default;
 
 @mixin base {
     .micl-shapes {
-        --md-sys-shapes-aspect-ratio: 1;
         inline-size: 100px;
         block-size: 100px;
         fill: var(--md-sys-color-primary);
