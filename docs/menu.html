@@ -36,6 +36,7 @@
             </header>
 
             <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column"></div>
                 <div class="micl-pane__column">
                     <div class="micl-card-filled">
                         <div class="micl-card__headline-s">
@@ -43,527 +44,527 @@
                         </div>
                         <p class="micl-card__supporting-text">Click a button to open one of the MICL menus.</p>
                         <div class="micl-card__content docs-buttons">
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu1">Single-item menu</button>
-                                <nav id="mymenu1" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Only one item</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu1">Single-item menu</button>
+                                        <nav id="mymenu1" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Only one item</span>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu2">Basic Menu</button>
-                                <nav id="mymenu2" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Home</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">About</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one micl-list-item--disabled">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Contact</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu2">Basic Menu</button>
+                                        <nav id="mymenu2" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Home</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">About</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one micl-list-item--disabled">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Contact</span>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu3">Menu with leading icons + divider</button>
-                                <nav id="mymenu3" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">undo</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Undo</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one micl-list-item--disabled">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">redo</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Redo</span>
-                                            </span>
-                                        </li>
-                                        <li role="separator" class="micl-divider-inset"></li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_cut</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Cut</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Copy</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_paste</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Paste</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu3">Menu with leading icons + divider</button>
+                                        <nav id="mymenu3" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">undo</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Undo</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one micl-list-item--disabled">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">redo</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Redo</span>
+                                                    </span>
+                                                </li>
+                                                <li role="separator" class="micl-divider-inset"></li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_cut</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Cut</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Copy</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_paste</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Paste</span>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu4">Grouped menu with trailing icons</button>
-                                <nav id="mymenu4" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Undo</span>
-                                            </span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">undo</span>
-                                        </li>
-                                        <li class="micl-list-item-one micl-list-item--disabled">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Redo</span>
-                                            </span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">redo</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Cut</span>
-                                            </span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_cut</span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Copy</span>
-                                            </span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Paste</span>
-                                            </span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_paste</span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu4">Grouped menu with trailing icons</button>
+                                        <nav id="mymenu4" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Undo</span>
+                                                    </span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">undo</span>
+                                                </li>
+                                                <li class="micl-list-item-one micl-list-item--disabled">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Redo</span>
+                                                    </span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">redo</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Cut</span>
+                                                    </span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_cut</span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Copy</span>
+                                                    </span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Paste</span>
+                                                    </span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_paste</span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu5">Menu with supporting text</button>
-                                <nav id="mymenu5" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-two" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">group</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Number of employees</span>
-                                                <span class="micl-list-item__supporting-text">Currently + those who have signed a contract</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <span class="micl-list-item__icon" aria-hidden="true"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Company cars</span>
-                                                <span class="micl-list-item__supporting-text">Available to our wonderful employees</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <a href="https://www.nytimes.com" target="_blank">
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">The New York Times</span>
-                                                    <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <label>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Select or Unselect</span>
-                                                    <span class="micl-list-item__supporting-text">A check-mark before this text if the item is selected.</span>
-                                                </span>
-                                                <input type="checkbox" id="cb5" class="micl-checkbox" style="display:none" value="c5" checked>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu5">Menu with supporting text</button>
+                                        <nav id="mymenu5" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-two" tabindex="0">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">group</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Number of employees</span>
+                                                        <span class="micl-list-item__supporting-text">Currently + those who have signed a contract</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <span class="micl-list-item__icon" aria-hidden="true"></span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Company cars</span>
+                                                        <span class="micl-list-item__supporting-text">Available to our wonderful employees</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <a href="https://www.nytimes.com" target="_blank">
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
+                                                        <span class="micl-list-item__text">
+                                                            <span class="micl-list-item__headline">The New York Times</span>
+                                                            <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <label>
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                                        <span class="micl-list-item__text">
+                                                            <span class="micl-list-item__headline">Select or Unselect</span>
+                                                            <span class="micl-list-item__supporting-text">A check-mark before this text if the item is selected.</span>
+                                                        </span>
+                                                        <input type="checkbox" id="cb5" class="micl-checkbox" style="display:none" value="c5" checked>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu6">Complex menu</button>
-                                <nav id="mymenu6" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">Open in new window</span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">open_in_new</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-two" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">home</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Home</span>
-                                                <span class="micl-list-item__supporting-text">Click here to go home</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <label>
-                                                <span class="micl-list-item__icon"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Person</span>
-                                                    <span class="micl-list-item__supporting-text">Are you an administrator?</span>
-                                                </span>
-                                                <input type="checkbox" id="cb6" class="micl-checkbox" value="c6">
-                                            </label>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">settings</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">About</span>
-                                                <span class="micl-list-item__supporting-text">Change everything in the system</span>
-                                            </span>
-                                        </li>
-                                        <li role="separator" class="micl-divider-inset"></li>
-                                        <li class="micl-list-item-two">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Contact</span>
-                                                <span class="micl-list-item__supporting-text">Call me!</span>
-                                            </span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">keyboard_command_key</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-two" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">group</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Number of employees</span>
-                                                <span class="micl-list-item__supporting-text">Currently + those who have signed a contract</span>
-                                            </span>
-                                            <span class="micl-list-item__trailing-text">381</span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/1928_Model_A_Ford.jpg/330px-1928_Model_A_Ford.jpg)"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Company cars</span>
-                                                <span class="micl-list-item__supporting-text">Available to our wonderful employees</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <label>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Select or Unselect</span>
-                                                    <span class="micl-list-item__supporting-text">A check-mark before this text if the item is selected.</span>
-                                                </span>
-                                                <input type="checkbox" id="cb7" class="micl-checkbox" style="display:none" value="c7" checked>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu6">Complex menu</button>
+                                        <nav id="mymenu6" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">Open in new window</span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">open_in_new</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-two" tabindex="0">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">home</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Home</span>
+                                                        <span class="micl-list-item__supporting-text">Click here to go home</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <label>
+                                                        <span class="micl-list-item__icon"></span>
+                                                        <span class="micl-list-item__text">
+                                                            <span class="micl-list-item__headline">Person</span>
+                                                            <span class="micl-list-item__supporting-text">Are you an administrator?</span>
+                                                        </span>
+                                                        <input type="checkbox" id="cb6" class="micl-checkbox" value="c6">
+                                                    </label>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">settings</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">About</span>
+                                                        <span class="micl-list-item__supporting-text">Change everything in the system</span>
+                                                    </span>
+                                                </li>
+                                                <li role="separator" class="micl-divider-inset"></li>
+                                                <li class="micl-list-item-two">
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Contact</span>
+                                                        <span class="micl-list-item__supporting-text">Call me!</span>
+                                                    </span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">keyboard_command_key</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-two" tabindex="0">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">group</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Number of employees</span>
+                                                        <span class="micl-list-item__supporting-text">Currently + those who have signed a contract</span>
+                                                    </span>
+                                                    <span class="micl-list-item__trailing-text">381</span>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/1928_Model_A_Ford.jpg/330px-1928_Model_A_Ford.jpg)"></span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Company cars</span>
+                                                        <span class="micl-list-item__supporting-text">Available to our wonderful employees</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-two">
+                                                    <label>
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                                        <span class="micl-list-item__text">
+                                                            <span class="micl-list-item__headline">Select or Unselect</span>
+                                                            <span class="micl-list-item__supporting-text">A check-mark before this text if the item is selected.</span>
+                                                        </span>
+                                                        <input type="checkbox" id="cb7" class="micl-checkbox" style="display:none" value="c7" checked>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu7">Menu with sub-menus</button>
-                                <nav id="mymenu7" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <button popovertarget="mymenu7-1">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Europe</span>
-                                                </span>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
-                                            </button>
-                                            <nav id="mymenu7-1" class="micl-menu" popover>
-                                                <ul class="micl-list">
-                                                    <li class="micl-list-item-one" tabindex="0">
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu7">Menu with sub-menus</button>
+                                        <nav id="mymenu7" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <button popovertarget="mymenu7-1">
                                                         <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Norway</span>
+                                                            <span class="micl-list-item__headline">Europe</span>
                                                         </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
+                                                    </button>
+                                                    <nav id="mymenu7-1" class="micl-menu" popover>
+                                                        <ul class="micl-list">
+                                                            <li class="micl-list-item-one" tabindex="0">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Norway</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Sweden</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">France</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Italy</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Slovenia</span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <button popovertarget="mymenu7-2">
                                                         <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Sweden</span>
+                                                            <span class="micl-list-item__headline">Africa</span>
                                                         </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
+                                                    </button>
+                                                    <nav id="mymenu7-2" class="micl-menu" popover>
+                                                        <ul class="micl-list">
+                                                            <li class="micl-list-item-one" tabindex="0">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Egypt</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Cameroon</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Botswana</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Ghana</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Niger</span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <button popovertarget="mymenu7-3">
                                                         <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">France</span>
+                                                            <span class="micl-list-item__headline">Asia</span>
                                                         </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
+                                                    </button>
+                                                    <nav id="mymenu7-3" class="micl-menu" popover>
+                                                        <ul class="micl-list">
+                                                            <li class="micl-list-item-one" tabindex="0">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Bhutan</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">India</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Jordan</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Vietnam</span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <span class="micl-list-item__text">
+                                                                    <span class="micl-list-item__headline">Mongolia</span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <button popovertarget="mymenu7-4">
                                                         <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Italy</span>
+                                                            <span class="micl-list-item__headline">America</span>
                                                         </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Slovenia</span>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <button popovertarget="mymenu7-2">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Africa</span>
-                                                </span>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
-                                            </button>
-                                            <nav id="mymenu7-2" class="micl-menu" popover>
-                                                <ul class="micl-list">
-                                                    <li class="micl-list-item-one" tabindex="0">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Egypt</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Cameroon</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Botswana</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Ghana</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Niger</span>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <button popovertarget="mymenu7-3">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Asia</span>
-                                                </span>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
-                                            </button>
-                                            <nav id="mymenu7-3" class="micl-menu" popover>
-                                                <ul class="micl-list">
-                                                    <li class="micl-list-item-one" tabindex="0">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Bhutan</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">India</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Jordan</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Vietnam</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <span class="micl-list-item__text">
-                                                            <span class="micl-list-item__headline">Mongolia</span>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <button popovertarget="mymenu7-4">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">America</span>
-                                                </span>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
-                                            </button>
-                                            <nav id="mymenu7-4" class="micl-menu" popover>
-                                                <ul class="micl-list">
-                                                    <li class="micl-list-item-one" tabindex="0">
-                                                        <button popovertarget="mymenu7-4-1">
-                                                            <span class="micl-list-item__text">
-                                                                <span class="micl-list-item__headline">North America</span>
-                                                            </span>
-                                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
-                                                        </button>
-                                                        <nav id="mymenu7-4-1" class="micl-menu" popover>
-                                                            <ul class="micl-list">
-                                                                <li class="micl-list-item-one" tabindex="0">
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
+                                                    </button>
+                                                    <nav id="mymenu7-4" class="micl-menu" popover>
+                                                        <ul class="micl-list">
+                                                            <li class="micl-list-item-one" tabindex="0">
+                                                                <button popovertarget="mymenu7-4-1">
                                                                     <span class="micl-list-item__text">
-                                                                        <span class="micl-list-item__headline">Mexico</span>
+                                                                        <span class="micl-list-item__headline">North America</span>
                                                                     </span>
-                                                                </li>
-                                                                <li class="micl-list-item-one">
+                                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
+                                                                </button>
+                                                                <nav id="mymenu7-4-1" class="micl-menu" popover>
+                                                                    <ul class="micl-list">
+                                                                        <li class="micl-list-item-one" tabindex="0">
+                                                                            <span class="micl-list-item__text">
+                                                                                <span class="micl-list-item__headline">Mexico</span>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li class="micl-list-item-one">
+                                                                            <span class="micl-list-item__text">
+                                                                                <span class="micl-list-item__headline">Canada</span>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li class="micl-list-item-one">
+                                                                            <span class="micl-list-item__text">
+                                                                                <span class="micl-list-item__headline">USA</span>
+                                                                            </span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </nav>
+                                                            </li>
+                                                            <li class="micl-list-item-one">
+                                                                <button popovertarget="mymenu7-4-2">
                                                                     <span class="micl-list-item__text">
-                                                                        <span class="micl-list-item__headline">Canada</span>
+                                                                        <span class="micl-list-item__headline">South America</span>
                                                                     </span>
-                                                                </li>
-                                                                <li class="micl-list-item-one">
-                                                                    <span class="micl-list-item__text">
-                                                                        <span class="micl-list-item__headline">USA</span>
-                                                                    </span>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
-                                                    </li>
-                                                    <li class="micl-list-item-one">
-                                                        <button popovertarget="mymenu7-4-2">
-                                                            <span class="micl-list-item__text">
-                                                                <span class="micl-list-item__headline">South America</span>
-                                                            </span>
-                                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
-                                                        </button>
-                                                        <nav id="mymenu7-4-2" class="micl-menu" popover>
-                                                            <ul class="micl-list">
-                                                                <li class="micl-list-item-one" tabindex="0">
-                                                                    <span class="micl-list-item__text">
-                                                                        <span class="micl-list-item__headline">Brazil</span>
-                                                                    </span>
-                                                                </li>
-                                                                <li class="micl-list-item-one">
-                                                                    <span class="micl-list-item__text">
-                                                                        <span class="micl-list-item__headline">Peru</span>
-                                                                    </span>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">arrow_right</span>
+                                                                </button>
+                                                                <nav id="mymenu7-4-2" class="micl-menu" popover>
+                                                                    <ul class="micl-list">
+                                                                        <li class="micl-list-item-one" tabindex="0">
+                                                                            <span class="micl-list-item__text">
+                                                                                <span class="micl-list-item__headline">Brazil</span>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li class="micl-list-item-one">
+                                                                            <span class="micl-list-item__text">
+                                                                                <span class="micl-list-item__headline">Peru</span>
+                                                                            </span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </nav>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu8">A vibrant menu</button>
-                                <nav id="mymenu8" class="micl-menu micl-menu--vibrant" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">Open in new window</span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">open_in_new</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">Revert</span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">undo</span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">Delete</span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">delete</span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">Settings</span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">settings</span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <label>
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">dark_mode</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Dark mode</span>
-                                                </span>
-                                                <input type="checkbox" id="cb8" class="micl-checkbox" value="dark" checked>
-                                            </label>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">Help & feedback</span>
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">help</span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu8">A vibrant menu</button>
+                                        <nav id="mymenu8" class="micl-menu micl-menu--vibrant" popover>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">Open in new window</span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">open_in_new</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="micl-list">
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__text">Revert</span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">undo</span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__text">Delete</span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__text">Settings</span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">settings</span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <label>
+                                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">dark_mode</span>
+                                                        <span class="micl-list-item__text">
+                                                            <span class="micl-list-item__headline">Dark mode</span>
+                                                        </span>
+                                                        <input type="checkbox" id="cb8" class="micl-checkbox" value="dark" checked>
+                                                    </label>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__text">Help & feedback</span>
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">help</span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
-
-                            <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu9">Menu with sections</button>
-                                <nav id="mymenu9" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li role="separator" class="micl-menu__section">Files</li>
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">note_add</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">New</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">file_open</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Open</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <ul class="micl-list">
-                                        <li role="separator" class="micl-menu__section">Edit</li>
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_cut</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Cut</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Copy</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_paste</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Paste</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="docs-example">
+                                <template>
+                                    <div style="position:relative">
+                                        <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu9">Menu with sections</button>
+                                        <nav id="mymenu9" class="micl-menu" popover>
+                                            <ul class="micl-list">
+                                                <li role="separator" class="micl-menu__section">Files</li>
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">note_add</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">New</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">file_open</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Open</span>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                            <ul class="micl-list">
+                                                <li role="separator" class="micl-menu__section">Edit</li>
+                                                <li class="micl-list-item-one" tabindex="0">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_cut</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Cut</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Copy</span>
+                                                    </span>
+                                                </li>
+                                                <li class="micl-list-item-one">
+                                                    <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_paste</span>
+                                                    <span class="micl-list-item__text">
+                                                        <span class="micl-list-item__headline">Paste</span>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Code example</h2>
-                            <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                        </div>
-                        <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code>&lt;nav id="id0" class="micl-menu" popover&gt;
-  &lt;ul class="micl-list"&gt;
-    &lt;li class="micl-list-item-one" tabindex="0"&gt;
-      &lt;span class="micl-list-item__text"&gt;
-        &lt;span class="micl-list-item__headline"&gt;Home&lt;/span&gt;
-      &lt;/span&gt;
-    &lt;/li&gt;
-    &lt;li class="micl-list-item-one"&gt;
-      &lt;span class="micl-list-item__text"&gt;
-        &lt;span class="micl-list-item__headline"&gt;About&lt;/span&gt;
-      &lt;/span&gt;
-    &lt;/li&gt;
-    &lt;li class="micl-list-item-one micl-list-item--disabled"&gt;
-      &lt;span class="micl-list-item__text"&gt;
-        &lt;span class="micl-list-item__headline"&gt;Contact&lt;/span&gt;
-      &lt;/span&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
+                <div class="micl-pane__column"></div>
             </div>
         </section>
     </main>

@@ -26,8 +26,8 @@ const getOrigin = (invoker: Element, popover: Element): string =>
     const invokerRect = invoker.getBoundingClientRect();
     const popoverRect = popover.getBoundingClientRect();
 
-    return ((invokerRect.x > popoverRect.x) ? 'right ' : 'left ') +
-           ((invokerRect.y > popoverRect.y) ? 'bottom' : 'top');
+    return ((invokerRect.x + invokerRect.width / 2 > popoverRect.x + popoverRect.width / 2) ? 'right ' : 'left ') +
+           ((invokerRect.y + invokerRect.height / 2 > popoverRect.y + popoverRect.height / 2) ? 'bottom' : 'top');
 };
 
 const navigableItems = (list: Element): HTMLElement[] =>
@@ -51,9 +51,20 @@ export default {
 
         const invoker = document.querySelector(`[popovertarget="${element.id}"]`);
 
-        invoker && element.addEventListener('beforetoggle', () =>
+        invoker && element.addEventListener('beforetoggle', (event: Event) =>
         {
-            element.style.transformOrigin = getOrigin(invoker, element);
+            if ((event as ToggleEvent).newState === 'open') {
+                if (!element.style.transformOrigin) {
+                    const rect = invoker.getBoundingClientRect();
+
+                    element.style.transformOrigin =
+                        ((rect.x + rect.width / 2 > window.innerWidth / 2) ? 'right ' : 'left ') +
+                        ((rect.y + rect.height / 2 > window.innerHeight / 2) ? 'bottom' : 'top');
+                }
+            }
+            else {
+                element.style.transformOrigin = getOrigin(invoker, element);
+            }
         });
 
         element.addEventListener('keydown', (event: KeyboardEvent) =>
