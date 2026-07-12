@@ -229,7 +229,9 @@ $open-accordion: ':where(details[open] > *)';
     }
 }
 
-.micl-list:has(> .micl-list-item-one[tabindex], > .micl-list-item-two[tabindex], > .micl-list-item-three[tabindex]), select {
+// :is(select, optgroup) keeps the specificity of a bare element selector; options are
+// direct children of the select only until they are wrapped in an <optgroup>.
+.micl-list:has(> .micl-list-item-one[tabindex], > .micl-list-item-two[tabindex], > .micl-list-item-three[tabindex]), :is(select, optgroup) {
     > .micl-list-item-one, > .micl-list-item-two, > .micl-list-item-three {
         &:not(:disabled):not(.micl-list-item--disabled) {
             @extend %shared-interactive-states;

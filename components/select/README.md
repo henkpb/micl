@@ -132,15 +132,19 @@ Options can be grouped by using the `<optgroup>` element. Add a `<legend>` eleme
 </div>
 ```
 
-## Customizations
-You can customize the appearance of the Select component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child selects.
+## Theming
+The Select component has no tokens of its own: the field is themed with the CSS custom properties of the [Text field](../textfield/README.md) component, and the option pick-list with those of the [Menu](../menu/README.md) and [List](../list/README.md) components. Set them on any appropriate parent element to affect its child selects.
 
-| Variable name                  | Default Value | Description |
-| ------------------------------ | ------------- | ----------- |
-| --md-comp-select-line-height   |               | The vertical line-height applied to the closed `<select>` element |
-| --md-comp-select-picker-origin | left top      | The transform-origin used for the open/close scale animation of the option pick-list |
+**Example: A select with a compact field and a wider pick-list**
 
-The Select component supports the CSS variables listed for the [Menu](../menu/README.md) component.
+```HTML
+<div class="micl-textfield-outlined" style="--md-comp-text-field-container-height:48px;--md-comp-menu-width-max:400px">
+  <label for="myselect">Country</label>
+  <select id="myselect">
+    ...
+  </select>
+</div>
+```
 
 ## Compatibility
 This component uses modern browser features to style the `<select>` element, which may not be fully supported in all browsers. Browsers that do not support these features will display a default select menu. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/::picker#browser_compatibility) for details.

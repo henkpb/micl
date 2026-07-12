@@ -133,17 +133,19 @@ export default {
         }
 
         if (input instanceof HTMLSelectElement) {
-            input.addEventListener('mousedown', () =>
+            const setPickerOrigin = (): void =>
             {
                 const rect       = input.getBoundingClientRect();
                 const spaceAbove = rect.top;
                 const spaceBelow = window.innerHeight - rect.bottom;
 
                 !input.matches(':open') && input.style.setProperty(
-                    '--md-comp-select-picker-origin',
-                    spaceAbove > spaceBelow ? 'left bottom' : 'left top'
+                    '--micl-select-picker-origin',
+                    spaceAbove > spaceBelow ? 'bottom' : 'top'
                 );
-            });
+            };
+            input.addEventListener('mousedown', setPickerOrigin);
+            input.addEventListener('keydown', setPickerOrigin);
         }
 
         if (input.matches('input[type=time][data-timepicker],input[type=date][data-datepicker]')) {
