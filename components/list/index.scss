@@ -51,19 +51,27 @@
 @include typography.scale('body-medium');
 @include typography.scale('label-small');
 
-:root {
-    --md-comp-accordion-item-space: 0px;
-}
-
 $item-padding-block: var(--md-comp-list-item-top-space, 10px) var(--md-comp-list-item-bottom-space, 10px);
 $item-padding-inline: var(--md-comp-list-item-leading-space, 16px) var(--md-comp-list-item-trailing-space, 16px);
 
 $open-accordion: ':where(details[open] > *)';
 
+// Each selector group compiles to a single selector.
+$items: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-three)';
+
+// An item is selected when it is a checked option, contains a checked checkbox/switch,
+// or is the summary of an open accordion.
+$selected: ':is(:checked, :has(input[type=checkbox]:checked), #{$open-accordion})';
+$unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordion})';
+
 %shared-interactive-states {
     cursor: pointer;
 
-    &:not(:has(input[type=checkbox]:checked)):not(#{$open-accordion}) {
+    &:focus-visible {
+        outline: var(--md-comp-list-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px)) solid var(--md-comp-list-item-focus-indicator-color, var(--md-sys-color-secondary));
+        outline-offset: var(--md-comp-list-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
+    }
+    &#{$unselected} {
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-hovered-expressive-shape, var(--md-sys-shape-corner-medium, 12px));
             --_headline-color: var(--md-comp-list-item-hover-label-text-color, var(--md-sys-color-on-surface));
@@ -83,9 +91,6 @@ $open-accordion: ':where(details[open] > *)';
             --_trailing-text-color: var(--md-comp-list-item-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
             --statelayer-color: var(--md-comp-list-item-focus-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity, 10%));
-
-            outline: var(--md-comp-list-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px)) solid var(--md-comp-list-item-focus-indicator-color, var(--md-sys-color-secondary));
-            outline-offset: var(--md-comp-list-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
         }
         &:active {
             --_list-item-shape: var(--md-comp-list-item-container-pressed-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -111,7 +116,7 @@ $open-accordion: ':where(details[open] > *)';
             cursor: grabbing;
         }
     }
-    &:is(:has(input[type=checkbox]:checked), #{$open-accordion}) {
+    &#{$selected} {
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-selected-hovered-expressive-shape, var(--md-sys-shape-corner-large, 16px));
             --_headline-color: var(--md-comp-list-item-selected-hover-label-text-color, var(--md-sys-color-on-secondary-container));
@@ -131,9 +136,6 @@ $open-accordion: ':where(details[open] > *)';
             --_trailing-text-color: var(--md-comp-list-item-selected-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-focus-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity, 10%));
-
-            outline: var(--md-comp-list-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px)) solid var(--md-comp-list-item-focus-indicator-color, var(--md-sys-color-secondary));
-            outline-offset: var(--md-comp-list-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
         }
         &:active {
             --_list-item-shape: var(--md-comp-list-item-container-selected-pressed-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -205,9 +207,7 @@ $open-accordion: ':where(details[open] > *)';
             transform: rotate(180deg);
         }
 
-        &> summary.micl-list-item-one,
-        &> summary.micl-list-item-two,
-        &> summary.micl-list-item-three {
+        &> summary#{$items} {
             position: relative;
 
             &::-webkit-details-marker {
@@ -215,9 +215,6 @@ $open-accordion: ':where(details[open] > *)';
             }
             &.micl-list-item--disabled {
                 pointer-events: none;
-            }
-            &:not(.micl-list-item--disabled) {
-                @extend %shared-interactive-states;
             }
         }
         .micl-list-item__content {
@@ -229,19 +226,18 @@ $open-accordion: ':where(details[open] > *)';
     }
 }
 
-// :is(select, optgroup) keeps the specificity of a bare element selector; options are
-// direct children of the select only until they are wrapped in an <optgroup>.
-.micl-list:has(> .micl-list-item-one[tabindex], > .micl-list-item-two[tabindex], > .micl-list-item-three[tabindex]), :is(select, optgroup) {
-    > .micl-list-item-one, > .micl-list-item-two, > .micl-list-item-three {
-        &:not(:disabled):not(.micl-list-item--disabled) {
-            @extend %shared-interactive-states;
-        }
-    }
+// This single extend site keeps every interactive-state rule at one compiled selector.
+// Interactive items are the summaries of accordions, the children of a list that holds a
+// tabindex-marked item (see the README), and the options of a select — with `optgroup`
+// covering grouped options, which are not direct children of their select.
+:is(
+    .micl-list > details > summary#{$items},
+    :is(.micl-list:has(> #{$items}[tabindex]), select, optgroup) > #{$items}
+):not(:disabled, .micl-list-item--disabled) {
+    @extend %shared-interactive-states;
 }
 
-.micl-list-item-one,
-.micl-list-item-two,
-.micl-list-item-three {
+#{$items} {
     --statelayer-color: var(--md-sys-color-on-surface);
     --_list-item-shape: var(--md-comp-list-item-container-expressive-shape, var(--md-sys-shape-corner-extra-small, 4px));
     --_overline-color: var(--md-comp-list-item-overline-color, var(--md-sys-color-on-surface-variant));
@@ -331,7 +327,7 @@ $open-accordion: ':where(details[open] > *)';
             opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         }
 
-        &:checked, &:has(input[type=checkbox]:checked), &#{$open-accordion} {
+        &#{$selected} {
             --_list-item-background-color: var(--md-comp-list-item-selected-disabled-container-color, var(--md-sys-color-on-surface));
             --_list-item-background-opacity: var(--md-comp-list-item-selected-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
             --_list-item-shape: var(--md-comp-list-item-container-selected-disabled-expressive-shape, var(--md-sys-shape-corner-large, 16px));
@@ -345,7 +341,7 @@ $open-accordion: ':where(details[open] > *)';
             --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 0%);
         }
     }
-    &:checked, &:has(input[type=checkbox]:checked), &#{$open-accordion} {
+    &#{$selected} {
         --_list-item-background-color: var(--md-comp-list-item-selected-container-color, var(--md-sys-color-secondary-container));
         --_list-item-background-opacity: 100%;
         --_overline-color: var(--md-comp-list-item-selected-overline-color, var(--md-sys-color-on-secondary-container));
@@ -355,8 +351,8 @@ $open-accordion: ':where(details[open] > *)';
         --_trailing-text-color: var(--md-comp-list-item-selected-trailing-supporting-text-color, var(--md-sys-color-on-secondary-container));
         --_trailing-icon-color: var(--md-comp-list-item-selected-trailing-icon-color, var(--md-sys-color-on-secondary-container));
     }
-    &:not(:disabled):not(.micl-list-item--disabled) {
-        &:checked, &:has(input[type=checkbox]:checked), &#{$open-accordion} {
+    &:not(:disabled, .micl-list-item--disabled) {
+        &#{$selected} {
             --_list-item-shape: var(--md-comp-list-item-container-selected-expressive-shape, var(--md-sys-shape-corner-large, 16px));
         }
         input[type=checkbox]:not(:disabled):hover,
@@ -393,7 +389,7 @@ $open-accordion: ':where(details[open] > *)';
         -webkit-line-clamp: 2;
     }
 }
-.micl-list-item-one, .micl-list-item-two, .micl-list-item-three {
+#{$items} {
     input[type=checkbox].micl-checkbox {
         block-size: 24px;
         min-block-size: 24px;
