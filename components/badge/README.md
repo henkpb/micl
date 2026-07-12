@@ -45,23 +45,25 @@ You can fine-tune the badge's position relative to its anchor using the followin
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| --md-sys-badge-inline-offset | 0px | Adjusts the horizontal position of the badge |
-| --md-sys-badge-block-offset | 0px | Adjusts the vertical position of the badge |
+| --md-comp-badge-inline-offset | 0px | Adjusts the horizontal position of the badge |
+| --md-comp-badge-block-offset | 0px | Adjusts the vertical position of the badge |
 
 
-## Customizations
-You can customize the appearance of the Badge component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child badges.
+## Theming
+Each badge can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child badges.
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| --md-sys-badge-small-size | 6px | The height and width of the small badge |
-| --md-sys-badge-large-size | 16px | The height and minimum width of the large badge |
-| --md-sys-badge-large-padding | 4px | The horizontal padding used for the large badge |
+| --md-comp-badge-size | 6px | The height and width of the small badge |
+| --md-comp-badge-large-size | 16px | The height and minimum width of the large badge |
+| --md-comp-badge-large-padding | 4px | The horizontal padding used for the large badge |
+| --md-comp-badge-color | --md-sys-color-error | The background color of the badge |
+| --md-comp-badge-large-label-text-color | --md-sys-color-on-error | The text color of the large badge |
 
 **Example: Changing the size of the small badge**
 
 ```HTML
-<div style="--md-sys-badge-small-size:8px">
+<div style="--md-comp-badge-size:8px">
   <span class="micl-badge micl-badge--small"></span>
 </div>
 ```
