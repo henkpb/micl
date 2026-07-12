@@ -28,27 +28,19 @@
 @include typography.scale('title-medium');
 @include typography.scale('body-medium');
 
-:root {
-    --md-sys-alert-padding: 16px;
-    --md-sys-alert-space: 16px;
-}
+$alerts: ':is(.micl-alert-filled, .micl-alert-tonal, .micl-alert-outlined)';
 
-.micl-alert-filled,
-.micl-alert-tonal,
-.micl-alert-outlined {
-    --md-sys-alert-background-color: inherit;
-    --md-sys-alert-color: inherit;
-
+#{$alerts} {
     box-sizing: border-box;
     display: flex;
     inline-size: 100%;
-    padding: var(--md-sys-alert-padding, 16px);
-    column-gap: var(--md-sys-alert-space, 8px);
+    padding: var(--md-comp-alert-padding, 16px);
+    column-gap: var(--md-comp-alert-space, 16px);
     border: none;
     outline: none;
     border-radius: var(--md-sys-shape-corner-small, 8px);
-    background-color: var(--md-sys-alert-background-color);
-    color: var(--md-sys-alert-color);
+    background-color: var(--_background-color, transparent);
+    color: var(--_color, inherit);
 
     .micl-alert__icon {
         block-size: var(--md-sys-icon-size, 24px);
@@ -60,7 +52,7 @@
         flex-direction: column;
         row-gap: 8px;
 
-        h1, h2, h3, h4, h5, h6, .micl-heading {
+        :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
             @include typography.title-medium;
 
             margin: 0;
@@ -74,53 +66,37 @@
 }
 
 .micl-alert-filled {
-    --md-sys-alert-background-color: var(--md-sys-color-error);
-    --md-sys-alert-color: var(--md-sys-color-on-error);
+    --_background-color: var(--md-sys-color-error);
+    --_color: var(--md-sys-color-on-error);
 
-    &.micl-alert--primary {
-        --md-sys-alert-background-color: var(--md-sys-color-primary);
-        --md-sys-alert-color: var(--md-sys-color-on-primary);
-    }
-    &.micl-alert--secondary {
-        --md-sys-alert-background-color: var(--md-sys-color-secondary);
-        --md-sys-alert-color: var(--md-sys-color-on-secondary);
-    }
-    &.micl-alert--tertiary {
-        --md-sys-alert-background-color: var(--md-sys-color-tertiary);
-        --md-sys-alert-color: var(--md-sys-color-on-tertiary);
+    @each $scheme in primary, secondary, tertiary {
+        &.micl-alert--#{$scheme} {
+            --_background-color: var(--md-sys-color-#{$scheme});
+            --_color: var(--md-sys-color-on-#{$scheme});
+        }
     }
 }
 
 .micl-alert-tonal {
-    --md-sys-alert-background-color: var(--md-sys-color-error-container);
-    --md-sys-alert-color: var(--md-sys-color-on-error-container);
+    --_background-color: var(--md-sys-color-error-container);
+    --_color: var(--md-sys-color-on-error-container);
 
-    &.micl-alert--primary {
-        --md-sys-alert-background-color: var(--md-sys-color-primary-container);
-        --md-sys-alert-color: var(--md-sys-color-on-primary-container);
-    }
-    &.micl-alert--secondary {
-        --md-sys-alert-background-color: var(--md-sys-color-secondary-container);
-        --md-sys-alert-color: var(--md-sys-color-on-secondary-container);
-    }
-    &.micl-alert--tertiary {
-        --md-sys-alert-background-color: var(--md-sys-color-tertiary-container);
-        --md-sys-alert-color: var(--md-sys-color-on-tertiary-container);
+    @each $scheme in primary, secondary, tertiary {
+        &.micl-alert--#{$scheme} {
+            --_background-color: var(--md-sys-color-#{$scheme}-container);
+            --_color: var(--md-sys-color-on-#{$scheme}-container);
+        }
     }
 }
 
 .micl-alert-outlined {
-    --md-sys-alert-color: var(--md-sys-color-error);
+    --_color: var(--md-sys-color-error);
 
-    border: 1px solid var(--md-sys-alert-color);
+    border: 1px solid var(--_color);
 
-    &.micl-alert--primary {
-        --md-sys-alert-color: var(--md-sys-color-primary);
-    }
-    &.micl-alert--secondary {
-        --md-sys-alert-color: var(--md-sys-color-secondary);
-    }
-    &.micl-alert--tertiary {
-        --md-sys-alert-color: var(--md-sys-color-tertiary);
+    @each $scheme in primary, secondary, tertiary {
+        &.micl-alert--#{$scheme} {
+            --_color: var(--md-sys-color-#{$scheme});
+        }
     }
 }
