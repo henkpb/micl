@@ -24,6 +24,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@use './label';
 
 @include shape.corner('full');
 
@@ -41,17 +42,16 @@
 @include motion.duration('short3');
 @include motion.duration('long4');
 
-:root {
-    --md-sys-checkbox-border-width: 2px;
-    --md-sys-checkbox-check-thickness: 2px;
-    --md-sys-checkbox-container-size: 18px;
-}
+$checkbox: 'input[type=checkbox].micl-checkbox';
 
-input[type=checkbox].micl-checkbox {
-    --md-sys-checkbox-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
-    --md-sys-checkbox-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-sys-checkbox-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
+#{$checkbox} {
+    --md-comp-checkbox-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+    --md-comp-checkbox-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --md-comp-checkbox-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
 
+    --_size: var(--md-comp-checkbox-container-size, 18px);
+    --_outline-width: var(--md-comp-checkbox-outline-width, 2px);
+    --_check-thickness: var(--md-comp-checkbox-check-thickness, 2px);
     --statelayer-color: var(--md-sys-color-on-surface);
 
     appearance: none;
@@ -69,21 +69,25 @@ input[type=checkbox].micl-checkbox {
     border-radius: var(--md-sys-shape-corner-full);
     outline-offset: -4px;
 
+    // The check mark: two currentColor borders rotated into a check, revealed by a
+    // combination of block-size and clip-path transitions. currentColor, so that the
+    // error and disabled states recolour it with a single color declaration.
     &::before {
-        --md-sys-checkbox-check-width: calc(var(--md-sys-checkbox-container-size) - 3px);
-        --md-sys-checkbox-check-height: calc(0.4667 * var(--md-sys-checkbox-check-width));
+        --_check-width: calc(var(--_size) - 3px);
+        --_check-height: calc(0.4667 * var(--_check-width));
 
         content: "";
         box-sizing: border-box;
         position: absolute;
-        inline-size: var(--md-sys-checkbox-check-width);
+        inline-size: var(--_check-width);
         block-size: 0;
         inset: 0;
-        inset-block-start: calc(-0.25 * var(--md-sys-checkbox-container-size));
+        inset-block-start: calc(-0.25 * var(--_size));
         inset-inline-start: 1px;
         margin: auto;
-        border-block-end: var(--md-sys-checkbox-check-thickness) var(--md-sys-color-on-primary) solid;
-        border-inline-start: var(--md-sys-checkbox-check-thickness) var(--md-sys-color-on-primary) solid;
+        color: var(--md-comp-checkbox-selected-icon-color, var(--md-sys-color-on-primary));
+        border-block-end: var(--_check-thickness) currentColor solid;
+        border-inline-start: var(--_check-thickness) currentColor solid;
         transform: rotate(-45deg);
         transform-origin: center;
         clip-path: rect(0 2px 0 0);
@@ -97,41 +101,40 @@ input[type=checkbox].micl-checkbox {
           transform 0ms linear var(--md-sys-motion-duration-short3);
     }
     &::after {
-        --md-sys-checkbox-background-color: transparent;
-        --md-sys-checkbox-border-color: var(--md-sys-color-on-surface-variant);
+        --_container-color: transparent;
+        --_outline-color: var(--md-comp-checkbox-unselected-outline-color, var(--md-sys-color-on-surface-variant));
 
         content: "";
         box-sizing: border-box;
         position: absolute;
-        inline-size: var(--md-sys-checkbox-container-size);
-        block-size: var(--md-sys-checkbox-container-size);
+        inline-size: var(--_size);
+        block-size: var(--_size);
         inset: 0;
         margin: auto;
-        border: var(--md-sys-checkbox-border-width) solid var(--md-sys-checkbox-border-color);
+        border: var(--_outline-width) solid var(--_outline-color);
         border-radius: 2px;
-        background-color: var(--md-sys-checkbox-background-color);
+        background-color: var(--_container-color);
         transition:
-            background-color var(--md-sys-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-sys-checkbox-motion-duration-reverse),
-            border-color var(--md-sys-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-sys-checkbox-motion-duration-reverse);
+            background-color var(--md-comp-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-comp-checkbox-motion-duration-reverse),
+            border-color var(--md-comp-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-comp-checkbox-motion-duration-reverse);
     }
-    &:checked,
-    &:indeterminate {
+    &:is(:checked, :indeterminate) {
         --statelayer-color: var(--md-sys-color-primary);
 
         &::before {
-            block-size: var(--md-sys-checkbox-check-height);
-            clip-path: rect(0 calc(var(--md-sys-checkbox-container-size) - 5px) 18px 0);
+            block-size: var(--_check-height);
+            clip-path: rect(0 calc(var(--_size) - 5px) var(--_size) 0);
             transition:
-                block-size var(--md-sys-motion-duration-short3) var(--md-sys-checkbox-motion-spatial),
-                clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--md-sys-checkbox-motion-spatial);
+                block-size var(--md-sys-motion-duration-short3) var(--md-comp-checkbox-motion-spatial),
+                clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--md-comp-checkbox-motion-spatial);
         }
         &::after {
-            --md-sys-checkbox-background-color: var(--md-sys-color-primary);
-            --md-sys-checkbox-border-color: var(--md-sys-color-primary);
+            --_container-color: var(--md-comp-checkbox-selected-container-color, var(--md-sys-color-primary));
+            --_outline-color: var(--md-comp-checkbox-selected-container-color, var(--md-sys-color-primary));
 
             transition:
-                background-color var(--md-sys-checkbox-motion-duration) linear,
-                border-color var(--md-sys-checkbox-motion-duration) motion.$md-sys-motion-easing-emphasized;
+                background-color var(--md-comp-checkbox-motion-duration) linear,
+                border-color var(--md-comp-checkbox-motion-duration) motion.$md-sys-motion-easing-emphasized;
         }
     }
     &:indeterminate::before {
@@ -143,10 +146,9 @@ input[type=checkbox].micl-checkbox {
         --statelayer-color: var(--md-sys-color-error);
 
         &::after {
-            --md-sys-checkbox-border-color: var(--md-sys-color-error);
+            --_outline-color: var(--md-sys-color-error);
         }
-        &:checked,
-        &:indeterminate {
+        &:is(:checked, :indeterminate) {
             &:hover,
             &:focus-visible,
             &:active {
@@ -156,17 +158,17 @@ input[type=checkbox].micl-checkbox {
                 color: var(--md-sys-color-on-error);
             }
             &::after {
-                --md-sys-checkbox-background-color: var(--md-sys-color-error);
+                --_container-color: var(--md-sys-color-error);
             }
         }
-        &:not(:checked):not(:indeterminate) {
+        &:not(:checked, :indeterminate) {
             &:hover,
             &:focus-visible,
             &:active {
                 --statelayer-color: var(--md-sys-color-error);
 
                 &::after {
-                    --md-sys-checkbox-border-color: var(--md-sys-color-error);
+                    --_outline-color: var(--md-sys-color-error);
                 }
             }
         }
@@ -187,13 +189,13 @@ input[type=checkbox].micl-checkbox {
         cursor: pointer;
         transition:
             background-size 0ms,
-            --statelayer-opacity var(--md-sys-checkbox-motion-duration) linear;
+            --statelayer-opacity var(--md-comp-checkbox-motion-duration) linear;
 
         &:hover {
             --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
 
-            &:not(:checked):not(:indeterminate)::after {
-                --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
+            &:not(:checked, :indeterminate)::after {
+                --_outline-color: var(--md-sys-color-on-surface);
             }
         }
         &:focus-visible {
@@ -201,19 +203,19 @@ input[type=checkbox].micl-checkbox {
 
             outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
 
-            &:not(:checked):not(:indeterminate)::after {
-                --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
+            &:not(:checked, :indeterminate)::after {
+                --_outline-color: var(--md-sys-color-on-surface);
             }
         }
         &:active {
             --statelayer-color: var(--md-sys-color-on-surface);
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
-            &:not(:checked):not(:indeterminate) {
+            &:not(:checked, :indeterminate) {
                 --statelayer-color: var(--md-sys-color-primary);
 
                 &::after {
-                    --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
+                    --_outline-color: var(--md-sys-color-on-surface);
                 }
             }
         }
@@ -224,45 +226,43 @@ input[type=checkbox].micl-checkbox {
     &:disabled {
         opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
 
-        &:checked,
-        &:indeterminate {
+        &:is(:checked, :indeterminate) {
             &::before {
                 color: var(--md-sys-color-surface);
             }
             &::after {
-                --md-sys-checkbox-background-color: var(--md-sys-color-on-surface);
+                --_container-color: var(--md-sys-color-on-surface);
             }
         }
         &::after {
-            --md-sys-checkbox-border-color: var(--md-sys-color-on-surface);
+            --_outline-color: var(--md-sys-color-on-surface);
         }
     }
 }
 
-input[type=checkbox].micl-checkbox:not(:disabled) + label,
-label:has(+ input[type=checkbox].micl-checkbox:not(:disabled)) {
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
+#{$checkbox}:not(:disabled) + label,
+label:has(+ #{$checkbox}:not(:disabled)) {
+    @extend %micl-toggle-label-pointer;
 }
-input[type=checkbox].micl-checkbox + label,
-label:has(+ input[type=checkbox].micl-checkbox) {
-    color: var(--md-sys-color-on-surface);
+#{$checkbox} + label,
+label:has(+ #{$checkbox}) {
+    @extend %micl-toggle-label;
 }
-input[type=checkbox].micl-checkbox:disabled + label,
-label:has(+ input[type=radio].micl-checkbox:disabled) {
-    opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%)
+#{$checkbox}:disabled + label,
+label:has(+ #{$checkbox}:disabled) {
+    @extend %micl-toggle-label-disabled;
 }
 
-[dir=rtl] input[type=checkbox].micl-checkbox {
+[dir=rtl] #{$checkbox} {
     &::before {
-        clip-path: rect(0 18px 8px 16px);
+        clip-path: rect(0 var(--_size) var(--_size) calc(var(--_size) - 2px));
     }
     &:checked::before {
-        clip-path: rect(0 18px 8px 2px);
+        clip-path: rect(0 var(--_size) var(--_size) 2px);
         transform: rotate(45deg);
     }
     &:indeterminate::before {
-        clip-path: rect(0 18px 8px 2px);
+        clip-path: rect(0 var(--_size) var(--_size) 2px);
         transform: rotate(0deg);
     }
 }

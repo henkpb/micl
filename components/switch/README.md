@@ -34,13 +34,13 @@ By default, the component displays an icon on the switch handle in both the sele
 
 ```CSS
 #myswitch {
-  --md-sys-switch-unselected-icon: "";
+  --md-comp-switch-unselected-icon: "";
 }
 ```
 To remove the icon in the selected state:
 ```CSS
 #myswitch {
-  --md-sys-switch-selected-icon: "";
+  --md-comp-switch-selected-icon: "";
 }
 ```
 
@@ -50,22 +50,29 @@ The Switch component respects the `dir` global attribute, automatically adjustin
 
 The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
 
-## Customizations
-You can customize the appearance of the Switch component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child switches.
+## Theming
+Each switch can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child switches.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-switch-handle-size | 16px | The diameter of the handle when the switch is "off" |
-| --md-sys-switch-handle-selected-size | 24px | The diameter of the handle when the switch is "on" |
-| --md-sys-switch-handle-pressed-size | 28px | The diameter of the handle when the switch is pressed |
-| --md-sys-switch-outline-width | 2px | The width of the border |
-| --md-sys-switch-target-height | 32px | The height of the track |
-| --md-sys-switch-target-width | 52px | The width of the track |
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-switch-track-width | The width of the track | 52px |
+| --md-comp-switch-track-height | The height of the track | 32px |
+| --md-comp-switch-track-outline-width | The border width of the track | 2px |
+| --md-comp-switch-handle-size | The diameter of the handle when the switch is "off" | 16px |
+| --md-comp-switch-selected-handle-size | The diameter of the handle when the switch is "on" | 24px |
+| --md-comp-switch-pressed-handle-size | The diameter of the handle when the switch is pressed | 28px |
+| --md-comp-switch-unselected-track-color | The track color when the switch is "off" | --md-sys-color-surface-container-highest |
+| --md-comp-switch-unselected-track-outline-color | The track border color when the switch is "off" | --md-sys-color-outline |
+| --md-comp-switch-unselected-handle-color | The handle color when the switch is "off" | --md-sys-color-outline |
+| --md-comp-switch-unselected-icon-color | The icon color when the switch is "off" | --md-sys-color-surface-container-highest |
+| --md-comp-switch-selected-track-color | The track color when the switch is "on" | --md-sys-color-primary |
+| --md-comp-switch-selected-handle-color | The handle color when the switch is "on" | --md-sys-color-on-primary |
+| --md-comp-switch-selected-icon-color | The icon color when the switch is "on" | --md-sys-color-on-primary-container |
 
 **Example: Changing the width of the switch**
 
 ```HTML
-<div style="--md-sys-switch-target-width:64px">
+<div style="--md-comp-switch-track-width:64px">
   <input type="checkbox" id="myswitch" class="micl-switch" role="switch">
   <label for="myswitch">Long switch</label>
 </div>

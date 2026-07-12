@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,home&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card-filled .micl-card__content {
+        .micl-card-filled .docs-example {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+        }
+        .docs-example {
+            gap: 0;
         }
     </style>
 </head>
@@ -35,44 +38,53 @@
             </header>
 
             <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column"></div>
                 <div class="micl-pane__column">
                     <div class="micl-card-elevated">
                         <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox1" class="micl-checkbox" value="c1">
-                                <label for="mycheckbox1" class="md-sys-typescale-body-medium">First Choice</label>
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox2" class="micl-checkbox" checked value="c2">
-                                <label for="mycheckbox2" class="md-sys-typescale-body-medium">Second Choice</label>
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox3" class="micl-checkbox" disabled value="c3">
-                                <label for="mycheckbox3" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox4" class="micl-checkbox" disabled checked value="c4">
-                                <label for="mycheckbox4" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                            <div class="docs-example">
+                                <template>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox1" class="micl-checkbox" value="c1">
+                                        <label for="mycheckbox1" class="md-sys-typescale-body-medium">First Choice</label>
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox2" class="micl-checkbox" checked value="c2">
+                                        <label for="mycheckbox2" class="md-sys-typescale-body-medium">Second Choice</label>
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox3" class="micl-checkbox" disabled value="c3">
+                                        <label for="mycheckbox3" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox4" class="micl-checkbox" disabled checked value="c4">
+                                        <label for="mycheckbox4" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
                     <div class="micl-card-filled">
                         <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
-                                <label for="mycheckbox21" class="md-sys-typescale-body-medium">First Choice</label>
-                                <input type="checkbox" id="mycheckbox21" class="micl-checkbox" value="c1">
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <label for="mycheckbox22" class="md-sys-typescale-body-medium">Second Choice</label>
-                                <input type="checkbox" id="mycheckbox22" class="micl-checkbox" checked value="c2">
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <label for="mycheckbox23" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
-                                <input type="checkbox" id="mycheckbox23" class="micl-checkbox" disabled value="c3">
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <label for="mycheckbox24" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
-                                <input type="checkbox" id="mycheckbox24" class="micl-checkbox" disabled checked value="c4">
+                            <div class="docs-example">
+                                <template>
+                                    <div class="micl-flex--vcenter">
+                                        <label for="mycheckbox21" class="md-sys-typescale-body-medium">First Choice</label>
+                                        <input type="checkbox" id="mycheckbox21" class="micl-checkbox" value="c1">
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <label for="mycheckbox22" class="md-sys-typescale-body-medium">Second Choice</label>
+                                        <input type="checkbox" id="mycheckbox22" class="micl-checkbox" checked value="c2">
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <label for="mycheckbox23" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                                        <input type="checkbox" id="mycheckbox23" class="micl-checkbox" disabled value="c3">
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <label for="mycheckbox24" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                                        <input type="checkbox" id="mycheckbox24" class="micl-checkbox" disabled checked value="c4">
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -80,63 +92,58 @@
                 <div class="micl-pane__column">
                     <div class="micl-card-outlined">
                         <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox11" class="micl-checkbox micl-checkbox--error" value="c1">
-                                <label for="mycheckbox11" class="md-sys-typescale-body-medium">First Choice</label>
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox12" class="micl-checkbox micl-checkbox--error" checked value="c2">
-                                <label for="mycheckbox12" class="md-sys-typescale-body-medium">Second Choice</label>
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox13" class="micl-checkbox micl-checkbox--error" disabled value="c3">
-                                <label for="mycheckbox13" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
-                            </div>
-                            <div class="micl-flex--vcenter">
-                                <input type="checkbox" id="mycheckbox14" class="micl-checkbox micl-checkbox--error" disabled checked value="c4">
-                                <label for="mycheckbox14" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                            <div class="docs-example">
+                                <template>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox11" class="micl-checkbox micl-checkbox--error" value="c1">
+                                        <label for="mycheckbox11" class="md-sys-typescale-body-medium">First Choice</label>
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox12" class="micl-checkbox micl-checkbox--error" checked value="c2">
+                                        <label for="mycheckbox12" class="md-sys-typescale-body-medium">Second Choice</label>
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox13" class="micl-checkbox micl-checkbox--error" disabled value="c3">
+                                        <label for="mycheckbox13" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                                    </div>
+                                    <div class="micl-flex--vcenter">
+                                        <input type="checkbox" id="mycheckbox14" class="micl-checkbox micl-checkbox--error" disabled checked value="c4">
+                                        <label for="mycheckbox14" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
                     <div class="micl-card-elevated">
                         <div class="micl-card__content">
-                            <div class="micl-checkbox-group">
-                                <div class="micl-flex--vcenter">
-                                    <input type="checkbox" id="mycheckbox30" class="micl-checkbox micl-checkbox__parent" value="c0">
-                                    <label for="mycheckbox30" class="md-sys-typescale-body-medium">Choices</label>
-                                </div>
-                                <div style="padding-inline-start:16px">
-                                    <div class="micl-flex--vcenter">
-                                        <input type="checkbox" id="mycheckbox31" class="micl-checkbox" value="c1">
-                                        <label for="mycheckbox31" class="md-sys-typescale-body-medium">First Choice</label>
+                            <div class="docs-example">
+                                <template>
+                                    <div class="micl-checkbox-group">
+                                        <div class="micl-flex--vcenter">
+                                            <input type="checkbox" id="mycheckbox30" class="micl-checkbox micl-checkbox__parent" value="c0">
+                                            <label for="mycheckbox30" class="md-sys-typescale-body-medium">Choices</label>
+                                        </div>
+                                        <div style="padding-inline-start:16px">
+                                            <div class="micl-flex--vcenter">
+                                                <input type="checkbox" id="mycheckbox31" class="micl-checkbox" value="c1">
+                                                <label for="mycheckbox31" class="md-sys-typescale-body-medium">First Choice</label>
+                                            </div>
+                                            <div class="micl-flex--vcenter">
+                                                <input type="checkbox" id="mycheckbox32" class="micl-checkbox" checked value="c2">
+                                                <label for="mycheckbox32" class="md-sys-typescale-body-medium">Second Choice</label>
+                                            </div>
+                                            <div class="micl-flex--vcenter">
+                                                <input type="checkbox" id="mycheckbox33" class="micl-checkbox" value="c3">
+                                                <label for="mycheckbox33" class="md-sys-typescale-body-medium">Third Choice</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="micl-flex--vcenter">
-                                        <input type="checkbox" id="mycheckbox32" class="micl-checkbox" checked value="c2">
-                                        <label for="mycheckbox32" class="md-sys-typescale-body-medium">Second Choice</label>
-                                    </div>
-                                    <div class="micl-flex--vcenter">
-                                        <input type="checkbox" id="mycheckbox33" class="micl-checkbox" value="c3">
-                                        <label for="mycheckbox33" class="md-sys-typescale-body-medium">Third Choice</label>
-                                    </div>
-                                </div>
+                                </template>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre><code>&lt;div class="micl-flex--vcenter"&gt;
-  &lt;input type="checkbox" id="id0" class="micl-checkbox" value="v0"&gt;
-  &lt;label for="id0" class="md-sys-typescale-body-medium"&gt;First Choice&lt;/label&gt;
-&lt;/div&gt;</code></pre>
-                </div>
+                <div class="micl-pane__column"></div>
             </div>
         </section>
     </main>

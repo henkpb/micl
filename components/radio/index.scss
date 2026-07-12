@@ -23,6 +23,7 @@
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
+@use '../checkbox/label';
 
 @include shape.corner('full');
 
@@ -37,15 +38,15 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
-:root {
-    --md-sys-radio-border-width: 2px;
-    --md-sys-radio-container-size: 20px;
-}
+$radio: 'input[type=radio].micl-radio';
 
-input[type=radio].micl-radio {
-    --md-sys-radio-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
-    --md-sys-radio-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
-    --md-sys-radio-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
+#{$radio} {
+    --md-comp-radio-button-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
+    --md-comp-radio-button-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+    --md-comp-radio-button-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
+
+    --_size: var(--md-comp-radio-button-icon-size, 20px);
+    --_outline-width: var(--md-comp-radio-button-outline-width, 2px);
 
     appearance: none;
     box-sizing: border-box;
@@ -62,29 +63,32 @@ input[type=radio].micl-radio {
     border-radius: var(--md-sys-shape-corner-full);
     outline-offset: -7px;
 
+    // The ring and the dot in one box: the dot is the primary background clipped to the
+    // content box, hidden while the padding fills the ring, revealed when the checked
+    // padding shrinks to reveal a dot of half the icon size.
     &::after {
         content: "";
         box-sizing: border-box;
         position: absolute;
-        inline-size: var(--md-sys-radio-container-size);
-        block-size: var(--md-sys-radio-container-size);
+        inline-size: var(--_size);
+        block-size: var(--_size);
         inset: 0;
         margin: auto;
-        padding: calc((var(--md-sys-radio-container-size) / 2) - var(--md-sys-radio-border-width));
-        border: var(--md-sys-radio-border-width) solid var(--md-sys-color-on-surface-variant);
-        background-color: var(--md-sys-color-primary);
+        padding: calc((var(--_size) / 2) - var(--_outline-width));
+        border: var(--_outline-width) solid var(--md-comp-radio-button-unselected-icon-color, var(--md-sys-color-on-surface-variant));
+        background-color: var(--md-comp-radio-button-selected-icon-color, var(--md-sys-color-primary));
         background-clip: content-box;
         border-radius: var(--md-sys-shape-corner-full);
         transition:
-            padding var(--md-sys-radio-motion-duration-reverse) var(--md-sys-radio-motion-effects),
-            border-color var(--md-sys-radio-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized;
+            padding var(--md-comp-radio-button-motion-duration-reverse) var(--md-comp-radio-button-motion-effects),
+            border-color var(--md-comp-radio-button-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized;
     }
     &:checked::after {
-        border-color: var(--md-sys-color-primary);
-        padding: 3px;
+        border-color: var(--md-comp-radio-button-selected-icon-color, var(--md-sys-color-primary));
+        padding: calc(0.15 * var(--_size));
         transition:
-            padding var(--md-sys-radio-motion-duration) var(--md-sys-radio-motion-effects),
-            border-color var(--md-sys-radio-motion-duration) motion.$md-sys-motion-easing-emphasized;
+            padding var(--md-comp-radio-button-motion-duration) var(--md-comp-radio-button-motion-effects),
+            border-color var(--md-comp-radio-button-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &:not(:disabled) {
         --micl-ripple: 1;
@@ -102,7 +106,7 @@ input[type=radio].micl-radio {
         cursor: pointer;
         transition:
             background-size 0ms,
-            --statelayer-opacity var(--md-sys-radio-motion-duration) linear;
+            --statelayer-opacity var(--md-comp-radio-button-motion-duration) linear;
 
         &:hover,
         &:focus-visible,
@@ -116,7 +120,7 @@ input[type=radio].micl-radio {
                 border-color: var(--md-sys-color-on-surface);
             }
             &:checked::after {
-                border-color: var(--md-sys-color-primary);
+                border-color: var(--md-comp-radio-button-selected-icon-color, var(--md-sys-color-primary));
             }
         }
         &:hover {
@@ -146,16 +150,15 @@ input[type=radio].micl-radio {
     }
 }
 
-input[type=radio].micl-radio:not(:disabled) + label,
-label:has(+ input[type=radio].micl-radio:not(:disabled)) {
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
+#{$radio}:not(:disabled) + label,
+label:has(+ #{$radio}:not(:disabled)) {
+    @extend %micl-toggle-label-pointer;
 }
-input[type=radio].micl-radio + label,
-label:has(+ input[type=radio].micl-radio) {
-    color: var(--md-sys-color-on-surface);
+#{$radio} + label,
+label:has(+ #{$radio}) {
+    @extend %micl-toggle-label;
 }
-input[type=radio].micl-radio:disabled + label,
-label:has(+ input[type=radio].micl-radio:disabled) {
-    opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%)
+#{$radio}:disabled + label,
+label:has(+ #{$radio}:disabled) {
+    @extend %micl-toggle-label-disabled;
 }

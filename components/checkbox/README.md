@@ -81,19 +81,22 @@ To visually improve the layout, such as by indenting child checkboxes, use wrapp
 
 Note that checkbox groups support **nesting**, allowing a `micl-checkbox-group` to contain other `micl-checkbox-group` elements for multi-level hierarchies.
 
-## Customizations
-You can customize the appearance of the Checkbox component by overriding its global CSS variables. These variables are declared on the :root pseudo-class and can be changed on any appropriate parent element to affect its child checkboxes.
+## Theming
+Each checkbox can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child checkboxes.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-checkbox-border-width | 2px | Controls the thickness of the checkbox's border |
-| --md-sys-checkbox-check-thickness | 2px | The thickness of the checkmark |
-| --md-sys-checkbox-container-size | 18px | Defines the size of the checkbox itself |
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-checkbox-container-size | The size of the checkbox itself | 18px |
+| --md-comp-checkbox-outline-width | The thickness of the checkbox's border | 2px |
+| --md-comp-checkbox-check-thickness | The thickness of the check mark | 2px |
+| --md-comp-checkbox-unselected-outline-color | The border color of an unselected checkbox | --md-sys-color-on-surface-variant |
+| --md-comp-checkbox-selected-container-color | The fill color of a selected checkbox | --md-sys-color-primary |
+| --md-comp-checkbox-selected-icon-color | The color of the check mark | --md-sys-color-on-primary |
 
 **Example: Changing the border width of a checkbox**
 
 ```HTML
-<div style="--md-sys-checkbox-border-width:1px">
+<div style="--md-comp-checkbox-outline-width:1px">
   <input type="checkbox" id="mycheckbox" class="micl-checkbox">
   <label for="mycheckbox">Checkbox</label>
 </div>
