@@ -133,7 +133,62 @@ document.getElementById('directionality').addEventListener('change', event => {
     }
     catch (e) {}
 });
-document.getElementById('copycode')?.addEventListener('click', event => {
-    const code = document.querySelector('code');
-    !!code && navigator.clipboard.writeText(code.textContent).then(() => {}).catch(e => {});
-});
+
+(() => {
+    const examples = document.querySelectorAll('.docs-example');
+    if (!examples.length) {
+        return;
+    }
+
+    const dedent = text => {
+        const lines = text.replace(/\t/g, '    ').split('\n');
+        while (lines.length && lines[0].trim() === '') {
+            lines.shift();
+        }
+        while (lines.length && lines[lines.length - 1].trim() === '') {
+            lines.pop();
+        }
+        const indent = lines.reduce((min, line) =>
+            line.trim() === '' ? min : Math.min(min, line.match(/^ */)[0].length), Infinity);
+        return lines.map(line => line.slice(indent === Infinity ? 0 : indent)).join('\n');
+    };
+
+    // Serialization writes redundant `=""` on boolean attributes; drop it.
+    const booleans = /\s(disabled|checked|selected|readonly|required|hidden|open|multiple|autofocus|inert)=""/g;
+    const tidy = html => dedent(html).replace(booleans, ' $1');
+
+    const status = document.createElement('div');
+    status.className = 'docs-visually-hidden';
+    status.setAttribute('aria-live', 'polite');
+    document.body.appendChild(status);
+
+    examples.forEach(example => {
+        const template = example.querySelector(':scope > template');
+        if (!template) {
+            return;
+        }
+        const markup = tidy(template.innerHTML);
+
+        // Render the live demo from the single source of truth.
+        example.appendChild(template.content.cloneNode(true));
+
+        const copy = document.createElement('button');
+        copy.type = 'button';
+        copy.className = 'docs-example__copy micl-iconbutton-standard-s material-symbols-outlined';
+        copy.setAttribute('aria-label', 'Copy markup');
+        copy.textContent = 'content_copy';
+        copy.addEventListener('click', () => {
+            navigator.clipboard.writeText(markup).then(() => {
+                copy.textContent = 'check';
+                copy.classList.add('docs-example__copy--done');
+                status.textContent = 'Markup copied to clipboard';
+                setTimeout(() => {
+                    copy.textContent = 'content_copy';
+                    copy.classList.remove('docs-example__copy--done');
+                    status.textContent = '';
+                }, 1500);
+            }).catch(() => {});
+        });
+        example.appendChild(copy);
+    });
+})();
