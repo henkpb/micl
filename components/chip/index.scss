@@ -20,8 +20,13 @@
 // SOFTWARE.
 
 @use '../../foundations';
+@use '../../styles/motion';
+@use '../../styles/shape';
 @use '../../styles/typography';
-@use '../button';
+@use '../button/shared' as button;
+
+@include shape.corner('small');
+@include shape.corner('full');
 
 @include typography.scale('title-medium');
 
@@ -87,7 +92,7 @@
             font-size: 18px;
             inline-size: 18px;
             overflow: hidden;
-            transition: inline-size var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects);
+            transition: inline-size #{motion.$md-sys-motion-expressive-fast-effects-duration} #{motion.$md-sys-motion-expressive-fast-effects};
         }
         &#{button.$enabled} .micl-button__icon {
             color: var(--micl-chip-icon, var(--md-sys-color-primary));
@@ -123,9 +128,6 @@
         &#{button.$enabled}:has(> .micl-chip__remove:is(:hover, :active)) {
             --statelayer-opacity: 0%;
         }
-        // the shared $disabled selector follows the child buttons, covering
-        // cursor, label, outline and state layers; the avatar is an image,
-        // so it additionally dims via opacity rather than colour
         &:has(> :disabled) .micl-chip__avatar {
             opacity: var(--md-comp-input-chip-disabled-avatar-opacity, 38%);
         }
@@ -242,7 +244,7 @@
             --micl-chip-icon: var(--md-comp-filter-chip-selected-leading-icon-color, var(--md-sys-color-on-secondary-container));
             --micl-chip-outline: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
 
-            border-width: 0;
+            border-color: transparent;
             background-color: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
 
             &:not(.micl-chip--elevated)#{button.$enabled}:hover:not(:active) {
