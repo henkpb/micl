@@ -30,6 +30,10 @@ $disabled: ':is(:disabled, :has(input:disabled, > button:disabled))';
 $enabled: ':not(:disabled, :has(input:disabled, > button:disabled))';
 $focused: ':is(:focus-visible, :has(input:focus-visible))';
 
+// Each selector group compiles to a single selector. Chips extend the %micl-button-*
+// placeholders, so button-only rules (the size modifiers below) stay out of them.
+$buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [class*="micl-button-filled-"], [class*="micl-button-tonal-"], [class*="micl-button-outlined-"])';
+
 @include elevation.level(0);
 @include elevation.level(1);
 @include elevation.level(2);
@@ -55,9 +59,8 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
 @include typography.scale('label-large');
 
 %micl-button-base {
-    --md-sys-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-sys-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --md-sys-button-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-comp-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-comp-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -66,6 +69,9 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
     padding: 0;
     border: none;
     border-radius: calc(var(--micl-height) / 2);
@@ -82,10 +88,10 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
-        border-radius var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects),
-        box-shadow var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects),
+        border-radius var(--md-comp-button-motion-duration) var(--md-comp-button-motion-effects),
+        box-shadow var(--md-comp-button-motion-duration) var(--md-comp-button-motion-effects),
         background-size 0ms,
-        --statelayer-opacity var(--md-sys-button-motion-duration) linear;
+        --statelayer-opacity var(--md-comp-button-motion-duration) linear;
 
     &#{$disabled} {
         cursor: default;
@@ -113,7 +119,7 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     }
     .micl-button__icon {
         font-variation-settings: 'FILL' 0;
-        transition: font-variation-settings var(--md-sys-button-motion-duration) linear;
+        transition: font-variation-settings var(--md-comp-button-motion-duration) linear;
     }
     &.micl-button--toggle:not([aria-pressed="true"]) .micl-button__icon::before {
         content: attr(data-miclicon);
@@ -123,224 +129,129 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     }
 }
 
-[class*="micl-button-text-"],
-[class*="micl-button-elevated-"],
-[class*="micl-button-filled-"],
-[class*="micl-button-tonal-"],
-[class*="micl-button-outlined-"] {
+// Buttons smaller than the minimum touch target extend their interactive area with a
+// transparent ::before overlay.
+%micl-button-target {
+    &::before {
+        content: "";
+        position: absolute;
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
+        background-color: transparent;
+    }
+}
+
+#{$buttons} {
     @extend %micl-button-base;
+
+    // The corner rounding of the size modifiers resolves through the two --_shape-*
+    // custom properties that each size declares below.
+    &.micl-button--toggle[aria-pressed="true"] {
+        border-radius: var(--_shape-toggle);
+    }
+    &.micl-button--square {
+        border-radius: var(--_shape-toggle);
+
+        &.micl-button--toggle[aria-pressed="true"] {
+            border-radius: calc(var(--micl-height) / 2);
+        }
+    }
+    &#{$enabled}:active {
+        &,
+        &.micl-button--square {
+            border-radius: var(--_shape-pressed);
+        }
+    }
 }
 
 %micl-button-xs {
     @include typography.label-large;
+    @extend %micl-button-target;
 
     --micl-width: 32px;
     --micl-height: 32px;
 
-    position: relative;
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 4px;
     padding-inline: 12px;
 
-    &::before {
-        content: "";
-        position: absolute;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
     .micl-button__icon {
         font-size: 20px;
         inline-size: 20px;
     }
 }
 
-.micl-button-text-xs,
-.micl-button-elevated-xs,
-.micl-button-filled-xs,
-.micl-button-tonal-xs,
-.micl-button-outlined-xs {
+:is(.micl-button-text-xs, .micl-button-elevated-xs, .micl-button-filled-xs, .micl-button-tonal-xs, .micl-button-outlined-xs) {
     @extend %micl-button-xs;
 
-    // Modifier rules stay on the concrete selectors: the `&, &.micl-button--square`
-    // compound does not survive @extend intact, and chips don't use these modifiers.
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-medium);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-medium);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &#{$enabled}:active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-small);
-        }
-    }
+    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-pressed: var(--md-sys-shape-corner-small);
 }
 
-.micl-button-text-s,
-.micl-button-elevated-s,
-.micl-button-filled-s,
-.micl-button-tonal-s,
-.micl-button-outlined-s {
+:is(.micl-button-text-s, .micl-button-elevated-s, .micl-button-filled-s, .micl-button-tonal-s, .micl-button-outlined-s) {
     @include typography.label-large;
+    @extend %micl-button-target;
 
     --micl-width: 40px;
     --micl-height: 40px;
+    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-pressed: var(--md-sys-shape-corner-small);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 16px;
 
-    &::before {
-        content: "";
-        position: absolute;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-medium);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-medium);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &#{$enabled}:active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-small);
-        }
-    }
     .micl-button__icon {
         font-size: 20px;
         inline-size: 20px;
     }
 }
 
-.micl-button-text-m,
-.micl-button-elevated-m,
-.micl-button-filled-m,
-.micl-button-tonal-m,
-.micl-button-outlined-m {
+:is(.micl-button-text-m, .micl-button-elevated-m, .micl-button-filled-m, .micl-button-tonal-m, .micl-button-outlined-m) {
     @include typography.title-medium;
 
     --micl-width: 56px;
     --micl-height: 56px;
+    --_shape-toggle: var(--md-sys-shape-corner-large);
+    --_shape-pressed: var(--md-sys-shape-corner-medium);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 24px;
 
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-large);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &#{$enabled}:active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-medium);
-        }
-    }
     .micl-button__icon {
         font-size: var(--md-sys-icon-size, 24px);
         inline-size: var(--md-sys-icon-size, 24px);
     }
 }
 
-.micl-button-text-l,
-.micl-button-elevated-l,
-.micl-button-filled-l,
-.micl-button-tonal-l,
-.micl-button-outlined-l {
+:is(.micl-button-text-l, .micl-button-elevated-l, .micl-button-filled-l, .micl-button-tonal-l, .micl-button-outlined-l) {
     @include typography.headline-small;
 
     --micl-width: 96px;
     --micl-height: 96px;
+    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 12px;
     padding-inline: 48px;
 
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &#{$enabled}:active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-large);
-        }
-    }
     .micl-button__icon {
         font-size: 32px;
         inline-size: 32px;
     }
 }
 
-.micl-button-text-xl,
-.micl-button-elevated-xl,
-.micl-button-filled-xl,
-.micl-button-tonal-xl,
-.micl-button-outlined-xl {
+:is(.micl-button-text-xl, .micl-button-elevated-xl, .micl-button-filled-xl, .micl-button-tonal-xl, .micl-button-outlined-xl) {
     @include typography.headline-large;
 
     --micl-width: 136px;
     --micl-height: 136px;
+    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 16px;
     padding-inline: 64px;
 
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &#{$enabled}:active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-large);
-        }
-    }
     .micl-button__icon {
         font-size: 40px;
         inline-size: 40px;

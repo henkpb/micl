@@ -8,10 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,draw,edit,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,draw,edit,home&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-example {
+            display: block;
+        }
+        button {
+            margin: 8px;
+        }
+    </style>
 </head>
 <body class="micl-window light">
     <main class="micl-body micl-body--stacked-to-large">
@@ -27,260 +35,255 @@
                 <div id="settings-placeholder" class="micl-appbar__trailing"></div>
             </header>
 
-            <div class="micl-card-filled">
-                <div class="micl-card__headline-m">
-                    <h2>Text buttons</h2>
-                </div>
-                <div class="micl-card__content" style="padding-block:8px 16px">
-                    <button type="button" class="micl-button-text-xs">Click</button>
-                    <button type="button" class="micl-button-text-s">Click</button>
-                    <button type="button" class="micl-button-text-m">Click</button>
-                    <button type="button" class="micl-button-text-l">Click</button>
-                    <button type="button" class="micl-button-text-xl">Click</button>
-                    <p></p>
-                    <button type="button" class="micl-button-text-xs micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-text-s micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-text-m micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-text-l micl-button--square" disabled>
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-text-xl micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                </div>
-            </div>
-            <div class="micl-card-outlined">
-                <div class="micl-card__headline-m">
-                    <h2>Elevated buttons</h2>
-                </div>
-                <div class="micl-card__content" style="padding-block:8px 16px">
-                    <button type="button" class="micl-button-elevated-xs">Click</button>
-                    <button type="button" class="micl-button-elevated-s">Click</button>
-                    <button type="button" class="micl-button-elevated-m">Click</button>
-                    <button type="button" class="micl-button-elevated-l">Click</button>
-                    <button type="button" class="micl-button-elevated-xl">Click</button>
-                    <p></p>
-                    <button type="button" class="micl-button-elevated-xs micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        <span>Click</span>
-                    </button>
-                    <button type="button" class="micl-button-elevated-s micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        <span>Click</span>
-                    </button>
-                    <button type="button" class="micl-button-elevated-m micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        <span>Click</span>
-                    </button>
-                    <button type="button" class="micl-button-elevated-l micl-button--square" disabled>
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        <span>Click</span>
-                    </button>
-                    <button type="button" class="micl-button-elevated-xl micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        <span>Click</span>
-                    </button>
-                </div>
-            </div>
-            <div class="micl-card-elevated">
-                <div class="micl-card__headline-m">
-                    <h2>Filled buttons</h2>
-                </div>
-                <div class="micl-card__content" style="padding-block:8px 16px">
-                    <button type="button" class="micl-button-filled-xs">Click</button>
-                    <button type="button" class="micl-button-filled-s">Click</button>
-                    <button type="button" class="micl-button-filled-m">Click</button>
-                    <button type="button" class="micl-button-filled-l">Click</button>
-                    <button type="button" class="micl-button-filled-xl">Click</button>
-                    <p></p>
-                    <button type="button" class="micl-button-filled-xs micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-filled-s micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-filled-m micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-filled-l micl-button--square" disabled>
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-filled-xl micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                </div>
-            </div>
-            <div class="micl-card-outlined">
-                <div class="micl-card__headline-m">
-                    <h2>Tonal buttons</h2>
-                </div>
-                <div class="micl-card__content" style="padding-block:8px 16px">
-                    <button type="button" class="micl-button-tonal-xs">Click</button>
-                    <button type="button" class="micl-button-tonal-s">Click</button>
-                    <button type="button" class="micl-button-tonal-m">Click</button>
-                    <button type="button" class="micl-button-tonal-l">Click</button>
-                    <button type="button" class="micl-button-tonal-xl">Click</button>
-                    <p></p>
-                    <button type="button" class="micl-button-tonal-xs micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-tonal-s micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-tonal-m micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-tonal-l micl-button--square" disabled>
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-tonal-xl micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                </div>
-            </div>
-            <div class="micl-card-elevated">
-                <div class="micl-card__headline-m">
-                    <h2>Outlined buttons</h2>
-                </div>
-                <div class="micl-card__content" style="padding-block:8px 16px">
-                    <button type="button" class="micl-button-outlined-xs">Click</button>
-                    <button type="button" class="micl-button-outlined-s">Click</button>
-                    <button type="button" class="micl-button-outlined-m">Click</button>
-                    <button type="button" class="micl-button-outlined-l">Click</button>
-                    <button type="button" class="micl-button-outlined-xl">Click</button>
-                    <p></p>
-                    <button type="button" class="micl-button-outlined-xs micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-outlined-s micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-outlined-m micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-outlined-l micl-button--square" disabled>
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                    <button type="button" class="micl-button-outlined-xl micl-button--square">
-                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                        Click
-                    </button>
-                </div>
-            </div>
-            <div class="micl-card-outlined">
-                <div class="micl-card__headline-m">
-                    <h2>Toggle buttons</h2>
-                </div>
-                <div class="micl-card__content">
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-                        <button type="button" id="btn1" class="micl-button-elevated-m micl-button--toggle" aria-pressed="false" commandfor="btn1" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn2" class="micl-button-elevated-m micl-button--toggle" aria-pressed="true" commandfor="btn2" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn3" class="micl-button-elevated-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn3" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                            Click
-                        </button>
-                        <button type="button" id="btn4" class="micl-button-elevated-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn4" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
-                            Click
-                        </button>
+            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column"></div>
+                <div class="micl-pane__column">
+                    <div class="micl-card-filled">
+                        <div class="micl-card__headline-m">
+                            <h2>Text buttons</h2>
+                        </div>
+                        <div class="micl-card__content" style="padding-block:8px 16px">
+                            <div class="docs-example">
+                                <template>
+                                    <button type="button" class="micl-button-text-xs">Click</button>
+                                    <button type="button" class="micl-button-text-s">Click</button>
+                                    <button type="button" class="micl-button-text-m">Click</button>
+                                    <button type="button" class="micl-button-text-l">Click</button>
+                                    <button type="button" class="micl-button-text-xl">Click</button>
+                                    <p></p>
+                                    <button type="button" class="micl-button-text-xs micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-text-s micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-text-m micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-text-l micl-button--square" disabled>
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-text-xl micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-                        <button type="button" id="btn5" class="micl-button-filled-m micl-button--toggle" aria-pressed="false" commandfor="btn5" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn6" class="micl-button-filled-m micl-button--toggle" aria-pressed="true" commandfor="btn6" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn7" class="micl-button-filled-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn7" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                            Click
-                        </button>
-                        <button type="button" id="btn8" class="micl-button-filled-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn8" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
-                            Click
-                        </button>
+                    <div class="micl-card-outlined">
+                        <div class="micl-card__headline-m">
+                            <h2>Elevated buttons</h2>
+                        </div>
+                        <div class="micl-card__content" style="padding-block:8px 16px">
+                            <div class="docs-example">
+                                <template>
+                                    <button type="button" class="micl-button-elevated-xs">Click</button>
+                                    <button type="button" class="micl-button-elevated-s">Click</button>
+                                    <button type="button" class="micl-button-elevated-m">Click</button>
+                                    <button type="button" class="micl-button-elevated-l">Click</button>
+                                    <button type="button" class="micl-button-elevated-xl">Click</button>
+                                    <p></p>
+                                    <button type="button" class="micl-button-elevated-xs micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        <span>Click</span>
+                                    </button>
+                                    <button type="button" class="micl-button-elevated-s micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        <span>Click</span>
+                                    </button>
+                                    <button type="button" class="micl-button-elevated-m micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        <span>Click</span>
+                                    </button>
+                                    <button type="button" class="micl-button-elevated-l micl-button--square" disabled>
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        <span>Click</span>
+                                    </button>
+                                    <button type="button" class="micl-button-elevated-xl micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        <span>Click</span>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-                        <button type="button" id="btn9" class="micl-button-tonal-m micl-button--toggle" aria-pressed="false" commandfor="btn9" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn10" class="micl-button-tonal-m micl-button--toggle" aria-pressed="true" commandfor="btn10" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn11" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn11" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                            Click
-                        </button>
-                        <button type="button" id="btn12" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn12" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
-                            Click
-                        </button>
+                    <div class="micl-card-elevated">
+                        <div class="micl-card__headline-m">
+                            <h2>Filled buttons</h2>
+                        </div>
+                        <div class="micl-card__content" style="padding-block:8px 16px">
+                            <div class="docs-example">
+                                <template>
+                                    <button type="button" class="micl-button-filled-xs">Click</button>
+                                    <button type="button" class="micl-button-filled-s">Click</button>
+                                    <button type="button" class="micl-button-filled-m">Click</button>
+                                    <button type="button" class="micl-button-filled-l">Click</button>
+                                    <button type="button" class="micl-button-filled-xl">Click</button>
+                                    <p></p>
+                                    <button type="button" class="micl-button-filled-xs micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-filled-s micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-filled-m micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-filled-l micl-button--square" disabled>
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-filled-xl micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px">
-                        <button type="button" id="btn13" class="micl-button-outlined-m micl-button--toggle" aria-pressed="false" commandfor="btn13" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn14" class="micl-button-outlined-m micl-button--toggle" aria-pressed="true" commandfor="btn14" command="--micl-toggle">Click</button>
-                        <button type="button" id="btn15" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn15" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
-                            Click
-                        </button>
-                        <button type="button" id="btn16" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn16" command="--micl-toggle">
-                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
-                            Click
-                        </button>
+                    <div class="micl-card-outlined">
+                        <div class="micl-card__headline-m">
+                            <h2>Tonal buttons</h2>
+                        </div>
+                        <div class="micl-card__content" style="padding-block:8px 16px">
+                            <div class="docs-example">
+                                <template>
+                                    <button type="button" class="micl-button-tonal-xs">Click</button>
+                                    <button type="button" class="micl-button-tonal-s">Click</button>
+                                    <button type="button" class="micl-button-tonal-m">Click</button>
+                                    <button type="button" class="micl-button-tonal-l">Click</button>
+                                    <button type="button" class="micl-button-tonal-xl">Click</button>
+                                    <p></p>
+                                    <button type="button" class="micl-button-tonal-xs micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-tonal-s micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-tonal-m micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-tonal-l micl-button--square" disabled>
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-tonal-xl micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="micl-card-elevated">
+                        <div class="micl-card__headline-m">
+                            <h2>Outlined buttons</h2>
+                        </div>
+                        <div class="micl-card__content" style="padding-block:8px 16px">
+                            <div class="docs-example">
+                                <template>
+                                    <button type="button" class="micl-button-outlined-xs">Click</button>
+                                    <button type="button" class="micl-button-outlined-s">Click</button>
+                                    <button type="button" class="micl-button-outlined-m">Click</button>
+                                    <button type="button" class="micl-button-outlined-l">Click</button>
+                                    <button type="button" class="micl-button-outlined-xl">Click</button>
+                                    <p></p>
+                                    <button type="button" class="micl-button-outlined-xs micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-outlined-s micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-outlined-m micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-outlined-l micl-button--square" disabled>
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                    <button type="button" class="micl-button-outlined-xl micl-button--square">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                        Click
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="micl-card-outlined">
+                        <div class="micl-card__headline-m">
+                            <h2>Toggle buttons</h2>
+                        </div>
+                        <div class="micl-card__content">
+                            <div class="docs-example">
+                                <template>
+                                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                                        <button type="button" id="btn1" class="micl-button-elevated-m micl-button--toggle" aria-pressed="false" commandfor="btn1" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn2" class="micl-button-elevated-m micl-button--toggle" aria-pressed="true" commandfor="btn2" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn3" class="micl-button-elevated-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn3" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                            Click
+                                        </button>
+                                        <button type="button" id="btn4" class="micl-button-elevated-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn4" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
+                                            Click
+                                        </button>
+                                    </div>
+                                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                                        <button type="button" id="btn5" class="micl-button-filled-m micl-button--toggle" aria-pressed="false" commandfor="btn5" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn6" class="micl-button-filled-m micl-button--toggle" aria-pressed="true" commandfor="btn6" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn7" class="micl-button-filled-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn7" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                            Click
+                                        </button>
+                                        <button type="button" id="btn8" class="micl-button-filled-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn8" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
+                                            Click
+                                        </button>
+                                    </div>
+                                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+                                        <button type="button" id="btn9" class="micl-button-tonal-m micl-button--toggle" aria-pressed="false" commandfor="btn9" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn10" class="micl-button-tonal-m micl-button--toggle" aria-pressed="true" commandfor="btn10" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn11" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn11" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                            Click
+                                        </button>
+                                        <button type="button" id="btn12" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn12" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
+                                            Click
+                                        </button>
+                                    </div>
+                                    <div style="display:flex;flex-wrap:wrap;gap:8px">
+                                        <button type="button" id="btn13" class="micl-button-outlined-m micl-button--toggle" aria-pressed="false" commandfor="btn13" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn14" class="micl-button-outlined-m micl-button--toggle" aria-pressed="true" commandfor="btn14" command="--micl-toggle">Click</button>
+                                        <button type="button" id="btn15" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn15" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                            Click
+                                        </button>
+                                        <button type="button" id="btn16" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn16" command="--micl-toggle">
+                                            <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
+                                            Click
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;button type="button" class="micl-button-tonal-s"&gt;Click&lt;/button&gt;
-
-&lt;button type="button" class="micl-button-outlined-xl micl-button--square"&gt;
-  &lt;span class="micl-button__icon material-symbols-outlined" aria-hidden="true"&gt;edit&lt;/span&gt;
-  Click
-&lt;/button&gt;
-
-&lt;button class="micl-button-filled-m micl-button--toggle" aria-pressed="true"&gt;Click&lt;/button&gt;
-
-&lt;button
-  type="button"
-  id="mybutton"
-  class="micl-button-tonal-l micl-button--toggle"
-  aria-pressed="false"
-  commandfor="mybutton"
-  command="--micl-toggle"
-&gt;
-  &lt;span
-    class="micl-button__icon material-symbols-outlined"
-    data-miclicon="edit"
-    data-micliconselected="draw"
-    aria-hidden="true"
-  &gt;&lt;/span&gt;
-  Click
-&lt;/button&gt;</code></pre>
-                </div>
+                <div class="micl-pane__column"></div>
             </div>
         </section>
     </main>

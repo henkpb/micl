@@ -19,56 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export const buttonSelector = '.micl-button--toggle';
-
-const toggleIcon = (button: HTMLButtonElement): void =>
-{
-    const selected = button.getAttribute('aria-pressed') === 'true';
-    if (button.dataset.micliconselected) {
-        button.classList.toggle(button.dataset.micliconselected, selected);
-    }
-    if (button.dataset.miclicon) {
-        button.classList.toggle(button.dataset.miclicon, !selected);
-    }
-};
-
-export default {
-    command: (event: Event): void =>
-    {
-        const target = event.target as HTMLButtonElement;
-
-        if (
-            target.matches(buttonSelector)
-            && !target.disabled
-            && (event as any).command === '--micl-toggle'
-        ) {
-            target.classList.add('micl-button--toggled');
-            target.setAttribute('aria-pressed', String(target.getAttribute('aria-pressed') !== 'true'));
-
-            toggleIcon(target);
-        }
-    },
-
-    initialize: function(element: HTMLButtonElement): void
-    {
-        if (
-            !element.matches(buttonSelector)
-            || element.dataset.miclinitialized
-        ) {
-            return;
-        }
-        element.dataset.miclinitialized = '1';
-
-        toggleIcon(element);
-
-        element.addEventListener('command', this.command);
-    },
-
-    cleanup: function(element: HTMLButtonElement): void
-    {
-        if (element.matches(buttonSelector)) {
-            element.removeEventListener('command', this.command);
-            delete element.dataset.miclinitialized;
-        }
-    }
-};
+// Icon buttons share the toggle behaviour of the Button component: its handler already
+// falls back to the button element itself when there is no .micl-button__icon child.
+export { buttonSelector } from '../button';
+export { default } from '../button';
