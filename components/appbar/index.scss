@@ -35,7 +35,7 @@
 @include typography.scale('headline-medium');
 @include typography.scale('title-large');
 @include typography.scale('title-medium');
-@include typography.scale('title-small');
+@include typography.scale('label-large');
 @include typography.scale('label-medium');
 
 @mixin appbar-sticky() {
@@ -48,10 +48,10 @@
 }
 
 .micl-appbar {
-    --md-sys-appbar-height: 64px;
-    --md-sys-appbar-padding-block-start: 0px;
-    --md-sys-appbar-padding-block-end: 0px;
-    --md-sys-appbar-padding-inline: 0px;
+    --_height: 64px;
+    --_padding-block-start: 0px;
+    --_padding-block-end: 0px;
+    --_padding-inline: 0px;
 
     box-sizing: border-box;
     display: grid;
@@ -62,12 +62,12 @@
     grid-template-rows: 64px max-content;
     column-gap: 4px;
     align-items: center;
-    min-block-size: var(--md-sys-appbar-height);
-    padding-block: var(--md-sys-appbar-padding-block-start) var(--md-sys-appbar-padding-block-end);
-    padding-inline: var(--md-sys-appbar-padding-inline);
+    min-block-size: var(--_height);
+    padding-block: var(--_padding-block-start) var(--_padding-block-end);
+    padding-inline: var(--_padding-inline);
     border-start-start-radius: inherit;
     border-start-end-radius: inherit;
-    background-color: inherit;
+    background-color: var(--md-comp-app-bar-container-color, inherit);
     box-shadow: var(--md-sys-elevation-level0);
     z-index: 8;
 
@@ -81,7 +81,7 @@
     .micl-appbar__leading-icon {
         grid-area: appbar-leading;
         margin-inline-start: var(--md-sys-layout-window-margin);
-        color: var(--md-sys-color-on-surface);
+        color: var(--md-comp-app-bar-leading-icon-color, var(--md-sys-color-on-surface));
     }
     .micl-appbar__headline {
         display: flex;
@@ -90,25 +90,22 @@
         align-items: flex-start;
         margin: 8px 0;
         border-radius: var(--md-sys-shape-corner-none);
-        color: var(--md-sys-color-on-surface);
+        color: var(--md-comp-app-bar-title-color, var(--md-sys-color-on-surface));
 
         &.micl-appbar__headline--center {
             align-items: center;
             text-align: center;
         }
-        h1, h2, h3, h4, h5, h6, .micl-heading {
+        :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
             @include typography.title-large;
 
             margin: 0;
         }
         .micl-appbar__subtitle {
-            margin: 0;
-            color: var(--md-sys-color-on-surface-variant);
-        }
-    }
-    &:has(.micl-appbar__subtitle) {
-        .micl-appbar__subtitle {
             @include typography.label-medium;
+
+            margin: 0;
+            color: var(--md-comp-app-bar-subtitle-color, var(--md-sys-color-on-surface-variant));
         }
     }
     .micl-appbar__trailing {
@@ -118,11 +115,11 @@
     .micl-appbar__trailing-icon {
         grid-area: appbar-trailing;
         margin-inline-end: var(--md-sys-layout-window-margin);
-        color: var(--md-sys-color-on-surface-variant);
+        color: var(--md-comp-app-bar-trailing-icon-color, var(--md-sys-color-on-surface-variant));
     }
     &.micl-appbar--medium {
-        --md-sys-appbar-height: 112px;
-        --md-sys-appbar-padding-block-end: 12px;
+        --_height: 112px;
+        --_padding-block-end: 12px;
 
         padding-inline-start: 0;
 
@@ -131,21 +128,21 @@
             margin: 0;
             padding-inline-start: var(--md-sys-layout-window-margin);
 
-            h1, h2, h3, h4, h5, h6, .micl-heading {
+            :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
                 @include typography.headline-medium;
             }
         }
         &:has(.micl-appbar__subtitle) {
-            --md-sys-appbar-height: 136px;
+            --_height: 136px;
 
             .micl-appbar__subtitle {
-                @include typography.title-small;
+                @include typography.label-large;
             }
         }
     }
     &.micl-appbar--large {
-        --md-sys-appbar-height: 120px;
-        --md-sys-appbar-padding-block-end: 12px;
+        --_height: 120px;
+        --_padding-block-end: 12px;
 
         padding-inline-start: 0;
 
@@ -154,12 +151,12 @@
             margin: 0;
             padding-inline-start: var(--md-sys-layout-window-margin);
 
-            h1, h2, h3, h4, h5, h6, .micl-heading {
+            :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
                 @include typography.display-small;
             }
         }
         &:has(.micl-appbar__subtitle) {
-            --md-sys-appbar-height: 152px;
+            --_height: 152px;
 
             .micl-appbar__subtitle {
                 @include typography.title-medium;
@@ -212,7 +209,7 @@
         border-start-end-radius: inherit;
     }
     10% {
-        background-color: var(--md-sys-color-surface-container);
+        background-color: var(--md-comp-app-bar-on-scroll-container-color, var(--md-sys-color-surface-container));
         box-shadow: var(--md-sys-elevation-level2);
     }
     50% {
@@ -220,7 +217,7 @@
         border-start-end-radius: 0;
     }
     100% {
-        background-color: var(--md-sys-color-surface-container);
+        background-color: var(--md-comp-app-bar-on-scroll-container-color, var(--md-sys-color-surface-container));
         box-shadow: var(--md-sys-elevation-level2);
         border-start-start-radius: 0;
         border-start-end-radius: 0;
