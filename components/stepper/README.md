@@ -173,18 +173,24 @@ In this example for a three-step stepper, the **Next** button is hidden on step 
 </div>
 ```
 
-## Customizations
-You can customize the appearance of the Stepper component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child steppers.
+## Theming
+Each stepper can be themed with CSS custom properties. Set them on any appropriate parent element to affect its child steppers.
 
-| Variable name | Default Value | Description |
-| ------------- | ----- | ----------- |
-| --md-sys-stepper-counter-style | decimal | The list-style used for the counter number inside the dots in the stepper header |
-| --md-sys-stepper-dot-size | 12px | Controls the size of each progress dot |
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-stepper-counter-style | The list-style used for the counter number inside the dots of the stepper header | decimal |
+| --md-comp-stepper-dot-size | The size of each progress dot | 12px |
+| --md-comp-stepper-header-dot-size | The size of the dots in the stepper header | 24px |
+| --md-comp-stepper-dot-color | The color of a pending progress dot | --md-sys-color-on-surface |
+| --md-comp-stepper-dot-label-color | The counter color of a pending progress dot | --md-sys-color-surface |
+| --md-comp-stepper-dot-done-color | The color of a completed progress dot | --md-sys-color-tertiary-container |
+| --md-comp-stepper-dot-done-label-color | The counter color of a completed progress dot | --md-sys-color-on-tertiary-container |
+| --md-comp-divider-color | The color of the connector line between the steps in the stepper header (shared with the Divider component) | --md-sys-color-outline-variant |
 
 **Example: Changing the style of the counter inside header dots**
 
 ```HTML
-<div class="micl-stepper" style="--md-sys-stepper-counter-style:upper-alpha">
+<div class="micl-stepper" style="--md-comp-stepper-counter-style:upper-alpha">
   ...
 </div>
 ```

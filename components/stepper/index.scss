@@ -25,18 +25,11 @@
 
 @include statelayer.token('disabled-state-layer-opacity');
 
-:root {
-    --md-sys-stepper-counter-style: decimal;
-    --md-sys-stepper-dot-size: 12px;
-}
-body {
-    --md-sys-stepper-dot-done-color: var(--md-sys-color-tertiary-container, blue);
-}
-
 .micl-stepper {
-    --md-sys-stepper-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
-    --md-sys-stepper-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
-    --md-sys-stepper-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-comp-stepper-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
+    --md-comp-stepper-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
+
+    --_dot-size: var(--md-comp-stepper-dot-size, 12px);
 
     box-sizing: border-box;
     display: flex;
@@ -45,28 +38,53 @@ body {
     margin: 0;
 
     .micl-stepper__header {
-        --md-sys-stepper-dot-size: 24px;
+        --_dot-size: var(--md-comp-stepper-header-dot-size, 24px);
 
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin-inline: -10px;
-        background-image: linear-gradient(90deg, var(--md-comp-divider-color), var(--md-comp-divider-color));
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 100% 1px;
         counter-reset: dotnumber;
+        anchor-scope: all;
 
         button {
-            background-color: var(--_card-background-color, inherit);
+            // The connector segments and the touch-target overlay are anchored
+            // pseudo-elements: an anchor is only acceptable when it is a
+            // descendant of the positioned element's containing block, so the
+            // buttons must stay static to make the header that containing block.
+            // The unique per-button anchor names are assigned by the stepper script.
+            position: static;
+            anchor-name: var(--micl-stepper-anchor);
             pointer-events: none;
 
+            // The shared touch-target overlay assumes a positioned button;
+            // re-anchor it to this button's box.
+            &::before {
+                inset: auto;
+                inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - var(--md-sys-target-size, 48px) / 2);
+                inset-inline-start: anchor(var(--micl-stepper-anchor) start);
+                inset-inline-end: anchor(var(--micl-stepper-anchor) end);
+                inline-size: auto;
+            }
+            // The connector line is drawn as one segment per step, spanning only
+            // the real gap between this button and the previous one.
+            &:not(:first-child)::after {
+                content: "";
+                position: absolute;
+                inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - 0.5px);
+                inset-inline-start: anchor(var(--micl-stepper-prev) end);
+                inset-inline-end: anchor(var(--micl-stepper-anchor) start);
+                block-size: 1px;
+                background-color: var(--md-comp-divider-color, var(--md-sys-color-outline-variant));
+                pointer-events: none;
+            }
             &.micl-stepper__progress--done {
                 pointer-events: inherit;
             }
         }
         .micl-stepper__progress-dot::before {
-            content: counter(dotnumber, var(--md-sys-stepper-counter-style));
+            content: counter(dotnumber, var(--md-comp-stepper-counter-style, decimal));
         }
     }
     &.micl-stepper--nonlinear .micl-stepper__header button {
@@ -88,8 +106,8 @@ body {
             opacity: 0%;
             transform: translateX(100%);
             transition:
-                opacity var(--md-sys-stepper-motion-duration) linear,
-                transform var(--md-sys-stepper-motion-duration) var(--md-sys-stepper-motion-spatial);
+                opacity var(--md-comp-stepper-motion-duration) linear,
+                transform var(--md-comp-stepper-motion-duration) var(--md-comp-stepper-motion-spatial);
 
             &:has(~ .micl-stepper__step[aria-current=step]) {
                 transform: translateX(-100%);
@@ -130,21 +148,21 @@ body {
         column-gap: 4px;
     }
     .micl-stepper__progress-dot {
-        block-size: var(--md-sys-stepper-dot-size);
-        inline-size: var(--md-sys-stepper-dot-size);
-        min-inline-size: var(--md-sys-stepper-dot-size);
-        line-height: var(--md-sys-stepper-dot-size);
-        border-radius: calc(var(--md-sys-stepper-dot-size) / 2);
+        block-size: var(--_dot-size);
+        inline-size: var(--_dot-size);
+        min-inline-size: var(--_dot-size);
+        line-height: var(--_dot-size);
+        border-radius: calc(var(--_dot-size) / 2);
         text-align: center;
-        background-color: var(--md-sys-color-on-surface);
-        color: var(--md-sys-color-surface);
+        background-color: var(--md-comp-stepper-dot-color, var(--md-sys-color-on-surface));
+        color: var(--md-comp-stepper-dot-label-color, var(--md-sys-color-surface));
         opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         counter-increment: dotnumber 1;
     }
     .micl-stepper__progress--done.micl-stepper__progress-dot,
     .micl-stepper__progress--done .micl-stepper__progress-dot {
-        background-color: var(--md-sys-stepper-dot-done-color);
-        color: var(--md-sys-color-on-tertiary-container);
+        background-color: var(--md-comp-stepper-dot-done-color, var(--md-sys-color-tertiary-container));
+        color: var(--md-comp-stepper-dot-done-label-color, var(--md-sys-color-on-tertiary-container));
         opacity: 100%;
     }
 }
