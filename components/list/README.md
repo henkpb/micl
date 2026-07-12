@@ -209,162 +209,95 @@ To enable selection of list items, integrate a Checkbox or Switch component with
 
 - The `role="listbox"` and `role="option"` are used for accessibility, indicating a selectable list. They are added automatically when a list contains a selectable item (an item with `tabindex="0"`. The example above shows these roles for clarity.
 
-## Customizations
-The List component supports the following CSS variables, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs):
+## Theming
+Each list style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs). Set them on any appropriate parent element to affect its child lists.
 
-| Variable name |
-| ------------- |
-| --md-comp-list-container-color |
-| --md-comp-list-container-shape |
-| --md-comp-list-container-space |
-| --md-comp-list-segment-gap |
-| |
-| --md-comp-list-item-container-color |
-| --md-comp-list-item-container-expressive-shape |
-| --md-comp-list-item-container-disabled-expressive-shape |
-| --md-comp-list-item-container-dragged-expressive-shape |
-| --md-comp-list-item-container-focused-expressive-shape |
-| --md-comp-list-item-container-hovered-expressive-shape |
-| --md-comp-list-item-container-pressed-expressive-shape |
-| --md-comp-list-item-container-selected-expressive-shape |
-| --md-comp-list-item-container-selected-disabled-expressive-shape |
-| --md-comp-list-item-container-selected-dragged-expressive-shape |
-| --md-comp-list-item-container-selected-focused-expressive-shape |
-| --md-comp-list-item-container-selected-hovered-expressive-shape |
-| --md-comp-list-item-container-selected-pressed-expressive-shape |
-| |
-| --md-comp-list-item-between-space |
-| --md-comp-list-item-bottom-space |
-| --md-comp-list-item-label-text-color |
-| --md-comp-list-item-one-line-container-height |
-| --md-comp-list-item-overline-color |
-| --md-comp-list-item-segmented-container-color |
-| --md-comp-list-item-supporting-text-color |
-| --md-comp-list-item-three-line-container-height |
-| --md-comp-list-item-top-space |
-| --md-comp-list-item-two-line-container-height |
-| |
-| --md-comp-list-item-disabled-label-text-color |
-| --md-comp-list-item-disabled-label-text-opacity |
-| --md-comp-list-item-disabled-leading-icon-color |
-| --md-comp-list-item-disabled-leading-icon-opacity |
-| --md-comp-list-item-disabled-overline-color |
-| --md-comp-list-item-disabled-overline-opacity |
-| --md-comp-list-item-disabled-state-layer-color |
-| --md-comp-list-item-disabled-state-layer-opacity |
-| --md-comp-list-item-disabled-supporting-text-color |
-| --md-comp-list-item-disabled-supporting-text-opacity |
-| --md-comp-list-item-disabled-trailing-icon-color |
-| --md-comp-list-item-disabled-trailing-icon-opacity |
-| --md-comp-list-item-disabled-trailing-supporting-text-color |
-| --md-comp-list-item-disabled-trailing-supporting-text-opacity |
-| |
-| --md-comp-list-item-dragged-container-elevation |
-| --md-comp-list-item-dragged-label-text-color |
-| --md-comp-list-item-dragged-leading-icon-color |
-| --md-comp-list-item-dragged-state-layer-color |
-| --md-comp-list-item-dragged-state-layer-opacity |
-| --md-comp-list-item-dragged-supporting-text-color |
-| --md-comp-list-item-dragged-trailing-icon-color |
-| --md-comp-list-item-dragged-trailing-supporting-text-color |
-| --md-comp-list-item-focus-indicator-color |
-| --md-comp-list-item-focus-indicator-offset |
-| --md-comp-list-item-focus-indicator-thickness |
-| --md-comp-list-item-focus-label-text-color |
-| --md-comp-list-item-focus-leading-icon-color |
-| --md-comp-list-item-focus-state-layer-color |
-| --md-comp-list-item-focus-state-layer-opacity |
-| --md-comp-list-item-focus-supporting-text-color |
-| --md-comp-list-item-focus-trailing-icon-color |
-| --md-comp-list-item-focus-trailing-supporting-text-color |
-| --md-comp-list-item-hover-label-text-color |
-| --md-comp-list-item-hover-leading-icon-color |
-| --md-comp-list-item-hover-state-layer-color |
-| --md-comp-list-item-hover-state-layer-opacity |
-| --md-comp-list-item-hover-supporting-text-color |
-| --md-comp-list-item-hover-trailing-icon-color |
-| --md-comp-list-item-hover-trailing-supporting-text-color |
-| --md-comp-list-item-pressed-label-text-color |
-| --md-comp-list-item-pressed-leading-icon-color |
-| --md-comp-list-item-pressed-state-layer-color |
-| --md-comp-list-item-pressed-state-layer-opacity |
-| --md-comp-list-item-pressed-supporting-text-color |
-| --md-comp-list-item-pressed-trailing-icon-color |
-| --md-comp-list-item-pressed-trailing-supporting-text-color |
-| |
-| --md-comp-list-item-leading-avatar-color |
-| --md-comp-list-item-leading-avatar-label-color |
-| --md-comp-list-item-leading-avatar-shape |
-| --md-comp-list-item-leading-avatar-size |
-| --md-comp-list-item-leading-icon-color |
-| --md-comp-list-item-leading-icon-expressive-size |
-| --md-comp-list-item-leading-image-height |
-| --md-comp-list-item-leading-image-expressive-shape |
-| --md-comp-list-item-leading-image-width |
-| --md-comp-list-item-leading-space |
-| --md-comp-list-item-leading-video-height |
-| --md-comp-list-item-leading-video-shape |
-| --md-comp-list-item-leading-video-width |
-| |
-| --md-comp-list-item-trailing-icon-color |
-| --md-comp-list-item-trailing-icon-expressive-size |
-| --md-comp-list-item-trailing-space |
-| --md-comp-list-item-trailing-supporting-text-color |
-| |
-| --md-comp-list-item-selected-container-color |
-| --md-comp-list-item-selected-label-text-color |
-| --md-comp-list-item-selected-leading-icon-color |
-| --md-comp-list-item-selected-overline-color |
-| --md-comp-list-item-selected-supporting-text-color |
-| --md-comp-list-item-selected-trailing-icon-color |
-| --md-comp-list-item-selected-trailing-supporting-text-color |
-| |
-| --md-comp-list-item-selected-disabled-container-color |
-| --md-comp-list-item-selected-disabled-container-opacity |
-| --md-comp-list-item-selected-disabled-label-text-color |
-| --md-comp-list-item-selected-disabled-label-text-opacity |
-| --md-comp-list-item-selected-disabled-leading-icon-color |
-| --md-comp-list-item-selected-disabled-leading-icon-opacity |
-| --md-comp-list-item-selected-disabled-overline-color |
-| --md-comp-list-item-selected-disabled-overline-opacity |
-| --md-comp-list-item-selected-disabled-state-layer-color |
-| --md-comp-list-item-selected-disabled-state-layer-opacity |
-| --md-comp-list-item-selected-disabled-supporting-text-color |
-| --md-comp-list-item-selected-disabled-supporting-text-opacity |
-| --md-comp-list-item-selected-disabled-trailing-icon-color |
-| --md-comp-list-item-selected-disabled-trailing-icon-opacity |
-| --md-comp-list-item-selected-disabled-trailing-supporting-text-color |
-| --md-comp-list-item-selected-disabled-trailing-supporting-text-opacity |
-| |
-| --md-comp-list-item-selected-dragged-container-elevation |
-| --md-comp-list-item-selected-dragged-label-text-color |
-| --md-comp-list-item-selected-dragged-leading-icon-color |
-| --md-comp-list-item-selected-dragged-state-layer-color |
-| --md-comp-list-item-selected-dragged-state-layer-opacity |
-| --md-comp-list-item-selected-dragged-supporting-text-color |
-| --md-comp-list-item-selected-dragged-trailing-icon-color |
-| --md-comp-list-item-selected-dragged-trailing-supporting-text-color |
-| --md-comp-list-item-selected-focus-label-text-color |
-| --md-comp-list-item-selected-focus-leading-icon-color |
-| --md-comp-list-item-selected-focus-state-layer-color |
-| --md-comp-list-item-selected-focus-state-layer-opacity |
-| --md-comp-list-item-selected-focus-supporting-text-color |
-| --md-comp-list-item-selected-focus-trailing-icon-color |
-| --md-comp-list-item-selected-focus-trailing-supporting-text-color |
-| --md-comp-list-item-selected-hover-label-text-color |
-| --md-comp-list-item-selected-hover-leading-icon-color |
-| --md-comp-list-item-selected-hover-state-layer-color |
-| --md-comp-list-item-selected-hover-state-layer-opacity |
-| --md-comp-list-item-selected-hover-supporting-text-color |
-| --md-comp-list-item-selected-hover-trailing-icon-color |
-| --md-comp-list-item-selected-hover-trailing-supporting-text-color |
-| --md-comp-list-item-selected-pressed-label-text-color |
-| --md-comp-list-item-selected-pressed-leading-icon-color |
-| --md-comp-list-item-selected-pressed-state-layer-color |
-| --md-comp-list-item-selected-pressed-state-layer-opacity |
-| --md-comp-list-item-selected-pressed-supporting-text-color |
-| --md-comp-list-item-selected-pressed-trailing-icon-color |
-| --md-comp-list-item-selected-pressed-trailing-supporting-text-color |
+### Container
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-list-container-color | The background color of the list | transparent |
+| --md-comp-list-container-shape | The corner rounding of the list, shared by its first and last items | --md-sys-shape-corner-large |
+| --md-comp-list-container-space | The vertical margin around the list | 0px |
+| --md-comp-list-segment-gap | The gap between the items of a segmented list | 2px |
+| --md-comp-list-item-segmented-container-color | The background color of the items of a segmented list | --md-sys-color-surface |
+
+### Item layout
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-list-item-one-line-container-height | The minimum height of a single-line item | 56px |
+| --md-comp-list-item-two-line-container-height | The minimum height of a two-line item | 72px |
+| --md-comp-list-item-three-line-container-height | The minimum height of a three-line item | 88px |
+| --md-comp-list-item-top-space | The padding above the item content | 10px |
+| --md-comp-list-item-bottom-space | The padding below the item content | 10px |
+| --md-comp-list-item-leading-space | The padding before the item content | 16px |
+| --md-comp-list-item-trailing-space | The padding after the item content | 16px |
+| --md-comp-list-item-between-space | The gap between the elements of an item | 12px |
+
+### Item shapes
+The expressive corner rounding of an item follows its interaction state:
+
+| Custom property | Item state | Default |
+|---|---|---|
+| --md-comp-list-item-container-expressive-shape | Resting | --md-sys-shape-corner-extra-small |
+| --md-comp-list-item-container-hovered-expressive-shape | Hovered | --md-sys-shape-corner-medium |
+| --md-comp-list-item-container-focused-expressive-shape | Focused | --md-sys-shape-corner-large |
+| --md-comp-list-item-container-pressed-expressive-shape | Pressed | --md-sys-shape-corner-large |
+| --md-comp-list-item-container-dragged-expressive-shape | Dragged | --md-sys-shape-corner-large |
+| --md-comp-list-item-container-disabled-expressive-shape | Disabled | --md-sys-shape-corner-extra-small |
+| --md-comp-list-item-container-selected-expressive-shape | Selected | --md-sys-shape-corner-large |
+
+For selected items, every state also has its own token — `--md-comp-list-item-container-selected-<state>-expressive-shape` with `<state>` one of `hovered`, `focused`, `pressed`, `dragged` or `disabled` — all defaulting to `--md-sys-shape-corner-large`.
+
+### Leading and trailing media
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-list-item-leading-icon-color | The color of a leading icon | --md-sys-color-on-surface-variant |
+| --md-comp-list-item-leading-icon-expressive-size | The size of a leading icon | 20px |
+| --md-comp-list-item-trailing-icon-color | The color of a trailing icon | --md-sys-color-on-surface-variant |
+| --md-comp-list-item-trailing-icon-expressive-size | The size of a trailing icon | 20px |
+| --md-comp-list-item-leading-avatar-color | The background color of an avatar | --md-sys-color-primary-container |
+| --md-comp-list-item-leading-avatar-label-color | The text color of an avatar | --md-sys-color-on-primary-container |
+| --md-comp-list-item-leading-avatar-shape | The corner rounding of an avatar | --md-sys-shape-corner-full |
+| --md-comp-list-item-leading-avatar-size | The size of an avatar | 40px |
+| --md-comp-list-item-leading-image-width | The width of an image | 56px |
+| --md-comp-list-item-leading-image-height | The maximum height of an image | 56px |
+| --md-comp-list-item-leading-image-expressive-shape | The corner rounding of an image | --md-sys-shape-corner-small |
+| --md-comp-list-item-leading-video-width | The width of a video thumbnail | 100px |
+| --md-comp-list-item-leading-video-height | The maximum height of a video thumbnail | 56px |
+| --md-comp-list-item-leading-video-shape | The corner rounding of a video thumbnail | --md-sys-shape-corner-small |
+
+### Focus indicator
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| --md-comp-list-item-focus-indicator-color | The color of the keyboard focus indicator | --md-sys-color-secondary |
+| --md-comp-list-item-focus-indicator-thickness | The thickness of the keyboard focus indicator | 3px |
+| --md-comp-list-item-focus-indicator-offset | The offset of the keyboard focus indicator | -3px |
+
+### Item colors
+The colors of list items follow a naming pattern that combines the item's selection and interaction state with the colored part:
+
+```
+--md-comp-list-item[-selected][-<state>]-<part>-color
+```
+
+- `selected` targets items that are checked options, contain a checked checkbox or switch, or are the summary of an open accordion.
+- `<state>` is one of `hover`, `focus`, `pressed`, `dragged` or `disabled`; omit it for the resting state.
+- `<part>` is one of `container`, `overline`, `label-text`, `supporting-text`, `leading-icon`, `trailing-icon`, `trailing-supporting-text` or `state-layer`.
+
+Every `state-layer` color has an `-opacity` companion (defaults: hover 8%, focus 10%, pressed 10%, dragged 16%, disabled 0%), and so does every color of a `disabled` state (default: --md-sys-state-disabled-state-layer-opacity, 38%). The `container` part exists for the resting, `selected` and `selected-disabled` combinations only, and the `overline` part has no interaction-state tokens. While an item is dragged, its elevation can be set with `--md-comp-list-item-dragged-container-elevation` and `--md-comp-list-item-selected-dragged-container-elevation` (default: --md-sys-elevation-level4). The defaults per part:
+
+| Part | Resting | Hover, focus, pressed, dragged | Selected | Selected + state | Disabled |
+|---|---|---|---|---|---|
+| container | transparent | | --md-sys-color-secondary-container | | selected: --md-sys-color-on-surface at 38% |
+| overline | --md-sys-color-on-surface-variant | | --md-sys-color-on-secondary-container | | --md-sys-color-on-surface at 38% |
+| label-text | --md-sys-color-on-surface | --md-sys-color-on-surface | --md-sys-color-on-secondary-container | --md-sys-color-on-secondary-container | --md-sys-color-on-surface at 38% |
+| supporting-text, trailing-supporting-text | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-secondary-container | --md-sys-color-on-surface | --md-sys-color-on-surface at 38% |
+| leading-icon, trailing-icon | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-secondary-container | --md-sys-color-on-surface | --md-sys-color-on-surface at 38% |
+| state-layer | | --md-sys-color-on-surface | | --md-sys-color-on-surface | --md-sys-color-on-surface at 0% |
 
 **Example: Changing the height of single-line list items**
 
