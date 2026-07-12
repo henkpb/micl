@@ -23,9 +23,11 @@ export const textfieldSelector = '.micl-textfield-outlined > input,.micl-textfie
 export const textareaSelector  = '.micl-textfield-outlined > textarea,.micl-textfield-filled > textarea';
 export const selectSelector = '.micl-textfield-filled > select,.micl-textfield-outlined > select';
 
+const anyFieldSelector = `${textfieldSelector},${selectSelector},${textareaSelector}`;
+
 const isTextFieldElement = (target: EventTarget | null): target is
     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
-    (target as Element).matches(`${textfieldSelector},${selectSelector},${textareaSelector}`);
+    (target as Element).matches(anyFieldSelector);
 
 const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
 {
@@ -145,27 +147,19 @@ export default {
         }
 
         if (input.matches('input[type=time][data-timepicker],input[type=date][data-datepicker]')) {
-            const picker = !input.dataset.timepicker ? (!input.dataset.datepicker ? null :
-                           document.getElementById(input.dataset.datepicker)) :
-                           document.getElementById(input.dataset.timepicker);
+            const picker = document.getElementById(input.dataset.timepicker || input.dataset.datepicker || '');
             if (picker instanceof HTMLDialogElement) {
-                input.addEventListener('click', (event: Event) =>
+                const open = (event: Event): void =>
                 {
                     event.preventDefault();
                     picker.showModal();
-                });
+                };
+                input.addEventListener('click', open);
                 input.addEventListener('keydown', (event: Event) =>
                 {
-                    if (!(event instanceof KeyboardEvent)) {
-                        return;
-                    }
-                    switch (event.key) {
-                        case 'Enter':
-                        case ' ':
-                            event.preventDefault();
-                            picker.showModal();
-                            break;
-                        default:
+                    const key = (event as KeyboardEvent).key;
+                    if (key === 'Enter' || key === ' ') {
+                        open(event);
                     }
                 });
             }
@@ -174,12 +168,6 @@ export default {
         setCounter(input);
     },
 
-    change: (event: Event): void =>
-    {
-        refreshTextField(event);
-    },
-    input: (event: Event): void =>
-    {
-        refreshTextField(event);
-    }
+    change: refreshTextField,
+    input: refreshTextField
 };
