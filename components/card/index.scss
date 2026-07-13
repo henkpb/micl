@@ -141,6 +141,7 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
             ),
             linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
         background-repeat: no-repeat;
+        background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
         background-size: 0%, 100%;
         transition:
             background-size 0ms,
@@ -168,7 +169,7 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
             cursor: grabbing;
         }
         &.micl-rippling {
-            animation: micl-ripple calc(var(--md-sys-state-ripple-duration) / 2) motion.$md-sys-motion-easing-standard;
+            animation: micl-ripple calc(var(--md-sys-state-ripple-duration) * 1.722);
         }
 
         .micl-card__content {

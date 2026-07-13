@@ -43,15 +43,19 @@
     inherits: false;
     initial-value: 0;
 }
+// The ripple coordinates are percentages: the runtime sets the touch point as a percentage of the
+// element, which pins the gradient box (background-position) and the circle within it (circle at)
+// to the same element point at every background-size.
+// The 50% initial value doubles as a centered fallback.
 @property --micl-x {
-    syntax: '<length>';
+    syntax: '<length-percentage>';
     inherits: false;
-    initial-value: -100000px;
+    initial-value: 50%;
 }
 @property --micl-y {
-    syntax: '<length>';
+    syntax: '<length-percentage>';
     inherits: false;
-    initial-value: -100000px;
+    initial-value: 50%;
 }
 @property --micl-width {
     syntax: '<length>';

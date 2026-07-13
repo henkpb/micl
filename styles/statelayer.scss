@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 @use 'sass:map';
+@use 'motion';
 
 //
 // Set $master: true (via @use 'styles/statelayer' with ($master: true)) to install every
@@ -43,7 +44,7 @@ $_tokens: (
     focus-indicator-thickness:     3px,
     backdrop-opacity:              32%,
     ripple-opacity-factor:         0.6,
-    ripple-duration:               5000ms,
+    ripple-duration:               750ms,
 );
 
 @if $master {
@@ -65,8 +66,15 @@ $_tokens: (
     }
 
     @keyframes micl-ripple {
-        from { background-size: 0%, 100%; }
-        to   { background-size: 10000%, 100%; }
+        from {
+            background-size: 0% 0%, 100%;
+            animation-timing-function: motion.$md-sys-motion-easing-standard;
+        }
+        60% {
+            background-size: 1000% 1000%, 100%;
+            animation-timing-function: motion.$md-sys-motion-easing-standard-accelerate;
+        }
+        to   { background-size: 10000% 10000%, 100%; }
     }
 }
 
@@ -99,8 +107,15 @@ $_tokens: (
 @mixin keyframes {
     @if not $master {
         @keyframes micl-ripple {
-            from { background-size: 0%, 100%; }
-            to   { background-size: 10000%, 100%; }
+            from {
+                background-size: 0% 0%, 100%;
+                animation-timing-function: motion.$md-sys-motion-easing-standard;
+            }
+            60% {
+                background-size: 1000% 1000%, 100%;
+                animation-timing-function: motion.$md-sys-motion-easing-standard-accelerate;
+            }
+            to   { background-size: 10000% 10000%, 100%; }
         }
     }
 }

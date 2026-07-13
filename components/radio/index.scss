@@ -101,6 +101,7 @@ $radio: 'input[type=radio].micl-radio';
             ),
             linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
         background-repeat: no-repeat;
+        background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
         background-size: 0%, 100%;
         cursor: pointer;
         transition:
@@ -134,7 +135,7 @@ $radio: 'input[type=radio].micl-radio';
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
         &.micl-rippling {
-            animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
+            animation: micl-ripple var(--md-sys-state-ripple-duration);
         }
     }
     &:disabled {

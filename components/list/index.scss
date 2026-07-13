@@ -160,7 +160,7 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
         }
     }
     &.micl-rippling {
-        animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
+        animation: micl-ripple calc(var(--md-sys-state-ripple-duration) * 1.333);
     }
 }
 
@@ -265,6 +265,7 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
         ),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
+    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
     background-size: 0%, 100%;
     list-style: none;
     transition:

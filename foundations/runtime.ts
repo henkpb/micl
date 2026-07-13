@@ -88,9 +88,12 @@ const initializeComponents = (parent: HTMLDocument | HTMLElement): void => {
                 }
                 e.stopPropagation();
 
+                // Percentages, not lengths: the same value positions both the gradient box
+                // (background-position) and the circle within it, pinning the ripple origin
+                // to the touch point at every background-size.
                 const r = element.getBoundingClientRect();
-                element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
-                element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
+                element.style.setProperty('--micl-x', `${(e.clientX - r.left) / r.width * 100}%`);
+                element.style.setProperty('--micl-y', `${(e.clientY - r.top) / r.height * 100}%`);
 
                 element.classList.remove('micl-rippling');
                 void element.offsetWidth;
