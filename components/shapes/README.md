@@ -76,17 +76,17 @@ Optional modifier classes:
 The base styles size the SVG to 100 × 100 px, fill it with the application's primary color, and let it overflow its viewBox horizontally (so wide shapes like *pill* and *fan* are not clipped). Override these on the element or on a parent:
 
 ```HTML
-<svg class="micl-shape micl-shape--diamond"
+<svg class="micl-shapes micl-shapes--diamond"
     viewBox="0 0 100 100"
     style="inline-size:64px;block-size:64px;fill:var(--md-sys-color-secondary)">
   <path />
 </svg>
 ```
 
-For `micl-shape--outlined`, the stroke colour and width are controlled by the standard SVG `stroke` and `stroke-width` properties:
+For `micl-shapes--outlined`, the stroke colour and width are controlled by the standard SVG `stroke` and `stroke-width` properties:
 
 ```HTML
-<svg class="micl-shape micl-shape--outlined micl-shape--pill"
+<svg class="micl-shapes micl-shapes--outlined micl-shapes--pill"
     viewBox="0 0 100 100"
     style="stroke:var(--md-sys-color-outline);stroke-width:3">
   <path />
