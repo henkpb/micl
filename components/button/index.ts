@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const buttonSelector = '.micl-button--toggle';
 
 const toggleIcon = (button: HTMLButtonElement): void =>
@@ -34,7 +36,7 @@ const toggleIcon = (button: HTMLButtonElement): void =>
     }
 };
 
-export default {
+export default register(buttonSelector, {
     command: (event: Event): void =>
     {
         const target = event.target as HTMLButtonElement;
@@ -73,4 +75,4 @@ export default {
             delete element.dataset.miclinitialized;
         }
     }
-};
+}, HTMLButtonElement);

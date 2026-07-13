@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const datepickerSelector = 'dialog.micl-dialog.micl-datepicker';
 
 const classPrefix  = 'micl-datepicker__';
@@ -592,7 +594,7 @@ const setInputDate = (dialog: HTMLDialogElement, index: number, dateStr: string)
     renderCalendar(dialog, state);
 };
 
-export default {
+export default register(datepickerSelector, {
     keydown: (event: Event): void =>
     {
         if (
@@ -829,4 +831,4 @@ export default {
             }
         });
     }
-};
+}, HTMLDialogElement);

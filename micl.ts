@@ -19,200 +19,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import _bottomsheet, { bottomsheetSelector } from './components/bottomsheet';
-import _button, { buttonSelector } from './components/button';
-import _checkboxgroup, { checkboxGroupSelector } from './components/checkbox';
-import _datepicker, { datepickerSelector } from './components/datepicker';
-import _list, { listSelector } from './components/list';
-import _menu, { menuSelector } from './components/menu';
-import _navigationrail, { navigationrailSelector } from './components/navigationrail';
-import _progressindicator, { progressindicatorSelector } from './components/progressindicator';
-import _slider, { sliderSelector } from './components/slider';
-import _snackbar, { snackbarSelector } from './components/snackbar';
-import _stepper, { stepperSelector } from './components/stepper';
-import _textfield, { textfieldSelector, textareaSelector, selectSelector } from './components/textfield';
-import _timepicker, { timepickerSelector } from './components/timepicker';
+// Each component module registers itself with the shared runtime when loaded;
+// importing it here is what puts it into the full bundle.
+import runtime from './foundations/runtime';
 
-interface ComponentEventHandlers {
-    input?  : (event: Event) => void;
-    keydown?: (event: Event) => void;
-    change? : (event: Event) => void;
-}
+import './components/bottomsheet';
+import './components/button';
+import './components/checkbox';
+import './components/datepicker';
+import './components/list';
+import './components/menu';
+import './components/navigationrail';
+import './components/progressindicator';
+import './components/slider';
+import './components/snackbar';
+import './components/stepper';
+import './components/textfield';
+import './components/timepicker';
 
-interface ComponentEntry<T extends HTMLElement> {
-    component: ComponentEventHandlers & {
-        initialize?: (element: T) => void;
-        cleanup?   : (element: T) => void;
-    };
-    type: new () => T;
-}
-
-type EventHandlerKey = keyof ComponentEventHandlers;
-
-const componentMap: Record<string, ComponentEntry<any>> = {
-    [bottomsheetSelector]   : { component: _bottomsheet, type: HTMLDialogElement },
-    [buttonSelector]        : { component: _button, type: HTMLButtonElement },
-    [checkboxGroupSelector] : { component: _checkboxgroup, type: HTMLElement },
-    [datepickerSelector]    : { component: _datepicker, type: HTMLDialogElement },
-    [listSelector]          : { component: _list, type: HTMLElement },
-    [menuSelector]          : { component: _menu, type: HTMLElement },
-    [navigationrailSelector]: { component: _navigationrail, type: HTMLElement },
-    [progressindicatorSelector]: { component: _progressindicator, type: HTMLProgressElement },
-    [selectSelector]        : { component: _textfield, type: HTMLSelectElement },
-    [sliderSelector]        : { component: _slider, type: HTMLInputElement },
-    [snackbarSelector]      : { component: _snackbar, type: HTMLElement },
-    [stepperSelector]       : { component: _stepper, type: HTMLElement },
-    [textareaSelector]      : { component: _textfield, type: HTMLTextAreaElement },
-    [textfieldSelector]     : { component: _textfield, type: HTMLInputElement },
-    [timepickerSelector]    : { component: _timepicker, type: HTMLDialogElement }
-};
-
-const selector = Object.keys(componentMap).join(',');
-
-const findEntry = (element: HTMLElement): ComponentEntry<HTMLElement> | undefined =>
-    Object.entries(componentMap)
-        .find(([selector, { type }]) => element.matches(selector) && element instanceof type)
-        ?.[1];
-
-const initializeScrollbars = (): void =>
-{
-    document.documentElement.style.setProperty(
-        '--md-sys-scrollbar-thumb-color',
-        window.getComputedStyle(document.body).getPropertyValue('--md-sys-color-outline').trim()
-    );
-};
-
-const initializeComponent = (element: HTMLElement): void =>
-{
-    const entry = findEntry(element);
-    if (entry && typeof entry.component.initialize === 'function') {
-        entry.component.initialize(element);
-    }
-};
-
-const rippleInitialized = new WeakSet<HTMLElement>();
-
-const initializeComponents = (parent: HTMLDocument | HTMLElement): void =>
-{
-    parent.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
-    parent.querySelectorAll<HTMLElement>('[class*="micl-"], [class*="micl-"] > summary').forEach(element =>
-    {
-        if (rippleInitialized.has(element)) return;
-
-        if (window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1') {
-            element.addEventListener('pointerdown', (e: PointerEvent) =>
-            {
-                if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
-                    return;
-                }
-                e.stopPropagation();
-
-                const r = element.getBoundingClientRect();
-                element.style.setProperty('--micl-x', `${e.clientX - r.left}px`);
-                element.style.setProperty('--micl-y', `${e.clientY - r.top}px`);
-
-                element.classList.remove('micl-rippling');
-                void element.offsetWidth;
-                element.classList.add('micl-rippling');
-
-                const cleanup = (ev: AnimationEvent): void =>
-                {
-                    if (ev.animationName !== 'micl-ripple') return;
-
-                    element.classList.remove('micl-rippling');
-                    element.style.removeProperty('--micl-x');
-                    element.style.removeProperty('--micl-y');
-                    element.removeEventListener('animationend', cleanup);
-                };
-
-                element.addEventListener('animationend', cleanup);
-            });
-
-            rippleInitialized.add(element);
-        }
-    });
-
-    initializeScrollbars();
-};
-
-const cleanupComponent = (element: HTMLElement): void =>
-{
-    const entry = findEntry(element);
-    if (entry && typeof entry.component.cleanup === 'function') {
-        entry.component.cleanup(element);
-    }
-};
-
-const cleanupComponents = (parent: HTMLDocument | HTMLElement): void =>
-{
-    parent.querySelectorAll<HTMLElement>(selector).forEach(cleanupComponent);
-};
-
-const handleEvent = (event: Event): void =>
-{
-    const target = (event.target as Element).closest(selector);
-    if (!(target instanceof HTMLElement)) return;
-
-    const entry = findEntry(target);
-    const key   = event.type as EventHandlerKey;
-    if (entry && typeof entry.component[key] === 'function') {
-        entry.component[key]?.(event);
-    }
-};
-
-const activate = () =>
-{
-    const observer = new MutationObserver(mutations =>
-    {
-        mutations.forEach(mutation =>
-        {
-            if (mutation.type !== 'childList') {
-                return;
-            }
-            mutation.addedNodes.forEach(node =>
-            {
-                if (node instanceof HTMLElement) {
-                    if (node.matches(selector)) {
-                        initializeComponent(node);
-                    }
-                    node.querySelectorAll<HTMLElement>(selector).forEach(initializeComponent);
-                }
-            });
-            mutation.removedNodes.forEach(node =>
-            {
-                if (node instanceof HTMLElement) {
-                    if (node.matches(selector)) {
-                        cleanupComponent(node);
-                    }
-                    cleanupComponents(node);
-                }
-            });
-        });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    initializeComponents(document);
-
-    // Delegated Event Handlers
-    document.addEventListener('change', handleEvent);
-    document.addEventListener('input', handleEvent);
-    document.addEventListener('keydown', handleEvent);
-};
-
-const loaded = () =>
-{
-    document.removeEventListener('DOMContentLoaded', loaded);
-    activate();
-};
-
-if (document.readyState !== 'loading') {
-    activate();
-}
-else {
-    document.addEventListener('DOMContentLoaded', loaded);
-}
-
-export default {
-    initialize: () => initializeComponents(document),
-    cleanup   : () => cleanupComponents(document)
-};
+export default runtime;

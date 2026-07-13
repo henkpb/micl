@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/statelayer';
 
@@ -178,4 +177,8 @@
             transform: translateX(0%);
         }
     }
+}
+
+.micl-stepper__action--hidden, .micl-stepper__step--hidden {
+    display: none !important;
 }

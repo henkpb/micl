@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const menuSelector = '.micl-menu[popover]';
 
 const getOrigin = (invoker: Element, popover: Element): string =>
@@ -38,7 +40,7 @@ const navigableItems = (list: Element): HTMLElement[] =>
         && child.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
     );
 
-export default {
+export default register(menuSelector, {
     initialize: (element: HTMLElement): void =>
     {
         if (
@@ -150,4 +152,4 @@ export default {
             }
         });
     }
-};
+}, HTMLElement);

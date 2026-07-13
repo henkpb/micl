@@ -19,12 +19,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const timepickerSelector = 'dialog.micl-dialog.micl-timepicker';
 
 // The block prefix of all element class names, hoisted to shrink the minified
 // bundle: the minifier shortens the constant but never dedupes string literals.
 const classPrefix   = 'micl-timepicker__';
-const hiddenClass   = 'micl-hidden';
+const hiddenClass   = 'micl-timepicker__dial--hidden';
 const selectedClass = 'micl-timepicker--selected';
 
 type ValueElement = HTMLInputElement | HTMLButtonElement;
@@ -256,7 +258,7 @@ const handleSpinning = (dialog: HTMLElement, input: HTMLInputElement, event: Key
     setInputValue(dialog, input.name, `${value}`);
 };
 
-export default {
+export default register(timepickerSelector, {
     initialize: (dialog: HTMLDialogElement): void =>
     {
         if (dialog.dataset.miclinitialized) {
@@ -430,4 +432,4 @@ export default {
             }
         });
     }
-};
+}, HTMLDialogElement);

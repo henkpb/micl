@@ -21,6 +21,8 @@
 
 import form from '../../foundations/form';
 
+import { register } from '../../foundations/runtime';
+
 export const stepperSelector = '.micl-stepper';
 
 const ACTIONS_SELECTOR = '.micl-stepper__action-back,.micl-stepper__action-next';
@@ -104,7 +106,7 @@ const showHideActions = (stepper: HTMLElement, step: HTMLElement): void =>
         const siblingKey = isBackAction(action) ? 'previousElementSibling' : 'nextElementSibling';
         const hasSibling = (step[siblingKey] as Element)?.classList.contains(STEP_CLASS);
 
-        action.classList.toggle('micl-hidden', !hasSibling);
+        action.classList.toggle('micl-stepper__action--hidden', !hasSibling);
     });
 };
 
@@ -117,7 +119,7 @@ const showHideElements = (stepper: HTMLElement, step: HTMLElement): void =>
     {
         const stepnr = parseInt(element.dataset.step || '0', 10);
         element.classList.toggle(
-            'micl-hidden',
+            'micl-stepper__step--hidden',
             stepnr > 0 ? stepnr != selectedStep : nrsteps + stepnr + 1 != selectedStep
         );
     });
@@ -166,7 +168,7 @@ const refresh = (stepper: HTMLElement, step: HTMLElement): void =>
     updateProgress(stepper, step);
 };
 
-export default {
+export default register(stepperSelector, {
     initialize: (stepper: HTMLElement): void =>
     {
         if (!stepper.matches(stepperSelector) || stepper.dataset.miclinitialized) {
@@ -248,4 +250,4 @@ export default {
             }, true);
         }
     }
-};
+}, HTMLElement);

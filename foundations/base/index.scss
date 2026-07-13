@@ -19,62 +19,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-$md-sys-icon-size: 24px;
+// Shared foundation styles, emitted exactly once: the :root design tokens,
+// the @property registrations the ripple effect depends on, and the generic
+// utility classes. Included in micl.css; consumers loading per-component CSS
+// files must load dist/base.css first (once).
 
-$md-sys-padding-xxs: 4px;
-$md-sys-padding-xs: 8px;
-$md-sys-padding-s: 12px;
-$md-sys-padding-m: 16px;
-$md-sys-padding-l: 20px;
-$md-sys-padding-xl: 24px;
-$md-sys-padding-xxl: 28px;
+@use '../index' as foundations;
 
 :root {
-    --md-sys-icon-size: #{$md-sys-icon-size};
+    --md-sys-icon-size: #{foundations.$md-sys-icon-size};
 
-    --md-sys-padding-xxs: #{$md-sys-padding-xxs};
-    --md-sys-padding-xs: #{$md-sys-padding-xs};
-    --md-sys-padding-s: #{$md-sys-padding-s};
-    --md-sys-padding-m: #{$md-sys-padding-m};
-    --md-sys-padding-l: #{$md-sys-padding-l};
-    --md-sys-padding-xl: #{$md-sys-padding-xl};
-    --md-sys-padding-xxl: #{$md-sys-padding-xxl};
-}
-
-.micl-hidden {
-    display: none !important;
-}
-.micl-no-transition {
-    transition: none !important;
-}
-.micl-flex--vcenter {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.micl-grid-field,
-.micl-grid-iconfield {
-    box-sizing: border-box;
-    display: grid;
-    row-gap: var(--md-sys-padding-xl, 24px);
-}
-.micl-grid-iconfield {
-    grid-template-columns: 48px 1fr;
-}
-.micl-grid-iconfield__icon {
-    grid-column: 1;
-    margin-block-start: 0.6rem;
-}
-.micl-grid-iconfield__field {
-    grid-column: 2;
-}
-
-.micl-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+    --md-sys-padding-xxs: #{foundations.$md-sys-padding-xxs};
+    --md-sys-padding-xs: #{foundations.$md-sys-padding-xs};
+    --md-sys-padding-s: #{foundations.$md-sys-padding-s};
+    --md-sys-padding-m: #{foundations.$md-sys-padding-m};
+    --md-sys-padding-l: #{foundations.$md-sys-padding-l};
+    --md-sys-padding-xl: #{foundations.$md-sys-padding-xl};
+    --md-sys-padding-xxl: #{foundations.$md-sys-padding-xxl};
 }
 
 @property --micl-ripple {

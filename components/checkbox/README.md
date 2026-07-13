@@ -59,18 +59,26 @@ You can establish a parent-child relationship among checkboxes. To do this, wrap
 
 To visually improve the layout, such as by indenting child checkboxes, use wrapper elements and utility classes:
 
+```CSS
+  .my-utility-class {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  } 
+```
+
 ```HTML
 <div class="micl-checkbox-group">
-  <div class="micl-flex--vcenter">
+  <div class="my-utility-class">
     <input type="checkbox" id="cb0" class="micl-checkbox micl-checkbox__parent" value="c0">
     <label for="cb0">Choices</label>
   </div>
   <div style="padding-inline-start:16px">
-    <div class="micl-flex--vcenter">
+    <div class="my-utility-class">
       <input type="checkbox" id="cb1" class="micl-checkbox" value="c1">
       <label for="cb1">First Choice</label>
     </div>
-    <div class="micl-flex--vcenter">
+    <div class="my-utility-class">
       <input type="checkbox" id="cb2" class="micl-checkbox" checked value="c2">
       <label for="cb2">Second Choice</label>
     </div>
@@ -102,10 +110,10 @@ Each checkbox can be themed with CSS custom properties that follow the Material 
 </div>
 ```
 
-To vertically align a checkbox with its label, wrap both in an element that has the `micl-flex--vcenter` class.
+To vertically align a checkbox with its label, wrap both in an element that has a styling like suggested below:
 
 ```HTML
-<div class="micl-flex--vcenter">
+<div style="display:flex;flex-direction:row;align-items:center">
   <input type="checkbox" id="mycheckbox" class="micl-checkbox">
   <label for="mycheckbox">Checkbox</label>
 </div>

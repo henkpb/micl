@@ -26,6 +26,9 @@ To create a standard side sheet, use the `<dialog>` element with the `popover` a
 Import the side sheet styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
+@use "material-inspired-component-library/dist/divider";
 @use "material-inspired-component-library/dist/sidesheet";
 ```
 

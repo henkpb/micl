@@ -41,6 +41,7 @@ This component requires JavaScript for functionality:
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
+When loading individual JavaScript files, the select behaviour is included in `dist/textfield`.
 
 This will initialize any Select component, including those that will be added to the DOM later on.
 

@@ -55,10 +55,10 @@ Each radio button can be themed with CSS custom properties that follow the Mater
 </div>
 ```
 
-To vertically align a radio button with its label, wrap both in an element that has the `micl-flex--vcenter` class.
+To vertically align a radio button with its label, wrap both in an element that has a styling like suggested below:
 
 ```HTML
-<div class="micl-flex--vcenter">
+<div style="display:flex;flex-direction:row;align-items:center">
   <input type="radio" id="myradio" class="micl-radio">
   <label for="myradio">Large radio button</label>
 </div>

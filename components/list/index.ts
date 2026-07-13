@@ -19,13 +19,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const listSelector = '.micl-list';
 
 const isDisabled   = (item?: HTMLElement | null) => item?.classList.contains('micl-list-item--disabled');
 const isSelectable = (item?: HTMLElement | null) => item?.matches(':has(input[type=checkbox])');
 const isSelected   = (item?: HTMLElement | null) => item?.matches(':has(input[type=checkbox]:checked)');
 
-export default
+export default register(listSelector,
 {
     keydown(event: KeyboardEvent | Event): void
     {
@@ -135,4 +137,4 @@ export default
             }
         });
     }
-};
+}, HTMLElement);

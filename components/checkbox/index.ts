@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const checkboxGroupSelector = '.micl-checkbox-group';
 
 const getParentCheckbox = (checkboxGroup: HTMLElement): HTMLInputElement | null =>
@@ -118,7 +120,7 @@ const refreshCheckboxGroup = (checkboxGroup: HTMLElement, input: HTMLInputElemen
     refreshParentCheckbox(parentCheckboxGroup);
 };
 
-export default {
+export default register(checkboxGroupSelector, {
     initialize: (element: HTMLElement): void =>
     {
         if (
@@ -142,4 +144,4 @@ export default {
 
         refreshCheckboxGroup(element, null);
     }
-};
+}, HTMLElement);

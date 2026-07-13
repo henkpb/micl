@@ -1,0 +1,1 @@
+.micl-grid-field,.micl-grid-iconfield{box-sizing:border-box;display:grid;row-gap:var(--md-sys-padding-xl, 24px)}.micl-grid-iconfield{grid-template-columns:48px 1fr}.micl-grid-iconfield__icon{grid-column:1;margin-block-start:.6rem}.micl-grid-iconfield__field{grid-column:2}

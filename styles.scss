@@ -25,7 +25,8 @@
 @use 'styles/typography' with ($master: true);
 @use 'styles/motion' with ($master: true);
 
-@use 'foundations';
+@use 'foundations/base';
+@use 'foundations/field';
 @use 'foundations/layout';
 @use 'foundations/scrollbar';
 

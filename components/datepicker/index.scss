@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
@@ -474,4 +473,8 @@ dialog.micl-dialog.micl-datepicker {
         flex: 1 1 0;
         min-inline-size: 0;
     }
+}
+
+.micl-no-transition {
+    transition: none !important;
 }

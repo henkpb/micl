@@ -44,6 +44,8 @@ Import both the time picker and the dialog styles into your project:
 
 ```CSS
 @use "material-inspired-component-library/dist/dialog";
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/timepicker";
 ```
 
@@ -58,6 +60,7 @@ This component requires JavaScript to function:
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
+When loading individual JavaScript files, also load `dist/textfield` — it wires the input field that opens the picker.
 
 This will initialize any Time picker component, including those that will be added to the DOM later on.
 

@@ -25,6 +25,7 @@ To create a simple navigation rail, use a `<nav>` element with the `micl-navigat
 Import the navigation rail styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/navigationrail";
 ```
 

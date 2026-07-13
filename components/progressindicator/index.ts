@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const progressindicatorSelector = 'progress.micl-progress-linear,progress.micl-progress-circular';
 
 // <progress> emits no input/change events when its value/max change, so a
@@ -50,7 +52,7 @@ const setVars = (element: HTMLProgressElement): void =>
     element.style.setProperty('--md-comp-progress-amplitude-scale', String(scale));
 };
 
-export default {
+export default register(progressindicatorSelector, {
     initialize: (element: HTMLProgressElement): void =>
     {
         if (!element.matches(progressindicatorSelector)) {
@@ -71,4 +73,4 @@ export default {
             observers.delete(element);
         }
     }
-};
+}, HTMLProgressElement);

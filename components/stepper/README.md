@@ -32,6 +32,7 @@ To create a basic stepper, use a `<div>` container with the `micl-stepper` class
 Import the stepper styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/button";
 @use "material-inspired-component-library/dist/stepper";
 ```
 

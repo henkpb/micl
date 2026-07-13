@@ -41,6 +41,9 @@ h1 {
 .docs-example__copy--done {
     color: var(--md-sys-color-primary);
 }
+.docs-hidden {
+    display: none !important;
+}
 .docs-visually-hidden {
     position: absolute;
     width: 1px;
@@ -51,4 +54,15 @@ h1 {
     clip: rect(0 0 0 0);
     white-space: nowrap;
     border: 0;
+}
+.docs-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.docs-flex--vcenter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

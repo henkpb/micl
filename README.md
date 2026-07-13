@@ -28,10 +28,27 @@ npm install material-inspired-component-library
 
 **Sass/SCSS**
 
-To import the styles for a single component (e.g., the [Card component](components/card/README.md)):
+To import the styles for a single component (e.g., the [Card component](components/card/README.md)), import the shared base styles once, followed by the component:
 ```SCSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/card";
 ```
+The base file contains the foundation design tokens, the `@property` registrations required by the ripple effect. It is small, needed only once, and already included in the full `micl.css`.
+
+Some components build on other MICL components; when importing them individually, import their companions as well (each component's README shows the complete list):
+
+| Component | Also import |
+| --------- | ----------- |
+| appbar | iconbutton |
+| datepicker | dialog, textfield, button, iconbutton, divider |
+| dialog | button, iconbutton |
+| menu | list |
+| navigationrail | iconbutton |
+| select | textfield, menu, list |
+| sidesheet | button, iconbutton, divider |
+| snackbar | button, iconbutton |
+| stepper | button |
+| timepicker | dialog, button, iconbutton |
 
 To import all MICL styles:
 ```SCSS
@@ -51,6 +68,8 @@ Copy the main `micl.css` file to your distribution folder and include it in your
 <link rel="stylesheet" type="text/css" href="path/to/dist/micl.css">
 ```
 
+The per-component stylesheets can be included the same way; include `base.css` once before them (`<link rel="stylesheet" type="text/css" href="path/to/dist/base.css">`).
+
 The main MICL CSS file can also be found on CDN networks, like on jsDelivr: `https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.css`
 
 ### 3. Add the HTML & JavaScript
@@ -68,9 +87,15 @@ Here is a simple example of a [Card component](components/card/README.md).
 
 Some components, like the [List](components/list/README.md), require a small amount of JavaScript to handle interactive behaviour. Because the JavaScript footprint in MICL is so small, you can import the code for all components at once.
 ```JavaScript
-import micl from "material-inspired-component-library/dist/micl";
+import "material-inspired-component-library/dist/micl";
 ```
 This will initialize all MICL components, including those that will be added to the DOM later on.
+
+To load only the JavaScript for the components you use, import their files individually. Each component registers itself with a shared runtime, so any combination works:
+```JavaScript
+import "material-inspired-component-library/dist/list";
+import "material-inspired-component-library/dist/textfield";
+```
 
 **Plain JavaScript**
 
@@ -78,6 +103,7 @@ Copy the main `micl.js` file to your distribution folder and include it in your 
 ```HTML
 <script src="path/to/dist/micl.js"></script>
 ```
+The per-component files can be included the same way (`<script src="path/to/dist/list.js"></script>`).
 
 The main MICL JavaScript file can also be found on CDN networks, like on jsDelivr: `https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.js`
 
@@ -91,8 +117,9 @@ MICL uses the [**Google Sans**](https://fonts.google.com/specimen/Google+Sans) a
 The [Styles guide](styles/README.md) describes how to change the default font.
 
 ## Foundations 🪟
-A separate CSS file, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/understanding-layout/overview), provides styles for an adaptive layout. It includes styles for the **window frame**, **body region** and **panes** that adjust to the available screen space, ensuring your layout follows Material Design's responsive guidelines.
+Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/understanding-layout/overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **body region** and **panes** that adjust to the available screen space, ensuring your layout follows Material Design's responsive guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column.
 
+- [x] [Field](foundations/field/README.md)
 - [x] [Layout](foundations/layout/README.md)
 
 ## Available components ✅
@@ -105,7 +132,9 @@ The library currently consists of the following components:
 - [x] [Button](components/button/README.md)
 - [x] [Card](components/card/README.md)
 - [x] [Checkbox](components/checkbox/README.md)
+- [x] [Chip](components/chip/README.md)
 - [x] [Date picker](components/datepicker/README.md)
+- [x] [Date range picker](components/datepicker/README.md)
 - [x] [Dialog](components/dialog/README.md)
 - [x] [Divider](components/divider/README.md)
 - [x] [Icon button](components/iconbutton/README.md)
@@ -125,6 +154,15 @@ The library currently consists of the following components:
 - [x] [Time picker](components/timepicker/README.md)
 
 ## Change Log ↪️
+
+### 9.0.0 ()
+- **BREAKING**: Renamed all CSS custom properties from --md-sys- to --md-comp-.
+- **BREAKING**: Per-component CSS files no longer embed the shared foundation styles; load `dist/base.css` once before them. The full `micl.css` is unaffected.
+- **Field**: The `micl-grid-field` and `micl-grid-iconfield` classes are now the 'Field' layout foundation with its own stylesheet (`dist/field.css`).
+- **Chip**: New component.
+- **Navigation bar**: New component.
+- **Date Range picker**: Select two dates in the Date picker to return a date range.
+- **Navigation rail**: Support for adaptive behaviour.
 
 ### 8.1.0 (24.06.2026)
 - **Shapes**: The Material shape library supported as the 'Shapes' component.
@@ -149,7 +187,7 @@ The library currently consists of the following components:
 - **Time picker**: New component.
 
 ### 4.0.0 (27.10.2025)
-- **BREAKING**: Moved layout.scss to sub-folder.
+- **BREAKING**: Moved layout.scss to subfolder.
 - **Alert**: New component.
 - **Stepper**: New component.
 

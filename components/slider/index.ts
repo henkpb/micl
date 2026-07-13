@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const sliderSelector = 'input[type=range][class*=micl-slider-]';
 
 const
@@ -83,7 +85,7 @@ const
         }
     };
 
-export default {
+export default register(sliderSelector, {
     initialize: (element: HTMLInputElement): void =>
     {
         if (!element.matches(sliderSelector)) {
@@ -143,4 +145,4 @@ export default {
             setValue(event.target);
         }
     }
-};
+}, HTMLInputElement);

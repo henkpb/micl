@@ -41,6 +41,7 @@ This component requires JavaScript for functionality:
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
+When loading individual JavaScript files, also load `dist/list` — it provides the keyboard navigation of the menu items.
 
 This will initialize any Menu component, including those that will be added to the DOM later on.
 

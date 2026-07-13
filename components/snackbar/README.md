@@ -18,6 +18,8 @@ The `data-micldelay` attribute contains the number of milliseconds the snackbar 
 Import the snackbar styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/snackbar";
 ```
 

@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const bottomsheetSelector = 'dialog.micl-bottomsheet';
 
 const getSnapHeights = (dialog: HTMLDialogElement): number[] =>
@@ -70,7 +72,7 @@ const setHeight = (dialog: HTMLDialogElement, value: number): void =>
     }
 }
 
-export default {
+export default register(bottomsheetSelector, {
     initialize: (element: HTMLDialogElement) =>
     {
         if (
@@ -161,4 +163,4 @@ export default {
             delete element.dataset.miclfitheight;
         }
     }
-};
+}, HTMLDialogElement);

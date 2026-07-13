@@ -19,6 +19,7 @@ To add a basic (small) app bar, use the `<header>` element with the `micl-appbar
 Import the app bar styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/appbar";
 ```
 
@@ -60,7 +61,7 @@ Use the `micl-appbar__leading` (or: `micl-appbar__leading-icon`) class for an el
 
 ```HTML
 <header class="micl-appbar">
-  <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-m" aria-label="Home">
+  <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-m" aria-label="Home">
     <span class="material-symbols-outlined" aria-hidden="true">home</span>
   </a>
   <div class="micl-appbar__headline">

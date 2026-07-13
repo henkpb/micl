@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,home&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
@@ -137,7 +137,7 @@
     <main class="micl-body micl-body--stacked-to-large">
         <section class="micl-pane">
             <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
+                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
                     <span class="material-symbols-outlined" aria-hidden="true">home</span>
                 </a>
                 <div class="micl-appbar__headline micl-appbar__headline--center">
@@ -148,23 +148,28 @@
             </header>
 
             <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
+                <div class="micl-pane__column"></div>
                 <div class="micl-pane__column">
                     <div class="micl-card-elevated">
                         <div class="micl-card__headline-s">
                             <h2>Linear &mdash; determinate</h2>
                         </div>
                         <div class="micl-card__content docs-row">
-                            <div class="docs-field">
-                                <label class="md-sys-typescale-body-medium">Downloading&hellip; <span id="pct">0%</span></label>
-                                <progress class="micl-progress-linear" id="linear-demo" value="0" max="1"></progress>
-                            </div>
-                            <div class="docs-field">
-                                <label class="md-sys-typescale-body-medium">Static value (40%)</label>
-                                <progress class="micl-progress-linear" value="0.4" max="1"></progress>
-                            </div>
-                            <div class="docs-field">
-                                <label class="md-sys-typescale-body-medium">Flat active indicator (wave disabled, 70%)</label>
-                                <progress class="micl-progress-linear" value="0.7" max="1" style="--md-comp-progress-wave-amplitude:0"></progress>
+                            <div class="docs-example">
+                                <template>
+                                    <div class="docs-field">
+                                        <label class="md-sys-typescale-body-medium">Downloading&hellip; <span id="pct">0%</span></label>
+                                        <progress class="micl-progress-linear" id="linear-demo" value="0" max="1"></progress>
+                                    </div>
+                                    <div class="docs-field">
+                                        <label class="md-sys-typescale-body-medium">Static value (40%)</label>
+                                        <progress class="micl-progress-linear" value="0.4" max="1"></progress>
+                                    </div>
+                                    <div class="docs-field">
+                                        <label class="md-sys-typescale-body-medium">Flat active indicator (wave disabled, 70%)</label>
+                                        <progress class="micl-progress-linear" value="0.7" max="1" style="--md-comp-progress-wave-amplitude:0"></progress>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -190,11 +195,15 @@
                             <h2>Linear &mdash; Test</h2>
                         </div>
                         <div class="micl-card__content docs-row">
-                            <div class="docs-field" style="overflow:hidden">
-                                <label class="md-sys-typescale-body-medium">Loading&hellip;</label>
-                                <div class="sine-wave-bg1"></div>
-                                <div class="sine-wave-bg2"></div>
-                                <div class="sine-wave-bg3"></div>
+                            <div class="docs-example">
+                                <template>
+                                    <div class="docs-field" style="overflow:hidden">
+                                        <label class="md-sys-typescale-body-medium">Loading&hellip;</label>
+                                        <div class="sine-wave-bg1"></div>
+                                        <div class="sine-wave-bg2"></div>
+                                        <div class="sine-wave-bg3"></div>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -241,23 +250,7 @@
                         <!-- </div> -->
                     <!-- </div> -->
                 <!-- </div> -->
-            </div>
-        </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;!-- Determinate --&gt;
-&lt;progress class="micl-progress-linear" value="0.6" max="1"&gt;&lt;/progress&gt;
-&lt;progress class="micl-progress-circular" value="60" max="100"&gt;&lt;/progress&gt;
-
-&lt;!-- Indeterminate (omit the value attribute) --&gt;
-&lt;progress class="micl-progress-linear"&gt;&lt;/progress&gt;
-&lt;progress class="micl-progress-circular"&gt;&lt;/progress&gt;</code></pre>
-                </div>
+                <div class="micl-pane__column"></div>
             </div>
         </section>
     </main>
