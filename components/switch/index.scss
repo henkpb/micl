@@ -197,6 +197,6 @@ label:has(+ #{$switch}:disabled) {
     @extend %micl-toggle-label-disabled;
 }
 
-[dir=rtl] #{$switch}::after {
+#{$switch}:dir(rtl)::after {
     transform: rotate(45deg) scaleY(-1);
 }

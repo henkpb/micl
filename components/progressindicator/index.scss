@@ -209,7 +209,7 @@ progress.micl-progress-circular {
 //
 // Right-to-left: mirror the linear sweep direction.
 //
-[dir=rtl] progress.micl-progress-linear {
+progress.micl-progress-linear:dir(rtl) {
     transform: scaleX(-1);
 }
 

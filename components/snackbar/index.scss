@@ -37,16 +37,6 @@
 
 @include typography.scale('body-medium');
 
-// The direction factor must react to the dir attribute, so it cannot follow the
-// no-declaration convention of the public tokens.
-:root {
-    --_snackbar-dir-factor: 1;
-}
-
-[dir=rtl] {
-    --_snackbar-dir-factor: -1;
-}
-
 .micl-snackbar {
     --md-comp-snackbar-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-comp-snackbar-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
@@ -69,8 +59,9 @@
 
     inset: auto;
     inset-block-end: calc(var(--md-comp-snackbar-margin, 24px) + env(safe-area-inset-bottom));
-    inset-inline-start: 50%;
-    margin: 0;
+    inset-inline: 0;
+    margin-block: 0;
+    margin-inline: auto;
     padding-block: 0;
     padding-inline: var(--md-comp-snackbar-padding, 16px);
 
@@ -86,7 +77,6 @@
 
     opacity: 0;
     overflow-y: hidden;
-    translate: calc(var(--_snackbar-dir-factor, 1) * -50%);
 
     transition:
         block-size var(--micl-duration) var(--md-comp-snackbar-motion-spatial),

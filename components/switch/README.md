@@ -46,7 +46,7 @@ To remove the icon in the selected state:
 
 A switch can be disabled by adding the `disabled` attribute to the `<input>` element.
 
-The Switch component respects the `dir` global attribute, automatically adjusting its layout for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element.
+The Switch component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
 
 The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
 

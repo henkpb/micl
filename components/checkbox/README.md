@@ -38,7 +38,7 @@ Adding the `micl-checkbox--error` CSS class to the `<input>` element will create
 
 A checkbox can be disabled by adding the `disabled` attribute to the `<input>` element.
 
-The Checkbox component respects the `dir` global attribute, automatically adjusting its layout for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element.
+The Checkbox component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
 
 The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following an `<input type="checkbox">` with the `micl-checkbox` class. You are encouraged to customize these CSS settings to match your design system.
 

@@ -44,7 +44,7 @@
 :root {
     --_dialog-dir-factor: 1;
 }
-[dir=rtl] {
+:dir(rtl) {
     --_dialog-dir-factor: -1;
 }
 

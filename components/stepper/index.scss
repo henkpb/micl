@@ -166,16 +166,14 @@
     }
 }
 
-[dir=rtl] {
-    .micl-stepper .micl-stepper__steps .micl-stepper__step {
-        transform: translateX(-100%);
+.micl-stepper .micl-stepper__steps .micl-stepper__step:dir(rtl) {
+    transform: translateX(-100%);
 
-        &:has(~ .micl-stepper__step[aria-current=step]) {
-            transform: translateX(100%);
-        }
-        &[aria-current=step] {
-            transform: translateX(0%);
-        }
+    &:has(~ .micl-stepper__step[aria-current=step]) {
+        transform: translateX(100%);
+    }
+    &[aria-current=step] {
+        transform: translateX(0%);
     }
 }
 

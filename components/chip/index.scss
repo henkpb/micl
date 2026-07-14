@@ -227,6 +227,12 @@
         .micl-button__icon + .micl-button__icon {
             margin-inline-start: -8px;
         }
+        // If icons have direction:ltr (like Material Symbols), the collapsing margin above always
+        // lands on their physical left; in a RTL context it must sit on the right to keep
+        // cancelling the gap between the two icons.
+        .micl-button__icon + .micl-button__icon:dir(rtl) {
+            margin-inline: 0 -8px;
+        }
         &:has(input:not(:checked)) {
             .micl-button__icon:has(+ input) {
                 inline-size: 0px;
@@ -272,9 +278,8 @@
     scrollbar-width: thin;
 }
 
-
-[dir=rtl] {
-    .micl-chips .micl-chip__remove {
-        margin-inline: 5px 0;
-    }
+// If the remove button is direction:ltr (like Material Symbols), its margin-inline resolves
+// against LTR and does not flip with the page direction — mirror the outer margin explicitly.
+.micl-chips .micl-chip__remove:dir(rtl) {
+    margin-inline: 5px 0;
 }

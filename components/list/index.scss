@@ -481,6 +481,6 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
     color: var(--_trailing-text-color);
 }
 
-[dir=rtl] .micl-list details[open] .micl-list-item__icon--expander {
+.micl-list details[open] .micl-list-item__icon--expander:dir(rtl) {
     transform: rotate(-180deg);
 }

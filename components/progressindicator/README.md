@@ -57,7 +57,7 @@ Each variant is **determinate** when a `value` attribute is present and **indete
 
 The signature Expressive *wavy active indicator* is applied to the linear variant as a static shape (rasterised once, so any number of determinate indicators cost nothing per frame). Its amplitude eases to zero as the indicator reaches completion, and setting `--md-comp-progress-wave-amplitude` to `0` produces a flat (pre-Expressive) active indicator. Only the transient loading states animate: the linear indeterminate comet, and the circular indeterminate spinner (a GPU-composited rotation). The circular variant renders a smooth ring.
 
-The component respects the `dir` global attribute, automatically mirroring the linear sweep direction for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element. It also honours the user's `prefers-reduced-motion` setting by disabling the travelling wave and looping animations.
+The component respects the element's computed direction, automatically mirroring the linear sweep direction for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor. It also honours the user's `prefers-reduced-motion` setting by disabling the travelling wave and looping animations.
 
 ## Customizations
 You can customize the appearance of the Progress Indicator component by overriding its global CSS variables. Following the MICL convention, these `--md-comp-progress-*` variables can be set on `:root` or on any appropriate parent element to affect its child progress indicators. The colour roles default to the Material Design system colour tokens per the M3 progress-indicator specification.

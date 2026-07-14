@@ -322,16 +322,14 @@ input[type=range][class*=micl-slider-] {
     }
 }
 
-[dir=rtl] {
-    input[type=range].micl-slider--vertical,
-    .micl-slider__container:has(> input[type=range].micl-slider--vertical) {
-        writing-mode: sideways-rl;
+input[type=range].micl-slider--vertical:dir(rtl),
+.micl-slider__container:dir(rtl):has(> input[type=range].micl-slider--vertical) {
+    writing-mode: sideways-rl;
 
-        &::after {
-            transform: rotate(-90deg);
-        }
+    &::after {
+        transform: rotate(-90deg);
     }
-    input[type=range][class*=micl-slider-]:not(.micl-slider--vertical) {
-        --_direction: to left;
-    }
+}
+input[type=range][class*=micl-slider-]:dir(rtl):not(.micl-slider--vertical) {
+    --_direction: to left;
 }

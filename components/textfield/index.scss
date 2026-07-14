@@ -384,7 +384,9 @@ $populated: ':has(> :focus, > [data-miclvalue], > :is([type=date], [type=datetim
     }
 }
 
-[dir=rtl] #{$textfields} {
+// If the icon elements are direction:ltr (like Material Symbols), their margin-inline resolves
+// against ltr and does not flip with the page direction — mirror them explicitly.
+#{$textfields}:dir(rtl) {
     &> .micl-textfield__icon-leading {
         margin-inline: auto var(--_icon-space);
     }

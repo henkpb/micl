@@ -124,6 +124,6 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     display: none;
 }
 
-[dir=rtl] #{$selects}:open::picker-icon {
+#{$selects}:dir(rtl):open::picker-icon {
     rotate: -180deg;
 }

@@ -253,7 +253,7 @@ label:has(+ #{$checkbox}:disabled) {
     @extend %micl-toggle-label-disabled;
 }
 
-[dir=rtl] #{$checkbox} {
+#{$checkbox}:dir(rtl) {
     &::before {
         clip-path: rect(0 var(--_size) var(--_size) calc(var(--_size) - 2px));
     }

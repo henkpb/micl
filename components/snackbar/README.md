@@ -70,7 +70,7 @@ Add the `micl-snackbar--two` class to the snackbar to increase its height so tha
 </div>
 ```
 
-The Snackbar component respects the `dir` global attribute, automatically adjusting its layout for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element.
+The Snackbar component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
 
 ## Theming
 Each snackbar can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child snackbars.

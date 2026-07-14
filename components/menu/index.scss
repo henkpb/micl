@@ -304,6 +304,6 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     }
 }
 
-[dir=rtl] .micl-menu[popover] > .micl-list button[popovertarget] .micl-list-item__icon {
+.micl-menu[popover] > .micl-list button[popovertarget] .micl-list-item__icon:dir(rtl) {
     transform: rotate(180deg);
 }
