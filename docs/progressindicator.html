@@ -19,9 +19,9 @@
             row-gap: 28px;
             padding-block: 16px;
         }
-        .docs-field label {
+        label {
             display: block;
-            margin-block-end: 12px;
+            margin-block-end: 8px;
             color: var(--md-sys-color-on-surface);
         }
         .docs-circular-row {
@@ -153,21 +153,37 @@
                     <div class="micl-card-elevated">
                         <div class="micl-card__headline-s">
                             <h2>Linear &mdash; determinate</h2>
-                        </div>
+                        </div>x
                         <div class="micl-card__content docs-row">
                             <div class="docs-example">
                                 <template>
-                                    <div class="docs-field">
-                                        <label class="md-sys-typescale-body-medium">Downloading&hellip; <span id="pct">0%</span></label>
-                                        <progress class="micl-progress-linear" id="linear-demo" value="0" max="1"></progress>
+                                    <div>
+                                        <label for="linear1" class="md-sys-typescale-body-medium">Downloading&hellip; 0%</label>
+                                        <progress id="linear1" class="micl-progress-linear" value="0" max="1"></progress>
                                     </div>
-                                    <div class="docs-field">
-                                        <label class="md-sys-typescale-body-medium">Static value (40%)</label>
-                                        <progress class="micl-progress-linear" value="0.4" max="1"></progress>
+                                </template>
+                            </div>
+                            <div class="docs-example">
+                                <template>
+                                    <div>
+                                        <label for="linear2" class="md-sys-typescale-body-medium">Static value 0.4 (40%)</label>
+                                        <progress id="linear2" class="micl-progress-linear" value="0.4" max="1"></progress>
                                     </div>
-                                    <div class="docs-field">
-                                        <label class="md-sys-typescale-body-medium">Flat active indicator (wave disabled, 70%)</label>
-                                        <progress class="micl-progress-linear" value="0.7" max="1" style="--md-comp-progress-wave-amplitude:0"></progress>
+                                </template>
+                            </div>
+                            <div class="docs-example">
+                                <template>
+                                    <div>
+                                        <label for="linear3" class="md-sys-typescale-body-medium">Flat active indicator (wave disabled, 70%)</label>
+                                        <progress id="linear3" class="micl-progress-linear" value="0.7" max="1" style="--md-comp-progress-wave-amplitude:0"></progress>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="docs-example">
+                                <template>
+                                    <div>
+                                        <label for="linear4" class="md-sys-typescale-body-medium">Downloading&hellip; <span id="pct">0%</span></label>
+                                        <progress id="linear4" class="micl-progress-linear" value="0" max="1"></progress>
                                     </div>
                                 </template>
                             </div>
@@ -258,24 +274,22 @@
     <script src="micl.js"></script>
     <script src="docs.js"></script>
     <script>
-        <!-- const animate = () => { -->
-            <!-- const linear = document.getElementById('linear-demo'); -->
-            <!-- const circular = document.getElementById('circular-demo'); -->
-            <!-- const pct = document.getElementById('pct'); -->
-            <!-- let v = 0; -->
-            <!-- setInterval(() => { -->
-                <!-- v = v >= 1 ? 0 : Math.min(1, v + 0.01); -->
-                <!-- linear.setAttribute('value', v.toFixed(2)); -->
-                <!-- circular.setAttribute('value', Math.round(v * 100)); -->
-                <!-- pct.textContent = Math.round(v * 100) + '%'; -->
-            <!-- }, 80); -->
-        <!-- }; -->
-        <!-- if (document.readyState !== 'loading') { -->
-            <!-- animate(); -->
-        <!-- } -->
-        <!-- else { -->
-            <!-- document.addEventListener('DOMContentLoaded', animate); -->
-        <!-- } -->
+        const animate = () => {
+            const linear4 = document.getElementById('linear4');
+            const pct = document.getElementById('pct');
+            let v = 0;
+            setInterval(() => {
+                v = v >= 1 ? 0 : Math.min(1, v + 0.01);
+                linear4.setAttribute('value', v.toFixed(3));
+                pct.textContent = Math.round(v * 100) + '%';
+            }, 80);
+        };
+        if (document.readyState !== 'loading') {
+            animate();
+        }
+        else {
+            document.addEventListener('DOMContentLoaded', animate);
+        }
     </script>
 </body>
 </html>

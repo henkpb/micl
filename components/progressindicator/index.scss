@@ -32,6 +32,14 @@
     inherits: true;
 }
 
+// Registered so a unitless `0` (the natural way to disable the wave) computes
+// to a real <length> instead of invalidating every calc() it appears in.
+@property --md-comp-progress-wave-amplitude {
+    syntax: '<length>';
+    initial-value: 3px;
+    inherits: true;
+}
+
 // Non-themed defaults. Declared on :root so they can be overridden on :root or
 // any parent element (consistent with the other MICL components). The colour
 // roles are resolved per the M3 progress-indicator spec at the point of use
@@ -47,13 +55,6 @@
     --md-comp-progress-indeterminate-duration: var(--md-sys-motion-duration-extra-long4);
     --md-comp-progress-circular-size: 48px;
     --md-comp-progress-amplitude-scale: 1;
-
-    // One wavelength of a sine ribbon, stroked at a constant width, used as a
-    // static mask so the active indicator takes a wavy shape. Painted once —
-    // no animation, no per-frame cost. The stroke is WHITE so it reveals
-    // correctly whether the browser treats the SVG mask as alpha (white =
-    // opaque) or luminance (white = 1).
-    --md-comp-progress-wave-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10' preserveAspectRatio='none'%3E%3Cpath d='M0 5 Q10 -1 20 5 T40 5' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 // M3 progress-indicator colour mapping. Resolved on the component element so
@@ -76,18 +77,53 @@ $stop:   var(--md-comp-progress-stop-color, var(--md-sys-color-primary));
 // Static wavy active indicator. No animation: the mask is rasterised once and
 // never sampled again, so a screen full of determinate indicators costs
 // nothing per frame.
+//
+// The wave is two repeating radial-gradient mask layers — one circular arc
+// per half wavelength (top layer: crests, bottom layer: troughs), stroked by
+// an annular ring of hard stops. Each layer is clipped a hair past the wave
+// midline, where the arcs join with a common tangent. Unlike a stretched
+// image, the geometry is parametric: the stroke keeps --thickness at ANY
+// amplitude, and as the amplitude approaches zero the arc radius grows so
+// large that the ribbon becomes a flat bar.
 @mixin wave {
+    // Effective amplitude (public token × the completion easing set by the
+    // handler), floored just above zero so --_radius (which divides by it)
+    // stays finite; at the floor the arcs are visually straight.
+    --_amplitude: max(0.005px, var(--md-comp-progress-wave-amplitude) * var(--md-comp-progress-amplitude-scale, 1));
+    // Arc radius yielding sagitta --_amplitude over a half-wavelength chord:
+    // R = A/2 + W²/(32A). tan(atan2(x, y)) divides one length by another.
+    --_radius: calc(var(--_amplitude) / 2 + var(--md-comp-progress-wave-wavelength) / 4
+        * tan(atan2(var(--md-comp-progress-wave-wavelength) / 8, var(--_amplitude))));
+    // Wave midline = half the box height (box is --thickness + 2 × the
+    // unscaled amplitude tall, see block-size below).
+    --_midline: calc(var(--md-comp-progress-thickness) / 2 + var(--md-comp-progress-wave-amplitude));
+    // The ring: opaque from R - thickness/2 to R + thickness/2, with
+    // quarter-pixel ramps for anti-aliasing. WHITE so it reveals correctly
+    // under both alpha and luminance masking.
+    --_ring: #fff0 calc(var(--_radius) - var(--md-comp-progress-thickness) / 2 - 0.25px),
+        #fff calc(var(--_radius) - var(--md-comp-progress-thickness) / 2 + 0.25px)
+        calc(var(--_radius) + var(--md-comp-progress-thickness) / 2 - 0.25px),
+        #fff0 calc(var(--_radius) + var(--md-comp-progress-thickness) / 2 + 0.25px);
+
     background-color: $active;
-    -webkit-mask-image: var(--md-comp-progress-wave-image);
-            mask-image: var(--md-comp-progress-wave-image);
+    -webkit-mask-image:
+        radial-gradient(circle at 50% calc(var(--_midline) - var(--_amplitude) + var(--_radius)), var(--_ring)),
+        radial-gradient(circle at 50% calc(var(--_amplitude) - var(--_radius) + 0.25px), var(--_ring));
+            mask-image:
+        radial-gradient(circle at 50% calc(var(--_midline) - var(--_amplitude) + var(--_radius)), var(--_ring)),
+        radial-gradient(circle at 50% calc(var(--_amplitude) - var(--_radius) + 0.25px), var(--_ring));
     -webkit-mask-repeat: repeat-x;
             mask-repeat: repeat-x;
-    -webkit-mask-position: 0 center;
-            mask-position: 0 center;
-    -webkit-mask-size: var(--md-comp-progress-wave-wavelength)
-        calc(var(--md-comp-progress-thickness) + 2 * var(--md-comp-progress-wave-amplitude) * var(--md-comp-progress-amplitude-scale, 1));
-            mask-size: var(--md-comp-progress-wave-wavelength)
-        calc(var(--md-comp-progress-thickness) + 2 * var(--md-comp-progress-wave-amplitude) * var(--md-comp-progress-amplitude-scale, 1));
+    // Crest peak at W/4, trough at 3W/4 — the wave rises from the midline at
+    // the inline start, like the M3 reference.
+    -webkit-mask-position:
+        calc(var(--md-comp-progress-wave-wavelength) / -4) 0,
+        calc(var(--md-comp-progress-wave-wavelength) / 4) calc(var(--_midline) - 0.25px);
+            mask-position:
+        calc(var(--md-comp-progress-wave-wavelength) / -4) 0,
+        calc(var(--md-comp-progress-wave-wavelength) / 4) calc(var(--_midline) - 0.25px);
+    -webkit-mask-size: var(--md-comp-progress-wave-wavelength) calc(var(--_midline) + 0.25px);
+            mask-size: var(--md-comp-progress-wave-wavelength) calc(var(--_midline) + 0.25px);
 }
 
 //

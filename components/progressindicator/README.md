@@ -75,7 +75,6 @@ You can customize the appearance of the Progress Indicator component by overridi
 | --md-comp-progress-wave-amplitude | 3px | Amplitude of the Expressive active wave (set to `0` to disable) |
 | --md-comp-progress-indeterminate-duration | var(--md-sys-motion-duration-extra-long4) | Period of the indeterminate loop |
 | --md-comp-progress-circular-size | 48px | Diameter of the circular indicator |
-| --md-comp-progress-wave-image | (inline SVG) | The sine-ribbon mask used for the wavy active indicator |
 
 **Example: A thicker linear indicator with a calmer wave**
 
@@ -85,4 +84,4 @@ You can customize the appearance of the Progress Indicator component by overridi
 ```
 
 ## Compatibility
-This component utilizes relative RGB color values, CSS `mask`, `conic-gradient` and registered `@property` custom properties, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
+This component utilizes relative RGB color values, CSS `mask`, `conic-gradient`, trigonometric functions (`tan`, `atan2`) and registered `@property` custom properties, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
