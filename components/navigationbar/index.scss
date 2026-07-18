@@ -132,8 +132,8 @@ body:has(nav.micl-navigationbar--tall) {
 // collapsed navigation rail (using the nav-rail tokens) at the breakpoint
 // and above. The item anatomy is shared, so only the container changes.
 $_breakpoints: (
-    medium:   layout.$md-sys-window-medium-min,
-    expanded: layout.$md-sys-window-expanded-min,
+    medium:   layout.$md-sys-breakpoint-medium-min,
+    expanded: layout.$md-sys-breakpoint-expanded-min,
 );
 
 @each $name, $min in $_breakpoints {

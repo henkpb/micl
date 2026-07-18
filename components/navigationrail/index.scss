@@ -71,7 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    block-size: 100vh;
+    block-size: calc(100vh - env(safe-area-inset-top, 0px));
     min-block-size: 100%;
     margin-block: 0;
     margin-inline: calc(-1 * var(--md-sys-layout-window-margin, 0px)) auto;
@@ -280,7 +280,7 @@ nav.micl-navigationrail {
     position: sticky;
     float: inline-start;
     inset: unset;
-    inset-block-start: 0;
+    inset-block-start: env(safe-area-inset-top, 0px);
     inset-inline-start: 0;
     border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color));
 }
@@ -314,10 +314,10 @@ dialog.micl-navigationrail {
 // Adaptive rail: acts as a modal navigation rail below the named breakpoint and
 // as a permanently visible standard (expanded) rail at the breakpoint and above.
 $_breakpoints: (
-    medium:     layout.$md-sys-window-medium-min,
-    expanded:   layout.$md-sys-window-expanded-min,
-    large:      layout.$md-sys-window-large-min,
-    extralarge: layout.$md-sys-window-extralarge-min,
+    medium:     layout.$md-sys-breakpoint-medium-min,
+    expanded:   layout.$md-sys-breakpoint-expanded-min,
+    large:      layout.$md-sys-breakpoint-large-min,
+    extralarge: layout.$md-sys-breakpoint-extralarge-min,
 );
 
 @each $name, $min in $_breakpoints {
@@ -327,7 +327,7 @@ $_breakpoints: (
             position: sticky;
             float: inline-start;
             inset: unset;
-            inset-block-start: 0;
+            inset-block-start: env(safe-area-inset-top, 0px);
             inset-inline-start: 0;
             min-inline-size: var(--_navigationrail-current-min-width);
             max-inline-size: var(--_navigationrail-current-max-width);

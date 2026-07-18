@@ -40,7 +40,7 @@
 @mixin appbar-sticky() {
     position: sticky;
     inset: unset;
-    inset-block-start: 0;
+    inset-block-start: env(safe-area-inset-top, 0px);
     inset-inline-start: 0;
     animation: 1ms linear alternate appbar-background;
     animation-timeline: scroll(root);
@@ -164,36 +164,36 @@
     }
 }
 
-.micl-body:not(:has(> .micl-pane:nth-child(2))) {
+.micl-panes:not(:has(> .micl-pane:nth-child(2))) {
     .micl-appbar:not(.micl-appbar--not-sticky) {
         @include appbar-sticky;
     }
 }
-.micl-body:has(> .micl-pane:nth-child(2)) {
-    @media (max-width: layout.$md-sys-window-medium-min) {
+.micl-panes:has(> .micl-pane:nth-child(2)) {
+    @media (max-width: layout.$md-sys-breakpoint-medium-min) {
         .micl-appbar:not(.micl-appbar--not-sticky) {
             @include appbar-sticky;
         }
     }
-    @media (min-width: layout.$md-sys-window-medium-min) and (max-width: layout.$md-sys-window-medium-max) {
-        &.micl-body--stacked-to-expanded,
-        &.micl-body--stacked-to-large,
-        &.micl-body--stacked-to-extralarge {
+    @media (min-width: layout.$md-sys-breakpoint-medium-min) and (max-width: layout.$md-sys-breakpoint-medium-max) {
+        &.micl-panes--stacked-to-expanded,
+        &.micl-panes--stacked-to-large,
+        &.micl-panes--stacked-to-extralarge {
             .micl-appbar:not(.micl-appbar--not-sticky) {
                 @include appbar-sticky;
             }
         }
     }
-    @media (min-width: layout.$md-sys-window-expanded-min) and (max-width: layout.$md-sys-window-expanded-max) {
-        &.micl-body--stacked-to-large,
-        &.micl-body--stacked-to-extralarge {
+    @media (min-width: layout.$md-sys-breakpoint-expanded-min) and (max-width: layout.$md-sys-breakpoint-expanded-max) {
+        &.micl-panes--stacked-to-large,
+        &.micl-panes--stacked-to-extralarge {
             .micl-appbar:not(.micl-appbar--not-sticky) {
                 @include appbar-sticky;
             }
         }
     }
-    @media (min-width: layout.$md-sys-window-large-min) and (max-width: layout.$md-sys-window-large-max) {
-        &.micl-body--stacked-to-extralarge {
+    @media (min-width: layout.$md-sys-breakpoint-large-min) and (max-width: layout.$md-sys-breakpoint-large-max) {
+        &.micl-panes--stacked-to-extralarge {
             .micl-appbar:not(.micl-appbar--not-sticky) {
                 @include appbar-sticky;
             }

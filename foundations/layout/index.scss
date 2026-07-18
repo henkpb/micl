@@ -23,59 +23,60 @@
 
 @include shape.corner('medium');
 
-$md-sys-window-compact-max: 599px;
-$md-sys-window-medium-min: 600px;
-$md-sys-window-medium-max: 839px;
-$md-sys-window-expanded-min: 840px;
-$md-sys-window-expanded-max: 1199px;
-$md-sys-window-large-min: 1200px;
-$md-sys-window-large-max: 1599px;
-$md-sys-window-extralarge-min: 1600px;
+$md-sys-breakpoint-compact-max: 599px;
+$md-sys-breakpoint-medium-min: 600px;
+$md-sys-breakpoint-medium-max: 839px;
+$md-sys-breakpoint-expanded-min: 840px;
+$md-sys-breakpoint-expanded-max: 1199px;
+$md-sys-breakpoint-large-min: 1200px;
+$md-sys-breakpoint-large-max: 1599px;
+$md-sys-breakpoint-extralarge-min: 1600px;
 
 $md-sys-window-margin-compact: 16px;
-$md-sys-window-margin-medium: 24px;
-$md-sys-window-margin-expanded: 24px;
-$md-sys-window-margin-large: 24px;
-$md-sys-window-margin-extralarge: 24px;
+$md-sys-window-margin: 24px; // medium and larger breakpoints
 
 $md-sys-pane-spacer: 24px;
 
+$md-sys-pane-fixed-width-expanded: 360px;
+$md-sys-pane-fixed-width-large: 412px;
+
 :root {
     --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
+    --md-sys-layout-window-margin: #{$md-sys-window-margin};
 
-    @media (max-width: $md-sys-window-compact-max) {
+    @media (max-width: $md-sys-breakpoint-compact-max) {
         --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
     }
-    @media (min-width: $md-sys-window-medium-min) and (max-width: $md-sys-window-medium-max) {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-medium};
+    @media (min-width: $md-sys-breakpoint-expanded-min) and (max-width: $md-sys-breakpoint-expanded-max) {
+        --md-sys-layout-pane-fixed-width: #{$md-sys-pane-fixed-width-expanded};
     }
-    @media (min-width: $md-sys-window-expanded-min) and (max-width: $md-sys-window-expanded-max) {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-expanded};
-    }
-    @media (min-width: $md-sys-window-large-min) and (max-width: $md-sys-window-large-max) {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-large};
-    }
-    @media (min-width: $md-sys-window-extralarge-min) {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-extralarge};
+    @media (min-width: $md-sys-breakpoint-large-min) {
+        --md-sys-layout-pane-fixed-width: #{$md-sys-pane-fixed-width-large};
     }
 }
 
 .micl-window {
-    padding: 0 var(--md-sys-layout-window-margin) var(--md-sys-layout-window-margin);
+    padding:
+        env(safe-area-inset-top, 0px)
+        calc(var(--md-sys-layout-window-margin) + env(safe-area-inset-right, 0px))
+        calc(var(--md-sys-layout-window-margin) + env(safe-area-inset-bottom, 0px))
+        calc(var(--md-sys-layout-window-margin) + env(safe-area-inset-left, 0px));
     margin: 0;
     background-color: var(--md-sys-color-surface);
 
-    .micl-body .micl-appbar {
+    .micl-panes .micl-appbar {
         margin-inline: calc(-1 * var(--md-sys-layout-window-margin));
     }
-    &:not(.micl-window--spatial):has(nav.micl-navigationrail) .micl-body .micl-appbar {
+    &:not(.micl-window--spatial):has(nav.micl-navigationrail) .micl-panes .micl-appbar {
         margin-inline-start: 0;
     }
     &.micl-window--spatial {
         --md-sys-layout-spatial-radius: calc(var(--md-sys-shape-corner-medium) + var(--md-sys-layout-window-margin));
 
         display: flex;
-        padding-block: calc(2 * var(--md-sys-layout-window-margin));
+        padding-block:
+            calc(2 * var(--md-sys-layout-window-margin) + env(safe-area-inset-top, 0px))
+            calc(2 * var(--md-sys-layout-window-margin) + env(safe-area-inset-bottom, 0px));
         gap: var(--md-sys-layout-window-margin);
 
         .micl-navigationrail {
@@ -87,7 +88,7 @@ $md-sys-pane-spacer: 24px;
             padding-block-end: var(--md-sys-navigationrail-top-space, 0px);
             border-radius: var(--md-sys-layout-spatial-radius);
         }
-        .micl-body {
+        .micl-panes {
             background: transparent;
         }
         .micl-pane {
@@ -97,19 +98,25 @@ $md-sys-pane-spacer: 24px;
         }
     }
 }
-.micl-body {
+.micl-panes {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     gap: var(--md-sys-comp-margin, 8px) var(--md-sys-layout-pane-spacer);
     background-color: inherit;
 
-    &.micl-body--split:has(> .micl-pane:nth-child(2)) {
-        .micl-pane {
-            flex-basis: 50%;
+    &.micl-panes--split > .micl-pane + .micl-pane {
+        // The physical safety inset on the trailing pane's side of the screen.
+        --_layout-safe-inline-end: env(safe-area-inset-right, 0px);
+
+        box-sizing: border-box;
+        flex: 0 1 var(--_layout-stacked-pane-size, calc(50vw - var(--md-sys-layout-window-margin, 0px) - var(--_layout-safe-inline-end) - var(--md-sys-layout-pane-spacer) / 2));
+
+        &:dir(rtl) {
+            --_layout-safe-inline-end: env(safe-area-inset-left, 0px);
         }
     }
-    &.micl-body--evenly .micl-pane {
+    &.micl-panes--evenly .micl-pane {
         flex: 1 1 0;
     }
 }
@@ -122,6 +129,8 @@ $md-sys-pane-spacer: 24px;
 
     &.micl-pane--fixed {
         flex: 0 0 auto;
+        box-sizing: border-box;
+        inline-size: var(--_layout-stacked-pane-size, var(--md-sys-layout-pane-fixed-width, auto));
     }
     &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined),
     &> *:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
@@ -153,59 +162,49 @@ $md-sys-pane-spacer: 24px;
     }
 }
 
-@media (max-width: $md-sys-window-compact-max) {
-    .micl-body.micl-body--stacked-to-medium,
-    .micl-body.micl-body--stacked-to-expanded,
-    .micl-body.micl-body--stacked-to-large,
-    .micl-body.micl-body--stacked-to-extralarge {
+@media (max-width: $md-sys-breakpoint-compact-max) {
+    .micl-panes.micl-panes--stacked-to-medium {
+        --_layout-stacked-pane-size: auto;
+
         flex-direction: column;
     }
-    .micl-pane.micl-pane--hidden-to-medium,
-    .micl-pane.micl-pane--hidden-to-expanded,
-    .micl-pane.micl-pane--hidden-to-large,
-    .micl-pane.micl-pane--hidden-to-extralarge {
+    .micl-pane.micl-pane--hidden-to-medium {
         display: none;
     }
-    .micl-pane__columns.micl-pane__columns--stacked-to-medium,
-    .micl-pane__columns.micl-pane__columns--stacked-to-expanded,
-    .micl-pane__columns.micl-pane__columns--stacked-to-large,
-    .micl-pane__columns.micl-pane__columns--stacked-to-extralarge {
+    .micl-pane__columns.micl-pane__columns--stacked-to-medium {
         flex-direction: column;
     }
 }
-@media (min-width: $md-sys-window-medium-min) and (max-width: $md-sys-window-medium-max) {
-    .micl-body.micl-body--stacked-to-expanded,
-    .micl-body.micl-body--stacked-to-large,
-    .micl-body.micl-body--stacked-to-extralarge {
+@media (max-width: $md-sys-breakpoint-medium-max) {
+    .micl-panes.micl-panes--stacked-to-expanded {
+        --_layout-stacked-pane-size: auto;
+
         flex-direction: column;
     }
-    .micl-pane.micl-pane--hidden-to-expanded,
-    .micl-pane.micl-pane--hidden-to-large,
-    .micl-pane.micl-pane--hidden-to-extralarge {
+    .micl-pane.micl-pane--hidden-to-expanded {
         display: none;
     }
-    .micl-pane__columns.micl-pane__columns--stacked-to-expanded,
-    .micl-pane__columns.micl-pane__columns--stacked-to-large,
-    .micl-pane__columns.micl-pane__columns--stacked-to-extralarge {
+    .micl-pane__columns.micl-pane__columns--stacked-to-expanded {
         flex-direction: column;
     }
 }
-@media (min-width: $md-sys-window-expanded-min) and (max-width: $md-sys-window-expanded-max) {
-    .micl-body.micl-body--stacked-to-large,
-    .micl-body.micl-body--stacked-to-extralarge {
+@media (max-width: $md-sys-breakpoint-expanded-max) {
+    .micl-panes.micl-panes--stacked-to-large {
+        --_layout-stacked-pane-size: auto;
+
         flex-direction: column;
     }
-    .micl-pane.micl-pane--hidden-to-large,
-    .micl-pane.micl-pane--hidden-to-extralarge {
+    .micl-pane.micl-pane--hidden-to-large {
         display: none;
     }
-    .micl-pane__columns.micl-pane__columns--stacked-to-large,
-    .micl-pane__columns.micl-pane__columns--stacked-to-extralarge {
+    .micl-pane__columns.micl-pane__columns--stacked-to-large {
         flex-direction: column;
     }
 }
-@media (min-width: $md-sys-window-large-min) and (max-width: $md-sys-window-large-max) {
-    .micl-body.micl-body--stacked-to-extralarge {
+@media (max-width: $md-sys-breakpoint-large-max) {
+    .micl-panes.micl-panes--stacked-to-extralarge {
+        --_layout-stacked-pane-size: auto;
+
         flex-direction: column;
     }
     .micl-pane.micl-pane--hidden-to-extralarge {

@@ -117,7 +117,7 @@ MICL uses the [**Google Sans**](https://fonts.google.com/specimen/Google+Sans) a
 The [Styles guide](styles/README.md) describes how to change the default font.
 
 ## Foundations 🪟
-Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/understanding-layout/overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **body region** and **panes** that adjust to the available screen space, ensuring your layout follows Material Design's responsive guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column.
+Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/layout-overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **rail region** and **panes** that adapt to the available screen space, ensuring your layout follows Material Design's adaptive design guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column.
 
 - [x] [Field](foundations/field/README.md)
 - [x] [Layout](foundations/layout/README.md)
@@ -157,8 +157,10 @@ The library currently consists of the following components:
 
 ### 9.0.0 ()
 - **BREAKING**: Renamed all CSS custom properties from --md-sys- to --md-comp-.
+- **BREAKING**: Renamed the layout class `micl-body` and its `micl-body--*` modifiers to `micl-panes`/`micl-panes--*`, aligning with the M3 Expressive layout terminology.
 - **BREAKING**: Per-component CSS files no longer embed the shared foundation styles; load `dist/base.css` once before them. The full `micl.css` is unaffected.
 - **Field**: The `micl-grid-field` and `micl-grid-iconfield` classes are now the 'Field' layout foundation with its own stylesheet (`dist/field.css`).
+- **Layout**: The window now reserves the safety regions (`env(safe-area-inset-*)`) around the content, and sticky app bars and navigation rails stay below the top safety region.
 - **Chip**: New component.
 - **Navigation bar**: New component.
 - **Date Range picker**: Select two dates in the Date picker to return a date range.

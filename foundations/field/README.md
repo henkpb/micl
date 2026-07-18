@@ -1,5 +1,5 @@
 # Field
-This foundation implements the classic [Material Design](https://m3.material.io/foundations/layout/understanding-layout/overview) form layout: form fields stacked in a grid with a consistent vertical rhythm, optionally with a leading icon column that labels a group of related fields.
+This foundation implements the classic [Material Design](https://m3.material.io/foundations/layout/layout-overview) form layout: form fields stacked in a grid with a consistent vertical rhythm, optionally with a leading icon column that labels a group of related fields.
 
 ## Basic Usage
 

@@ -54,7 +54,7 @@
 
     block-size: 0;
     inline-size: max-content;
-    max-inline-size: min(layout.$md-sys-window-expanded-max, calc(100vw - (2 * var(--md-sys-layout-window-margin))));
+    max-inline-size: min(layout.$md-sys-breakpoint-expanded-max, calc(100vw - (2 * var(--md-sys-layout-window-margin))));
     min-inline-size: 300px;
 
     inset: auto;
@@ -155,7 +155,7 @@
     }
 }
 
-@media (max-width: layout.$md-sys-window-compact-max) {
+@media (max-width: layout.$md-sys-breakpoint-compact-max) {
     .micl-snackbar {
         inline-size: calc(100vw - (2 * var(--md-sys-layout-window-margin)));
         min-inline-size: auto;
