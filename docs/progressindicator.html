@@ -13,18 +13,23 @@
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="docs.css">
     <style>
+        .docs-example {
+            gap: 12px;
+        }
         .micl-card__content {
             display: flex;
             flex-direction: column;
             gap: 24px;
         }
         label {
+            display: inline-block;
+            min-inline-size: 148px;
             color: var(--md-sys-color-on-surface);
         }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body micl-body--stacked-to-large">
+    <main class="micl-panes micl-panes--stacked-to-large">
         <section class="micl-pane">
             <header class="micl-appbar">
                 <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
@@ -56,16 +61,24 @@
                             <div class="docs-example">
                                 <template>
                                     <div>
-                                        <label for="linear2" class="md-sys-typescale-body-medium">Downloading&hellip; 60%</label>
-                                        <progress id="linear2" class="micl-linear-progress" value="0.6"></progress>
+                                        <label for="linear2" class="md-sys-typescale-body-medium">Downloading&hellip; 63%</label>
+                                        <progress id="linear2" class="micl-linear-progress" value="0.63"></progress>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="docs-example docs-animate">
+                                <template>
+                                    <div>
+                                        <label for="linear3" class="md-sys-typescale-body-medium">Downloading&hellip;</label>
+                                        <progress id="linear3" class="micl-linear-progress" value="0"></progress>
                                     </div>
                                 </template>
                             </div>
                             <div class="docs-example">
                                 <template>
                                     <div>
-                                        <label for="linear3" class="md-sys-typescale-body-medium">Indeterminate</label>
-                                        <progress id="linear3" class="micl-linear-progress"></progress>
+                                        <label for="linear4" class="md-sys-typescale-body-medium">Indeterminate</label>
+                                        <progress id="linear4" class="micl-linear-progress"></progress>
                                     </div>
                                 </template>
                             </div>
@@ -87,16 +100,24 @@
                             <div class="docs-example">
                                 <template>
                                     <div>
-                                        <label for="circular2" class="md-sys-typescale-body-medium">Downloading&hellip; 60%</label>
-                                        <progress id="circular2" class="micl-circular-progress" value="0.6"></progress>
+                                        <label for="circular2" class="md-sys-typescale-body-medium">Downloading&hellip; 63%</label>
+                                        <progress id="circular2" class="micl-circular-progress" value="0.63"></progress>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="docs-example docs-animate">
+                                <template>
+                                    <div>
+                                        <label for="circular3" class="md-sys-typescale-body-medium">Downloading&hellip;</label>
+                                        <progress id="circular3" class="micl-circular-progress" value="0"></progress>
                                     </div>
                                 </template>
                             </div>
                             <div class="docs-example">
                                 <template>
                                     <div>
-                                        <label for="circular3" class="md-sys-typescale-body-medium">Indeterminate</label>
-                                        <progress id="circular3" class="micl-circular-progress"></progress>
+                                        <label for="circular4" class="md-sys-typescale-body-medium">Indeterminate</label>
+                                        <progress id="circular4" class="micl-circular-progress"></progress>
                                     </div>
                                 </template>
                             </div>
@@ -111,9 +132,33 @@
                         <div class="micl-card__content">
                             <div class="docs-example">
                                 <template>
-                                    <div>
-                                        <label for="wave1" class="md-sys-typescale-body-medium">Downloading&hellip; 0%</label>
-                                        <progress id="wave1" class="micl-linear-progress" value="0"></progress>
+                                    <label for="linear5" class="md-sys-typescale-body-medium">Downloading&hellip; 0%</label>
+                                    <div role="progressbar" id="linear5" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+                                        <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="docs-example">
+                                <template>
+                                    <label for="linear6" class="md-sys-typescale-body-medium">Downloading&hellip;63%</label>
+                                    <div role="progressbar" id="linear6" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                                        <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="docs-example docs-animate">
+                                <template>
+                                    <label for="linear7" class="md-sys-typescale-body-medium">Downloading&hellip;</label>
+                                    <div role="progressbar" id="linear7" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+                                        <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="docs-example">
+                                <template>
+                                    <label for="linear8" class="md-sys-typescale-body-medium">Indeterminate</label>
+                                    <div role="progressbar" id="linear8" class="micl-linear-progress micl-linear-progress--indeterminate">
+                                        <div class="micl-linear-progress__wave" aria-hidden="true"></div>
                                     </div>
                                 </template>
                             </div>
@@ -125,7 +170,31 @@
         </section>
     </main>
 
-    <script src="micl.js"></script>
     <script src="docs.js"></script>
+    <script src="micl.js"></script>
+    <script>
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        const animate = () => {
+            document.querySelectorAll('.docs-animate .micl-linear-progress,.docs-animate .micl-circular-progress').forEach(async (el) => {
+                let attribute = el instanceof HTMLProgressElement ? 'value' : 'aria-valuenow';
+                for (;;) {
+                    for (let v = 0; v < 1;) {
+                        v = Math.min(1, +(v + 0.01 + Math.random() * 0.3).toFixed(1));
+                        el.setAttribute(attribute, v);
+                        await sleep(500);
+                    }
+                    await sleep(2000);
+                    el.setAttribute(attribute, 0);
+                    await sleep(1500);
+                }
+            });
+        };
+        if (document.readyState !== 'loading') {
+            animate();
+        }
+        else {
+            document.addEventListener('DOMContentLoaded', animate);
+        }
+    </script>
 </body>
 </html>

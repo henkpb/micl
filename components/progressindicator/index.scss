@@ -21,13 +21,6 @@
 
 @use '../../styles/motion';
 
-// - Wave amplitude is a function of progress, not a constant: the default determinate curve ramps
-//   amplitude from 0 to max over 0–10% progress and back down to 0 over 95–100%. Indeterminate
-//   indicators run at full amplitude. The amplitude tokens (3dp / 1.6dp) are the maximum wave amplitude.
-// - Motion (no dedicated tokens, uses system motion tokens): determinate progress animates with duration
-//   long2 (500ms); linear uses linear easing, circular uses standard easing, and the linear indeterminate
-//   cycle uses emphasized-accelerate. The circular indeterminate rotation is a 6000ms keyframed cycle with
-//   300ms emphasized-decelerate steps.
 $track-color: var(--md-comp-linear-progress-track-color, var(--md-sys-color-secondary-container));
 $active-color: var(--md-comp-linear-progress-active-indicator-color, var(--md-sys-color-primary));
 $stop-dot: radial-gradient(circle closest-side,
@@ -61,13 +54,6 @@ $stop-dot: radial-gradient(circle closest-side,
 }
 $carve-stops: "var(--micl-progress-track-color) calc(var(--micl-progress-tail) - var(--micl-progress-space)), transparent 0, transparent calc(var(--micl-progress-tail) + var(--micl-progress-size) + var(--micl-progress-space)), var(--micl-progress-track-color) 0";
 
-// determinate variants of the stop dot, active bar and carve, built exclusively from
-// REGISTERED properties so the declarations survive the value-change transition (the same
-// rule as for the indeterminate animations: any unregistered var() would invalidate them
-// per frame). The active bar is painted on the ELEMENT (a body strip plus a round end-cap
-// with the pill geometry expressed inside the gradients, where percentages resolve against
-// the element) because Gecko's progress frame ignores author widths on ::-moz-progress-bar,
-// which would snap while the carve transitions; the native bar is hidden instead.
 @property --micl-progress-thickness {
     syntax: '<length>';
     inherits: false;
@@ -86,11 +72,6 @@ $det-bar-cap: radial-gradient(circle calc(var(--micl-progress-thickness) / 2) at
 $det-bar-cap-rtl: radial-gradient(circle calc(var(--micl-progress-thickness) / 2) at calc(100% - #{$det-bar-end}) 50%,
     var(--micl-progress-active-color) calc(100% - 0.75px), transparent);
 
-// Circular indicator: the whole ring is painted on the element (the native pseudos are
-// hidden), so both engines share one code path. The ring is a conic-gradient clipped to an
-// annulus by a single-layer radial mask (stays on the compositor under the rotation
-// animations); the round arc caps are trig-positioned radial-gradient dots, and the gaps are
-// simply unpainted arc windows - transparent on any surface, like the linear carve.
 @property --micl-progress-sweep {
     syntax: '<angle>';
     inherits: false;
@@ -113,13 +94,10 @@ $det-bar-cap-rtl: radial-gradient(circle calc(var(--micl-progress-thickness) / 2
 }
 $circ-track: var(--md-comp-circular-progress-track-color, var(--md-sys-color-secondary-container));
 $circ-active: var(--md-comp-circular-progress-active-indicator-color, var(--md-sys-color-primary));
-// 0.75px edge fades: gradient rasterisation has no geometric antialiasing, so sub-half-pixel
-// ramps render visibly ragged at 1x device-pixel ratio (they only look smooth zoomed in)
 $circ-cap-active: radial-gradient(circle closest-side,
     var(--micl-progress-active-color) calc(100% - 0.75px), transparent);
 $circ-cap-track: radial-gradient(circle closest-side,
     var(--micl-progress-track-color) calc(100% - 0.75px), transparent);
-// both gaps collapse with a short active arc, per the spec's min(sweep, gap)
 $circ-gap: "min(var(--micl-progress-sweep), var(--micl-progress-gap))";
 
 progress.micl-linear-progress {
@@ -157,13 +135,6 @@ progress.micl-linear-progress {
             box-shadow: var(--_space) 0 0 0 var(--_gap-color), calc(-1 * var(--_space)) 0 0 0 var(--_gap-color);
         }
 
-        // Where typed attr() is available, the fraction is read from the value/max attributes
-        // and the track becomes a gradient that leaves the bar + gap unpainted, making the gap
-        // truly transparent on any surface. The min() term reproduces the spec's gap collapse
-        // near 0%. The fraction lands in the registered --micl-progress-tail, which TRANSITIONS
-        // on value changes (spec: duration long2, linear easing); the value pseudo's inline-size
-        // is frozen to the same property (author !important beats the UA's inline width), so the
-        // bar, the carve and the gap all glide together.
         @supports (inline-size: attr(value type(<number>))) {
             --_fraction: min(calc(attr(value type(<number>), 0) / max(attr(max type(<number>), 1), 0.001)), 1);
             --micl-progress-tail: calc(var(--_fraction) * 100%);
@@ -296,9 +267,6 @@ progress.micl-circular-progress {
     --_thickness: var(--md-comp-circular-progress-active-thickness, 4px);
     --_space: var(--md-comp-circular-progress-track-active-space, 4px);
     --micl-progress-radius: calc((var(--_size) - var(--_thickness)) / 2);
-    // the spec gap is an arc LENGTH; atan2 of two lengths yields its angle at the
-    // centerline radius, widened by one thickness so the protruding round caps still
-    // leave the full gap visible
     --micl-progress-gap: atan2(calc(var(--_space) + var(--_thickness)), var(--micl-progress-radius));
     --micl-progress-active-color: #{$circ-active};
     --micl-progress-track-color: #{$circ-track};
@@ -310,11 +278,7 @@ progress.micl-circular-progress {
     inline-size: var(--_size);
     block-size: var(--_size);
     border: none;
-    // Gecko's UA sheet paints <progress> light grey even with appearance: none - it would
-    // show through the unpainted gap windows (Blink leaves the element transparent)
     background-color: transparent;
-    // top to bottom: active-arc caps, the arc conic (gaps unpainted), track caps - the
-    // track caps sit underneath so the active arc covers them when the track collapses
     background-image: $circ-cap-active, $circ-cap-active,
         conic-gradient(
             var(--micl-progress-active-color) 0 var(--micl-progress-sweep),
@@ -333,16 +297,11 @@ progress.micl-circular-progress {
     background-size: var(--_thickness) var(--_thickness), var(--_thickness) var(--_thickness),
         100% 100%, var(--_thickness) var(--_thickness), var(--_thickness) var(--_thickness);
     background-repeat: no-repeat;
-    // full-pixel antialiasing ramps on the ring silhouettes (see the cap comment above)
     mask-image: radial-gradient(circle closest-side,
         transparent calc(100% - var(--_thickness) - 0.5px),
         #fff calc(100% - var(--_thickness) + 0.5px) calc(100% - 0.5px),
         transparent);
 
-    // Where clip-path: shape() is available it replaces the mask: an evenodd two-circle
-    // annulus is clipped with true geometric antialiasing, giving visibly crisper ring
-    // silhouettes than gradient rasterisation can produce (and it follows the size and
-    // thickness tokens, unlike path())
     @supports (clip-path: shape(from 0px 0px, arc to 1px 1px of 1px)) {
         mask-image: none;
         clip-path: shape(evenodd from 50% 0%,
@@ -364,11 +323,6 @@ progress.micl-circular-progress {
         background: none;
     }
 
-    // Without typed attr() the sweep keeps its 0deg initial value: the ring degrades to
-    // the full track with the active start dot at 12 o'clock (matching the spec's
-    // rendering at zero progress). Value changes transition the sweep (spec: duration
-    // long2, standard easing) - the arc, its caps and both gaps all follow the one
-    // registered property.
     @supports (inline-size: attr(value type(<number>))) {
         &:not(:indeterminate) {
             --micl-progress-sweep: calc(min(calc(attr(value type(<number>), 0) / max(attr(max type(<number>), 1), 0.001)), 1) * 360deg);
@@ -376,12 +330,6 @@ progress.micl-circular-progress {
         }
     }
 
-    // Spec motion: 1080deg linear global rotation (the `rotate` property) composed with
-    // four linear 90deg hops (`transform`), while the arc sweeps between 10% and 87% -
-    // grow linear, shrink standard-eased. (Compose's declared hop/grow easings are dead
-    // code: its `using` binds forward, landing them on hold segments; eased hops jerk
-    // badly - emphasized-decelerate starts at ~14x velocity.) The two rotations are
-    // compositor-driven, only the ~size-squared arc repaint runs per frame.
     &:indeterminate {
         animation: circglobal 6000ms linear infinite,
             circstep 6000ms linear infinite,
@@ -435,4 +383,149 @@ progress.micl-circular-progress {
     100% {
         --micl-progress-sweep: 36deg;
     }
+}
+
+@property --micl-progress-amplitude {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@property --micl-progress-fraction {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@property --micl-progress-cap {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+.micl-linear-progress:not(progress) {
+    --_wavelength: var(--md-comp-linear-progress-active-wave-wavelength, 40px);
+    --_wave-gap: var(--md-comp-linear-progress-track-active-space, 4px);
+    --_max-amplitude: var(--md-comp-linear-progress-active-wave-amplitude, 3px);
+    --_track-thickness: var(--md-comp-linear-progress-track-thickness, 4px);
+    --_active-thickness: var(--md-comp-linear-progress-active-thickness, 4px);
+    --_fraction: min(calc(attr(aria-valuenow type(<number>), 0) / max(attr(aria-valuemax type(<number>), 1), 0.001)), 1);
+    --micl-progress-fraction: var(--_fraction);
+    --micl-progress-amplitude: clamp(0, min(calc(var(--micl-progress-fraction) / 0.1), calc((1 - var(--micl-progress-fraction)) / 0.05)), 1);
+    transition: --micl-progress-fraction motion.$md-sys-motion-duration-long2 linear;
+
+    --_wave-image: var(--md-comp-linear-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -30 6.283 60' preserveAspectRatio='none'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='4' stroke-linecap='round' fill='none' stroke='black' d='M0,0 C.512,.512 1.002,1 1.571,1 S2.629,.512 3.142,0 S4.144,-1 4.712,-1 S5.771,-.512 6.283,0'/%3E%3C/svg%3E"));
+    --_amplitude: calc(var(--micl-progress-amplitude) * var(--_max-amplitude));
+    --_wave-mask-size: var(--_wavelength) max(calc(var(--_active-thickness) + 1px), calc(var(--_amplitude) * 60));
+
+    position: relative;
+    inline-size: 100%;
+    block-size: max(var(--_track-thickness), calc(2 * var(--_max-amplitude) + var(--_active-thickness)));
+    overflow: clip;
+
+    $wave-carve: "calc(var(--micl-progress-fraction) * 100% + min(var(--micl-progress-fraction) * 100%, var(--_wave-gap)))";
+
+    &::before {
+        --_stop-size: var(--md-comp-linear-progress-stop-size, 4px);
+
+        content: "";
+        position: absolute;
+        inset: 0;
+        inline-size: 100%;
+        block-size: var(--_track-thickness);
+        inset-block-start: calc(50% - (var(--_track-thickness) / 2));
+        border-radius: calc(var(--_track-thickness) / 2);
+        background-image: $stop-dot,
+            linear-gradient(to right, transparent #{$wave-carve}, $track-color 0);
+        background-position: calc(100% - var(--md-comp-linear-progress-stop-trailing-space, 0px)) center, 0 0;
+        background-size: var(--_stop-size) var(--_stop-size), 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .micl-linear-progress__wave {
+        inline-size: calc(var(--micl-progress-fraction) * 100%);
+        block-size: 100%;
+        background-color: $active-color;
+        border-radius: calc(var(--_max-amplitude) + var(--_active-thickness) / 2);
+        mask-image: var(--_wave-image);
+        mask-repeat: repeat-x;
+        mask-size: var(--_wave-mask-size);
+        mask-position: left center;
+
+        @container style(--micl-progress-amplitude: 0) {
+            position: relative;
+            inset-block-start: calc(50% - var(--_active-thickness) / 2);
+            block-size: var(--_active-thickness);
+            border-radius: calc(var(--_active-thickness) / 2);
+            mask-image: none;
+        }
+    }
+    &:dir(rtl) {
+        &::before {
+            background-image: $stop-dot,
+                linear-gradient(to left, transparent #{$wave-carve}, $track-color 0);
+            background-position: var(--md-comp-linear-progress-stop-trailing-space, 0px) center, 0 0;
+        }
+        .micl-linear-progress__wave {
+            mask-position: right center;
+        }
+    }
+    &.micl-linear-progress--indeterminate {
+        --_wavelength: var(--md-comp-linear-progress-indeterminate-active-wave-wavelength, 20px);
+        --_fraction: 1;
+        --micl-progress-amplitude: 1;
+
+        $comet-head: "min(var(--micl-progress-tail) + var(--micl-progress-size), 100%)";
+
+        &::before {
+            --micl-progress-space: var(--md-comp-linear-progress-track-active-space, 4px);
+            --micl-progress-track-color: #{$track-color};
+
+            background: linear-gradient(to right, #{$carve-stops});
+            animation: indettrack 1750ms motion.$md-sys-motion-easing-emphasized-accelerate infinite;
+        }
+        .micl-linear-progress__wave {
+            --micl-progress-cap: calc(var(--_max-amplitude) + var(--_active-thickness) / 2);
+
+            background: none;
+            mask-image: none;
+            clip-path: inset(0 calc(100% - #{$comet-head}) 0 var(--micl-progress-tail) round var(--micl-progress-cap));
+            animation: indettrack 1750ms motion.$md-sys-motion-easing-emphasized-accelerate infinite;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset-block: 0;
+                inset-inline-start: 0;
+                inline-size: calc(100% + var(--_wavelength));
+                background-color: $active-color;
+                mask-image: var(--_wave-image);
+                mask-repeat: repeat-x;
+                mask-size: var(--_wave-mask-size);
+                mask-position: left center;
+                animation: crawl-wave 1000ms linear infinite;
+
+                @media (prefers-reduced-motion: reduce) {
+                    animation-play-state: paused;
+                }
+            }
+        }
+        &:dir(rtl) {
+            &::before {
+                background-image: linear-gradient(to left, #{$carve-stops});
+            }
+            .micl-linear-progress__wave {
+                clip-path: inset(0 var(--micl-progress-tail) 0 calc(100% - #{$comet-head}) round var(--micl-progress-cap));
+
+                &::before {
+                    mask-position: right center;
+                    animation-name: crawl-wave-rtl;
+                }
+            }
+        }
+    }
+}
+
+@keyframes crawl-wave {
+    to { translate: calc(-1 * var(--_wavelength)) 0; }
+}
+@keyframes crawl-wave-rtl {
+    to { translate: var(--_wavelength) 0; }
 }

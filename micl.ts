@@ -30,7 +30,6 @@ import './components/datepicker';
 import './components/list';
 import './components/menu';
 import './components/navigationrail';
-import './components/progressindicator';
 import './components/slider';
 import './components/snackbar';
 import './components/stepper';
