@@ -104,7 +104,7 @@ Corner radii are exposed as CSS custom properties and can be overridden anywhere
 </div>
 ```
 
-The decorative shape gallery (heart, cookie, clover, sunny, …) is **not** part of these tokens. It is shipped as an opt-in component — see the [Shape Component](../components/shape/README.md).
+The decorative shape gallery (heart, cookie, clover, sunny, …) is **not** part of these tokens. It is shipped as an opt-in component — see the [Shape Component](../components/shapes/README.md).
 
 
 ## State layers
