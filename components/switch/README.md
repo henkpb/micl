@@ -55,19 +55,19 @@ Each switch can be themed with CSS custom properties that follow the Material De
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-switch-track-width | The width of the track | 52px |
-| --md-comp-switch-track-height | The height of the track | 32px |
-| --md-comp-switch-track-outline-width | The border width of the track | 2px |
-| --md-comp-switch-handle-size | The diameter of the handle when the switch is "off" | 16px |
-| --md-comp-switch-selected-handle-size | The diameter of the handle when the switch is "on" | 24px |
-| --md-comp-switch-pressed-handle-size | The diameter of the handle when the switch is pressed | 28px |
-| --md-comp-switch-unselected-track-color | The track color when the switch is "off" | --md-sys-color-surface-container-highest |
-| --md-comp-switch-unselected-track-outline-color | The track border color when the switch is "off" | --md-sys-color-outline |
-| --md-comp-switch-unselected-handle-color | The handle color when the switch is "off" | --md-sys-color-outline |
-| --md-comp-switch-unselected-icon-color | The icon color when the switch is "off" | --md-sys-color-surface-container-highest |
-| --md-comp-switch-selected-track-color | The track color when the switch is "on" | --md-sys-color-primary |
-| --md-comp-switch-selected-handle-color | The handle color when the switch is "on" | --md-sys-color-on-primary |
-| --md-comp-switch-selected-icon-color | The icon color when the switch is "on" | --md-sys-color-on-primary-container |
+| `--md-comp-switch-track-width` | The width of the track | `52px` |
+| `--md-comp-switch-track-height` | The height of the track | `32px` |
+| `--md-comp-switch-track-outline-width` | The border width of the track | `2px` |
+| `--md-comp-switch-handle-size` | The diameter of the handle when the switch is "off" | `16px` |
+| `--md-comp-switch-selected-handle-size` | The diameter of the handle when the switch is "on" | `24px` |
+| `--md-comp-switch-pressed-handle-size` | The diameter of the handle when the switch is pressed | `28px` |
+| `--md-comp-switch-unselected-track-color` | The track color when the switch is "off" | `--md-sys-color-surface-container-highest` |
+| `--md-comp-switch-unselected-track-outline-color` | The track border color when the switch is "off" | `--md-sys-color-outline` |
+| `--md-comp-switch-unselected-handle-color` | The handle color when the switch is "off" | `--md-sys-color-outline` |
+| `--md-comp-switch-unselected-icon-color` | The icon color when the switch is "off" | `--md-sys-color-surface-container-highest` |
+| `--md-comp-switch-selected-track-color` | The track color when the switch is "on" | `--md-sys-color-primary` |
+| `--md-comp-switch-selected-handle-color` | The handle color when the switch is "on" | `--md-sys-color-on-primary` |
+| `--md-comp-switch-selected-icon-color` | The icon color when the switch is "on" | `--md-sys-color-on-primary-container` |
 
 **Example: Changing the width of the switch**
 

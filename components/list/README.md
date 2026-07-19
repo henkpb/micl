@@ -216,37 +216,37 @@ Each list style can be themed with CSS custom properties that follow the Materia
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-list-container-color | The background color of the list | transparent |
-| --md-comp-list-container-shape | The corner rounding of the list, shared by its first and last items | --md-sys-shape-corner-large |
-| --md-comp-list-container-space | The vertical margin around the list | 0px |
-| --md-comp-list-segment-gap | The gap between the items of a segmented list | 2px |
-| --md-comp-list-item-segmented-container-color | The background color of the items of a segmented list | --md-sys-color-surface |
+| `--md-comp-list-container-color` | The background color of the list | `transparent` |
+| `--md-comp-list-container-shape` | The corner rounding of the list, shared by its first and last items | `--md-sys-shape-corner-large` |
+| `--md-comp-list-container-space` | The vertical margin around the list | `0px` |
+| `--md-comp-list-segment-gap` | The gap between the items of a segmented list | `2px` |
+| `--md-comp-list-item-segmented-container-color` | The background color of the items of a segmented list | `--md-sys-color-surface` |
 
 ### Item layout
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-list-item-one-line-container-height | The minimum height of a single-line item | 56px |
-| --md-comp-list-item-two-line-container-height | The minimum height of a two-line item | 72px |
-| --md-comp-list-item-three-line-container-height | The minimum height of a three-line item | 88px |
-| --md-comp-list-item-top-space | The padding above the item content | 10px |
-| --md-comp-list-item-bottom-space | The padding below the item content | 10px |
-| --md-comp-list-item-leading-space | The padding before the item content | 16px |
-| --md-comp-list-item-trailing-space | The padding after the item content | 16px |
-| --md-comp-list-item-between-space | The gap between the elements of an item | 12px |
+| `--md-comp-list-item-one-line-container-height` | The minimum height of a single-line item | `56px` |
+| `--md-comp-list-item-two-line-container-height` | The minimum height of a two-line item | `72px` |
+| `--md-comp-list-item-three-line-container-height` | The minimum height of a three-line item | `88px` |
+| `--md-comp-list-item-top-space` | The padding above the item content | `10px` |
+| `--md-comp-list-item-bottom-space` | The padding below the item content | `10px` |
+| `--md-comp-list-item-leading-space` | The padding before the item content | `16px` |
+| `--md-comp-list-item-trailing-space` | The padding after the item content | `16px` |
+| `--md-comp-list-item-between-space` | The gap between the elements of an item | `12px` |
 
 ### Item shapes
 The expressive corner rounding of an item follows its interaction state:
 
 | Custom property | Item state | Default |
 |---|---|---|
-| --md-comp-list-item-container-expressive-shape | Resting | --md-sys-shape-corner-extra-small |
-| --md-comp-list-item-container-hovered-expressive-shape | Hovered | --md-sys-shape-corner-medium |
-| --md-comp-list-item-container-focused-expressive-shape | Focused | --md-sys-shape-corner-large |
-| --md-comp-list-item-container-pressed-expressive-shape | Pressed | --md-sys-shape-corner-large |
-| --md-comp-list-item-container-dragged-expressive-shape | Dragged | --md-sys-shape-corner-large |
-| --md-comp-list-item-container-disabled-expressive-shape | Disabled | --md-sys-shape-corner-extra-small |
-| --md-comp-list-item-container-selected-expressive-shape | Selected | --md-sys-shape-corner-large |
+| `--md-comp-list-item-container-expressive-shape` | Resting | `--md-sys-shape-corner-extra-small` |
+| `--md-comp-list-item-container-hovered-expressive-shape` | Hovered | `--md-sys-shape-corner-medium` |
+| `--md-comp-list-item-container-focused-expressive-shape` | Focused | `--md-sys-shape-corner-large` |
+| `--md-comp-list-item-container-pressed-expressive-shape` | Pressed | `--md-sys-shape-corner-large` |
+| `--md-comp-list-item-container-dragged-expressive-shape` | Dragged | `--md-sys-shape-corner-large` |
+| `--md-comp-list-item-container-disabled-expressive-shape` | Disabled | `--md-sys-shape-corner-extra-small` |
+| `--md-comp-list-item-container-selected-expressive-shape` | Selected | `--md-sys-shape-corner-large` |
 
 For selected items, every state also has its own token — `--md-comp-list-item-container-selected-<state>-expressive-shape` with `<state>` one of `hovered`, `focused`, `pressed`, `dragged` or `disabled` — all defaulting to `--md-sys-shape-corner-large`.
 
@@ -254,28 +254,28 @@ For selected items, every state also has its own token — `--md-comp-list-item-
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-list-item-leading-icon-color | The color of a leading icon | --md-sys-color-on-surface-variant |
-| --md-comp-list-item-leading-icon-expressive-size | The size of a leading icon | 20px |
-| --md-comp-list-item-trailing-icon-color | The color of a trailing icon | --md-sys-color-on-surface-variant |
-| --md-comp-list-item-trailing-icon-expressive-size | The size of a trailing icon | 20px |
-| --md-comp-list-item-leading-avatar-color | The background color of an avatar | --md-sys-color-primary-container |
-| --md-comp-list-item-leading-avatar-label-color | The text color of an avatar | --md-sys-color-on-primary-container |
-| --md-comp-list-item-leading-avatar-shape | The corner rounding of an avatar | --md-sys-shape-corner-full |
-| --md-comp-list-item-leading-avatar-size | The size of an avatar | 40px |
-| --md-comp-list-item-leading-image-width | The width of an image | 56px |
-| --md-comp-list-item-leading-image-height | The maximum height of an image | 56px |
-| --md-comp-list-item-leading-image-expressive-shape | The corner rounding of an image | --md-sys-shape-corner-small |
-| --md-comp-list-item-leading-video-width | The width of a video thumbnail | 100px |
-| --md-comp-list-item-leading-video-height | The maximum height of a video thumbnail | 56px |
-| --md-comp-list-item-leading-video-shape | The corner rounding of a video thumbnail | --md-sys-shape-corner-small |
+| `--md-comp-list-item-leading-icon-color` | The color of a leading icon | `--md-sys-color-on-surface-variant` |
+| `--md-comp-list-item-leading-icon-expressive-size` | The size of a leading icon | `20px` |
+| `--md-comp-list-item-trailing-icon-color` | The color of a trailing icon | `--md-sys-color-on-surface-variant` |
+| `--md-comp-list-item-trailing-icon-expressive-size` | The size of a trailing icon | `20px` |
+| `--md-comp-list-item-leading-avatar-color` | The background color of an avatar | `--md-sys-color-primary-container` |
+| `--md-comp-list-item-leading-avatar-label-color` | The text color of an avatar | `--md-sys-color-on-primary-container` |
+| `--md-comp-list-item-leading-avatar-shape` | The corner rounding of an avatar | `--md-sys-shape-corner-full` |
+| `--md-comp-list-item-leading-avatar-size` | The size of an avatar | `40px` |
+| `--md-comp-list-item-leading-image-width` | The width of an image | `56px` |
+| `--md-comp-list-item-leading-image-height` | The maximum height of an image | `56px` |
+| `--md-comp-list-item-leading-image-expressive-shape` | The corner rounding of an image | `--md-sys-shape-corner-small` |
+| `--md-comp-list-item-leading-video-width` | The width of a video thumbnail | `100px` |
+| `--md-comp-list-item-leading-video-height` | The maximum height of a video thumbnail | `56px` |
+| `--md-comp-list-item-leading-video-shape` | The corner rounding of a video thumbnail | `--md-sys-shape-corner-small` |
 
 ### Focus indicator
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-list-item-focus-indicator-color | The color of the keyboard focus indicator | --md-sys-color-secondary |
-| --md-comp-list-item-focus-indicator-thickness | The thickness of the keyboard focus indicator | 3px |
-| --md-comp-list-item-focus-indicator-offset | The offset of the keyboard focus indicator | -3px |
+| `--md-comp-list-item-focus-indicator-color` | The color of the keyboard focus indicator | `--md-sys-color-secondary` |
+| `--md-comp-list-item-focus-indicator-thickness` | The thickness of the keyboard focus indicator | `3px` |
+| `--md-comp-list-item-focus-indicator-offset` | The offset of the keyboard focus indicator | `-3px` |
 
 ### Item colors
 The colors of list items follow a naming pattern that combines the item's selection and interaction state with the colored part:

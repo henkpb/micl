@@ -7,7 +7,8 @@ This component implements the [Material Design 3 Expressive Icon button](https:/
 To create a basic icon button, use the `<button>` element with a class that specifies its style and size. This example uses a small standard icon button with a Material Symbol:
 
 ```HTML
-<button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Control Panel">settings</button>
+<button type="button" class="micl-iconbutton-standard-s material-symbols-outlined"
+        aria-label="Control Panel">settings</button>
 ```
 
 **Important**: The `aria-label` attribute is crucial for accessibility, as it provides a descriptive text for screen readers.
@@ -42,7 +43,8 @@ Icon buttons come in **five sizes**: extra small (`xs`), small (`s`), medium (`m
 **Example: An extra-large icon button**
 
 ```HTML
-<button type="button" class="micl-iconbutton-standard-xl material-symbols-outlined" aria-label="Control Panel">settings</button>
+<button type="button" class="micl-iconbutton-standard-xl material-symbols-outlined"
+        aria-label="Control Panel">settings</button>
 ```
 
 Material Design provides **four distinct styles**: `standard`, `filled`, `tonal` and `outlined`. To use a style other than the `standard` style used above, apply the corresponding class to the button:
@@ -50,7 +52,8 @@ Material Design provides **four distinct styles**: `standard`, `filled`, `tonal`
 **Example: A medium-sized filled icon button**
 
 ```HTML
-<button type="button" class="micl-iconbutton-filled-m material-symbols-outlined" aria-label="Control Panel">settings</button>
+<button type="button" class="micl-iconbutton-filled-m material-symbols-outlined"
+        aria-label="Control Panel">settings</button>
 ```
 
 By default, icon buttons have a **rounded shape**. For a more square-like appearance, add the `micl-button--square` class.

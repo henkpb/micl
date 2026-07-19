@@ -69,8 +69,8 @@ An **adaptive** navigation bar acts as a navigation bar on narrow screens and is
 
 | Class | Navigation bar below | Navigation rail from |
 | ----- | -------------------- | -------------------- |
-| micl-navigationbar--bar-to-medium | 600px | 600px |
-| micl-navigationbar--bar-to-expanded | 840px | 840px |
+| `micl-navigationbar--bar-to-medium` | `600px` | `600px` |
+| `micl-navigationbar--bar-to-expanded` | `840px` | `840px` |
 
 ```HTML
 <nav class="micl-navigationbar micl-navigationbar--bar-to-medium">
@@ -87,17 +87,17 @@ Each navigation bar can be themed with CSS custom properties that follow the Mat
 |---|---|---|
 | `--md-comp-nav-bar-container-color` | The background color of the navigation bar | `--md-sys-color-surface-container` |
 | `--md-comp-nav-bar-container-elevation` | The shadow (elevation) of the navigation bar | `--md-sys-elevation-level2` |
-| `--md-comp-nav-bar-container-height` | The height of the navigation bar (excluding any safe-area inset) | 64px |
-| `--md-comp-nav-bar-tall-container-height` | The height of the tall navigation bar | 80px |
-| `--md-comp-nav-bar-container-shape` | The corner rounding of the navigation bar | 0px |
+| `--md-comp-nav-bar-container-height` | The height of the navigation bar (excluding any safe-area inset) | `64px` |
+| `--md-comp-nav-bar-tall-container-height` | The height of the tall navigation bar | `80px` |
+| `--md-comp-nav-bar-container-shape` | The corner rounding of the navigation bar | `0px` |
 | `--md-comp-nav-bar-item-icon-size` | The size of the item icons | `--md-sys-icon-size` |
 | `--md-comp-nav-bar-item-active-indicator-shape` | The corner rounding of an item's active indicator | half the indicator height |
-| `--md-comp-nav-bar-item-active-indicator-icon-label-space` | The space between the icon and the label | 4px |
-| `--md-comp-nav-bar-item-vertical-active-indicator-width` | The width of an item's active indicator | 56px |
-| `--md-comp-nav-bar-item-vertical-active-indicator-height` | The height of an item's active indicator | 32px |
-| `--md-comp-nav-bar-item-horizontal-active-indicator-height` | The height of an item's active indicator with horizontal items | 40px |
-| `--md-comp-nav-bar-item-horizontal-active-indicator-leading-space` | The space between the start edge of a horizontal item's active indicator and the icon | 16px |
-| `--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space` | The space between the label and the end edge of a horizontal item's active indicator | 16px |
+| `--md-comp-nav-bar-item-active-indicator-icon-label-space` | The space between the icon and the label | `4px` |
+| `--md-comp-nav-bar-item-vertical-active-indicator-width` | The width of an item's active indicator | `56px` |
+| `--md-comp-nav-bar-item-vertical-active-indicator-height` | The height of an item's active indicator | `32px` |
+| `--md-comp-nav-bar-item-horizontal-active-indicator-height` | The height of an item's active indicator with horizontal items | `40px` |
+| `--md-comp-nav-bar-item-horizontal-active-indicator-leading-space` | The space between the start edge of a horizontal item's active indicator and the icon | `16px` |
+| `--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space` | The space between the label and the end edge of a horizontal item's active indicator | `16px` |
 
 **Example: Changing the background color of the navigation bar**
 

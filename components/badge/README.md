@@ -45,20 +45,20 @@ You can fine-tune the badge's position relative to its anchor using the followin
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| --md-comp-badge-inline-offset | 0px | Adjusts the horizontal position of the badge |
-| --md-comp-badge-block-offset | 0px | Adjusts the vertical position of the badge |
+| `--md-comp-badge-inline-offset` | `0px` | Adjusts the horizontal position of the badge |
+| `--md-comp-badge-block-offset` | `0px` | Adjusts the vertical position of the badge |
 
 
 ## Theming
 Each badge can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child badges.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-comp-badge-size | 6px | The height and width of the small badge |
-| --md-comp-badge-large-size | 16px | The height and minimum width of the large badge |
-| --md-comp-badge-large-padding | 4px | The horizontal padding used for the large badge |
-| --md-comp-badge-color | --md-sys-color-error | The background color of the badge |
-| --md-comp-badge-large-label-text-color | --md-sys-color-on-error | The text color of the large badge |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-badge-size` | The height and width of the small badge | `6px` |
+| `--md-comp-badge-large-size` | The height and minimum width of the large badge | `16px` |
+| `--md-comp-badge-large-padding` | The horizontal padding used for the large badge | `4px` |
+| `--md-comp-badge-color` | The background color of the badge | `--md-sys-color-error` |
+| `--md-comp-badge-large-label-text-color` | The text color of the large badge | `--md-sys-color-on-error` |
 
 **Example: Changing the size of the small badge**
 

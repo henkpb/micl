@@ -102,11 +102,11 @@ Each app bar can be themed with CSS custom properties that follow the Material D
 | Custom property | Meaning | Default |
 |---|---|---|
 | `--md-comp-app-bar-container-color` | The background color of the app bar | inherited from the page |
-| `--md-comp-app-bar-on-scroll-container-color` | The background color while the page is scrolled | --md-sys-color-surface-container |
-| `--md-comp-app-bar-title-color` | The text color of the headline | --md-sys-color-on-surface |
-| `--md-comp-app-bar-subtitle-color` | The text color of the subtitle | --md-sys-color-on-surface-variant |
-| `--md-comp-app-bar-leading-icon-color` | The color of the leading icon | --md-sys-color-on-surface |
-| `--md-comp-app-bar-trailing-icon-color` | The color of the trailing icons | --md-sys-color-on-surface-variant |
+| `--md-comp-app-bar-on-scroll-container-color` | The background color while the page is scrolled | `--md-sys-color-surface-container` |
+| `--md-comp-app-bar-title-color` | The text color of the headline | `--md-sys-color-on-surface` |
+| `--md-comp-app-bar-subtitle-color` | The text color of the subtitle | `--md-sys-color-on-surface-variant` |
+| `--md-comp-app-bar-leading-icon-color` | The color of the leading icon | `--md-sys-color-on-surface` |
+| `--md-comp-app-bar-trailing-icon-color` | The color of the trailing icons | `--md-sys-color-on-surface-variant` |
 
 ## Compatibility
 This component uses the `animation-timeline` CSS property for the scroll-effect, which may not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline#browser_compatibility) for details.

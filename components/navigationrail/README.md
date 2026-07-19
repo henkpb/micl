@@ -108,10 +108,10 @@ An **adaptive** navigation rail is permanently visible as a standard (expanded) 
 
 | Class | Modal below | Standard from |
 | ----- | ----------- | ------------- |
-| micl-navigationrail--modal-to-medium | 600px | 600px |
-| micl-navigationrail--modal-to-expanded | 840px | 840px |
-| micl-navigationrail--modal-to-large | 1200px | 1200px |
-| micl-navigationrail--modal-to-extralarge | 1600px | 1600px |
+| `micl-navigationrail--modal-to-medium` | `600px` | `600px` |
+| `micl-navigationrail--modal-to-expanded` | `840px` | `840px` |
+| `micl-navigationrail--modal-to-large` | `1200px` | `1200px` |
+| `micl-navigationrail--modal-to-extralarge` | `1600px` | `1600px` |
 
 ```HTML
 <dialog id="mynavigationrail" class="micl-navigationrail micl-navigationrail--modal-to-expanded" closedby="closerequest">
@@ -137,34 +137,34 @@ Each navigation rail can be themed with CSS custom properties that follow the Ma
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-nav-rail-divider-thickness` | The width of the vertical divider at the end of the rail | 0px |
+| `--md-comp-nav-rail-divider-thickness` | The width of the vertical divider at the end of the rail | `0px` |
 | `--md-comp-nav-rail-divider-color` | The color of the vertical divider | `--md-comp-divider-color` |
-| `--md-comp-nav-rail-collapsed-container-width` | The width of the collapsed navigation rail | 96px |
+| `--md-comp-nav-rail-collapsed-container-width` | The width of the collapsed navigation rail | `96px` |
 | `--md-comp-nav-rail-collapsed-container-color` | The background color of the collapsed navigation rail | `--md-sys-color-surface` |
 | `--md-comp-nav-rail-collapsed-container-elevation` | The shadow (elevation) of the collapsed navigation rail | `--md-sys-elevation-level0` |
-| `--md-comp-nav-rail-collapsed-container-shape` | The corner rounding of the collapsed navigation rail | 0px |
-| `--md-comp-nav-rail-collapsed-top-space` | The space between the top edge and the header of the collapsed navigation rail | 44px |
-| `--md-comp-nav-rail-collapsed-item-vertical-space` | The space between the icon and the label of a collapsed item | 4px |
-| `--md-comp-nav-rail-expanded-container-width-minimum` | The smallest allowed width of the expanded navigation rail | 220px |
-| `--md-comp-nav-rail-expanded-container-width-maximum` | The largest allowed width of the expanded navigation rail | 360px |
+| `--md-comp-nav-rail-collapsed-container-shape` | The corner rounding of the collapsed navigation rail | `0px` |
+| `--md-comp-nav-rail-collapsed-top-space` | The space between the top edge and the header of the collapsed navigation rail | `44px` |
+| `--md-comp-nav-rail-collapsed-item-vertical-space` | The space between the icon and the label of a collapsed item | `4px` |
+| `--md-comp-nav-rail-expanded-container-width-minimum` | The smallest allowed width of the expanded navigation rail | `220px` |
+| `--md-comp-nav-rail-expanded-container-width-maximum` | The largest allowed width of the expanded navigation rail | `360px` |
 | `--md-comp-nav-rail-expanded-container-color` | The background color of the expanded navigation rail | `--md-sys-color-surface` |
 | `--md-comp-nav-rail-expanded-container-elevation` | The shadow (elevation) of the expanded navigation rail | `--md-sys-elevation-level0` |
-| `--md-comp-nav-rail-expanded-container-shape` | The corner rounding of the expanded navigation rail | 0px |
-| `--md-comp-nav-rail-expanded-top-space` | The space between the top edge and the header of the expanded navigation rail | 44px |
+| `--md-comp-nav-rail-expanded-container-shape` | The corner rounding of the expanded navigation rail | `0px` |
+| `--md-comp-nav-rail-expanded-top-space` | The space between the top edge and the header of the expanded navigation rail | `44px` |
 | `--md-comp-nav-rail-expanded-modal-container-color` | The background color of the modal navigation rail | `--md-sys-color-surface-container` |
 | `--md-comp-nav-rail-expanded-modal-container-elevation` | The shadow (elevation) of the modal navigation rail | `--md-sys-elevation-level2` |
 | `--md-comp-nav-rail-expanded-modal-container-shape` | The corner rounding of the modal navigation rail, applied to the two corners facing the content | `--md-sys-shape-corner-large` |
 | `--md-comp-nav-rail-item-icon-size` | The size of the item icons | `--md-sys-icon-size` |
 | `--md-comp-nav-rail-item-container-shape` | The corner rounding of an item's active indicator | half the item height |
-| `--md-comp-nav-rail-item-container-vertical-space` | The vertical space between items | 6px |
-| `--md-comp-nav-rail-item-header-space-minimum` | The minimum space between the header and the first item | 40px |
-| `--md-comp-nav-rail-item-short-container-height` | The height of items in an expanded navigation rail, and of items without a label | 56px |
-| `--md-comp-nav-rail-item-vertical-active-indicator-width` | The width of an item's active indicator in a collapsed navigation rail | 56px |
-| `--md-comp-nav-rail-item-vertical-active-indicator-height` | The height of an item's active indicator in a collapsed navigation rail | 32px |
-| `--md-comp-nav-rail-item-active-indicator-leading-space` | The space between the start edge of the active indicator and the icon | 16px |
-| `--md-comp-nav-rail-item-active-indicator-trailing-space` | The space between the icon and the end edge of the active indicator | 16px |
-| `--md-comp-nav-rail-item-active-indicator-icon-label-space` | The space between the icon and the label of an expanded item | 8px |
-| `--md-comp-nav-rail-item-horizontal-full-width-trailing-space` | The space between the end of an expanded item's click target and the container edge | 16px |
+| `--md-comp-nav-rail-item-container-vertical-space` | The vertical space between items | `6px` |
+| `--md-comp-nav-rail-item-header-space-minimum` | The minimum space between the header and the first item | `40px` |
+| `--md-comp-nav-rail-item-short-container-height` | The height of items in an expanded navigation rail, and of items without a label | `56px` |
+| `--md-comp-nav-rail-item-vertical-active-indicator-width` | The width of an item's active indicator in a collapsed navigation rail | `56px` |
+| `--md-comp-nav-rail-item-vertical-active-indicator-height` | The height of an item's active indicator in a collapsed navigation rail | `32px` |
+| `--md-comp-nav-rail-item-active-indicator-leading-space` | The space between the start edge of the active indicator and the icon | `16px` |
+| `--md-comp-nav-rail-item-active-indicator-trailing-space` | The space between the icon and the end edge of the active indicator | `16px` |
+| `--md-comp-nav-rail-item-active-indicator-icon-label-space` | The space between the icon and the label of an expanded item | `8px` |
+| `--md-comp-nav-rail-item-horizontal-full-width-trailing-space` | The space between the end of an expanded item's click target and the container edge | `16px` |
 
 **Example: Changing the width of the collapsed navigation rail**
 

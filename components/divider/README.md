@@ -33,21 +33,21 @@ The Divider component offers five CSS classes for different divider styles:
 
 | CSS class | Description |
 | --------- | ----------- |
-| micl-divider | A standard, full-width divider |
-| micl-divider-inset | Indented equally on both the left and right sides |
-| micl-divider-inset-start | Indented only on the left (start) side |
-| micl-divider-inset-end | Indented only on the right (end) side |
-| micl-divider-vertical | A vertical divider |
+| `micl-divider` | A standard, full-width divider |
+| `micl-divider-inset` | Indented equally on both the left and right sides |
+| `micl-divider-inset-start` | Indented only on the left (start) side |
+| `micl-divider-inset-end` | Indented only on the right (end) side |
+| `micl-divider-vertical` | A vertical divider |
 
 ## Theming
 Each divider can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-divider-color | The color of the divider | `--md-sys-color-outline-variant` |
-| --md-comp-divider-thickness | Controls the thickness (height for horizontal, width for vertical) of the divider | 1px |
-| --md-comp-divider-inset-margin | Defines the indentation distance for inset dividers | 16px |
-| --md-comp-divider-space | Sets the spacing between the divider and adjacent text or elements | 4px |
+| `--md-comp-divider-color` | The color of the divider | `--md-sys-color-outline-variant` |
+| `--md-comp-divider-thickness` | Controls the thickness (height for horizontal, width for vertical) of the divider | `1px` |
+| `--md-comp-divider-inset-margin` | Defines the indentation distance for inset dividers | `16px` |
+| `--md-comp-divider-space` | Sets the spacing between the divider and adjacent text or elements | `4px` |
 
 **Example: Changing the inset margin**
 

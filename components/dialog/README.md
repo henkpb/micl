@@ -124,18 +124,18 @@ Each dialog can be themed with CSS custom properties that follow the Material De
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-dialog-min-width | The minimum width of a dialog | 280px |
-| --md-comp-dialog-max-width | The maximum width of a dialog | 560px |
-| --md-comp-dialog-padding | The inner padding between the dialog's edge and its content | 24px |
-| --md-comp-dialog-headline-space | The vertical spacing between the elements in the header | 16px |
-| --md-comp-dialog-container-color | The background color of the dialog | --md-sys-color-surface-container-high |
-| --md-comp-dialog-container-shape | The corner rounding of the dialog | --md-sys-shape-corner-extra-large |
-| --md-comp-dialog-container-elevation | The shadow (elevation) of the dialog | --md-sys-elevation-level3 |
-| --md-comp-dialog-headline-color | The text color of the headline | --md-sys-color-on-surface |
-| --md-comp-dialog-supporting-text-color | The text color of the supporting text | --md-sys-color-on-surface-variant |
-| --md-comp-dialog-icon-color | The color of the dialog icon | --md-sys-color-secondary |
-| --md-comp-dialog-icon-size | The size of the dialog icon | --md-sys-icon-size |
-| --md-comp-full-screen-dialog-container-color | The background color of a full-screen dialog | --md-sys-color-surface |
+| `--md-comp-dialog-min-width` | The minimum width of a dialog | `280px` |
+| `--md-comp-dialog-max-width` | The maximum width of a dialog | `560px` |
+| `--md-comp-dialog-padding` | The inner padding between the dialog's edge and its content | `24px` |
+| `--md-comp-dialog-headline-space` | The vertical spacing between the elements in the header | `16px` |
+| `--md-comp-dialog-container-color` | The background color of the dialog | `--md-sys-color-surface-container-high` |
+| `--md-comp-dialog-container-shape` | The corner rounding of the dialog | `--md-sys-shape-corner-extra-large` |
+| `--md-comp-dialog-container-elevation` | The shadow (elevation) of the dialog | `--md-sys-elevation-level3` |
+| `--md-comp-dialog-headline-color` | The text color of the headline | `--md-sys-color-on-surface` |
+| `--md-comp-dialog-supporting-text-color` | The text color of the supporting text | `--md-sys-color-on-surface-variant` |
+| `--md-comp-dialog-icon-color` | The color of the dialog icon | `--md-sys-color-secondary` |
+| `--md-comp-dialog-icon-size` | The size of the dialog icon | `--md-sys-icon-size` |
+| `--md-comp-full-screen-dialog-container-color` | The background color of a full-screen dialog | `--md-sys-color-surface` |
 
 **Example: Changing the dialog padding**
 

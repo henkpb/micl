@@ -94,12 +94,12 @@ Each checkbox can be themed with CSS custom properties that follow the Material 
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-checkbox-container-size | The size of the checkbox itself | 18px |
-| --md-comp-checkbox-outline-width | The thickness of the checkbox's border | 2px |
-| --md-comp-checkbox-check-thickness | The thickness of the check mark | 2px |
-| --md-comp-checkbox-unselected-outline-color | The border color of an unselected checkbox | --md-sys-color-on-surface-variant |
-| --md-comp-checkbox-selected-container-color | The fill color of a selected checkbox | --md-sys-color-primary |
-| --md-comp-checkbox-selected-icon-color | The color of the check mark | --md-sys-color-on-primary |
+| `--md-comp-checkbox-container-size` | The size of the checkbox itself | `18px` |
+| `--md-comp-checkbox-outline-width` | The thickness of the checkbox's border | `2px` |
+| `--md-comp-checkbox-check-thickness` | The thickness of the check mark | `2px` |
+| `--md-comp-checkbox-unselected-outline-color` | The border color of an unselected checkbox | `--md-sys-color-on-surface-variant` |
+| `--md-comp-checkbox-selected-container-color` | The fill color of a selected checkbox | `--md-sys-color-primary` |
+| `--md-comp-checkbox-selected-icon-color` | The color of the check mark | `--md-sys-color-on-primary` |
 
 **Example: Changing the border width of a checkbox**
 

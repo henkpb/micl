@@ -116,24 +116,24 @@ Each text field can be themed with CSS custom properties that follow the Materia
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-text-field-container-height | The height of the text field (excluding supporting text) | 56px |
-| --md-comp-text-field-icon-size | The size of the leading and trailing icons | 24px |
-| --md-comp-text-field-icon-space | The spacing between an icon and the text field's edge | 12px |
-| --md-comp-text-field-input-space | The inline padding around the input text | 16px |
-| --md-comp-text-field-prefix-space | The width reserved for the prefix | 1em |
-| --md-comp-text-field-suffix-space | The width reserved for the suffix | 1em |
-| --md-comp-text-field-input-color | The text color of the input text | --md-sys-color-on-surface |
-| --md-comp-text-field-input-placeholder-color | The text color of the placeholder | --md-sys-color-on-surface-variant |
-| --md-comp-text-field-caret-color | The color of the text cursor | --md-sys-color-primary |
-| --md-comp-text-field-label-color | The text color of the label | --md-sys-color-on-surface-variant |
-| --md-comp-text-field-focus-label-color | The text color of the label when focused | --md-sys-color-primary |
-| --md-comp-text-field-supporting-text-color | The text color of the supporting text and character counter | --md-sys-color-on-surface-variant |
-| --md-comp-text-field-icon-color | The color of the leading and trailing icons | --md-sys-color-on-surface-variant |
-| --md-comp-filled-text-field-container-color | The background color of a filled text field | --md-sys-color-surface-container-highest |
-| --md-comp-filled-text-field-active-indicator-color | The bottom line color of a filled text field | --md-sys-color-on-surface-variant |
-| --md-comp-filled-text-field-focus-active-indicator-color | The bottom line color of a filled text field when focused | --md-sys-color-primary |
-| --md-comp-outlined-text-field-outline-color | The outline color of an outlined text field | --md-sys-color-outline |
-| --md-comp-outlined-text-field-focus-outline-color | The outline color of an outlined text field when focused | --md-sys-color-primary |
+| `--md-comp-text-field-container-height` | The height of the text field (excluding supporting text) | `56px` |
+| `--md-comp-text-field-icon-size` | The size of the leading and trailing icons | `24px` |
+| `--md-comp-text-field-icon-space` | The spacing between an icon and the text field's edge | `12px` |
+| `--md-comp-text-field-input-space` | The inline padding around the input text | `16px` |
+| `--md-comp-text-field-prefix-space` | The width reserved for the prefix | `1em` |
+| `--md-comp-text-field-suffix-space` | The width reserved for the suffix | `1em` |
+| `--md-comp-text-field-input-color` | The text color of the input text | `--md-sys-color-on-surface` |
+| `--md-comp-text-field-input-placeholder-color` | The text color of the placeholder | `--md-sys-color-on-surface-variant` |
+| `--md-comp-text-field-caret-color` | The color of the text cursor | `--md-sys-color-primary` |
+| `--md-comp-text-field-label-color` | The text color of the label | `--md-sys-color-on-surface-variant` |
+| `--md-comp-text-field-focus-label-color` | The text color of the label when focused | `--md-sys-color-primary` |
+| `--md-comp-text-field-supporting-text-color` | The text color of the supporting text and character counter | `--md-sys-color-on-surface-variant` |
+| `--md-comp-text-field-icon-color` | The color of the leading and trailing icons | `--md-sys-color-on-surface-variant` |
+| `--md-comp-filled-text-field-container-color` | The background color of a filled text field | `--md-sys-color-surface-container-highest` |
+| `--md-comp-filled-text-field-active-indicator-color` | The bottom line color of a filled text field | `--md-sys-color-on-surface-variant` |
+| `--md-comp-filled-text-field-focus-active-indicator-color` | The bottom line color of a filled text field when focused | `--md-sys-color-primary` |
+| `--md-comp-outlined-text-field-outline-color` | The outline color of an outlined text field | `--md-sys-color-outline` |
+| `--md-comp-outlined-text-field-focus-outline-color` | The outline color of an outlined text field when focused | `--md-sys-color-primary` |
 
 **Example: Compact text fields with a brand-colored focus indicator**
 

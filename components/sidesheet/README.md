@@ -98,12 +98,12 @@ Each side sheet style can be themed with CSS custom properties that follow the M
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-sidesheet-container-width` | The default (and minimum allowed) width of the side sheet | 256px |
-| `--md-comp-sidesheet-container-max-width` | The largest allowed width of the side sheet | 400px |
+| `--md-comp-sidesheet-container-width` | The default (and minimum allowed) width of the side sheet | `256px` |
+| `--md-comp-sidesheet-container-max-width` | The largest allowed width of the side sheet | `400px` |
 | `--md-comp-sidesheet-padding` | The amount of space between the vertical edges and the content | `--md-sys-layout-window-margin` |
 | `--md-comp-sidesheet-container-shape` | The corner rounding of the standard side sheet | `--md-sys-shape-corner-none` |
 | `--md-comp-sidesheet-standard-container-color` | The background color of the standard side sheet | `--md-sys-color-surface` |
-| `--md-comp-sidesheet-divider-thickness` | The thickness of the vertical divider of the standard side sheet | 1px |
+| `--md-comp-sidesheet-divider-thickness` | The thickness of the vertical divider of the standard side sheet | `1px` |
 | `--md-comp-sidesheet-divider-color` | The color of the vertical divider of the standard side sheet | `--md-sys-color-outline` |
 | `--md-comp-sidesheet-standard-container-elevation` | The shadow (elevation) of the standard side sheet | `--md-sys-elevation-level0` |
 | `--md-comp-sidesheet-modal-container-color` | The background color of the modal side sheet | `--md-sys-color-surface-container-low` |

@@ -184,43 +184,43 @@ Each menu can be themed with CSS custom properties that follow the Material Desi
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-menu-width-min | The minimum width of a menu | 112px |
-| --md-comp-menu-width-max | The maximum width of a menu | 320px |
-| --md-comp-menu-container-elevation | The shadow (elevation) of the menu surface | --md-sys-elevation-level2 |
-| --md-comp-menu-container-shape | The corner rounding of the menu surface | --md-sys-shape-corner-large |
-| --md-comp-menu-active-container-shape | The corner rounding while the menu is the frontmost menu | --md-comp-menu-container-shape |
-| --md-comp-menu-inactive-container-shape | The corner rounding while one of its submenus is open | --md-sys-shape-corner-small |
-| --md-comp-menu-standard-container-color | The background color of a standard menu | --md-sys-color-surface-container-low |
-| --md-comp-menu-vibrant-container-color | The background color of a vibrant menu | --md-sys-color-tertiary-container |
+| `--md-comp-menu-width-min` | The minimum width of a menu | `112px` |
+| `--md-comp-menu-width-max` | The maximum width of a menu | `320px` |
+| `--md-comp-menu-container-elevation` | The shadow (elevation) of the menu surface | `--md-sys-elevation-level2` |
+| `--md-comp-menu-container-shape` | The corner rounding of the menu surface | `--md-sys-shape-corner-large` |
+| `--md-comp-menu-active-container-shape` | The corner rounding while the menu is the frontmost menu | `--md-comp-menu-container-shape` |
+| `--md-comp-menu-inactive-container-shape` | The corner rounding while one of its submenus is open | `--md-sys-shape-corner-small` |
+| `--md-comp-menu-standard-container-color` | The background color of a standard menu | `--md-sys-color-surface-container-low` |
+| `--md-comp-menu-vibrant-container-color` | The background color of a vibrant menu | `--md-sys-color-tertiary-container` |
 
 ### Item groups and section labels
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-menu-gap | The gap between the item groups (the lists) of a menu | 2px |
-| --md-comp-menu-group-padding | The vertical padding inside an item group | 4px |
-| --md-comp-menu-group-shape | The corner rounding of the edges where two item groups meet | --md-sys-shape-corner-small |
-| --md-comp-menu-section-label-top-space | The padding above a section label | 8px |
-| --md-comp-menu-section-label-bottom-space | The padding below a section label | 8px |
-| --md-comp-menu-standard-section-label-text-color | The text color of a section label in a standard menu | --md-sys-color-on-surface-variant |
-| --md-comp-menu-vibrant-section-label-text-color | The text color of a section label in a vibrant menu | --md-sys-color-on-tertiary-container |
+| `--md-comp-menu-gap` | The gap between the item groups (the lists) of a menu | `2px` |
+| `--md-comp-menu-group-padding` | The vertical padding inside an item group | `4px` |
+| `--md-comp-menu-group-shape` | The corner rounding of the edges where two item groups meet | `--md-sys-shape-corner-small` |
+| `--md-comp-menu-section-label-top-space` | The padding above a section label | `8px` |
+| `--md-comp-menu-section-label-bottom-space` | The padding below a section label | `8px` |
+| `--md-comp-menu-standard-section-label-text-color` | The text color of a section label in a standard menu | `--md-sys-color-on-surface-variant` |
+| `--md-comp-menu-vibrant-section-label-text-color` | The text color of a section label in a vibrant menu | `--md-sys-color-on-tertiary-container` |
 
 ### Item layout
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-menu-item-height | The height of a menu item | 44px |
-| --md-comp-menu-item-top-space | The padding above the item content | 8px |
-| --md-comp-menu-item-bottom-space | The padding below the item content | 8px |
-| --md-comp-menu-item-leading-space | The padding before the item content | 16px |
-| --md-comp-menu-item-trailing-space | The padding after the item content | 16px |
-| --md-comp-menu-item-leading-icon-size | The size of a leading icon | 20px |
-| --md-comp-menu-item-trailing-icon-size | The size of a trailing icon | 20px |
-| --md-comp-menu-item-shape | The corner rounding of a menu item | --md-sys-shape-corner-small |
-| --md-comp-menu-item-selected-shape | The corner rounding of a selected menu item | --md-sys-shape-corner-large |
-| --md-comp-menu-item-focus-indicator-color | The color of the keyboard focus indicator | --md-sys-color-secondary |
-| --md-comp-menu-item-focus-indicator-thickness | The thickness of the keyboard focus indicator | 3px |
-| --md-comp-menu-item-focus-indicator-offset | The offset of the keyboard focus indicator | -3px |
+| `--md-comp-menu-item-height` | The height of a menu item | `44px` |
+| `--md-comp-menu-item-top-space` | The padding above the item content | `8px` |
+| `--md-comp-menu-item-bottom-space` | The padding below the item content | `8px` |
+| `--md-comp-menu-item-leading-space` | The padding before the item content | `16px` |
+| `--md-comp-menu-item-trailing-space` | The padding after the item content | `16px` |
+| `--md-comp-menu-item-leading-icon-size` | The size of a leading icon | `20px` |
+| `--md-comp-menu-item-trailing-icon-size` | The size of a trailing icon | `20px` |
+| `--md-comp-menu-item-shape` | The corner rounding of a menu item | `--md-sys-shape-corner-small` |
+| `--md-comp-menu-item-selected-shape` | The corner rounding of a selected menu item | `--md-sys-shape-corner-large` |
+| `--md-comp-menu-item-focus-indicator-color` | The color of the keyboard focus indicator | `--md-sys-color-secondary` |
+| `--md-comp-menu-item-focus-indicator-thickness` | The thickness of the keyboard focus indicator | `3px` |
+| `--md-comp-menu-item-focus-indicator-offset` | The offset of the keyboard focus indicator | `-3px` |
 
 ### Item colors
 The colors of menu items follow a naming pattern that combines the menu variant, the item's selection and interaction state, and the colored part:
@@ -242,21 +242,21 @@ Inside a menu these tokens take precedence over the item color tokens of the [Li
 
 | Part | Resting | Hovered, focused, pressed | Selected (all states) | Disabled |
 |---|---|---|---|---|
-| container | --md-sys-color-surface-container-low | | --md-sys-color-tertiary-container | selected colors at 38% |
-| label-text | --md-sys-color-on-surface-variant | --md-sys-color-on-surface | --md-sys-color-on-tertiary-container | --md-sys-color-on-surface at 38% |
-| leading-icon, trailing-icon | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-tertiary-container | --md-sys-color-on-surface at 38% |
-| supporting-text, trailing-supporting-text | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-tertiary-container | --md-sys-color-on-surface at 38% |
-| state-layer | | --md-sys-color-on-surface | --md-sys-color-on-tertiary-container | |
+| container | `--md-sys-color-surface-container-low` | | `--md-sys-color-tertiary-container` | selected colors at `38%` |
+| label-text | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-surface` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-surface` at `38%` |
+| leading-icon, trailing-icon | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-surface` at `38%` |
+| supporting-text, trailing-supporting-text | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-tertiary-container | --md-sys-color-on-surface` at `38%` |
+| state-layer | | --md-sys-color-on-surface | `--md-sys-color-on-tertiary-container` | |
 
 **Vibrant menu**
 
 | Part | Resting | Hovered, focused, pressed | Selected (all states) | Disabled |
 |---|---|---|---|---|
-| container | --md-sys-color-tertiary-container | | --md-sys-color-tertiary | selected colors at 38% |
-| label-text | --md-sys-color-on-tertiary-container | --md-sys-color-on-tertiary-container | --md-sys-color-on-tertiary | --md-sys-color-on-tertiary-container at 38% |
-| leading-icon, trailing-icon | --md-sys-color-on-tertiary-container | --md-sys-color-tertiary | --md-sys-color-on-tertiary | --md-sys-color-on-tertiary-container at 38% |
-| supporting-text, trailing-supporting-text | --md-sys-color-on-tertiary-container | --md-sys-color-on-tertiary-container | --md-sys-color-on-tertiary | --md-sys-color-on-tertiary-container at 38% |
-| state-layer | | --md-sys-color-on-tertiary-container | --md-sys-color-on-tertiary | |
+| container | `--md-sys-color-tertiary-container` | | `--md-sys-color-tertiary` | selected colors at `38%` |
+| label-text | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary` | `--md-sys-color-on-tertiary-container` at `38%` |
+| leading-icon, trailing-icon | `--md-sys-color-on-tertiary-container` | `--md-sys-color-tertiary` | `--md-sys-color-on-tertiary` | `--md-sys-color-on-tertiary-container` at `38%` |
+| supporting-text, trailing-supporting-text | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary` | `--md-sys-color-on-tertiary-container` at `38%` |
+| state-layer | | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary` | |
 
 **Example: Changing the maximum width**
 

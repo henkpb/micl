@@ -179,14 +179,14 @@ Each stepper can be themed with CSS custom properties. Set them on any appropria
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-stepper-counter-style | The list-style used for the counter number inside the dots of the stepper header | decimal |
-| --md-comp-stepper-dot-size | The size of each progress dot | 12px |
-| --md-comp-stepper-header-dot-size | The size of the dots in the stepper header | 24px |
-| --md-comp-stepper-dot-color | The color of a pending progress dot | --md-sys-color-on-surface |
-| --md-comp-stepper-dot-label-color | The counter color of a pending progress dot | --md-sys-color-surface |
-| --md-comp-stepper-dot-done-color | The color of a completed progress dot | --md-sys-color-tertiary-container |
-| --md-comp-stepper-dot-done-label-color | The counter color of a completed progress dot | --md-sys-color-on-tertiary-container |
-| --md-comp-divider-color | The color of the connector line between the steps in the stepper header (shared with the Divider component) | --md-sys-color-outline-variant |
+| `--md-comp-stepper-counter-style` | The list-style used for the counter number inside the dots of the stepper header | `decimal` |
+| `--md-comp-stepper-dot-size` | The size of each progress dot | `12px` |
+| `--md-comp-stepper-header-dot-size` | The size of the dots in the stepper header | `24px` |
+| `--md-comp-stepper-dot-color` | The color of a pending progress dot | `--md-sys-color-on-surface` |
+| `--md-comp-stepper-dot-label-color` | The counter color of a pending progress dot | `--md-sys-color-surface` |
+| `--md-comp-stepper-dot-done-color` | The color of a completed progress dot | `--md-sys-color-tertiary-container` |
+| `--md-comp-stepper-dot-done-label-color` | The counter color of a completed progress dot | `--md-sys-color-on-tertiary-container` |
+| `--md-comp-divider-color` | The color of the connector line between the steps in the stepper header (shared with the Divider component) | `--md-sys-color-outline-variant` |
 
 **Example: Changing the style of the counter inside header dots**
 

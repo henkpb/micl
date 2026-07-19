@@ -41,10 +41,10 @@ Each radio button can be themed with CSS custom properties that follow the Mater
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| --md-comp-radio-button-icon-size | The diameter of the radio button itself | 20px |
-| --md-comp-radio-button-outline-width | The thickness of the radio button's ring | 2px |
-| --md-comp-radio-button-unselected-icon-color | The ring color of an unselected radio button | --md-sys-color-on-surface-variant |
-| --md-comp-radio-button-selected-icon-color | The ring and dot color of a selected radio button | --md-sys-color-primary |
+| `--md-comp-radio-button-icon-size` | The diameter of the radio button itself | `20px` |
+| `--md-comp-radio-button-outline-width` | The thickness of the radio button's ring | `2px` |
+| `--md-comp-radio-button-unselected-icon-color` | The ring color of an unselected radio button | `--md-sys-color-on-surface-variant` |
+| `--md-comp-radio-button-selected-icon-color` | The ring and dot color of a selected radio button | `--md-sys-color-primary` |
 
 **Example: Changing the size of the radio button**
 
