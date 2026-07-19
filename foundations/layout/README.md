@@ -139,8 +139,8 @@ You can customize the layout settings by overriding its global CSS variables. Th
 
 | Variable name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| `--md-sys-layout-pane-spacer` | The space between two panes. | 24px |
-| `--md-sys-layout-pane-fixed-width` | The width of `micl-pane--fixed` panes at the expanded (360px) and larger (412px) breakpoints. Unset at smaller breakpoints, where fixed panes are sized by their content. | 360px / 412px |
+| `--md-sys-layout-pane-spacer` | The space between two panes. | `24px` |
+| `--md-sys-layout-pane-fixed-width` | The width of `micl-pane--fixed` panes at the expanded (360px) and larger (412px) breakpoints. Unset at smaller breakpoints, where fixed panes are sized by their content. | `360px` / `412px` |
 
 **Example: Changing the space between panes**
 

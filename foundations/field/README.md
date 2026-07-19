@@ -54,10 +54,10 @@ No custom JavaScript is required for this foundation.
 
 | CSS class | Description |
 | --------- | ----------- |
-| micl-grid-field | A single-column grid of form fields with the standard row gap |
-| micl-grid-iconfield | A two-column grid: a 48px icon column and a field column |
-| micl-grid-iconfield__icon | Places an icon in the icon column |
-| micl-grid-iconfield__field | Places a field in the field column |
+| `micl-grid-field` | A single-column grid of form fields with the standard row gap |
+| `micl-grid-iconfield` | A two-column grid: a 48px icon column and a field column |
+| `micl-grid-iconfield__icon` | Places an icon in the icon column |
+| `micl-grid-iconfield__field` | Places a field in the field column |
 
 ## Theming
 The row gap follows the `--md-sys-padding-xl` design token (default 24px), defined in the shared `base.css`:
