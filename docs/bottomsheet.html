@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,edit,home,link,pause,share,skip_next&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,edit,home,link,palette,pause,share,skip_next&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
         .figures {
@@ -53,170 +54,179 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Bottom sheets</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL bottom sheets</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Bottom sheets</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column"></div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Showcase</h2>
-                        </div>
-                        <p class="micl-card__supporting-text">Click a button to open one of the MICL bottom sheets.</p>
-                        <div class="micl-card__content docs-buttons">
-                            <div class="docs-example">
-                                <template>
-                                    <dialog id="mybottomsheet1" class="micl-bottomsheet" popover>
-                                        <div class="micl-bottomsheet__content">
-                                            <h3 class="md-sys-typescale-title-large">Send</h3>
-                                            <div class="figures">
-                                                <figure>
-                                                    <img alt="John" src="card-names.webp">
-                                                    <figcaption class="md-sys-typescale-body-small">John Reeves</figcaption>
-                                                </figure>
-                                                <figure>
-                                                    <img alt="Carol" src="card-awards.webp">
-                                                    <figcaption class="md-sys-typescale-body-small">Carol Glass</figcaption>
-                                                </figure>
-                                                <figure>
-                                                    <img alt="Bill" src="card-fingerprint.webp">
-                                                    <figcaption class="md-sys-typescale-body-small">Bill Graves</figcaption>
-                                                </figure>
-                                                <figure>
-                                                    <img alt="Knut" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/KnutSteen.1.jpg/250px-KnutSteen.1.jpg">
-                                                    <figcaption class="md-sys-typescale-body-small">Knut Steen</figcaption>
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                    <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet1">Open Sheet</button>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <dialog id="mybottomsheet2" class="micl-bottomsheet" popover="manual">
-                                        <div class="micl-bottomsheet__content">
-                                            <div class="player">
-                                                <img alt="City Album" src="card-city.webp" class="cover">
-                                                <p>
-                                                    <span class="md-sys-typescale-body-large">City Sleepers</span>
-                                                    <span class="md-sys-typescale-body-small">Various artists</span>
-                                                </p>
-                                                <div class="actions">
-                                                    <span class="material-symbols-outlined micl-list-item__icon">pause</span>
-                                                    <span class="material-symbols-outlined micl-list-item__icon">skip_next</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                    <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet2">Open Co-Existing Sheet</button>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <dialog id="mybottomsheet3" class="micl-bottomsheet" popover data-miclsnapheights="0,400">
-                                        <div class="micl-bottomsheet__headline">
-                                            <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
-                                        </div>
-                                        <div class="micl-bottomsheet__content">
-                                            <ul class="micl-list" role="listbox">
-                                                <li class="micl-list-item-one" tabindex="0">
-                                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
-                                                    <span class="micl-list-item__text">
-                                                        <span class="micl-list-item__headline">Share</span>
-                                                    </span>
-                                                </li>
-                                                <li class="micl-list-item-one">
-                                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
-                                                    <span class="micl-list-item__text">
-                                                        <span class="micl-list-item__headline">Get link</span>
-                                                    </span>
-                                                </li>
-                                                <li class="micl-list-item-one">
-                                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
-                                                    <span class="micl-list-item__text">
-                                                        <span class="micl-list-item__headline">Edit name</span>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dialog>
-                                    <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet3">Open Resizable Sheet</button>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <dialog id="mybottomsheet4" class="micl-bottomsheet" closedby="closerequest">
-                                        <div class="micl-bottomsheet__headline">
-                                            <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
-                                        </div>
-                                        <div class="micl-bottomsheet__content">
-                                            <ul class="micl-list" role="listbox" style="flex-direction:row">
-                                                <li class="micl-list-item-one" tabindex="0">
-                                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
-                                                    <span class="micl-list-item__text">
-                                                        <span class="micl-list-item__headline">Share</span>
-                                                    </span>
-                                                </li>
-                                                <li class="micl-list-item-one">
-                                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
-                                                    <span class="micl-list-item__text">
-                                                        <span class="micl-list-item__headline">Get link</span>
-                                                    </span>
-                                                </li>
-                                                <li class="micl-list-item-one">
-                                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
-                                                    <span class="micl-list-item__text">
-                                                        <span class="micl-list-item__headline">Edit name</span>
-                                                    </span>
-                                                </li>
-                                                <li class="micl-list-item-one">
-                                                    <button type="button" class="micl-iconbutton-standard-m material-symbols-outlined" command="close" commandfor="mybottomsheet4">close</button>
-                                                </li>
-                                            </ul>
-                                            <hr class="micl-divider">
-                                            <h3 class="md-sys-typescale-title-large">Send</h3>
-                                            <div class="figures">
-                                                <figure>
-                                                    <img alt="John" src="card-names.webp">
-                                                    <figcaption class="md-sys-typescale-body-small">John Reeves</figcaption>
-                                                </figure>
-                                                <figure>
-                                                    <img alt="Carol" src="card-awards.webp">
-                                                    <figcaption class="md-sys-typescale-body-small">Carol Glass</figcaption>
-                                                </figure>
-                                                <figure>
-                                                    <img alt="Bill" src="card-fingerprint.webp">
-                                                    <figcaption class="md-sys-typescale-body-small">Bill Graves</figcaption>
-                                                </figure>
-                                                <figure>
-                                                    <img alt="Knut" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/KnutSteen.1.jpg/250px-KnutSteen.1.jpg">
-                                                    <figcaption class="md-sys-typescale-body-small">Knut Steen</figcaption>
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                    <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mybottomsheet4">Open Modal Sheet</button>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column"></div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Bottom sheets</h1>
+            <p class="docs-hero__lede">Bottom sheets show secondary content anchored to the bottom of the screen.</p>
+            <ul class="docs-hero__facts">
+                <li>Resizable via drag handle</li>
+                <li>Light-dismiss popover</li>
+                <li>Height managed for you</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <button type="button" class="micl-button-filled-m" popovertarget="mybottomsheet1">Open a bottom sheet</button>
             </div>
         </section>
-    </main>
+
+        <main class="docs-content">
+            <section class="docs-section" id="showcase">
+                <div class="docs-section__head">
+                    <h2>Showcase</h2>
+                    <p class="docs-section__use">Click a button to open one of the MICL bottom sheets.</p>
+                </div>
+                <div class="docs-stage docs-buttons">
+                    <div class="docs-example">
+                        <template>
+                            <dialog id="mybottomsheet1" class="micl-bottomsheet" popover>
+                                <div class="micl-bottomsheet__content">
+                                    <h3 class="md-sys-typescale-title-large">Send</h3>
+                                    <div class="figures">
+                                        <figure>
+                                            <img alt="John" src="card-names.webp">
+                                            <figcaption class="md-sys-typescale-body-small">John Reeves</figcaption>
+                                        </figure>
+                                        <figure>
+                                            <img alt="Carol" src="card-awards.webp">
+                                            <figcaption class="md-sys-typescale-body-small">Carol Glass</figcaption>
+                                        </figure>
+                                        <figure>
+                                            <img alt="Bill" src="card-fingerprint.webp">
+                                            <figcaption class="md-sys-typescale-body-small">Bill Graves</figcaption>
+                                        </figure>
+                                        <figure>
+                                            <img alt="Knut" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/KnutSteen.1.jpg/250px-KnutSteen.1.jpg">
+                                            <figcaption class="md-sys-typescale-body-small">Knut Steen</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet1">Open Sheet</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <dialog id="mybottomsheet2" class="micl-bottomsheet" popover="manual">
+                                <div class="micl-bottomsheet__content">
+                                    <div class="player">
+                                        <img alt="City Album" src="card-city.webp" class="cover">
+                                        <p>
+                                            <span class="md-sys-typescale-body-large">City Sleepers</span>
+                                            <span class="md-sys-typescale-body-small">Various artists</span>
+                                        </p>
+                                        <div class="actions">
+                                            <span class="material-symbols-outlined micl-list-item__icon">pause</span>
+                                            <span class="material-symbols-outlined micl-list-item__icon">skip_next</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet2">Open Co-Existing Sheet</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <dialog id="mybottomsheet3" class="micl-bottomsheet" popover data-miclsnapheights="0,400">
+                                <div class="micl-bottomsheet__headline">
+                                    <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
+                                </div>
+                                <div class="micl-bottomsheet__content">
+                                    <ul class="micl-list" role="listbox">
+                                        <li class="micl-list-item-one" tabindex="0">
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Share</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Get link</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Edit name</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet3">Open Resizable Sheet</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <dialog id="mybottomsheet4" class="micl-bottomsheet" closedby="closerequest">
+                                <div class="micl-bottomsheet__headline">
+                                    <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
+                                </div>
+                                <div class="micl-bottomsheet__content">
+                                    <ul class="micl-list" role="listbox" style="flex-direction:row">
+                                        <li class="micl-list-item-one" tabindex="0">
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Share</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Get link</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">Edit name</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <button type="button" class="micl-iconbutton-standard-m material-symbols-outlined" command="close" commandfor="mybottomsheet4">close</button>
+                                        </li>
+                                    </ul>
+                                    <hr class="micl-divider">
+                                    <h3 class="md-sys-typescale-title-large">Send</h3>
+                                    <div class="figures">
+                                        <figure>
+                                            <img alt="John" src="card-names.webp">
+                                            <figcaption class="md-sys-typescale-body-small">John Reeves</figcaption>
+                                        </figure>
+                                        <figure>
+                                            <img alt="Carol" src="card-awards.webp">
+                                            <figcaption class="md-sys-typescale-body-small">Carol Glass</figcaption>
+                                        </figure>
+                                        <figure>
+                                            <img alt="Bill" src="card-fingerprint.webp">
+                                            <figcaption class="md-sys-typescale-body-small">Bill Graves</figcaption>
+                                        </figure>
+                                        <figure>
+                                            <img alt="Knut" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/KnutSteen.1.jpg/250px-KnutSteen.1.jpg">
+                                            <figcaption class="md-sys-typescale-body-small">Knut Steen</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mybottomsheet4">Open Modal Sheet</button>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

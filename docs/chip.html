@@ -8,15 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=alarm,artist,blinds,brightness_empty,check,close,content_copy,dark_mode,directions_car,elevator,forest,garage_home,home,lyrics,music_note&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=alarm,artist,blinds,brightness_empty,check,close,content_copy,dark_mode,directions_car,elevator,forest,garage_home,home,lyrics,music_note,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card__content {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        .docs-stage {
+            row-gap: 36px;
         }
         p {
             color: var(--md-sys-color-on-surface);
@@ -24,237 +23,266 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes micl-panes--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Chips</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL chips</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Chips</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-m">
-                            <h2>Assist chips</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <button type="button" class="micl-chip-assist">Turn on lights</button>
-                                        <button type="button" class="micl-chip-assist">Set alarm</button>
-                                        <button type="button" class="micl-chip-assist" disabled>Close blinds</button>
-                                    </fieldset>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <button type="button" class="micl-chip-assist">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">brightness_empty</span>
-                                            <span>Turn on lights</span>
-                                        </button>
-                                        <button type="button" class="micl-chip-assist">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">alarm</span>
-                                            <span>Set alarm</span>
-                                        </button>
-                                        <button type="button" class="micl-chip-assist" disabled>
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">blinds</span>
-                                            <span>Close blinds</span>
-                                        </button>
-                                    </fieldset>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <button type="button" class="micl-chip-assist micl-chip--elevated">Turn on lights</button>
-                                        <button type="button" class="micl-chip-assist micl-chip--elevated">Set alarm</button>
-                                        <button type="button" class="micl-chip-assist micl-chip--elevated" disabled>Close blinds</button>
-                                    </fieldset>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-m">
-                            <h2>Filter chips</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <label class="micl-chip-filter">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">elevator</span>
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="checkbox" name="amenities" value="elevator">
-                                            <span>Elevator</span>
-                                        </label>
-                                        <label class="micl-chip-filter">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="checkbox" name="amenities" value="parking">
-                                            <span>Parking</span>
-                                        </label>
-                                        <label class="micl-chip-filter">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="checkbox" name="amenities" value="garden" disabled checked>
-                                            <span>Garden</span>
-                                        </label>
-                                        <label class="micl-chip-filter">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="checkbox" name="amenities" value="pool" disabled>
-                                            <span>Swimming pool</span>
-                                        </label>
-                                    </fieldset>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <label class="micl-chip-filter micl-chip--elevated">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="radio" name="chips2" value="soft">
-                                            <span>Soft</span>
-                                        </label>
-                                        <label class="micl-chip-filter micl-chip--elevated">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="radio" name="chips2" value="medium">
-                                            <span>Medium</span>
-                                        </label>
-                                        <label class="micl-chip-filter micl-chip--elevated">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="radio" name="chips2" value="hard">
-                                            <span>Hard</span>
-                                        </label>
-                                        <label class="micl-chip-filter micl-chip--elevated">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                            <input type="radio" name="chips2" value="veryhard" disabled checked>
-                                            <span>Very hard</span>
-                                        </label>
-                                    </fieldset>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-m">
-                            <h2>Input chips</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example" style="width:50%">
-                                <template>
-                                    <fieldset class="micl-chips micl-chips--input">
-                                        <legend class="md-sys-typescale-label-large">Toppings</legend>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary">Avocado</button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Avocado">close</button>
-                                        </span>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary" disabled>Lettuce</button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Lettuce" disabled>close</button>
-                                        </span>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary">Cheese</button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Cheese">close</button>
-                                        </span>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary">Habanero salsa</button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Habanero salsa">close</button>
-                                        </span>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary">Black bean sauce</button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Black bean sauce">close</button>
-                                        </span>
-                                    </fieldset>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips micl-chips--input">
-                                        <legend class="md-sys-typescale-label-large">Recipients</legend>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary">
-                                                <img alt="" src="card-names.webp" class="micl-chip__avatar">
-                                                <span>Jonas</span>
-                                            </button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Jonas">close</button>
-                                        </span>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary">
-                                                <span class="micl-chip__avatar" aria-hidden="true">A</span>
-                                                <span>Kathy</span>
-                                            </button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Kathy">close</button>
-                                        </span>
-                                        <span class="micl-chip-input">
-                                            <button type="button" class="micl-chip__primary" disabled>
-                                                <img alt="" src="card-awards.webp" class="micl-chip__avatar">
-                                                <span>Nathalie</span>
-                                            </button>
-                                            <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Nathalie" disabled>close</button>
-                                        </span>
-                                    </fieldset>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-m">
-                            <h2>Suggestion chips</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <button type="button" class="micl-chip-suggestion">What song is this?</button>
-                                        <button type="button" class="micl-chip-suggestion">What are the lyrics?</button>
-                                        <button type="button" class="micl-chip-suggestion" disabled>Who is the artist?</button>
-                                    </fieldset>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <button type="button" class="micl-chip-suggestion">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">music_note</span>
-                                            <span>What song is this?</span>
-                                        </button>
-                                        <button type="button" class="micl-chip-suggestion">
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">lyrics</span>
-                                            <span>What are the lyrics?</span>
-                                        </button>
-                                        <button type="button" class="micl-chip-suggestion" disabled>
-                                            <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">artist</span>
-                                            <span>Who is the artist?</span>
-                                        </button>
-                                    </fieldset>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <fieldset class="micl-chips">
-                                        <button type="button" class="micl-chip-suggestion micl-chip--elevated">What song is this?</button>
-                                        <button type="button" class="micl-chip-suggestion micl-chip--elevated">What are the lyrics?</button>
-                                        <button type="button" class="micl-chip-suggestion micl-chip--elevated" disabled>Who is the artist?</button>
-                                    </fieldset>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Chips</h1>
+            <p class="docs-hero__lede">Chips help people enter information, make selections, filter content, or trigger actions.</p>
+            <ul class="docs-hero__facts">
+                <li>Assist, filter, input & suggestion</li>
+                <li>Elevated variant</li>
+                <li>No JavaScript required</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <fieldset class="micl-chips" style="border:none;margin:0;padding:0">
+                    <button type="button" class="micl-chip-assist">Turn on lights</button>
+                    <button type="button" class="micl-chip-assist">Set alarm</button>
+                </fieldset>
             </div>
         </section>
-    </main>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#assist-chips">Assist chips</a>
+            <a href="#filter-chips">Filter chips</a>
+            <a href="#input-chips">Input chips</a>
+            <a href="#suggestion-chips">Suggestion chips</a>
+        </nav>
+
+        <main class="docs-content docs-content--columns">
+            <section class="docs-section" id="assist-chips">
+                <div class="docs-section__head">
+                    <h2>Assist chips</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <button type="button" class="micl-chip-assist">Turn on lights</button>
+                                <button type="button" class="micl-chip-assist">Set alarm</button>
+                                <button type="button" class="micl-chip-assist" disabled>Close blinds</button>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <button type="button" class="micl-chip-assist">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">brightness_empty</span>
+                                    <span>Turn on lights</span>
+                                </button>
+                                <button type="button" class="micl-chip-assist">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">alarm</span>
+                                    <span>Set alarm</span>
+                                </button>
+                                <button type="button" class="micl-chip-assist" disabled>
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">blinds</span>
+                                    <span>Close blinds</span>
+                                </button>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <button type="button" class="micl-chip-assist micl-chip--elevated">Turn on lights</button>
+                                <button type="button" class="micl-chip-assist micl-chip--elevated">Set alarm</button>
+                                <button type="button" class="micl-chip-assist micl-chip--elevated" disabled>Close blinds</button>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="filter-chips">
+                <div class="docs-section__head">
+                    <h2>Filter chips</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <label class="micl-chip-filter">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">elevator</span>
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="checkbox" name="amenities" value="elevator">
+                                    <span>Elevator</span>
+                                </label>
+                                <label class="micl-chip-filter">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="checkbox" name="amenities" value="parking">
+                                    <span>Parking</span>
+                                </label>
+                                <label class="micl-chip-filter">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="checkbox" name="amenities" value="garden" checked>
+                                    <span>Garden</span>
+                                </label>
+                                <label class="micl-chip-filter">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="checkbox" name="amenities" value="pool" disabled>
+                                    <span>Swimming pool</span>
+                                </label>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <label class="micl-chip-filter micl-chip--elevated">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="radio" name="chips2" value="soft">
+                                    <span>Soft</span>
+                                </label>
+                                <label class="micl-chip-filter micl-chip--elevated">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="radio" name="chips2" value="medium">
+                                    <span>Medium</span>
+                                </label>
+                                <label class="micl-chip-filter micl-chip--elevated">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="radio" name="chips2" value="hard" checked>
+                                    <span>Hard</span>
+                                </label>
+                                <label class="micl-chip-filter micl-chip--elevated">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                    <input type="radio" name="chips2" value="veryhard" disabled>
+                                    <span>Very hard</span>
+                                </label>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="input-chips">
+                <div class="docs-section__head">
+                    <h2>Input chips</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips micl-chips--input">
+                                <legend class="md-sys-typescale-label-large">Toppings</legend>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary">Avocado</button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Avocado">close</button>
+                                </span>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary" disabled>Lettuce</button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Lettuce" disabled>close</button>
+                                </span>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary">Cheese</button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Cheese">close</button>
+                                </span>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary">Habanero salsa</button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Habanero salsa">close</button>
+                                </span>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary">Black bean sauce</button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Black bean sauce">close</button>
+                                </span>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips micl-chips--input">
+                                <legend class="md-sys-typescale-label-large">Recipients</legend>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary">
+                                        <img alt="" src="card-names.webp" class="micl-chip__avatar">
+                                        <span>Jonas</span>
+                                    </button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Jonas">close</button>
+                                </span>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary">
+                                        <span class="micl-chip__avatar" aria-hidden="true">A</span>
+                                        <span>Kathy</span>
+                                    </button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Kathy">close</button>
+                                </span>
+                                <span class="micl-chip-input">
+                                    <button type="button" class="micl-chip__primary" disabled>
+                                        <img alt="" src="card-awards.webp" class="micl-chip__avatar">
+                                        <span>Nathalie</span>
+                                    </button>
+                                    <button type="button" class="micl-chip__remove material-symbols-outlined" aria-label="Remove Nathalie" disabled>close</button>
+                                </span>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="suggestion-chips">
+                <div class="docs-section__head">
+                    <h2>Suggestion chips</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <button type="button" class="micl-chip-suggestion">What song is this?</button>
+                                <button type="button" class="micl-chip-suggestion">What are the lyrics?</button>
+                                <button type="button" class="micl-chip-suggestion" disabled>Who is the artist?</button>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <button type="button" class="micl-chip-suggestion">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">music_note</span>
+                                    <span>What song is this?</span>
+                                </button>
+                                <button type="button" class="micl-chip-suggestion">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">lyrics</span>
+                                    <span>What are the lyrics?</span>
+                                </button>
+                                <button type="button" class="micl-chip-suggestion" disabled>
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">artist</span>
+                                    <span>Who is the artist?</span>
+                                </button>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-chips">
+                                <button type="button" class="micl-chip-suggestion micl-chip--elevated">What song is this?</button>
+                                <button type="button" class="micl-chip-suggestion micl-chip--elevated">What are the lyrics?</button>
+                                <button type="button" class="micl-chip-suggestion micl-chip--elevated" disabled>Who is the artist?</button>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>
+    <script>
+        document.querySelectorAll(".micl-chip__remove").forEach(el => {
+            el.addEventListener('click', () => {
+                el.closest(".micl-chip-input")?.remove();
+            });
+        });
+    </script>
 </body>
 </html>

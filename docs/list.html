@@ -8,15 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,confirmation_number,content_copy,dark_mode,home,keyboard_arrow_right,more_horiz,person,search,settings,star&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,confirmation_number,content_copy,dark_mode,home,keyboard_arrow_right,more_horiz,palette,person,search,settings,star&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card__content {
-            display: flex;
-            flex-direction: column;
-            row-gap: 24px;
+        .docs-stage {
+            row-gap: 36px;
         }
         input[type=checkbox].micl-switch {
             --md-comp-switch-selected-icon: "";
@@ -25,300 +24,306 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes micl-panes--stacked-to-extralarge">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Lists</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL lists</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Lists</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--evenly micl-pane__columns--stacked-to-large">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list micl-list--segmented">
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__overline">Overline</span>
-                                                <span class="micl-list-item__headline">Headline</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list micl-list--segmented">
-                                        <li class="micl-list-item-three">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 1</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-three micl-list-item--disabled">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 2</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one">
-                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">star</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__overline">Overline</span>
-                                                <span class="micl-list-item__headline">Headline</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one">
-                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">settings</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline</span>
-                                            </span>
-                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">more_horiz</span>
-                                        </li>
-                                        <li class="micl-list-item-two" tabindex="0">
-                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text</span>
-                                            </span>
-                                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">keyboard_arrow_right</span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list micl-list--segmented" role="listbox">
-                                        <li role="option" class="micl-list-item-three" tabindex="0">
-                                            <label>
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">search</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                                <input type="checkbox" id="cb1" class="micl-checkbox" value="c2" aria-label="Headline 1" checked>
-                                            </label>
-                                        </li>
-                                        <li role="option" class="micl-list-item-three">
-                                            <label>
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">confirmation_number</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                                <input type="checkbox" id="cb2" class="micl-checkbox" value="c3" aria-label="Headline 2">
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one">
-                                            <span class="micl-list-item__avatar">3</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__overline">Overline</span>
-                                                <span class="micl-list-item__headline">Headline</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-two">
-                                            <span class="micl-list-item__avatar">17</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list micl-list--segmented">
-                                        <li class="micl-list-item-three" tabindex="0">
-                                            <a href="https://www.thetimes.com/" target="_blank">
-                                                <span class="micl-list-item__avatar">T</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">The Times</span>
-                                                    <span class="micl-list-item__supporting-text">Selecting this item opens the front page of The Times.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="micl-list-item-three micl-list-item--disabled">
-                                            <span class="micl-list-item__avatar">H</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 2</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <button type="button" onclick="alert('This list item acts as an action button')">
-                                                <span class="micl-list-item__image" style="background-image:url(card-city.webp)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline</span>
-                                                </span>
-                                                <span class="micl-list-item__trailing-text">100+</span>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list" role="listbox">
-                                        <li role="option" class="micl-list-item-two" tabindex="0">
-                                            <label>
-                                                <span class="micl-list-item__image" style="background-image:url(card-holiday.webp)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__overline">Overline</span>
-                                                    <span class="micl-list-item__headline">Headline</span>
-                                                </span>
-                                                <input type="checkbox" class="micl-switch" id="myswitch" value="c1" aria-label="Headline">
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-three">
-                                            <span class="micl-list-item__image" style="background-image:url(card-cabinet.webp);border-radius:16px"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 1</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-three">
-                                            <span class="micl-list-item__image" style="background-image:url(card-awards.webp);border-radius:16px"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 2</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one micl-list-item--disabled">
-                                            <span class="micl-list-item__thumbnail" style="background-image:url(card-city.webp)"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <ul class="micl-list" role="listbox">
-                                        <li role="option" class="micl-list-item-two" tabindex="0">
-                                            <label>
-                                                <span class="micl-list-item__thumbnail" style="background-image:url(card-holiday.webp)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text</span>
-                                                </span>
-                                                <input type="checkbox" id="cb3" class="micl-checkbox" value="c1" aria-label="Headline">
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-three">
-                                            <span class="micl-list-item__thumbnail" style="background-image:url(card-cabinet.webp)"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 1</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
-                                            </span>
-                                        </li>
-                                        <li role="separator" class="micl-divider-inset"></li>
-                                        <li class="micl-list-item-three">
-                                            <span class="micl-list-item__thumbnail" style="background-image:url(card-awards.webp)"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Headline 2</span>
-                                                <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <ul class="micl-list" role="listbox">
-                                        <li role="option" class="micl-list-item-three" tabindex="0" aria-selected="true">
-                                            <label>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
-                                                </span>
-                                                <input type="checkbox" id="cb4" class="micl-checkbox" value="c2" checked aria-label="Headline 1">
-                                            </label>
-                                        </li>
-                                        <li role="separator" class="micl-divider-inset" tabindex="-1"></li>
-                                        <li role="option" class="micl-list-item-three">
-                                            <label>
-                                                <input type="checkbox" id="cb5" class="micl-checkbox" value="c3" aria-label="Headline 2">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
-                                                </span>
-                                                <span class="micl-list-item__trailing-text">47</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Lists</h1>
+            <p class="docs-hero__lede">Lists are continuous, vertical groups of text or images, representing a set of data.</p>
+            <ul class="docs-hero__facts">
+                <li>One- to three-line items</li>
+                <li>Segmented style</li>
+                <li>Avatars, icons & media</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <ul class="micl-list micl-list--segmented" style="inline-size:260px">
+                    <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Headline</span></span></li>
+                    <li class="micl-list-item-two"><span class="micl-list-item__text"><span class="micl-list-item__headline">Headline</span><span class="micl-list-item__supporting-text">Supporting text</span></span></li>
+                </ul>
             </div>
         </section>
-    </main>
+
+        <main class="docs-content docs-content--columns">
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list micl-list--segmented">
+                            <li class="micl-list-item-one">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-one">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__overline">Overline</span>
+                                    <span class="micl-list-item__headline">Headline</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-two">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list micl-list--segmented">
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 1</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-three micl-list-item--disabled">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 2</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one">
+                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">star</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__overline">Overline</span>
+                                    <span class="micl-list-item__headline">Headline</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-one">
+                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">settings</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline</span>
+                                </span>
+                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">more_horiz</span>
+                            </li>
+                            <li class="micl-list-item-two" tabindex="0">
+                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text</span>
+                                </span>
+                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">keyboard_arrow_right</span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list micl-list--segmented" role="listbox">
+                            <li role="option" class="micl-list-item-three" tabindex="0">
+                                <label>
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">search</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                    </span>
+                                    <input type="checkbox" id="cb1" class="micl-checkbox" value="c2" aria-label="Headline 1" checked>
+                                </label>
+                            </li>
+                            <li role="option" class="micl-list-item-three">
+                                <label>
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">confirmation_number</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                    </span>
+                                    <input type="checkbox" id="cb2" class="micl-checkbox" value="c3" aria-label="Headline 2">
+                                </label>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one">
+                                <span class="micl-list-item__avatar">3</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__overline">Overline</span>
+                                    <span class="micl-list-item__headline">Headline</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-two">
+                                <span class="micl-list-item__avatar">17</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list micl-list--segmented">
+                            <li class="micl-list-item-three" tabindex="0">
+                                <a href="https://www.thetimes.com/" target="_blank">
+                                    <span class="micl-list-item__avatar">T</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">The Times</span>
+                                        <span class="micl-list-item__supporting-text">Selecting this item opens the front page of The Times.</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="micl-list-item-three micl-list-item--disabled">
+                                <span class="micl-list-item__avatar">H</span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 2</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one" tabindex="0">
+                                <button type="button" onclick="alert('This list item acts as an action button')">
+                                    <span class="micl-list-item__image" style="background-image:url(card-city.webp)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline</span>
+                                    </span>
+                                    <span class="micl-list-item__trailing-text">100+</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list" role="listbox">
+                            <li role="option" class="micl-list-item-two" tabindex="0">
+                                <label>
+                                    <span class="micl-list-item__image" style="background-image:url(card-holiday.webp)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__overline">Overline</span>
+                                        <span class="micl-list-item__headline">Headline</span>
+                                    </span>
+                                    <input type="checkbox" class="micl-switch" id="myswitch" value="c1" aria-label="Headline">
+                                </label>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__image" style="background-image:url(card-cabinet.webp);border-radius:16px"></span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 1</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                </span>
+                            </li>
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__image" style="background-image:url(card-awards.webp);border-radius:16px"></span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 2</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one micl-list-item--disabled">
+                                <span class="micl-list-item__thumbnail" style="background-image:url(card-city.webp)"></span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline</span>
+                                </span>
+                            </li>
+                        </ul>
+                        <ul class="micl-list" role="listbox">
+                            <li role="option" class="micl-list-item-two" tabindex="0">
+                                <label>
+                                    <span class="micl-list-item__thumbnail" style="background-image:url(card-holiday.webp)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text</span>
+                                    </span>
+                                    <input type="checkbox" id="cb3" class="micl-checkbox" value="c1" aria-label="Headline">
+                                </label>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__thumbnail" style="background-image:url(card-cabinet.webp)"></span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 1</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                                </span>
+                            </li>
+                            <li role="separator" class="micl-divider-inset"></li>
+                            <li class="micl-list-item-three">
+                                <span class="micl-list-item__thumbnail" style="background-image:url(card-awards.webp)"></span>
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Headline 2</span>
+                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <ul class="micl-list" role="listbox">
+                            <li role="option" class="micl-list-item-three" tabindex="0" aria-selected="true">
+                                <label>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                                    </span>
+                                    <input type="checkbox" id="cb4" class="micl-checkbox" value="c2" checked aria-label="Headline 1">
+                                </label>
+                            </li>
+                            <li role="separator" class="micl-divider-inset" tabindex="-1"></li>
+                            <li role="option" class="micl-list-item-three">
+                                <label>
+                                    <input type="checkbox" id="cb5" class="micl-checkbox" value="c3" aria-label="Headline 2">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines of text with words and sentences</span>
+                                    </span>
+                                    <span class="micl-list-item__trailing-text">47</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

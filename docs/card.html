@@ -8,17 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-pane__columns {
-            column-gap: 8px;
+        .docs-content > .docs-stage {
+            padding-inline: 0;
+            background-color: transparent;
         }
-        .micl-pane__column {
-            row-gap: 8px;
-        }
+
         .micl-card__content p {
             margin: 0;
             color: var(--md-sys-color-on-surface);
@@ -37,137 +37,161 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes micl-panes--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Cards</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL cards</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Cards</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--evenly micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column"></div>
-                <div class="micl-pane__column" style="padding-block-start:8px">
-                    <div class="docs-example">
-                        <template>
-                            <div role="button" class="micl-card-elevated">
-                                <div class="docs-icon" aria-hidden="true">A</div>
-                                <div class="micl-card__headline-s">
-                                    <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit</h2>
-                                </div>
-                                <p class="micl-card__subhead">Dummy or placeholder text</p>
-                                <p class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</p>
-                                <div class="micl-card__content">
-                                    <p class="md-sys-typescale-body-small">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="docs-example">
-                        <template>
-                            <div class="micl-card-filled">
-                                <div class="micl-card__headline-m">
-                                    <h2>Lorem ipsum</h2>
-                                </div>
-                                <p class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</p>
-                                <div class="micl-card__content">
-                                    <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    <button type="button" class="micl-button-filled-s" style="margin-block-start:16px">Action</button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="docs-example">
-                        <template>
-                            <div role="link" class="micl-card-outlined" tabindex="0">
-                                <div class="micl-card__headline-l">
-                                    <h2>Lorem</h2>
-                                </div>
-                                <div class="micl-card__content">
-                                    <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-                <div class="micl-pane__column" style="padding-block-start:8px">
-                    <div class="docs-example">
-                        <template>
-                            <details class="micl-card-elevated">
-                                <summary>
-                                    <span class="micl-card__headline-s">
-                                        <span class="micl-heading">Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
-                                    </span>
-                                    <span class="micl-card__subhead">Dummy or placeholder text</span>
-                                    <span class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</span>
-                                </summary>
-                                <div class="micl-card__content" style="padding-inline:0">
-                                    <p class="md-sys-typescale-body-small" style="padding-block-end:var(--md-comp-card-padding-inline, 16px);padding-inline:var(--md-comp-card-padding-inline, 16px)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    <hr class="micl-divider" style="--md-comp-divider-space:8px">
-                                    <button type="button" class="micl-button-text-s">Share</button>
-                                </div>
-                            </details>
-                        </template>
-                    </div>
-                    <div class="docs-example">
-                        <template>
-                            <details class="micl-card-elevated">
-                                <summary>
-                                    <img alt="holiday" class="micl-card__image" src="card-holiday.webp" aria-hidden="true">
-                                    <span class="micl-card__headline-s">
-                                        <span class="micl-heading">Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
-                                    </span>
-                                    <span class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</span>
-                                </summary>
-                                <div class="micl-card__content" style="padding-inline:0">
-                                    <p class="md-sys-typescale-body-small" style="padding-block-end:var(--md-comp-card-padding-inline, 16px);padding-inline:var(--md-comp-card-padding-inline, 16px)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    <hr class="micl-divider" style="--md-comp-divider-space:8px">
-                                    <button type="button" class="micl-button-text-s">Share</button>
-                                </div>
-                            </details>
-                        </template>
-                    </div>
-                    <div class="docs-example">
-                        <template>
-                            <details class="micl-card-outlined">
-                                <summary>
-                                    <span class="micl-card__image" style="background-image:url(card-city.webp);aspect-ratio:820/340" aria-hidden="true"></span>
-                                    <span class="micl-card__headline-l">
-                                        <span class="micl-heading">Lorem</span>
-                                    </span>
-                                </summary>
-                                <div class="micl-card__content">
-                                    <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
-                                </div>
-                            </details>
-                        </template>
-                    </div>
-                    <div class="docs-example">
-                        <template>
-                            <details class="micl-card-filled">
-                                <summary class="micl-card--compact">
-                                    <span class="micl-card__image" style="background-image:url(card-cabinet.webp);aspect-ratio:820/340" aria-hidden="true"></span>
-                                    <span class="micl-card__headline-m">
-                                        <span class="micl-heading">Lorem ipsum</span>
-                                    </span>
-                                    <span class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</span>
-                                </summary>
-                                <div class="micl-card__content">
-                                    <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                </div>
-                            </details>
-                        </template>
-                    </div>
-                </div>
-                <div class="micl-pane__column"></div>
-            </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Cards</h1>
+            <p class="docs-hero__lede">Cards display content and actions about a single subject.</p>
+            <ul class="docs-hero__facts">
+                <li>Elevated, filled & outlined</li>
+                <li>Actionable and expandable</li>
+                <li>Image, headline & action slots</li>
+            </ul>
         </section>
-    </main>
+
+        <main class="docs-content docs-content--columns">
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-card-elevated">
+                            <div class="docs-icon" aria-hidden="true">A</div>
+                            <div class="micl-card__headline-s">
+                                <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit</h2>
+                            </div>
+                            <p class="micl-card__subhead">Dummy or placeholder text</p>
+                            <p class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</p>
+                            <div class="micl-card__content">
+                                <p class="md-sys-typescale-body-small">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-card-filled">
+                            <div class="micl-card__headline-m">
+                                <h2>Lorem ipsum</h2>
+                            </div>
+                            <p class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</p>
+                            <div class="micl-card__content">
+                                <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                <button type="button" class="micl-button-filled-s" style="margin-block-start:16px">Action</button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <div role="link" class="micl-card-outlined" tabindex="0">
+                            <div class="micl-card__headline-l">
+                                <h2>Lorem</h2>
+                            </div>
+                            <div class="micl-card__content">
+                                <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <details class="micl-card-elevated">
+                            <summary>
+                                <span class="micl-card__headline-s">
+                                    <span class="micl-heading">Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
+                                </span>
+                                <span class="micl-card__subhead">Dummy or placeholder text</span>
+                                <span class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</span>
+                            </summary>
+                            <div class="micl-card__content" style="padding-inline:0">
+                                <p class="md-sys-typescale-body-small" style="padding-block-end:var(--md-comp-card-padding-inline, 16px);padding-inline:var(--md-comp-card-padding-inline, 16px)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                <hr class="micl-divider" style="--md-comp-divider-space:8px">
+                                <button type="button" class="micl-button-text-s">Share</button>
+                            </div>
+                        </details>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <details class="micl-card-elevated">
+                            <summary>
+                                <img alt="holiday" class="micl-card__image" src="card-holiday.webp" aria-hidden="true">
+                                <span class="micl-card__headline-s">
+                                    <span class="micl-heading">Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
+                                </span>
+                                <span class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</span>
+                            </summary>
+                            <div class="micl-card__content" style="padding-inline:0">
+                                <p class="md-sys-typescale-body-small" style="padding-block-end:var(--md-comp-card-padding-inline, 16px);padding-inline:var(--md-comp-card-padding-inline, 16px)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                <hr class="micl-divider" style="--md-comp-divider-space:8px">
+                                <button type="button" class="micl-button-text-s">Share</button>
+                            </div>
+                        </details>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <details class="micl-card-outlined">
+                            <summary>
+                                <span class="micl-card__image" style="background-image:url(card-city.webp);aspect-ratio:820/340" aria-hidden="true"></span>
+                                <span class="micl-card__headline-l">
+                                    <span class="micl-heading">Lorem</span>
+                                </span>
+                            </summary>
+                            <div class="micl-card__content">
+                                <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                            </div>
+                        </details>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <details class="micl-card-filled">
+                            <summary class="micl-card--compact">
+                                <span class="micl-card__image" style="background-image:url(card-cabinet.webp);aspect-ratio:820/340" aria-hidden="true"></span>
+                                <span class="micl-card__headline-m">
+                                    <span class="micl-heading">Lorem ipsum</span>
+                                </span>
+                                <span class="micl-card__supporting-text">This is a dummy or placeholder text commonly used in web development.</span>
+                            </summary>
+                            <div class="micl-card__content">
+                                <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                            </div>
+                        </details>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

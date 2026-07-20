@@ -8,199 +8,218 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,error,home,question_mark&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,error,home,palette,question_mark&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card__content {
-            display: flex;
-            flex-direction: column;
+        .docs-stage {
             row-gap: 24px;
         }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes micl-panes--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Alerts</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL alerts</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Alerts</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-s">
-                            <h2>Error colors</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-tonal" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
-                                        <div class="micl-alert__text">
-                                            <h3>An error has occurred</h3>
-                                            <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-filled" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
-                                        <div class="micl-alert__text">
-                                            <h3>An error has occurred</h3>
-                                            <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-outlined" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
-                                        <div class="micl-alert__text">
-                                            <h3>An error has occurred</h3>
-                                            <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Primary colors</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-tonal micl-alert--primary" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                        <div class="micl-alert__text">
-                                            <h3>Your file has been saved</h3>
-                                            <span class="micl-alert__supporting-text">Please insert the next floppy disk.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-filled micl-alert--primary" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                        <div class="micl-alert__text">
-                                            <h3>Your file has been saved</h3>
-                                            <span class="micl-alert__supporting-text">Please insert the next floppy disk.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-outlined micl-alert--primary" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
-                                        <div class="micl-alert__text">
-                                            <h3>Your file has been saved</h3>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-outlined">
-                        <div class="micl-card__headline-s">
-                            <h2>Secondary colors</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-tonal micl-alert--secondary" role="alert">
-                                        <div class="micl-alert__text">
-                                            <h3>Your efforts have been rewarded</h3>
-                                            <span class="micl-alert__supporting-text">Click the button below to retrieve your prize.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-filled micl-alert--secondary" role="alert">
-                                        <div class="micl-alert__text">
-                                            <h3>Your efforts have been rewarded</h3>
-                                            <span class="micl-alert__supporting-text">Click the button below to retrieve your prize.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-outlined micl-alert--secondary" role="alert">
-                                        <div class="micl-alert__text">
-                                            <h3>Your efforts have been rewarded</h3>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                       <div class="micl-card__headline-s">
-                            <h2>Tertiary colors</h2>
-                        </div>
-                         <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-tonal micl-alert--tertiary" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
-                                        <div class="micl-alert__text">
-                                            <h3>Checking your progress</h3>
-                                            <span class="micl-alert__supporting-text">Continuing this operation will clear the Internet.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-filled micl-alert--tertiary" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
-                                        <div class="micl-alert__text">
-                                            <h3>Checking your progress</h3>
-                                            <span class="micl-alert__supporting-text">Continuing this operation will clear the Internet.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-alert-outlined micl-alert--tertiary" role="alert">
-                                        <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
-                                        <div class="micl-alert__text">
-                                            <h3>Checking your progress</h3>
-                                            <span class="micl-alert__supporting-text">Continuing this operation will clear the Internet.</span>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Alerts</h1>
+            <p class="docs-hero__lede">Alerts are used to inform the user of important changes in a prominent way. This component is inspired by Material Design 3 Expressive.</p>
+            <ul class="docs-hero__facts">
+                <li>Filled, tonal & outlined styles</li>
+                <li>ARIA alert semantics</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="micl-alert-filled" role="alert" style="max-inline-size:300px">
+                    <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
+                    <div class="micl-alert__text">
+                        <h2>An error has occurred</h2>
+                        <span class="micl-alert__supporting-text">Press any key to continue.</span>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#error-colors">Error colors</a>
+            <a href="#primary-colors">Primary colors</a>
+            <a href="#secondary-colors">Secondary colors</a>
+            <a href="#tertiary-colors">Tertiary colors</a>
+        </nav>
+
+        <main class="docs-content docs-content--columns">
+            <section class="docs-section" id="error-colors">
+                <div class="docs-section__head">
+                    <h2>Error colors</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-tonal" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
+                                <div class="micl-alert__text">
+                                    <h3>An error has occurred</h3>
+                                    <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-filled" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
+                                <div class="micl-alert__text">
+                                    <h3>An error has occurred</h3>
+                                    <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-outlined" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
+                                <div class="micl-alert__text">
+                                    <h3>An error has occurred</h3>
+                                    <span class="micl-alert__supporting-text">Keyboard not responding. Press any key to continue.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="primary-colors">
+                <div class="docs-section__head">
+                    <h2>Primary colors</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-tonal micl-alert--primary" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <div class="micl-alert__text">
+                                    <h3>Your file has been saved</h3>
+                                    <span class="micl-alert__supporting-text">Please insert the next floppy disk.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-filled micl-alert--primary" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <div class="micl-alert__text">
+                                    <h3>Your file has been saved</h3>
+                                    <span class="micl-alert__supporting-text">Please insert the next floppy disk.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-outlined micl-alert--primary" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <div class="micl-alert__text">
+                                    <h3>Your file has been saved</h3>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="secondary-colors">
+                <div class="docs-section__head">
+                    <h2>Secondary colors</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-tonal micl-alert--secondary" role="alert">
+                                <div class="micl-alert__text">
+                                    <h3>Your efforts have been rewarded</h3>
+                                    <span class="micl-alert__supporting-text">Click the button below to retrieve your prize.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-filled micl-alert--secondary" role="alert">
+                                <div class="micl-alert__text">
+                                    <h3>Your efforts have been rewarded</h3>
+                                    <span class="micl-alert__supporting-text">Click the button below to retrieve your prize.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-outlined micl-alert--secondary" role="alert">
+                                <div class="micl-alert__text">
+                                    <h3>Your efforts have been rewarded</h3>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="tertiary-colors">
+                <div class="docs-section__head">
+                    <h2>Tertiary colors</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-tonal micl-alert--tertiary" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
+                                <div class="micl-alert__text">
+                                    <h3>Checking your progress</h3>
+                                    <span class="micl-alert__supporting-text">Continuing this operation will clear the Internet.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-filled micl-alert--tertiary" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
+                                <div class="micl-alert__text">
+                                    <h3>Checking your progress</h3>
+                                    <span class="micl-alert__supporting-text">Continuing this operation will clear the Internet.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-alert-outlined micl-alert--tertiary" role="alert">
+                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
+                                <div class="micl-alert__text">
+                                    <h3>Checking your progress</h3>
+                                    <span class="micl-alert__supporting-text">Continuing this operation will clear the Internet.</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

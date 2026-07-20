@@ -8,17 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,dark_mode,delete,edit,error,favorite,globe,inbox,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,person,schedule,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,delete,edit,error,favorite,globe,home,inbox,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,palette,person,schedule,share&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
         a {
+            padding: 8px 0;
             color:var(--md-sys-color-on-surface)
         }
-        p:has(a) {
-            margin-block: 0 16px;
+        .docs-democol {
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
         }
     </style>
 </head>
@@ -49,373 +52,413 @@
         </div>
     </dialog>
 
-    <main class="micl-panes">
-        <section class="micl-pane">
-            <header class="micl-appbar micl-appbar--large">
-                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" command="show-modal" commandfor="mynavigationrail" aria-label="Open navigation rail">menu</button>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>MICL Showcase</h1>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="show-modal" commandfor="mynavigationrail" aria-label="Open navigation rail">menu</button>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><strong>Showcase</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Material-Inspired Component Library</p>
+            <h1>MICL Showcase</h1>
+            <p class="docs-hero__lede">A free, open-source implementation of Material Design 3 Expressive, built from native HTML elements and modern CSS. Everything on these pages is live — press, toggle, and theme it.</p>
+            <ul class="docs-hero__facts">
+                <li>26 components</li>
+                <li>Colour themes</li>
+                <li>Light, dark & high contrast</li>
+                <li>Zero runtime dependencies</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="docs-hero__demo-row">
+                    <button type="button" class="micl-button-filled-m">Press me</button>
+                    <input type="checkbox" class="micl-switch" role="switch" checked aria-label="Hero switch">
                 </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
-
-            <div class="micl-pane__columns micl-pane__columns--evenly micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Data entry</h2>
-                        </div>
-                        <div class="micl-card__content" style="display:flex;flex-direction:column;row-gap:16px;padding-block-start:16px">
-                            <div class="micl-textfield-outlined">
-                                <label for="mytextfield1">Text field</label>
-                                <input type="text" id="mytextfield1">
-                            </div>
-                            <div class="micl-textfield-outlined">
-                                <label for="myselect1">Select</label>
-                                <select id="myselect1">
-                                    <option class="micl-list-item-one" value="AR">
-                                        <span class="micl-list-item__text">Argentina</span>
-                                    </option>
-                                    <option class="micl-list-item-one" value="BO">
-                                        <span class="micl-list-item__text">Bolivia</span>
-                                    </option>
-                                    <option class="micl-list-item-one" value="BR" disabled>
-                                        <span class="micl-list-item__text">Brazil</span>
-                                    </option>
-                                    <option class="micl-list-item-one" value="CL">
-                                        <span class="micl-list-item__text">Chile</span>
-                                    </option>
-                                    <option class="micl-list-item-one" value="CO">
-                                        <span class="micl-list-item__text">Colombia</span>
-                                    </option>
-                                    <option class="micl-list-item-one" value="EC">
-                                        <span class="micl-list-item__text">Ecuador</span>
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
-                                <div class="docs-flex--vcenter">
-                                    <input type="radio" id="myradio1" class="micl-radio" name="foo" value="bar" checked>
-                                    <label for="myradio1" class="md-sys-typescale-body-medium">First radio button</label>
-                                </div>
-                                <div class="docs-flex--vcenter">
-                                    <input type="radio" id="myradio2" class="micl-radio" name="foo" value="baz">
-                                    <label for="myradio2" class="md-sys-typescale-body-medium">Second radio button</label>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="docs-flex--vcenter">
-                                    <input type="checkbox" id="mycheckbox1" class="micl-checkbox" checked>
-                                    <label for="mycheckbox1" class="md-sys-typescale-body-medium">First checkbox</label>
-                                </div>
-                                <div class="docs-flex--vcenter">
-                                    <input type="checkbox" id="mycheckbox2" class="micl-checkbox">
-                                    <label for="mycheckbox2" class="md-sys-typescale-body-medium">Second checkbox</label>
-                                </div>
-                            </div>
-                            <div class="docs-flex--vcenter" style="column-gap:16px">
-                                <input type="checkbox" class="micl-switch" id="myswitch" checked value="c1" role="switch">
-                                <label for="myswitch" class="md-sys-typescale-body-medium">First switch</label>
-                            </div>
-                            <input type="range" class="micl-slider-xs" style="width:100%;margin-block:16px" min="1" max="10" value="6" aria-label="Slider component">
-                        </div>
-                    </div>
-
-                    <div class="micl-card-outlined">
-                        <img class="micl-card__image" alt="city" src="card-city.webp" aria-hidden="true">
-                        <div class="micl-card__headline-l">
-                            <h2>Card</h2>
-                        </div>
-                        <span class="micl-card__supporting-text">A card is a versatile component that groups related elements. It can hold a wide range of content, including images, headlines, supporting text, and buttons. Cards are designed with flexible layouts and dimensions that adapt to their contents.</span>
-                        <div class="micl-card__content">
-                            <div class="micl-alert-outlined" role="alert">
-                                <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
-                                <div class="micl-alert__text">
-                                    <h3>This is an alert</h3>
-                                    <span class="micl-alert__supporting-text">An error has occurred</span>
-                                </div>
-                            </div>
-                            <fieldset class="micl-chips" style="margin-block:24px">
-                                <button type="button" class="micl-chip-assist">First assist chip</button>
-                                <button type="button" class="micl-chip-assist">Second assist chip</button>
-                                <button type="button" class="micl-chip-assist" disabled>Third assist chip</button>
-                                <button type="button" class="micl-chip-assist">Fourth assist chip</button>
-                            </fieldset>
-                            <div style="display:flex;justify-content:space-between;padding-block-start:16px">
-                                <button type="button" class="micl-button-filled-s">Action</button>
-                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mymenu" aria-label="Open Menu">more_vert</button>
-                                <nav id="mymenu" class="micl-menu" popover>
-                                    <ul class="micl-list">
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Menu item without graphics</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">globe</span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Menu item with an icon</span>
-                                            </span>
-                                        </li>
-                                        <li class="micl-list-item-three">
-                                            <a href="https://www.nytimes.com" tabindex="-1">
-                                                <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">The New York Times</span>
-                                                    <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="micl-list-item-one" tabindex="0">
-                                            <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/330px-Top_of_Atmosphere.jpg)"></span>
-                                            <span class="micl-list-item__text">
-                                                <span class="micl-list-item__headline">Item with an image</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-l">
-                            <h2>Lists</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <ul class="micl-list">
-                                <li class="micl-list-item-one">
-                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
-                                    <span class="micl-list-item__text">
-                                        <span class="micl-list-item__headline">One-line list item</span>
-                                    </span>
-                                </li>
-                                <li class="micl-list-item-two">
-                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">globe</span>
-                                    <span class="micl-list-item__text">
-                                        <span class="micl-list-item__headline">Two-line list item</span>
-                                        <span class="micl-list-item__supporting-text">Supporting text</span>
-                                    </span>
-                                </li>
-                                <li class="micl-list-item-three">
-                                    <span class="micl-list-item__image" style="background-image:url(card-names.webp);background-position:center" aria-hidden="true"></span>
-                                    <span class="micl-list-item__text">
-                                        <span class="micl-list-item__headline">Three-line list item</span>
-                                        <span class="micl-list-item__supporting-text">Supporting text</span>
-                                    </span>
-                                </li>
-                            </ul>
-
-                            <div class="micl-list" role="listbox">
-                                <details name="accordion">
-                                    <summary class="micl-list-item-two">
-                                        <span class="micl-list-item__text">
-                                            <span class="micl-list-item__headline">Accordion item 1</span>
-                                            <span class="micl-list-item__supporting-text">Click to open</span>
-                                        </span>
-                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                    </summary>
-                                    <div class="micl-list-item__content" style="padding-block:16px">
-                                        <div class="micl-textfield-filled">
-                                            <label for="tf1">Name</label>
-                                            <input type="text" id="tf1" value="Filled text field">
-                                        </div>
-                                    </div>
-                                </details>
-                                <hr class="micl-divider">
-                                <details name="accordion">
-                                    <summary class="micl-list-item-two" tabindex="-1">
-                                        <span class="micl-list-item__text">
-                                            <span class="micl-list-item__headline">Accordion item 2</span>
-                                            <span class="micl-list-item__supporting-text">Click to open</span>
-                                        </span>
-                                        <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                    </summary>
-                                    <div class="micl-list-item__content" style="padding-block:16px">
-                                        <div class="micl-textfield-filled">
-                                            <label for="tf2">Time</label>
-                                            <input type="time" id="tf2" data-timepicker="mytimepicker" value="10:05">
-                                        </div>
-                                        <dialog id="mytimepicker" class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="mytime">
-                                            <form method="dialog">
-                                                <div class="micl-dialog__headline">
-                                                    <h2 id="mytime">Enter time</h2>
-                                                </div>
-                                                <div class="micl-dialog__content">
-                                                    <input type="number" name="hour" value="00" aria-labelledby="myhour">
-                                                    <span class="micl-timepicker__separator">:</span>
-                                                    <input type="number" name="minute" value="00" aria-labelledby="myminute">
-                                                    <div class="micl-timepicker__period"></div>
-                                                    <span id="myhour" class="micl-timepicker__supporting-text-hour">Hour</span>
-                                                    <span id="myminute" class="micl-timepicker__supporting-text-minute">Minute</span>
-                                                    <div class="micl-timepicker__dial"></div>
-                                                </div>
-                                                <div class="micl-dialog__actions">
-                                                    <button type="button" id="btn" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
-                                                    <div>
-                                                        <button class="micl-button-text-s" value="">Cancel</button>
-                                                        <button class="micl-button-text-s" value="OK">OK</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </dialog>
-                                    </div>
-                                </details>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="micl-card-outlined">
-                        <div class="micl-card__headline-s">
-                            <h2>Button actions</h2>
-                        </div>
-                        <div class="micl-card__content" style="display:flex;justify-content:space-between;flex-wrap:wrap">
-                            <div style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px">
-                                <dialog id="mydialog" class="micl-dialog" popover closedby="none" aria-labelledby="mytitle">
-                                    <form method="dialog" class="micl-dialog__headline">
-                                        <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
-                                        <h2 id="mytitle">Personal info</h2>
-                                    </form>
-                                    <div class="micl-dialog__content">
-                                        <p class="micl-dialog__supporting-text">Please specify personal information about the new employee.</p>
-                                        <div class="micl-textfield-outlined" style="margin-block:24px">
-                                            <label for="mytextfield2">Name</label>
-                                            <input type="text" id="mytextfield2" value="Marie Curie">
-                                        </div>
-                                        <div class="micl-textfield-outlined" style="margin-block:24px">
-                                            <label for="mytextfield3">Address</label>
-                                            <input type="text" id="mytextfield3" value="Rue du Boulevard 3, Paris">
-                                        </div>
-                                        <div class="micl-textfield-outlined">
-                                            <label for="myselect">Country</label>
-                                            <select id="myselect">
-                                                <option class="micl-list-item-one" value="AR">
-                                                    <span class="micl-list-item__text">Argentina</span>
-                                                </option>
-                                                <option class="micl-list-item-one" value="BO">
-                                                    <span class="micl-list-item__text">Bolivia</span>
-                                                </option>
-                                                <option class="micl-list-item-one" value="BR">
-                                                    <span class="micl-list-item__text">Brazil</span>
-                                                </option>
-                                                <option class="micl-list-item-one" value="CL" disabled>
-                                                    <span class="micl-list-item__text">Chile</span>
-                                                </option>
-                                                <option class="micl-list-item-one" value="CO">
-                                                    <span class="micl-list-item__text">Colombia</span>
-                                                </option>
-                                                <option class="micl-list-item-one" value="FR" selected>
-                                                    <span class="micl-list-item__text">France</span>
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="micl-textfield-outlined" style="margin-block:24px 4px">
-                                            <label for="mytextfield4">Profession</label>
-                                            <input type="text" id="mytextfield4" value="Physics researcher">
-                                        </div>
-                                    </div>
-                                    <form method="dialog" class="micl-dialog__actions">
-                                        <button type="button" class="micl-button-text-s" popovertarget="mydialog">Cancel</button>
-                                        <button class="micl-button-text-s" value="dosave">Save</button>
-                                    </form>
-                                </dialog>
-                                <button class="micl-button-elevated-s" popovertarget="mydialog">Open Dialog</button>
-
-                                <dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mysidesheettitle">
-                                    <div class="micl-sidesheet__headline">
-                                        <h2 id="mysidesheettitle">Lorum ipsum</h2>
-                                        <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet">close</button>
-                                    </div>
-                                    <div class="micl-sidesheet__content">
-                                        <p style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                        <p style="color:var(--md-sys-color-on-surface)">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
-                                        <p style="color:var(--md-sys-color-on-surface)">Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
-                                        <p style="color:var(--md-sys-color-on-surface)">Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
-                                    </div>
-                                </dialog>
-                                <button type="button" class="micl-button-tonal-s" popovertarget="mysidesheet">Open Side Sheet</button>
-
-                                <dialog id="mybottomsheet" class="micl-bottomsheet" popover data-snapheights="400">
-                                    <div class="micl-bottomsheet__headline">
-                                        <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
-                                    </div>
-                                    <div class="micl-bottomsheet__content">
-                                        <ul class="micl-list" role="listbox">
-                                            <li class="micl-list-item-one" tabindex="0">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Share</span>
-                                                </span>
-                                            </li>
-                                            <li class="micl-list-item-one" tabindex="0">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Get link</span>
-                                                </span>
-                                            </li>
-                                            <li class="micl-list-item-one" tabindex="0">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Edit name</span>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </dialog>
-                                <button type="button" class="micl-button-outlined-s" popovertarget="mybottomsheet">Open Bottom Sheet</button>
-                            </div>
-                            <div style="display:flex;flex-wrap:wrap">
-                                <svg class="micl-shapes micl-shapes--soft-burst">
-                                    <defs>
-                                        <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
-                                            <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
-                                        </pattern>
-                                    </defs>
-                                    <path fill="url(#photo-1)" />
-                                </svg>
-                                <svg class="micl-shapes micl-shapes--arrow micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-l">
-                            <h2>Demos</h2>
-                        </div>
-                        <div class="micl-card__content" style="column-count:2;padding-block-start:16px">
-                            <p><a href="accordion.html" class="md-sys-typescale-body-large">Accordions</a></p>
-                            <p><a href="alert.html" class="md-sys-typescale-body-large">Alerts</a></p>
-                            <p><a href="bottomsheet.html" class="md-sys-typescale-body-large">Bottom sheets</a></p>
-                            <p><a href="button.html" class="md-sys-typescale-body-large">Buttons</a></p>
-                            <p><a href="card.html" class="md-sys-typescale-body-large">Cards</a></p>
-                            <p><a href="chip.html" class="md-sys-typescale-body-large">Chips</a></p>
-                            <p><a href="checkbox.html" class="md-sys-typescale-body-large">Checkboxes</a></p>
-                            <p><a href="datepicker.html" class="md-sys-typescale-body-large">Date pickers</a></p>
-                            <p><a href="dialog.html" class="md-sys-typescale-body-large">Dialogs</a></p>
-                            <p><a href="divider.html" class="md-sys-typescale-body-large">Dividers</a></p>
-                            <p><a href="iconbutton.html" class="md-sys-typescale-body-large">Icon buttons</a></p>
-                            <p><a href="list.html" class="md-sys-typescale-body-large">Lists</a></p>
-                            <p><a href="menu.html" class="md-sys-typescale-body-large">Menus</a></p>
-                            <p><a href="navigationbar.html" class="md-sys-typescale-body-large">Navigation bars</a></p>
-                            <p><a href="navigationrail.html" class="md-sys-typescale-body-large">Navigation rails</a></p>
-                            <p><a href="progressindicator.html" class="md-sys-typescale-body-large">Progress indicators</a></p>
-                            <p><a href="radio.html" class="md-sys-typescale-body-large">Radio buttons</a></p>
-                            <p><a href="select.html" class="md-sys-typescale-body-large">Selects</a></p>
-                            <p><a href="shapes.html" class="md-sys-typescale-body-large">Shapes</a></p>
-                            <p><a href="sidesheet.html" class="md-sys-typescale-body-large">Side sheets</a></p>
-                            <p><a href="slider.html" class="md-sys-typescale-body-large">Sliders</a></p>
-                            <p><a href="snackbar.html" class="md-sys-typescale-body-large">Snackbars</a></p>
-                            <p><a href="stepper.html" class="md-sys-typescale-body-large">Steppers</a></p>
-                            <p><a href="switch.html" class="md-sys-typescale-body-large">Switches</a></p>
-                            <p><a href="textfield.html" class="md-sys-typescale-body-large">Text fields</a></p>
-                            <p><a href="timepicker.html" class="md-sys-typescale-body-large">Time pickers</a></p>
-                        </div>
-                    </div>
-                </div>
+                <progress class="micl-linear-progress" style="inline-size:220px"></progress>
+                <fieldset class="micl-chips" style="border:none;margin:0;padding:0;justify-content:center">
+                    <button type="button" class="micl-chip-assist">Theme it</button>
+                    <button type="button" class="micl-chip-assist">Toggle it</button>
+                </fieldset>
             </div>
         </section>
-    </main>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#components">Components</a>
+            <a href="#data-entry">Data entry</a>
+            <a href="#cards">Cards</a>
+            <a href="#lists">Lists</a>
+            <a href="#actions">Actions</a>
+        </nav>
+
+        <main class="docs-content docs-content--columns">
+            <section class="docs-section" id="components">
+                <div class="docs-section__head">
+                    <h2>Components</h2>
+                    <p class="docs-section__use">Every component has its own page with live examples and copyable markup.</p>
+                </div>
+                <div class="docs-stage" style="flex-direction:row;justify-content:space-between">
+                    <div style="display:flex;flex-direction:column">
+                        <a href="accordion.html" class="md-sys-typescale-body-large">Accordions</a>
+                        <a href="alert.html" class="md-sys-typescale-body-large">Alerts</a>
+                        <a href="bottomsheet.html" class="md-sys-typescale-body-large">Bottom sheets</a>
+                        <a href="button.html" class="md-sys-typescale-body-large">Buttons</a>
+                        <a href="card.html" class="md-sys-typescale-body-large">Cards</a>
+                        <a href="checkbox.html" class="md-sys-typescale-body-large">Checkboxes</a>
+                        <a href="chip.html" class="md-sys-typescale-body-large">Chips</a>
+                        <a href="datepicker.html" class="md-sys-typescale-body-large">Date pickers</a>
+                        <a href="dialog.html" class="md-sys-typescale-body-large">Dialogs</a>
+                        <a href="divider.html" class="md-sys-typescale-body-large">Dividers</a>
+                        <a href="iconbutton.html" class="md-sys-typescale-body-large">Icon buttons</a>
+                        <a href="list.html" class="md-sys-typescale-body-large">Lists</a>
+                        <a href="menu.html" class="md-sys-typescale-body-large">Menus</a>
+                    </div>
+                    <div style="display:flex;flex-direction:column">
+                        <a href="navigationbar.html" class="md-sys-typescale-body-large">Navigation bars</a>
+                        <a href="navigationrail.html" class="md-sys-typescale-body-large">Navigation rails</a>
+                        <a href="progressindicator.html" class="md-sys-typescale-body-large">Progress indicators</a>
+                        <a href="radio.html" class="md-sys-typescale-body-large">Radio buttons</a>
+                        <a href="select.html" class="md-sys-typescale-body-large">Selects</a>
+                        <a href="shapes.html" class="md-sys-typescale-body-large">Shapes</a>
+                        <a href="sidesheet.html" class="md-sys-typescale-body-large">Side sheets</a>
+                        <a href="slider.html" class="md-sys-typescale-body-large">Sliders</a>
+                        <a href="snackbar.html" class="md-sys-typescale-body-large">Snackbars</a>
+                        <a href="stepper.html" class="md-sys-typescale-body-large">Steppers</a>
+                        <a href="switch.html" class="md-sys-typescale-body-large">Switches</a>
+                        <a href="textfield.html" class="md-sys-typescale-body-large">Text fields</a>
+                        <a href="timepicker.html" class="md-sys-typescale-body-large">Time pickers</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="data-entry">
+                <div class="docs-section__head">
+                    <h2>Data entry</h2>
+                </div>
+                <div class="docs-stage docs-democol">
+                    <div class="micl-textfield-outlined">
+                        <label for="mytextfield1">Text field</label>
+                        <input type="text" id="mytextfield1">
+                    </div>
+                    <div class="micl-textfield-outlined">
+                        <label for="myselect1">Select</label>
+                        <select id="myselect1">
+                            <option class="micl-list-item-one" value="AR">
+                                <span class="micl-list-item__text">Argentina</span>
+                            </option>
+                            <option class="micl-list-item-one" value="BO">
+                                <span class="micl-list-item__text">Bolivia</span>
+                            </option>
+                            <option class="micl-list-item-one" value="BR" disabled>
+                                <span class="micl-list-item__text">Brazil</span>
+                            </option>
+                            <option class="micl-list-item-one" value="CL">
+                                <span class="micl-list-item__text">Chile</span>
+                            </option>
+                            <option class="micl-list-item-one" value="CO">
+                                <span class="micl-list-item__text">Colombia</span>
+                            </option>
+                            <option class="micl-list-item-one" value="EC">
+                                <span class="micl-list-item__text">Ecuador</span>
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="docs-flex--vcenter">
+                            <input type="radio" id="myradio1" class="micl-radio" name="foo" value="bar" checked>
+                            <label for="myradio1" class="md-sys-typescale-body-medium">First radio button</label>
+                        </div>
+                        <div class="docs-flex--vcenter">
+                            <input type="radio" id="myradio2" class="micl-radio" name="foo" value="baz">
+                            <label for="myradio2" class="md-sys-typescale-body-medium">Second radio button</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="docs-flex--vcenter">
+                            <input type="checkbox" id="mycheckbox1" class="micl-checkbox" checked>
+                            <label for="mycheckbox1" class="md-sys-typescale-body-medium">First checkbox</label>
+                        </div>
+                        <div class="docs-flex--vcenter">
+                            <input type="checkbox" id="mycheckbox2" class="micl-checkbox">
+                            <label for="mycheckbox2" class="md-sys-typescale-body-medium">Second checkbox</label>
+                        </div>
+                    </div>
+                    <div class="docs-flex--vcenter" style="column-gap:16px">
+                        <input type="checkbox" class="micl-switch" id="myswitch" checked value="c1" role="switch">
+                        <label for="myswitch" class="md-sys-typescale-body-medium">First switch</label>
+                    </div>
+                    <hr class="micl-divider">
+                    <input type="range" class="micl-slider-xs" style="width:100%;margin-block:16px" min="1" max="10" value="6" aria-label="Slider component">
+                </div>
+            </section>
+
+            <section class="docs-section" id="cards">
+                <div class="docs-section__head">
+                    <h2>Cards</h2>
+                </div>
+                <div class="micl-card-outlined">
+                    <img class="micl-card__image" alt="city" src="card-city.webp" aria-hidden="true">
+                    <div class="micl-card__headline-l">
+                        <h2>Card</h2>
+                    </div>
+                    <span class="micl-card__supporting-text">A card is a versatile component that groups related elements. It can hold a wide range of content, including images, headlines, supporting text, and buttons. Cards are designed with flexible layouts and dimensions that adapt to their contents.</span>
+                    <div class="micl-card__content">
+                        <div class="micl-alert-outlined" role="alert">
+                            <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
+                            <div class="micl-alert__text">
+                                <h3>This is an alert</h3>
+                                <span class="micl-alert__supporting-text">An error has occurred</span>
+                            </div>
+                        </div>
+                        <fieldset class="micl-chips" style="margin-block:24px">
+                            <button type="button" class="micl-chip-assist">First assist chip</button>
+                            <button type="button" class="micl-chip-assist">Second assist chip</button>
+                            <button type="button" class="micl-chip-assist" disabled>Third assist chip</button>
+                            <button type="button" class="micl-chip-assist">Fourth assist chip</button>
+                        </fieldset>
+                        <div style="display:flex;justify-content:space-between;padding-block-start:16px">
+                            <button type="button" class="micl-button-filled-s">Action</button>
+                            <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mymenu" aria-label="Open Menu">more_vert</button>
+                            <nav id="mymenu" class="micl-menu" popover>
+                                <ul class="micl-list">
+                                    <li class="micl-list-item-one" tabindex="0">
+                                        <span class="micl-list-item__text">
+                                            <span class="micl-list-item__headline">Menu item without graphics</span>
+                                        </span>
+                                    </li>
+                                    <li class="micl-list-item-one" tabindex="0">
+                                        <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">globe</span>
+                                        <span class="micl-list-item__text">
+                                            <span class="micl-list-item__headline">Menu item with an icon</span>
+                                        </span>
+                                    </li>
+                                    <li class="micl-list-item-three">
+                                        <a href="https://www.nytimes.com" tabindex="-1">
+                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">newspaper</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">The New York Times</span>
+                                                <span class="micl-list-item__supporting-text">Clicking this item opens the front page of The New York Times</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="micl-list-item-one" tabindex="0">
+                                        <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Top_of_Atmosphere.jpg/330px-Top_of_Atmosphere.jpg)"></span>
+                                        <span class="micl-list-item__text">
+                                            <span class="micl-list-item__headline">Item with an image</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="lists">
+                <div class="docs-section__head">
+                    <h2>Lists</h2>
+                </div>
+                <div class="docs-stage">
+                    <ul class="micl-list">
+                        <li class="micl-list-item-one">
+                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">One-line list item</span>
+                            </span>
+                        </li>
+                        <li class="micl-list-item-two">
+                            <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">globe</span>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">Two-line list item</span>
+                                <span class="micl-list-item__supporting-text">Supporting text</span>
+                            </span>
+                        </li>
+                        <li class="micl-list-item-three">
+                            <span class="micl-list-item__image" style="background-image:url(card-names.webp);background-position:center" aria-hidden="true"></span>
+                            <span class="micl-list-item__text">
+                                <span class="micl-list-item__headline">Three-line list item</span>
+                                <span class="micl-list-item__supporting-text">Supporting text</span>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="micl-list" role="listbox">
+                        <details name="accordion">
+                            <summary class="micl-list-item-two">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Accordion item 1</span>
+                                    <span class="micl-list-item__supporting-text">Click to open</span>
+                                </span>
+                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="micl-list-item__content" style="padding-block:16px">
+                                <div class="micl-textfield-filled">
+                                    <label for="tf1">Name</label>
+                                    <input type="text" id="tf1" value="Filled text field">
+                                </div>
+                            </div>
+                        </details>
+                        <hr class="micl-divider">
+                        <details name="accordion">
+                            <summary class="micl-list-item-two" tabindex="-1">
+                                <span class="micl-list-item__text">
+                                    <span class="micl-list-item__headline">Accordion item 2</span>
+                                    <span class="micl-list-item__supporting-text">Click to open</span>
+                                </span>
+                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="micl-list-item__content" style="padding-block:16px">
+                                <div class="micl-textfield-filled">
+                                    <label for="tf2">Time</label>
+                                    <input type="time" id="tf2" data-timepicker="mytimepicker" value="10:05">
+                                </div>
+                                <dialog id="mytimepicker" class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="mytime">
+                                    <form method="dialog">
+                                        <div class="micl-dialog__headline">
+                                            <h2 id="mytime">Enter time</h2>
+                                        </div>
+                                        <div class="micl-dialog__content">
+                                            <input type="number" name="hour" value="00" aria-labelledby="myhour">
+                                            <span class="micl-timepicker__separator">:</span>
+                                            <input type="number" name="minute" value="00" aria-labelledby="myminute">
+                                            <div class="micl-timepicker__period"></div>
+                                            <span id="myhour" class="micl-timepicker__supporting-text-hour">Hour</span>
+                                            <span id="myminute" class="micl-timepicker__supporting-text-minute">Minute</span>
+                                            <div class="micl-timepicker__dial"></div>
+                                        </div>
+                                        <div class="micl-dialog__actions">
+                                            <button type="button" id="btn" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
+                                            <div>
+                                                <button class="micl-button-text-s" value="">Cancel</button>
+                                                <button class="micl-button-text-s" value="OK">OK</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </dialog>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="actions">
+                <div class="docs-section__head">
+                    <h2>Button actions</h2>
+                </div>
+                <div class="docs-stage" style="flex-direction:row;justify-content:space-between;flex-wrap:wrap">
+                    <div style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px">
+                        <dialog id="mydialog" class="micl-dialog" popover closedby="none" aria-labelledby="mytitle">
+                            <form method="dialog" class="micl-dialog__headline">
+                                <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
+                                <h2 id="mytitle">Personal info</h2>
+                            </form>
+                            <div class="micl-dialog__content">
+                                <p class="micl-dialog__supporting-text">Please specify personal information about the new employee.</p>
+                                <div class="micl-textfield-outlined" style="margin-block:24px">
+                                    <label for="mytextfield2">Name</label>
+                                    <input type="text" id="mytextfield2" value="Marie Curie">
+                                </div>
+                                <div class="micl-textfield-outlined" style="margin-block:24px">
+                                    <label for="mytextfield3">Address</label>
+                                    <input type="text" id="mytextfield3" value="Rue du Boulevard 3, Paris">
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myselect">Country</label>
+                                    <select id="myselect">
+                                        <option class="micl-list-item-one" value="AR">
+                                            <span class="micl-list-item__text">Argentina</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="BO">
+                                            <span class="micl-list-item__text">Bolivia</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="BR">
+                                            <span class="micl-list-item__text">Brazil</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="CL" disabled>
+                                            <span class="micl-list-item__text">Chile</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="CO">
+                                            <span class="micl-list-item__text">Colombia</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="FR" selected>
+                                            <span class="micl-list-item__text">France</span>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="micl-textfield-outlined" style="margin-block:24px 4px">
+                                    <label for="mytextfield4">Profession</label>
+                                    <input type="text" id="mytextfield4" value="Physics researcher">
+                                </div>
+                            </div>
+                            <form method="dialog" class="micl-dialog__actions">
+                                <button type="button" class="micl-button-text-s" popovertarget="mydialog">Cancel</button>
+                                <button class="micl-button-text-s" value="dosave">Save</button>
+                            </form>
+                        </dialog>
+                        <button class="micl-button-elevated-s" popovertarget="mydialog">Open Dialog</button>
+
+                        <dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mysidesheettitle">
+                            <div class="micl-sidesheet__headline">
+                                <h2 id="mysidesheettitle">Lorum ipsum</h2>
+                                <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet">close</button>
+                            </div>
+                            <div class="micl-sidesheet__content">
+                                <p style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                <p style="color:var(--md-sys-color-on-surface)">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                                <p style="color:var(--md-sys-color-on-surface)">Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
+                                <p style="color:var(--md-sys-color-on-surface)">Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
+                            </div>
+                        </dialog>
+                        <button type="button" class="micl-button-tonal-s" popovertarget="mysidesheet">Open Side Sheet</button>
+
+                        <dialog id="mybottomsheet" class="micl-bottomsheet" popover data-snapheights="400">
+                            <div class="micl-bottomsheet__headline">
+                                <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
+                            </div>
+                            <div class="micl-bottomsheet__content">
+                                <ul class="micl-list" role="listbox">
+                                    <li class="micl-list-item-one" tabindex="0">
+                                        <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">share</span>
+                                        <span class="micl-list-item__text">
+                                            <span class="micl-list-item__headline">Share</span>
+                                        </span>
+                                    </li>
+                                    <li class="micl-list-item-one" tabindex="0">
+                                        <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">link</span>
+                                        <span class="micl-list-item__text">
+                                            <span class="micl-list-item__headline">Get link</span>
+                                        </span>
+                                    </li>
+                                    <li class="micl-list-item-one" tabindex="0">
+                                        <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">edit</span>
+                                        <span class="micl-list-item__text">
+                                            <span class="micl-list-item__headline">Edit name</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dialog>
+                        <button type="button" class="micl-button-outlined-s" popovertarget="mybottomsheet">Open Bottom Sheet</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;margin-block:-24px -12px">
+                        <svg class="micl-shapes micl-shapes--arrow micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
+                        <svg class="micl-shapes micl-shapes--soft-burst">
+                            <defs>
+                                <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
+                                    <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
+                                </pattern>
+                            </defs>
+                            <path fill="url(#photo-1)" />
+                        </svg>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
+
     <div id="mysnackbar" class="micl-snackbar" popover data-micldelay="7000" role="status" aria-atomic="true">
         <span class="micl-snackbar__supporting-text">This is the Snackbar component</span>
         <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar" popovertargetaction="hide">close</button>

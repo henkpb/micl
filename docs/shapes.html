@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
@@ -20,6 +20,7 @@
             flex-wrap: wrap;
             gap: 16px;
             margin-inline-end: 16px;
+            margin-block-end: 36px;
         }
         .buttons {
             display: flex;
@@ -34,85 +35,96 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes micl-panes--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Shapes</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL shapes</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Shapes</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column"></div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__content" style="display:flex">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="shapes">
-                                        <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100"><path /></svg>
-                                        <svg class="micl-shapes micl-shapes--square micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
-                                        <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100">
-                                            <defs>
-                                                <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
-                                                    <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
-                                                </pattern>
-                                            </defs>
-                                            <path fill="url(#photo-1)" />
-                                        </svg>
-                                        <svg class="micl-shapes micl-shapes--square micl-shapes--shadowed" viewBox="-10 0 120 100" style="fill:var(--md-sys-color-tertiary)"><path /></svg>
-                                    </div>
-                                    <div class="buttons">
-                                        <button type="button" data-target="circle"         class="micl-button-outlined-s">Circle</button>
-                                        <button type="button" data-target="square"         class="micl-button-outlined-s">Square</button>
-                                        <button type="button" data-target="slanted"        class="micl-button-outlined-s">Slanted</button>
-                                        <button type="button" data-target="arch"           class="micl-button-outlined-s">Arch</button>
-                                        <button type="button" data-target="semicircle"     class="micl-button-outlined-s">Semi-circle</button>
-                                        <button type="button" data-target="oval"           class="micl-button-outlined-s">Oval</button>
-                                        <button type="button" data-target="pill"           class="micl-button-outlined-s">Pill</button>
-                                        <button type="button" data-target="triangle"       class="micl-button-outlined-s">Triangle</button>
-                                        <button type="button" data-target="arrow"          class="micl-button-outlined-s">Arrow</button>
-                                        <button type="button" data-target="fan"            class="micl-button-outlined-s">Fan</button>
-                                        <button type="button" data-target="diamond"        class="micl-button-outlined-s">Diamond</button>
-                                        <button type="button" data-target="clamshell"      class="micl-button-outlined-s">Clamshell</button>
-                                        <button type="button" data-target="pentagon"       class="micl-button-outlined-s">Pentagon</button>
-                                        <button type="button" data-target="gem"            class="micl-button-outlined-s">Gem</button>
-                                        <button type="button" data-target="very-sunny"     class="micl-button-outlined-s">Very-sunny</button>
-                                        <button type="button" data-target="sunny"          class="micl-button-outlined-s">Sunny</button>
-                                        <button type="button" data-target="cookie-4"       class="micl-button-outlined-s">4-cookie</button>
-                                        <button type="button" data-target="cookie-6"       class="micl-button-outlined-s">6-cookie</button>
-                                        <button type="button" data-target="cookie-7"       class="micl-button-outlined-s">7-cookie</button>
-                                        <button type="button" data-target="cookie-9"       class="micl-button-outlined-s">9-cookie</button>
-                                        <button type="button" data-target="cookie-12"      class="micl-button-outlined-s">12-cookie</button>
-                                        <button type="button" data-target="clover-4"       class="micl-button-outlined-s">4-leaf clover</button>
-                                        <button type="button" data-target="clover-8"       class="micl-button-outlined-s">8-leaf clover</button>
-                                        <button type="button" data-target="burst"          class="micl-button-outlined-s">Burst</button>
-                                        <button type="button" data-target="soft-burst"     class="micl-button-outlined-s">Soft-burst</button>
-                                        <button type="button" data-target="boom"           class="micl-button-outlined-s">Boom</button>
-                                        <button type="button" data-target="soft-boom"      class="micl-button-outlined-s">Soft-boom</button>
-                                        <button type="button" data-target="flower"         class="micl-button-outlined-s">Flower</button>
-                                        <button type="button" data-target="puffy"          class="micl-button-outlined-s">Puffy</button>
-                                        <button type="button" data-target="puffy-diamond"  class="micl-button-outlined-s">Puffy-diamond</button>
-                                        <button type="button" data-target="ghost-ish"      class="micl-button-outlined-s">Ghost-ish</button>
-                                        <button type="button" data-target="pixel-circle"   class="micl-button-outlined-s">Pixel-circle</button>
-                                        <button type="button" data-target="pixel-triangle" class="micl-button-outlined-s">Pixel-triangle</button>
-                                        <button type="button" data-target="bun"            class="micl-button-outlined-s">Bun</button>
-                                        <button type="button" data-target="heart"          class="micl-button-outlined-s">Heart</button>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Shapes</h1>
+            <p class="docs-hero__lede">The Shapes component renders Material Design 3 Expressive Shapes as inline SVGs whose d attribute is supplied by CSS. Because the path data is set with d: rather than baked into the SVG markup, swapping a shape's class triggers a smooth transition: d morph between the old and new outline.</p>
+            <ul class="docs-hero__facts">
+                <li>35 Material shapes</li>
+                <li>Smooth d: path morphing</li>
+                <li>Fill, outline & shadow</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="docs-hero__demo-row">
+                    <svg class="micl-shapes micl-shapes--heart" viewBox="-10 0 120 100" style="inline-size:72px;block-size:72px" aria-hidden="true"><path /></svg>
+                    <svg class="micl-shapes micl-shapes--very-sunny" viewBox="-10 0 120 100" style="inline-size:72px;block-size:72px;fill:var(--md-sys-color-tertiary)" aria-hidden="true"><path /></svg>
+                    <svg class="micl-shapes micl-shapes--flower" viewBox="-10 0 120 100" style="inline-size:72px;block-size:72px;fill:var(--md-sys-color-secondary)" aria-hidden="true"><path /></svg>
                 </div>
-                <div class="micl-pane__column"></div>
             </div>
         </section>
-    </main>
+
+        <main class="docs-content">
+            <div class="docs-stage" style="display:flex">
+                <div class="docs-example">
+                    <template>
+                        <div class="shapes">
+                            <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100"><path /></svg>
+                            <svg class="micl-shapes micl-shapes--square micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
+                            <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100">
+                                <defs>
+                                    <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
+                                        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
+                                    </pattern>
+                                </defs>
+                                <path fill="url(#photo-1)" />
+                            </svg>
+                            <svg class="micl-shapes micl-shapes--square micl-shapes--shadowed" viewBox="-10 0 120 100" style="fill:var(--md-sys-color-tertiary)"><path /></svg>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" data-target="circle"         class="micl-button-outlined-s">Circle</button>
+                            <button type="button" data-target="square"         class="micl-button-outlined-s">Square</button>
+                            <button type="button" data-target="slanted"        class="micl-button-outlined-s">Slanted</button>
+                            <button type="button" data-target="arch"           class="micl-button-outlined-s">Arch</button>
+                            <button type="button" data-target="semicircle"     class="micl-button-outlined-s">Semi-circle</button>
+                            <button type="button" data-target="oval"           class="micl-button-outlined-s">Oval</button>
+                            <button type="button" data-target="pill"           class="micl-button-outlined-s">Pill</button>
+                            <button type="button" data-target="triangle"       class="micl-button-outlined-s">Triangle</button>
+                            <button type="button" data-target="arrow"          class="micl-button-outlined-s">Arrow</button>
+                            <button type="button" data-target="fan"            class="micl-button-outlined-s">Fan</button>
+                            <button type="button" data-target="diamond"        class="micl-button-outlined-s">Diamond</button>
+                            <button type="button" data-target="clamshell"      class="micl-button-outlined-s">Clamshell</button>
+                            <button type="button" data-target="pentagon"       class="micl-button-outlined-s">Pentagon</button>
+                            <button type="button" data-target="gem"            class="micl-button-outlined-s">Gem</button>
+                            <button type="button" data-target="very-sunny"     class="micl-button-outlined-s">Very-sunny</button>
+                            <button type="button" data-target="sunny"          class="micl-button-outlined-s">Sunny</button>
+                            <button type="button" data-target="cookie-4"       class="micl-button-outlined-s">4-cookie</button>
+                            <button type="button" data-target="cookie-6"       class="micl-button-outlined-s">6-cookie</button>
+                            <button type="button" data-target="cookie-7"       class="micl-button-outlined-s">7-cookie</button>
+                            <button type="button" data-target="cookie-9"       class="micl-button-outlined-s">9-cookie</button>
+                            <button type="button" data-target="cookie-12"      class="micl-button-outlined-s">12-cookie</button>
+                            <button type="button" data-target="clover-4"       class="micl-button-outlined-s">4-leaf clover</button>
+                            <button type="button" data-target="clover-8"       class="micl-button-outlined-s">8-leaf clover</button>
+                            <button type="button" data-target="burst"          class="micl-button-outlined-s">Burst</button>
+                            <button type="button" data-target="soft-burst"     class="micl-button-outlined-s">Soft-burst</button>
+                            <button type="button" data-target="boom"           class="micl-button-outlined-s">Boom</button>
+                            <button type="button" data-target="soft-boom"      class="micl-button-outlined-s">Soft-boom</button>
+                            <button type="button" data-target="flower"         class="micl-button-outlined-s">Flower</button>
+                            <button type="button" data-target="puffy"          class="micl-button-outlined-s">Puffy</button>
+                            <button type="button" data-target="puffy-diamond"  class="micl-button-outlined-s">Puffy-diamond</button>
+                            <button type="button" data-target="ghost-ish"      class="micl-button-outlined-s">Ghost-ish</button>
+                            <button type="button" data-target="pixel-circle"   class="micl-button-outlined-s">Pixel-circle</button>
+                            <button type="button" data-target="pixel-triangle" class="micl-button-outlined-s">Pixel-triangle</button>
+                            <button type="button" data-target="bun"            class="micl-button-outlined-s">Bun</button>
+                            <button type="button" data-target="heart"          class="micl-button-outlined-s">Heart</button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

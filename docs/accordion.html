@@ -8,341 +8,359 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,confirmation_number,content_copy,dark_mode,home,keyboard_arrow_down,person,search,settings&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,confirmation_number,content_copy,dark_mode,home,keyboard_arrow_down,palette,person,search,settings&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card__content {
-            display: flex;
-            flex-direction: column;
-            row-gap: 24px;
+        .docs-stage {
+            row-gap: 36px;
         }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-panes micl-panes--stacked-to-extralarge">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-iconbutton-standard-s docs-link" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Accordions</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL accordions</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Accordions</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--evenly micl-pane__columns--stacked-to-large">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion1">
-                                            <summary class="micl-list-item-one">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p class="md-sys-typescale-body-large" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                        <details name="accordion1">
-                                            <summary class="micl-list-item-one">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p class="md-sys-typescale-body-large" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion2">
-                                            <summary class="micl-list-item-two">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Marie Curie</span>
-                                                    <span class="micl-list-item__supporting-text">The name of the employee</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content" style="padding-block:16px">
-                                                <div class="micl-textfield-filled">
-                                                    <label for="tf1">Name</label>
-                                                    <input type="text" id="tf1" value="Marie Curie">
-                                                </div>
-                                            </div>
-                                        </details>
-                                        <details name="accordion2">
-                                            <summary class="micl-list-item-two">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Country</span>
-                                                    <span class="micl-list-item__supporting-text">The country of residence</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content" style="padding-block:16px">
-                                                <div class="micl-textfield-filled">
-                                                    <label for="tf2">Country</label>
-                                                    <input type="text" id="tf2" value="France">
-                                                </div>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion3">
-                                            <summary class="micl-list-item-three">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p class="md-sys-typescale-body-small" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                            </div>
-                                        </details>
-                                        <details name="accordion3">
-                                            <summary class="micl-list-item-three">
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p class="md-sys-typescale-body-small" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__content" style="--md-comp-accordion-item-space:4px">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion4">
-                                            <summary class="micl-list-item-one">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">search</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Date</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content" style="padding-block:16px">
-                                                <div class="micl-textfield-outlined">
-                                                    <label for="tf3">Date</label>
-                                                    <input type="date" id="tf3" value="2025-11-01">
-                                                </div>
-                                            </div>
-                                        </details>
-                                        <details name="accordion4">
-                                            <summary class="micl-list-item-one">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">confirmation_number</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Time</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content" style="padding-block:16px">
-                                                <div class="micl-textfield-outlined">
-                                                    <label for="tf4">Time</label>
-                                                    <input type="time" id="tf4" value="13:22">
-                                                </div>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion5">
-                                            <summary class="micl-list-item-two">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">settings</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text 1</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p class="md-sys-typescale-body-medium" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                        <details name="accordion5">
-                                            <summary class="micl-list-item-two micl-list-item--disabled" tabindex="-1">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text 2</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p class="md-sys-typescale-body-medium" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion6">
-                                            <summary class="micl-list-item-three">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">settings</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                            </div>
-                                        </details>
-                                        <details name="accordion6">
-                                            <summary class="micl-list-item-three">
-                                                <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">confirmation_number</span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                                <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-outlined">
-                        <div class="micl-card__content">
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion7">
-                                            <summary class="micl-list-item-one">
-                                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Large_cloud_over_Mexican_landscape.jpg/330px-Large_cloud_over_Mexican_landscape.jpg)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                </span>
-                                                <span class="micl-list-item__trailing-text">39</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="font-family:Consolas;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                        <details name="accordion7">
-                                            <summary class="micl-list-item-one">
-                                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg/330px-Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                </span>
-                                                <span class="micl-list-item__trailing-text">24</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="font-family:cursive;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion8">
-                                            <summary class="micl-list-item-two">
-                                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/San_Juan_River_at_Pagosa_Springs_with_balloons.jpg/330px-San_Juan_River_at_Pagosa_Springs_with_balloons.jpg)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text 1</span>
-                                                </span>
-                                                <span class="micl-list-item__trailing-text">waiting</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="font-family:'Courier New';color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                        <details name="accordion8">
-                                            <summary class="micl-list-item-two">
-                                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg/330px-Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text 2</span>
-                                                </span>
-                                                <span class="micl-list-item__trailing-text">completed</span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="font-family:Helvetica;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                            <div class="docs-example">
-                                <template>
-                                    <div class="micl-list">
-                                        <details name="accordion9">
-                                            <summary class="micl-list-item-three">
-                                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/N1015X_Air_Tahiti_Nui_Boeing_787-9_Dreamliner_26.jpg/330px-N1015X_Air_Tahiti_Nui_Boeing_787-9_Dreamliner_26.jpg)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 1</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="font-family:fantasy;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                        <hr class="micl-divider-inset">
-                                        <details name="accordion9">
-                                            <summary class="micl-list-item-three">
-                                                <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/1928_Model_A_Ford.jpg/330px-1928_Model_A_Ford.jpg)"></span>
-                                                <span class="micl-list-item__text">
-                                                    <span class="micl-list-item__headline">Headline 2</span>
-                                                    <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines</span>
-                                                </span>
-                                            </summary>
-                                            <div class="micl-list-item__content">
-                                                <p style="font-family:Garamond;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
-                                            </div>
-                                        </details>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Accordions</h1>
+            <p class="docs-hero__lede">Accordions are vertically stacked lists that allow you to show and hide sections of content.</p>
+            <ul class="docs-hero__facts">
+                <li>Based on the List component</li>
+                <li>Native details/summary</li>
+                <li>Arrow-key navigation</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="micl-list" style="inline-size:270px">
+                    <details name="heroaccordion">
+                        <summary class="micl-list-item-one">
+                            <span class="micl-list-item__text"><span class="micl-list-item__headline">Open me</span></span>
+                            <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-hidden="true">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="micl-list-item__content"><p class="md-sys-typescale-body-medium" style="color:var(--md-sys-color-on-surface)">Hello from the hero.</p></div>
+                    </details>
+                    <details name="heroaccordion">
+                        <summary class="micl-list-item-one">
+                            <span class="micl-list-item__text"><span class="micl-list-item__headline">Then me</span></span>
+                            <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander" aria-hidden="true">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="micl-list-item__content"><p class="md-sys-typescale-body-medium" style="color:var(--md-sys-color-on-surface)">Accordions stay in sync.</p></div>
+                    </details>
                 </div>
             </div>
         </section>
-    </main>
+
+
+        <main class="docs-content docs-content--columns">
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion1">
+                                <summary class="micl-list-item-one">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p class="md-sys-typescale-body-large" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                            <details name="accordion1">
+                                <summary class="micl-list-item-one">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p class="md-sys-typescale-body-large" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion2">
+                                <summary class="micl-list-item-two">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Marie Curie</span>
+                                        <span class="micl-list-item__supporting-text">The name of the employee</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content" style="padding-block:16px">
+                                    <div class="micl-textfield-filled">
+                                        <label for="tf1">Name</label>
+                                        <input type="text" id="tf1" value="Marie Curie">
+                                    </div>
+                                </div>
+                            </details>
+                            <details name="accordion2">
+                                <summary class="micl-list-item-two">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Country</span>
+                                        <span class="micl-list-item__supporting-text">The country of residence</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content" style="padding-block:16px">
+                                    <div class="micl-textfield-filled">
+                                        <label for="tf2">Country</label>
+                                        <input type="text" id="tf2" value="France">
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion3">
+                                <summary class="micl-list-item-three">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines in an accordion item</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p class="md-sys-typescale-body-small" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                </div>
+                            </details>
+                            <details name="accordion3">
+                                <summary class="micl-list-item-three">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines in an accordion item</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p class="md-sys-typescale-body-small" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage" style="--md-comp-accordion-item-space:4px">
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion4">
+                                <summary class="micl-list-item-one">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">search</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Date</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content" style="padding-block:16px">
+                                    <div class="micl-textfield-outlined">
+                                        <label for="tf3">Date</label>
+                                        <input type="date" id="tf3" value="2025-11-01">
+                                    </div>
+                                </div>
+                            </details>
+                            <details name="accordion4">
+                                <summary class="micl-list-item-one">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">confirmation_number</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Time</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content" style="padding-block:16px">
+                                    <div class="micl-textfield-outlined">
+                                        <label for="tf4">Time</label>
+                                        <input type="time" id="tf4" value="13:22">
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion5">
+                                <summary class="micl-list-item-two">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">settings</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text 1</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p class="md-sys-typescale-body-medium" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                            <details name="accordion5">
+                                <summary class="micl-list-item-two micl-list-item--disabled" tabindex="-1">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text 2</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p class="md-sys-typescale-body-medium" style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion6">
+                                <summary class="micl-list-item-three">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">settings</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines in an accordion item</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                </div>
+                            </details>
+                            <details name="accordion6">
+                                <summary class="micl-list-item-three">
+                                    <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">confirmation_number</span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines in an accordion item</span>
+                                    </span>
+                                    <span class="material-symbols-outlined micl-list-item__icon micl-list-item__icon--expander">keyboard_arrow_down</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion7">
+                                <summary class="micl-list-item-one">
+                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Large_cloud_over_Mexican_landscape.jpg/330px-Large_cloud_over_Mexican_landscape.jpg)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                    </span>
+                                    <span class="micl-list-item__trailing-text">39</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="font-family:Consolas;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                            <details name="accordion7">
+                                <summary class="micl-list-item-one">
+                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg/330px-Old_World_swallowtail_%28Papilio_machaon_gorganus%29_underside_Italy.jpg)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                    </span>
+                                    <span class="micl-list-item__trailing-text">24</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="font-family:cursive;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion8">
+                                <summary class="micl-list-item-two">
+                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/San_Juan_River_at_Pagosa_Springs_with_balloons.jpg/330px-San_Juan_River_at_Pagosa_Springs_with_balloons.jpg)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text 1</span>
+                                    </span>
+                                    <span class="micl-list-item__trailing-text">waiting</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="font-family:'Courier New';color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                            <details name="accordion8">
+                                <summary class="micl-list-item-two">
+                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg/330px-Bhotaigaon_gaolia_khel%2C_rajohua_namghar.jpg)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text 2</span>
+                                    </span>
+                                    <span class="micl-list-item__trailing-text">completed</span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="font-family:Helvetica;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-list">
+                            <details name="accordion9">
+                                <summary class="micl-list-item-three">
+                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/N1015X_Air_Tahiti_Nui_Boeing_787-9_Dreamliner_26.jpg/330px-N1015X_Air_Tahiti_Nui_Boeing_787-9_Dreamliner_26.jpg)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 1</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines in an accordion item</span>
+                                    </span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="font-family:fantasy;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                            <hr class="micl-divider-inset">
+                            <details name="accordion9">
+                                <summary class="micl-list-item-three">
+                                    <span class="micl-list-item__image" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/1928_Model_A_Ford.jpg/330px-1928_Model_A_Ford.jpg)"></span>
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Headline 2</span>
+                                        <span class="micl-list-item__supporting-text">Supporting text that is long enough to fill up multiple lines in an accordion item</span>
+                                    </span>
+                                </summary>
+                                <div class="micl-list-item__content">
+                                    <p style="font-family:Garamond;color:var(--md-sys-color-on-surface-variant)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>
