@@ -1,6 +1,6 @@
 {
   "name": "material-inspired-component-library",
-  "version": "8.1.1",
+  "version": "9.0.0",
   "description": "The Material-Inspired Component Library (MICL) offers a collection of beautifully crafted components leveraging native HTML markup, designed to align with the Material Design 3 guidelines.",
   "author": "MICL Hermana <micl.hermana@proton.me> (https://github.com/henkpb/micl)",
   "license": "MIT",
@@ -21,14 +21,19 @@
     "button",
     "card",
     "checkbox",
+    "chip",
     "date picker",
+    "date range picker",
     "dialog",
     "divider",
+    "field",
     "iconbutton",
     "layout",
     "list",
     "menu",
+    "navigation bar",
     "navigation rail",
+    "progress indicator",
     "radio button",
     "select",
     "shapes",
@@ -50,25 +55,34 @@
   },
   "main": "dist/micl.js",
   "types": "dist/micl.d.ts",
+  "files": [
+    "dist",
+    "styles.scss",
+    "styles/**/*.scss",
+    "foundations/**/*.scss",
+    "components/**/*.scss",
+    "components/**/README.md",
+    "themes"
+  ],
   "scripts": {
     "build": "webpack",
     "gen:shapes": "node tools/shapes/generate.mjs",
     "check:shapes": "node tools/shapes/check.mjs"
   },
-  "sideEffects": false,
   "devDependencies": {
     "autoprefixer": "^10.5",
     "css-loader": "^7.1",
-    "extract-loader": "^5.1",
-    "file-loader": "^6.2",
     "glob": "^13.0",
     "mini-css-extract-plugin": "^2.10",
     "postcss-loader": "^8.2",
-    "sass": "^1.99",
-    "sass-loader": "^16.0",
-    "ts-loader": "^9.5",
+    "sass": "^1.101",
+    "sass-loader": "^17.0",
+    "ts-loader": "^9.6",
     "typescript": "^6.0",
-    "webpack": "^5.106",
-    "webpack-cli": "^7.0"
+    "webpack": "^5.108",
+    "webpack-cli": "^7.2"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.6": true
   }
 }

@@ -6,10 +6,6 @@
 
 **MICL (Material-Inspired Component Library)** is a free, open-source implementation of [Material Design 3](https://m3.material.io/) — including the current **M3 Expressive** update — built from native HTML elements and modern CSS. No custom elements, no framework, no runtime dependencies, and for most components no JavaScript at all.
 
-<!-- TODO hero: animated GIF/video of the showcase — suggested cut: wavy progress indicators
-     (linear + circular), a theme + dark-mode switch, and the adaptive pane layout resizing.
-     This image is the single highest-impact asset on the page. -->
-
 **[Live showcase](https://henkpb.github.io/micl/)** · **[Component documentation](components/README.md)** · **[Quick start](#quick-start-)**
 
 ## Why MICL exists
@@ -205,7 +201,7 @@ The library currently consists of the following components:
 
 ## Change Log ↪️
 
-### 9.0.0 (19.07.2026)
+### 9.0.0 (20.07.2026)
 - **BREAKING**: Renamed all CSS custom properties from --md-sys- to --md-comp-.
 - **BREAKING**: Renamed the layout class `micl-body` and its `micl-body--*` modifiers to `micl-panes`/`micl-panes--*`, aligning with the M3 Expressive layout terminology.
 - **BREAKING**: Per-component CSS files no longer embed the shared foundation styles; load `dist/base.css` once before them. The full `micl.css` is unaffected.
