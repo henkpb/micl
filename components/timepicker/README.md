@@ -26,10 +26,15 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
     <div class="micl-dialog__actions">
       <button
         type="button"
-        class="micl-timepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined"
-        data-miclalt="schedule"
+        id="myinputmode"
+        class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined"
+        commandfor="myinputmode"
+        command="--micl-toggle"
+        data-miclicon="keyboard"
+        data-micliconselected="schedule"
+        aria-pressed="false"
         aria-label="Switch input mode"
-      >keyboard</button>
+      ></button>
       <div>
         <button class="micl-button-text-s" value="">Cancel</button>
         <button class="micl-button-text-s" value="OK">OK</button>
@@ -40,7 +45,7 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
 ```
 
 ### CSS
-Import both the time picker and the dialog styles into your project:
+Import the time picker, dialog and button styles into your project:
 
 ```CSS
 @use "material-inspired-component-library/dist/dialog";
@@ -83,11 +88,15 @@ For the picker to function correctly, the `micl-dialog__content` area must conta
 By default, the layout is **vertical**. To switch to a **horizontal** layout (side-by-side inputs and dial), add the modifier class `micl-timepicker--horizontal` to the `<dialog>`.
 
 #### Input Mode Switching
-To allow users to toggle between the text inputs and the analog dial, add a button to the `micl-dialog__actions` container:
+To allow users to toggle between the text inputs and the analog dial, add an icon [toggle button](../button/README.md#toggle-button) to the `micl-dialog__actions` container, as shown in the basic example above:
 
-- Class: `micl-timepicker__inputmode`
-- Data Attribute: `data-miclicon="keyboard"` (defines the icon to show).
-- Data Attribute: `data-micliconselected="schedule"` (defines the icon to show when toggled).
+- Class: `micl-timepicker__inputmode` in addition to the icon button and `micl-button--toggle` classes.
+- A self-targeting `commandfor`/`command="--micl-toggle"` pair, which flips the button's `aria-pressed` state on activation.
+- Data Attribute: `data-miclicon="keyboard"` (the icon shown in dial mode, when `aria-pressed="false"`).
+- Data Attribute: `data-micliconselected="schedule"` (the icon shown in input mode, when `aria-pressed="true"`).
+
+#### Starting in Input Mode
+The picker opens in dial mode by default. To open it in input mode instead, add the `micl-timepicker__dial--hidden` class to the `micl-timepicker__dial` element, and set `aria-pressed="true"` on the `micl-timepicker__inputmode` button so it shows the matching `schedule` icon. The two attributes are independent, so they must agree in the initial markup.
 
 ### Integration
 You can trigger the Time picker component from standard input fields or buttons.
