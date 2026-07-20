@@ -26,10 +26,15 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
     <div class="micl-dialog__actions">
       <button
         type="button"
-        class="micl-timepicker__inputmode micl-iconbutton-standard-s material-symbols-outlined"
-        data-miclalt="schedule"
+        id="myinputmode"
+        class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined"
+        commandfor="myinputmode"
+        command="--micl-toggle"
+        data-miclicon="keyboard"
+        data-micliconselected="schedule"
+        aria-pressed="false"
         aria-label="Switch input mode"
-      >keyboard</button>
+      ></button>
       <div>
         <button class="micl-button-text-s" value="">Cancel</button>
         <button class="micl-button-text-s" value="OK">OK</button>
@@ -40,10 +45,12 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
 ```
 
 ### CSS
-Import both the time picker and the dialog styles into your project:
+Import the time picker, dialog and button styles into your project:
 
 ```CSS
 @use "material-inspired-component-library/dist/dialog";
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/timepicker";
 ```
 
@@ -58,6 +65,7 @@ This component requires JavaScript to function:
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
+When loading individual JavaScript files, also load `dist/textfield` — it wires the input field that opens the picker.
 
 This will initialize any Time picker component, including those that will be added to the DOM later on.
 
@@ -80,11 +88,15 @@ For the picker to function correctly, the `micl-dialog__content` area must conta
 By default, the layout is **vertical**. To switch to a **horizontal** layout (side-by-side inputs and dial), add the modifier class `micl-timepicker--horizontal` to the `<dialog>`.
 
 #### Input Mode Switching
-To allow users to toggle between the text inputs and the analog dial, add a button to the `micl-dialog__actions` container:
+To allow users to toggle between the text inputs and the analog dial, add an icon [toggle button](../button/README.md#toggle-button) to the `micl-dialog__actions` container, as shown in the basic example above:
 
-- Class: `micl-timepicker__inputmode`
-- Data Attribute: `data-miclicon="keyboard"` (defines the icon to show).
-- Data Attribute: `data-micliconselected="schedule"` (defines the icon to show when toggled).
+- Class: `micl-timepicker__inputmode` in addition to the icon button and `micl-button--toggle` classes.
+- A self-targeting `commandfor`/`command="--micl-toggle"` pair, which flips the button's `aria-pressed` state on activation.
+- Data Attribute: `data-miclicon="keyboard"` (the icon shown in dial mode, when `aria-pressed="false"`).
+- Data Attribute: `data-micliconselected="schedule"` (the icon shown in input mode, when `aria-pressed="true"`).
+
+#### Starting in Input Mode
+The picker opens in dial mode by default. To open it in input mode instead, add the `micl-timepicker__dial--hidden` class to the `micl-timepicker__dial` element, and set `aria-pressed="true"` on the `micl-timepicker__inputmode` button so it shows the matching `schedule` icon. The two attributes are independent, so they must agree in the initial markup.
 
 ### Integration
 You can trigger the Time picker component from standard input fields or buttons.
@@ -109,25 +121,43 @@ You can trigger the picker from a button using the standard `popovertarget` attr
 - **Behavior**: The Time picker reads from and writes to the button's value attribute.
 - **Formatting**: The component automatically updates the button's text content with the selected time, formatted according to the user's locale.
 
-## Customizations
-You can customize the appearance of the Time picker component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child time pickers.
+## Theming
+Each time picker can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. The container color, shape and elevation are inherited from the [Dialog component](../dialog/README.md).
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-timepicker-input-height | 72px | Height of the hour a minute input boxes |
-| --md-sys-timepicker-input-width | 96px | Width of the input boxes in 12-hour mode |
-| --md-sys-timepicker-input-width-24h | 114px | Width of the input boxes in 24-hour mode |
-| --md-sys-timepicker-separator-width | 24px | Width of the space containing the colon separator |
-| --md-sys-timepicker-period-height | 72px | Total height of the AM/PM selector toggle |
-| --md-sys-timepicker-period-width | 52px | Width of the AM/PM selector toggle |
-| --md-sys-timepicker-dial-size | 256px | Diameter of the analog clock face |
-| --md-sys-timepicker-dial-center-size | 8px | Diameter of the center dot in the analog dial |
-| --md-sys-timepicker-dial-track-width | 2px | Thickness of the circular track line on the dial |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-time-picker-time-selector-container-height` | Height of the hour and minute input boxes | `72px` (`80px` in dial mode) |
+| `--md-comp-time-picker-time-selector-container-width` | Width of the input boxes in 12-hour mode | `96px` |
+| `--md-comp-time-picker-time-selector-24h-container-width` | Width of the input boxes in 24-hour mode | `114px` |
+| `--md-comp-time-picker-time-selector-unselected-container-color` | The background color of the input boxes | `--md-sys-color-surface-container-highest` |
+| `--md-comp-time-picker-time-selector-unselected-label-text-color` | The text color of the input boxes | `--md-sys-color-on-surface` |
+| `--md-comp-time-picker-time-selector-selected-container-color` | The background color of the active input box | `--md-sys-color-primary-container` |
+| `--md-comp-time-picker-time-selector-selected-label-text-color` | The text color of the active input box | `--md-sys-color-on-primary-container` |
+| `--md-comp-time-input-focus-outline-color` | The border color of the active input box in keyboard input mode | `--md-sys-color-primary` |
+| `--md-comp-time-picker-separator-width` | Width of the space containing the colon separator | `24px` |
+| `--md-comp-time-picker-separator-color` | The color of the colon separator | `--md-sys-color-on-surface` |
+| `--md-comp-time-picker-headline-color` | The text color of the headline | `--md-sys-color-on-surface-variant` |
+| `--md-comp-time-picker-supporting-text-color` | The text color of the labels below the input boxes | `--md-sys-color-on-surface-variant` |
+| `--md-comp-time-picker-period-selector-container-height` | Total height of the AM/PM selector toggle | `72px` (`80px` or `38px` in dial modes) |
+| `--md-comp-time-picker-period-selector-container-width` | Width of the AM/PM selector toggle | `52px` |
+| `--md-comp-time-picker-period-selector-outline-color` | The border color of the AM/PM selector toggle | `--md-sys-color-outline` |
+| `--md-comp-time-picker-period-selector-unselected-label-text-color` | The text color of the unselected period | `--md-sys-color-on-surface-variant` |
+| `--md-comp-time-picker-period-selector-selected-container-color` | The background color of the selected period | `--md-sys-color-tertiary-container` |
+| `--md-comp-time-picker-period-selector-selected-label-text-color` | The text color of the selected period | `--md-sys-color-on-tertiary-container` |
+| `--md-comp-time-picker-clock-dial-container-size` | Diameter of the analog clock face | `256px` |
+| `--md-comp-time-picker-clock-dial-color` | The background color of the analog clock face | `--md-sys-color-surface-container-highest` |
+| `--md-comp-time-picker-clock-dial-unselected-label-text-color` | The text color of the dial marks | `--md-sys-color-on-surface` |
+| `--md-comp-time-picker-clock-dial-selected-label-text-color` | The text color of the selected dial mark | `--md-sys-color-on-primary` |
+| `--md-comp-time-picker-clock-dial-selector-handle-container-color` | The background color of the selected dial mark | `--md-sys-color-primary` |
+| `--md-comp-time-picker-clock-dial-selector-track-container-color` | The color of the selector track line on the dial | `--md-sys-color-primary` |
+| `--md-comp-time-picker-clock-dial-selector-track-container-width` | Thickness of the selector track line on the dial | `2px` |
+| `--md-comp-time-picker-clock-dial-selector-center-container-color` | The color of the center dot of the dial | `--md-sys-color-primary` |
+| `--md-comp-time-picker-clock-dial-selector-center-container-size` | Diameter of the center dot of the dial | `8px` |
 
 **Example: Changing the width of the dial track**
 
 ```HTML
-<div style="--md-sys-timepicker-dial-track-width:3px">
+<div style="--md-comp-time-picker-clock-dial-selector-track-container-width:3px">
   <dialog class="micl-dialog micl-timepicker" closedby="closerequest">
     ...
   </dialog>

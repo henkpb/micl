@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Navigation Bars">
+    <title>MICL Navigation Bar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,delete,favorite,home,inbox,outbox,palette&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        /* Room for the fixed navigation bar below the content */
+        .docs-shell {
+            padding-block-end: 120px;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <nav id="mynavigationbar" class="micl-navigationbar">
+        <div class="micl-navigationbar__content" role="menu">
+            <a href="#" class="micl-navigationbar__item" role="menuitem" aria-current="page">
+                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationbar__text">Inbox</span>
+                <span class="micl-badge" style="position-anchor:--inbox;--md-comp-badge-inline-offset:-16px">97</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item" role="menuitem">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationbar__text">Outbox</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item" role="menuitem">
+                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationbar__text">Favorites</span>
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-comp-badge-inline-offset:-16px"></span>
+            </a>
+            <a href="#" class="micl-navigationbar__item" role="menuitem">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                <span class="micl-navigationbar__text">Trash</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Navigation bars</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Navigation bars</h1>
+            <p class="docs-hero__lede">A navigation bar lets people switch between UI views on smaller devices, anchored to the bottom of the screen. The bar below is live — pick a variant and try it.</p>
+            <ul class="docs-hero__facts">
+                <li>Bottom-anchored</li>
+                <li>Horizontal & tall variants</li>
+                <li>Adapts into a rail</li>
+            </ul>
+        </section>
+
+        <main class="docs-content">
+            <section class="docs-section" id="variants">
+                <div class="docs-section__head">
+                    <h2>Variants</h2>
+                    <p class="docs-section__use">The selected variant is applied to the navigation bar at the bottom of this page. The adaptive variant turns into a navigation rail on windows wider than 840&thinsp;px.</p>
+                </div>
+                <div class="docs-stage md-sys-typescale-body-medium">
+                    <div class="docs-flex--vcenter">
+                        <input type="radio" id="bar1" name="bar" class="micl-radio" value="" checked>
+                        <label for="bar1">Navigation bar</label>
+                    </div>
+                    <div class="docs-flex--vcenter">
+                        <input type="radio" id="bar2" name="bar" class="micl-radio" value="micl-navigationbar--horizontal">
+                        <label for="bar2">Navigation bar with horizontal items</label>
+                    </div>
+                    <div class="docs-flex--vcenter">
+                        <input type="radio" id="bar3" name="bar" class="micl-radio" value="micl-navigationbar--tall">
+                        <label for="bar3">Tall navigation bar</label>
+                    </div>
+                    <div class="docs-flex--vcenter">
+                        <input type="radio" id="bar4" name="bar" class="micl-radio" value="micl-navigationbar--bar-to-expanded">
+                        <label for="bar4">Adaptive navigation (rail from 840px)</label>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+    <script>
+        const navigationbar = document.getElementById('mynavigationbar');
+        document.querySelectorAll('.micl-radio').forEach(radio => {
+            radio.addEventListener('change', () => {
+                navigationbar.classList.remove('micl-navigationbar--horizontal', 'micl-navigationbar--tall', 'micl-navigationbar--bar-to-expanded');
+                if (radio.value) {
+                    navigationbar.classList.add(radio.value);
+                }
+            });
+        });
+        navigationbar.querySelectorAll('.micl-navigationbar__item').forEach(item => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                navigationbar.querySelector('[aria-current="page"]')?.removeAttribute('aria-current');
+                item.setAttribute('aria-current', 'page');
+            });
+        });
+    </script>
+</body>
+</html>

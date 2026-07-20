@@ -8,130 +8,91 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
+        .docs-example {
+            border: 3px solid var(--md-sys-color-primary-container)
+        }
         p {
             color: var(--md-sys-color-on-surface);
         }
-        section:first-child .micl-pane__column > :last-child {
-            padding-block-end: 0;
-        }
-        section:first-child .micl-card__content {
-            padding: 0;
-        }
-        section:first-child .micl-card-filled {
-            --md-sys-divider-color: var(--md-sys-color-primary);
-        }
         p.md-sys-typescale-label-large {
-            margin: 3rem 2rem 1rem;
+            margin: 2rem 2rem 1rem;
         }
         .verticalbox {
             display: flex;
             flex-wrap: nowrap;
+            block-size: 320px;
         }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body micl-body--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Dividers</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL dividers</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Dividers</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__content">
-                            <p class="md-sys-typescale-label-large">Full width:</p>
-                            <hr class="micl-divider">
-                            <p class="md-sys-typescale-label-large">Inset:</p>
-                            <hr class="micl-divider-inset">
-                            <p class="md-sys-typescale-label-large">Inset start:</p>
-                            <hr class="micl-divider-inset-start">
-                            <p class="md-sys-typescale-label-large">Inset end:</p>
-                            <hr class="micl-divider-inset-end">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__content">
-                            <div class="verticalbox">
-                                <p class="md-sys-typescale-label-large">Full height:</p>
-                                <hr class="micl-divider-vertical">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__content">
-                            <p class="md-sys-typescale-label-large">Full width:</p>
-                            <hr class="micl-divider">
-                            <p class="md-sys-typescale-label-large">Inset:</p>
-                            <hr class="micl-divider-inset">
-                            <p class="md-sys-typescale-label-large">Inset start:</p>
-                            <hr class="micl-divider-inset-start">
-                            <p class="md-sys-typescale-label-large">Inset end:</p>
-                            <hr class="micl-divider-inset-end">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="micl-card-filled">
-                        <div class="micl-card__content">
-                            <div class="verticalbox">
-                                <p class="md-sys-typescale-label-large">Full height:</p>
-                                <hr class="micl-divider-vertical">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-outlined">
-                        <div class="micl-card__content">
-                            <p class="md-sys-typescale-label-large">Full width:</p>
-                            <hr class="micl-divider">
-                            <p class="md-sys-typescale-label-large">Inset:</p>
-                            <hr class="micl-divider-inset">
-                            <p class="md-sys-typescale-label-large">Inset start:</p>
-                            <hr class="micl-divider-inset-start">
-                            <p class="md-sys-typescale-label-large">Inset end:</p>
-                            <hr class="micl-divider-inset-end">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="micl-card-outlined">
-                        <div class="micl-card__content">
-                            <div class="verticalbox">
-                                <p class="md-sys-typescale-label-large">Full height:</p>
-                                <hr class="micl-divider-vertical">
-                            </div>
-                        </div>
-                    </div>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Dividers</h1>
+            <p class="docs-hero__lede">Dividers are thin lines that separate content into distinct sections.</p>
+            <ul class="docs-hero__facts">
+                <li>Horizontal & vertical</li>
+                <li>Inset variants</li>
+                <li>RTL ready</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div style="inline-size:250px">
+                    <p class="md-sys-typescale-label-large" style="margin:4px 0">Full width</p>
+                    <hr class="micl-divider">
+                    <p class="md-sys-typescale-label-large" style="margin:4px 0">Inset</p>
+                    <hr class="micl-divider-inset">
                 </div>
             </div>
         </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;hr class="micl-divider"&gt;</code></pre>
+
+
+        <main class="docs-content docs-content--columns">
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <p class="md-sys-typescale-label-large">Full width:</p>
+                        <hr class="micl-divider">
+                        <p class="md-sys-typescale-label-large">Inset:</p>
+                        <hr class="micl-divider-inset">
+                        <p class="md-sys-typescale-label-large">Inset start:</p>
+                        <hr class="micl-divider-inset-start">
+                        <p class="md-sys-typescale-label-large">Inset end:</p>
+                        <hr class="micl-divider-inset-end">
+                        <p class="md-sys-typescale-label-large">(end)</p>
+                    </template>
                 </div>
             </div>
-        </section>
-    </main>
+
+            <div class="docs-stage">
+                <div class="docs-example">
+                    <template>
+                        <div class="verticalbox">
+                            <p class="md-sys-typescale-label-large">Full height:</p>
+                            <hr class="micl-divider-vertical">
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

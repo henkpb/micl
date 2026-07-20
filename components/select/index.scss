@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -32,40 +31,41 @@
 
 @include statelayer.token('disabled-state-layer-opacity');
 
+// Each selector group compiles to a single selector.
+$selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
+
 .micl-textfield-filled > select {
-    --md-comp-select-line-height: calc(var(--md-sys-textfield-height) - 18px - 3px);
+    --_line-height: calc(var(--md-comp-text-field-container-height, 56px) - 18px - 3px);
 }
 .micl-textfield-outlined > select {
-    --md-comp-select-line-height: var(--md-sys-textfield-height);
+    --_line-height: var(--md-comp-text-field-container-height, 56px);
 }
-.micl-textfield-filled > select,
-.micl-textfield-outlined > select {
-    --md-sys-divider-space: 8px;
+#{$selects} {
+    --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
     --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-comp-select-picker-origin: left top;
 
     appearance: base-select;
-    line-height: var(--md-comp-select-line-height);
+    line-height: var(--_line-height);
 
     &::picker-icon {
-      color: var(--md-sys-color-on-surface-variant);
+      color: var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant));
       transition: motion.$md-sys-motion-duration-medium4 rotate;
-      transform-origin: 50% calc((var(--md-comp-select-line-height) / 2) - 1px);
+      transform-origin: 50% calc((var(--_line-height) / 2) - 1px);
     }
     &:disabled::picker-icon {
-        color: rgb(from var(--md-sys-color-on-surface-variant) r g b/var(--md-sys-state-disabled-state-layer-opacity, 38%));
+        color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
     }
     &:open::picker-icon {
       rotate: 180deg;
     }
 
     &::picker(select) {
-        --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-        --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-        --md-sys-divider-space: 0.5px;
+        --md-comp-divider-space: 0.5px;
         --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
         --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
         --_list-item-background-opacity: 0%;
+        --micl-duration: var(--md-comp-menu-motion-spatial-duration-reverse);
+        --micl-easing: linear;
 
         appearance: base-select;
         display: flex;
@@ -85,21 +85,19 @@
         overflow-x: hidden;
         overflow-y: auto;
         transform: scaleY(0);
-        transform-origin: var(--md-comp-select-picker-origin, left top);
+        transform-origin: var(--micl-select-picker-origin, top);
         transition:
-            opacity var(--md-comp-menu-motion-spatial-duration-reverse) linear,
-            transform var(--md-comp-menu-motion-spatial-duration-reverse) var(--md-comp-menu-motion-spatial),
-            overlay var(--md-comp-menu-motion-spatial-duration-reverse) linear allow-discrete,
-            display var(--md-comp-menu-motion-spatial-duration-reverse) linear allow-discrete;
+            opacity var(--micl-duration) var(--micl-easing),
+            transform var(--micl-duration) var(--md-comp-menu-motion-spatial),
+            overlay var(--micl-duration) linear allow-discrete,
+            display var(--micl-duration) linear allow-discrete;
 
         &:popover-open {
+            --micl-duration: var(--md-comp-menu-motion-spatial-duration);
+            --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+
             opacity: 1;
             transform: scaleY(1);
-            transition:
-                opacity var(--md-comp-menu-motion-spatial-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
-                transform var(--md-comp-menu-motion-spatial-duration) var(--md-comp-menu-motion-spatial),
-                overlay var(--md-comp-menu-motion-spatial-duration) linear allow-discrete,
-                display var(--md-comp-menu-motion-spatial-duration) linear allow-discrete;
 
             @starting-style {
                 opacity: 0;
@@ -117,21 +115,15 @@
             text-overflow: ellipsis;
         }
         &::checkmark {
-            color: var(--md-sys-color-on-surface-variant);
+            color: var(--_trailing-icon-color);
         }
     }
 }
 
-[inert] .micl-textfield-filled > select::picker-icon,
-[inert] .micl-textfield-outlined > select::picker-icon {
+[inert] #{$selects}::picker-icon {
     display: none;
 }
 
-[dir=rtl] {
-    .micl-textfield-filled > select,
-    .micl-textfield-outlined > select {
-        &:open::picker-icon {
-          rotate: -180deg;
-        }
-    }
+#{$selects}:dir(rtl):open::picker-icon {
+    rotate: -180deg;
 }

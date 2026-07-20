@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=close,content_copy,dark_mode,home,person,restart_alt&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette,person,restart_alt&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
         label {
@@ -19,27 +20,41 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Dialogs</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL dialogs</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Dialogs</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Showcase</h2>
-                        </div>
-                        <p class="micl-card__supporting-text">Click a button to open one of the MICL dialogs.</p>
-                        <div class="micl-card__content docs-buttons">
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Dialogs</h1>
+            <p class="docs-hero__lede">A dialog is a small window that prompts the user to make a decision or enter additional information.</p>
+            <ul class="docs-hero__facts">
+                <li>Basic, docked & full-screen</li>
+                <li>No JavaScript required</li>
+                <li>Light-dismiss options</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <button type="button" class="micl-button-filled-m" popovertarget="mydialog1">Open a dialog</button>
+            </div>
+        </section>
+
+
+        <main class="docs-content">
+            <section class="docs-section" id="showcase">
+                <div class="docs-section__head">
+                    <h2>Showcase</h2>
+                    <p class="docs-section__use">Click a button to open one of the MICL dialogs.</p>
+                </div>
+                <div class="docs-stage docs-buttons">
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mydialog1" class="micl-dialog" style="width:300px" popover closedby="any" aria-labelledby="mytitle1">
                                 <div class="micl-dialog__headline">
                                     <h2 id="mytitle1">Basic dialog</h2>
@@ -49,8 +64,11 @@
                                     <button type="button" class="micl-button-text-s" popovertarget="mydialog1" autofocus>OK</button>
                                 </div>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog1">Open Basic Dialog</button>
-
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog1">Open Basic Dialog</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mydialog2" class="micl-dialog" style="width:400px" popover closedby="any" aria-labelledby="mytitle2" aria-describedby="mydesc2">
                                 <div class="micl-dialog__headline">
                                     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">restart_alt</span>
@@ -86,8 +104,11 @@
                                     <button type="button" class="micl-button-text-s">Accept</button>
                                 </div>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog2">Open Dialog</button>
-
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog2">Open Dialog</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mydialog3" class="micl-dialog" style="width:350px" closedby="none" role="alertdialog" aria-labelledby="mytitle3" aria-describedby="mydesc3">
                                 <div class="micl-dialog__headline">
                                     <h2 id="mytitle3">Delete selected images?</h2>
@@ -98,8 +119,11 @@
                                     <button class="micl-button-text-s" value="dodelete">Delete</button>
                                 </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" commandfor="mydialog3" command="show-modal">Open Modal Dialog</button>
-
+                            <button type="button" class="micl-button-outlined-m" commandfor="mydialog3" command="show-modal">Open Modal Dialog</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mydialog4" class="micl-dialog micl-dialog--docked" style="position-anchor: --myanchor;width:350px" popover closedby="closerequest" aria-labelledby="mytitle4">
                                 <div class="micl-dialog__headline">
                                     <h2 id="mytitle4">Delete selected images?</h2>
@@ -110,8 +134,11 @@
                                     <button class="micl-button-text-s">Delete</button>
                                 </div>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mydialog4" style="anchor-name:--myanchor">Open Anchored Dialog</button>
-
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog4" style="anchor-name:--myanchor">Open Anchored Dialog</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mydialog5" class="micl-dialog micl-dialog--fullscreen" closedby="none" aria-labelledby="mytitle5">
                                 <form method="dialog" class="micl-dialog__headline">
                                     <button class="micl-dialog__fullscreen micl-iconbutton-standard-s material-symbols-outlined" aria-label="Close">close</button>
@@ -162,32 +189,15 @@
                                     <button class="micl-button-text-s" value="dosave">Save</button>
                                 </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m micl-button--square" command="show-modal" commandfor="mydialog5">Open Full-Screen Dialog</button>
-                        </div>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mydialog5">Open Full-Screen Dialog</button>
+                        </template>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Code example</h2>
-                            <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                        </div>
-                        <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code>&lt;dialog id="id0" class="micl-dialog" style="width:300px" closedby="any" popover&gt;
-  &lt;div class="micl-dialog__headline"&gt;
-    &lt;h2&gt;Basic dialog&lt;/h2&gt;
-    &lt;span class="micl-dialog__supporting-text"&gt;A dialog is a type of modal window.&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class="micl-dialog__actions"&gt;
-    &lt;button type="button" class="micl-button-text-s" popovertarget="id0"&gt;OK&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/dialog&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

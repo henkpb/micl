@@ -113,17 +113,17 @@ Since the Accordion is based on the List component, you can use the same utility
 ## Keyboard
 Each `<summary>` is a tab stop in document order — `Tab` and `Shift+Tab` move focus through the accordion headers. While focus is on a header, `Enter` or `Space` toggles the panel open or closed. As an optional enhancement, `ArrowDown` and `ArrowUp` move focus to the next or previous header in the same group; focus wraps around at the ends.
 
-## Customizations
-You can customize the appearance of the Accordion component by overriding its own global CSS variables and those from the List component. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child accordions.
+## Theming
+You can customize the appearance of the Accordion component by overriding its own CSS custom properties and those of the [List](../list/README.md) component. Set them on any appropriate parent element to affect its child accordions.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-accordion-item-space | 0px | The space between an opened accordion item and its next neighbour. |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-accordion-item-space` | The space between an opened accordion item and its next neighbour. | `0px` |
 
 **Example: Changing the margin between an opened item and the next**
 
 ```HTML
-<div class="micl-list" style="--md-sys-accordion-item-space:4px">
+<div class="micl-list" style="--md-comp-accordion-item-space:4px">
   <details>
     ...
   </details>

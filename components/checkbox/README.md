@@ -38,7 +38,7 @@ Adding the `micl-checkbox--error` CSS class to the `<input>` element will create
 
 A checkbox can be disabled by adding the `disabled` attribute to the `<input>` element.
 
-The Checkbox component respects the `dir` global attribute, automatically adjusting its layout for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element.
+The Checkbox component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
 
 The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following an `<input type="checkbox">` with the `micl-checkbox` class. You are encouraged to customize these CSS settings to match your design system.
 
@@ -59,18 +59,26 @@ You can establish a parent-child relationship among checkboxes. To do this, wrap
 
 To visually improve the layout, such as by indenting child checkboxes, use wrapper elements and utility classes:
 
+```CSS
+  .my-utility-class {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  } 
+```
+
 ```HTML
 <div class="micl-checkbox-group">
-  <div class="micl-flex--vcenter">
+  <div class="my-utility-class">
     <input type="checkbox" id="cb0" class="micl-checkbox micl-checkbox__parent" value="c0">
     <label for="cb0">Choices</label>
   </div>
   <div style="padding-inline-start:16px">
-    <div class="micl-flex--vcenter">
+    <div class="my-utility-class">
       <input type="checkbox" id="cb1" class="micl-checkbox" value="c1">
       <label for="cb1">First Choice</label>
     </div>
-    <div class="micl-flex--vcenter">
+    <div class="my-utility-class">
       <input type="checkbox" id="cb2" class="micl-checkbox" checked value="c2">
       <label for="cb2">Second Choice</label>
     </div>
@@ -81,28 +89,31 @@ To visually improve the layout, such as by indenting child checkboxes, use wrapp
 
 Note that checkbox groups support **nesting**, allowing a `micl-checkbox-group` to contain other `micl-checkbox-group` elements for multi-level hierarchies.
 
-## Customizations
-You can customize the appearance of the Checkbox component by overriding its global CSS variables. These variables are declared on the :root pseudo-class and can be changed on any appropriate parent element to affect its child checkboxes.
+## Theming
+Each checkbox can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child checkboxes.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-checkbox-border-width | 2px | Controls the thickness of the checkbox's border |
-| --md-sys-checkbox-check-thickness | 2px | The thickness of the checkmark |
-| --md-sys-checkbox-container-size | 18px | Defines the size of the checkbox itself |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-checkbox-container-size` | The size of the checkbox itself | `18px` |
+| `--md-comp-checkbox-outline-width` | The thickness of the checkbox's border | `2px` |
+| `--md-comp-checkbox-check-thickness` | The thickness of the check mark | `2px` |
+| `--md-comp-checkbox-unselected-outline-color` | The border color of an unselected checkbox | `--md-sys-color-on-surface-variant` |
+| `--md-comp-checkbox-selected-container-color` | The fill color of a selected checkbox | `--md-sys-color-primary` |
+| `--md-comp-checkbox-selected-icon-color` | The color of the check mark | `--md-sys-color-on-primary` |
 
 **Example: Changing the border width of a checkbox**
 
 ```HTML
-<div style="--md-sys-checkbox-border-width:1px">
+<div style="--md-comp-checkbox-outline-width:1px">
   <input type="checkbox" id="mycheckbox" class="micl-checkbox">
   <label for="mycheckbox">Checkbox</label>
 </div>
 ```
 
-To vertically align a checkbox with its label, wrap both in an element that has the `micl-flex--vcenter` class.
+To vertically align a checkbox with its label, wrap both in an element that has a styling like suggested below:
 
 ```HTML
-<div class="micl-flex--vcenter">
+<div style="display:flex;flex-direction:row;align-items:center">
   <input type="checkbox" id="mycheckbox" class="micl-checkbox">
   <label for="mycheckbox">Checkbox</label>
 </div>

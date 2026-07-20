@@ -53,6 +53,10 @@ Import both the date picker and the dialog styles into your project:
 
 ```CSS
 @use "material-inspired-component-library/dist/dialog";
+@use "material-inspired-component-library/dist/textfield";
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
+@use "material-inspired-component-library/dist/divider";
 @use "material-inspired-component-library/dist/datepicker";
 ```
 
@@ -67,6 +71,7 @@ This component requires JavaScript to function:
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
+When loading individual JavaScript files, also load `dist/textfield` — it wires the input field that opens the picker.
 
 This will initialize any Date picker component, including those that will be added to the DOM later on.
 
@@ -145,3 +150,77 @@ You can trigger the picker from a button using the standard `popovertarget` attr
 
 - **Behavior**: The Date picker reads from and writes to the button's value attribute.
 - **Formatting**: The component automatically updates the button's text content with the selected date, formatted according to the user's locale.
+
+## Date Range Selection
+Add the `micl-datepicker--range` class to the dialog to let users select a range of dates instead of a single date:
+
+```HTML
+<dialog id="myrangepicker" class="micl-dialog micl-datepicker micl-datepicker--range" closedby="closerequest">
+```
+
+The first selected date becomes the start of the range and the second one its end. Selecting a date before the start moves the start, and any selection after a completed range starts a new one. Confirming before an end date has been chosen commits a single-day range.
+
+### Connecting a Pair of Input Fields
+Connect two date input fields — both referring to the picker in their `data-datepicker` attribute — and identify the field holding the end date in the `data-miclrangeto` attribute of the start field:
+
+```HTML
+<input type="date" id="from" data-datepicker="myrangepicker" data-miclrangeto="to">
+<input type="date" id="to" data-datepicker="myrangepicker">
+```
+
+- **Behavior**: Clicking either field opens the picker with the range loaded from both fields; reversed values are swapped. Confirming writes both fields and fires their change-events.
+- **Limits**: The earliest allowed date is taken from the `min` attribute of the start field, the latest from the `max` attribute of the end field.
+
+### Connecting to a Button
+A single button invoker holds the range in its value attribute as an ISO 8601 time interval. The component updates the button's text content with the localized range:
+
+```HTML
+<button type="button" class="micl-button-text-m" popovertarget="myrangepicker" value="2026-01-23/2026-02-06">23.01.2026 – 06.02.2026</button>
+```
+
+### Text Input Mode
+In range mode, the manual input area holds two [Text field components](../textfield/README.md) instead of being one itself:
+
+```HTML
+<div class="micl-datepicker__input">
+  <div class="micl-textfield-outlined">
+    <label for="rangestart">From</label>
+    <input type="text" id="rangestart">
+  </div>
+  <div class="micl-textfield-outlined">
+    <label for="rangeend">To</label>
+    <input type="text" id="rangeend">
+  </div>
+</div>
+```
+
+Entering a start date that lies after the end date swaps the two. The fields cannot be emptied: to discard the end of a range, return to the calendar view and start a new range by selecting any date.
+
+## Theming
+Each date picker can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. The container color, shape and elevation are inherited from the [Dialog component](../dialog/README.md).
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-date-picker-modal-container-width` | The width of the modal date picker | `360px` |
+| `--md-comp-date-input-modal-container-width` | The width of the modal date picker in text input mode | `328px` |
+| `--md-comp-date-picker-docked-container-width` | The width of the docked date picker | `360px` |
+| `--md-comp-date-picker-header-headline-color` | The text color of the headline showing the selected date | `--md-sys-color-on-surface-variant` |
+| `--md-comp-date-picker-weekdays-label-text-color` | The text color of the weekday labels | `--md-sys-color-on-surface` |
+| `--md-comp-date-picker-date-unselected-label-text-color` | The text color of the selectable dates | `--md-sys-color-on-surface` |
+| `--md-comp-date-picker-date-selected-container-color` | The background color of the selected date | `--md-sys-color-primary` |
+| `--md-comp-date-picker-date-selected-label-text-color` | The text color of the selected date | `--md-sys-color-on-primary` |
+| `--md-comp-date-picker-date-today-container-outline-color` | The outline color of today's date | `--md-sys-color-primary` |
+| `--md-comp-date-picker-date-today-label-text-color` | The text color of today's date | `--md-sys-color-primary` |
+| `--md-comp-date-picker-selection-year-unselected-label-text-color` | The text color of the selectable years | `--md-sys-color-on-surface-variant` |
+| `--md-comp-date-picker-selection-year-selected-container-color` | The background color of the selected year | `--md-sys-color-primary` |
+| `--md-comp-date-picker-selection-year-selected-label-text-color` | The text color of the selected year | `--md-sys-color-on-primary` |
+| `--md-comp-date-picker-range-selection-active-indicator-container-color` | The background color of the band connecting the endpoints of a range | `--md-sys-color-secondary-container` |
+| `--md-comp-date-picker-selection-date-in-range-label-text-color` | The text color of the dates inside a range | `--md-sys-color-on-secondary-container` |
+
+**Example: Changing the width of the modal date picker**
+
+```CSS
+#mydatepicker {
+  --md-comp-date-picker-modal-container-width: 400px;
+}
+```

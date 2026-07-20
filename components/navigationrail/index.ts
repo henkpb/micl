@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const navigationrailSelector = '.micl-navigationrail';
 
 interface NavigationRailState {
@@ -27,7 +29,7 @@ interface NavigationRailState {
 
 const navigationrailStates = new WeakMap<HTMLElement, NavigationRailState>();
 
-export default
+export default register(navigationrailSelector,
 {
     initialize: (element: HTMLElement): void =>
     {
@@ -84,4 +86,4 @@ export default
 
         delete element.dataset.miclinitialized;
     }
-};
+}, HTMLElement);

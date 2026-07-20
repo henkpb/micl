@@ -86,7 +86,32 @@ The initial height is determined by its content and capped at 50% of the screen'
 <dialog data-miclsnapheights="0,200,420" ...>
 ```
 
-The value `0` is equivalent to closing the bottom sheet. When a user clicks the drag-handle, the bottom sheet toggles between these preset heights and its initial height. The bottom sheet will also snap to these preset heights as a user drags the heading.
+The value `0` is equivalent to closing the bottom sheet. When a user clicks the drag-handle, the bottom sheet toggles between these preset heights and its initial height. The bottom sheet will also snap to these preset heights as a user drags the heading, and settles on the nearest preset when released. Dragging the bottom sheet down to less than 48px closes it.
+
+## Theming
+Each bottom sheet style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. The properties are declared on the component itself and can be changed on any appropriate parent element to affect its child bottom sheets.
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-bottomsheet-height` | The height of the opened bottom sheet (managed by the library for resizable bottom sheets) | `max-content` |
+| `--md-comp-bottomsheet-margin` | The space between the bottom sheet and the sides of the screen, on screens wider than 640px | `56px` |
+| `--md-comp-bottomsheet-margin-top` | The minimum space between the bottom sheet and the top of the screen | `72px` |
+| `--md-comp-bottomsheet-padding` | The amount of space between the edges and the content | `24px` |
+| `--md-comp-bottomsheet-container-color` | The background color of the bottom sheet | `--md-sys-color-surface-container-low` |
+| `--md-comp-bottomsheet-container-shape` | The corner rounding of the bottom sheet | `--md-sys-shape-corner-extra-large-top` |
+| `--md-comp-bottomsheet-container-elevation` | The shadow (elevation) of the bottom sheet | `--md-sys-elevation-level1` |
+| `--md-comp-bottomsheet-drag-handle-width` | The width of the drag handle | `32px` |
+| `--md-comp-bottomsheet-drag-handle-height` | The height of the drag handle | `4px` |
+| `--md-comp-bottomsheet-drag-handle-color` | The color of the drag handle | `--md-sys-color-on-surface-variant` |
+| `--md-comp-bottomsheet-focus-indicator-color` | The color of the drag handle's keyboard-focus outline | `--md-sys-color-secondary` |
+
+**Example: Changing the background color of the bottom sheet**
+
+```HTML
+<dialog class="micl-bottomsheet" popover style="--md-comp-bottomsheet-container-color:var(--md-sys-color-surface-container)">
+  ...
+</dialog>
+```
 
 ## Compatibility
 This component uses the Popover API, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API#api.htmlelement.popover) for details.

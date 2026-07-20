@@ -1,0 +1,185 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../foundations/layout';
+@use '../../styles/elevation';
+@use '../../styles/statelayer';
+@use '../navigationrail/navitem';
+
+@include elevation.level(0);
+@include elevation.level(2);
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
+nav.micl-navigationbar {
+    box-sizing: border-box;
+    position: fixed;
+    inset-block: auto 0;
+    inset-inline: 0;
+    padding-block-end: env(safe-area-inset-bottom);
+    background-color: var(--md-comp-nav-bar-container-color, var(--md-sys-color-surface-container));
+    box-shadow: var(--md-comp-nav-bar-container-elevation, var(--md-sys-elevation-level2));
+    border-radius: var(--md-comp-nav-bar-container-shape, 0px);
+    z-index: 9;
+
+    &> .micl-navigationbar__content {
+        box-sizing: border-box;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        block-size: var(--md-comp-nav-bar-container-height, 64px);
+        padding-block-start: 6px;
+
+        &> a.micl-navigationbar__item {
+            @extend %micl-navitem;
+
+            flex-direction: column;
+            inline-size: var(--md-comp-nav-bar-item-vertical-active-indicator-width, 56px);
+            block-size: var(--md-comp-nav-bar-item-vertical-active-indicator-height, 32px);
+            border-radius: var(--md-comp-nav-bar-item-active-indicator-shape, calc(var(--md-comp-nav-bar-item-vertical-active-indicator-height, 32px) / 2));
+
+            .micl-navigationbar__icon {
+                @extend %micl-navitem-icon;
+                font-size: var(--md-comp-nav-bar-item-icon-size, var(--md-sys-icon-size));
+                inline-size: var(--md-comp-nav-bar-item-icon-size, var(--md-sys-icon-size));
+                padding-inline: 16px;
+            }
+            .micl-navigationbar__text {
+                @extend %micl-navitem-text;
+                margin-block-start: var(--md-comp-nav-bar-item-active-indicator-icon-label-space, 4px);
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+
+        &> a.micl-navigationbar__item[aria-current="page"] {
+            @extend %micl-navitem-current;
+
+            .micl-navigationbar__icon {
+                @extend %micl-navitem-current-icon;
+            }
+            .micl-navigationbar__text {
+                @extend %micl-navitem-current-text;
+            }
+        }
+    }
+
+    // Tall bar (80px): the item stack is vertically centered
+    &.micl-navigationbar--tall > .micl-navigationbar__content {
+        block-size: var(--md-comp-nav-bar-tall-container-height, 80px);
+        padding-block-start: 14px;
+    }
+
+    // Horizontal items: icon and label side by side in a 40px pill
+    &.micl-navigationbar--horizontal > .micl-navigationbar__content {
+        align-items: center;
+        padding-block-start: 0;
+
+        &> a.micl-navigationbar__item {
+            flex-direction: row;
+            inline-size: fit-content;
+            max-inline-size: 100%;
+            block-size: var(--md-comp-nav-bar-item-horizontal-active-indicator-height, 40px);
+            border-radius: var(--md-comp-nav-bar-item-active-indicator-shape, calc(var(--md-comp-nav-bar-item-horizontal-active-indicator-height, 40px) / 2));
+
+            .micl-navigationbar__icon {
+                padding-inline:
+                    var(--md-comp-nav-bar-item-horizontal-active-indicator-leading-space, 16px)
+                    var(--md-comp-nav-bar-item-active-indicator-icon-label-space, 4px);
+            }
+            .micl-navigationbar__text {
+                margin-block-start: 0;
+                padding-inline-end: var(--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space, 16px);
+            }
+        }
+    }
+}
+
+// Reserve space at the bottom of the page for the fixed navigation bar
+// (higher specificity than the padding shorthand of body.micl-window)
+body:has(nav.micl-navigationbar) {
+    padding-block-end: calc(var(--md-comp-nav-bar-container-height, 64px) + env(safe-area-inset-bottom));
+}
+body:has(nav.micl-navigationbar--tall) {
+    padding-block-end: calc(var(--md-comp-nav-bar-tall-container-height, 80px) + env(safe-area-inset-bottom));
+}
+
+// Adaptive navigation: a navigation bar below the named breakpoint and a
+// collapsed navigation rail (using the nav-rail tokens) at the breakpoint
+// and above. The item anatomy is shared, so only the container changes.
+$_breakpoints: (
+    medium:   layout.$md-sys-breakpoint-medium-min,
+    expanded: layout.$md-sys-breakpoint-expanded-min,
+);
+
+@each $name, $min in $_breakpoints {
+    @media (min-width: $min) {
+        nav.micl-navigationbar--bar-to-#{$name} {
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            float: inline-start;
+            inset: unset;
+            inset-block-start: 0;
+            inline-size: var(--md-comp-nav-rail-collapsed-container-width, 96px);
+            block-size: 100vh;
+            min-block-size: 100%;
+            margin-inline: calc(-1 * var(--md-sys-layout-window-margin, 0px)) auto;
+            padding-block: var(--md-comp-nav-rail-collapsed-top-space, 44px) 0;
+            background-color: var(--md-comp-nav-rail-collapsed-container-color, var(--md-sys-color-surface));
+            box-shadow: var(--md-comp-nav-rail-collapsed-container-elevation, var(--md-sys-elevation-level0));
+            border-radius: var(--md-comp-nav-rail-collapsed-container-shape, 0px);
+            border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color));
+            overflow: hidden;
+
+            &> .micl-navigationbar__content {
+                flex: 1 1 auto;
+                flex-direction: column;
+                justify-content: flex-start;
+                inline-size: 100%;
+                block-size: auto;
+                row-gap: var(--md-comp-nav-rail-item-container-vertical-space, 6px);
+                padding-block: var(--md-comp-nav-rail-item-header-space-minimum, 40px) 16px;
+                padding-inline: 20px;
+                overflow: hidden auto;
+
+                &> a.micl-navigationbar__item {
+                    margin-block-end: 40px;
+                    row-gap: var(--md-comp-nav-rail-collapsed-item-vertical-space, 4px);
+                }
+            }
+        }
+
+        // in rail mode the bottom of the page no longer needs to be reserved
+        body.micl-window:has(nav.micl-navigationbar--bar-to-#{$name}) {
+            padding-block-end: var(--md-sys-layout-window-margin, 0px);
+        }
+        body:not(.micl-window):has(nav.micl-navigationbar--bar-to-#{$name}) {
+            padding-block-end: 0;
+        }
+    }
+}

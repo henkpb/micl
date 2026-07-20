@@ -19,11 +19,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
+
+// Each selector group compiles to a single selector.
+$iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutton-filled-"], [class*="micl-iconbutton-tonal-"], [class*="micl-iconbutton-outlined-"])';
 
 @include elevation.level(0);
 
@@ -43,18 +45,37 @@
 @include statelayer.property;
 @include statelayer.keyframes;
 
-[class*="micl-iconbutton-standard-"],
-[class*="micl-iconbutton-filled-"],
-[class*="micl-iconbutton-tonal-"],
-[class*="micl-iconbutton-outlined-"] {
-    --md-sys-iconbutton-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-sys-iconbutton-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --md-sys-iconbutton-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+// Icon buttons smaller than the minimum touch target extend their interactive area with
+// a transparent ::before overlay.
+%micl-iconbutton-target {
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
+        background-color: transparent;
+    }
+}
+
+#{$iconbuttons} {
+    --md-comp-icon-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-comp-icon-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
     --micl-ripple: 1;
 
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    inline-size: var(--micl-width);
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
     padding: 0;
     border: none;
     border-radius: var(--md-sys-shape-corner-full);
@@ -68,16 +89,17 @@
         ),
         linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
+    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
     background-size: 0%, 100%;
     -webkit-tap-highlight-color: transparent;
     color: var(--md-comp-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
     font-variation-settings: 'FILL' 0;
     cursor: pointer;
     transition:
-        border-radius var(--md-sys-iconbutton-motion-duration) var(--md-sys-iconbutton-motion-effects),
-        font-variation-settings var(--md-sys-iconbutton-motion-duration) linear,
+        border-radius var(--md-comp-icon-button-motion-duration) var(--md-comp-icon-button-motion-effects),
+        font-variation-settings var(--md-comp-icon-button-motion-duration) linear,
         background-size 0ms,
-        --statelayer-opacity var(--md-sys-iconbutton-motion-duration) linear;
+        --statelayer-opacity var(--md-comp-icon-button-motion-duration) linear;
 
     &:disabled {
         box-shadow: var(--md-sys-elevation-level0);
@@ -91,13 +113,13 @@
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
             outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: 3px;
+            outline-offset: 2px;
         }
         &:active {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
         &.micl-rippling {
-            animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
+            animation: micl-ripple var(--md-sys-state-ripple-duration);
         }
     }
     &:hover:not(:disabled),
@@ -110,222 +132,93 @@
     &.micl-button--toggle[aria-pressed="true"]::before {
         content: attr(data-micliconselected);
     }
+
+    // The corner rounding of the size modifiers resolves through the two --_shape-*
+    // custom properties that each size declares below, the narrow and wide widths
+    // through the two --_width-* custom properties.
+    &.micl-button--toggle[aria-pressed="true"] {
+        border-radius: var(--_shape-toggle);
+    }
+    &.micl-iconbutton--narrow {
+        --micl-width: var(--_width-narrow);
+        border-radius: calc(var(--micl-width) / 2);
+    }
+    &.micl-iconbutton--wide {
+        --micl-width: var(--_width-wide);
+        border-radius: calc(var(--micl-height) / 2);
+    }
+    &.micl-button--square {
+        border-radius: var(--_shape-toggle);
+
+        &.micl-button--toggle[aria-pressed="true"] {
+            border-radius: var(--md-sys-shape-corner-full);
+        }
+    }
+    &:not(:disabled):active {
+        &,
+        &.micl-button--square {
+            border-radius: var(--_shape-pressed);
+        }
+    }
 }
 
-.micl-iconbutton-standard-xs,
-.micl-iconbutton-filled-xs,
-.micl-iconbutton-tonal-xs,
-.micl-iconbutton-outlined-xs {
+:is(.micl-iconbutton-standard-xs, .micl-iconbutton-filled-xs, .micl-iconbutton-tonal-xs, .micl-iconbutton-outlined-xs) {
+    @extend %micl-iconbutton-target;
+
     --micl-width: 32px;
     --micl-height: 32px;
+    --_width-narrow: 28px;
+    --_width-wide: 40px;
+    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-pressed: var(--md-sys-shape-corner-small);
 
-    position: relative;
-    inline-size: var(--micl-width);
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
     font-size: 20px;
-
-    &::before {
-        content: "";
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-medium);
-    }
-    &.micl-iconbutton--narrow {
-        --micl-width: 28px;
-        border-radius: calc(var(--micl-width) / 2);
-    }
-    &.micl-iconbutton--wide {
-        --micl-width: 40px;
-        border-radius: calc(var(--micl-height) / 2);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-medium);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: var(--md-sys-shape-corner-full);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-small);
-        }
-    }
 }
 
-.micl-iconbutton-standard-s,
-.micl-iconbutton-filled-s,
-.micl-iconbutton-tonal-s,
-.micl-iconbutton-outlined-s {
+:is(.micl-iconbutton-standard-s, .micl-iconbutton-filled-s, .micl-iconbutton-tonal-s, .micl-iconbutton-outlined-s) {
+    @extend %micl-iconbutton-target;
+
     --micl-width: 40px;
     --micl-height: 40px;
+    --_width-narrow: 32px;
+    --_width-wide: 52px;
+    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-pressed: var(--md-sys-shape-corner-small);
 
-    position: relative;
-    inline-size: var(--micl-width);
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
     font-size: var(--md-sys-icon-size, 24px);
-
-    &::before {
-        content: "";
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-medium);
-    }
-    &.micl-iconbutton--narrow {
-        --micl-width: 32px;
-        border-radius: calc(var(--micl-width) / 2);
-    }
-    &.micl-iconbutton--wide {
-        --micl-width: 52px;
-        border-radius: calc(var(--micl-height) / 2);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-medium);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: var(--md-sys-shape-corner-full);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-small);
-        }
-    }
 }
 
-.micl-iconbutton-standard-m,
-.micl-iconbutton-filled-m,
-.micl-iconbutton-tonal-m,
-.micl-iconbutton-outlined-m {
+:is(.micl-iconbutton-standard-m, .micl-iconbutton-filled-m, .micl-iconbutton-tonal-m, .micl-iconbutton-outlined-m) {
     --micl-width: 56px;
     --micl-height: 56px;
+    --_width-narrow: 48px;
+    --_width-wide: 72px;
+    --_shape-toggle: var(--md-sys-shape-corner-large);
+    --_shape-pressed: var(--md-sys-shape-corner-medium);
 
-    inline-size: var(--micl-width);
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
     font-size: var(--md-sys-icon-size, 24px);
-
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-large);
-    }
-    &.micl-iconbutton--narrow {
-        --micl-width: 48px;
-        border-radius: calc(var(--micl-width) / 2);
-    }
-    &.micl-iconbutton--wide {
-        --micl-width: 72px;
-        border-radius: calc(var(--micl-height) / 2);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: var(--md-sys-shape-corner-full);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-medium);
-        }
-    }
 }
 
-.micl-iconbutton-standard-l,
-.micl-iconbutton-filled-l,
-.micl-iconbutton-tonal-l,
-.micl-iconbutton-outlined-l {
+:is(.micl-iconbutton-standard-l, .micl-iconbutton-filled-l, .micl-iconbutton-tonal-l, .micl-iconbutton-outlined-l) {
     --micl-width: 96px;
     --micl-height: 96px;
+    --_width-narrow: 64px;
+    --_width-wide: 128px;
+    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    inline-size: var(--micl-width);
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
     font-size: 32px;
-
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-    }
-    &.micl-iconbutton--narrow {
-        --micl-width: 64px;
-        border-radius: calc(var(--micl-width) / 2);
-    }
-    &.micl-iconbutton--wide {
-        --micl-width: 128px;
-        border-radius: calc(var(--micl-height) / 2);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: var(--md-sys-shape-corner-full);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-large);
-        }
-    }
 }
 
-.micl-iconbutton-standard-xl,
-.micl-iconbutton-filled-xl,
-.micl-iconbutton-tonal-xl,
-.micl-iconbutton-outlined-xl {
+:is(.micl-iconbutton-standard-xl, .micl-iconbutton-filled-xl, .micl-iconbutton-tonal-xl, .micl-iconbutton-outlined-xl) {
     --micl-width: 136px;
     --micl-height: 136px;
+    --_width-narrow: 104px;
+    --_width-wide: 184px;
+    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    inline-size: var(--micl-width);
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
     font-size: 40px;
-
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-    }
-    &.micl-iconbutton--narrow {
-        --micl-width: 104px;
-        border-radius: calc(var(--micl-width) / 2);
-    }
-    &.micl-iconbutton--wide {
-        --micl-width: 184px;
-        border-radius: calc(var(--micl-height) / 2);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: var(--md-sys-shape-corner-full);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-large);
-        }
-    }
 }
 
 [class*="micl-iconbutton-standard-"] {
@@ -345,7 +238,6 @@
         }
     }
 }
-
 
 [class*="micl-iconbutton-filled-"] {
     --statelayer-color: var(--md-sys-color-on-primary);
@@ -396,6 +288,11 @@
     &:disabled {
         background-color: transparent;
         color: var(--md-comp-outlined-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-disabled-icon-opacity, 38%)));
+
+        &.micl-button--toggle[aria-pressed="true"] {
+            border: none;
+            background-color: var(--md-comp-outlined-icon-button-selected-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-selected-disabled-container-opacity, 10%)));
+        }
     }
     &:not(:disabled) {
         &.micl-button--toggle[aria-pressed="true"] {

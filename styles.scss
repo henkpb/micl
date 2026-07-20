@@ -21,11 +21,12 @@
 
 @use 'styles/shape' with ($master: true);
 @use 'styles/elevation' with ($master: true);
+@use 'styles/motion' with ($master: true);
 @use 'styles/statelayer' with ($master: true);
 @use 'styles/typography' with ($master: true);
-@use 'styles/motion' with ($master: true);
 
-@use 'foundations';
+@use 'foundations/base';
+@use 'foundations/field';
 @use 'foundations/layout';
 @use 'foundations/scrollbar';
 
@@ -38,6 +39,7 @@
 @use 'components/slider';
 @use 'components/button';
 @use 'components/iconbutton';
+@use 'components/chip';
 @use 'components/list';
 @use 'components/menu';
 @use 'components/select';
@@ -48,6 +50,7 @@
 @use 'components/appbar';
 @use 'components/sidesheet';
 @use 'components/bottomsheet';
+@use 'components/navigationbar';
 @use 'components/navigationrail';
 @use 'components/progressindicator';
 @use 'components/stepper';

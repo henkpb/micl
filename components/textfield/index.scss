@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
@@ -34,22 +33,31 @@
 @include typography.scale('body-large');
 @include typography.scale('body-small');
 
-.micl-textfield-filled,
-.micl-textfield-outlined {
-    --md-sys-textfield-height: 56px;
-    --md-sys-textfield-icon-size: 24px;
-    --md-sys-textfield-icon-space: 12px;
-    --md-sys-textfield-input-space: 16px;
-    --md-sys-textfield-prefix-space: 1em;
-    --md-sys-textfield-suffix-space: 1em;
-    --md-sys-textfield-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
-    --md-sys-textfield-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
-    --md-sys-textfield-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
+$textfields: ':is(.micl-textfield-filled, .micl-textfield-outlined)';
+$fields: ':is(input, select, textarea)';
+
+// A text field is "populated" when its label floats.
+$populated: ':has(> :focus, > [data-miclvalue], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select:not([data-miclinitialized]) option:checked:not([value=""]), > textarea:not(:empty, [data-miclinitialized]))';
+
+#{$textfields} {
+    --_height: var(--md-comp-text-field-container-height, 56px);
+    --_shape: var(--md-sys-shape-corner-extra-small);
+    --_icon-size: var(--md-comp-text-field-icon-size, 24px);
+    --_icon-space: var(--md-comp-text-field-icon-space, 12px);
+    --_input-space: var(--md-comp-text-field-input-space, 16px);
+    --_icon-leading: 0px;
+    --_icon-trailing: 0px;
+    --_prefix: 0px;
+    --_suffix: 0px;
+    --_outline-width: 1px;
+    --_label-color: var(--md-comp-text-field-label-color, var(--md-sys-color-on-surface-variant));
+    --_effects: var(--md-comp-text-field-motion-effects, #{motion.$md-sys-motion-expressive-slow-effects});
+    --_duration: var(--md-comp-text-field-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
+    --_duration-reverse: var(--md-comp-text-field-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
 
     display: grid;
     grid-template-areas: "textfield" "supporting";
     align-items: center;
-    background-color: inherit;
 
     &> label {
         @include typography.body-large;
@@ -59,42 +67,40 @@
         align-self: flex-start;
         width: fit-content;
         padding-inline: 4px;
-        margin-block-start: calc((var(--md-sys-textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
-        margin-inline: 12px 4px;
-        border-radius: 4px;
-        background-color: var(--_dialog-background-color, var(--_card-background-color, inherit));
-        color: var(--md-sys-color-on-surface-variant);
+        margin-block-start: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+        color: var(--_label-color);
         z-index: 1;
         transition:
-            margin-block-start var(--md-sys-textfield-motion-duration) var(--md-sys-textfield-motion-effects),
-            margin-inline-start var(--md-sys-textfield-motion-duration) var(--md-sys-textfield-motion-effects),
-            font-size var(--md-sys-textfield-motion-duration) linear,
-            letter-spacing var(--md-sys-textfield-motion-duration) linear;
+            margin var(--_duration) var(--_effects),
+            font-size var(--_duration) linear,
+            letter-spacing var(--_duration) linear;
     }
-    &> input,
-    &> select,
-    &> textarea {
+    &> #{$fields} {
         @include typography.body-large;
 
         box-sizing: border-box;
         grid-area: textfield;
         margin: 0;
-        padding-inline: var(--md-sys-textfield-input-space);
+        padding-inline:
+            calc(var(--_input-space) - var(--_border, 0px) + var(--_icon-leading) + var(--_prefix))
+            calc(var(--_input-space) - var(--_border, 0px) + var(--_icon-trailing) + var(--_suffix));
         border: none;
-        border-block-end: 1px solid var(--md-sys-color-on-surface-variant);
-        border-radius: var(--md-sys-shape-corner-extra-small);
+        border-radius: var(--_shape);
         outline: none;
-        color: var(--md-sys-color-on-surface);
+        color: var(--md-comp-text-field-input-color, var(--md-sys-color-on-surface));
         background-color: transparent;
         text-overflow: ellipsis;
-        caret-color: var(--md-sys-color-primary);
+        caret-color: var(--_caret-color, var(--md-comp-text-field-caret-color, var(--md-sys-color-primary)));
 
         &:disabled {
-            border-block-end-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
             color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+
+            &::placeholder {
+                color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+            }
         }
         &::placeholder {
-            color: var(--md-sys-color-on-surface-variant);
+            color: var(--md-comp-text-field-input-placeholder-color, var(--md-sys-color-on-surface-variant));
         }
         &::-webkit-inner-spin-button,
         &::-webkit-outer-spin-button {
@@ -105,14 +111,13 @@
             -moz-appearance: textfield;
         }
     }
-    &> input,
-    &> select {
-        height: var(--md-sys-textfield-height);
+    &> :is(input, select) {
+        height: var(--_height);
         padding-block: 0;
     }
     &> textarea {
-        min-height: var(--md-sys-textfield-height);
-        padding-block: calc((var(--md-sys-textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+        min-height: var(--_height);
+        padding-block: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2);
         resize: none;
 
         &[rows] {
@@ -130,70 +135,59 @@
 
         grid-area: textfield;
         align-content: center;
-        height: var(--md-sys-textfield-height);
+        height: var(--_height);
         color: var(--md-sys-color-on-surface-variant);
         opacity: 0;
         z-index: 1;
-        transition: opacity var(--md-sys-textfield-motion-duration-reverse) linear;
+        transition: opacity var(--_duration-reverse) linear;
     }
     &> .micl-textfield__prefix {
-        width: var(--md-sys-textfield-prefix-space);
-        padding-inline-start: var(--md-sys-textfield-input-space);
+        width: var(--md-comp-text-field-prefix-space, 1em);
+        padding-inline-start: calc(var(--_input-space) + var(--_icon-leading));
     }
     &> .micl-textfield__suffix {
-        width: var(--md-sys-textfield-suffix-space);
-        padding-inline-end: var(--md-sys-textfield-input-space);
+        width: var(--md-comp-text-field-suffix-space, 1em);
+        padding-inline-end: calc(var(--_input-space) + var(--_icon-trailing));
         margin-inline: auto 0;
     }
     &> .micl-textfield__icon-leading,
     &> .micl-textfield__icon-trailing {
         grid-area: textfield;
         width: 1em;
-        margin-inline: var(--md-sys-textfield-icon-space) auto;
-        font-size: var(--md-sys-textfield-icon-size);
-        color: var(--md-sys-color-on-surface-variant);
+        margin-inline: var(--_icon-space) auto;
+        font-size: var(--_icon-size);
+        color: var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant));
         z-index: 1;
     }
     &> .micl-textfield__icon-trailing {
-        margin-inline: auto var(--md-sys-textfield-icon-space);
+        margin-inline: auto var(--_icon-space);
     }
+
     &:has(> .micl-textfield__prefix) {
-        &> input,
-        &> textarea {
-            padding-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-prefix-space));
-        }
+        --_prefix: var(--md-comp-text-field-prefix-space, 1em);
     }
     &:has(> .micl-textfield__suffix) {
-        &> input,
-        &> textarea {
-            padding-inline-end: calc(var(--md-sys-textfield-suffix-space) + var(--md-sys-textfield-input-space));
-        }
+        --_suffix: var(--md-comp-text-field-suffix-space, 1em);
     }
     &:has(> .micl-textfield__icon-leading) {
-        &> label {
-            margin-inline-start: calc(var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-input-space));
-        }
-        &> .micl-textfield__prefix,
-        &> input,
-        &> textarea {
-            padding-inline-start: calc(var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-input-space));
-        }
-        &:has(> .micl-textfield__prefix) > input,
-        &:has(> .micl-textfield__prefix) > textarea {
-            padding-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space) + var(--md-sys-textfield-prefix-space));
-        }
+        --_icon-leading: calc(var(--_icon-size) + var(--_icon-space));
     }
     &:has(> .micl-textfield__icon-trailing) {
-        &> .micl-textfield__suffix,
-        &> input,
-        &> textarea {
-            padding-inline-end: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space));
+        --_icon-trailing: calc(var(--_icon-size) + var(--_icon-space));
+    }
+
+    // While the label rests on top of the data element, hide the text that would shine
+    // through it: the input placeholder and the label of a selected empty-value option.
+    // A focused or populated text field moves the label out of the way and both return.
+    &:has(> label):not(#{$populated}) {
+        &> select {
+            color: transparent;
         }
-        &:has(> .micl-textfield__suffix) > input,
-        &:has(> .micl-textfield__suffix) > textarea {
-            padding-inline-end: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-prefix-space) + var(--md-sys-textfield-icon-space));
+        &> #{$fields}::placeholder {
+            color: transparent;
         }
     }
+
     &> .micl-textfield__supporting-text,
     &> .micl-textfield__character-counter {
         @include typography.body-small;
@@ -201,252 +195,202 @@
         grid-area: supporting;
         padding-block: 4px 0;
         padding-inline: 16px;
-        color: var(--md-sys-color-on-surface-variant);
-
-        &.micl-textfield__supporting-text--focus {
-            visibility: hidden;
-        }
+        color: var(--md-comp-text-field-supporting-text-color, var(--md-sys-color-on-surface-variant));
+    }
+    &> .micl-textfield__supporting-text--focus {
+        visibility: hidden;
     }
     &> .micl-textfield__character-counter {
         justify-self: flex-end;
     }
-    &:has(> input:active),
-    &:has(> select:active),
-    &:has(> textarea:active),
-    &:has(> input:focus),
-    &:has(> select:focus),
-    &:has(> textarea:focus),
-    &:has(> input:focus-visible),
-    &:has(> select:focus-visible),
-    &:has(> textarea:focus-visible) {
-        &> label {
-            color: var(--md-sys-color-primary);
-        }
-        &> .micl-textfield__supporting-text.micl-textfield__supporting-text--focus {
-            visibility: visible;
-        }
+    &:has(> :is(input, textarea):not([maxlength]), > select) > .micl-textfield__character-counter {
+        display: none;
     }
-    &:has(> input:disabled),
-    &:has(> select:disabled),
-    &:has(> textarea:disabled) {
-        &> label {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
-        }
-        &> .micl-textfield__icon-leading,
-        &> .micl-textfield__icon-trailing,
-        &> .micl-textfield__supporting-text {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
-        }
-        &> .micl-textfield__character-counter {
-            display: none;
-        }
-    }
-    &:has(> input:not([maxlength])),
-    &:has(> textarea:not([maxlength])) {
-        &> .micl-textfield__character-counter {
-            display: none;
-        }
-    }
-    &:has(> input[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter),
-    &:has(> textarea[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) {
-        &> .micl-textfield__supporting-text {
-            padding-inline-end: 64px;
-        }
+    &:has(> :is(input, textarea)[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) > .micl-textfield__supporting-text {
+        padding-inline-end: 64px;
     }
 }
 
 .micl-textfield-filled {
-    &> label {
-        background-color: transparent;
-    }
-    &:hover {
-        &> input:not(:disabled),
-        &> select:not(:disabled),
-        &> textarea:not(:disabled) {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+    --_outline-color: var(--md-comp-filled-text-field-active-indicator-color, var(--md-sys-color-on-surface-variant));
+    --_focus-outline-color: var(--md-comp-filled-text-field-focus-active-indicator-color, var(--md-sys-color-primary));
 
-            border-block-end-color: var(--md-sys-color-on-surface);
-        }
+    &> label {
+        margin-inline: 12px 4px;
     }
-    &> input,
-    &> select,
-    &> textarea {
+    &:hover > #{$fields}:not(:disabled) {
+        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+    }
+    &> #{$fields} {
         --statelayer-color: var(--md-sys-color-on-surface);
 
         padding-block-start: 18px;
-        padding-block-end: 2px;
+        padding-block-end: calc(3px - var(--_outline-width));
+        border-block-end: var(--_outline-width) solid var(--_outline-color);
         border-end-start-radius: 0;
         border-end-end-radius: 0;
-        outline: none;
-        background-color: var(--md-sys-color-surface-container-highest);
+        background-color: var(--md-comp-filled-text-field-container-color, var(--md-sys-color-surface-container-highest));
         background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
         background-repeat: no-repeat;
-        transition: --statelayer-opacity var(--md-sys-textfield-motion-duration) linear;
+        transition: --statelayer-opacity var(--_duration) linear;
 
         &:disabled {
             background-color: rgb(from var(--md-sys-color-on-surface) r g b / 4%);
         }
-        &:not(:disabled):focus,
-        &:not(:disabled):focus-visible,
-        &:not(:disabled):active {
-            padding-block-end: 0px;
-            border-block-end-width: 3px;
-            border-block-end-color: var(--md-sys-color-primary);
-        }
-    }
-    &> input {
-        width: 100%;
     }
     &> textarea {
         padding-block-start: 24px;
     }
-    &:has(
-        > input:focus,
-        > input[value]:not([value='']):not([data-miclinitialized]),
-        > input[data-miclvalue],
-        > input[type=date],
-        > input[type=datetime-local],
-        > input[type=month],
-        > input[type=time],
-        > input[type=week],
-        > select:focus,
-        > select:not([data-miclinitialized]) option:checked:not([value='']),
-        > select[data-miclvalue],
-        > textarea:focus,
-        > textarea:not(:empty):not([data-miclinitialized]),
-        > textarea[data-miclvalue]
-    ) {
+    &:has(> .micl-textfield__icon-leading) > label {
+        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading));
+    }
+    &#{$populated} {
         &> label {
-            @include typography.body-small;
-
             margin-block-start: 8px;
             margin-inline-start: 12px;
         }
         &:has(> .micl-textfield__icon-leading) > label {
-            margin-inline-start: calc(var(--md-sys-textfield-input-space) + var(--md-sys-textfield-icon-size) + var(--md-sys-textfield-icon-space) - 4px);
+            margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 4px);
         }
         &> .micl-textfield__prefix,
         &> .micl-textfield__suffix {
             height: 40px;
             margin-block-start: 16px;
-            opacity: 1;
         }
     }
 }
+
 .micl-textfield-outlined {
-    margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height)/2);
+    --_outline-color: var(--md-comp-outlined-text-field-outline-color, var(--md-sys-color-outline));
+    --_focus-outline-color: var(--md-comp-outlined-text-field-focus-outline-color, var(--md-sys-color-primary));
+    --_disabled-outline-opacity: 12%;
+    --_border: var(--_outline-width);
+    --_outline-extra: calc(var(--_outline-width) - 1px);
 
+    grid-template:
+        "textfield textfield textfield"
+        "supporting supporting supporting"
+        / 12px fit-content(calc(100% - 24px)) 1fr;
+    margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height) / 2);
+
+    // The outline's top edge is drawn by these two pseudo-elements. The label sits in the
+    // middle grid column, so the notch for a floating label opens by retracting ::before
+    // to the first column.
+    &::before,
+    &::after {
+        content: '';
+        grid-area: textfield;
+        align-self: start;
+        height: var(--_shape);
+        border-block-start: var(--_outline-width) solid var(--_outline-color);
+    }
+    &::before {
+        grid-column: 1 / 3;
+        border-start-start-radius: var(--_shape);
+    }
+    &::after {
+        grid-column: 3;
+        border-start-end-radius: var(--_shape);
+    }
     &:hover {
-        &> label {
-            color: var(--md-sys-color-on-surface);
-        }
-        &> input:not(:disabled),
-        &> select:not(:disabled),
-        &> textarea:not(:disabled) {
-            outline-color: var(--md-sys-color-on-surface);
-            color: var(--md-sys-color-on-surface);
-        }
+        --_label-color: var(--md-sys-color-on-surface);
     }
-    &> input,
-    &> select,
-    &> textarea {
-        margin: 0px 3px 3px 3px;
-        border: none;
-        outline: 1px solid var(--md-sys-color-outline);
+    &> label {
+        grid-column: 2;
+    }
+    &:has(> .micl-textfield__icon-leading) > label {
+        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 12px);
+    }
+    &> #{$fields} {
+        border-block-end: var(--_border) solid var(--_outline-color);
+        border-inline: var(--_border) solid var(--_outline-color);
+    }
 
-        &:disabled {
-            outline-color: rgb(from var(--md-sys-color-on-surface) r g b / 12%);
-        }
-        &:not(:disabled):focus,
-        &:not(:disabled):focus-visible,
-        &:not(:disabled):active {
-            outline-width: 3px;
-            outline-color: var(--md-sys-color-primary);
-        }
-    }
     &> input {
-        width: calc(100% - 3px - 3px);
+        padding-block-start: calc(var(--_border) - 1px);
     }
-    &:has(
-        > input:focus,
-        > input[value]:not([value='']):not([data-miclinitialized]),
-        > input[data-miclvalue],
-        > input[type=date],
-        > input[type=datetime-local],
-        > input[type=month],
-        > input[type=time],
-        > input[type=week],
-        > select:focus,
-        > select:not([data-miclinitialized]) option:checked:not([value='']),
-        > select[data-miclvalue],
-        > textarea:focus,
-        > textarea:not(:empty):not([data-miclinitialized]),
-        > textarea[data-miclvalue]
-    ) {
+
+    &> textarea {
+        --_border: 1px;
+
+        box-shadow:
+            inset var(--_outline-extra) 0 var(--_outline-color),
+            inset calc(0px - var(--_outline-extra)) 0 var(--_outline-color),
+            inset 0 calc(0px - var(--_outline-extra)) var(--_outline-color);
+    }
+    &#{$populated} {
+        &::before {
+            grid-column: 1;
+        }
+        &> label {
+            margin-block-start: calc(-2px - var(--md-sys-typescale-body-small-line-height) / 2);
+            margin-inline-start: 0;
+        }
+    }
+}
+
+// Shared states. Rule order matters here — focus must follow hover, the disabled overrides must come last.
+#{$textfields} {
+    &:hover {
+        --_outline-color: var(--md-sys-color-on-surface);
+    }
+    &:has(> :focus) {
+        --_outline-width: 3px;
+        --_outline-color: var(--_focus-outline-color);
+        --_label-color: var(--md-comp-text-field-focus-label-color, var(--md-sys-color-primary));
+
+        &> .micl-textfield__supporting-text--focus {
+            visibility: visible;
+        }
+    }
+    &#{$populated} {
         &> label {
             @include typography.body-small;
-
-            margin-block-start: calc(-2px - var(--md-sys-typescale-body-small-line-height) / 2);
-            margin-inline-start: 12px;
         }
         &> .micl-textfield__prefix,
         &> .micl-textfield__suffix {
             opacity: 1;
         }
     }
+    &:has(> :disabled) {
+        --_outline-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--_disabled-outline-opacity, 38%));
+
+        &> :is(label, [class*=micl-textfield__]:not(.micl-textfield__character-counter)) {
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+        }
+        &> .micl-textfield__character-counter {
+            display: none;
+        }
+    }
 }
 
-.micl-textfield-filled.micl-textfield--error,
-.micl-textfield-outlined.micl-textfield--error {
-    &> label,
+.micl-textfield--error:not(:has(> :disabled)) {
+    --_outline-color: var(--md-sys-color-error);
+    --_caret-color: var(--md-sys-color-error);
+    --_label-color: var(--md-sys-color-error);
+
     &> .micl-textfield__icon-trailing,
     &> .micl-textfield__supporting-text,
     &> .micl-textfield__character-counter {
         color: var(--md-sys-color-error);
     }
-    &> input,
-    &> textarea {
-        border-block-end-color: var(--md-sys-color-error);
-        outline-color: var(--md-sys-color-error);
-        caret-color: var(--md-sys-color-error);
+    &:hover:not(:has(> :focus)) {
+        --_outline-color: var(--md-sys-color-on-error-container);
+        --_label-color: var(--md-sys-color-on-error-container);
 
-        &:active,
-        &:focus,
-        &:focus-visible {
-            border-block-end-color: var(--md-sys-color-error);
-            outline-color: var(--md-sys-color-error);
-        }
-    }
-    &:hover {
-        &> label,
         &> .micl-textfield__icon-trailing {
             color: var(--md-sys-color-on-error-container);
-        }
-        &> input,
-        &> textarea {
-            border-block-end-color: var(--md-sys-color-on-error-container);
-            outline-color: var(--md-sys-color-on-error-container);
-        }
-    }
-    &:has(> input:active),
-    &:has(> input:focus),
-    &:has(> input:focus-visible),
-    &:has(> textarea:active),
-    &:has(> textarea:focus),
-    &:has(> textarea:focus-visible) {
-        &> label,
-        &> .micl-textfield__icon-trailing {
-            color: var(--md-sys-color-error);
         }
     }
 }
 
-[dir=rtl] .micl-textfield-filled,
-[dir=rtl] .micl-textfield-outlined {
+// If the icon elements are direction:ltr (like Material Symbols), their margin-inline resolves
+// against ltr and does not flip with the page direction — mirror them explicitly.
+#{$textfields}:dir(rtl) {
     &> .micl-textfield__icon-leading {
-        margin-inline: auto var(--md-sys-textfield-icon-space);
+        margin-inline: auto var(--_icon-space);
     }
     &> .micl-textfield__icon-trailing {
-        margin-inline: var(--md-sys-textfield-icon-space) auto;
+        margin-inline: var(--_icon-space) auto;
     }
 }

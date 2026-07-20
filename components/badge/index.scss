@@ -19,47 +19,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/typography';
 
 @include typography.scale('label-small');
 
-:root {
-    --md-sys-badge-small-size: 6px;
-    --md-sys-badge-large-size: 16px;
-    --md-sys-badge-large-padding: 4px;
-    --md-sys-badge-inline-offset: 0px;
-    --md-sys-badge-block-offset: 0px;
-}
-
 .micl-badge {
+    --_size: var(--md-comp-badge-size, 6px);
+    --_large-size: var(--md-comp-badge-large-size, 16px);
+    --_dx: var(--md-comp-badge-inline-offset, 0px);
+    --_dy: var(--md-comp-badge-block-offset, 0px);
+
     box-sizing: border-box;
     position: fixed;
     inset: 0;
     margin: 0;
     overflow-x: hidden;
-    background-color: var(--md-sys-color-error);
-    color: var(--md-sys-color-on-error);
+    background-color: var(--md-comp-badge-color, var(--md-sys-color-error));
+    color: var(--md-comp-badge-large-label-text-color, var(--md-sys-color-on-error));
 
     &.micl-badge--small {
-        inline-size: var(--md-sys-badge-small-size);
-        block-size: var(--md-sys-badge-small-size);
-        inset-block-start: calc(anchor(start) + var(--md-sys-badge-block-offset));
-        inset-inline-start: calc(anchor(end) - var(--md-sys-badge-small-size) + var(--md-sys-badge-inline-offset));
+        inline-size: var(--_size);
+        block-size: var(--_size);
+        inset-block-start: calc(anchor(start) + var(--_dy));
+        inset-inline-start: calc(anchor(end) - var(--_size) + var(--_dx));
         padding: 0;
-        border-radius: calc(var(--md-sys-badge-small-size) / 2);
+        border-radius: calc(var(--_size) / 2);
     }
     &:not(.micl-badge--small) {
         @include typography.label-small;
 
         inline-size: fit-content;
         max-inline-size: 34px;
-        min-inline-size: var(--md-sys-badge-large-size);
-        block-size: var(--md-sys-badge-large-size);
-        inset-block-start: calc(anchor(start) - (var(--md-sys-badge-large-size) - 14px) + var(--md-sys-badge-block-offset));
-        inset-inline-start: calc(anchor(end) - 12px + var(--md-sys-badge-inline-offset));
-        padding-inline: var(--md-sys-badge-large-padding);
-        border-radius: calc(var(--md-sys-badge-large-size) / 2);
+        min-inline-size: var(--_large-size);
+        block-size: var(--_large-size);
+        inset-block-start: calc(anchor(start) - (var(--_large-size) - 14px) + var(--_dy));
+        inset-inline-start: calc(anchor(end) - 12px + var(--_dx));
+        padding-inline: var(--md-comp-badge-large-padding, 4px);
+        border-radius: calc(var(--_large-size) / 2);
     }
 }
 
@@ -67,13 +63,13 @@
     .micl-badge {
         position: absolute;
         inset: 0 !important;
-        margin-block: calc(12px + var(--md-sys-badge-block-offset)) auto;
+        margin-block: calc(12px + var(--_dy)) auto;
 
         &.micl-badge--small {
-            margin-inline-start: calc(var(--md-sys-icon-size) - var(--md-sys-badge-small-size) - var(--md-sys-badge-inline-offset));
+            margin-inline-start: calc(var(--md-sys-icon-size, 24px) - var(--_size) - var(--_dx));
         }
         &:not(.micl-badge--small) {
-            margin-inline-start: calc(12px - var(--md-sys-badge-inline-offset));
+            margin-inline-start: calc(12px - var(--_dx));
         }
     }
 }

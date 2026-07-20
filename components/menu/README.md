@@ -41,6 +41,7 @@ This component requires JavaScript for functionality:
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
+When loading individual JavaScript files, also load `dist/list` — it provides the keyboard navigation of the menu items.
 
 This will initialize any Menu component, including those that will be added to the DOM later on.
 
@@ -176,161 +177,86 @@ Menu items can be grouped by including a [Divider component](../divider/README.m
 
 You may include an `<li>` with the `micl-menu__section` class to give the menu item group a descriptive title.
 
-## Customizations
-You can customize the appearance of the Menu component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child menus.
+## Theming
+Each menu can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention, as defined in the [Material Design 3 Expressive Menu Specification](https://m3.material.io/components/menus/specs). Set them on any appropriate parent element to affect its child menus.
 
-| Variable name            | Default Value | Description                          |
-| ------------------------ | ------------- | ------------------------------------ |
-| --md-comp-menu-width-max | 320px         | The maximum width allowed for a menu |
-| --md-comp-menu-width-min | 112px         | The minimum allowed width for a menu |
+### Container
 
-The Menu component supports the following CSS variables, as defined in the [Material Design 3 Expressive Menu Specification](https://m3.material.io/components/menus/specs):
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-menu-width-min` | The minimum width of a menu | `112px` |
+| `--md-comp-menu-width-max` | The maximum width of a menu | `320px` |
+| `--md-comp-menu-container-elevation` | The shadow (elevation) of the menu surface | `--md-sys-elevation-level2` |
+| `--md-comp-menu-container-shape` | The corner rounding of the menu surface | `--md-sys-shape-corner-large` |
+| `--md-comp-menu-active-container-shape` | The corner rounding while the menu is the frontmost menu | `--md-comp-menu-container-shape` |
+| `--md-comp-menu-inactive-container-shape` | The corner rounding while one of its submenus is open | `--md-sys-shape-corner-small` |
+| `--md-comp-menu-standard-container-color` | The background color of a standard menu | `--md-sys-color-surface-container-low` |
+| `--md-comp-menu-vibrant-container-color` | The background color of a vibrant menu | `--md-sys-color-tertiary-container` |
 
-| Variable name |
-| ------------- |
-| --md-comp-menu-container-elevation |
-| --md-comp-menu-container-shape |
-| --md-comp-menu-active-container-shape |
-| --md-comp-menu-inactive-container-shape |
-| --md-comp-menu-gap |
-| --md-comp-menu-group-padding |
-| --md-comp-menu-group-shape |
-| --md-comp-menu-item-height |
-| --md-comp-menu-item-bottom-space |
-| --md-comp-menu-item-leading-space |
-| --md-comp-menu-item-top-space |
-| --md-comp-menu-item-trailing-space |
-| --md-comp-menu-item-focus-indicator-color |
-| --md-comp-menu-item-focus-indicator-offset |
-| --md-comp-menu-item-focus-indicator-thickness |
-| --md-comp-menu-item-leading-icon-size |
-| --md-comp-menu-item-trailing-icon-size |
-| --md-comp-menu-item-shape |
-| --md-comp-menu-item-shape-single |
-| --md-comp-menu-item-selected-shape |
-|  |
-| --md-comp-menu-section-label-bottom-space |
-| --md-comp-menu-section-label-top-space |
-|  |
-| --md-comp-menu-standard-container-color |
-| --md-comp-menu-standard-menu-item-container-color |
-| --md-comp-menu-standard-menu-item-focused-label-text-color |
-| --md-comp-menu-standard-menu-item-focused-leading-icon-color |
-| --md-comp-menu-standard-menu-item-focused-state-layer-color |
-| --md-comp-menu-standard-menu-item-focused-state-layer-opacity |
-| --md-comp-menu-standard-menu-item-focused-supporting-text-color |
-| --md-comp-menu-standard-menu-item-focused-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-focused-trailing-supporting-text-color |
-| --md-comp-menu-standard-menu-item-hovered-label-text-color |
-| --md-comp-menu-standard-menu-item-hovered-leading-icon-color |
-| --md-comp-menu-standard-menu-item-hovered-state-layer-color |
-| --md-comp-menu-standard-menu-item-hovered-state-layer-opacity |
-| --md-comp-menu-standard-menu-item-hovered-supporting-text-color |
-| --md-comp-menu-standard-menu-item-hovered-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-hovered-trailing-supporting-text-color |
-| --md-comp-menu-standard-menu-item-pressed-label-text-color |
-| --md-comp-menu-standard-menu-item-pressed-leading-icon-color |
-| --md-comp-menu-standard-menu-item-pressed-state-layer-color |
-| --md-comp-menu-standard-menu-item-pressed-state-layer-opacity |
-| --md-comp-menu-standard-menu-item-pressed-supporting-text-color |
-| --md-comp-menu-standard-menu-item-pressed-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-pressed-trailing-supporting-text-color |
-| --md-comp-menu-standard-menu-item-label-text-color |
-| --md-comp-menu-standard-menu-item-leading-icon-color |
-| --md-comp-menu-standard-menu-item-supporting-text-color |
-| --md-comp-menu-standard-menu-item-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-trailing-supporting-text-color |
-| --md-comp-menu-standard-section-label-text-color |
-|  |
-| --md-comp-menu-vibrant-container-color |
-| --md-comp-menu-vibrant-menu-item-container-color |
-| --md-comp-menu-vibrant-menu-item-focused-label-text-color |
-| --md-comp-menu-vibrant-menu-item-focused-leading-icon-color |
-| --md-comp-menu-vibrant-menu-item-focused-state-layer-color |
-| --md-comp-menu-vibrant-menu-item-focused-state-layer-opacity |
-| --md-comp-menu-vibrant-menu-item-focused-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-focused-trailing-icon-color |
-| --md-comp-menu-vibrant-menu-item-focused-trailing-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-hovered-label-text-color |
-| --md-comp-menu-vibrant-menu-item-hovered-leading-icon-color |
-| --md-comp-menu-vibrant-menu-item-hovered-state-layer-color |
-| --md-comp-menu-vibrant-menu-item-hovered-state-layer-opacity |
-| --md-comp-menu-vibrant-menu-item-hovered-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-hovered-trailing-icon-color |
-| --md-comp-menu-vibrant-menu-item-hovered-trailing-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-pressed-label-text-color |
-| --md-comp-menu-vibrant-menu-item-pressed-leading-icon-color |
-| --md-comp-menu-vibrant-menu-item-pressed-state-layer-color |
-| --md-comp-menu-vibrant-menu-item-pressed-state-layer-opacity |
-| --md-comp-menu-vibrant-menu-item-pressed-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-pressed-trailing-icon-color |
-| --md-comp-menu-vibrant-menu-item-pressed-trailing-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-label-text-color |
-| --md-comp-menu-vibrant-menu-item-leading-icon-color |
-| --md-comp-menu-vibrant-menu-item-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-trailing-icon-color |
-| --md-comp-menu-vibrant-menu-item-trailing-supporting-text-color |
-| --md-comp-menu-vibrant-section-label-text-color |
-|  |
-| --md-comp-menu-standard-menu-item-selected-container-color |
-| --md-comp-menu-standard-menu-item-selected-label-text-color |
-| --md-comp-menu-standard-menu-item-selected-leading-icon-color |
-| --md-comp-menu-standard-menu-item-selected-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-selected-trailing-supporting-text-color |
-|  |
-| --md-comp-menu-standard-menu-item-selected-disabled-container-color |
-| --md-comp-menu-standard-menu-item-selected-disabled-container-opacity |
-| --md-comp-menu-standard-menu-item-selected-disabled-label-text-color |
-| --md-comp-menu-standard-menu-item-selected-disabled-label-text-opacity |
-| --md-comp-menu-standard-menu-item-selected-disabled-leading-icon-color |
-| --md-comp-menu-standard-menu-item-selected-disabled-leading-icon-opacity |
-| --md-comp-menu-standard-menu-item-selected-disabled-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-selected-disabled-trailing-icon-opacity |
-| --md-comp-menu-standard-menu-item-selected-disabled-trailing-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-focused-label-text-color |
-| --md-comp-menu-standard-menu-item-selected-focused-leading-icon-color |
-| --md-comp-menu-standard-menu-item-selected-focused-state-layer-color |
-| --md-comp-menu-standard-menu-item-selected-focused-state-layer-opacity |
-| --md-comp-menu-standard-menu-item-selected-focused-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-focused-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-selected-focused-trailing-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-hovered-label-text-color |
-| --md-comp-menu-standard-menu-item-selected-hovered-leading-icon-color |
-| --md-comp-menu-standard-menu-item-selected-hovered-state-layer-color |
-| --md-comp-menu-standard-menu-item-selected-hovered-state-layer-opacity |
-| --md-comp-menu-standard-menu-item-selected-hovered-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-hovered-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-selected-hovered-trailing-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-pressed-label-text-color |
-| --md-comp-menu-standard-menu-item-selected-pressed-leading-icon-color |
-| --md-comp-menu-standard-menu-item-selected-pressed-state-layer-color |
-| --md-comp-menu-standard-menu-item-selected-pressed-state-layer-opacity |
-| --md-comp-menu-standard-menu-item-selected-pressed-supporting-text-color |
-| --md-comp-menu-standard-menu-item-selected-pressed-trailing-icon-color |
-| --md-comp-menu-standard-menu-item-selected-pressed-trailing-supporting-text-color |
-|  |
-| --md-comp-menu-vibrant-menu-item-selected-container-color |
-| --md-comp-menu-vibrant-menu-item-selected-label-text-color |
-| --md-comp-menu-vibrant-menu-item-selected-leading-icon-color |
-| --md-comp-menu-vibrant-menu-item-selected-supporting-text-color |
-| --md-comp-menu-vibrant-menu-item-selected-trailing-icon-color |
-| --md-comp-menu-vibrant-menu-item-selected-trailing-supporting-text-color |
-|  |
-| --md-comp-menu-vibrant-menu-item-selected-disabled-label-text-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-disabled-leading-icon-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-disabled-supporting-text-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-disabled-trailing-icon-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-disabled-trailing-supporting-text-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-focused-state-layer-color |
-| --md-comp-menu-vibrant-menu-item-selected-focused-state-layer-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-focused-label-text-color |
-| --md-comp-menu-vibrant-menu-item-selected-hovered-state-layer-color |
-| --md-comp-menu-vibrant-menu-item-selected-hovered-state-layer-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-hovered-label-text-color |
-| --md-comp-menu-vibrant-menu-item-selected-pressed-state-layer-color |
-| --md-comp-menu-vibrant-menu-item-selected-pressed-state-layer-opacity |
-| --md-comp-menu-vibrant-menu-item-selected-pressed-label-text-color |
+### Item groups and section labels
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-menu-gap` | The gap between the item groups (the lists) of a menu | `2px` |
+| `--md-comp-menu-group-padding` | The vertical padding inside an item group | `4px` |
+| `--md-comp-menu-group-shape` | The corner rounding of the edges where two item groups meet | `--md-sys-shape-corner-small` |
+| `--md-comp-menu-section-label-top-space` | The padding above a section label | `8px` |
+| `--md-comp-menu-section-label-bottom-space` | The padding below a section label | `8px` |
+| `--md-comp-menu-standard-section-label-text-color` | The text color of a section label in a standard menu | `--md-sys-color-on-surface-variant` |
+| `--md-comp-menu-vibrant-section-label-text-color` | The text color of a section label in a vibrant menu | `--md-sys-color-on-tertiary-container` |
+
+### Item layout
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-menu-item-height` | The height of a menu item | `44px` |
+| `--md-comp-menu-item-top-space` | The padding above the item content | `8px` |
+| `--md-comp-menu-item-bottom-space` | The padding below the item content | `8px` |
+| `--md-comp-menu-item-leading-space` | The padding before the item content | `16px` |
+| `--md-comp-menu-item-trailing-space` | The padding after the item content | `16px` |
+| `--md-comp-menu-item-leading-icon-size` | The size of a leading icon | `20px` |
+| `--md-comp-menu-item-trailing-icon-size` | The size of a trailing icon | `20px` |
+| `--md-comp-menu-item-shape` | The corner rounding of a menu item | `--md-sys-shape-corner-small` |
+| `--md-comp-menu-item-selected-shape` | The corner rounding of a selected menu item | `--md-sys-shape-corner-large` |
+| `--md-comp-menu-item-focus-indicator-color` | The color of the keyboard focus indicator | `--md-sys-color-secondary` |
+| `--md-comp-menu-item-focus-indicator-thickness` | The thickness of the keyboard focus indicator | `3px` |
+| `--md-comp-menu-item-focus-indicator-offset` | The offset of the keyboard focus indicator | `-3px` |
+
+### Item colors
+The colors of menu items follow a naming pattern that combines the menu variant, the item's selection and interaction state, and the colored part:
+
+```
+--md-comp-menu-<variant>-menu-item[-selected][-<state>]-<part>-color
+```
+
+- `<variant>` is `standard` or `vibrant`.
+- `selected` targets items that are checked or contain a checked checkbox or switch.
+- `<state>` is one of `hovered`, `focused`, `pressed` or `disabled`; omit it for the resting state.
+- `<part>` is one of `container`, `label-text`, `leading-icon`, `supporting-text`, `trailing-icon`, `trailing-supporting-text` or `state-layer`.
+
+Every `state-layer` color has an `-opacity` companion (defaults: hovered 8%, focused 10%, pressed 10%), and so does every color of a `disabled` state (default: --md-sys-state-disabled-state-layer-opacity, 38%). The `container` part exists for the resting, `selected` and `selected-disabled` combinations only. For example, `--md-comp-menu-standard-menu-item-selected-hovered-label-text-color` is the label color of a hovered selected item in a standard menu.
+
+Inside a menu these tokens take precedence over the item color tokens of the [List component](../list/README.md). The defaults per part:
+
+**Standard menu**
+
+| Part | Resting | Hovered, focused, pressed | Selected (all states) | Disabled |
+|---|---|---|---|---|
+| container | `--md-sys-color-surface-container-low` | | `--md-sys-color-tertiary-container` | selected colors at `38%` |
+| label-text | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-surface` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-surface` at `38%` |
+| leading-icon, trailing-icon | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-surface` at `38%` |
+| supporting-text, trailing-supporting-text | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-surface-variant` | `--md-sys-color-on-tertiary-container | --md-sys-color-on-surface` at `38%` |
+| state-layer | | --md-sys-color-on-surface | `--md-sys-color-on-tertiary-container` | |
+
+**Vibrant menu**
+
+| Part | Resting | Hovered, focused, pressed | Selected (all states) | Disabled |
+|---|---|---|---|---|
+| container | `--md-sys-color-tertiary-container` | | `--md-sys-color-tertiary` | selected colors at `38%` |
+| label-text | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary` | `--md-sys-color-on-tertiary-container` at `38%` |
+| leading-icon, trailing-icon | `--md-sys-color-on-tertiary-container` | `--md-sys-color-tertiary` | `--md-sys-color-on-tertiary` | `--md-sys-color-on-tertiary-container` at `38%` |
+| supporting-text, trailing-supporting-text | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary` | `--md-sys-color-on-tertiary-container` at `38%` |
+| state-layer | | `--md-sys-color-on-tertiary-container` | `--md-sys-color-on-tertiary` | |
 
 **Example: Changing the maximum width**
 

@@ -8,151 +8,145 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home,keyboard,schedule&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,keyboard,palette,schedule&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card__content {
-            display: flex;
-            flex-direction: column;
-            row-gap: 8px;
+        .docs-example > input, .micl-textfield-outlined {
+            inline-size: fit-content;
         }
         p {
-            margin-block: 24px 0px;
+            margin-block: 0 16px;
+            color: var(--md-sys-color-on-surface);
+        }
+        label {
             color: var(--md-sys-color-on-surface);
         }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body micl-body--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Time Pickers</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL time pickers</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Time Pickers</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns">
-                <div class="micl-pane__column" style="gap:24px">
-                    <div class="micl-card-outlined">
-                        <div class="micl-card__content">
-                            <p class="md-sys-typescale-body-medium">Default non-MICL time input field</p>
-                            <input type="time" name="t0" style="width:fit-content" value="08:40">
-                            <p class="md-sys-typescale-body-medium">MICL time textfield component without the MICL time picker component</p>
-                            <div class="micl-textfield-outlined" style="width:fit-content">
-                                <label for="mytextfield0">Start time</label>
-                                <input type="time" id="mytextfield0" value="08:40">
-                            </div>
-                            <p class="md-sys-typescale-body-medium">MICL time textfield component with the MICL time picker component</p>
-                            <div class="micl-textfield-outlined" style="width:fit-content">
-                                <label for="mytextfield1">Start time</label>
-                                <input type="time" id="mytextfield1" data-timepicker="mytimepicker1" value="23:19">
-                            </div>
-                            <dialog id="mytimepicker1" class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="mytitle1">
-                                <form method="dialog">
-                                    <div class="micl-dialog__headline">
-                                        <h2 id="mytitle1">Enter time</h2>
-                                    </div>
-                                    <div class="micl-dialog__content">
-                                        <input type="number" name="hour" value="00" aria-labelledby="myhour1">
-                                        <span class="micl-timepicker__separator">:</span>
-                                        <input type="number" name="minute" value="00" aria-labelledby="myminute1">
-                                        <div class="micl-timepicker__period"></div>
-                                        <span id="myhour1" class="micl-timepicker__supporting-text-hour">Hour</span>
-                                        <span id="myminute1" class="micl-timepicker__supporting-text-minute">Minute</span>
-                                        <div class="micl-timepicker__dial"></div>
-                                    </div>
-                                    <div class="micl-dialog__actions">
-                                        <button type="button" id="btn1" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn1" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
-                                        <div>
-                                            <button class="micl-button-text-s" value="">Cancel</button>
-                                            <button class="micl-button-text-s" value="OK">OK</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </dialog>
-                            <p class="md-sys-typescale-body-medium">Time input using a MICL button component that opens the MICL time picker</p>
-                            <div class="micl-flex--vcenter" style="column-gap:8px">
-                                <label for="mytime" class="md-sys-typescale-body-large">Start time:</label>
-                                <button type="button" id="mytime" class="micl-button-text-m" command="show-modal" commandfor="mytimepicker2" value="07:53">07:53</button>
-                            </div>
-                            <dialog id="mytimepicker2" class="micl-dialog micl-timepicker micl-timepicker--horizontal" closedby="closerequest" aria-labelledby="mytitle2">
-                                <form method="dialog">
-                                    <div class="micl-dialog__headline">
-                                        <h2 id="mytitle2">Enter time</h2>
-                                    </div>
-                                    <div class="micl-dialog__content">
-                                        <input type="number" name="hour" value="00" aria-labelledby="myhour2">
-                                        <span class="micl-timepicker__separator">:</span>
-                                        <input type="number" name="minute" value="00" aria-labelledby="myminute2">
-                                        <div class="micl-timepicker__period"></div>
-                                        <span id="myhour2" class="micl-timepicker__supporting-text-hour">Hour</span>
-                                        <span id="myminute2" class="micl-timepicker__supporting-text-minute">Minute</span>
-                                        <div class="micl-timepicker__dial micl-hidden"></div>
-                                    </div>
-                                    <div class="micl-dialog__actions">
-                                        <button type="button" id="btn2" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn2" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule"></button>
-                                        <div>
-                                            <button class="micl-button-text-s" value="">Cancel</button>
-                                            <button class="micl-button-text-s" value="OK">OK</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </dialog>
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Time Pickers</h1>
+            <p class="docs-hero__lede">It allows users to select a specific time of day using either a text input or an analog dial interface.</p>
+            <ul class="docs-hero__facts">
+                <li>Dial & keyboard input</li>
+                <li>12 h and 24 h</li>
+                <li>Dialog-based</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="micl-textfield-outlined">
+                    <label for="herotime">Start time</label>
+                    <input type="time" id="herotime" data-timepicker="mytimepicker1" value="09:30">
+                </div>
+            </div>
+        </section>
+
+        <main class="docs-content docs-content--columns">
+            <div class="docs-stage">
+                <p class="md-sys-typescale-body-medium">Default non-MICL time input field</p>
+                <div class="docs-example">
+                    <template>
+                        <input type="time" name="t0" value="08:40">
+                    </template>
+                </div>
+            </div>
+            <div class="docs-stage">
+                <p class="md-sys-typescale-body-medium">MICL time textfield component without the MICL time picker component</p>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-textfield-outlined">
+                            <label for="mytextfield0">Start time</label>
+                            <input type="time" id="mytextfield0" value="08:40">
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
-        </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;dialog class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="id0"&gt;
-  &lt;form method="dialog"&gt;
-    &lt;div class="micl-dialog__headline"&gt;
-      &lt;h2 id="id0"&gt;Enter time&lt;/h2&gt;
-    &lt;/div&gt;
-    &lt;div class="micl-dialog__content"&gt;
-      &lt;input type="number" name="hour" value="00" aria-labelledby="id1"&gt;
-      &lt;span class="micl-timepicker__separator"&gt;:&lt;/span&gt;
-      &lt;input type="number" name="minute" value="00" aria-labelledby="id2"&gt;
-      &lt;div class="micl-timepicker__period"&gt;&lt;/div&gt;
-      &lt;span id="id1" class="micl-timepicker__supporting-text-hour"&gt;Hour&lt;/span&gt;
-      &lt;span id="id2" class="micl-timepicker__supporting-text-minute"&gt;Minute&lt;/span&gt;
-      &lt;div class="micl-timepicker__dial"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="micl-dialog__actions"&gt;
-      &lt;button
-        type="button"
-        id="btn"
-        class="micl-timepicker__inputmode micl-iconbutton-standard-s
-               micl-button--toggle micl-button--square material-symbols-outlined"
-        commandfor="btn"
-        command="--micl-toggle"
-        data-miclicon="keyboard"
-        data-micliconselected="schedule"
-      &gt;&lt;/button&gt;
-      &lt;div&gt;
-        &lt;button class="micl-button-text-s" value=""&gt;Cancel&lt;/button&gt;
-        &lt;button class="micl-button-text-s" value="OK"&gt;OK&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/form&gt;
-&lt;/dialog&gt;</code></pre>
+            <div class="docs-stage">
+                <p class="md-sys-typescale-body-medium">MICL time textfield component with the MICL time picker component</p>
+                <div class="docs-example">
+                    <template>
+                        <div class="micl-textfield-outlined">
+                            <label for="mytextfield1">Start time</label>
+                            <input type="time" id="mytextfield1" data-timepicker="mytimepicker1" value="23:19">
+                        </div>
+                        <dialog id="mytimepicker1" class="micl-dialog micl-timepicker" closedby="closerequest" aria-labelledby="mytitle1">
+                            <form method="dialog">
+                                <div class="micl-dialog__headline">
+                                    <h2 id="mytitle1">Enter time</h2>
+                                </div>
+                                <div class="micl-dialog__content">
+                                    <input type="number" name="hour" value="00" aria-labelledby="myhour1">
+                                    <span class="micl-timepicker__separator">:</span>
+                                    <input type="number" name="minute" value="00" aria-labelledby="myminute1">
+                                    <div class="micl-timepicker__period"></div>
+                                    <span id="myhour1" class="micl-timepicker__supporting-text-hour">Hour</span>
+                                    <span id="myminute1" class="micl-timepicker__supporting-text-minute">Minute</span>
+                                    <div class="micl-timepicker__dial"></div>
+                                </div>
+                                <div class="micl-dialog__actions">
+                                    <button type="button" id="btn1" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn1" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule" aria-pressed="false" aria-label="Switch input mode"></button>
+                                    <div>
+                                        <button class="micl-button-text-s" value="">Cancel</button>
+                                        <button class="micl-button-text-s" value="OK">OK</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </dialog>
+                    </template>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="docs-stage">
+                <p class="md-sys-typescale-body-medium">Time input using a MICL button component that opens the MICL time picker</p>
+                <div class="docs-example">
+                    <template>
+                        <div class="docs-flex--vcenter" style="column-gap:8px">
+                            <label for="mytime" class="md-sys-typescale-body-large">Start time:</label>
+                            <button type="button" id="mytime" class="micl-button-text-m" command="show-modal" commandfor="mytimepicker2" value="07:53">07:53</button>
+                        </div>
+                        <dialog id="mytimepicker2" class="micl-dialog micl-timepicker micl-timepicker--horizontal" closedby="closerequest" aria-labelledby="mytitle2">
+                            <form method="dialog">
+                                <div class="micl-dialog__headline">
+                                    <h2 id="mytitle2">Enter time</h2>
+                                </div>
+                                <div class="micl-dialog__content">
+                                    <input type="number" name="hour" value="00" aria-labelledby="myhour2">
+                                    <span class="micl-timepicker__separator">:</span>
+                                    <input type="number" name="minute" value="00" aria-labelledby="myminute2">
+                                    <div class="micl-timepicker__period"></div>
+                                    <span id="myhour2" class="micl-timepicker__supporting-text-hour">Hour</span>
+                                    <span id="myminute2" class="micl-timepicker__supporting-text-minute">Minute</span>
+                                    <div class="micl-timepicker__dial micl-timepicker__dial--hidden"></div>
+                                </div>
+                                <div class="micl-dialog__actions">
+                                    <button type="button" id="btn2" class="micl-timepicker__inputmode micl-iconbutton-standard-s micl-button--toggle micl-button--square material-symbols-outlined" commandfor="btn2" command="--micl-toggle" data-miclicon="keyboard" data-micliconselected="schedule" aria-pressed="true" aria-label="Switch input mode"></button>
+                                    <div>
+                                        <button class="micl-button-text-s" value="">Cancel</button>
+                                        <button class="micl-button-text-s" value="OK">OK</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </dialog>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

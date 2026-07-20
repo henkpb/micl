@@ -19,11 +19,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@use '../checkbox/label';
 
 @include shape.corner('full');
 
@@ -34,81 +34,86 @@
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 
-:root {
-    --md-sys-switch-handle-size: 16px;
-    --md-sys-switch-handle-selected-size: 24px;
-    --md-sys-switch-handle-pressed-size: 28px;
-    --md-sys-switch-outline-width: 2px;
-    --md-sys-switch-target-height: 32px;
-    --md-sys-switch-target-width: 52px;
-}
+$switch: 'input[type=checkbox].micl-switch';
 
-input[type=checkbox].micl-switch {
-    --md-sys-switch-unselected-icon: "+";
-    --md-sys-switch-selected-icon: "\AC";
-    --md-sys-switch-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
-    --md-sys-switch-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
-    --md-sys-switch-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
+#{$switch} {
+    --md-comp-switch-unselected-icon: "+";
+    --md-comp-switch-selected-icon: "\AC";
+    --md-comp-switch-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
+    --md-comp-switch-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+
+    --_track-width: var(--md-comp-switch-track-width, 52px);
+    --_track-height: var(--md-comp-switch-track-height, 32px);
+    --_track-outline-width: var(--md-comp-switch-track-outline-width, 2px);
+    --_handle-size: var(--md-comp-switch-handle-size, 16px);
+    --_handle-selected-size: var(--md-comp-switch-selected-handle-size, 24px);
+    --_handle-pressed-size: var(--md-comp-switch-pressed-handle-size, 28px);
+    --_layer: var(--md-sys-state-layer-size, 40px);
+    --_target: var(--md-sys-target-size, 48px);
 
     appearance: none;
     position: relative;
-    inline-size: var(--md-sys-switch-target-width);
-    block-size: var(--md-sys-target-size);
+    inline-size: var(--_track-width);
+    block-size: var(--_target);
     margin: 0;
-    border-radius: calc(var(--md-sys-switch-target-height) / 2);
+    border-radius: calc(var(--_track-height) / 2);
     outline: none;
     -webkit-tap-highlight-color: transparent;
 
+    // The track.
     &::before {
         content: "";
         box-sizing: border-box;
         display: block;
-        inline-size: var(--md-sys-switch-target-width);
-        block-size: var(--md-sys-switch-target-height);
-        margin-block: calc((var(--md-sys-target-size, 48px) - var(--md-sys-switch-target-height)) / 2);
-        border: var(--md-sys-switch-outline-width) solid var(--md-sys-color-outline);
+        inline-size: var(--_track-width);
+        block-size: var(--_track-height);
+        margin-block: calc((var(--_target) - var(--_track-height)) / 2);
+        border: var(--_track-outline-width) solid var(--md-comp-switch-unselected-track-outline-color, var(--md-sys-color-outline));
         border-radius: inherit;
-        background-color: var(--md-sys-color-surface-container-highest);
-        transition: background-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
+        background-color: var(--md-comp-switch-unselected-track-color, var(--md-sys-color-surface-container-highest));
+        transition: background-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
+    // The handle: a state-layer-sized box whose transparent border shrinks the painted
+    // content box to the handle size; the icon glyphs are rotated typeface characters,
+    // with their metrics tuned in pixels against a 16px base.
     &::after {
-        content: var(--md-sys-switch-unselected-icon);
+        content: var(--md-comp-switch-unselected-icon);
         box-sizing: border-box;
         position: absolute;
-        inline-size: var(--md-sys-state-layer-size, 40px);
-        block-size: var(--md-sys-state-layer-size, 40px);
+        inline-size: var(--_layer);
+        block-size: var(--_layer);
         inset: 0;
-        inset-inline-start: calc((var(--md-sys-target-size, 48px) - var(--md-sys-state-layer-size, 40px) - 16px) / 2);
+        inset-inline-start: calc((var(--_target) - var(--_layer) - 16px) / 2);
         margin: auto 0;
-        font: 300 16px / 1rem var(--md-ref-typeface-plain);
-        color: var(--md-sys-color-surface-container-highest);
+        font: 300 16px / 16px var(--md-ref-typeface-plain);
+        color: var(--md-comp-switch-unselected-icon-color, var(--md-sys-color-surface-container-highest));
         text-align: center;
-        background-color: var(--md-sys-color-outline);
+        background-color: var(--md-comp-switch-unselected-handle-color, var(--md-sys-color-outline));
         background-clip: content-box;
-        border: calc((var(--md-sys-state-layer-size, 40px) - var(--md-sys-switch-handle-size)) / 2) solid transparent;
+        border: calc((var(--_layer) - var(--_handle-size)) / 2) solid transparent;
         border-radius: var(--md-sys-shape-corner-full);
         transform: rotate(135deg);
         transition:
-            inset-inline-start var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
-            border-width var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
-            line-height var(--md-sys-switch-motion-duration) var(--md-sys-switch-motion-effects),
-            color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
-            border-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
-            background-color var(--md-sys-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
+            inset-inline-start var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
+            border-width var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
+            line-height var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
+            color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
+            border-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
+            background-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &:checked {
         &::before {
-            background-color: var(--md-sys-color-primary);
+            background-color: var(--md-comp-switch-selected-track-color, var(--md-sys-color-primary));
         }
         &::after {
-            content: var(--md-sys-switch-selected-icon);
-            inset-inline-start: calc(var(--md-sys-switch-target-width) - ((var(--md-sys-state-layer-size, 40px) + var(--md-sys-target-size, 48px) - 16px) / 2));
-            font-size: 1.6rem;
-            line-height: 1.3rem;
-            letter-spacing: 0.1rem;
-            border: calc((var(--md-sys-state-layer-size, 40px) - var(--md-sys-switch-handle-selected-size)) / 2) solid transparent;
-            color: var(--md-sys-color-on-primary-container);
-            background-color: var(--md-sys-color-on-primary);
+            content: var(--md-comp-switch-selected-icon);
+            inset-inline-start: calc(var(--_track-width) - ((var(--_layer) + var(--_target) - 16px) / 2));
+            font-size: 25.6px;
+            line-height: 20.8px;
+            letter-spacing: 1.6px;
+            border: calc((var(--_layer) - var(--_handle-selected-size)) / 2) solid transparent;
+            color: var(--md-comp-switch-selected-icon-color, var(--md-sys-color-on-primary-container));
+            background-color: var(--md-comp-switch-selected-handle-color, var(--md-sys-color-on-primary));
         }
     }
     &:not(:disabled) {
@@ -142,18 +147,17 @@ input[type=checkbox].micl-switch {
         }
         &:active {
             &::after {
-                line-height: 1.7rem;
-                border: calc((var(--md-sys-state-layer-size, 40px) - var(--md-sys-switch-handle-pressed-size)) / 2) solid transparent;
+                line-height: 27.2px;
+                border: calc((var(--_layer) - var(--_handle-pressed-size)) / 2) solid transparent;
                 background-color: var(--md-sys-color-on-surface-variant);
             }
             &:checked::after {
-                line-height: 1.6rem;
-                border-width: calc((var(--md-sys-state-layer-size, 40px) - var(--md-sys-switch-handle-pressed-size)) / 2);
+                line-height: 25.6px;
+                border-width: calc((var(--_layer) - var(--_handle-pressed-size)) / 2);
                 border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-pressed-state-layer-opacity, 10%), transparent);
                 background-color: var(--md-sys-color-primary-container);
             }
             &:not(:checked)::after {
-                inset-inline-start: calc((var(--md-sys-target-size, 48px) - var(--md-sys-state-layer-size, 40px) - 16px) / 2);
                 border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity, 10%), transparent);
             }
         }
@@ -180,15 +184,19 @@ input[type=checkbox].micl-switch {
     }
 }
 
-input[type=checkbox].micl-switch:not(:disabled) + label,
-label:has(+ input[type=checkbox].micl-switch:not(:disabled)) {
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
+#{$switch}:not(:disabled) + label,
+label:has(+ #{$switch}:not(:disabled)) {
+    @extend %micl-toggle-label-pointer;
 }
-input[type=checkbox].micl-switch + label,
-label:has(+ input[type=checkbox].micl-switch) {
-    color: var(--md-sys-color-on-surface);
+#{$switch} + label,
+label:has(+ #{$switch}) {
+    @extend %micl-toggle-label;
 }
-[dir=rtl] input[type=checkbox].micl-switch::after {
+#{$switch}:disabled + label,
+label:has(+ #{$switch}:disabled) {
+    @extend %micl-toggle-label-disabled;
+}
+
+#{$switch}:dir(rtl)::after {
     transform: rotate(45deg) scaleY(-1);
 }

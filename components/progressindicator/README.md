@@ -4,20 +4,40 @@ This component implements the [Material Design 3 Expressive Progress indicators]
 ## Basic Usage
 
 ### HTML
-Progress indicators use the native `<progress>` element. Add the `micl-progress-linear` class for the linear (bar) variant or `micl-progress-circular` for the circular (ring) variant.
-
-A **determinate** indicator has a known value. Provide the `value` and (optionally) `max` attributes:
+The flat linear variant and the circular variant use the native `<progress>` element. A **determinate** indicator has a known value: provide the `value` and (optionally) `max` attributes. An **indeterminate** indicator has an unknown value: omit the `value` attribute entirely.
 
 ```HTML
-<progress class="micl-progress-linear" value="0.6" max="1"></progress>
-<progress class="micl-progress-circular" value="60" max="100"></progress>
+<progress class="micl-linear-progress" value="0.6"></progress>
+<progress class="micl-circular-progress" value="60" max="100"></progress>
+
+<progress class="micl-linear-progress"></progress>
+<progress class="micl-circular-progress"></progress>
 ```
 
-An **indeterminate** indicator has an unknown value. Omit the `value` attribute entirely:
+The signature Expressive **wavy** indicators cannot be drawn inside a native `<progress>`, so they use a `progressbar`-role element with a wave child instead. A determinate wavy indicator reads its fraction from the `aria-valuenow` / `aria-valuemax` attributes:
 
 ```HTML
-<progress class="micl-progress-linear"></progress>
-<progress class="micl-progress-circular"></progress>
+<div role="progressbar" class="micl-linear-progress"
+     aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.6">
+  <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+</div>
+
+<div role="progressbar" class="micl-circular-progress"
+     aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.6">
+  <div class="micl-circular-progress__wave" aria-hidden="true"></div>
+</div>
+```
+
+The indeterminate wavy indicators take a modifier class and, per the ARIA `progressbar` pattern, simply omit `aria-valuenow`:
+
+```HTML
+<div role="progressbar" class="micl-linear-progress micl-linear-progress--indeterminate">
+  <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+</div>
+
+<div role="progressbar" class="micl-circular-progress micl-circular-progress--indeterminate">
+  <div class="micl-circular-progress__wave" aria-hidden="true"></div>
+</div>
 ```
 
 ### CSS
@@ -33,11 +53,9 @@ Or import all MICL styles:
 ```
 
 ### JavaScript
-No custom JavaScript is required for indeterminate indicators — the looping animation is driven entirely by CSS via the native `:indeterminate` state.
+No custom JavaScript is required for the core functionality of this component.
 
-For determinate indicators, the bundled handler mirrors the `value` and `max` attributes into the CSS custom properties that drive the fill, the active/track gap and the Expressive wave amplitude. It also flattens the wave into a straight line over the final 10% of progress.
-
-> **Updating progress at runtime:** the handler observes the `value` and `max` *attributes*. When you update progress dynamically, set the attribute (`element.setAttribute('value', 0.7)`) rather than only the IDL property (`element.value = 0.7`), so the indicator stays in sync. Alternatively, you may set the `--md-comp-progress-fraction` custom property (a number between `0` and `1`) directly for pure-CSS control without the handler.
+To update progress at runtime, set the `value` attribute (`<progress>`) or the `aria-valuenow` attribute (wavy) and the indicator animates to the new value. Note that setting only the IDL property (`element.value = 0.7`) does not change the attribute; use `element.setAttribute(…)`.
 
 ### Live Demo
 A live example of the [Progress Indicator component](https://henkpb.github.io/micl/progressindicator.html) is available to interact with.
@@ -45,44 +63,62 @@ A live example of the [Progress Indicator component](https://henkpb.github.io/mi
 ## Variants
 The Progress Indicator component offers the following variants:
 
-| CSS class | Description |
-| --------- | ----------- |
-| micl-progress-linear | A horizontal linear progress bar |
-| micl-progress-circular | A circular progress ring |
-| micl-progress-circular--s | Small circular ring (28px) |
-| micl-progress-circular--m | Medium circular ring (48px, default) |
-| micl-progress-circular--l | Large circular ring (64px) |
+| CSS class | Element | Description |
+| --------- | ------- | ----------- |
+| `micl-linear-progress` | `<progress>` | A flat horizontal progress bar |
+| `micl-linear-progress` | `<div role="progressbar">` | The Expressive wavy progress bar |
+| `micl-linear-progress--indeterminate` | `<div role="progressbar">` | Modifier for the indeterminate wavy bar |
+| `micl-circular-progress` | `<progress>` | A flat circular progress ring |
+| `micl-circular-progress` | `<div role="progressbar">` | The Expressive wavy progress ring |
+| `micl-circular-progress--indeterminate` | `<div role="progressbar">` | Modifier for the indeterminate wavy ring |
 
-Each variant is **determinate** when a `value` attribute is present and **indeterminate** when it is omitted.
+- Right-to-left layouts mirror the sweep direction, the wave travel, the gap and the stop dot automatically — via the inherited direction, no extra classes.
+- Under `prefers-reduced-motion` the decorative wave travel is disabled; the functional progress animations are kept.
 
-The signature Expressive *wavy active indicator* is applied to the linear variant as a static shape (rasterised once, so any number of determinate indicators cost nothing per frame). Its amplitude eases to zero as the indicator reaches completion, and setting `--md-comp-progress-wave-amplitude` to `0` produces a flat (pre-Expressive) active indicator. Only the transient loading states animate: the linear indeterminate comet, and the circular indeterminate spinner (a GPU-composited rotation). The circular variant renders a smooth ring.
+## Theming
+Each progress indicator can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
 
-The component respects the `dir` global attribute, automatically mirroring the linear sweep direction for right-to-left (RTL) languages when `dir="rtl"` is applied to an ancestor element. It also honours the user's `prefers-reduced-motion` setting by disabling the travelling wave and looping animations.
+### Linear (flat and wavy)
 
-## Customizations
-You can customize the appearance of the Progress Indicator component by overriding its global CSS variables. Following the MICL convention, these `--md-comp-progress-*` variables can be set on `:root` or on any appropriate parent element to affect its child progress indicators. The colour roles default to the Material Design system colour tokens per the M3 progress-indicator specification.
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-linear-progress-active-indicator-color` | Colour of the active indicator | `--md-sys-color-primary` |
+| `--md-comp-linear-progress-track-color` | Colour of the remaining track | `--md-sys-color-secondary-container` |
+| `--md-comp-linear-progress-stop-color` | Colour of the stop indicator dot | `--md-sys-color-primary` |
+| `--md-comp-linear-progress-track-thickness` | Thickness of the track | `4px` |
+| `--md-comp-linear-progress-active-thickness` | Thickness of the active indicator | `4px` |
+| `--md-comp-linear-progress-track-active-space` | Gap between the active indicator and the track | `4px` |
+| `--md-comp-linear-progress-stop-size` | Diameter of the stop indicator dot | `4px` |
+| `--md-comp-linear-progress-stop-trailing-space` | Inset of the stop dot from the trailing edge | `0px` |
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-comp-progress-active-color | var(--md-sys-color-primary) | Colour of the active (filled) indicator |
-| --md-comp-progress-track-color | var(--md-sys-color-secondary-container) | Colour of the remaining track |
-| --md-comp-progress-stop-color | var(--md-sys-color-primary) | Colour of the linear end stop indicator dot |
-| --md-comp-progress-thickness | 4px | Thickness of the linear track and circular ring stroke |
-| --md-comp-progress-track-gap | 4px | Gap between the active indicator and the remaining track (linear) |
-| --md-comp-progress-stop-size | 4px | Diameter of the linear end stop indicator dot |
-| --md-comp-progress-linear-width | 100% | Default width of the linear indicator |
-| --md-comp-progress-wave-wavelength | 40px | Wavelength of the Expressive active wave |
-| --md-comp-progress-wave-amplitude | 3px | Amplitude of the Expressive active wave (set to `0` to disable) |
-| --md-comp-progress-indeterminate-duration | var(--md-sys-motion-duration-extra-long4) | Period of the indeterminate loop |
-| --md-comp-progress-circular-size | 48px | Diameter of the circular indicator |
-| --md-comp-progress-wave-image | (inline SVG) | The sine-ribbon mask used for the wavy active indicator |
+### Wavy only
 
-**Example: A thicker linear indicator with a calmer wave**
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-linear-progress-active-wave-amplitude` | Maximum wave amplitude; set to `0px` for a flat (pre-Expressive) bar | `3px` |
+| `--md-comp-linear-progress-active-wave-wavelength` | Wavelength of the determinate wave | `40px` |
+| `--md-comp-linear-progress-indeterminate-active-wave-wavelength` | Wavelength of the indeterminate wave | `20px` |
+| `--md-comp-linear-progress-wave-image` | The repeating wave mask tile (advanced) | built-in |
+
+### Circular
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-circular-progress-active-indicator-color` | Colour of the active arc | `--md-sys-color-primary` |
+| `--md-comp-circular-progress-track-color` | Colour of the remaining track ring | `--md-sys-color-secondary-container` |
+| `--md-comp-circular-progress-size` | Diameter of the indicator | `40px` |
+| `--md-comp-circular-progress-active-thickness` | Stroke thickness of **both** the active arc and the track ring | `4px` |
+| `--md-comp-circular-progress-track-active-space` | Arc-length gap between the active arc and the track | `4px` |
+| `--md-comp-circular-progress-wave-image` | The wavy ring mask (advanced, wavy variant) | built-in |
+
+**Example: A thicker wavy indicator with a calmer wave**
 
 ```HTML
-<progress class="micl-progress-linear" value="0.4"
-  style="--md-comp-progress-thickness:8px;--md-comp-progress-wave-amplitude:2px"></progress>
+<div role="progressbar" class="micl-linear-progress" aria-valuenow="0.4" aria-valuemax="1"
+     style="--md-comp-linear-progress-active-thickness:6px;--md-comp-linear-progress-active-wave-amplitude:2px">
+  <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+</div>
 ```
 
 ## Compatibility
-This component utilizes relative RGB color values, CSS `mask`, `conic-gradient` and registered `@property` custom properties, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
+Determinate indicators read the `value`/`max` (or `aria-valuenow`/`aria-valuemax`) attributes from CSS using typed [`attr()`](https://developer.mozilla.org/en-US/docs/Web/CSS/attr) (CSS Values Level 5). This is supported in Chromium-based browsers; Firefox has the feature implemented behind the `layout.css.attr.enabled` preference (about:config) and is expected to ship it soon.

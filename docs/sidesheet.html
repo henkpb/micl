@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_back,close,content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_back,check,close,content_copy,dark_mode,home,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
         p {
@@ -24,35 +25,45 @@
             height: 48px;
         }
         input[type=checkbox].micl-switch {
-            --md-sys-switch-unselected-icon: "";
-        }
-        #mysidesheet2 {
-            --md-sys-divider-thickness: 0;
+            --md-comp-switch-unselected-icon: "";
         }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Side sheets</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL side sheets</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Side sheets</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Showcase</h2>
-                        </div>
-                        <p class="micl-card__supporting-text">Click a button to open one of the MICL side sheets.</p>
-                        <div class="micl-card__content docs-buttons">
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Side sheets</h1>
+            <p class="docs-hero__lede">Side sheets provide optional content and actions without interrupting the main content.</p>
+            <ul class="docs-hero__facts">
+                <li>Standard & modal</li>
+                <li>No JavaScript required</li>
+                <li>Docked to the edge</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <button type="button" class="micl-button-filled-m" popovertarget="mysidesheet1">Open a side sheet</button>
+            </div>
+        </section>
+
+        <main class="docs-content">
+            <section class="docs-section" id="showcase">
+                <div class="docs-section__head">
+                    <h2>Showcase</h2>
+                    <p class="docs-section__use">Click a button to open one of the MICL side sheets.</p>
+                </div>
+                <div class="docs-stage docs-buttons">
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mysidesheet1" class="micl-sidesheet" popover aria-labelledby="title1">
                                 <div class="micl-sidesheet__headline">
                                     <h2 id="title1">Lorem Ipsum</h2>
@@ -66,8 +77,11 @@
                                 </div>
                             </dialog>
                             <button type="button" class="micl-button-outlined-m" popovertarget="mysidesheet1">Open Standard Sheet</button>
-
-                            <dialog id="mysidesheet2" class="micl-sidesheet" popover aria-labelledby="title2">
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <dialog id="mysidesheet2" class="micl-sidesheet" style="--md-comp-sidesheet-divider-thickness:0" popover aria-labelledby="title2">
                                 <div class="micl-sidesheet__headline">
                                     <h2 id="title2">Lorem Ipsum</h2>
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet2">close</button>
@@ -80,7 +94,10 @@
                                 </div>
                             </dialog>
                             <button type="button" class="micl-button-outlined-m" popovertarget="mysidesheet2">Open Standard Sheet<br>without dividers</button>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest" aria-labelledby="title1" tabindex="-1">
                                 <div class="micl-sidesheet__headline">
                                     <button class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Back">arrow_back</button>
@@ -117,31 +134,14 @@
                                 </div>
                             </dialog>
                             <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mysidesheet3">Open Modal Sheet</button>
-                        </div>
+                        </template>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Code example</h2>
-                            <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                        </div>
-                        <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code>&lt;dialog id="id0" class="micl-sidesheet" popover aria-labelledby="id1"&gt;
-  &lt;div class="micl-sidesheet__headline"&gt;
-    &lt;h2 id="id1"&gt;Lorem Ipsum&lt;/h2&gt;
-    &lt;button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="id0"&gt;close&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="micl-sidesheet__content"&gt;
-    &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipiscing elit&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/dialog&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

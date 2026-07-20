@@ -1,0 +1,285 @@
+//
+// Copyright © 2026 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/motion';
+@use '../../styles/shape';
+@use '../../styles/typography';
+@use '../button/shared' as button;
+
+@include shape.corner('small');
+@include shape.corner('full');
+
+@include typography.scale('title-medium');
+
+.micl-chips {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    .micl-chips__headline {
+        padding-block-end: 4px;
+        color: var(--md-sys-color-on-surface-variant);
+    }
+    .micl-chip-assist {
+        --micl-chip-statelayer: var(--md-sys-color-on-surface);
+        --micl-chip-label: var(--md-comp-assist-chip-label-text-color, var(--md-sys-color-on-surface));
+        --micl-chip-icon: var(--md-comp-assist-chip-leading-icon-color);
+        --micl-chip-outline: var(--md-comp-assist-chip-outline-color);
+        --micl-chip-disabled-label: var(--md-comp-assist-chip-disabled-label-text-color);
+        --micl-chip-disabled-outline: var(--md-comp-assist-chip-disabled-outline-color);
+        --micl-chip-elevated-container: var(--md-comp-assist-chip-elevated-container-color);
+    }
+    .micl-chip-filter {
+        --micl-chip-label: var(--md-comp-filter-chip-label-text-color);
+        --micl-chip-icon: var(--md-comp-filter-chip-leading-icon-color);
+        --micl-chip-outline: var(--md-comp-filter-chip-outline-color);
+        --micl-chip-disabled-label: var(--md-comp-filter-chip-disabled-label-text-color);
+        --micl-chip-disabled-outline: var(--md-comp-filter-chip-disabled-outline-color);
+        --micl-chip-elevated-container: var(--md-comp-filter-chip-elevated-container-color);
+    }
+    .micl-chip-suggestion {
+        --micl-chip-label: var(--md-comp-suggestion-chip-label-text-color);
+        --micl-chip-icon: var(--md-comp-suggestion-chip-leading-icon-color);
+        --micl-chip-outline: var(--md-comp-suggestion-chip-outline-color);
+        --micl-chip-disabled-label: var(--md-comp-suggestion-chip-disabled-label-text-color);
+        --micl-chip-disabled-outline: var(--md-comp-suggestion-chip-disabled-outline-color);
+        --micl-chip-elevated-container: var(--md-comp-suggestion-chip-elevated-container-color);
+    }
+    .micl-chip-assist, .micl-chip-filter, .micl-chip-input, .micl-chip-suggestion {
+        @extend %micl-button-base;
+        @extend %micl-button-xs;
+
+        --md-comp-elevated-button-label-text-color: var(--micl-chip-label, var(--md-sys-color-on-surface-variant));
+        --md-comp-outlined-button-label-text-color: var(--micl-chip-label, var(--md-sys-color-on-surface-variant));
+        --md-comp-elevated-button-disabled-container-opacity: 12%;
+        --md-comp-elevated-button-disabled-label-text-color: var(--micl-chip-disabled-label, rgb(from var(--md-sys-color-on-surface) r g b / 38%));
+        --md-comp-outlined-button-disabled-label-text-color: var(--micl-chip-disabled-label, rgb(from var(--md-sys-color-on-surface) r g b / 38%));
+
+        border-radius: var(--md-sys-shape-corner-small);
+        padding-inline: 16px;
+        column-gap: 8px;
+
+        &:has(> .micl-button__icon:first-child) {
+            padding-inline-start: 8px;
+        }
+        &:has(> .micl-button__icon:last-child) {
+            padding-inline-end: 8px;
+        }
+        .micl-button__icon {
+            font-size: 18px;
+            inline-size: 18px;
+            overflow: hidden;
+            transition: inline-size #{motion.$md-sys-motion-expressive-fast-effects-duration} #{motion.$md-sys-motion-expressive-fast-effects};
+        }
+        &#{button.$enabled} .micl-button__icon {
+            color: var(--micl-chip-icon, var(--md-sys-color-primary));
+        }
+        &:not(.micl-chip--elevated) {
+            @extend %micl-button-outlined;
+
+            --statelayer-color: var(--micl-chip-statelayer, var(--md-sys-color-on-surface-variant));
+            --md-comp-outlined-button-outline-color: var(--micl-chip-outline, var(--md-sys-color-outline-variant));
+
+            &#{button.$disabled} {
+                border-color: var(--micl-chip-disabled-outline, rgb(from var(--md-sys-color-on-surface) r g b / 12%));
+            }
+        }
+    }
+    .micl-chip-input {
+        --micl-chip-label: var(--md-comp-input-chip-label-text-color);
+        --micl-chip-icon: var(--md-comp-input-chip-leading-icon-color, currentColor);
+        --micl-chip-outline: var(--md-comp-input-chip-outline-color);
+        --micl-chip-disabled-label: var(--md-comp-input-chip-disabled-label-text-color);
+        --micl-chip-disabled-outline: var(--md-comp-input-chip-disabled-outline-color);
+
+        padding-inline: 0;
+        column-gap: 0;
+        cursor: default;
+
+        &:has(> .micl-chip__primary:focus-visible) {
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
+
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+            outline-offset: 2px;
+        }
+        &#{button.$enabled}:has(> .micl-chip__remove:is(:hover, :active)) {
+            --statelayer-opacity: 0%;
+        }
+        &:has(> :disabled) .micl-chip__avatar {
+            opacity: var(--md-comp-input-chip-disabled-avatar-opacity, 38%);
+        }
+        &:has(.micl-chip__avatar) {
+            border-radius: calc(var(--micl-height) / 2);
+
+            .micl-chip__primary {
+                border-start-start-radius: calc(var(--micl-height) / 2 - 1px);
+                border-end-start-radius: calc(var(--micl-height) / 2 - 1px);
+            }
+        }
+        .micl-chip__primary,
+        .micl-chip__remove {
+            @extend %micl-button-base;
+
+            --statelayer-color: var(--micl-chip-statelayer, var(--md-sys-color-on-surface-variant));
+
+            color: inherit;
+            background-color: transparent;
+        }
+        .micl-chip__primary {
+            background-image:
+                radial-gradient(
+                    circle at var(--micl-x, center) var(--micl-y, center),
+                    transparent 0%,
+                    rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+                    transparent 10%
+                );
+            block-size: 100%;
+            column-gap: 8px;
+            padding-inline: 12px 5px;
+            border-start-start-radius: calc(var(--md-sys-shape-corner-small) - 1px);
+            border-end-start-radius: calc(var(--md-sys-shape-corner-small) - 1px);
+            border-start-end-radius: 0;
+            border-end-end-radius: 0;
+            font: inherit;
+
+            &:has(> .micl-button__icon:first-child) {
+                padding-inline-start: 8px;
+            }
+            &:has(> .micl-chip__avatar:first-child) {
+                padding-inline-start: 4px;
+            }
+            &#{button.$enabled}#{button.$focused} {
+                outline: none;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                inset-block-start: calc((100% - var(--md-sys-target-size, 48px)) / 2);
+                inset-inline-start: 0;
+                block-size: var(--md-sys-target-size, 48px);
+                inline-size: 100%;
+            }
+        }
+        .micl-chip__remove {
+            inline-size: 24px;
+            block-size: 24px;
+            margin-inline: 0 5px;
+            border-radius: 50%;
+            font-size: 18px;
+
+            &#{button.$enabled} {
+                color: var(--md-comp-input-chip-trailing-icon-color, var(--md-comp-input-chip-leading-icon-color, currentColor));
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                inset-block-start: calc((100% - var(--md-sys-target-size, 48px)) / 2);
+                inset-inline-start: calc((100% - var(--md-sys-target-size, 48px)) / 2);
+                block-size: var(--md-sys-target-size, 48px);
+                inline-size: var(--md-sys-target-size, 48px);
+            }
+        }
+        .micl-chip__avatar {
+            @include typography.title-medium;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            block-size: var(--md-comp-input-chip-avatar-size, 24px);
+            inline-size: var(--md-comp-input-chip-avatar-size, 24px);
+            border-radius: var(--md-comp-input-chip-avatar-shape, var(--md-sys-shape-corner-full, 50%));
+            color: var(--md-comp-input-chip-avatar-label-color, var(--md-sys-color-on-primary-container));
+            background-color: var(--md-comp-input-chip-avatar-color, var(--md-sys-color-primary-container));
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    .micl-chip-filter {
+        input {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            opacity: 0;
+            cursor: inherit;
+        }
+        .micl-button__icon + .micl-button__icon {
+            margin-inline-start: -8px;
+        }
+        // If icons have direction:ltr (like Material Symbols), the collapsing margin above always
+        // lands on their physical left; in a RTL context it must sit on the right to keep
+        // cancelling the gap between the two icons.
+        .micl-button__icon + .micl-button__icon:dir(rtl) {
+            margin-inline: 0 -8px;
+        }
+        &:has(input:not(:checked)) {
+            .micl-button__icon:has(+ input) {
+                inline-size: 0px;
+            }
+        }
+        &:has(input:checked) {
+            .micl-button__icon:not(:has(+ input)) {
+                inline-size: 0px;
+            }
+        }
+        &:has(input:checked) {
+            --micl-chip-statelayer: var(--md-sys-color-on-secondary-container);
+            --micl-chip-label: var(--md-comp-filter-chip-selected-label-text-color, var(--md-sys-color-on-secondary-container));
+            --micl-chip-icon: var(--md-comp-filter-chip-selected-leading-icon-color, var(--md-sys-color-on-secondary-container));
+            --micl-chip-outline: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
+
+            border-color: transparent;
+            background-color: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
+
+            &:not(.micl-chip--elevated)#{button.$enabled}:hover:not(:active) {
+                box-shadow: var(--md-sys-elevation-level1);
+            }
+        }
+        &:not(.micl-chip--elevated):has(input:disabled:checked) {
+            background-color: var(--md-comp-filter-chip-disabled-selected-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filter-chip-disabled-selected-container-opacity, 12%)));
+        }
+    }
+    .micl-chip--elevated {
+        @extend %micl-button-elevated;
+
+        --statelayer-color: var(--micl-chip-statelayer, var(--md-sys-color-on-surface-variant));
+        --md-comp-elevated-button-container-color: var(--micl-chip-elevated-container, var(--md-sys-color-surface-container-low));
+    }
+}
+.micl-chips--input {
+    min-inline-size: 0;
+    flex-wrap: nowrap;
+    min-inline-size: 0;
+    padding: 10px 16px 13px;
+    border: 1px solid var(--md-comp-outlined-button-outline-color, var(--md-sys-color-outline-variant));
+    border-radius: var(--md-sys-shape-corner-small);
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+// If the remove button is direction:ltr (like Material Symbols), its margin-inline resolves
+// against LTR and does not flip with the page direction — mirror the outer margin explicitly.
+.micl-chips .micl-chip__remove:dir(rtl) {
+    margin-inline: 5px 0;
+}

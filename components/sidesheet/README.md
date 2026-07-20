@@ -26,6 +26,9 @@ To create a standard side sheet, use the `<dialog>` element with the `popover` a
 Import the side sheet styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
+@use "material-inspired-component-library/dist/divider";
 @use "material-inspired-component-library/dist/sidesheet";
 ```
 
@@ -77,7 +80,7 @@ To open a standard or modal side sheet, link a button to the side sheet's ID usi
 The back-button and the actions-container are optional. To remove the vertical divider of the standard side sheet, assign zero to the following CSS variable:
 ```CSS
 #mysidesheet {
-  --md-sys-divider-thickness: 0;
+  --md-comp-sidesheet-divider-thickness: 0;
 }
 ```
 
@@ -90,19 +93,28 @@ The back-button and the actions-container are optional. To remove the vertical d
 > transition: ...transition on max-inline-size...
 > ```
 
-## Customizations
-You can customize the appearance of the Side sheet component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child side sheets.
+## Theming
+Each side sheet style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-sidesheet-width | 256px | The default (and minimum allowed) width of the side sheet |
-| --md-sys-sidesheet-maxwidth | 400px | The largest allowed width of the side sheet |
-| --md-sys-sidesheet-padding-standard | 24px | The amount of space between the vertical edges and the content |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-sidesheet-container-width` | The default (and minimum allowed) width of the side sheet | `256px` |
+| `--md-comp-sidesheet-container-max-width` | The largest allowed width of the side sheet | `400px` |
+| `--md-comp-sidesheet-padding` | The amount of space between the vertical edges and the content | `--md-sys-layout-window-margin` |
+| `--md-comp-sidesheet-container-shape` | The corner rounding of the standard side sheet | `--md-sys-shape-corner-none` |
+| `--md-comp-sidesheet-standard-container-color` | The background color of the standard side sheet | `--md-sys-color-surface` |
+| `--md-comp-sidesheet-divider-thickness` | The thickness of the vertical divider of the standard side sheet | `1px` |
+| `--md-comp-sidesheet-divider-color` | The color of the vertical divider of the standard side sheet | `--md-sys-color-outline` |
+| `--md-comp-sidesheet-standard-container-elevation` | The shadow (elevation) of the standard side sheet | `--md-sys-elevation-level0` |
+| `--md-comp-sidesheet-modal-container-color` | The background color of the modal side sheet | `--md-sys-color-surface-container-low` |
+| `--md-comp-sidesheet-modal-container-elevation` | The shadow (elevation) of the modal side sheet | `--md-sys-elevation-level1` |
+| `--md-comp-sidesheet-modal-container-shape` | The corner rounding of the modal side sheet, applied to the two corners facing the content | `--md-sys-shape-corner-large` |
+
 
 **Example: Changing the width of the sidesheet**
 
 ```HTML
-<body style="--md-sys-sidesheet-width:320px">
+<body style="--md-comp-sidesheet-container-width:320px">
   <dialog id="mysidesheet" class="micl-sidesheet" popover>
     ...
   </dialog>

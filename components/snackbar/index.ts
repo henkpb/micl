@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const snackbarSelector = '.micl-snackbar';
 
 interface SnackbarState {
@@ -53,7 +55,7 @@ const startTimer = (element: HTMLElement): void =>
     }, state.delay);
 };
 
-export default
+export default register(snackbarSelector,
 {
     initialize: (element: HTMLElement): void =>
     {
@@ -115,4 +117,4 @@ export default
         }
         delete element.dataset.miclinitialized;
     }
-};
+}, HTMLElement);

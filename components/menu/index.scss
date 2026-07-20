@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -43,23 +42,17 @@
 @include typography.scale('label-small');
 @include typography.scale('body-small');
 
-:root {
-    --md-comp-menu-width-max: 320px;
-    --md-comp-menu-width-min: 112px;
-}
-
 $menu-padding-block: 4px;
 $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-three)';
 
-@mixin menu-color-set(
-    $variant,
-    $container,
-    $on-container,
-    $on-container-strong,
-    $on-icon-active,
-    $selected-container,
-    $on-selected
-) {
+@mixin menu-color-set($variant) {
+    $container: var(--_menu-item-bg);
+    $on-container: var(--_menu-on);
+    $on-container-strong: var(--_menu-on-strong);
+    $on-icon-active: var(--_menu-icon-active);
+    $selected-container: var(--_menu-selected-bg);
+    $on-selected: var(--_menu-on-selected);
+
     --md-comp-list-item-container-color: var(--md-comp-menu-#{$variant}-menu-item-container-color, #{$container});
     --md-comp-list-item-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-label-text-color, #{$on-container});
     --md-comp-list-item-leading-icon-color: var(--md-comp-menu-#{$variant}-menu-item-leading-icon-color, #{$on-container});
@@ -68,15 +61,15 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     --md-comp-list-item-trailing-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-trailing-supporting-text-color, #{$on-container});
 
     --md-comp-list-item-disabled-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-disabled-label-text-color, #{$on-container-strong});
-    --md-comp-list-item-disabled-label-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-disabled-label-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-label-text-opacity, var(--_menu-do));
     --md-comp-list-item-disabled-leading-icon-color: var(--md-comp-menu-#{$variant}-menu-item-disabled-leading-icon-color, #{$on-container-strong});
-    --md-comp-list-item-disabled-leading-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-disabled-leading-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-leading-icon-opacity, var(--_menu-do));
     --md-comp-list-item-disabled-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-disabled-supporting-text-color, #{$on-container-strong});
-    --md-comp-list-item-disabled-supporting-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-disabled-supporting-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-supporting-text-opacity, var(--_menu-do));
     --md-comp-list-item-disabled-trailing-icon-color: var(--md-comp-menu-#{$variant}-menu-item-disabled-trailing-icon-color, #{$on-container-strong});
-    --md-comp-list-item-disabled-trailing-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-disabled-trailing-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-trailing-icon-opacity, var(--_menu-do));
     --md-comp-list-item-disabled-trailing-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-disabled-trailing-supporting-text-color, #{$on-container-strong});
-    --md-comp-list-item-disabled-trailing-supporting-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-disabled-trailing-supporting-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-disabled-trailing-supporting-text-opacity, var(--_menu-do));
 
     --md-comp-list-item-focus-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-focused-label-text-color, #{$on-container-strong});
     --md-comp-list-item-focus-leading-icon-color: var(--md-comp-menu-#{$variant}-menu-item-focused-leading-icon-color, #{$on-icon-active});
@@ -110,15 +103,15 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     --md-comp-list-item-selected-trailing-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-selected-trailing-supporting-text-color, #{$on-selected});
 
     --md-comp-list-item-selected-disabled-container-color: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-container-color, #{$selected-container});
-    --md-comp-list-item-selected-disabled-container-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-selected-disabled-container-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-container-opacity, var(--_menu-do));
     --md-comp-list-item-selected-disabled-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-label-text-color, #{$on-selected});
-    --md-comp-list-item-selected-disabled-label-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-selected-disabled-label-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-label-text-opacity, var(--_menu-do));
     --md-comp-list-item-selected-disabled-leading-icon-color: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-leading-icon-color, #{$on-selected});
-    --md-comp-list-item-selected-disabled-leading-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-selected-disabled-leading-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-leading-icon-opacity, var(--_menu-do));
     --md-comp-list-item-selected-disabled-trailing-icon-color: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-trailing-icon-color, #{$on-selected});
-    --md-comp-list-item-selected-disabled-trailing-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-selected-disabled-trailing-icon-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-trailing-icon-opacity, var(--_menu-do));
     --md-comp-list-item-selected-disabled-trailing-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-trailing-supporting-text-color, #{$on-selected});
-    --md-comp-list-item-selected-disabled-trailing-supporting-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
+    --md-comp-list-item-selected-disabled-trailing-supporting-text-opacity: var(--md-comp-menu-#{$variant}-menu-item-selected-disabled-trailing-supporting-text-opacity, var(--_menu-do));
 
     --md-comp-list-item-selected-focus-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-selected-focused-label-text-color, #{$on-selected});
     --md-comp-list-item-selected-focus-leading-icon-color: var(--md-comp-menu-#{$variant}-menu-item-selected-focused-leading-icon-color, #{$on-selected});
@@ -173,15 +166,15 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     --md-comp-list-item-focus-indicator-offset: var(--md-comp-menu-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
     --md-comp-list-item-focus-indicator-thickness: var(--md-comp-menu-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px));
 
-    @include menu-color-set(
-        'standard',
-        var(--md-sys-color-surface-container-low),
-        var(--md-sys-color-on-surface-variant),
-        var(--md-sys-color-on-surface),
-        var(--md-sys-color-on-surface-variant),
-        var(--md-sys-color-tertiary-container),
-        var(--md-sys-color-on-tertiary-container)
-    );
+    --_menu-item-bg: var(--md-sys-color-surface-container-low);
+    --_menu-on: var(--md-sys-color-on-surface-variant);
+    --_menu-on-strong: var(--md-sys-color-on-surface);
+    --_menu-icon-active: var(--md-sys-color-on-surface-variant);
+    --_menu-selected-bg: var(--md-sys-color-tertiary-container);
+    --_menu-on-selected: var(--md-sys-color-on-tertiary-container);
+    --_menu-do: var(--md-sys-state-disabled-state-layer-opacity, 38%);
+
+    @include menu-color-set('standard');
 
     .micl-menu__section {
         @include typography.label-small;
@@ -206,7 +199,6 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 }
 
 .micl-menu[popover] {
-    display: flex;
     flex-direction: column;
     position: absolute;
     inset: unset;
@@ -221,24 +213,27 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     border: none;
     outline: none;
     background-color: transparent;
+    --micl-duration: var(--md-comp-menu-motion-spatial-duration-reverse);
+    --micl-easing: linear;
+    --_group-shape: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
+
     opacity: 0;
     overflow: visible;
     transform: scaleY(0);
     transform-origin: center top;
     transition:
-        opacity var(--md-comp-menu-motion-spatial-duration-reverse) linear,
-        transform var(--md-comp-menu-motion-spatial-duration-reverse) var(--md-comp-menu-motion-spatial),
-        overlay var(--md-comp-menu-motion-spatial-duration-reverse) linear allow-discrete,
-        display var(--md-comp-menu-motion-spatial-duration-reverse) linear allow-discrete;
+        opacity var(--micl-duration) var(--micl-easing),
+        transform var(--micl-duration) var(--md-comp-menu-motion-spatial),
+        overlay var(--micl-duration) linear allow-discrete,
+        display var(--micl-duration) linear allow-discrete;
 
     &:popover-open {
+        --micl-duration: var(--md-comp-menu-motion-spatial-duration);
+        --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+
+        display: flex;
         opacity: 1;
         transform: scaleY(1);
-        transition:
-            opacity var(--md-comp-menu-motion-spatial-duration) motion.$md-sys-motion-easing-emphasized-decelerate,
-            transform var(--md-comp-menu-motion-spatial-duration) var(--md-comp-menu-motion-spatial),
-            overlay var(--md-comp-menu-motion-spatial-duration) linear allow-discrete,
-            display var(--md-comp-menu-motion-spatial-duration) linear allow-discrete;
 
         @starting-style {
             opacity: 0;
@@ -268,12 +263,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         transition: border-radius var(--md-comp-menu-motion-effects-duration-reverse) linear;
 
         &+ .micl-list {
-            border-start-start-radius: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
-            border-start-end-radius: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
+            border-start-start-radius: var(--_group-shape);
+            border-start-end-radius: var(--_group-shape);
         }
         &:has(+ .micl-list) {
-            border-end-start-radius: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
-            border-end-end-radius: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
+            border-end-start-radius: var(--_group-shape);
+            border-end-end-radius: var(--_group-shape);
         }
 
         #{$item-classes} > .micl-menu[popover] {
@@ -296,20 +291,19 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     }
 
     &.micl-menu--vibrant > .micl-list {
-        @include menu-color-set(
-            'vibrant',
-            var(--md-sys-color-tertiary-container),
-            var(--md-sys-color-on-tertiary-container),
-            var(--md-sys-color-on-tertiary-container),
-            var(--md-sys-color-tertiary),
-            var(--md-sys-color-tertiary),
-            var(--md-sys-color-on-tertiary)
-        );
+        --_menu-item-bg: var(--md-sys-color-tertiary-container);
+        --_menu-on: var(--md-sys-color-on-tertiary-container);
+        --_menu-on-strong: var(--md-sys-color-on-tertiary-container);
+        --_menu-icon-active: var(--md-sys-color-tertiary);
+        --_menu-selected-bg: var(--md-sys-color-tertiary);
+        --_menu-on-selected: var(--md-sys-color-on-tertiary);
+
+        @include menu-color-set('vibrant');
 
         background-color: var(--md-comp-menu-vibrant-container-color, var(--md-sys-color-tertiary-container));
     }
 }
 
-[dir=rtl] .micl-menu[popover] > .micl-list button[popovertarget] .micl-list-item__icon {
+.micl-menu[popover] > .micl-list button[popovertarget] .micl-list-item__icon:dir(rtl) {
     transform: rotate(180deg);
 }

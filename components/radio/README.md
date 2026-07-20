@@ -36,27 +36,29 @@ The Radio Button component respects the `dir` global attribute, automatically ad
 
 The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following an `<input type="radio">` with the `micl-radio` class. You are encouraged to customize these CSS settings to match your design system.
 
-## Customizations
-You can customize the appearance of the Radio Button component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child radio buttons.
+## Theming
+Each radio button can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child radio buttons.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-radio-border-width | 2px | Controls the thickness of the radio button's border |
-| --md-sys-radio-container-size | 20px | Defines the diameter of the radio button itself |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-radio-button-icon-size` | The diameter of the radio button itself | `20px` |
+| `--md-comp-radio-button-outline-width` | The thickness of the radio button's ring | `2px` |
+| `--md-comp-radio-button-unselected-icon-color` | The ring color of an unselected radio button | `--md-sys-color-on-surface-variant` |
+| `--md-comp-radio-button-selected-icon-color` | The ring and dot color of a selected radio button | `--md-sys-color-primary` |
 
 **Example: Changing the size of the radio button**
 
 ```HTML
-<div style="--md-sys-radio-container-size:28px">
+<div style="--md-comp-radio-button-icon-size:28px">
   <input type="radio" id="myradio" class="micl-radio">
   <label for="myradio">Large radio button</label>
 </div>
 ```
 
-To vertically align a radio button with its label, wrap both in an element that has the `micl-flex--vcenter` class.
+To vertically align a radio button with its label, wrap both in an element that has a styling like suggested below:
 
 ```HTML
-<div class="micl-flex--vcenter">
+<div style="display:flex;flex-direction:row;align-items:center">
   <input type="radio" id="myradio" class="micl-radio">
   <label for="myradio">Large radio button</label>
 </div>

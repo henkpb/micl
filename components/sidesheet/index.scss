@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../foundations/layout';
 @use '../../styles/elevation';
 @use '../../styles/motion';
@@ -38,50 +37,49 @@
 @include typography.scale('title-large');
 
 :root {
-    --md-sys-sidesheet-width: 256px;
-    --md-sys-sidesheet-maxwidth: 400px;
-    --md-sys-sidesheet-padding-standard: var(--md-sys-layout-window-margin, 24px);
+    --md-comp-sidesheet-container-width: 256px;
+    --md-comp-sidesheet-container-max-width: 400px;
+    --md-comp-sidesheet-padding: var(--md-sys-layout-window-margin, 24px);
 }
 body {
-    --md-sys-sidesheet-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
-    --md-sys-sidesheet-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
-    --md-sys-sidesheet-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --md-comp-sidesheet-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
+    --md-comp-sidesheet-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
+    --md-comp-sidesheet-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
 }
 
 dialog.micl-sidesheet {
-    --md-sys-sidesheet-spring-buffer: 40px;
+    --micl-spring-buffer: 40px;
+    --micl-duration: var(--md-comp-sidesheet-motion-duration-reverse);
 
     box-sizing: border-box;
     display: none;
     flex-direction: column;
-    justify-content: space-between;
-    min-inline-size: calc(var(--md-sys-sidesheet-width) + var(--md-sys-sidesheet-spring-buffer));
-    max-inline-size: calc(var(--md-sys-sidesheet-maxwidth) + var(--md-sys-sidesheet-spring-buffer));
-    block-size: 100vh;
-    max-block-size: 100%;
+    min-inline-size: calc(var(--md-comp-sidesheet-container-width) + var(--micl-spring-buffer));
+    max-inline-size: calc(var(--md-comp-sidesheet-container-max-width) + var(--micl-spring-buffer));
+    block-size: 100%;
     min-block-size: 100%;
     margin-block: 0;
     margin-inline-start: auto;
-    margin-inline-end: calc(-1 * (var(--md-sys-sidesheet-maxwidth) + var(--md-sys-sidesheet-spring-buffer)));
-    padding-block: var(--md-sys-sidesheet-padding-standard) 0;
-    padding-inline: 0 var(--md-sys-sidesheet-spring-buffer);
-    background-color: var(--md-sys-color-surface);
+    margin-inline-end: calc(-1 * (var(--md-comp-sidesheet-container-max-width) + var(--micl-spring-buffer)));
+    padding-block: var(--md-comp-sidesheet-padding) 0;
+    padding-inline: 0 var(--micl-spring-buffer);
+    background-color: var(--md-comp-sidesheet-standard-container-color, var(--md-sys-color-surface));
     border: none;
-    border-radius: var(--md-sys-shape-corner-none);
-    box-shadow: var(--md-sys-elevation-level0);
+    border-radius: var(--md-comp-sidesheet-container-shape, var(--md-sys-shape-corner-none));
+    box-shadow: var(--md-comp-sidesheet-standard-container-elevation, var(--md-sys-elevation-level0));
     opacity: 0;
     overflow: hidden;
     transition:
-        opacity var(--md-sys-sidesheet-motion-duration-reverse) linear,
-        margin-inline-end var(--md-sys-sidesheet-motion-duration-reverse) var(--md-sys-sidesheet-motion-spatial),
-        overlay var(--md-sys-sidesheet-motion-duration-reverse) linear allow-discrete,
-        display var(--md-sys-sidesheet-motion-duration-reverse) linear allow-discrete;
+        opacity var(--micl-duration) linear,
+        margin-inline-end var(--micl-duration) var(--md-comp-sidesheet-motion-spatial),
+        overlay var(--micl-duration) linear allow-discrete,
+        display var(--micl-duration) linear allow-discrete;
 
     .micl-sidesheet__headline {
         display: flex;
         align-items: center;
         block-size: var(--md-sys-typescale-title-large-line-height);
-        padding-inline: var(--md-sys-sidesheet-padding-standard);
+        padding-inline: var(--md-comp-sidesheet-padding);
         margin-block-end: 16px;
         column-gap: 12px;
         color: var(--md-sys-color-on-surface-variant);
@@ -106,7 +104,7 @@ dialog.micl-sidesheet {
     .micl-sidesheet__content {
         box-sizing: border-box;
         flex: 1 1 auto;
-        padding-inline: var(--md-sys-sidesheet-padding-standard);
+        padding-inline: var(--md-comp-sidesheet-padding);
         overflow: hidden auto;
     }
     .micl-sidesheet__actions {
@@ -115,46 +113,40 @@ dialog.micl-sidesheet {
         flex-shrink: 0;
         align-items: center;
         justify-content: start;
-        padding-block: 16px var(--md-sys-sidesheet-padding-standard);
-        padding-inline: var(--md-sys-sidesheet-padding-standard);
+        padding-block: 16px var(--md-comp-sidesheet-padding);
+        padding-inline: var(--md-comp-sidesheet-padding);
         column-gap: 8px;
         overflow: hidden;
     }
 
     &[open] {
-        background-color: var(--md-sys-color-surface-container-low);
-        border-start-start-radius: var(--md-sys-shape-corner-large);
-        border-end-start-radius: var(--md-sys-shape-corner-large);
-        box-shadow: var(--md-sys-elevation-level1);
+        background-color: var(--md-comp-sidesheet-modal-container-color, var(--md-sys-color-surface-container-low));
+        border-start-start-radius: var(--md-comp-sidesheet-modal-container-shape, var(--md-sys-shape-corner-large));
+        border-end-start-radius: var(--md-comp-sidesheet-modal-container-shape, var(--md-sys-shape-corner-large));
+        box-shadow: var(--md-comp-sidesheet-modal-container-elevation, var(--md-sys-elevation-level1));
     }
     &:popover-open {
-        --md-sys-divider-color: var(--md-sys-color-outline, gray);
-
-        border-inline-start: var(--md-sys-divider-thickness, 1px) solid var(--md-sys-divider-color);
+        border-inline-start: var(--md-comp-sidesheet-divider-thickness, 1px) solid var(--md-comp-sidesheet-divider-color, var(--md-sys-color-outline, gray));
     }
     &:popover-open,
     &[open] {
+        --micl-duration: var(--md-comp-sidesheet-motion-duration);
+
         display: flex;
-        margin-inline-end: calc(-1 * var(--md-sys-sidesheet-spring-buffer));
+        margin-inline-end: calc(-1 * var(--micl-spring-buffer));
         opacity: 100%;
-        transition:
-            opacity var(--md-sys-sidesheet-motion-duration) linear,
-            margin-inline-end var(--md-sys-sidesheet-motion-duration) var(--md-sys-sidesheet-motion-spatial),
-            overlay var(--md-sys-sidesheet-motion-duration) linear allow-discrete,
-            display var(--md-sys-sidesheet-motion-duration) linear allow-discrete;
 
         @starting-style {
-            margin-inline-end: calc(-1 * (var(--md-sys-sidesheet-maxwidth) + var(--md-sys-sidesheet-spring-buffer)));
+            margin-inline-end: calc(-1 * (var(--md-comp-sidesheet-container-max-width) + var(--micl-spring-buffer)));
             opacity: 0;
         }
     }
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
-        transition: background-color var(--md-sys-sidesheet-motion-duration-reverse) linear;
+        transition: background-color var(--micl-duration) linear;
     }
     &[open]::backdrop {
         background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
-        transition: background-color var(--md-sys-sidesheet-motion-duration) linear;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
@@ -166,9 +158,9 @@ body:has(dialog.micl-sidesheet[popover]) {
     box-sizing: border-box;
     max-inline-size: 100%;
     margin: 0;
-    transition: max-inline-size var(--md-sys-sidesheet-motion-duration-reverse);
+    transition: max-inline-size var(--md-comp-sidesheet-motion-duration-reverse);
 }
 body:has(dialog.micl-sidesheet:popover-open) {
-    max-inline-size: calc(100vw - var(--md-sys-sidesheet-maxwidth));
-    transition: max-inline-size var(--md-sys-sidesheet-motion-duration) var(--md-sys-sidesheet-motion-spatial);
+    max-inline-size: calc(100vw - var(--md-comp-sidesheet-container-max-width));
+    transition: max-inline-size var(--md-comp-sidesheet-motion-duration) var(--md-comp-sidesheet-motion-spatial);
 }

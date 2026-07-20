@@ -56,9 +56,9 @@ To change the color, add one of the following modifier classes to the main `<div
 
 | Class name | Description |
 | ---------- | ----------- |
-| micl-alert--primary | Uses the main color scheme of your application |
-| micl-alert--secondary | Uses a color scheme that is less prominent than the main one |
-| micl-alert--tertiary | Uses a color scheme that provides contrasting accents |
+| `micl-alert--primary` | Uses the main color scheme of your application |
+| `micl-alert--secondary` | Uses a color scheme that is less prominent than the main one |
+| `micl-alert--tertiary` | Uses a color scheme that provides contrasting accents |
 
 ### Alert Content Structure
 The Alert component is built with a few key structural elements.
@@ -69,18 +69,18 @@ The Alert component is built with a few key structural elements.
 
 - `micl-alert__supporting-text` (optional): Used for a short description or supplementary information. It is displayed in a smaller font.
 
-## Customizations
-You can customize the appearance of the Alert component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child alert.
+## Theming
+Each alert can be themed with CSS custom properties. Set them on any appropriate parent element to affect its child alerts.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| --md-sys-alert-padding | 16px | The inner padding between the alert's edge and its content |
-| --md-sys-alert-space | 16px | The spacing between the optional icon and the text container |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-alert-padding` | The inner padding between the alert's edge and its content | `16px` |
+| `--md-comp-alert-space` | The spacing between the optional icon and the text container | `16px` |
 
 **Example: Changing the padding**
 
 ```HTML
-<div style="--md-sys-alert-padding:24px">
+<div style="--md-comp-alert-padding:24px">
   <div class="micl-alert-filled" role="alert">
     ...
   </div>

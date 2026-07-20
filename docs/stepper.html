@@ -8,18 +8,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
+        .docs-example {
+            padding-block-start: 24px;
+        }
         h2, p {
             color: var(--md-sys-color-on-surface);
         }
         .docs-icon {
             inline-size: 32px;
             block-size: 32px;
-            margin: var(--md-comp-card-padding-inline);
+            margin: var(--md-comp-card-padding-inline, 16px);
             border-radius: 16px;
             background-color: var(--md-sys-color-primary);
             color: var(--md-sys-color-on-primary);
@@ -30,27 +34,46 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body micl-body--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Steppers</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL steppers</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Steppers</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="docs-icon" aria-hidden="true">A</div>
-                        <div class="micl-card__headline-s">
-                            <h2>Basic stepper with three steps</h2>
-                        </div>
-                        <div class="micl-card__content">
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Steppers</h1>
+            <p class="docs-hero__lede">This component creates a Stepper to manage a linear, step-by-step process for gathering or displaying information, inspired by the design principles of Material Design 3 Expressive.</p>
+            <ul class="docs-hero__facts">
+                <li>Linear progress dots</li>
+                <li>Keyboard navigable</li>
+                <li>Counter styling via CSS</li>
+            </ul>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#basic-stepper-with-three-steps">Basic stepper with three steps</a>
+            <a href="#stepper-with-header">Stepper with header</a>
+            <a href="#stepper-with-progress-counter">Stepper with progress counter</a>
+            <a href="#non-linear-stepper">Non-linear stepper</a>
+            <a href="#stepper-with-progress-dots">Stepper with progress dots</a>
+            <a href="#stepper-with-validation">Stepper with validation</a>
+        </nav>
+
+        <main class="docs-content docs-content--columns">
+            <section class="docs-section" id="basic-stepper-with-three-steps">
+                <div class="docs-section__head">
+                    <h2>Basic stepper with three steps</h2>
+                </div>
+                <div class="docs-icon" aria-hidden="true">A</div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
                             <div class="micl-stepper" role="tablist" aria-label="My stepper">
                                 <div class="micl-stepper__steps" tabindex="-1">
                                     <div class="micl-stepper__step" role="tabpanel" aria-current="step">
@@ -75,92 +98,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="micl-card-outlined">
-                        <div class="docs-icon" aria-hidden="true">C</div>
-                        <div class="micl-card__headline-s">
-                            <h2>Stepper with progress dots</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="micl-stepper" role="tablist" aria-label="My stepper">
-                                <div class="micl-stepper__steps" tabindex="-1">
-                                    <div class="micl-stepper__step" role="tabpanel" aria-current="step">
-                                        <h2>First step</h2>
-                                        <p class="md-sys-typescale-body-small">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    </div>
-                                    <div class="micl-stepper__step" role="tabpanel">
-                                        <h2>Second step</h2>
-                                        <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    </div>
-                                    <div class="micl-stepper__step" role="tabpanel">
-                                        <h2>Last step</h2>
-                                        <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames.</p>
-                                    </div>
-                                </div>
-                                <div class="micl-stepper__actions">
-                                    <div>
-                                        <button type="button" class="micl-button-text-m micl-stepper__action-back">Back</button>
-                                    </div>
-                                    <div class="micl-stepper__progress-dots"></div>
-                                    <div>
-                                        <button type="button" class="micl-button-text-m micl-stepper__action-next">Next</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="micl-card-filled">
-                        <div class="docs-icon" aria-hidden="true">F</div>
-                        <div class="micl-card__headline-s">
-                            <h2>Non-linear stepper</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="micl-stepper micl-stepper--nonlinear" role="tablist" aria-label="My stepper">
-                                <div class="micl-stepper__header" style="--md-sys-stepper-counter-style:upper-alpha">
-                                    <button type="button" role="tab" id="step1label" class="micl-button-text-xs" aria-controls="step4" aria-selected="true">
-                                        <span class="micl-stepper__progress-dot" aria-hidden="true"></span>
-                                        First step
-                                    </button>
-                                    <button type="button" role="tab" id="step2label" class="micl-button-text-xs" aria-controls="step5">
-                                        <span class="micl-stepper__progress-dot" aria-hidden="true"></span>
-                                        Second step
-                                    </button>
-                                    <button type="button" role="tab" id="step3label" class="micl-button-text-xs" aria-controls="step6">
-                                        <span class="micl-stepper__progress-dot" aria-hidden="true"></span>
-                                        Last step
-                                    </button>
-                                </div>
-                                <div class="micl-stepper__steps" tabindex="-1">
-                                    <div id="step4" class="micl-stepper__step" role="tabpanel" aria-labelledby="step1label" aria-current="step">
-                                        <p class="md-sys-typescale-body-small">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    </div>
-                                    <div id="step5" class="micl-stepper__step" role="tabpanel" aria-labelledby="step2label">
-                                        <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                    </div>
-                                    <div id="step6" class="micl-stepper__step" role="tabpanel" aria-labelledby="step3label">
-                                        <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames.</p>
-                                    </div>
-                                </div>
-                                <div class="micl-stepper__actions">
-                                    <div>
-                                        <button type="button" class="micl-button-text-m micl-stepper__action-back">Back</button>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="micl-button-text-m micl-stepper__action-next">Next</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="docs-icon" aria-hidden="true">B</div>
-                        <div class="micl-card__headline-s">
-                            <h2>Stepper with progress counter</h2>
-                        </div>
-                        <div class="micl-card__content">
+            </section>
+
+            <section class="docs-section" id="stepper-with-progress-counter">
+                <div class="docs-section__head">
+                    <h2>Stepper with progress counter</h2>
+                </div>
+                <div class="docs-icon" aria-hidden="true">B</div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
                             <div class="micl-stepper" role="tablist" aria-label="My stepper">
                                 <div class="micl-stepper__steps" tabindex="-1">
                                     <div class="micl-stepper__step" role="tabpanel">
@@ -190,14 +140,57 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
-                    <div class="micl-card-elevated">
-                        <div class="docs-icon" aria-hidden="true">D</div>
-                        <div class="micl-card__headline-s">
-                            <h2>Stepper with header</h2>
-                        </div>
-                        <div class="micl-card__content">
+                </div>
+            </section>
+
+            <section class="docs-section" id="stepper-with-progress-dots">
+                <div class="docs-section__head">
+                    <h2>Stepper with progress dots</h2>
+                </div>
+                <div class="docs-icon" aria-hidden="true">C</div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-stepper" role="tablist" aria-label="My stepper">
+                                <div class="micl-stepper__steps" tabindex="-1">
+                                    <div class="micl-stepper__step" role="tabpanel" aria-current="step">
+                                        <h2>First step</h2>
+                                        <p class="md-sys-typescale-body-small">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                    </div>
+                                    <div class="micl-stepper__step" role="tabpanel">
+                                        <h2>Second step</h2>
+                                        <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                    </div>
+                                    <div class="micl-stepper__step" role="tabpanel">
+                                        <h2>Last step</h2>
+                                        <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames.</p>
+                                    </div>
+                                </div>
+                                <div class="micl-stepper__actions">
+                                    <div>
+                                        <button type="button" class="micl-button-text-m micl-stepper__action-back">Back</button>
+                                    </div>
+                                    <div class="micl-stepper__progress-dots"></div>
+                                    <div>
+                                        <button type="button" class="micl-button-text-m micl-stepper__action-next">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="stepper-with-header">
+                <div class="docs-section__head">
+                    <h2>Stepper with header</h2>
+                </div>
+                <div class="docs-icon" aria-hidden="true">D</div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
                             <div class="micl-stepper" role="tablist" aria-label="My stepper">
                                 <div class="micl-stepper__header">
                                     <button type="button" role="tab" id="step4label" class="micl-button-text-xs" aria-controls="step1" aria-selected="true">
@@ -233,14 +226,67 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
-                    <div class="micl-card-outlined">
-                        <div class="docs-icon" aria-hidden="true">G</div>
-                        <div class="micl-card__headline-s">
-                            <h2>Stepper with validation</h2>
-                        </div>
-                        <div class="micl-card__content">
+                </div>
+            </section>
+
+            <section class="docs-section" id="non-linear-stepper">
+                <div class="docs-section__head">
+                    <h2>Non-linear stepper</h2>
+                </div>
+                <div class="docs-icon" aria-hidden="true">E</div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-stepper micl-stepper--nonlinear" role="tablist" aria-label="My stepper">
+                                <div class="micl-stepper__header" style="--md-comp-stepper-counter-style:upper-alpha">
+                                    <button type="button" role="tab" id="step1label" class="micl-button-text-xs" aria-controls="step4" aria-selected="true">
+                                        <span class="micl-stepper__progress-dot" aria-hidden="true"></span>
+                                        First step
+                                    </button>
+                                    <button type="button" role="tab" id="step2label" class="micl-button-text-xs" aria-controls="step5">
+                                        <span class="micl-stepper__progress-dot" aria-hidden="true"></span>
+                                        Second step
+                                    </button>
+                                    <button type="button" role="tab" id="step3label" class="micl-button-text-xs" aria-controls="step6">
+                                        <span class="micl-stepper__progress-dot" aria-hidden="true"></span>
+                                        Last step
+                                    </button>
+                                </div>
+                                <div class="micl-stepper__steps" tabindex="-1">
+                                    <div id="step4" class="micl-stepper__step" role="tabpanel" aria-labelledby="step1label" aria-current="step">
+                                        <p class="md-sys-typescale-body-small">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                    </div>
+                                    <div id="step5" class="micl-stepper__step" role="tabpanel" aria-labelledby="step2label">
+                                        <p class="md-sys-typescale-body-medium">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                    </div>
+                                    <div id="step6" class="micl-stepper__step" role="tabpanel" aria-labelledby="step3label">
+                                        <p class="md-sys-typescale-body-large">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames.</p>
+                                    </div>
+                                </div>
+                                <div class="micl-stepper__actions">
+                                    <div>
+                                        <button type="button" class="micl-button-text-m micl-stepper__action-back">Back</button>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="micl-button-text-m micl-stepper__action-next">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="stepper-with-validation">
+                <div class="docs-section__head">
+                    <h2>Stepper with validation</h2>
+                </div>
+                <div class="docs-icon" aria-hidden="true">F</div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
                             <form class="micl-stepper" role="tablist" aria-label="My stepper">
                                 <div class="micl-stepper__steps" tabindex="-1">
                                     <fieldset class="micl-stepper__step" style="row-gap:16px" role="tabpanel" aria-current="step">
@@ -253,7 +299,7 @@
                                             <input type="password" id="mytextfield2" name="mypassword" pattern="\d{4,4}" required>
                                             <span class="micl-textfield__supporting-text">A password must consist of four digits</span>
                                         </div>
-                                        <div class="micl-flex--vcenter">
+                                        <div class="docs-flex--vcenter">
                                             <input type="checkbox" id="mycheckbox1" class="micl-checkbox" value="c1" required>
                                             <label for="mycheckbox1" class="md-sys-typescale-body-medium">I agree to the terms and conditions</label>
                                         </div>
@@ -271,47 +317,14 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </template>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="micl-pane" style="flex-shrink:0.5">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;div class="micl-stepper" role="tablist" aria-label="My stepper"&gt;
-  &lt;div class="micl-stepper__steps"&gt;
-    &lt;div class="micl-stepper__step" role="tabpanel" aria-current="step"&gt;
-      &lt;h2&gt;First step&lt;/h2&gt;
-      &lt;p&gt;Content First step&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="micl-stepper__step" role="tabpanel"&gt;
-      &lt;h2&gt;Second step&lt;/h2&gt;
-      &lt;p&gt;Content Second step&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="micl-stepper__step" role="tabpanel"&gt;
-      &lt;h2&gt;Last step&lt;/h2&gt;
-      &lt;p&gt;Content Last step&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+            </section>
+        </main>
 
-  &lt;div class="micl-stepper__actions"&gt;
-    &lt;div&gt;
-      &lt;button type="button" class="micl-button-text-m micl-stepper__action-back"&gt;Back&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;button type="button" class="micl-button-text-m micl-stepper__action-next"&gt;Next&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </div>
-        </section>
-    </main>
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

@@ -19,6 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import { register } from '../../foundations/runtime';
+
 export const buttonSelector = '.micl-button--toggle';
 
 const toggleIcon = (button: HTMLButtonElement): void =>
@@ -34,46 +36,43 @@ const toggleIcon = (button: HTMLButtonElement): void =>
     }
 };
 
-export default (() =>
-{
-    return {
-        command: (event: Event): void =>
-        {
-            const target = event.target as HTMLButtonElement;
+export default register(buttonSelector, {
+    command: (event: Event): void =>
+    {
+        const target = event.target as HTMLButtonElement;
 
-            if (
-                target.matches(buttonSelector)
-                && !target.disabled
-                && (event as any).command === '--micl-toggle'
-            ) {
-                target.classList.add('micl-button--toggled');
-                target.setAttribute('aria-pressed', String(target.getAttribute('aria-pressed') !== 'true'));
+        if (
+            target.matches(buttonSelector)
+            && !target.disabled
+            && (event as any).command === '--micl-toggle'
+        ) {
+            target.classList.add('micl-button--toggled');
+            target.setAttribute('aria-pressed', String(target.getAttribute('aria-pressed') !== 'true'));
 
-                toggleIcon(target);
-            }
-        },
-
-        initialize: function(element: HTMLButtonElement): void
-        {
-            if (
-                !element.matches(buttonSelector)
-                || element.dataset.miclinitialized
-            ) {
-                return;
-            }
-            element.dataset.miclinitialized = '1';
-
-            toggleIcon(element);
-
-            element.addEventListener('command', this.command);
-        },
-
-        cleanup: function(element: HTMLButtonElement): void
-        {
-            if (element.matches(buttonSelector)) {
-                element.removeEventListener('command', this.command);
-                delete element.dataset.miclinitialized;
-            }
+            toggleIcon(target);
         }
-    };
-})();
+    },
+
+    initialize: function(element: HTMLButtonElement): void
+    {
+        if (
+            !element.matches(buttonSelector)
+            || element.dataset.miclinitialized
+        ) {
+            return;
+        }
+        element.dataset.miclinitialized = '1';
+
+        toggleIcon(element);
+
+        element.addEventListener('command', this.command);
+    },
+
+    cleanup: function(element: HTMLButtonElement): void
+    {
+        if (element.matches(buttonSelector)) {
+            element.removeEventListener('command', this.command);
+            delete element.dataset.miclinitialized;
+        }
+    }
+}, HTMLButtonElement);

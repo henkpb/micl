@@ -8,187 +8,199 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=content_copy,dark_mode,home&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .micl-card-filled.noicons .micl-card__content {
+        .docs-example > div {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            text-align: end;
-        }
-        .micl-card-outlined.unselectedicon .micl-card__content {
-            display: flex;
-            flex-direction: column;
-        }
-        .micl-flex--vcenter {
+            flex-direction: row;
+            align-items: center;
             column-gap: 16px;
         }
-        .micl-card-outlined.unselectedicon .micl-flex--vcenter {
-            width: 100%;
+        .docs-noicons input[type=checkbox].micl-switch {
+            --md-comp-switch-selected-icon: "";
+            --md-comp-switch-unselected-icon: "";
+        }
+        .docs-noicons > div {
+            justify-content: flex-end;
+        }
+        .docs-selectedicon input[type=checkbox].micl-switch {
+            --md-comp-switch-unselected-icon: "";
+        }
+        .docs-unselectedicon input[type=checkbox].micl-switch {
+            --md-comp-switch-selected-icon: "";
+        }
+        .docs-unselectedicon > div {
             justify-content: space-between;
         }
-        .micl-card-outlined.unselectedicon label {
+        .docs-unselectedicon label {
             display: flex;
             flex-direction: column;
             flex-basis: 100%;
             margin-block: 12px;
         }
-        .noicons input[type=checkbox].micl-switch {
-            --md-sys-switch-selected-icon: "";
-            --md-sys-switch-unselected-icon: "";
-        }
-        .selectedicon input[type=checkbox].micl-switch {
-            --md-sys-switch-unselected-icon: "";
-        }
-        .unselectedicon input[type=checkbox].micl-switch {
-            --md-sys-switch-selected-icon: "";
-        }
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body micl-body--stacked-to-large">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Switches</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL switches</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Switches</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-elevated">
-                        <div class="micl-card__headline-s">
-                            <h2>Switches with icons</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Switches</h1>
+            <p class="docs-hero__lede">Switches toggle the state of a single setting on or off.</p>
+            <ul class="docs-hero__facts">
+                <li>No JavaScript required</li>
+                <li>Icon handles</li>
+                <li>Expressive press animation</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div style="display:flex;flex-direction:column;gap:12px">
+                    <input type="checkbox" class="micl-switch" role="switch" checked aria-label="Hero switch on">
+                    <input type="checkbox" class="micl-switch" role="switch" aria-label="Hero switch off">
+                </div>
+            </div>
+        </section>
+
+        <main class="docs-content docs-content--columns">
+            <section class="docs-section">
+                <div class="docs-section__head">
+                    <h2>Switches with icons</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch1" checked value="c1" role="switch">
                                 <label for="myswitch1" class="md-sys-typescale-body-medium">First Choice</label>
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch2" value="c2" role="switch">
                                 <label for="myswitch2" class="md-sys-typescale-body-medium">Second Choice</label>
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch3" value="c3" disabled role="switch">
                                 <label for="myswitch3" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch4" value="c4" checked disabled role="switch">
                                 <label for="myswitch4" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
                             </div>
-                        </div>
+                        </template>
                     </div>
-                    <div class="micl-card-filled noicons">
-                        <div class="micl-card__headline-s">
-                            <h2>Switches without icons</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
+                </div>
+            </section>
+
+            <section class="docs-section docs-noicons">
+                <div class="docs-section__head">
+                    <h2>Switches without icons</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div>
                                 <label for="myswitch5" class="md-sys-typescale-body-medium">First Choice</label>
                                 <input type="checkbox" class="micl-switch" id="myswitch5" checked value="c1" role="switch">
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <label for="myswitch6" class="md-sys-typescale-body-medium">Second Choice</label>
                                 <input type="checkbox" class="micl-switch" id="myswitch6" value="c2" role="switch">
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <label for="myswitch7" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
                                 <input type="checkbox" class="micl-switch" id="myswitch7" value="c3" disabled role="switch">
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <label for="myswitch8" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
                                 <input type="checkbox" class="micl-switch" id="myswitch8" value="c4" checked disabled role="switch">
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-outlined selectedicon">
-                        <div class="micl-card__headline-s">
-                            <h2>Switches with selected icon</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
+            </section>
+
+            <section class="docs-section docs-selectedicon">
+                <div class="docs-section__head">
+                    <h2>Switches with selected icon</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch9" checked value="c1" role="switch">
                                 <label for="myswitch9" class="md-sys-typescale-body-medium">First Choice</label>
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch10" value="c2" role="switch">
                                 <label for="myswitch10" class="md-sys-typescale-body-medium">Second Choice</label>
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch11" value="c3" disabled role="switch">
                                 <label for="myswitch11" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <input type="checkbox" class="micl-switch" id="myswitch12" value="c4" checked disabled role="switch">
                                 <label for="myswitch12" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
                             </div>
-                        </div>
+                        </template>
                     </div>
+                </div>
+            </section>
 
-                    <div class="micl-card-outlined unselectedicon">
-                        <div class="micl-card__headline-s">
-                            <h2>Switches with unselected icon</h2>
-                        </div>
-                        <div class="micl-card__content">
-                            <div class="micl-flex--vcenter">
+            <section class="docs-section docs-unselectedicon">
+                <div class="docs-section__head">
+                    <h2>Switches with unselected icon</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div>
                                 <label for="myswitch13">
                                     <span class="md-sys-typescale-body-large">First Choice</span>
                                     <span class="md-sys-typescale-body-small">This is the first choice</span>
                                 </label>
                                 <input type="checkbox" class="micl-switch" id="myswitch13" checked value="c1" role="switch">
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <label for="myswitch14">
                                     <span class="md-sys-typescale-body-large">Second Choice</span>
                                     <span class="md-sys-typescale-body-small">This is the second choice</span>
                                 </label>
                                 <input type="checkbox" class="micl-switch" id="myswitch14" value="c2" role="switch">
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <label for="myswitch15">
                                     <span class="md-sys-typescale-body-large">Third Choice</span>
                                     <span class="md-sys-typescale-body-small">This is the third choice</span>
                                 </label>
                                 <input type="checkbox" class="micl-switch" id="myswitch15" value="c3" disabled role="switch">
                             </div>
-                            <div class="micl-flex--vcenter">
+                            <div>
                                 <label for="myswitch16">
                                     <span class="md-sys-typescale-body-large">Fourth Choice</span>
                                     <span class="md-sys-typescale-body-small">This is the fourth choice</span>
                                 </label>
                                 <input type="checkbox" class="micl-switch" id="myswitch16" value="c4" checked disabled role="switch">
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="micl-pane">
-            <div class="micl-card-filled" style="margin-top:8px">
-                <div class="micl-card__headline-s">
-                    <h2>Code example</h2>
-                    <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                </div>
-                <div class="micl-card__content docs-code">
-                    <pre tabindex="-1"><code>&lt;div class="micl-flex--vcenter" style="column-gap:16px"&gt;
-  &lt;input type="checkbox" class="micl-switch" id="id0" checked value="v0" role="switch"&gt;
-  &lt;label for="id0" class="md-sys-typescale-body-medium"&gt;First Choice&lt;/label&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

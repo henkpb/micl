@@ -19,311 +19,118 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
-@use '../../styles/elevation';
-@use '../../styles/motion';
 @use '../../styles/shape';
-@use '../../styles/statelayer';
 @use '../../styles/typography';
+@use './shared' as *;
 
-@include elevation.level(0);
-@include elevation.level(1);
+$buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [class*="micl-button-filled-"], [class*="micl-button-tonal-"], [class*="micl-button-outlined-"])';
 
 @include shape.corner('small');
 @include shape.corner('medium');
 @include shape.corner('large');
 @include shape.corner('extra-large');
 
-@include statelayer.token('hover-state-layer-opacity');
-@include statelayer.token('focus-state-layer-opacity');
-@include statelayer.token('pressed-state-layer-opacity');
-@include statelayer.token('disabled-state-layer-opacity');
-@include statelayer.token('focus-indicator-thickness');
-@include statelayer.token('ripple-opacity-factor');
-@include statelayer.token('ripple-duration');
-@include statelayer.property;
-@include statelayer.keyframes;
-
 @include typography.scale('headline-large');
 @include typography.scale('headline-small');
 @include typography.scale('title-medium');
-@include typography.scale('label-large');
 
-[class*="micl-button-text-"],
-[class*="micl-button-elevated-"],
-[class*="micl-button-filled-"],
-[class*="micl-button-tonal-"],
-[class*="micl-button-outlined-"] {
-    --md-sys-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-sys-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --md-sys-button-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --micl-ripple: 1;
+#{$buttons} {
+    @extend %micl-button-base;
 
-    position: relative;
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: none;
-    border-radius: calc(var(--micl-height) / 2);
-    background-image:
-        radial-gradient(
-            circle at var(--micl-x, center) var(--micl-y, center),
-            transparent 0%,
-            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-            transparent 10%
-        ),
-        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-    background-repeat: no-repeat;
-    background-size: 0%, 100%;
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
-    transition:
-        border-radius var(--md-sys-button-motion-duration) var(--md-sys-button-motion-effects),
-        background-size 0ms,
-        --statelayer-opacity var(--md-sys-button-motion-duration) linear;
-
-    &:disabled {
-        box-shadow: var(--md-sys-elevation-level0);
-        cursor: default;
-    }
-    &:not(:disabled) {
-        &:hover {
-            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-
-            .micl-button__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-        &:focus-visible {
-            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
-
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: 3px;
-        }
-        &:active {
-            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
-        }
-        &.micl-rippling {
-            animation: micl-ripple var(--md-sys-state-ripple-duration) motion.$md-sys-motion-easing-standard;
-        }
-    }
-    .micl-button__icon {
-        font-variation-settings: 'FILL' 0;
-        transition: font-variation-settings var(--md-sys-button-motion-duration) linear;
-    }
-    &.micl-button--toggle:not([aria-pressed="true"]) .micl-button__icon::before {
-        content: attr(data-miclicon);
-    }
-    &.micl-button--toggle[aria-pressed="true"] .micl-button__icon::before {
-        content: attr(data-micliconselected);
-    }
-}
-
-.micl-button-text-xs,
-.micl-button-elevated-xs,
-.micl-button-filled-xs,
-.micl-button-tonal-xs,
-.micl-button-outlined-xs {
-    @include typography.label-large;
-
-    --micl-width: 32px;
-    --micl-height: 32px;
-
-    position: relative;
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
-    column-gap: 4px;
-    padding-inline: 12px;
 
-    &::before {
-        content: "";
-        position: absolute;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
+    // The corner rounding of the size modifiers resolves through the two --_shape-*
+    // custom properties that each size declares below.
     &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-medium);
+        border-radius: var(--_shape-toggle);
     }
     &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-medium);
+        border-radius: var(--_shape-toggle);
 
         &.micl-button--toggle[aria-pressed="true"] {
             border-radius: calc(var(--micl-height) / 2);
         }
     }
-    &:not(:disabled):active {
+    &#{$enabled}:active {
         &,
         &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-small);
+            border-radius: var(--_shape-pressed);
         }
-    }
-    .micl-button__icon {
-        font-size: 20px;
-        inline-size: 20px;
     }
 }
 
-.micl-button-text-s,
-.micl-button-elevated-s,
-.micl-button-filled-s,
-.micl-button-tonal-s,
-.micl-button-outlined-s {
+:is(.micl-button-text-xs, .micl-button-elevated-xs, .micl-button-filled-xs, .micl-button-tonal-xs, .micl-button-outlined-xs) {
+    @extend %micl-button-xs;
+
+    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-pressed: var(--md-sys-shape-corner-small);
+}
+
+:is(.micl-button-text-s, .micl-button-elevated-s, .micl-button-filled-s, .micl-button-tonal-s, .micl-button-outlined-s) {
     @include typography.label-large;
+    @extend %micl-button-target;
 
     --micl-width: 40px;
     --micl-height: 40px;
+    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-pressed: var(--md-sys-shape-corner-small);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 16px;
 
-    &::before {
-        content: "";
-        position: absolute;
-        block-size: var(--md-sys-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-medium);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-medium);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-small);
-        }
-    }
     .micl-button__icon {
         font-size: 20px;
         inline-size: 20px;
     }
 }
 
-.micl-button-text-m,
-.micl-button-elevated-m,
-.micl-button-filled-m,
-.micl-button-tonal-m,
-.micl-button-outlined-m {
+:is(.micl-button-text-m, .micl-button-elevated-m, .micl-button-filled-m, .micl-button-tonal-m, .micl-button-outlined-m) {
     @include typography.title-medium;
 
     --micl-width: 56px;
     --micl-height: 56px;
+    --_shape-toggle: var(--md-sys-shape-corner-large);
+    --_shape-pressed: var(--md-sys-shape-corner-medium);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 8px;
     padding-inline: 24px;
 
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-large);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-medium);
-        }
-    }
     .micl-button__icon {
         font-size: var(--md-sys-icon-size, 24px);
         inline-size: var(--md-sys-icon-size, 24px);
     }
 }
 
-.micl-button-text-l,
-.micl-button-elevated-l,
-.micl-button-filled-l,
-.micl-button-tonal-l,
-.micl-button-outlined-l {
+:is(.micl-button-text-l, .micl-button-elevated-l, .micl-button-filled-l, .micl-button-tonal-l, .micl-button-outlined-l) {
     @include typography.headline-small;
 
     --micl-width: 96px;
     --micl-height: 96px;
+    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 12px;
     padding-inline: 48px;
 
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-large);
-        }
-    }
     .micl-button__icon {
         font-size: 32px;
         inline-size: 32px;
     }
 }
 
-.micl-button-text-xl,
-.micl-button-elevated-xl,
-.micl-button-filled-xl,
-.micl-button-tonal-xl,
-.micl-button-outlined-xl {
+:is(.micl-button-text-xl, .micl-button-elevated-xl, .micl-button-filled-xl, .micl-button-tonal-xl, .micl-button-outlined-xl) {
     @include typography.headline-large;
 
     --micl-width: 136px;
     --micl-height: 136px;
+    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    min-inline-size: var(--micl-width);
-    block-size: var(--micl-height);
-    min-block-size: var(--micl-height);
     column-gap: 16px;
     padding-inline: 64px;
 
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-    }
-    &.micl-button--square {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-
-        &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: calc(var(--micl-height) / 2);
-        }
-    }
-    &:not(:disabled):active {
-        &,
-        &.micl-button--square {
-            border-radius: var(--md-sys-shape-corner-large);
-        }
-    }
     .micl-button__icon {
         font-size: 40px;
         inline-size: 40px;
@@ -337,35 +144,14 @@
     color: var(--md-comp-text-button-label-text-color, var(--md-sys-color-primary));
     text-decoration: none;
 
-    &:disabled {
+    &#{$disabled} {
         background-color: transparent;
-        color: var(--md-comp-text-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-text-button-disabled-label-text-opacity, 38%)));
+        color: var(--md-comp-text-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-text-button-disabled-label-text-opacity, 38%)));
     }
 }
 
 [class*="micl-button-elevated-"] {
-    --statelayer-color: var(--md-sys-color-primary);
-
-    background-color: var(--md-comp-elevated-button-container-color, var(--md-sys-color-surface-container-low));
-    color: var(--md-comp-elevated-button-label-text-color, var(--md-sys-color-primary));
-    box-shadow: var(--md-comp-elevated-button-container-elevation, var(--md-sys-elevation-level1));
-
-    &:disabled {
-        background-color: var(--md-comp-elevated-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-elevated-button-disabled-container-opacity, 10%)));
-        color: var(--md-comp-elevated-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-elevated-button-disabled-label-text-opacity, 38%)));
-    }
-    &:not(:disabled) {
-        &.micl-button--toggle[aria-pressed="true"] {
-            --statelayer-color: var(--md-sys-color-on-primary);
-
-            background-color: var(--md-comp-elevated-button-selected-container-color, var(--md-sys-color-primary));
-            color: var(--md-comp-elevated-button-selected-label-text-color, var(--md-sys-color-on-primary));
-
-            .micl-button__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-    }
+    @extend %micl-button-elevated;
 }
 
 [class*="micl-button-filled-"] {
@@ -374,11 +160,14 @@
     background-color: var(--md-comp-filled-button-container-color, var(--md-sys-color-primary));
     color: var(--md-comp-filled-button-label-text-color, var(--md-sys-color-on-primary));
 
-    &:disabled {
+    &#{$disabled} {
         background-color: var(--md-comp-filled-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-button-disabled-container-opacity, 10%)));
-        color: var(--md-comp-filled-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-button-disabled-label-text-opacity, 38%)));
+        color: var(--md-comp-filled-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-filled-button-disabled-label-text-opacity, 38%)));
     }
-    &:not(:disabled) {
+    &#{$enabled} {
+        &:hover:not(:active) {
+            box-shadow: var(--md-sys-elevation-level1);
+        }
         &.micl-button--toggle[aria-pressed="true"] {
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
@@ -399,11 +188,14 @@
     background-color: var(--md-comp-filled-tonal-button-container-color, var(--md-sys-color-secondary-container));
     color: var(--md-comp-filled-tonal-button-label-text-color, var(--md-sys-color-on-secondary-container));
 
-    &:disabled {
+    &#{$disabled} {
         background-color: var(--md-comp-filled-tonal-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-tonal-button-disabled-container-opacity, 10%)));
-        color: var(--md-comp-filled-tonal-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-tonal-button-disabled-label-text-opacity, 38%)));
+        color: var(--md-comp-filled-tonal-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-filled-tonal-button-disabled-label-text-opacity, 38%)));
     }
-    &:not(:disabled) {
+    &#{$enabled} {
+        &:hover:not(:active) {
+            box-shadow: var(--md-sys-elevation-level1);
+        }
         &.micl-button--toggle[aria-pressed="true"] {
             --statelayer-color: var(--md-sys-color-on-secondary);
 
@@ -418,37 +210,11 @@
 }
 
 [class*="micl-button-outlined-"] {
-    --statelayer-color: var(--md-sys-color-on-surface-variant);
-
-    background-color: transparent;
-    color: var(--md-comp-outlined-button-label-text-color, var(--md-sys-color-on-surface-variant));
-
-    &:disabled {
-        background-color: transparent;
-        color: var(--md-comp-outlined-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-button-disabled-label-text-opacity, 38%)));
-    }
-    &:not(:disabled) {
-        &.micl-button--toggle[aria-pressed="true"] {
-            --statelayer-color: var(--md-sys-color-inverse-on-surface);
-
-            border: none;
-            background-color: var(--md-comp-outlined-button-selected-container-color, var(--md-sys-color-inverse-surface));
-            color: var(--md-comp-outlined-button-selected-label-text-color, var(--md-sys-color-inverse-on-surface));
-
-            .micl-button__icon {
-                font-variation-settings: 'FILL' 1;
-            }
-        }
-    }
-}
-.micl-button-outlined-xs,
-.micl-button-outlined-s,
-.micl-button-outlined-m {
-    border: 1px solid var(--md-comp-outlined-button-outline-color, var(--md-sys-color-outline-variant));
+    @extend %micl-button-outlined;
 }
 .micl-button-outlined-l {
-    border: 2px solid var(--md-comp-outlined-button-outline-color, var(--md-sys-color-outline-variant));
+    border-width: 2px;
 }
 .micl-button-outlined-xl {
-    border: 3px solid var(--md-comp-outlined-button-outline-color, var(--md-sys-color-outline-variant));
+    border-width: 3px;
 }

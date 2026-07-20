@@ -1,0 +1,210 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// The shared foundation of the Button component: the state selectors and the
+// %micl-button-* placeholders, which the Chip component extends as well.
+
+@use '../../styles/elevation';
+@use '../../styles/motion';
+@use '../../styles/statelayer';
+@use '../../styles/typography';
+
+$disabled: ':is(:disabled, :has(input:disabled, > button:disabled))';
+$enabled: ':not(:disabled, :has(input:disabled, > button:disabled))';
+$focused: ':is(:focus-visible, :has(input:focus-visible))';
+
+@include elevation.level(0);
+@include elevation.level(1);
+@include elevation.level(2);
+
+@include statelayer.token('hover-state-layer-opacity');
+@include statelayer.token('focus-state-layer-opacity');
+@include statelayer.token('pressed-state-layer-opacity');
+@include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('ripple-opacity-factor');
+@include statelayer.token('ripple-duration');
+@include statelayer.property;
+@include statelayer.keyframes;
+
+@include typography.scale('label-large');
+
+%micl-button-base {
+    --md-comp-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --md-comp-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --micl-ripple: 1;
+
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: calc(var(--micl-height) / 2);
+    background-image:
+        radial-gradient(
+            circle at var(--micl-x, center) var(--micl-y, center),
+            transparent 0%,
+            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+            transparent 10%
+        ),
+        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+    background-repeat: no-repeat;
+    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
+    background-size: 0%, 100%;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    transition:
+        border-radius var(--md-comp-button-motion-duration) var(--md-comp-button-motion-effects),
+        box-shadow var(--md-comp-button-motion-duration) var(--md-comp-button-motion-effects),
+        background-size 0ms,
+        --statelayer-opacity var(--md-comp-button-motion-duration) linear;
+
+    &#{$disabled} {
+        cursor: default;
+    }
+    &#{$enabled} {
+        &:hover {
+            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        &#{$focused} {
+            --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
+
+            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+            outline-offset: 2px;
+        }
+        &:active {
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+        }
+        &.micl-rippling {
+            animation: micl-ripple calc(var(--md-sys-state-ripple-duration) * 1.333);
+        }
+    }
+    .micl-button__icon {
+        font-variation-settings: 'FILL' 0;
+        transition: font-variation-settings var(--md-comp-button-motion-duration) linear;
+    }
+    &.micl-button--toggle:not([aria-pressed="true"]) .micl-button__icon::before {
+        content: attr(data-miclicon);
+    }
+    &.micl-button--toggle[aria-pressed="true"] .micl-button__icon::before {
+        content: attr(data-micliconselected);
+    }
+}
+
+// Buttons smaller than the minimum touch target extend their interactive area with a
+// transparent ::before overlay.
+%micl-button-target {
+    &::before {
+        content: "";
+        position: absolute;
+        block-size: var(--md-sys-target-size, 48px);
+        inline-size: 100%;
+        min-inline-size: var(--md-sys-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
+        background-color: transparent;
+    }
+}
+
+%micl-button-xs {
+    @include typography.label-large;
+    @extend %micl-button-target;
+
+    --micl-width: 32px;
+    --micl-height: 32px;
+
+    min-inline-size: var(--micl-width);
+    block-size: var(--micl-height);
+    min-block-size: var(--micl-height);
+    column-gap: 4px;
+    padding-inline: 12px;
+
+    .micl-button__icon {
+        font-size: 20px;
+        inline-size: 20px;
+    }
+}
+
+%micl-button-elevated {
+    --statelayer-color: var(--md-sys-color-primary);
+
+    background-color: var(--md-comp-elevated-button-container-color, var(--md-sys-color-surface-container-low));
+    color: var(--md-comp-elevated-button-label-text-color, var(--md-sys-color-primary));
+    box-shadow: var(--md-comp-elevated-button-container-elevation, var(--md-sys-elevation-level1));
+
+    &#{$disabled} {
+        background-color: var(--md-comp-elevated-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-elevated-button-disabled-container-opacity, 10%)));
+        color: var(--md-comp-elevated-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-elevated-button-disabled-label-text-opacity, 38%)));
+        box-shadow: var(--md-sys-elevation-level0);
+    }
+    &#{$enabled} {
+        &:hover:not(:active) {
+            box-shadow: var(--md-sys-elevation-level2);
+        }
+        &.micl-button--toggle[aria-pressed="true"] {
+            --statelayer-color: var(--md-sys-color-on-primary);
+
+            background-color: var(--md-comp-elevated-button-selected-container-color, var(--md-sys-color-primary));
+            color: var(--md-comp-elevated-button-selected-label-text-color, var(--md-sys-color-on-primary));
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+    }
+}
+
+%micl-button-outlined {
+    --statelayer-color: var(--md-sys-color-on-surface-variant);
+
+    background-color: transparent;
+    color: var(--md-comp-outlined-button-label-text-color, var(--md-sys-color-on-surface-variant));
+    border: 1px solid var(--md-comp-outlined-button-outline-color, var(--md-sys-color-outline-variant));
+
+    &#{$disabled} {
+        background-color: transparent;
+        color: var(--md-comp-outlined-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-outlined-button-disabled-label-text-opacity, 38%)));
+
+        &.micl-button--toggle[aria-pressed="true"] {
+            border: none;
+            background-color: var(--md-comp-outlined-button-selected-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-button-selected-disabled-container-opacity, 10%)));
+        }
+    }
+    &#{$enabled} {
+        &.micl-button--toggle[aria-pressed="true"] {
+            --statelayer-color: var(--md-sys-color-inverse-on-surface);
+
+            border: none;
+            background-color: var(--md-comp-outlined-button-selected-container-color, var(--md-sys-color-inverse-surface));
+            color: var(--md-comp-outlined-button-selected-label-text-color, var(--md-sys-color-inverse-on-surface));
+
+            .micl-button__icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+    }
+}

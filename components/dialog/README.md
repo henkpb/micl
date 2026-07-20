@@ -25,6 +25,8 @@ To create a basic dialog, use the `<dialog>` element with the `micl-dialog` clas
 Import the dialog styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/button";
+@use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/dialog";
 ```
 
@@ -117,20 +119,28 @@ A full-screen dialog covers the entire viewport, primarily on smaller screens. O
 
 - When not in full-screen mode (e.g., on wider screens), the `micl-dialog__fullscreen` buttons are hidden, and the standard dialog actions (`micl-dialog__actions`) are visible.
 
-## Customizations
-You can customize the appearance of the Dialog component by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class and can be changed on any appropriate parent element to affect its child dialogs.
+## Theming
+Each dialog can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child dialogs.
 
-| Variable name | Default Value | Description |
-| ------------- | ----- | ----------- |
-| --md-sys-dialog-min-width | 280px | The minimum width of a dialog |
-| --md-sys-dialog-max-width | 560px | The maximum width of a dialog |
-| --md-sys-dialog-padding | 24px | The inner padding between the dialog's edge and its content |
-| --md-sys-dialog-headline-space | 16px | The vertical spacing between the elements in the header |
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-dialog-min-width` | The minimum width of a dialog | `280px` |
+| `--md-comp-dialog-max-width` | The maximum width of a dialog | `560px` |
+| `--md-comp-dialog-padding` | The inner padding between the dialog's edge and its content | `24px` |
+| `--md-comp-dialog-headline-space` | The vertical spacing between the elements in the header | `16px` |
+| `--md-comp-dialog-container-color` | The background color of the dialog | `--md-sys-color-surface-container-high` |
+| `--md-comp-dialog-container-shape` | The corner rounding of the dialog | `--md-sys-shape-corner-extra-large` |
+| `--md-comp-dialog-container-elevation` | The shadow (elevation) of the dialog | `--md-sys-elevation-level3` |
+| `--md-comp-dialog-headline-color` | The text color of the headline | `--md-sys-color-on-surface` |
+| `--md-comp-dialog-supporting-text-color` | The text color of the supporting text | `--md-sys-color-on-surface-variant` |
+| `--md-comp-dialog-icon-color` | The color of the dialog icon | `--md-sys-color-secondary` |
+| `--md-comp-dialog-icon-size` | The size of the dialog icon | `--md-sys-icon-size` |
+| `--md-comp-full-screen-dialog-container-color` | The background color of a full-screen dialog | `--md-sys-color-surface` |
 
 **Example: Changing the dialog padding**
 
 ```HTML
-<div style="--md-sys-dialog-padding:16px">
+<div style="--md-comp-dialog-padding:16px">
   <dialog class="micl-dialog">
   </dialog>
 </div>

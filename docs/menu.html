@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_right,check,content_copy,content_cut,content_paste,dark_mode,delete,file_open,group,help,home,keyboard_command_key,newspaper,note_add,open_in_new,redo,settings,undo&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_right,check,close,content_copy,content_cut,content_paste,dark_mode,delete,file_open,group,help,home,keyboard_command_key,newspaper,note_add,open_in_new,palette,redo,settings,undo&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
         .micl-list-item-two:has(.micl-checkbox) .micl-list-item__icon {
@@ -22,29 +23,43 @@
     </style>
 </head>
 <body class="micl-window light">
-    <main class="micl-body">
-        <section class="micl-pane">
-            <header class="micl-appbar">
-                <a href="index.html" class="micl-appbar__leading-icon micl-link micl-iconbutton-standard-s" aria-label="Navigate to the main MICL Showcase page">
-                    <span class="material-symbols-outlined" aria-hidden="true">home</span>
-                </a>
-                <div class="micl-appbar__headline micl-appbar__headline--center">
-                    <h1>Menus</h1>
-                    <p class="micl-appbar__subtitle">Showcasing MICL menus</p>
-                </div>
-                <div id="settings-placeholder" class="micl-appbar__trailing"></div>
-            </header>
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Menus</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
 
-            <div class="micl-pane__columns micl-pane__columns--stacked-to-expanded">
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Showcase</h2>
-                        </div>
-                        <p class="micl-card__supporting-text">Click a button to open one of the MICL menus.</p>
-                        <div class="micl-card__content docs-buttons">
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Menus</h1>
+            <p class="docs-hero__lede">Menus provide a list of choices on a temporary surface that appears when a user interacts with a control element.</p>
+            <ul class="docs-hero__facts">
+                <li>Nested submenus</li>
+                <li>Sections & dividers</li>
+                <li>Standard & vibrant styles</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <button type="button" class="micl-button-filled-m" popovertarget="mymenu1">Open a menu</button>
+            </div>
+        </section>
+
+
+        <main class="docs-content">
+            <section class="docs-section" id="showcase">
+                <div class="docs-section__head">
+                    <h2>Showcase</h2>
+                    <p class="docs-section__use">Click a button to open one of the MICL menus.</p>
+                </div>
+                <div class="docs-stage docs-buttons">
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu1">Single-item menu</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu1">Single-item menu</button>
                                 <nav id="mymenu1" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -55,9 +70,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu2">Basic Menu</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu2">Basic Menu</button>
                                 <nav id="mymenu2" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -78,9 +96,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu3">Menu with leading icons + divider</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu3">Menu with leading icons + divider</button>
                                 <nav id="mymenu3" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -117,9 +138,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu4">Grouped menu with trailing icons</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu4">Grouped menu with trailing icons</button>
                                 <nav id="mymenu4" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -157,9 +181,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu5">Menu with supporting text</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu5">Menu with supporting text</button>
                                 <nav id="mymenu5" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-two" tabindex="0">
@@ -198,9 +225,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu6">Complex menu</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu6">Complex menu</button>
                                 <nav id="mymenu6" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -271,9 +301,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu7">Menu with sub-menus</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu7">Menu with sub-menus</button>
                                 <nav id="mymenu7" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -451,9 +484,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu8">A vibrant menu</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu8">A vibrant menu</button>
                                 <nav id="mymenu8" class="micl-menu micl-menu--vibrant" popover>
                                     <ul class="micl-list">
                                         <li class="micl-list-item-one" tabindex="0">
@@ -490,9 +526,12 @@
                                     </ul>
                                 </nav>
                             </div>
-
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
                             <div style="position:relative">
-                                <button type="button" class="micl-button-outlined-m micl-button--square" popovertarget="mymenu9">Menu with sections</button>
+                                <button type="button" class="micl-button-outlined-m" popovertarget="mymenu9">Menu with sections</button>
                                 <nav id="mymenu9" class="micl-menu" popover>
                                     <ul class="micl-list">
                                         <li role="separator" class="micl-menu__section">Files</li>
@@ -532,41 +571,14 @@
                                     </ul>
                                 </nav>
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
-                <div class="micl-pane__column">
-                    <div class="micl-card-filled">
-                        <div class="micl-card__headline-s">
-                            <h2>Code example</h2>
-                            <button type="button" id="copycode" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Copy code">content_copy</button>
-                        </div>
-                        <div class="micl-card__content docs-code">
-                            <pre tabindex="-1"><code>&lt;nav id="id0" class="micl-menu" popover&gt;
-  &lt;ul class="micl-list"&gt;
-    &lt;li class="micl-list-item-one" tabindex="0"&gt;
-      &lt;span class="micl-list-item__text"&gt;
-        &lt;span class="micl-list-item__headline"&gt;Home&lt;/span&gt;
-      &lt;/span&gt;
-    &lt;/li&gt;
-    &lt;li class="micl-list-item-one"&gt;
-      &lt;span class="micl-list-item__text"&gt;
-        &lt;span class="micl-list-item__headline"&gt;About&lt;/span&gt;
-      &lt;/span&gt;
-    &lt;/li&gt;
-    &lt;li class="micl-list-item-one micl-list-item--disabled"&gt;
-      &lt;span class="micl-list-item__text"&gt;
-        &lt;span class="micl-list-item__headline"&gt;Contact&lt;/span&gt;
-      &lt;/span&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav&gt;</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
 
     <script src="micl.js"></script>
     <script src="docs.js"></script>

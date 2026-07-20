@@ -19,7 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations';
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -43,56 +42,55 @@
 @include typography.scale('body-medium');
 
 :root {
-    --md-sys-dialog-min-width: 280px;
-    --md-sys-dialog-max-width: 560px;
-    --md-sys-dialog-padding: 24px;
-    --md-sys-dialog-headline-space: 16px;
-    --md-sys-dialog-dir-factor: 1;
+    --_dialog-dir-factor: 1;
 }
-
-[dir=rtl] {
-    --md-sys-dialog-dir-factor: -1;
+:dir(rtl) {
+    --_dialog-dir-factor: -1;
 }
 
 dialog.micl-dialog {
     --statelayer-color: var(--md-sys-color-primary);
-    --md-sys-dialog-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-sys-dialog-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --md-sys-dialog-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-comp-dialog-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --md-comp-dialog-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
 
-    --_dialog-background-color: var(--md-sys-color-surface-container-high);
+    --micl-duration: var(--md-comp-dialog-motion-duration-reverse);
+    --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+
+    --_dialog-background-color: var(--md-comp-dialog-container-color, var(--md-sys-color-surface-container-high));
+    --_padding: var(--md-comp-dialog-padding, 24px);
+    --_translate: translate(calc(var(--_dialog-dir-factor, 1) * -50%), -50%);
 
     box-sizing: border-box;
     display: none;
     flex-direction: column;
-    min-inline-size: var(--md-sys-dialog-min-width, 280px);
-    max-inline-size: var(--md-sys-dialog-max-width, 560px);
+    min-inline-size: var(--md-comp-dialog-min-width, 280px);
+    max-inline-size: var(--md-comp-dialog-max-width, 560px);
     max-block-size: 100vh;
     inset-block-start: anchor(start);
     inset-inline-start: anchor(start);
-    transform: translate(calc(var(--md-sys-dialog-dir-factor, 1) * -50%), -50%) scale(50%);
+    transform: var(--_translate) scale(50%);
     padding: 0;
     margin: 0;
     outline: none;
     border: none;
-    border-radius: var(--md-sys-shape-corner-extra-large);
+    border-radius: var(--md-comp-dialog-container-shape, var(--md-sys-shape-corner-extra-large));
     background-color: var(--_dialog-background-color);
     background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
     background-repeat: no-repeat;
-    box-shadow: var(--md-sys-elevation-level3);
+    box-shadow: var(--md-comp-dialog-container-elevation, var(--md-sys-elevation-level3));
     opacity: 0;
     overflow: hidden;
     interpolate-size: allow-keywords;
     transition:
-        inset-block-start var(--md-sys-dialog-motion-duration-reverse) linear,
-        inset-inline-start var(--md-sys-dialog-motion-duration-reverse) linear,
-        inline-size var(--md-sys-dialog-motion-duration-reverse) linear,
-        block-size var(--md-sys-dialog-motion-duration-reverse) linear,
-        transform var(--md-sys-dialog-motion-duration-reverse) linear,
-        opacity var(--md-sys-dialog-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized-decelerate,
-        overlay var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete,
-        display var(--md-sys-dialog-motion-duration-reverse) linear allow-discrete,
-        --statelayer-opacity var(--md-sys-dialog-motion-duration) linear;
+        inset-block-start var(--micl-duration) linear,
+        inset-inline-start var(--micl-duration) linear,
+        inline-size var(--micl-duration) linear,
+        block-size var(--micl-duration) linear,
+        transform var(--micl-duration) linear,
+        opacity var(--micl-duration) var(--micl-easing),
+        overlay var(--micl-duration) linear allow-discrete,
+        display var(--micl-duration) linear allow-discrete,
+        --statelayer-opacity var(--md-comp-dialog-motion-duration) linear;
 
     @starting-style {
         block-size: fit-content;
@@ -100,31 +98,25 @@ dialog.micl-dialog {
         inset-block-start: anchor(start);
         inset-inline-start: anchor(start);
         opacity: 0;
-        transform: translate(calc(var(--md-sys-dialog-dir-factor, 1) * -50%), -50%) scale(50%);
+        transform: var(--_translate) scale(50%);
     }
 
     &:popover-open,
     &[open] {
+        --micl-duration: var(--md-comp-dialog-motion-duration);
+        --micl-easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
+
         display: flex;
         inset-block-start: 50%;
         inset-inline-start: 50%;
         opacity: 1;
-        transform: translate(calc(var(--md-sys-dialog-dir-factor, 1) * -50%), -50%) scale(100%);
-        transition:
-            inset-block-start var(--md-sys-dialog-motion-duration) linear,
-            inset-inline-start var(--md-sys-dialog-motion-duration) linear,
-            inline-size var(--md-sys-dialog-motion-duration) linear,
-            block-size var(--md-sys-dialog-motion-duration) linear,
-            transform var(--md-sys-dialog-motion-duration) linear,
-            opacity var(--md-sys-dialog-motion-duration) motion.$md-sys-motion-easing-emphasized-accelerate,
-            overlay var(--md-sys-dialog-motion-duration) linear allow-discrete,
-            display var(--md-sys-dialog-motion-duration) linear allow-discrete;
+        transform: var(--_translate) scale(100%);
 
         @starting-style {
             inset-block-start: anchor(start);
             inset-inline-start: anchor(start);
             opacity: 0;
-            transform: translate(calc(var(--md-sys-dialog-dir-factor, 1) * -50%), -50%) scale(50%);
+            transform: var(--_translate) scale(50%);
         }
     }
     &:not([popover]) {
@@ -148,9 +140,9 @@ dialog.micl-dialog {
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            background-color var(--md-sys-dialog-motion-duration) linear,
-            overlay var(--md-sys-dialog-motion-duration) linear allow-discrete,
-            display var(--md-sys-dialog-motion-duration) linear allow-discrete;
+            background-color var(--md-comp-dialog-motion-duration) linear,
+            overlay var(--md-comp-dialog-motion-duration) linear allow-discrete,
+            display var(--md-comp-dialog-motion-duration) linear allow-discrete;
     }
     &[open]::backdrop {
         background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
@@ -169,40 +161,38 @@ dialog.micl-dialog {
         position-try-fallbacks: flip-block;
     }
 
-//    &:hover {
-//        --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-//    }
-
     .micl-dialog__headline {
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
         align-items: flex-start;
         gap: 16px;
-        padding-block: var(--md-sys-dialog-padding, 24px) var(--md-sys-dialog-headline-space, 16px);
-        padding-inline: var(--md-sys-dialog-padding, 24px);
+        padding-block: var(--_padding) var(--md-comp-dialog-headline-space, 16px);
+        padding-inline: var(--_padding);
         background-color: transparent;
 
         &:has(> .micl-dialog__icon) {
             align-items: center;
         }
         .micl-dialog__icon {
-            inline-size: var(--md-sys-icon-size, 24px);
-            block-size: var(--md-sys-icon-size, 24px);
-            font-size: var(--md-sys-icon-size, 24px);
-            color: var(--md-sys-color-secondary);
+            --_icon-size: var(--md-comp-dialog-icon-size, var(--md-sys-icon-size, 24px));
+
+            inline-size: var(--_icon-size);
+            block-size: var(--_icon-size);
+            font-size: var(--_icon-size);
+            color: var(--md-comp-dialog-icon-color, var(--md-sys-color-secondary));
         }
-        h1, h2, h3, h4, h5, h6, .micl-heading {
+        :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
             @include typography.headline-small;
 
             flex: 1 1 100%;
             margin: 0;
-            color: var(--md-sys-color-on-surface);
+            color: var(--md-comp-dialog-headline-color, var(--md-sys-color-on-surface));
         }
         .micl-dialog__subhead {
             @include typography.title-medium;
 
-            padding-inline: var(--md-sys-dialog-padding, 24px);
+            padding-inline: var(--_padding);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -215,11 +205,11 @@ dialog.micl-dialog {
     .micl-dialog__supporting-text {
         @include typography.body-medium;
 
-        color: var(--md-sys-color-on-surface-variant);
+        color: var(--md-comp-dialog-supporting-text-color, var(--md-sys-color-on-surface-variant));
     }
     .micl-dialog__content {
         flex-shrink: 1;
-        padding-inline: var(--md-sys-dialog-padding, 24px);
+        padding-inline: var(--_padding);
         overflow-y: auto;
     }
     .micl-dialog__actions {
@@ -227,18 +217,18 @@ dialog.micl-dialog {
         flex-shrink: 0;
         justify-content: flex-end;
         column-gap: 8px;
-        padding: var(--md-sys-dialog-padding, 24px);
+        padding: var(--_padding);
         opacity: 1;
         transition:
-            opacity var(--md-sys-dialog-motion-duration) linear allow-discrete,
-            overlay var(--md-sys-dialog-motion-duration) linear allow-discrete,
-            display var(--md-sys-dialog-motion-duration) linear allow-discrete;
+            opacity var(--md-comp-dialog-motion-duration) linear allow-discrete,
+            overlay var(--md-comp-dialog-motion-duration) linear allow-discrete,
+            display var(--md-comp-dialog-motion-duration) linear allow-discrete;
     }
 }
 
 dialog.micl-dialog.micl-dialog--fullscreen {
     @media (max-width: 560px) {
-        --_dialog-background-color: var(--md-sys-color-surface);
+        --_dialog-background-color: var(--md-comp-full-screen-dialog-container-color, var(--md-sys-color-surface));
 
         inline-size: 100vw;
         block-size: 100vh;
@@ -247,10 +237,9 @@ dialog.micl-dialog.micl-dialog--fullscreen {
         box-shadow: var(--md-sys-elevation-level0);
         timeline-scope: --headlineTimeline;
 
-//        &:hover {
-//            --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
-//        }
         .micl-dialog__headline {
+            // border-box: the 56px of the spec include the block padding
+            box-sizing: border-box;
             block-size: 56px;
             flex-direction: row;
             align-items: center;
@@ -264,7 +253,7 @@ dialog.micl-dialog.micl-dialog--fullscreen {
             animation-range: 0% 20%;
             z-index: 1;
 
-            h1, h2, h3, h4, h5, h6, .micl-heading {
+            :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
                 @include typography.title-large;
 
                 margin: 0;
