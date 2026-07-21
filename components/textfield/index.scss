@@ -80,6 +80,7 @@ $populated: ':has(> :focus, > [data-miclvalue], > :is([type=date], [type=datetim
 
         box-sizing: border-box;
         grid-area: textfield;
+        inline-size: auto;
         margin: 0;
         padding-inline:
             calc(var(--_input-space) - var(--_border, 0px) + var(--_icon-leading) + var(--_prefix))
