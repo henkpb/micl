@@ -4,6 +4,7 @@ body {
     font-family: 'Google Sans', Roboto, sans-serif;
 }
 h1 {
+    position: relative;
     color: var(--md-sys-color-on-surface);
 }
 
