@@ -156,7 +156,7 @@ To install only specific typescales, use the `scale` mixin:
 @include typography.scale('title-medium');
 ```
 
-There is also one selector-scope mixin per typescale (`display-large`, `display-medium`, …, `emphasized-label-small`) that emits the five `font-family`/`font-size`/`line-height`/`font-weight`/`letter-spacing` declarations at once, so you can apply a typescale to your own element without naming each variable:
+There is also one selector-scope mixin per typescale (`display-large`, `display-medium`, …, `emphasized-label-small`) that emits a `font` shorthand (weight, size, line-height and family) plus `letter-spacing`, so you can apply a typescale to your own element without naming each variable. Because the `font` shorthand is used, other font properties such as `font-style` and `font-variant` are reset to their initial values at the same time:
 
 ```CSS
 @use "material-inspired-component-library/styles/typography";
