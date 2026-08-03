@@ -106,6 +106,25 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         }
     }
 
+    &[multiple] {
+        --md-comp-divider-space: 0.5px;
+        --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
+        --_list-item-background-opacity: 0%;
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--md-comp-menu-gap, 2px);
+        block-size: var(--md-comp-text-field-container-height, auto);
+        min-block-size: var(--_height);
+        padding-block: 6px calc(4px - var(--_outline-extra, 0px));
+        padding-inline: calc(4px - var(--_outline-extra, 0px));
+        overflow-y: auto;
+
+        &::picker-icon {
+            display: none;
+        }
+    }
+
     option {
         line-height: normal;
 
@@ -116,6 +135,40 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         }
         &::checkmark {
             color: var(--_trailing-icon-color);
+        }
+    }
+}
+
+.micl-textfield-filled > select[multiple] {
+    padding-block: 24px calc(5px - var(--_outline-width, 1px));
+}
+
+@supports not (appearance: base-select) {
+    #{$selects}[multiple] {
+        border-radius: 0;
+
+        option {
+            --micl-ripple: 0;
+
+            appearance: none;
+            background-position: var(--micl-x, center) var(--micl-y, center), 0 0, 0 0;
+            background-size: 0%, 100%, 100%;
+            background-image:
+                radial-gradient(
+                    circle at var(--micl-x, center) var(--micl-y, center),
+                    transparent 0%,
+                    rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+                    transparent 10%
+                ),
+                linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity))),
+                linear-gradient(rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity)));
+            -webkit-text-fill-color: var(--_headline-color);
+
+            // A timed border-radius transition also re-enables the native painting —
+            // the list transition is repeated here without it.
+            transition:
+                background-size 0ms,
+                --statelayer-opacity var(--md-comp-list-motion-duration) linear;
         }
     }
 }
