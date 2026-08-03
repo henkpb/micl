@@ -275,12 +275,12 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
     -webkit-tap-highlight-color: transparent;
 
     &:first-of-type {
-        border-start-start-radius: max(var(--_list-item-shape), var(--_list-shape));
-        border-start-end-radius: max(var(--_list-item-shape), var(--_list-shape));
+        border-start-start-radius: max(var(--_list-item-shape), var(--_list-shape, 0px));
+        border-start-end-radius: max(var(--_list-item-shape), var(--_list-shape, 0px));
     }
     &:last-of-type {
-        border-end-start-radius: max(var(--_list-item-shape), var(--_list-shape));
-        border-end-end-radius: max(var(--_list-item-shape), var(--_list-shape));
+        border-end-start-radius: max(var(--_list-item-shape), var(--_list-shape, 0px));
+        border-end-end-radius: max(var(--_list-item-shape), var(--_list-shape, 0px));
     }
     &:not(:has(> button)) {
         --micl-ripple: 1;
