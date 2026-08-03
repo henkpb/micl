@@ -201,6 +201,7 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 .micl-menu[popover] {
     flex-direction: column;
     position: absolute;
+    position-anchor: auto;
     inset: unset;
     inset-block-start: anchor(end);
     inset-inline-start: anchor(start);
