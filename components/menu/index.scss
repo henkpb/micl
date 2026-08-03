@@ -200,13 +200,11 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 
 .micl-menu[popover] {
     flex-direction: column;
-    position: absolute;
     position-anchor: auto;
     inset: unset;
     inset-block-start: anchor(end);
     inset-inline-start: anchor(start);
-    position-try-order: most-block-size;
-    position-try-fallbacks: flip-block, flip-inline;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
     min-inline-size: var(--md-comp-menu-width-min, 112px);
     max-inline-size: var(--md-comp-menu-width-max, 320px);
     gap: var(--md-comp-menu-gap, 2px);

@@ -55,18 +55,16 @@ export default register(menuSelector, {
 
         invoker && element.addEventListener('beforetoggle', (event: Event) =>
         {
-            if ((event as ToggleEvent).newState === 'open') {
-                if (!element.style.transformOrigin) {
-                    const rect = invoker.getBoundingClientRect();
+            if ((event as ToggleEvent).newState !== 'open') return;
 
-                    element.style.transformOrigin =
-                        ((rect.x + rect.width / 2 > window.innerWidth / 2) ? 'right ' : 'left ') +
-                        ((rect.y + rect.height / 2 > window.innerHeight / 2) ? 'bottom' : 'top');
+            const source = (event as ToggleEvent & { source?: Element }).source || invoker;
+
+            requestAnimationFrame(() =>
+            {
+                if (element.matches(':popover-open')) {
+                    element.style.transformOrigin = getOrigin(source, element);
                 }
-            }
-            else {
-                element.style.transformOrigin = getOrigin(invoker, element);
-            }
+            });
         });
 
         element.addEventListener('keydown', (event: KeyboardEvent) =>
