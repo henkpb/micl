@@ -33,11 +33,12 @@ import { fileURLToPath } from 'node:url';
 const __dirname  = path.dirname(fileURLToPath(import.meta.url));
 const targetPath = path.resolve(__dirname, '../../components/shapes/_paths.generated.scss');
 
-// Sass's default precision is 10 decimal places. Match that, then strip
-// trailing zeros so e.g. 50.0000000000 → 50, 3.1400000000 → 3.14.
+// 3 decimal places (1/1000 of the 100-unit viewBox) is sub-pixel at any
+// realistic render size and roughly halves the generated file. Strip
+// trailing zeros so e.g. 50.000 → 50, 3.140 → 3.14.
 function toCss(n) {
     if (Number.isInteger(n)) return String(n);
-    let s = n.toFixed(10);
+    let s = n.toFixed(3);
     s = s.replace(/(\.\d*?)0+$/, '$1');
     s = s.replace(/\.$/, '');
     // Sass renders -0 as 0 — match that to avoid spurious diffs.

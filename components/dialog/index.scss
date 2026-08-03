@@ -66,6 +66,7 @@ dialog.micl-dialog {
     min-inline-size: var(--md-comp-dialog-min-width, 280px);
     max-inline-size: var(--md-comp-dialog-max-width, 560px);
     max-block-size: 100vh;
+    position-anchor: auto;
     inset-block-start: anchor(start);
     inset-inline-start: anchor(start);
     transform: var(--_translate) scale(50%);
@@ -153,7 +154,6 @@ dialog.micl-dialog {
     }
 
     &.micl-dialog--docked {
-        position-anchor: auto;
         inset-block: anchor(end) auto;
         inset-inline: anchor(start) auto;
         transform: none;

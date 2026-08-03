@@ -37,7 +37,7 @@ $textfields: ':is(.micl-textfield-filled, .micl-textfield-outlined)';
 $fields: ':is(input, select, textarea)';
 
 // A text field is "populated" when its label floats.
-$populated: ':has(> :focus, > [data-miclvalue], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select:not([data-miclinitialized]) option:checked:not([value=""]), > textarea:not(:empty, [data-miclinitialized]))';
+$populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select:not([data-miclinitialized]) option:checked:not([value=""]), > textarea:not(:empty, [data-miclinitialized]))';
 
 #{$textfields} {
     --_height: var(--md-comp-text-field-container-height, 56px);

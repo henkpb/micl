@@ -133,6 +133,32 @@ Options can be grouped by using the `<optgroup>` element. Add a `<legend>` eleme
 </div>
 ```
 
+## Multiple selection
+Adding the `multiple` attribute turns the select into an in-page listbox in which several options can be chosen at once.
+
+By default the listbox grows with its options. To give it a fixed height with internal scrolling, set the `--md-comp-text-field-container-height` custom property.
+
+**Example: A multiple select with a fixed height**
+
+```HTML
+<div class="micl-textfield-outlined" style="--md-comp-text-field-container-height:230px">
+  <label for="myselect">Countries</label>
+  <select id="myselect" multiple>
+    <option class="micl-list-item-one" value="AR" selected>
+      <span class="micl-list-item__text">Argentina</span>
+    </option>
+    <option class="micl-list-item-one" value="BO">
+      <span class="micl-list-item__text">Bolivia</span>
+    </option>
+    <option class="micl-list-item-one" value="CL" selected>
+      <span class="micl-list-item__text">Chile</span>
+    </option>
+  </select>
+</div>
+```
+
+Options support the same content as in a single select: supporting text, dividers, media elements, and option groups.
+
 ## Theming
 The Select component has no tokens of its own: the field is themed with the CSS custom properties of the [Text field](../textfield/README.md) component, and the option pick-list with those of the [Menu](../menu/README.md) and [List](../list/README.md) components. Set them on any appropriate parent element to affect its child selects.
 

@@ -118,284 +118,47 @@ $_narrow-tracking: (
     }
 }
 
-@mixin display-large {
-    font-family: var(--md-sys-typescale-display-large-font);
-    font-size: var(--md-sys-typescale-display-large-size);
-    line-height: var(--md-sys-typescale-display-large-line-height);
-    font-weight: var(--md-sys-typescale-display-large-weight);
-    letter-spacing: var(--md-sys-typescale-display-large-tracking);
+@mixin _apply($name) {
+    font: var(--md-sys-typescale-#{$name}-weight) var(--md-sys-typescale-#{$name}-size)/var(--md-sys-typescale-#{$name}-line-height) var(--md-sys-typescale-#{$name}-font);
+    letter-spacing: var(--md-sys-typescale-#{$name}-tracking);
 }
 
-@mixin display-medium {
-    font-family: var(--md-sys-typescale-display-medium-font);
-    font-size: var(--md-sys-typescale-display-medium-size);
-    line-height: var(--md-sys-typescale-display-medium-line-height);
-    font-weight: var(--md-sys-typescale-display-medium-weight);
-    letter-spacing: var(--md-sys-typescale-display-medium-tracking);
-}
-
-@mixin display-small {
-    font-family: var(--md-sys-typescale-display-small-font);
-    font-size: var(--md-sys-typescale-display-small-size);
-    line-height: var(--md-sys-typescale-display-small-line-height);
-    font-weight: var(--md-sys-typescale-display-small-weight);
-    letter-spacing: var(--md-sys-typescale-display-small-tracking);
-}
-
-@mixin headline-large {
-    font-family: var(--md-sys-typescale-headline-large-font);
-    font-size: var(--md-sys-typescale-headline-large-size);
-    line-height: var(--md-sys-typescale-headline-large-line-height);
-    font-weight: var(--md-sys-typescale-headline-large-weight);
-    letter-spacing: var(--md-sys-typescale-headline-large-tracking);
-}
-
-@mixin headline-medium {
-    font-family: var(--md-sys-typescale-headline-medium-font);
-    font-size: var(--md-sys-typescale-headline-medium-size);
-    line-height: var(--md-sys-typescale-headline-medium-line-height);
-    font-weight: var(--md-sys-typescale-headline-medium-weight);
-    letter-spacing: var(--md-sys-typescale-headline-medium-tracking);
-}
-
-@mixin headline-small {
-    font-family: var(--md-sys-typescale-headline-small-font);
-    font-size: var(--md-sys-typescale-headline-small-size);
-    line-height: var(--md-sys-typescale-headline-small-line-height);
-    font-weight: var(--md-sys-typescale-headline-small-weight);
-    letter-spacing: var(--md-sys-typescale-headline-small-tracking);
-}
-
-@mixin title-large {
-    font-family: var(--md-sys-typescale-title-large-font);
-    font-size: var(--md-sys-typescale-title-large-size);
-    line-height: var(--md-sys-typescale-title-large-line-height);
-    font-weight: var(--md-sys-typescale-title-large-weight);
-    letter-spacing: var(--md-sys-typescale-title-large-tracking);
-}
-
-@mixin title-medium {
-    font-family: var(--md-sys-typescale-title-medium-font);
-    font-size: var(--md-sys-typescale-title-medium-size);
-    line-height: var(--md-sys-typescale-title-medium-line-height);
-    font-weight: var(--md-sys-typescale-title-medium-weight);
-    letter-spacing: var(--md-sys-typescale-title-medium-tracking);
-}
-
-@mixin title-small {
-    font-family: var(--md-sys-typescale-title-small-font);
-    font-size: var(--md-sys-typescale-title-small-size);
-    line-height: var(--md-sys-typescale-title-small-line-height);
-    font-weight: var(--md-sys-typescale-title-small-weight);
-    letter-spacing: var(--md-sys-typescale-title-small-tracking);
-}
-
-@mixin body-large {
-    font-family: var(--md-sys-typescale-body-large-font);
-    font-size: var(--md-sys-typescale-body-large-size);
-    line-height: var(--md-sys-typescale-body-large-line-height);
-    font-weight: var(--md-sys-typescale-body-large-weight);
-    letter-spacing: var(--md-sys-typescale-body-large-tracking);
-}
-
-@mixin body-medium {
-    font-family: var(--md-sys-typescale-body-medium-font);
-    font-size: var(--md-sys-typescale-body-medium-size);
-    line-height: var(--md-sys-typescale-body-medium-line-height);
-    font-weight: var(--md-sys-typescale-body-medium-weight);
-    letter-spacing: var(--md-sys-typescale-body-medium-tracking);
-}
-
-@mixin body-smallmedium {
-    font-family: var(--md-sys-typescale-body-smallmedium-font);
-    font-size: var(--md-sys-typescale-body-smallmedium-size);
-    line-height: var(--md-sys-typescale-body-smallmedium-line-height);
-    font-weight: var(--md-sys-typescale-body-smallmedium-weight);
-    letter-spacing: var(--md-sys-typescale-body-smallmedium-tracking);
-}
-
-@mixin body-small {
-    font-family: var(--md-sys-typescale-body-small-font);
-    font-size: var(--md-sys-typescale-body-small-size);
-    line-height: var(--md-sys-typescale-body-small-line-height);
-    font-weight: var(--md-sys-typescale-body-small-weight);
-    letter-spacing: var(--md-sys-typescale-body-small-tracking);
-}
-
-@mixin label-large {
-    font-family: var(--md-sys-typescale-label-large-font);
-    font-size: var(--md-sys-typescale-label-large-size);
-    line-height: var(--md-sys-typescale-label-large-line-height);
-    font-weight: var(--md-sys-typescale-label-large-weight);
-    letter-spacing: var(--md-sys-typescale-label-large-tracking);
-}
-
-@mixin label-medium {
-    font-family: var(--md-sys-typescale-label-medium-font);
-    font-size: var(--md-sys-typescale-label-medium-size);
-    line-height: var(--md-sys-typescale-label-medium-line-height);
-    font-weight: var(--md-sys-typescale-label-medium-weight);
-    letter-spacing: var(--md-sys-typescale-label-medium-tracking);
-}
-
-@mixin label-small {
-    font-family: var(--md-sys-typescale-label-small-font);
-    font-size: var(--md-sys-typescale-label-small-size);
-    line-height: var(--md-sys-typescale-label-small-line-height);
-    font-weight: var(--md-sys-typescale-label-small-weight);
-    letter-spacing: var(--md-sys-typescale-label-small-tracking);
-}
-
-@mixin emphasized-display-large {
-    font-family: var(--md-sys-typescale-emphasized-display-large-font);
-    font-size: var(--md-sys-typescale-emphasized-display-large-size);
-    line-height: var(--md-sys-typescale-emphasized-display-large-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-display-large-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-display-large-tracking);
-}
-
-@mixin emphasized-display-medium {
-    font-family: var(--md-sys-typescale-emphasized-display-medium-font);
-    font-size: var(--md-sys-typescale-emphasized-display-medium-size);
-    line-height: var(--md-sys-typescale-emphasized-display-medium-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-display-medium-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-display-medium-tracking);
-}
-
-@mixin emphasized-display-small {
-    font-family: var(--md-sys-typescale-emphasized-display-small-font);
-    font-size: var(--md-sys-typescale-emphasized-display-small-size);
-    line-height: var(--md-sys-typescale-emphasized-display-small-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-display-small-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-display-small-tracking);
-}
-
-@mixin emphasized-headline-large {
-    font-family: var(--md-sys-typescale-emphasized-headline-large-font);
-    font-size: var(--md-sys-typescale-emphasized-headline-large-size);
-    line-height: var(--md-sys-typescale-emphasized-headline-large-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-headline-large-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-headline-large-tracking);
-}
-
-@mixin emphasized-headline-medium {
-    font-family: var(--md-sys-typescale-emphasized-headline-medium-font);
-    font-size: var(--md-sys-typescale-emphasized-headline-medium-size);
-    line-height: var(--md-sys-typescale-emphasized-headline-medium-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-headline-medium-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-headline-medium-tracking);
-}
-
-@mixin emphasized-headline-small {
-    font-family: var(--md-sys-typescale-emphasized-headline-small-font);
-    font-size: var(--md-sys-typescale-emphasized-headline-small-size);
-    line-height: var(--md-sys-typescale-emphasized-headline-small-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-headline-small-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-headline-small-tracking);
-}
-
-@mixin emphasized-title-large {
-    font-family: var(--md-sys-typescale-emphasized-title-large-font);
-    font-size: var(--md-sys-typescale-emphasized-title-large-size);
-    line-height: var(--md-sys-typescale-emphasized-title-large-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-title-large-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-title-large-tracking);
-}
-
-@mixin emphasized-title-medium {
-    font-family: var(--md-sys-typescale-emphasized-title-medium-font);
-    font-size: var(--md-sys-typescale-emphasized-title-medium-size);
-    line-height: var(--md-sys-typescale-emphasized-title-medium-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-title-medium-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-title-medium-tracking);
-}
-
-@mixin emphasized-title-small {
-    font-family: var(--md-sys-typescale-emphasized-title-small-font);
-    font-size: var(--md-sys-typescale-emphasized-title-small-size);
-    line-height: var(--md-sys-typescale-emphasized-title-small-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-title-small-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-title-small-tracking);
-}
-
-@mixin emphasized-body-large {
-    font-family: var(--md-sys-typescale-emphasized-body-large-font);
-    font-size: var(--md-sys-typescale-emphasized-body-large-size);
-    line-height: var(--md-sys-typescale-emphasized-body-large-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-body-large-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-body-large-tracking);
-}
-
-@mixin emphasized-body-medium {
-    font-family: var(--md-sys-typescale-emphasized-body-medium-font);
-    font-size: var(--md-sys-typescale-emphasized-body-medium-size);
-    line-height: var(--md-sys-typescale-emphasized-body-medium-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-body-medium-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-body-medium-tracking);
-}
-
-@mixin emphasized-body-small {
-    font-family: var(--md-sys-typescale-emphasized-body-small-font);
-    font-size: var(--md-sys-typescale-emphasized-body-small-size);
-    line-height: var(--md-sys-typescale-emphasized-body-small-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-body-small-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-body-small-tracking);
-}
-
-@mixin emphasized-label-large {
-    font-family: var(--md-sys-typescale-emphasized-label-large-font);
-    font-size: var(--md-sys-typescale-emphasized-label-large-size);
-    line-height: var(--md-sys-typescale-emphasized-label-large-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-label-large-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-label-large-tracking);
-}
-
-@mixin emphasized-label-medium {
-    font-family: var(--md-sys-typescale-emphasized-label-medium-font);
-    font-size: var(--md-sys-typescale-emphasized-label-medium-size);
-    line-height: var(--md-sys-typescale-emphasized-label-medium-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-label-medium-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-label-medium-tracking);
-}
-
-@mixin emphasized-label-small {
-    font-family: var(--md-sys-typescale-emphasized-label-small-font);
-    font-size: var(--md-sys-typescale-emphasized-label-small-size);
-    line-height: var(--md-sys-typescale-emphasized-label-small-line-height);
-    font-weight: var(--md-sys-typescale-emphasized-label-small-weight);
-    letter-spacing: var(--md-sys-typescale-emphasized-label-small-tracking);
-}
+@mixin display-large              { @include _apply(display-large); }
+@mixin display-medium             { @include _apply(display-medium); }
+@mixin display-small              { @include _apply(display-small); }
+@mixin headline-large             { @include _apply(headline-large); }
+@mixin headline-medium            { @include _apply(headline-medium); }
+@mixin headline-small             { @include _apply(headline-small); }
+@mixin title-large                { @include _apply(title-large); }
+@mixin title-medium               { @include _apply(title-medium); }
+@mixin title-small                { @include _apply(title-small); }
+@mixin body-large                 { @include _apply(body-large); }
+@mixin body-medium                { @include _apply(body-medium); }
+@mixin body-smallmedium           { @include _apply(body-smallmedium); }
+@mixin body-small                 { @include _apply(body-small); }
+@mixin label-large                { @include _apply(label-large); }
+@mixin label-medium               { @include _apply(label-medium); }
+@mixin label-small                { @include _apply(label-small); }
+@mixin emphasized-display-large   { @include _apply(emphasized-display-large); }
+@mixin emphasized-display-medium  { @include _apply(emphasized-display-medium); }
+@mixin emphasized-display-small   { @include _apply(emphasized-display-small); }
+@mixin emphasized-headline-large  { @include _apply(emphasized-headline-large); }
+@mixin emphasized-headline-medium { @include _apply(emphasized-headline-medium); }
+@mixin emphasized-headline-small  { @include _apply(emphasized-headline-small); }
+@mixin emphasized-title-large     { @include _apply(emphasized-title-large); }
+@mixin emphasized-title-medium    { @include _apply(emphasized-title-medium); }
+@mixin emphasized-title-small     { @include _apply(emphasized-title-small); }
+@mixin emphasized-body-large      { @include _apply(emphasized-body-large); }
+@mixin emphasized-body-medium     { @include _apply(emphasized-body-medium); }
+@mixin emphasized-body-small      { @include _apply(emphasized-body-small); }
+@mixin emphasized-label-large     { @include _apply(emphasized-label-large); }
+@mixin emphasized-label-medium    { @include _apply(emphasized-label-medium); }
+@mixin emphasized-label-small     { @include _apply(emphasized-label-small); }
 
 @if $master {
-    .md-sys-typescale-display-large              { @include display-large; }
-    .md-sys-typescale-display-medium             { @include display-medium; }
-    .md-sys-typescale-display-small              { @include display-small; }
-    .md-sys-typescale-headline-large             { @include headline-large; }
-    .md-sys-typescale-headline-medium            { @include headline-medium; }
-    .md-sys-typescale-headline-small             { @include headline-small; }
-    .md-sys-typescale-title-large                { @include title-large; }
-    .md-sys-typescale-title-medium               { @include title-medium; }
-    .md-sys-typescale-title-small                { @include title-small; }
-    .md-sys-typescale-body-large                 { @include body-large; }
-    .md-sys-typescale-body-medium                { @include body-medium; }
-    .md-sys-typescale-body-smallmedium           { @include body-smallmedium; }
-    .md-sys-typescale-body-small                 { @include body-small; }
-    .md-sys-typescale-label-large                { @include label-large; }
-    .md-sys-typescale-label-medium               { @include label-medium; }
-    .md-sys-typescale-label-small                { @include label-small; }
-    .md-sys-typescale-emphasized-display-large   { @include emphasized-display-large; }
-    .md-sys-typescale-emphasized-display-medium  { @include emphasized-display-medium; }
-    .md-sys-typescale-emphasized-display-small   { @include emphasized-display-small; }
-    .md-sys-typescale-emphasized-headline-large  { @include emphasized-headline-large; }
-    .md-sys-typescale-emphasized-headline-medium { @include emphasized-headline-medium; }
-    .md-sys-typescale-emphasized-headline-small  { @include emphasized-headline-small; }
-    .md-sys-typescale-emphasized-title-large     { @include emphasized-title-large; }
-    .md-sys-typescale-emphasized-title-medium    { @include emphasized-title-medium; }
-    .md-sys-typescale-emphasized-title-small     { @include emphasized-title-small; }
-    .md-sys-typescale-emphasized-body-large      { @include emphasized-body-large; }
-    .md-sys-typescale-emphasized-body-medium     { @include emphasized-body-medium; }
-    .md-sys-typescale-emphasized-body-small      { @include emphasized-body-small; }
-    .md-sys-typescale-emphasized-label-large     { @include emphasized-label-large; }
-    .md-sys-typescale-emphasized-label-medium    { @include emphasized-label-medium; }
-    .md-sys-typescale-emphasized-label-small     { @include emphasized-label-small; }
+    @each $name, $_ in $_scales {
+        .md-sys-typescale-#{$name} {
+            @include _apply($name);
+        }
+    }
 }

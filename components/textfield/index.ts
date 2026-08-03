@@ -134,7 +134,29 @@ const textfield = {
             input.dataset.miclvalue = '1';
         }
 
-        if (input instanceof HTMLSelectElement) {
+        // A legacy listbox replaces the whole selection on a plain click; a customizable
+        // multiple select toggles the clicked option. Align the fallback with the latter,
+        // leaving shift-clicks to the native range selection. The event target is the
+        // content of the option, not the option itself.
+        if (
+            input instanceof HTMLSelectElement
+            && input.multiple
+            && !CSS.supports('appearance', 'base-select')
+        ) {
+            input.addEventListener('mousedown', (event: MouseEvent) => {
+                const option = event.target instanceof Element && event.target.closest('option');
+                if (option && !option.disabled && !event.shiftKey) {
+                    event.preventDefault();
+                    const scroll = input.scrollTop;
+                    option.selected = !option.selected;
+                    input.focus();
+                    input.scrollTop = scroll;
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        }
+
+        if (input instanceof HTMLSelectElement && !input.multiple) {
             const setPickerOrigin = (): void =>
             {
                 const rect       = input.getBoundingClientRect();
