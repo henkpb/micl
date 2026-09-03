@@ -35,11 +35,7 @@ Or import all MICL styles:
 ```
 
 ### JavaScript
-This component requires JavaScript to support keyboard navigation. The library will automatically initialize new components as they're added to the DOM.
-
-```JavaScript
-import micl from "material-inspired-component-library/dist/micl";
-```
+No custom JavaScript is required for the core functionality of this component.
 
 ### Live Demo
 A live example of the [Navigation rail component](https://henkpb.github.io/micl/navigationrail.html) is available to interact with.
