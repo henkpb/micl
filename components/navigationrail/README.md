@@ -8,12 +8,12 @@ To create a simple navigation rail, use a `<nav>` element with the `micl-navigat
 
 ```HTML
 <nav id="mynavigationrail" class="micl-navigationrail">
-  <div class="micl-navigationrail__content" role="menu">
-    <a href="#" class="micl-navigationrail__item" role="menuitem" aria-current="page">
+  <div class="micl-navigationrail__content">
+    <a href="#" class="micl-navigationrail__item" aria-current="page">
       <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
       <span class="micl-navigationrail__text">Inbox</span>
     </a>
-    <a href="#" class="micl-navigationrail__item" role="menuitem">
+    <a href="#" class="micl-navigationrail__item">
       <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
       <span class="micl-navigationrail__text">Outbox</span>
     </a>
@@ -37,6 +37,11 @@ Or import all MICL styles:
 ### JavaScript
 No custom JavaScript is required for the core functionality of this component.
 
+> [!NOTE]
+> Opening and closing a modal navigation rail is handled natively by the `<dialog>` element and its invoker buttons, and the navigation items are ordinary links, activated with `Enter` like any other link.
+> 
+> Marking the current destination is left to the application: give the item for the current page the `aria-current="page"` attribute.
+
 ### Live Demo
 A live example of the [Navigation rail component](https://henkpb.github.io/micl/navigationrail.html) is available to interact with.
 
@@ -58,7 +63,7 @@ The basic example creates a **collapsed** navigation rail. Add a menu button to 
       aria-label="Toggle navigation rail"
     ></button>
   </div>
-  <div class="micl-navigationrail__content" role="menu">
+  <div class="micl-navigationrail__content">
     ...
   </div>
 </nav>
@@ -82,7 +87,7 @@ A **modal** navigation rail is hidden until the user clicks a menu button. When 
       autofocus
     >menu_open</button>
   </div>
-  <div class="micl-navigationrail__content" role="menu">
+  <div class="micl-navigationrail__content">
     ...
   </div>
 </dialog>
