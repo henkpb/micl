@@ -201,6 +201,9 @@ The library currently consists of the following components:
 
 ## Change Log ↪️
 
+### 9.1.0 (05.09.2026)
+- **Navigation rail**: Dropped the JavaScript.
+
 ### 9.0.0 (20.07.2026)
 - **BREAKING**: Renamed all CSS custom properties from --md-sys- to --md-comp-.
 - **BREAKING**: Renamed the layout class `micl-body` and its `micl-body--*` modifiers to `micl-panes`/`micl-panes--*`, aligning with the M3 Expressive layout terminology.
