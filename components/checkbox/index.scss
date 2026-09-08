@@ -51,17 +51,19 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
     --_size: var(--md-comp-checkbox-container-size, 18px);
     --_outline-width: var(--md-comp-checkbox-outline-width, 2px);
     --_check-thickness: var(--md-comp-checkbox-check-thickness, 2px);
+    --_layer: max(var(--md-sys-state-layer-size, 40px), calc(var(--_size) + 22px));
+    --_target: max(var(--md-sys-state-target-size, 48px), calc(var(--_layer) + 8px));
     --statelayer-color: var(--md-sys-color-on-surface);
 
     appearance: none;
     box-sizing: border-box;
     position: relative;
-    inline-size: var(--md-sys-state-target-size, 48px);
-    min-inline-size: var(--md-sys-state-target-size, 48px);
-    block-size: var(--md-sys-state-target-size, 48px);
-    min-block-size: var(--md-sys-state-target-size, 48px);
+    inline-size: var(--_target);
+    min-inline-size: var(--_target);
+    block-size: var(--_target);
+    min-block-size: var(--_target);
     margin: 0;
-    border: calc((var(--md-sys-state-target-size, 48px) - var(--md-sys-state-layer-size, 40px)) / 2) solid transparent;
+    border: calc((var(--_target) - var(--_layer)) / 2) solid transparent;
     background-clip: content-box;
     background-color: transparent;
     -webkit-tap-highlight-color: transparent;
@@ -72,7 +74,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
     // combination of block-size and clip-path transitions. currentColor, so that the
     // error and disabled states recolour it with a single color declaration.
     &::before {
-        --_check-width: calc(var(--_size) - 3px);
+        --_check-width: calc(var(--_size) * 5 / 6);
         --_check-height: calc(0.4667 * var(--_check-width));
 
         content: "";
@@ -82,14 +84,14 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         block-size: 0;
         inset: 0;
         inset-block-start: calc(-0.25 * var(--_size));
-        inset-inline-start: 1px;
+        inset-inline-start: calc(var(--_check-thickness) / 2);
         margin: auto;
         color: var(--md-comp-checkbox-selected-icon-color, var(--md-sys-color-on-primary));
         border-block-end: var(--_check-thickness) currentColor solid;
         border-inline-start: var(--_check-thickness) currentColor solid;
         transform: rotate(-45deg);
         transform-origin: center;
-        clip-path: rect(0 2px 0 0);
+        clip-path: rect(0 var(--_check-thickness) 0 0);
         z-index: 1;
         transition:
           block-size var(--md-sys-motion-duration-short3) var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard-decelerate,
@@ -122,7 +124,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
 
         &::before {
             block-size: var(--_check-height);
-            clip-path: rect(0 calc(var(--_size) - 5px) var(--_size) 0);
+            clip-path: rect(0 calc(var(--_check-width) - var(--_check-thickness)) var(--_size) 0);
             transition:
                 block-size var(--md-sys-motion-duration-short3) var(--md-comp-checkbox-motion-spatial),
                 clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--md-comp-checkbox-motion-spatial);
@@ -137,7 +139,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         }
     }
     &:indeterminate::before {
-        inset-inline-start: 2px;
+        inset-inline-start: var(--_check-thickness);
         border-inline-start-width: 0px;
         transform: rotate(0deg);
     }
@@ -255,14 +257,14 @@ label:has(+ #{$checkbox}:disabled) {
 
 #{$checkbox}:dir(rtl) {
     &::before {
-        clip-path: rect(0 var(--_size) var(--_size) calc(var(--_size) - 2px));
+        clip-path: rect(0 var(--_size) var(--_size) calc(var(--_size) - var(--_check-thickness)));
     }
     &:checked::before {
-        clip-path: rect(0 var(--_size) var(--_size) 2px);
+        clip-path: rect(0 var(--_size) var(--_size) var(--_check-thickness));
         transform: rotate(45deg);
     }
     &:indeterminate::before {
-        clip-path: rect(0 var(--_size) var(--_size) 2px);
+        clip-path: rect(0 var(--_size) var(--_size) var(--_check-thickness));
         transform: rotate(0deg);
     }
 }
