@@ -22,7 +22,6 @@
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
-@use '../../styles/typography';
 @use '../checkbox/label';
 
 @include shape.corner('full');
