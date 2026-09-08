@@ -32,6 +32,7 @@
 @include statelayer.token('pressed-state-layer-opacity');
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('focus-indicator-outer-offset');
 @include statelayer.token('ripple-opacity-factor');
 @include statelayer.token('ripple-duration');
 @include statelayer.property;
@@ -67,7 +68,10 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
     background-color: transparent;
     -webkit-tap-highlight-color: transparent;
     border-radius: var(--md-sys-shape-corner-full);
-    outline-offset: -4px;
+    outline-offset: calc(
+        var(--md-sys-state-focus-indicator-outer-offset, 2px)
+        - ((var(--_target) - var(--_layer)) / 2)
+    );
 
     // The check mark: two currentColor borders rotated into a check, revealed by a
     // combination of block-size and clip-path transitions. currentColor, so that the

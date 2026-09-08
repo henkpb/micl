@@ -32,6 +32,7 @@
 @include statelayer.token('pressed-state-layer-opacity');
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('focus-indicator-outer-offset');
 @include statelayer.token('ripple-opacity-factor');
 @include statelayer.token('ripple-duration');
 @include statelayer.property;
@@ -46,21 +47,26 @@ $radio: 'input[type=radio].micl-radio';
 
     --_size: var(--md-comp-radio-button-icon-size, 20px);
     --_outline-width: var(--md-comp-radio-button-outline-width, 2px);
+    --_layer: var(--md-sys-state-layer-size, 40px);
+    --_target: var(--md-sys-state-target-size, 48px);
 
     appearance: none;
     box-sizing: border-box;
     position: relative;
-    inline-size: var(--md-sys-state-target-size, 48px);
-    min-inline-size: var(--md-sys-state-target-size, 48px);
-    block-size: var(--md-sys-state-target-size, 48px);
-    min-block-size: var(--md-sys-state-target-size, 48px);
+    inline-size: var(--_target);
+    min-inline-size: var(--_target);
+    block-size: var(--_target);
+    min-block-size: var(--_target);
     margin: 0;
-    border: calc((var(--md-sys-state-target-size, 48px) - var(--md-sys-state-layer-size, 40px)) / 2) solid transparent;
+    border: calc((var(--_target) - var(--_layer)) / 2) solid transparent;
     background-clip: content-box;
     background-color: transparent;
     -webkit-tap-highlight-color: transparent;
     border-radius: var(--md-sys-shape-corner-full);
-    outline-offset: -7px;
+    outline-offset: calc(
+        var(--md-sys-state-focus-indicator-outer-offset, 2px)
+        - ((var(--_target) - var(--_layer)) / 2)
+    );
 
     // The ring and the dot in one box: the dot is the primary background clipped to the
     // content box, hidden while the padding fills the ring, revealed when the checked
