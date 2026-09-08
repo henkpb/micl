@@ -164,6 +164,21 @@ const refreshCheckboxGroup = (checkboxGroup: HTMLElement, input: HTMLInputElemen
     }
 };
 
+const handleChange = (event: Event): void =>
+{
+    const checkboxGroup = event.currentTarget as HTMLElement;
+    const input = event.target as HTMLInputElement;
+    if (
+        announcing
+        || !input.classList.contains('micl-checkbox')
+        || input.closest(checkboxGroupSelector) !== checkboxGroup
+    ) {
+        return;
+    }
+
+    refreshCheckboxGroup(checkboxGroup, input);
+};
+
 export default register(checkboxGroupSelector, {
     initialize: (element: HTMLElement): void =>
     {
@@ -175,20 +190,16 @@ export default register(checkboxGroupSelector, {
         }
         element.dataset.miclinitialized = '1';
 
-        element.addEventListener('change', event =>
-        {
-            const input = event.target as HTMLInputElement;
-            if (
-                announcing
-                || !input.classList.contains('micl-checkbox')
-                || input.closest(checkboxGroupSelector) !== element
-            ) {
-                return;
-            }
-
-            refreshCheckboxGroup(element, input);
-        });
+        element.addEventListener('change', handleChange);
 
         refreshCheckboxGroup(element, null);
+    },
+
+    cleanup: (element: HTMLElement): void =>
+    {
+        if (element.matches(checkboxGroupSelector)) {
+            element.removeEventListener('change', handleChange);
+            delete element.dataset.miclinitialized;
+        }
     }
 }, HTMLElement);
