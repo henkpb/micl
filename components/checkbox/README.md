@@ -87,7 +87,9 @@ To visually improve the layout, such as by indenting child checkboxes, use wrapp
 </div>
 ```
 
-Note that checkbox groups support **nesting**, allowing a `micl-checkbox-group` to contain other `micl-checkbox-group` elements for multi-level hierarchies.
+Note that checkbox groups support **nesting**, allowing a `micl-checkbox-group` to contain other `micl-checkbox-group` elements for multi-level hierarchies. Each group must contain exactly one `micl-checkbox__parent`; a nested group without one is not tracked by its ancestor.
+
+The parent checkbox reflects the state of its descendants: **checked** when all of them are selected, **unchecked** when none are, and **indeterminate** when the selection is partial — including when that partial selection sits inside a nested group. Because an indeterminate parent is not itself checked, it is left out of form submission until everything below it is selected, and clicking it selects the whole group.
 
 ## Theming
 Each checkbox can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child checkboxes.
