@@ -176,9 +176,9 @@
             &::before {
                 content: "";
                 position: absolute;
-                inset-block-start: calc((100% - var(--md-sys-target-size, 48px)) / 2);
+                inset-block-start: calc((100% - var(--md-sys-state-target-size, 48px)) / 2);
                 inset-inline-start: 0;
-                block-size: var(--md-sys-target-size, 48px);
+                block-size: var(--md-sys-state-target-size, 48px);
                 inline-size: 100%;
             }
         }
@@ -195,10 +195,10 @@
             &::before {
                 content: "";
                 position: absolute;
-                inset-block-start: calc((100% - var(--md-sys-target-size, 48px)) / 2);
-                inset-inline-start: calc((100% - var(--md-sys-target-size, 48px)) / 2);
-                block-size: var(--md-sys-target-size, 48px);
-                inline-size: var(--md-sys-target-size, 48px);
+                inset-block-start: calc((100% - var(--md-sys-state-target-size, 48px)) / 2);
+                inset-inline-start: calc((100% - var(--md-sys-state-target-size, 48px)) / 2);
+                block-size: var(--md-sys-state-target-size, 48px);
+                inline-size: var(--md-sys-state-target-size, 48px);
             }
         }
         .micl-chip__avatar {

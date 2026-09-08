@@ -49,7 +49,7 @@ $switch: 'input[type=checkbox].micl-switch';
     --_handle-selected-size: var(--md-comp-switch-selected-handle-size, 24px);
     --_handle-pressed-size: var(--md-comp-switch-pressed-handle-size, 28px);
     --_layer: var(--md-sys-state-layer-size, 40px);
-    --_target: var(--md-sys-target-size, 48px);
+    --_target: var(--md-sys-state-target-size, 48px);
 
     appearance: none;
     position: relative;

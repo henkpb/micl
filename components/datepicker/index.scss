@@ -86,7 +86,7 @@ dialog.micl-dialog.micl-datepicker {
     --md-comp-date-picker-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
 
     // Internal alias: the target size is referenced from many descendants.
-    --_target: var(--md-sys-target-size, 48px);
+    --_target: var(--md-sys-state-target-size, 48px);
 
     inline-size: var(--md-comp-date-picker-modal-container-width, 360px);
 

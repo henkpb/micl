@@ -81,7 +81,7 @@ dialog.micl-bottomsheet {
         flex-shrink: 0;
         align-items: center;
         inline-size: 100%;
-        block-size: var(--md-sys-target-size, 48px);
+        block-size: var(--md-sys-state-target-size, 48px);
         justify-content: center;
         cursor: grab;
         touch-action: none;
@@ -90,7 +90,7 @@ dialog.micl-bottomsheet {
             box-sizing: content-box;
             inline-size: var(--md-comp-bottomsheet-drag-handle-width);
             block-size: var(--md-comp-bottomsheet-drag-handle-height);
-            padding: 16px calc((var(--md-sys-target-size, 48px) - var(--md-comp-bottomsheet-drag-handle-width)) / 2);
+            padding: 16px calc((var(--md-sys-state-target-size, 48px) - var(--md-comp-bottomsheet-drag-handle-width)) / 2);
             border: none;
             // only shapes the focus ring; the visible handle is the ::before below
             border-radius: var(--md-sys-shape-corner-extra-large);

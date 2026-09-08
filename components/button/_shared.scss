@@ -122,10 +122,10 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     &::before {
         content: "";
         position: absolute;
-        block-size: var(--md-sys-target-size, 48px);
+        block-size: var(--md-sys-state-target-size, 48px);
         inline-size: 100%;
-        min-inline-size: var(--md-sys-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-target-size, 48px)) - var(--md-sys-target-size, 48px)) / 2);
+        min-inline-size: var(--md-sys-state-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-state-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-state-target-size, 48px)) - var(--md-sys-state-target-size, 48px)) / 2);
         background-color: transparent;
     }
 }
