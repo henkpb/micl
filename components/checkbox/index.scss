@@ -22,7 +22,7 @@
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
-@use './label';
+@use '../../styles/togglelabel';
 
 @include shape.corner('full');
 

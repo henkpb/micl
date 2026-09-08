@@ -21,7 +21,7 @@
 
 // The label rules shared by the toggle controls (checkbox, switch, radio): the label
 // immediately before or after the input is clickable, uses the on-surface color, and
-// dims alongside a disabled input. This partial emits nothing that is not extended.
+// dims alongside a disabled input. This module emits nothing that is not extended.
 
 %micl-toggle-label-pointer {
     -webkit-tap-highlight-color: transparent;
