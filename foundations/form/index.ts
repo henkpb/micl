@@ -45,7 +45,7 @@ const setErrorStateTextField = (textField: HTMLElement, message: string): boolea
             }
         }
         else {
-            if (!supporting.dataset.micltext) {
+            if (!('micltext' in supporting.dataset)) {
                 supporting.dataset.micltext = supporting.textContent;
             }
             supporting.textContent = message;
