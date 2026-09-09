@@ -162,9 +162,10 @@ MICL doubles as a working tour of what production CSS can do in 2026. A few of t
 Each component's README documents its approach and its graceful-degradation story.
 
 ## Foundations 🪟
-Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/layout-overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **rail region** and **panes** that adapt to the available screen space, ensuring your layout follows Material Design's adaptive design guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column.
+Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/layout-overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **rail region** and **panes** that adapt to the available screen space, ensuring your layout follows Material Design's adaptive design guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column. The **Form** foundation ships no CSS: it validates a form with the browser's own Constraint Validation API and renders the result as MICL error styling.
 
 - [x] [Field](foundations/field/README.md)
+- [x] [Form](foundations/form/README.md)
 - [x] [Layout](foundations/layout/README.md)
 
 ## Available components ✅
