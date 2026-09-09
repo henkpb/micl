@@ -32,7 +32,14 @@ const scssEntries = scssFiles.reduce((entries, filePath) => {
 const tsEntries = glob.sync('./foundations/**/*.ts').reduce((entries, filePath) => {
     const normalized = filePath.replace(/\\/g, '/').replace(/^\.\//, '');
     if (normalized.endsWith('.d.ts')) return entries;
-    entries[normalized.replace(/\.ts$/, '')] = './' + normalized;
+    const name = normalized.replace(/\.ts$/, '');
+
+    entries[name] = (name === 'foundations/form/index')
+        ? {
+            import : './' + normalized,
+            library: { name: 'micl', type: 'umd', export: 'default' }
+        }
+        : './' + normalized;
     return entries;
 }, {});
 
