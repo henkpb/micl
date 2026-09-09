@@ -116,7 +116,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         inset: 0;
         margin: auto;
         border: var(--_outline-width) solid var(--_outline-color);
-        border-radius: 2px;
+        border-radius: var(--md-comp-checkbox-container-shape, 2px);
         background-color: var(--_container-color);
         transition:
             background-color var(--md-comp-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-comp-checkbox-motion-duration-reverse),
