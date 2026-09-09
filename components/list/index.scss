@@ -390,11 +390,13 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
     }
 }
 #{$items} {
-    // The compact list control. The checkbox derives all four of its size properties and its
-    // transparent border from these two, so overriding them shrinks the box without leaving
-    // the pseudo-elements wider than the padding box that centres them: sizing the element
-    // directly left an 18px container inside a 16px padding box, which start-aligned it.
-    input[type=checkbox].micl-checkbox {
+    // The compact list controls. The checkbox and the radio button derive all four of their
+    // size properties and their transparent border from these two, so overriding them shrinks
+    // the box without leaving the pseudo-elements wider than the padding box that centres
+    // them: sizing the element directly left an 18px container inside a 16px padding box,
+    // which start-aligned it.
+    input[type=checkbox].micl-checkbox,
+    input[type=radio].micl-radio {
         --_layer: max(24px, var(--_size));
         --_target: var(--_layer);
     }

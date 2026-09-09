@@ -14,8 +14,27 @@
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
+        .docs-example div:has(> input[type=radio]) {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
         .docs-example {
             gap: 0;
+        }
+        .docs-example fieldset {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        .docs-example legend {
+            padding: 0 0 4px;
+        }
+        .docs-theming {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            column-gap: 32px;
         }
     </style>
 </head>
@@ -37,62 +56,131 @@
             <p class="docs-hero__lede">A radio button allows a user to select only one option from a group of mutually exclusive choices.</p>
             <ul class="docs-hero__facts">
                 <li>Group keyboard navigation</li>
+                <li>No JavaScript required</li>
                 <li>RTL ready</li>
             </ul>
             <div class="docs-hero__demo">
                 <div>
-                    <div class="docs-flex--vcenter"><input type="radio" id="herora1" name="herora" class="micl-radio" checked><label for="herora1" class="md-sys-typescale-body-medium">This one</label></div>
-                    <div class="docs-flex--vcenter"><input type="radio" id="herora2" name="herora" class="micl-radio"><label for="herora2" class="md-sys-typescale-body-medium">Or this one</label></div>
+                    <div class="docs-flex--vcenter"><input type="radio" id="herora1" class="micl-radio" name="herora" checked><label for="herora1" class="md-sys-typescale-body-medium">This one</label></div>
+                    <div class="docs-flex--vcenter"><input type="radio" id="herora2" class="micl-radio" name="herora"><label for="herora2" class="md-sys-typescale-body-medium">Or this one</label></div>
                 </div>
             </div>
         </section>
 
-        <main class="docs-content docs-content--columns">
-            <div class="docs-stage">
-                <div class="docs-example">
-                    <template>
-                        <div class="docs-flex--vcenter">
-                            <input type="radio" class="micl-radio" id="myradio1" name="choices" checked value="c1">
-                            <label for="myradio1" class="md-sys-typescale-body-medium">First Choice</label>
-                        </div>
-                        <div class="docs-flex--vcenter">
-                            <input type="radio" class="micl-radio" id="myradio2" name="choices" value="c2">
-                            <label for="myradio2" class="md-sys-typescale-body-medium">Second Choice</label>
-                        </div>
-                        <div class="docs-flex--vcenter">
-                            <input type="radio" class="micl-radio" id="myradio3" name="choices" value="c3">
-                            <label for="myradio3" class="md-sys-typescale-body-medium">Third Choice</label>
-                        </div>
-                        <div class="docs-flex--vcenter">
-                            <input type="radio" class="micl-radio" id="myradio4" name="choices" value="c4" disabled>
-                            <label for="myradio4" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
-                        </div>
-                    </template>
-                </div>
-            </div>
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#radio-buttons">Radio buttons</a>
+            <a href="#label-first">Label first</a>
+            <a href="#radio-group">Group</a>
+            <a href="#theming">Theming</a>
+        </nav>
 
-            <div class="docs-stage">
-                <div class="docs-example">
-                    <template>
-                        <div class="docs-flex--vcenter" style="justify-content:flex-end">
-                            <label for="myradio21" class="md-sys-typescale-body-medium">First Choice</label>
-                            <input type="radio" class="micl-radio" id="myradio21" name="selection" checked value="c1">
-                        </div>
-                        <div class="docs-flex--vcenter" style="justify-content:flex-end">
-                            <label for="myradio22" class="md-sys-typescale-body-medium">Second Choice</label>
-                            <input type="radio" class="micl-radio" id="myradio22" name="selection" value="c2">
-                        </div>
-                        <div class="docs-flex--vcenter" style="justify-content:flex-end">
-                            <label for="myradio23" class="md-sys-typescale-body-medium">Third Choice</label>
-                            <input type="radio" class="micl-radio" id="myradio23" name="selection" value="c3">
-                        </div>
-                        <div class="docs-flex--vcenter" style="justify-content:flex-end">
-                            <label for="myradio24" class="md-sys-typescale-body-medium">Fourth Choice (disabled)</label>
-                            <input type="radio" class="micl-radio" id="myradio24" name="selection" value="c4" disabled>
-                        </div>
-                    </template>
+        <main class="docs-content docs-content--columns">
+            <section class="docs-section" id="radio-buttons">
+                <div class="docs-section__head">
+                    <h2>Radio buttons</h2>
                 </div>
-            </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div>
+                                <input type="radio" id="myradio1" class="micl-radio" name="choices" checked value="c1">
+                                <label for="myradio1" class="md-sys-typescale-body-medium">First Choice</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="myradio2" class="micl-radio" name="choices" value="c2">
+                                <label for="myradio2" class="md-sys-typescale-body-medium">Second Choice</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="myradio3" class="micl-radio" name="choices" disabled value="c3">
+                                <label for="myradio3" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="myradio4" class="micl-radio" name="picked" disabled checked value="c4">
+                                <label for="myradio4" class="md-sys-typescale-body-medium">Fourth Choice (disabled, selected)</label>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="label-first">
+                <div class="docs-section__head">
+                    <h2>Label before the radio button</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div style="justify-content:flex-end">
+                                <label for="myradio21" class="md-sys-typescale-body-medium">First Choice</label>
+                                <input type="radio" id="myradio21" class="micl-radio" name="selection" checked value="c1">
+                            </div>
+                            <div style="justify-content:flex-end">
+                                <label for="myradio22" class="md-sys-typescale-body-medium">Second Choice</label>
+                                <input type="radio" id="myradio22" class="micl-radio" name="selection" value="c2">
+                            </div>
+                            <div style="justify-content:flex-end">
+                                <label for="myradio23" class="md-sys-typescale-body-medium">Third Choice (disabled)</label>
+                                <input type="radio" id="myradio23" class="micl-radio" name="selection" disabled value="c3">
+                            </div>
+                            <div style="justify-content:flex-end">
+                                <label for="myradio24" class="md-sys-typescale-body-medium">Fourth Choice (disabled, selected)</label>
+                                <input type="radio" id="myradio24" class="micl-radio" name="chosen" disabled checked value="c4">
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="radio-group">
+                <div class="docs-section__head">
+                    <h2>Radio group</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <fieldset>
+                                <legend class="md-sys-typescale-title-small">Delivery</legend>
+                                <div>
+                                    <input type="radio" id="myradio31" class="micl-radio" name="delivery" checked value="standard">
+                                    <label for="myradio31" class="md-sys-typescale-body-medium">Standard</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="myradio32" class="micl-radio" name="delivery" value="express">
+                                    <label for="myradio32" class="md-sys-typescale-body-medium">Express</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="myradio33" class="micl-radio" name="delivery" value="pickup">
+                                    <label for="myradio33" class="md-sys-typescale-body-medium">Pick up in store</label>
+                                </div>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example docs-theming">
+                        <template>
+                            <div style="--md-comp-radio-button-icon-size:28px">
+                                <input type="radio" id="myradio41" class="micl-radio" name="larger" checked value="c1">
+                                <label for="myradio41" class="md-sys-typescale-body-medium">Larger</label>
+                            </div>
+                            <div style="--md-comp-radio-button-outline-width:1px">
+                                <input type="radio" id="myradio42" class="micl-radio" name="thinner" checked value="c2">
+                                <label for="myradio42" class="md-sys-typescale-body-medium">Thinner</label>
+                            </div>
+                            <div style="--md-comp-radio-button-selected-icon-color:var(--md-sys-color-tertiary)">
+                                <input type="radio" id="myradio43" class="micl-radio" name="tertiary" checked value="c3">
+                                <label for="myradio43" class="md-sys-typescale-body-medium">Tertiary</label>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>

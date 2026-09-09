@@ -42,7 +42,7 @@ The component automatically applies `cursor: pointer` and the **on surface** col
 
 Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification. You only need to set the class yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
 
-To vertically align a checkbox with its label, wrap both in an element that has a styling like suggested below:
+To vertically align a checkbox with its label, wrap both in an element with styling similar to the following:
 
 ```CSS
 .my-valign-class {
