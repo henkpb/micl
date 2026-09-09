@@ -33,6 +33,7 @@ You can customize elevation levels by overriding their global CSS variables.
 </div>
 ```
 
+---
 
 ## Motion
 Motion brings your UI to life, making it expressive and intuitive to use. The motion styles are based on the [Material Design 3 Motion](https://m3.material.io/styles/motion/overview/how-it-works) guidelines.
@@ -73,6 +74,7 @@ You can customize duration tokens by overriding their global CSS variables.
 </div>
 ```
 
+---
 
 ## Shape corner-radius tokens
 Shape tokens define the corner radii used across every component, following the [Material Design 3 Shape](https://m3.material.io/styles/shape/overview-principles) principles.
@@ -106,6 +108,7 @@ Corner radii are exposed as CSS custom properties and can be overridden anywhere
 
 The decorative shape gallery (heart, cookie, clover, sunny, …) is **not** part of these tokens. It is shipped as an opt-in component — see the [Shape Component](../components/shapes/README.md).
 
+---
 
 ## State layers
 State layers are visual overlays that communicate the interaction status of a component, such as when it's hovered over or pressed. These are based on [Material Design 3 States](https://m3.material.io/foundations/interaction/states/overview).
@@ -137,6 +140,7 @@ Customize the appearance of state layers by overriding their global CSS variable
 </div>
 ```
 
+---
 
 ## Typography
 Typography is the foundation of text styling. The typography styles in this library are based on the [Material Design 3 Typography](https://m3.material.io/styles/typography/overview) specifications.
@@ -194,3 +198,20 @@ The default typography styles apply natural letter spacing (`0px` or `normal`) o
     --md-ref-typeface-plain-narrow: 1;
 }
 ```
+
+---
+
+## Toggle labels
+This module holds the three Sass placeholder selectors shared by the toggle controls — [Checkbox](../components/checkbox/README.md), [Radio button](../components/radio/README.md) and [Switch](../components/switch/README.md) — so that a `<label>` immediately before or after the input is clickable, uses the **on surface** color role, and dims alongside a disabled input.
+
+It emits nothing that is not extended, so it costs no bytes in a bundle that does not use it, and it is only relevant if you are building a toggle-like component of your own:
+
+```CSS
+@use "material-inspired-component-library/styles/togglelabel";
+
+input[type=checkbox].my-toggle + label {
+    @extend %micl-toggle-label;
+}
+```
+
+The available placeholders are `%micl-toggle-label` (the color role), `%micl-toggle-label-pointer` (the pointer cursor and tap-highlight reset) and `%micl-toggle-label-disabled` (the disabled dimming).
