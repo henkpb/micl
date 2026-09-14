@@ -186,16 +186,21 @@ $switch: 'input[type=checkbox].micl-switch';
 }
 
 #{$switch}:not(:disabled) + label,
-label:has(+ #{$switch}:not(:disabled)) {
+label:has(+ #{$switch}:not(:disabled)),
+label:has(#{$switch}:not(:disabled)) {
     @extend %micl-toggle-label-pointer;
 }
 #{$switch} + label,
-label:has(+ #{$switch}) {
+label:has(+ #{$switch}),
+label:has(#{$switch}) {
     @extend %micl-toggle-label;
 }
 #{$switch}:disabled + label,
 label:has(+ #{$switch}:disabled) {
     @extend %micl-toggle-label-disabled;
+}
+label:has(#{$switch}:disabled) {
+    @extend %micl-toggle-label-disabled-text;
 }
 #{$switch}:dir(rtl)::after {
     transform: rotate(45deg) scaleY(-1);

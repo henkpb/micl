@@ -48,7 +48,7 @@ A switch can be disabled by adding the `disabled` attribute to the `<input>` ele
 
 The Switch component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
 
-The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding or following the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
+The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding, immediately following, or wrapping the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
 
 ## Theming
 Each switch can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child switches.

@@ -164,14 +164,19 @@ $radio: 'input[type=radio].micl-radio';
 }
 
 #{$radio}:not(:disabled) + label,
-label:has(+ #{$radio}:not(:disabled)) {
+label:has(+ #{$radio}:not(:disabled)),
+label:has(#{$radio}:not(:disabled)) {
     @extend %micl-toggle-label-pointer;
 }
 #{$radio} + label,
-label:has(+ #{$radio}) {
+label:has(+ #{$radio}),
+label:has(#{$radio}) {
     @extend %micl-toggle-label;
 }
 #{$radio}:disabled + label,
 label:has(+ #{$radio}:disabled) {
     @extend %micl-toggle-label-disabled;
+}
+label:has(#{$radio}:disabled) {
+    @extend %micl-toggle-label-disabled-text;
 }

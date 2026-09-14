@@ -246,16 +246,21 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
 }
 
 #{$checkbox}:not(:disabled) + label,
-label:has(+ #{$checkbox}:not(:disabled)) {
+label:has(+ #{$checkbox}:not(:disabled)),
+label:has(#{$checkbox}:not(:disabled)) {
     @extend %micl-toggle-label-pointer;
 }
 #{$checkbox} + label,
-label:has(+ #{$checkbox}) {
+label:has(+ #{$checkbox}),
+label:has(#{$checkbox}) {
     @extend %micl-toggle-label;
 }
 #{$checkbox}:disabled + label,
 label:has(+ #{$checkbox}:disabled) {
     @extend %micl-toggle-label-disabled;
+}
+label:has(#{$checkbox}:disabled) {
+    @extend %micl-toggle-label-disabled-text;
 }
 
 #{$checkbox}:dir(rtl) {

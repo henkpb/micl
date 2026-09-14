@@ -38,7 +38,7 @@ A checkbox can be disabled by adding the `disabled` attribute to the `<input>` e
 
 The Checkbox component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute is set on the element itself or inherited from an ancestor.
 
-The component automatically applies `cursor: pointer` and the **on surface** color role to any `<label>` immediately preceding or following a `micl-checkbox` input. You are encouraged to customize these CSS settings to match your design system.
+The component automatically applies `cursor: pointer` and the **on surface** color role to any `<label>` immediately preceding, immediately following, or wrapping a `micl-checkbox` input. You are encouraged to customize these CSS settings to match your design system.
 
 Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification. You only need to set the class yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
 
