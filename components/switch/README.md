@@ -68,6 +68,25 @@ Each switch can be themed with CSS custom properties that follow the Material De
 | `--md-comp-switch-selected-track-color` | The track color when the switch is "on" | `--md-sys-color-primary` |
 | `--md-comp-switch-selected-handle-color` | The handle color when the switch is "on" | `--md-sys-color-on-primary` |
 | `--md-comp-switch-selected-icon-color` | The icon color when the switch is "on" | `--md-sys-color-on-primary-container` |
+| `--md-comp-switch-unselected-hover-handle-color` | The handle color when the switch is "off" and hovered | `--md-sys-color-on-surface-variant` |
+| `--md-comp-switch-unselected-focus-handle-color` | The handle color when the switch is "off" and focused | `--md-sys-color-on-surface-variant` |
+| `--md-comp-switch-unselected-pressed-handle-color` | The handle color when the switch is "off" and pressed | `--md-sys-color-on-surface-variant` |
+| `--md-comp-switch-selected-hover-handle-color` | The handle color when the switch is "on" and hovered | `--md-sys-color-primary-container` |
+| `--md-comp-switch-selected-focus-handle-color` | The handle color when the switch is "on" and focused | `--md-sys-color-primary-container` |
+| `--md-comp-switch-selected-pressed-handle-color` | The handle color when the switch is "on" and pressed | `--md-sys-color-primary-container` |
+| `--md-comp-switch-unselected-state-layer-color` | The state layer color around the handle when the switch is "off" | `--md-sys-color-on-surface` |
+| `--md-comp-switch-selected-state-layer-color` | The state layer color around the handle when the switch is "on" | `--md-sys-color-primary` |
+| `--md-comp-switch-focus-indicator-color` | The color of the focus indicator | `--md-sys-color-secondary` |
+| `--md-comp-switch-disabled-unselected-track-color` | The track color when the switch is disabled and "off" | `--md-sys-color-surface-container-highest` |
+| `--md-comp-switch-disabled-unselected-track-outline-color` | The track border color when the switch is disabled and "off" | `--md-sys-color-on-surface` |
+| `--md-comp-switch-disabled-unselected-handle-color` | The handle color when the switch is disabled and "off" | `--md-sys-color-on-surface` |
+| `--md-comp-switch-disabled-unselected-icon-color` | The icon color when the switch is disabled and "off" | `--md-sys-color-surface-container-highest` |
+| `--md-comp-switch-disabled-selected-track-color` | The track color when the switch is disabled and "on" | `--md-sys-color-on-surface` |
+| `--md-comp-switch-disabled-selected-handle-color` | The handle color when the switch is disabled and "on" | `--md-sys-color-surface` |
+| `--md-comp-switch-disabled-selected-icon-color` | The icon color when the switch is disabled and "on" | `--md-sys-color-on-surface` |
+| `--md-comp-switch-disabled-track-opacity` | The opacity of the track when the switch is disabled | `12%` |
+
+Following the Material Design 3 token set, the handle has its own color for each interaction state. Setting `--md-comp-switch-selected-handle-color` therefore changes the resting state only — override the matching `-hover-`, `-focus-` and `-pressed-` properties to recolor the other states.
 
 **Example: Changing the width of the switch**
 
@@ -79,4 +98,13 @@ Each switch can be themed with CSS custom properties that follow the Material De
 ```
 
 ## Compatibility
-This component utilizes relative RGB color values, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
+This component relies on several recent CSS features, which may not be fully supported in your browser:
+
+| Feature | Used for |
+|---|---|
+| [Relative RGB color values](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) | Dimming the icon of a disabled, selected switch |
+| [`color-mix()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix) | The state layer around the handle |
+| [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) | Styling a `<label>` that precedes its switch |
+| [`:dir()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) | Mirroring the icon for right-to-left languages |
+
+Please check the linked browser-compatibility tables for details.
