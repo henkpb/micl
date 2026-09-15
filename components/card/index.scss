@@ -84,7 +84,8 @@
         --_card-background-color: var(--md-comp-#{$name}-card-disabled-container-color, #{$inert-bg-default});
         --_card-elevation: var(--md-comp-#{$name}-card-disabled-container-elevation, #{$inert-elev-default});
         --_card-opacity: var(--md-comp-#{$name}-card-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity));
-        --_card-pointer-events: none;
+
+        pointer-events: none;
     }
 }
 
@@ -94,18 +95,23 @@
     --_card-focus-outline-offset: var(--md-comp-#{$name}-card-focus-indicator-outline-offset, var(--md-sys-state-focus-indicator-outer-offset));
 }
 
+$actionable: ':is([tabindex="0"], a[href])';
+
 @mixin card-interactive($state) {
-    &[tabindex='0']:not([inert]):#{$state},
-    &:not([tabindex='0']):not([inert]):has(> summary:#{$state}) {
+    &#{$actionable}:not([inert]):#{$state},
+    &:not(#{$actionable}):not([inert]):has(> summary:#{$state}) {
         @content;
     }
 }
 
 $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
 
+$headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__headline-l)';
+
 #{$cards} {
-    --md-comp-card-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-comp-card-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
+    --_card-motion-spatial: var(--md-comp-card-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
+    --_card-motion-duration: var(--md-comp-card-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_card-ripple-duration: var(--md-sys-state-ripple-duration);
 
     --_card-color: var(--md-sys-color-on-surface-variant);
 
@@ -113,24 +119,26 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
     flex-direction: column;
     block-size: fit-content;
     margin: 0;
-    outline: none;
-    overflow: hidden;
-    interpolate-size: allow-keywords;
-
+    border: var(--_card-border, none);
     border-radius: var(--_card-shape);
+    outline: none;
     background-color: var(--_card-background-color);
     box-shadow: var(--_card-elevation);
-    border: var(--_card-border, none);
+    text-decoration: none;
     opacity: var(--_card-opacity, 1);
-    pointer-events: var(--_card-pointer-events, auto);
+    color: inherit;
+    overflow: hidden;
+    interpolate-size: allow-keywords;
 
     &:not(.micl-card--compact):not(:has(>summary)) {
         row-gap: var(--md-comp-card-gap, 8px);
     }
 
-    &[tabindex='0']:not([inert]),
+    &#{$actionable}:not([inert]),
     &:not([inert]) > summary {
         --micl-ripple: 1;
+
+        --statelayer-color: var(--_card-hover-state-color);
 
         background-image:
             radial-gradient(
@@ -143,9 +151,10 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
         background-repeat: no-repeat;
         background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
         background-size: 0%, 100%;
+        -webkit-tap-highlight-color: transparent;
         transition:
             background-size 0ms,
-            --statelayer-opacity var(--md-comp-card-motion-duration) linear;
+            --statelayer-opacity var(--_card-motion-duration) linear;
 
         &:is(:hover, :focus-visible, :active, .micl-card--dragging) {
             --_card-color: var(--md-sys-color-on-surface);
@@ -169,7 +178,7 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
             cursor: grabbing;
         }
         &.micl-rippling {
-            animation: micl-ripple calc(var(--md-sys-state-ripple-duration) * 1.722);
+            animation: micl-ripple calc(var(--_card-ripple-duration) * 1.722);
         }
 
         .micl-card__content {
@@ -184,14 +193,14 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
     @include card-interactive('focus-visible') {
         box-shadow: var(--_card-focus-elevation);
         border-color: var(--_card-focus-border-color, transparent);
-        outline: var(--_card-focus-outline-thickness, 0px) solid var(--_card-focus-outline-color, transparent);
-        outline-offset: var(--_card-focus-outline-offset, 0px);
+        outline: var(--_card-focus-outline-thickness) solid var(--_card-focus-outline-color);
+        outline-offset: var(--_card-focus-outline-offset);
     }
     @include card-interactive('active') {
         box-shadow: var(--_card-pressed-elevation);
         border-color: var(--_card-pressed-border-color, transparent);
     }
-    &[tabindex='0']:not([inert]).micl-card--dragging {
+    &#{$actionable}:not([inert]).micl-card--dragging {
         box-shadow: var(--_card-dragged-elevation);
         border-color: var(--_card-dragged-border-color, transparent);
     }
@@ -200,8 +209,8 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
         block-size: 0;
         overflow: hidden;
         transition:
-            block-size var(--md-comp-card-motion-duration) var(--md-comp-card-motion-spatial),
-            content-visibility var(--md-comp-card-motion-duration) linear allow-discrete;
+            block-size var(--_card-motion-duration) var(--_card-motion-spatial),
+            content-visibility var(--_card-motion-duration) linear allow-discrete;
     }
     &[open]::details-content {
         block-size: auto;
@@ -213,13 +222,16 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
         outline: none;
         list-style: none;
         cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
 
         &:not(.micl-card--compact) {
             row-gap: var(--md-comp-card-gap, 8px);
         }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+        --_card-motion-duration: 0ms;
+        --_card-ripple-duration: 0ms;
+    }
 }
 
 .micl-card-elevated {
@@ -281,6 +293,7 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
 .micl-card__image {
     display: block;
     inline-size: 100%;
+    object-fit: contain;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -289,12 +302,12 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
 
 #{$cards},
 #{$cards} > summary {
-    &> [class*='micl-card__headline-']:first-child {
+    &> #{$headlines}:first-child {
         padding-block-start: var(--md-comp-card-content-padding-block, 16px);
     }
 }
 
-[class*='micl-card__headline-'] {
+#{$headlines} {
     display: flex;
     align-items: center;
     column-gap: var(--md-comp-card-gap, 8px);
@@ -304,16 +317,14 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
         flex: 1 2 fit-content;
         margin: 0;
         padding-inline: var(--md-comp-card-padding-inline, 16px);
+        display: -webkit-box;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: var(--md-comp-card-headline-line-clamp, 1);
 
         &:has(+ button) {
             padding-inline-end: 0;
         }
-    }
-    &:has(button) {
-        margin-block: 0;
     }
 }
 
@@ -325,13 +336,17 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
 
 .micl-card__subhead {
     @include typography.title-medium;
-    display: block;
-    margin: calc(-1 * var(--md-comp-card-gap, 8px)) 0 var(--md-comp-card-gap, 8px) 0;
-    padding: 0 var(--md-comp-card-padding-inline, 16px);
+    display: -webkit-box;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin: 0 0 var(--md-comp-card-gap, 8px) 0;
+    padding: 0 var(--md-comp-card-padding-inline, 16px);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--md-comp-card-subhead-line-clamp, 1);
     color: var(--_card-color);
+
+    &:not(:first-child) {
+        margin-block-start: calc(-1 * var(--md-comp-card-gap, 8px));
+    }
 }
 
 .micl-card__supporting-text {
@@ -354,7 +369,7 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
     display: flex;
     flex-shrink: 0;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--md-comp-card-gap, 8px);
     padding-block: 0 var(--md-comp-card-content-padding-block, 16px);
     padding-inline: var(--md-comp-card-padding-inline, 16px);
 
@@ -366,24 +381,23 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
     }
 }
 
-.micl-card--compact,
-summary.micl-card--compact {
+.micl-card--compact {
     display: grid;
     grid-template-columns: 20% 1fr;
-    padding-block-end: 0;
 
     .micl-card__image {
         grid-column: 1;
         grid-row: 1 / span 4;
         block-size: 100%;
+        object-fit: cover;
         background-size: cover;
     }
-    [class*='micl-card__headline-'],
+    #{$headlines},
     .micl-card__subhead, .micl-card__supporting-text {
         grid-column: 2;
         min-inline-size: 0;
     }
-    [class*='micl-card__headline-'], .micl-card__supporting-text {
+    #{$headlines}, .micl-card__supporting-text {
         margin-block-start: var(--md-comp-card-gap, 8px);
     }
     .micl-card__subhead {
@@ -396,4 +410,9 @@ summary.micl-card--compact {
     &:not(:has(.micl-card__content)) > :last-child {
         margin-block-end: var(--md-comp-card-gap, 8px);
     }
+}
+
+summary.micl-card--compact {
+    display: grid;
+    padding-block-end: 0;
 }

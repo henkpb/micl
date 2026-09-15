@@ -30,25 +30,11 @@ No custom JavaScript is required for the core functionality of this component.
 ### Live Demo
 A live example of the [Card component](https://henkpb.github.io/micl/card.html) is available to interact with.
 
-## Variants
-Cards are available in **three distinct styles**:
-
-- `micl-card-elevated`: A card with a subtle shadow, visually lifted from the background. This is the style shown in Basic Usage.
-
-- `micl-card-filled`: A card with a solid background color, blending more seamlessly with its surroundings.
-  ```HTML
-  <div class="micl-card-filled">
-    <p>This is a filled card.</p>
-  </div>
-  ```
-
-- `micl-card-outlined`: A card with a clear border, often used for less prominent content or to indicate interactivity.
-
-### Card Content Structure
+## Card Content Structure
 While the card container is the only required element, the Card component provides several optional utility classes to help structure your card's content:
 
 ```HTML
-<div class="micl-card-outlined" tabindex="0">
+<div class="micl-card-outlined">
   <img alt="Descriptive image text" class="micl-card__image" src="/path/to/your/image.jpg">
 
   <div class="micl-card__headline-m">
@@ -69,9 +55,17 @@ While the card container is the only required element, the Card component provid
   - `micl-card__headline-m` (medium) - *Used in the example above*
   - `micl-card__headline-l` (large)
 
-- `micl-card__image`: Applies styling to an `<img>` element or an element with a `background-image` style used as the primary image for the card.
+  A headline occupies a single line and is ellipsed when it does not fit. To let it run onto more lines before being ellipsed, increase the `--md-comp-card-headline-line-clamp` value:
 
-- `micl-card__subhead`: For secondary headings, displayed with a smaller font than the main headline.
+  ```HTML
+  <div class="micl-card__headline-m" style="--md-comp-card-headline-line-clamp:2">
+    <h2>A headline long enough to need a second line</h2>
+  </div>
+  ```
+
+- `micl-card__image`: Applies styling to an `<img>` element or an element with a `background-image` style used as the primary image for the card. The media carries the card's corner shape on every side, including the edges that face the card's interior.
+
+- `micl-card__subhead`: For secondary headings, displayed with a smaller font than the main headline. Like a headline it occupies a single line and is ellipsed when it does not fit; increase the `--md-comp-card-subhead-line-clamp` value to allow more lines.
 
 - `micl-card__supporting-text`: Intended for short descriptions or supplementary information, displayed with a smaller font.
 
@@ -79,8 +73,35 @@ While the card container is the only required element, the Card component provid
 
 - `micl-card__actions`: A flexible container for any action buttons.
 
+## Variants
+Cards are available in **three distinct styles**:
+
+- `micl-card-elevated`: A card with a subtle shadow, visually lifted from the background. This is the style shown in Basic Usage.
+
+- `micl-card-filled`: A card with a solid background color, blending more seamlessly with its surroundings.
+  ```HTML
+  <div class="micl-card-filled">
+    <p>This is a filled card.</p>
+  </div>
+  ```
+
+- `micl-card-outlined`: A card with a clear border, often used for less prominent content or to indicate interactivity.
+
 ### Actionable Cards
-For cards that are themselves clickable or interactive (e.g., to navigate to another page), specify the `tabindex="0"` attribute on the card container. Non-actionable cards, which contain interactive elements like buttons or links within their content, should *not* have a tabindex on the card container itself.
+For a card that is itself clickable — the whole card navigates somewhere — use an `<a>` element with an `href` as the card container. The card then picks up the hover, focus, pressed and ripple states, and is operable with the keyboard and announced correctly by assistive technology without any extra attributes or JavaScript.
+
+```HTML
+<a class="micl-card-outlined" href="/article/42">
+  <div class="micl-card__headline-m">
+    <h2>Card headline</h2>
+  </div>
+  <p class="micl-card__supporting-text">The whole card is the link.</p>
+</a>
+```
+
+The same states are also applied to a card carrying `tabindex="0"`, which is the escape hatch for a card that acts on something other than a navigation. A `tabindex` only makes the card focusable, though — it does **not** make it operable. If you use it, you must supply the activation yourself: give the card the right `role` (usually `button`), and handle both `click` and the <kbd>Enter</kbd>/<kbd>Space</kbd> keys, or the card will be a focus stop that does nothing.
+
+Non-actionable cards, which contain interactive elements like buttons or links within their content, should be a `<div>` with neither an `href` nor a `tabindex` on the card container itself.
 
 ### Expandable Cards
 Cards can also serve as containers for expandable detail areas using the `<details>` and `<summary>` elements. In this scenario, the `<summary>` element becomes the actionable part of the card.
@@ -101,7 +122,7 @@ Cards can also serve as containers for expandable detail areas using the `<detai
 ```
 
 ### Compact Cards
-Add the `micl-card--compact` to the main `<div>` element (or, the `<summary>` element for expandable cards) to create a compact version of the card header.
+Add the `micl-card--compact` class to the main `<div>` element (or, the `<summary>` element for expandable cards) to create a compact version of the card header.
 
 ### States
 - **Disabled Cards**: To visually indicate a disabled card (e.g., non-interactive), add the `inert` attribute to the card container.
@@ -113,10 +134,15 @@ Each card can be themed with CSS custom properties that follow the Material Desi
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-card-margin` | Sets the spacing between adjacent cards both horizontally and vertically | `8px` |
 | `--md-comp-card-padding-inline` | Defines the amount of space between the left and right edges of a card and its content | `16px` |
 | `--md-comp-card-content-padding-block` | The amount of vertical padding reserved for the content area | `16px` |
-| `--md-comp-card-gap` | Defines the amount of vertical space between structural elements inside the card | `8px` |
+| `--md-comp-card-gap` | Defines the amount of space between structural elements inside the card, and between the buttons in a `micl-card__actions` row | `8px` |
+| `--md-comp-card-headline-line-clamp` | The number of lines a headline may run to before it is ellipsed | `1` |
+| `--md-comp-card-subhead-line-clamp` | The number of lines a subhead may run to before it is ellipsed | `1` |
+| `--md-comp-card-motion-duration` | How long the detail area of an expandable card takes to open and close, and how long a state layer takes to fade | `--md-sys-motion-expressive-default-spatial-duration` |
+| `--md-comp-card-motion-spatial` | The easing curve used while the detail area of an expandable card opens and closes | `--md-sys-motion-expressive-default-spatial` |
+
+The spacing *between* adjacent cards is not a property of the card itself — it is applied by the [Layout foundation](../../foundations/layout/README.md), which sets the gap on a `micl-pane` or `micl-pane__column` that holds cards. Set `--md-sys-card-margin` on, or above, that container.
 
 Each card style additionally supports the following CSS custom properties, as defined in the [Material Design 3 Expressive Card Specification](https://m3.material.io/components/cards/specs). The hover, focus, pressed and dragged properties only apply to actionable cards.
 
@@ -206,17 +232,19 @@ Each card style additionally supports the following CSS custom properties, as de
 | `--md-comp-outlined-card-dragged-state-layer-color` | The state layer color of the card while dragged | `--md-sys-color-on-surface` |
 | `--md-comp-outlined-card-dragged-state-layer-opacity` | The state layer opacity of the card while dragged | `--md-sys-state-dragged-state-layer-opacity` |
 
-**Example: Changing the card margins**
+**Example: Changing the spacing between cards**
+
+The gap comes from the pane that holds the cards, so set the property on the `micl-pane` (or on any of its ancestors):
 
 ```HTML
-<div style="--md-comp-card-margin:4px">
+<section class="micl-pane" style="--md-sys-card-margin:4px">
   <div class="micl-card-filled">
     <p>This is a filled card.</p>
   </div>
   <div class="micl-card-filled">
     <p>This is another filled card.</p>
   </div>
-</div>
+</section>
 ```
 
 To change the amount of rounding of a filled card's corners, you could for example add a CSS rule to your stylesheet:
@@ -228,6 +256,8 @@ To change the amount of rounding of a filled card's corners, you could for examp
 ```
 
 ## Compatibility
+To preserve its rounded corners, a card clips its internal content. Because of this, anything meant to extend past the card's edges (like a dropdown menu or tooltip) will be cut off unless it is rendered in the top layer with the `popover` attribute or a `<dialog>`, as the MICL Menu and Dialog components are.
+
 This component utilizes relative RGB color values, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
 
 The Card component uses the `interpolate-size` CSS property to smoothly open and close the detail area of a Details disclosure element, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.
