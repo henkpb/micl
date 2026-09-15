@@ -11,6 +11,8 @@ To add a basic checkbox, use the `<input type="checkbox">` element with the `mic
 <label for="mycheckbox">Bar</label>
 ```
 
+**Note on labels**: The component automatically applies `cursor: pointer` and the **on surface** color role to any `<label>` immediately preceding, immediately following, or wrapping a `micl-checkbox` input. You are encouraged to customize these CSS settings to match your design system.
+
 ### CSS
 Import the checkbox styles into your project:
 
@@ -37,8 +39,6 @@ A live example of the [Checkbox component](https://henkpb.github.io/micl/checkbo
 A checkbox can be disabled by adding the `disabled` attribute to the `<input>` element.
 
 The Checkbox component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute is set on the element itself or inherited from an ancestor.
-
-The component automatically applies `cursor: pointer` and the **on surface** color role to any `<label>` immediately preceding, immediately following, or wrapping a `micl-checkbox` input. You are encouraged to customize these CSS settings to match your design system.
 
 Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification. You only need to set the class yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
 

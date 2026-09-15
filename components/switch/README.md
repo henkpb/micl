@@ -11,6 +11,8 @@ To add a basic switch, use the `<input type="checkbox">` element with the `micl-
 <label for="myswitch">My choice</label>
 ```
 
+**Note on labels**: The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding, immediately following, or wrapping the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
+
 ### CSS
 Import the switch styles into your project:
 
@@ -30,7 +32,7 @@ No custom JavaScript is required for the core functionality of this component.
 A live example of the [Switch component](https://henkpb.github.io/micl/switch.html) is available to interact with.
 
 ## Variants
-By default, the component displays an icon on the switch handle in both the selected and unselected state. To remove the icon in the unselected state, assign an empty string to the following CSS variable:
+By default, the component displays an icon on the switch handle in both the selected and unselected state. To remove the icon in the unselected state, set the corresponding CSS custom property to an empty string:
 
 ```CSS
 #myswitch {
@@ -47,8 +49,6 @@ To remove the icon in the selected state:
 A switch can be disabled by adding the `disabled` attribute to the `<input>` element.
 
 The Switch component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
-
-The component applies `cursor: pointer` and the color role **on surface** to the `<label>` element immediately preceding, immediately following, or wrapping the `<input type="checkbox">` with the `micl-switch` class. You are encouraged to customize these CSS settings to match your design system.
 
 ## Theming
 Each switch can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child switches.
@@ -86,7 +86,7 @@ Each switch can be themed with CSS custom properties that follow the Material De
 | `--md-comp-switch-disabled-selected-icon-color` | The icon color when the switch is disabled and "on" | `--md-sys-color-on-surface` |
 | `--md-comp-switch-disabled-track-opacity` | The opacity of the track when the switch is disabled | `12%` |
 
-Following the Material Design 3 token set, the handle has its own color for each interaction state. Setting `--md-comp-switch-selected-handle-color` therefore changes the resting state only — override the matching `-hover-`, `-focus-` and `-pressed-` properties to recolor the other states.
+Because this component follows the Material Design 3 token set, the handle requires distinct colors for each interaction state. Modifying `--md-comp-switch-selected-handle-color` only changes the *resting* state. To ensure a consistent theme, remember to also override the matching `-hover-`, `-focus-`, and `-pressed-` properties.
 
 **Example: Changing the width of the switch**
 

@@ -11,6 +11,8 @@ To add a basic radio button, use the `<input type="radio">` element with the `mi
 <label for="myradio">First choice</label>
 ```
 
+**Note on labels**: The component automatically applies `cursor: pointer` and the **on-surface** color role to any `<label>` immediately preceding, immediately following, or wrapping a `micl-radio` input. You are encouraged to customize these CSS settings to match your design system.
+
 ### CSS
 Import the radio button styles into your project:
 
@@ -33,8 +35,6 @@ A live example of the [Radio button component](https://henkpb.github.io/micl/rad
 A radio button can be disabled by adding the `disabled` attribute to the `<input>` element.
 
 The Radio button component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute is set on the element itself or inherited from an ancestor.
-
-The component automatically applies `cursor: pointer` and the **on-surface** color role to any `<label>` immediately preceding, immediately following, or wrapping a `micl-radio` input. You are encouraged to customize these CSS settings to match your design system.
 
 To vertically align a radio button with its label, wrap both in an element with styling similar to the following:
 
