@@ -115,6 +115,12 @@ nav.micl-navigationbar {
                 margin-block-start: 0;
                 padding-inline-end: var(--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space, 16px);
             }
+            .micl-navigationbar__text:has(+ .micl-badge--trailing) {
+                padding-inline-end: 0;
+            }
+            .micl-badge--trailing {
+                margin-inline-end: var(--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space, 16px);
+            }
         }
     }
 }

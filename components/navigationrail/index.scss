@@ -263,6 +263,12 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
             margin-inline-start: var(--_navigationrail-expanded-text-margin);
             padding-inline-end: 16px;
         }
+        .micl-navigationrail__text:has(+ .micl-badge--trailing) {
+            padding-inline-end: 0;
+        }
+        .micl-badge--trailing {
+            margin-inline-end: 16px;
+        }
 
         &:not(:has(.micl-navigationrail__icon)) .micl-navigationrail__text {
             margin-inline-start: 0px;
