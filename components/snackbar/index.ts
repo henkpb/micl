@@ -26,28 +26,24 @@ export const snackbarSelector = '.micl-snackbar';
 interface SnackbarState {
     timeoutid?: number;
     delay: number;
-    boundHandleToggle: (event: Event) => void;
-    boundClearTimer: () => void;
-    boundHandleMouseLeave: () => void;
+    hovering: boolean;
+    controller: AbortController;
 }
 
 const snackbarStates = new WeakMap<HTMLElement, SnackbarState>();
 
-const clearTimer = (element: HTMLElement): void =>
+const clearTimer = (state: SnackbarState): void =>
 {
-    const state = snackbarStates.get(element);
-    if (state && state.timeoutid) {
-        clearTimeout(state.timeoutid);
-        state.timeoutid = undefined;
-    }
+    clearTimeout(state.timeoutid);
+    state.timeoutid = undefined;
 };
 
-const startTimer = (element: HTMLElement): void =>
+const updateTimer = (element: HTMLElement, state: SnackbarState): void =>
 {
-    clearTimer(element);
-    const state = snackbarStates.get(element);
-    if (!state) return;
-
+    clearTimer(state);
+    if (!element.matches(':popover-open') || state.hovering || element.matches(':has(:focus-visible)')) {
+        return;
+    }
     state.timeoutid = window.setTimeout(() => {
         if (element.isConnected && element.matches(':popover-open')) {
             element.hidePopover();
@@ -63,45 +59,38 @@ export default register(snackbarSelector,
             return;
         }
 
-        const delayAttr = element.dataset.micldelay;
-        const delay = delayAttr ? parseInt(delayAttr, 10) : 0;
-
-        if (isNaN(delay) || delay <= 0) return;
+        const delay = parseInt(element.dataset.micldelay ?? '', 10);
+        if (!(delay > 0)) return;
 
         element.dataset.miclinitialized = '1';
 
-        // Create bound handlers specifically for THIS snackbar.
-        const boundClearTimer = () => clearTimer(element);
+        const state: SnackbarState = { delay, hovering: false, controller: new AbortController() };
+        snackbarStates.set(element, state);
 
-        const boundHandleToggle = (event: Event): void =>
+        const update = (): void => updateTimer(element, state);
+
+        const toggle = (): void =>
         {
-            const toggleEvent = event as ToggleEvent;
-            if (toggleEvent.newState === 'open') {
-                startTimer(element);
-            }
-            else {
-                clearTimer(element);
+            state.hovering = false;
+            update();
+        };
+
+        const hover = (event: Event): void =>
+        {
+            if ((event as PointerEvent).pointerType !== 'touch') {
+                state.hovering = event.type === 'pointerenter';
+                update();
             }
         };
 
-        const boundHandleMouseLeave = (): void =>
-        {
-            if (element.matches(':popover-open')) {
-                startTimer(element);
-            }
-        };
+        const options = { signal: state.controller.signal };
+        element.addEventListener('toggle', toggle, options);
+        element.addEventListener('pointerenter', hover, options);
+        element.addEventListener('pointerleave', hover, options);
+        element.addEventListener('focusin', update, options);
+        element.addEventListener('focusout', update, options);
 
-        // Save these references in the WeakMap.
-        snackbarStates.set(element, {
-            delay,
-            boundHandleToggle,
-            boundClearTimer,
-            boundHandleMouseLeave
-        });
-
-        element.addEventListener('toggle', boundHandleToggle);
-        element.addEventListener('mouseenter', boundClearTimer);
-        element.addEventListener('mouseleave', boundHandleMouseLeave);
+        update();
     },
 
     cleanup: (element: HTMLElement): void =>
@@ -109,10 +98,8 @@ export default register(snackbarSelector,
         const state = snackbarStates.get(element);
 
         if (state) {
-            clearTimer(element);
-            element.removeEventListener('toggle', state.boundHandleToggle);
-            element.removeEventListener('mouseenter', state.boundClearTimer);
-            element.removeEventListener('mouseleave', state.boundHandleMouseLeave);
+            state.controller.abort();
+            clearTimer(state);
             snackbarStates.delete(element);
         }
         delete element.dataset.miclinitialized;

@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations/layout/tokens' as layout;
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -31,7 +31,6 @@
 @include shape.corner('extra-small');
 
 @include statelayer.token('hover-state-layer-opacity');
-@include statelayer.token('focus-state-layer-opacity');
 @include statelayer.token('pressed-state-layer-opacity');
 @include statelayer.property;
 
@@ -53,13 +52,13 @@
     column-gap: 4px;
 
     block-size: 0;
-    inline-size: max-content;
-    max-inline-size: min(layout.$md-sys-breakpoint-expanded-max, calc(100vw - (2 * var(--md-sys-layout-window-margin))));
-    min-inline-size: 300px;
+    inline-size: fit-content;
+    max-inline-size: var(--md-comp-snackbar-container-max-width, #{layout.$md-sys-breakpoint-medium-min});
+    min-inline-size: var(--md-comp-snackbar-container-min-width, 320px);
 
     inset: auto;
-    inset-block-end: calc(var(--md-comp-snackbar-margin, 24px) + env(safe-area-inset-bottom));
-    inset-inline: 0;
+    inset-block-end: calc(var(--md-comp-snackbar-margin, 8px) + env(safe-area-inset-bottom, 0px));
+    inset-inline: var(--md-sys-layout-window-margin);
     margin-block: 0;
     margin-inline: auto;
     padding-block: 0;
@@ -76,7 +75,7 @@
     background-size: 100%;
 
     opacity: 0;
-    overflow-y: hidden;
+    overflow: clip;
 
     transition:
         block-size var(--micl-duration) var(--md-comp-snackbar-motion-spatial),
@@ -86,16 +85,12 @@
         --statelayer-opacity var(--md-comp-snackbar-motion-duration) linear;
 
     &:hover {
-        --statelayer-color: var(--md-comp-snackbar-action-hover-state-layer-color, var(--md-sys-color-inverse-primary));
-        --statelayer-opacity: var(--md-comp-snackbar-action-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity));
-    }
-    &:focus-visible {
-        --statelayer-color: var(--md-comp-snackbar-action-focus-state-layer-color, var(--md-sys-color-inverse-primary));
-        --statelayer-opacity: var(--md-comp-snackbar-action-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity));
+        --statelayer-color: var(--md-comp-snackbar-hover-state-layer-color, var(--md-sys-color-inverse-primary));
+        --statelayer-opacity: var(--md-comp-snackbar-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity));
     }
     &:active {
-        --statelayer-color: var(--md-comp-snackbar-action-pressed-state-layer-color, var(--md-sys-color-inverse-primary));
-        --statelayer-opacity: var(--md-comp-snackbar-action-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity));
+        --statelayer-color: var(--md-comp-snackbar-pressed-state-layer-color, var(--md-sys-color-inverse-primary));
+        --statelayer-opacity: var(--md-comp-snackbar-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity));
     }
 
     &:popover-open {
@@ -157,7 +152,7 @@
 
 @media (max-width: layout.$md-sys-breakpoint-compact-max) {
     .micl-snackbar {
-        inline-size: calc(100vw - (2 * var(--md-sys-layout-window-margin)));
+        inline-size: auto;
         min-inline-size: auto;
     }
 }
