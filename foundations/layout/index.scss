@@ -19,44 +19,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@forward 'tokens';
+@use 'tokens' as *;
 @use '../../styles/shape';
 
 @include shape.corner('medium');
-
-$md-sys-breakpoint-compact-max: 599px;
-$md-sys-breakpoint-medium-min: 600px;
-$md-sys-breakpoint-medium-max: 839px;
-$md-sys-breakpoint-expanded-min: 840px;
-$md-sys-breakpoint-expanded-max: 1199px;
-$md-sys-breakpoint-large-min: 1200px;
-$md-sys-breakpoint-large-max: 1599px;
-$md-sys-breakpoint-extralarge-min: 1600px;
-
-$md-sys-window-margin-compact: 16px;
-$md-sys-window-margin: 24px; // medium and larger breakpoints
-
-$md-sys-pane-spacer: 24px;
-
-$md-sys-pane-fixed-width-expanded: 360px;
-$md-sys-pane-fixed-width-large: 412px;
-
-$md-sys-card-margin: 8px;
-
-:root {
-    --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
-    --md-sys-layout-window-margin: #{$md-sys-window-margin};
-    --md-sys-card-margin: #{$md-sys-card-margin};
-
-    @media (max-width: $md-sys-breakpoint-compact-max) {
-        --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
-    }
-    @media (min-width: $md-sys-breakpoint-expanded-min) and (max-width: $md-sys-breakpoint-expanded-max) {
-        --md-sys-layout-pane-fixed-width: #{$md-sys-pane-fixed-width-expanded};
-    }
-    @media (min-width: $md-sys-breakpoint-large-min) {
-        --md-sys-layout-pane-fixed-width: #{$md-sys-pane-fixed-width-large};
-    }
-}
 
 .micl-window {
     padding:
