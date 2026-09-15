@@ -61,7 +61,7 @@
             // re-anchor it to this button's box.
             &::before {
                 inset: auto;
-                inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - var(--md-sys-target-size, 48px) / 2);
+                inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - var(--md-sys-state-target-size, 48px) / 2);
                 inset-inline-start: anchor(var(--micl-stepper-anchor) start);
                 inset-inline-end: anchor(var(--micl-stepper-anchor) end);
                 inline-size: auto;

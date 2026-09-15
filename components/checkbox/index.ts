@@ -23,20 +23,44 @@ import { register } from '../../foundations/runtime';
 
 export const checkboxGroupSelector = '.micl-checkbox-group';
 
+type GroupState = 'empty' | 'none' | 'some' | 'all';
+
+let announcing = false;
+
 const getParentCheckbox = (checkboxGroup: HTMLElement): HTMLInputElement | null =>
 {
-    const parentCheckbox = checkboxGroup.querySelector<HTMLInputElement>('.micl-checkbox__parent');
-    return (parentCheckbox?.closest(checkboxGroupSelector) === checkboxGroup) ? parentCheckbox : null;
+    for (const cb of checkboxGroup.querySelectorAll<HTMLInputElement>('.micl-checkbox__parent')) {
+        if (cb.closest(checkboxGroupSelector) === checkboxGroup) {
+            return cb;
+        }
+    }
+    return null;
 };
 
-const refreshParentCheckbox = (checkboxGroup: HTMLElement): boolean =>
+const setState = (
+    cb: HTMLInputElement,
+    checked: boolean,
+    indeterminate: boolean,
+    changed: HTMLInputElement[]
+): void =>
+{
+    if (cb.checked === checked && cb.indeterminate === indeterminate) {
+        return;
+    }
+    cb.checked = checked;
+    cb.indeterminate = indeterminate;
+    changed.push(cb);
+};
+
+const refreshParentCheckbox = (checkboxGroup: HTMLElement, changed: HTMLInputElement[]): GroupState =>
 {
     const parentCheckbox = getParentCheckbox(checkboxGroup);
     if (!parentCheckbox) {
-        return false;
+        return 'empty';
     }
     let nrCheckboxes = 0,
-        nrCheckedCheckboxes = 0;
+        nrCheckedCheckboxes = 0,
+        nrMixedCheckboxes = 0;
 
     checkboxGroup.querySelectorAll<HTMLInputElement>(
         'input[type="checkbox"].micl-checkbox'
@@ -45,40 +69,55 @@ const refreshParentCheckbox = (checkboxGroup: HTMLElement): boolean =>
         if (cb !== parentCheckbox) {
             const group = cb.closest(checkboxGroupSelector) as HTMLElement;
             if (group === checkboxGroup) {
-                nrCheckboxes++;
-                if (cb.checked && !cb.indeterminate) {
-                    nrCheckedCheckboxes++;
+                if (!cb.disabled) {
+                    nrCheckboxes++;
+                    if (cb.indeterminate) {
+                        nrMixedCheckboxes++;
+                    }
+                    else if (cb.checked) {
+                        nrCheckedCheckboxes++;
+                    }
                 }
             }
             else if (
                 cb.classList.contains('micl-checkbox__parent')
                 && (group?.parentElement?.closest(checkboxGroupSelector) === checkboxGroup)
             ) {
-                nrCheckboxes++;
-                if (refreshParentCheckbox(group)) {
-                    nrCheckedCheckboxes++;
+                const subState = refreshParentCheckbox(group, changed);
+                if (subState !== 'empty') {
+                    nrCheckboxes++;
+                    if (subState === 'all') {
+                        nrCheckedCheckboxes++;
+                    }
+                    else if (subState === 'some') {
+                        nrMixedCheckboxes++;
+                    }
                 }
             }
         }
     });
 
-    if (nrCheckedCheckboxes === 0) {
-        parentCheckbox.checked = false;
-        parentCheckbox.indeterminate = false;
+    let state: GroupState = (nrCheckboxes > 0) ? 'none' : 'empty';
+    if (
+        (nrMixedCheckboxes > 0)
+        || ((nrCheckedCheckboxes > 0) && (nrCheckedCheckboxes < nrCheckboxes))
+    ) {
+        state = 'some';
     }
-    else if (nrCheckedCheckboxes === nrCheckboxes) {
-        parentCheckbox.checked = true;
-        parentCheckbox.indeterminate = false;
-    }
-    else {
-        parentCheckbox.checked = true;
-        parentCheckbox.indeterminate = true;
+    else if ((nrCheckboxes > 0) && (nrCheckedCheckboxes === nrCheckboxes)) {
+        state = 'all';
     }
 
-    return nrCheckedCheckboxes === nrCheckboxes;
+    setState(parentCheckbox, state === 'all', state === 'some', changed);
+
+    return state;
 };
 
-const updateCheckboxGroup = (checkboxGroup: HTMLElement, checked: boolean): void =>
+const updateCheckboxGroup = (
+    checkboxGroup: HTMLElement,
+    checked: boolean,
+    changed: HTMLInputElement[]
+): void =>
 {
     checkboxGroup.querySelectorAll<HTMLInputElement>(
         'input[type="checkbox"].micl-checkbox'
@@ -86,14 +125,15 @@ const updateCheckboxGroup = (checkboxGroup: HTMLElement, checked: boolean): void
     {
         const group = cb.closest(checkboxGroupSelector) as HTMLElement;
         if (group === checkboxGroup) {
-            cb.checked = checked;
+            if (!cb.disabled) {
+                setState(cb, checked, false, changed);
+            }
         }
         else if (
             cb.classList.contains('micl-checkbox__parent')
             && (group?.parentElement?.closest(checkboxGroupSelector) === checkboxGroup)
         ) {
-            cb.checked = checked;
-            updateCheckboxGroup(group, checked);
+            updateCheckboxGroup(group, checked, changed);
         }
     });
 };
@@ -105,8 +145,10 @@ const refreshCheckboxGroup = (checkboxGroup: HTMLElement, input: HTMLInputElemen
         return;
     }
 
+    const changed: HTMLInputElement[] = [];
+
     if (input === parentCheckbox) {
-        updateCheckboxGroup(checkboxGroup, input.checked);
+        updateCheckboxGroup(checkboxGroup, input.checked, changed);
     }
 
     let parentCheckboxGroup,
@@ -117,7 +159,35 @@ const refreshCheckboxGroup = (checkboxGroup: HTMLElement, input: HTMLInputElemen
     }
     while (cbg);
 
-    refreshParentCheckbox(parentCheckboxGroup);
+    refreshParentCheckbox(parentCheckboxGroup, changed);
+
+    if (input && changed.length) {
+        announcing = true;
+        try {
+            changed.forEach(cb => cb.dispatchEvent(new Event('change', {
+                bubbles   : true,
+                cancelable: true
+            })));
+        }
+        finally {
+            announcing = false;
+        }
+    }
+};
+
+const handleChange = (event: Event): void =>
+{
+    const checkboxGroup = event.currentTarget as HTMLElement;
+    const input = event.target as HTMLInputElement;
+    if (
+        announcing
+        || !input.classList.contains('micl-checkbox')
+        || input.closest(checkboxGroupSelector) !== checkboxGroup
+    ) {
+        return;
+    }
+
+    refreshCheckboxGroup(checkboxGroup, input);
 };
 
 export default register(checkboxGroupSelector, {
@@ -131,17 +201,16 @@ export default register(checkboxGroupSelector, {
         }
         element.dataset.miclinitialized = '1';
 
-        element.addEventListener('change', event =>
-        {
-            const input = event.target as HTMLInputElement;
-            if (!input.classList.contains('micl-checkbox')) {
-                return;
-            }
-            event.stopPropagation();
-
-            refreshCheckboxGroup(element, input);
-        });
+        element.addEventListener('change', handleChange);
 
         refreshCheckboxGroup(element, null);
+    },
+
+    cleanup: (element: HTMLElement): void =>
+    {
+        if (element.matches(checkboxGroupSelector)) {
+            element.removeEventListener('change', handleChange);
+            delete element.dataset.miclinitialized;
+        }
     }
 }, HTMLElement);

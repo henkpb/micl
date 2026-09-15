@@ -76,7 +76,7 @@ dialog.micl-dialog.micl-timepicker {
     --_dial-size: var(--md-comp-time-picker-clock-dial-container-size, 256px);
     --_center-size: var(--md-comp-time-picker-clock-dial-selector-center-container-size, 8px);
     --_track-width: var(--md-comp-time-picker-clock-dial-selector-track-container-width, 2px);
-    --_target: var(--md-sys-target-size, 48px);
+    --_target: var(--md-sys-state-target-size, 48px);
 
     .micl-dialog__headline {
         padding-block-end: 20px;

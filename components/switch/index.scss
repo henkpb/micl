@@ -22,8 +22,7 @@
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
-@use '../../styles/typography';
-@use '../checkbox/label';
+@use '../../styles/togglelabel';
 
 @include shape.corner('full');
 
@@ -33,6 +32,7 @@
 @include statelayer.token('pressed-state-layer-opacity');
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
+@include statelayer.token('focus-indicator-outer-offset');
 
 $switch: 'input[type=checkbox].micl-switch';
 
@@ -49,7 +49,9 @@ $switch: 'input[type=checkbox].micl-switch';
     --_handle-selected-size: var(--md-comp-switch-selected-handle-size, 24px);
     --_handle-pressed-size: var(--md-comp-switch-pressed-handle-size, 28px);
     --_layer: var(--md-sys-state-layer-size, 40px);
-    --_target: var(--md-sys-target-size, 48px);
+    --_target: var(--md-sys-state-target-size, 48px);
+    --_unselected-layer-color: var(--md-comp-switch-unselected-state-layer-color, var(--md-sys-color-on-surface));
+    --_selected-layer-color: var(--md-comp-switch-selected-state-layer-color, var(--md-sys-color-primary));
 
     appearance: none;
     position: relative;
@@ -73,21 +75,20 @@ $switch: 'input[type=checkbox].micl-switch';
         background-color: var(--md-comp-switch-unselected-track-color, var(--md-sys-color-surface-container-highest));
         transition: background-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
-    // The handle: a state-layer-sized box whose transparent border shrinks the painted
-    // content box to the handle size; the icon glyphs are rotated typeface characters,
-    // with their metrics tuned in pixels against a 16px base.
     &::after {
         content: var(--md-comp-switch-unselected-icon);
         box-sizing: border-box;
         position: absolute;
+        display: grid;
+        grid-template-rows: auto 3px;
+        place-items: center;
         inline-size: var(--_layer);
         block-size: var(--_layer);
         inset: 0;
-        inset-inline-start: calc((var(--_target) - var(--_layer) - 16px) / 2);
+        inset-inline-start: calc((var(--_track-height) - var(--_layer)) / 2);
         margin: auto 0;
-        font: 300 16px / 16px var(--md-ref-typeface-plain);
+        font: 300 18px / 0 var(--md-ref-typeface-plain);
         color: var(--md-comp-switch-unselected-icon-color, var(--md-sys-color-surface-container-highest));
-        text-align: center;
         background-color: var(--md-comp-switch-unselected-handle-color, var(--md-sys-color-outline));
         background-clip: content-box;
         border: calc((var(--_layer) - var(--_handle-size)) / 2) solid transparent;
@@ -96,20 +97,21 @@ $switch: 'input[type=checkbox].micl-switch';
         transition:
             inset-inline-start var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
             border-width var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
-            line-height var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
+            grid-template-rows var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
             color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
             border-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
             background-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &:checked {
         &::before {
+            border-color: var(--md-comp-switch-selected-track-color, var(--md-sys-color-primary));
             background-color: var(--md-comp-switch-selected-track-color, var(--md-sys-color-primary));
         }
         &::after {
             content: var(--md-comp-switch-selected-icon);
-            inset-inline-start: calc(var(--_track-width) - ((var(--_layer) + var(--_target) - 16px) / 2));
-            font-size: 25.6px;
-            line-height: 20.8px;
+            grid-template-rows: auto 8px;
+            inset-inline-start: calc(var(--_track-width) - ((var(--_layer) + var(--_track-height)) / 2));
+            font-size: 32px;
             letter-spacing: 1.6px;
             border: calc((var(--_layer) - var(--_handle-selected-size)) / 2) solid transparent;
             color: var(--md-comp-switch-selected-icon-color, var(--md-sys-color-on-primary-container));
@@ -121,82 +123,85 @@ $switch: 'input[type=checkbox].micl-switch';
 
         &:hover {
             &::after {
-                border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-hover-state-layer-opacity, 8%), transparent);
-                background-color: var(--md-sys-color-on-surface-variant);
+                border-color: color-mix(in srgb, var(--_unselected-layer-color) var(--md-sys-state-hover-state-layer-opacity, 8%), transparent);
+                background-color: var(--md-comp-switch-unselected-hover-handle-color, var(--md-sys-color-on-surface-variant));
             }
             &:checked::after {
-                border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-hover-state-layer-opacity, 8%), transparent);
-                background-color: var(--md-sys-color-primary-container);
+                border-color: color-mix(in srgb, var(--_selected-layer-color) var(--md-sys-state-hover-state-layer-opacity, 8%), transparent);
+                background-color: var(--md-comp-switch-selected-hover-handle-color, var(--md-sys-color-primary-container));
             }
         }
         &:focus-visible {
             &::after {
-                border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity, 10%), transparent);
+                border-color: color-mix(in srgb, var(--_unselected-layer-color) var(--md-sys-state-focus-state-layer-opacity, 10%), transparent);
             }
             &::before {
-                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-                outline-offset: 2px;
+                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-comp-switch-focus-indicator-color, var(--md-sys-color-secondary));
+                outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
             }
             &:checked::after {
-                border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-focus-state-layer-opacity, 10%), transparent);
-                background-color: var(--md-sys-color-primary-container);
+                border-color: color-mix(in srgb, var(--_selected-layer-color) var(--md-sys-state-focus-state-layer-opacity, 10%), transparent);
+                background-color: var(--md-comp-switch-selected-focus-handle-color, var(--md-sys-color-primary-container));
             }
             &:not(:checked)::after {
-                background-color: var(--md-sys-color-on-surface-variant);
+                background-color: var(--md-comp-switch-unselected-focus-handle-color, var(--md-sys-color-on-surface-variant));
             }
         }
         &:active {
             &::after {
-                line-height: 27.2px;
                 border: calc((var(--_layer) - var(--_handle-pressed-size)) / 2) solid transparent;
-                background-color: var(--md-sys-color-on-surface-variant);
+                background-color: var(--md-comp-switch-unselected-pressed-handle-color, var(--md-sys-color-on-surface-variant));
             }
             &:checked::after {
-                line-height: 25.6px;
                 border-width: calc((var(--_layer) - var(--_handle-pressed-size)) / 2);
-                border-color: color-mix(in srgb, var(--md-sys-color-primary) var(--md-sys-state-pressed-state-layer-opacity, 10%), transparent);
-                background-color: var(--md-sys-color-primary-container);
+                border-color: color-mix(in srgb, var(--_selected-layer-color) var(--md-sys-state-pressed-state-layer-opacity, 10%), transparent);
+                background-color: var(--md-comp-switch-selected-pressed-handle-color, var(--md-sys-color-primary-container));
             }
             &:not(:checked)::after {
-                border-color: color-mix(in srgb, var(--md-sys-color-on-surface) var(--md-sys-state-pressed-state-layer-opacity, 10%), transparent);
+                border-color: color-mix(in srgb, var(--_unselected-layer-color) var(--md-sys-state-pressed-state-layer-opacity, 10%), transparent);
             }
         }
     }
     &:disabled {
         &::before {
-            border-color: var(--md-sys-color-on-surface);
-            background-color: var(--md-sys-color-surface-container-highest);
-            opacity: 12%;
+            border-color: var(--md-comp-switch-disabled-unselected-track-outline-color, var(--md-sys-color-on-surface));
+            background-color: var(--md-comp-switch-disabled-unselected-track-color, var(--md-sys-color-surface-container-highest));
+            opacity: var(--md-comp-switch-disabled-track-opacity, 12%);
         }
         &:checked::before {
-            background-color: var(--md-sys-color-on-surface);
+            border-color: var(--md-comp-switch-disabled-selected-track-color, var(--md-sys-color-on-surface));
+            background-color: var(--md-comp-switch-disabled-selected-track-color, var(--md-sys-color-on-surface));
         }
         &::after {
-            color: rgb(from var(--md-sys-color-surface-container-highest) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
-            background-color: var(--md-sys-color-on-surface);
+            color: var(--md-comp-switch-disabled-unselected-icon-color, var(--md-sys-color-surface-container-highest));
+            background-color: var(--md-comp-switch-disabled-unselected-handle-color, var(--md-sys-color-on-surface));
             opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
         }
         &:checked::after {
-            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
-            background-color: var(--md-sys-color-surface);
+            color: rgb(from var(--md-comp-switch-disabled-selected-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
+            background-color: var(--md-comp-switch-disabled-selected-handle-color, var(--md-sys-color-surface));
             opacity: 100%;
         }
     }
 }
 
 #{$switch}:not(:disabled) + label,
-label:has(+ #{$switch}:not(:disabled)) {
+label:has(+ #{$switch}:not(:disabled)),
+label:has(#{$switch}:not(:disabled)) {
     @extend %micl-toggle-label-pointer;
 }
 #{$switch} + label,
-label:has(+ #{$switch}) {
+label:has(+ #{$switch}),
+label:has(#{$switch}) {
     @extend %micl-toggle-label;
 }
 #{$switch}:disabled + label,
 label:has(+ #{$switch}:disabled) {
     @extend %micl-toggle-label-disabled;
 }
-
+label:has(#{$switch}:disabled) {
+    @extend %micl-toggle-label-disabled-text;
+}
 #{$switch}:dir(rtl)::after {
     transform: rotate(45deg) scaleY(-1);
 }

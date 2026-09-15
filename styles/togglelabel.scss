@@ -20,18 +20,26 @@
 // SOFTWARE.
 
 // The label rules shared by the toggle controls (checkbox, switch, radio): the label
-// immediately before or after the input is clickable, uses the on-surface color, and
-// dims alongside a disabled input. This partial emits nothing that is not extended.
+// wrapping, immediately before, or immediately after the input is clickable, uses the on-surface color, never
+// shows the tap highlight, and dims alongside a disabled input. The tap highlight is
+// suppressed for a disabled label too, so it belongs to %micl-toggle-label rather than
+// to %micl-toggle-label-pointer. This module emits nothing that is not extended.
 
 %micl-toggle-label-pointer {
-    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 }
 
 %micl-toggle-label {
     color: var(--md-sys-color-on-surface);
+    -webkit-tap-highlight-color: transparent;
 }
 
 %micl-toggle-label-disabled {
     opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
+}
+
+// A label that wraps its input cannot be dimmed with opacity: that would dim the control
+// inside it on top of the disabled treatment it already paints. Fade only the text.
+%micl-toggle-label-disabled-text {
+    color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
 }

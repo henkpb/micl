@@ -24,7 +24,7 @@
             --md-comp-switch-selected-icon: "";
             --md-comp-switch-unselected-icon: "";
         }
-        .docs-noicons > div {
+        .docs-noicons .docs-example > div {
             justify-content: flex-end;
         }
         .docs-selectedicon input[type=checkbox].micl-switch {
@@ -33,8 +33,14 @@
         .docs-unselectedicon input[type=checkbox].micl-switch {
             --md-comp-switch-selected-icon: "";
         }
-        .docs-unselectedicon > div {
+        .docs-unselectedicon .docs-example > div {
             justify-content: space-between;
+        }
+        .docs-theming {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            column-gap: 32px;
         }
         .docs-unselectedicon label {
             display: flex;
@@ -73,8 +79,16 @@
             </div>
         </section>
 
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#switches">With icons</a>
+            <a href="#no-icons">No icons</a>
+            <a href="#selected-icon">Selected icon</a>
+            <a href="#unselected-icon">Unselected icon</a>
+            <a href="#theming">Theming</a>
+        </nav>
+
         <main class="docs-content docs-content--columns">
-            <section class="docs-section">
+            <section class="docs-section" id="switches">
                 <div class="docs-section__head">
                     <h2>Switches with icons</h2>
                 </div>
@@ -102,7 +116,7 @@
                 </div>
             </section>
 
-            <section class="docs-section docs-noicons">
+            <section class="docs-section docs-noicons" id="no-icons">
                 <div class="docs-section__head">
                     <h2>Switches without icons</h2>
                 </div>
@@ -130,7 +144,7 @@
                 </div>
             </section>
 
-            <section class="docs-section docs-selectedicon">
+            <section class="docs-section docs-selectedicon" id="selected-icon">
                 <div class="docs-section__head">
                     <h2>Switches with selected icon</h2>
                 </div>
@@ -158,7 +172,7 @@
                 </div>
             </section>
 
-            <section class="docs-section docs-unselectedicon">
+            <section class="docs-section docs-unselectedicon" id="unselected-icon">
                 <div class="docs-section__head">
                     <h2>Switches with unselected icon</h2>
                 </div>
@@ -192,6 +206,29 @@
                                     <span class="md-sys-typescale-body-small">This is the fourth choice</span>
                                 </label>
                                 <input type="checkbox" class="micl-switch" id="myswitch16" value="c4" checked disabled role="switch">
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example docs-theming">
+                        <template>
+                            <div style="--md-comp-switch-track-width:64px">
+                                <input type="checkbox" class="micl-switch" id="myswitch17" checked value="c1" role="switch">
+                                <label for="myswitch17" class="md-sys-typescale-body-medium">Wider</label>
+                            </div>
+                            <div style="--md-comp-switch-track-height:40px;--md-comp-switch-track-width:64px;--md-comp-switch-handle-size:20px;--md-comp-switch-selected-handle-size:30px">
+                                <input type="checkbox" class="micl-switch" id="myswitch18" checked value="c2" role="switch">
+                                <label for="myswitch18" class="md-sys-typescale-body-medium">Larger</label>
+                            </div>
+                            <div style="--md-comp-switch-selected-track-color:var(--md-sys-color-tertiary);--md-comp-switch-selected-icon-color:var(--md-sys-color-on-tertiary-container)">
+                                <input type="checkbox" class="micl-switch" id="myswitch19" checked value="c3" role="switch">
+                                <label for="myswitch19" class="md-sys-typescale-body-medium">Tertiary</label>
                             </div>
                         </template>
                     </div>
