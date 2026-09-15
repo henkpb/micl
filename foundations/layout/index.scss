@@ -40,9 +40,12 @@ $md-sys-pane-spacer: 24px;
 $md-sys-pane-fixed-width-expanded: 360px;
 $md-sys-pane-fixed-width-large: 412px;
 
+$md-sys-card-margin: 8px;
+
 :root {
     --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
     --md-sys-layout-window-margin: #{$md-sys-window-margin};
+    --md-sys-card-margin: #{$md-sys-card-margin};
 
     @media (max-width: $md-sys-breakpoint-compact-max) {
         --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
@@ -134,13 +137,13 @@ $md-sys-pane-fixed-width-large: 412px;
     }
     &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined),
     &> *:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
-        gap: var(--md-comp-card-margin, 8px);
+        gap: var(--md-sys-card-margin);
     }
     &> .micl-pane__columns {
         display: flex;
 
         &:has(> .micl-pane__column > .micl-card-elevated, > .micl-pane__column > .micl-card-filled, > .micl-pane__column > .micl-card-outlined) {
-            gap: var(--md-comp-card-margin, 8px);
+            gap: var(--md-sys-card-margin);
         }
         &> .micl-pane__column {
             display: flex;
@@ -150,7 +153,7 @@ $md-sys-pane-fixed-width-large: 412px;
             background-color: inherit;
 
             &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
-                row-gap: var(--md-comp-card-margin, 8px);
+                row-gap: var(--md-sys-card-margin);
             }
             &.micl-pane__column--fixed {
                 flex: 0 0 auto;
