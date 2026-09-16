@@ -23,125 +23,66 @@ import { register } from '../../foundations/runtime';
 
 export const sliderSelector = 'input[type=range][class*=micl-slider-]';
 
-const
-    tick  = String.fromCharCode(8226),
-    blank = String.fromCharCode(8201),
-    getTickValues = (element: HTMLInputElement, max: number, min: number): number[] =>
-    {
-        const values: number[] = [];
+const getTarget = (element: HTMLInputElement): HTMLElement =>
+    element.parentElement?.classList.contains('micl-slider__container') ?
+    element.parentElement : element;
 
-        if (!!element.list && (max > min)) {
-            element.list.querySelectorAll<HTMLOptionElement>('option[value]').forEach(option =>
-            {
-                let value = parseFloat(option.value);
-                if (!isNaN(value) && (value >= min) && (value <= max)) {
-                    values.push(value);
-                }
-            });
-        }
-        return values;
-    },
-    getWrapper = (element: HTMLInputElement): null | HTMLElement =>
-    {
-        return element.parentElement?.classList.contains('micl-slider__container') ?
-               element.parentElement : null;
-    },
-    setMax = (element: HTMLInputElement): void =>
-    {
-        let max = element.max || '100';
-        getWrapper(element)?.style.setProperty('--micl-slider-max', max);
-        element.style.setProperty('--micl-slider-max', max);
-    },
-    setMin = (element: HTMLInputElement): void =>
-    {
-        let min = element.min || '0';
-        getWrapper(element)?.style.setProperty('--micl-slider-min', min);
-        element.style.setProperty('--micl-slider-min', min);
-    },
-    setTickString = (element: HTMLInputElement, tickString: string): void =>
-    {
-        // getWrapper(element)?.dataset.miclsliderticks = tickString;
-        element.dataset.miclsliderticks = tickString;
-    },
-    setValue = (element: HTMLInputElement): void =>
-    {
-        let tip = JSON.stringify(element.value + ''),
-            wrapper = getWrapper(element);
-        if (wrapper) {
-            wrapper.style.setProperty('--micl-slider-value', element.value);
-            wrapper.style.setProperty('--micl-slider-tip', tip);
-        }
-        element.style.setProperty('--micl-slider-value', element.value);
-        element.style.setProperty('--micl-slider-tip', tip);
-    },
-    setVars = (element: HTMLInputElement): void =>
-    {
-        let wrapper = getWrapper(element);
-        if (wrapper) {
-            const computedStyles = window.getComputedStyle(element);
-            ['--_handle-height', '--_track-height'].forEach(name => {
-                wrapper.style.setProperty(name, computedStyles.getPropertyValue(name));
-            });
-        }
-    };
+const setValue = (element: HTMLInputElement): void =>
+{
+    const target = getTarget(element);
+
+    target.style.setProperty('--micl-slider-min', element.min || '0');
+    target.style.setProperty('--micl-slider-max', element.max || '100');
+    target.style.setProperty('--micl-slider-value', element.value);
+    target.style.setProperty('--micl-slider-tip', JSON.stringify(element.value));
+};
+
+const stopLayers = (fractions: number[], span: string): string =>
+    fractions.map(fraction => {
+        const offset = `(8px + ${fraction} * ${span})`;
+
+        return 'radial-gradient(circle 2px at ' +
+               `calc(var(--_kx) * ${offset} + var(--_cx)) ` +
+               `calc(var(--_ky) * ${offset} + var(--_cy)),` +
+               'currentColor 100%,transparent 0)';
+    }).join(',');
+
+const setStops = (element: HTMLInputElement): void =>
+{
+    const min = parseFloat(element.min || '0');
+    const max = parseFloat(element.max || '100');
+    const values = new Set<number>();
+
+    if (max > min) {
+        element.list?.querySelectorAll<HTMLOptionElement>('option[value]').forEach(option =>
+        {
+            const value = parseFloat(option.value);
+            if (!isNaN(value) && (value >= min) && (value <= max)) {
+                values.add((value - min) / (max - min));
+            }
+        });
+    }
+    if (values.size > 0) {
+        const fractions = [...values].sort((a, b) => a - b);
+
+        element.style.setProperty('--micl-slider-stops',
+            stopLayers(fractions, '(100% - 16px)'));
+        element.style.setProperty('--micl-slider-stops-progress',
+            stopLayers(fractions, '(100% / max(var(--_fraction), 0.0001))'));
+    }
+};
 
 export default register(sliderSelector, {
     initialize: (element: HTMLInputElement): void =>
     {
-        if (!element.matches(sliderSelector)) {
-            return;
-        }
-
-        setMax(element);
-        setMin(element);
-        setValue(element);
-        setVars(element);
-
-        const max  = parseFloat(element.max);
-        const min  = parseFloat(element.min);
-        const rect = element.getBoundingClientRect();
-        const percentages = getTickValues(element, max, min).sort((a, b) => a - b).map(value => {
-            return Math.round(100 * (value - min) / (max - min));
-        });
-
-        if (percentages.length > 0) {
-            const canvas = document.createElement('canvas');
-            const ctx    = canvas.getContext('2d');
-
-            if (ctx) {
-                ctx.font = window.getComputedStyle(element).getPropertyValue('font');
-                let blankWidth   = ctx.measureText(blank).width,
-                    tickWidth    = ctx.measureText(tick).width,
-                    totalWidth   = rect.width - 10,
-                    currentWidth = 0,
-                    tickString   = '';
-
-                percentages.forEach(percentage =>
-                {
-                    let position = (totalWidth * percentage) / 100,
-                        nrBlanks = Math.round((position - currentWidth) / blankWidth) - 1;
-                    for (let i = 0; i < nrBlanks; i++) {
-                        tickString   += blank;
-                        currentWidth += blankWidth;
-                    }
-                    tickString += tick;
-                    currentWidth += tickWidth;
-                });
-                setTickString(element, tickString);
-            }
-            canvas.remove();
-        }
-        else {
-            setTickString(element, tick);
+        if (element.matches(sliderSelector)) {
+            setValue(element);
+            setStops(element);
         }
     },
     input: (event: Event): void =>
     {
-        if (
-            (event.target as Element).matches(sliderSelector)
-            && event.target instanceof HTMLInputElement
-            && !event.target.disabled
-        ) {
+        if (event.target instanceof HTMLInputElement && event.target.matches(sliderSelector)) {
             setValue(event.target);
         }
     }
