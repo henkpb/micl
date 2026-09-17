@@ -30,7 +30,7 @@ No custom JavaScript is required for the core functionality of this component.
 ### Live Demo
 A live example of the [Card component](https://henkpb.github.io/micl/card.html) is available to interact with.
 
-## Card Content Structure
+## Anatomy
 While the card container is the only required element, the Card component provides several optional utility classes to help structure your card's content:
 
 ```HTML
