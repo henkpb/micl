@@ -23,150 +23,152 @@ import { register } from '../../foundations/runtime';
 
 export const timepickerSelector = 'dialog.micl-dialog.micl-timepicker';
 
-// The block prefix of all element class names, hoisted to shrink the minified
-// bundle: the minifier shortens the constant but never dedupes string literals.
-const classPrefix   = 'micl-timepicker__';
-const hiddenClass   = 'micl-timepicker__dial--hidden';
-const selectedClass = 'micl-timepicker--selected';
+const classPrefix    = 'micl-timepicker__';
+const hiddenClass    = 'micl-timepicker__dial--hidden';
+const draggingClass  = 'micl-timepicker__dial--dragging';
+const innerClass     = 'micl-timepicker__dial-inner';
+const markClass      = 'micl-timepicker__time--selected';
+const selectedClass  = 'micl-timepicker--selected';
+const angleProperty  = '--micl-angle';
+const radiusProperty = '--micl-track-radius';
 
 type ValueElement = HTMLInputElement | HTMLButtonElement;
 
-interface TimeLimits {
-    max: number,
-    min: number
-}
-
-const uses12HourFormat = (() =>
-{
+const intl = (() => {
     try {
-        const hourCycle = new Intl.DateTimeFormat(undefined, {
-            hour: 'numeric'
-        }).resolvedOptions().hourCycle;
+        const format = Intl.DateTimeFormat;
 
-        return hourCycle === 'h11' || hourCycle === 'h12';
+        return {
+            cycle  : new format(undefined, { hour: 'numeric' }).resolvedOptions().hourCycle || 'h23',
+            time   : new format(undefined, { hour: 'numeric', minute: '2-digit' }),
+            periods: [9, 21].map((hour, i) => new format(undefined, { hour: 'numeric', hour12: true })
+                .formatToParts(new Date(2024, 0, 1, hour))
+                .find(part => part.type === 'dayPeriod')?.value || (i ? 'PM' : 'AM'))
+        };
     }
-    catch (error) {
-        return false;
+    catch {
+        return { cycle: 'h23', time: null, periods: ['AM', 'PM'] };
     }
 })();
 
-const getElement = <T extends Element>(parent: Element, selector: string): T | null =>
-{
+const pad = (value: number | string): string => `${value}`.padStart(2, '0');
+
+const toInt = (value: string): number => parseInt(value, 10);
+
+const getElement = <T extends Element>(parent: Element, selector: string): T | null => {
     return parent.querySelector(selector) as T | null;
 };
 
-const isValueElement = (element: Element | null): element is ValueElement =>
-{
+const isValueElement = (element: Element | null): element is ValueElement => {
     return element instanceof HTMLInputElement || element instanceof HTMLButtonElement;
 };
 
-const isVisible = (element: Element | null): boolean =>
-{
+const isVisible = (element: Element | null): boolean => {
     return !!element && !element.classList.contains(hiddenClass);
 };
 
-const toggleSelection = (element: Element, force: boolean): void =>
-{
+const toggleSelection = (element: Element, force: boolean): void => {
     element.classList.toggle(selectedClass, force);
 };
 
-const findInvoker = (dialog: HTMLDialogElement): Element | null =>
-{
+const findInvoker = (dialog: HTMLDialogElement): Element | null => {
     return document.querySelector(
         `[data-timepicker="${dialog.id}"],[popovertarget="${dialog.id}"],[commandfor="${dialog.id}"]`
     );
 };
 
-const getTimeLimits = (name: string): TimeLimits =>
-{
-    if (name === 'hour') {
-        return {
-            min: uses12HourFormat ? 1 : 0,
-            max: uses12HourFormat ? 12 : 23
-        };
-    }
-    return { min: 0, max: 59 };
+const uses12HourFormat = (dialog: HTMLElement): boolean => {
+    const cycle = dialog.dataset.miclhourcycle || intl.cycle;
+    return cycle === 'h11' || cycle === 'h12';
 };
 
-const formatValue = (element: HTMLInputElement): void =>
-{
-    const { max, min } = getTimeLimits(element.name);
-    let value = parseInt(element.value, 10);
+const getTimeLimits = (name: string, h12: boolean): number[] => {
+    return name === 'hour' ? (h12 ? [1, 12] : [0, 23]) : [0, 59];
+};
 
-    if (isNaN(value)) value = min;
+const setValue = (input: HTMLInputElement, value: number): void => {
+    input.value = pad(value);
+    input.setAttribute('aria-valuenow', `${value}`);
+    input.setAttribute('aria-valuetext', input.value);
+};
+
+const formatValue = (input: HTMLInputElement, h12: boolean): void => {
+    const [min, max] = getTimeLimits(input.name, h12);
+    let value = toInt(input.value);
+
+    if (isNaN(value) || value < min) value = min;
     if (value > max) value = max;
-    if (value < 0) value = min;
 
-    element.value = String(value).padStart(2, '0');
+    setValue(input, value);
 };
 
-const setInputAttributes = (input: HTMLInputElement): void =>
-{
-    const { min, max } = getTimeLimits(input.name);
-
-    let pattern: string;
-    if (input.name === 'hour') {
-        pattern = uses12HourFormat ? '(0[1-9]|1[0-2])' : '(0[0-9]|1[0-9]|2[0-3])';
-    } else {
-        pattern = '(0[0-9]|[1-5][0-9])';
-    }
-
-    const attributes: Record<string, string> = {
-        maxlength: '2',
-        pattern: pattern,
+const setInputAttributes = (input: HTMLInputElement, h12: boolean): void => {
+    const [min, max] = getTimeLimits(input.name, h12);
+    const attributes: Record<string, string | number> = {
+        type: 'text',
+        maxlength: 2,
+        pattern: input.name === 'hour'
+            ? (h12 ? '(0[1-9]|1[0-2])' : '(0[0-9]|1[0-9]|2[0-3])')
+            : '(0[0-9]|[1-5][0-9])',
         inputmode: 'numeric',
         autocomplete: 'off',
         role: 'spinbutton',
-        min: String(min),
-        max: String(max)
+        'aria-valuemin': min,
+        'aria-valuemax': max
     };
 
     for (const key in attributes) {
-        input.setAttribute(key, attributes[key]);
+        input.setAttribute(key, attributes[key] as string);
     }
 };
 
-const setDial = (dial: HTMLElement, name: string, value: string): void =>
-{
-    dial.querySelectorAll('data').forEach(
-        e => e.classList.remove(`${classPrefix}time--selected`)
-    );
+const setDial = (dial: HTMLElement, name: string, value: string): void => {
+    dial.querySelectorAll('data').forEach(e => e.classList.remove(markClass));
 
     const mark = dial.querySelector(`data[data-${name}][value="${value}"]`);
-    let angle  = '';
+    let angle  = NaN;
+
+    dial.style.removeProperty(radiusProperty);
 
     if (mark) {
-        angle = window.getComputedStyle(mark).getPropertyValue('--micl-angle');
-        mark.classList.add(`${classPrefix}time--selected`);
+        const style = window.getComputedStyle(mark);
+
+        angle = parseFloat(style.getPropertyValue(angleProperty));
+        dial.style.setProperty(radiusProperty, style.getPropertyValue('--micl-hour-radius'));
+        mark.classList.add(markClass);
     }
     else if (name === 'minute') {
-        angle = `${Math.round((parseInt(value, 10) * 360 / 60) - 90)}deg`;
+        angle = (toInt(value) * 360 / 60) - 90;
     }
-    !!angle && dial.style.setProperty('--micl-angle', angle);
+    if (isNaN(angle)) {
+        return;
+    }
+
+    const current = parseFloat(dial.style.getPropertyValue(angleProperty)) || 0;
+
+    dial.style.setProperty(
+        angleProperty,
+        `${current + (((((angle - current) % 360) + 540) % 360) - 180)}deg`
+    );
 };
 
 const setInputValue = (
     dialog  : HTMLElement,
-    name    : string,
+    input   : HTMLInputElement,
     value?  : string,
     setampm?: boolean,
     setdial : boolean = true
 ): void => {
 
-    let numeric = parseInt(value || '0', 10);
+    let numeric = toInt(value || '0');
     if (isNaN(numeric)) {
         return;
     }
-    const input = getElement<HTMLInputElement>(dialog, `input[name=${name}]`);
-    if (!input) {
-        return;
-    }
 
-    if (name === 'hour' && setampm && uses12HourFormat) {
-        const am = dialog.querySelector(`.${classPrefix}am`) as HTMLInputElement;
-        const pm = dialog.querySelector(`.${classPrefix}pm`) as HTMLInputElement;
+    if (input.name === 'hour' && setampm && uses12HourFormat(dialog)) {
+        const am = getElement<HTMLInputElement>(dialog, `.${classPrefix}am`);
+        const pm = getElement<HTMLInputElement>(dialog, `.${classPrefix}pm`);
 
-        // Noon (12) is PM and midnight (0) displays as 12 AM.
         if (numeric >= 12) {
             if (pm) {
                 pm.checked = true;
@@ -184,78 +186,63 @@ const setInputValue = (
             }
         }
     }
-    input.value = `${numeric}`.padStart(2, '0');
+    setValue(input, numeric);
 
-    if (setdial) {
-        const dial = getElement<HTMLElement>(dialog, `.${classPrefix}dial`);
-        if (!dial) {
-            return;
-        }
-        setDial(dial, name, input.value);
+    const dial = setdial && getElement<HTMLElement>(dialog, `.${classPrefix}dial`);
+    if (dial) {
+        setDial(dial, input.name, input.value);
     }
 }
 
-const addMarks = (dial: HTMLElement): void =>
-{
-    let angle = uses12HourFormat ? 300 : 270;
+const addMarks = (dial: HTMLElement, h12: boolean): void => {
+    let angle = h12 ? 300 : 270;
+    let marks = '';
 
-    for (let i = (uses12HourFormat ? 1 : 0); i <= (uses12HourFormat ? 12 : 23); i++) {
-        const mark = document.createElement('data') as HTMLDataElement;
+    for (let i = (h12 ? 1 : 0); i <= (h12 ? 12 : 23); i++) {
+        const ring = !h12 && i >= 12
+            ? ` class="${innerClass}"`
+            : ` data-minute="${(i * 5) % 60}"`;
 
-        mark.value        = `${i}`.padStart(2, '0');
-        mark.textContent  = `${i}`;
-        mark.dataset.hour = `${i}`;
-        mark.style.setProperty('--micl-angle', `${angle}deg`);
-        if (!uses12HourFormat && i >= 12) {
-            mark.classList.add(`${classPrefix}dial-inner`);
-        }
-        else {
-            mark.dataset.minute = `${(i * 5) % 60}`;
-        }
-        dial.appendChild(mark);
-
-        angle = (angle + 30) % 360;
+        marks += `<data value="${pad(i)}" data-hour="${i}"${ring} style="${angleProperty}:${angle}deg">${i}</data>`;
+        angle  = (angle + 30) % 360;
     }
-
-    const track: HTMLSpanElement = document.createElement('span');
-    track.className = `${classPrefix}track`;
-    dial.appendChild(track);
+    dial.innerHTML = `${marks}<span class="${classPrefix}track"></span>`;
 };
 
-const showDialMarks = (dial: HTMLElement, name: string): void =>
-{
+const showDialMarks = (dial: HTMLElement, name: string): void => {
     dial.querySelectorAll<HTMLDataElement>('data').forEach(mark =>
     {
-        if (!!mark.dataset[name]) {
-            mark.textContent = mark.dataset[name];
-            mark.value       = mark.dataset[name].padStart(2, '0');
+        const value = mark.dataset[name];
+
+        if (value) {
+            mark.textContent = value;
+            mark.value       = pad(value);
         }
-        if (mark.classList.contains(`${classPrefix}dial-inner`)) {
-            mark.classList[name === 'hour' ? 'remove' : 'add'](hiddenClass);
+        if (mark.classList.contains(innerClass)) {
+            mark.classList.toggle(hiddenClass, name !== 'hour');
         }
     });
 };
 
-const handleSpinning = (dialog: HTMLElement, input: HTMLInputElement, event: KeyboardEvent): void =>
-{
+const handleSpinning = (dialog: HTMLElement, input: HTMLInputElement, event: KeyboardEvent): void => {
     if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
         return;
     }
     event.preventDefault();
 
-    const { max, min } = getTimeLimits(input.name);
-    let value = parseInt(input.value, 10) || 0;
+    const h12 = uses12HourFormat(dialog);
+    const [min, max] = getTimeLimits(input.name, h12);
+    let value = toInt(input.value) || 0;
 
     value += event.key === 'ArrowUp' ? 1 : -1;
     if (value < min || value > max) {
         value = (value < min) ? max : min;
-        if (input.name === 'hour' && uses12HourFormat) {
-            const e = dialog.querySelector('input[name=period]:not(:checked)') as HTMLInputElement;
-            e?.click();
+        if (input.name === 'hour' && h12) {
+            getElement<HTMLInputElement>(dialog, 'input[name=period]:not(:checked)')?.click();
         }
     }
 
-    setInputValue(dialog, input.name, `${value}`);
+    setInputValue(dialog, input, `${value}`);
 };
 
 export default register(timepickerSelector, {
@@ -265,31 +252,46 @@ export default register(timepickerSelector, {
             return;
         }
 
-        const form   = getElement<HTMLFormElement>(dialog, 'form');
-        const mode   = getElement<HTMLElement>(dialog, `.${classPrefix}inputmode`);
-        const dial   = getElement<HTMLElement>(dialog, `.${classPrefix}dial`);
-        const inputs = [
+        const form     = getElement<HTMLFormElement>(dialog, 'form');
+        const mode     = getElement<HTMLElement>(dialog, `.${classPrefix}inputmode`);
+        const dial     = getElement<HTMLElement>(dialog, `.${classPrefix}dial`);
+        const headline = getElement<HTMLElement>(dialog, '.micl-dialog__headline h2');
+        const inputs   = [
             getElement<HTMLInputElement>(dialog, 'input[name=hour]'),
             getElement<HTMLInputElement>(dialog, 'input[name=minute]')
-        ].filter((input): input is HTMLInputElement => input !== null);
+        ].filter((input): input is HTMLInputElement => !!input);
 
         if (!form || inputs.length < 2) {
             return;
         }
         dialog.dataset.miclinitialized = '1';
 
-        inputs.forEach((input, i) =>
-        {
-            setInputAttributes(input);
-            if (dial) {
-                input.toggleAttribute('readonly', isVisible(dial));
+        const h12 = uses12HourFormat(dialog);
+
+        const applyMode = (focus?: boolean): void => {
+            const dialMode = isVisible(dial);
+            const text     = dialog.dataset[dialMode ? 'micldialheadline' : 'miclinputheadline'];
+
+            inputs.forEach(input => input.toggleAttribute('readonly', dialMode));
+            if (headline && text) {
+                headline.textContent = text;
             }
+            if (focus) {
+                inputs[0].focus();
+                dialMode || inputs[0].select();
+            }
+        };
+
+        inputs.forEach((input, i) => {
+            setInputAttributes(input, h12);
+            formatValue(input, h12);
 
             input.addEventListener('keydown', handleSpinning.bind(null, dialog, input));
             input.addEventListener('focus', () =>
             {
-                toggleSelection(inputs[i === 0 ? 1 : 0], false);
+                toggleSelection(inputs[1 - i], false);
                 toggleSelection(input, true);
+                isVisible(dial) || input.select();
                 if (dial) {
                     showDialMarks(dial, input.name);
                     setDial(dial, input.name, input.value);
@@ -298,76 +300,74 @@ export default register(timepickerSelector, {
             input.addEventListener('blur', () =>
             {
                 if (!isVisible(dial)) {
-                    formatValue(input);
+                    formatValue(input, h12);
                     toggleSelection(input, false);
                 }
             });
         });
+        applyMode();
 
-        const period = dialog.querySelector(`.${classPrefix}period`);
-        if (period && uses12HourFormat) {
-            ['am', 'pm'].forEach(ampm => {
-                let e = document.createElement('input') as HTMLInputElement;
-                e.type = 'radio';
-                e.name = 'period';
-                e.className = `${classPrefix}${ampm}`;
-                e.value = ampm;
-                e.ariaLabel = ampm.toUpperCase();
-                period.appendChild(e);
-            });
-            period.classList.toggle(hiddenClass, !uses12HourFormat);
+        const period = getElement<HTMLElement>(dialog, `.${classPrefix}period`);
+        if (period && h12) {
+            period.innerHTML = ['am', 'pm'].map((ampm, i) => '<input type="radio" name="period"'
+                + ` class="${classPrefix}${ampm}" value="${ampm}"`
+                + ` aria-label="${intl.periods[i]}"${i ? '' : ' checked'}>`
+            ).join('');
         }
 
-        mode?.addEventListener('click', () =>
-        {
+        mode?.addEventListener('click', () => {
             dial?.classList.toggle(hiddenClass);
-            inputs.forEach(input =>
-            {
-                input.toggleAttribute('readonly', isVisible(dial));
-            });
-            if (isVisible(dial)) {
-                inputs[0].focus();
-            }
+            applyMode(true);
         });
 
         if (dial) {
-            addMarks(dial);
+            dial.setAttribute('aria-hidden', 'true');
+            addMarks(dial, h12);
 
-            const handleSelection = (clientX: number, clientY: number) =>
-            {
-                const target = document.elementFromPoint(clientX, clientY);
+            const handleSelection = (event: PointerEvent) => {
+                const target = document.elementFromPoint(event.clientX, event.clientY);
                 if (target && target.tagName === 'DATA') {
-                    setInputValue(dialog, !dialog.querySelector(
-                        `input[name=hour].${selectedClass}`
-                    ) ? 'minute' : 'hour', (target as HTMLDataElement).value);
+                    setInputValue(
+                        dialog,
+                        inputs[inputs[1].classList.contains(selectedClass) ? 1 : 0],
+                        (target as HTMLDataElement).value
+                    );
                 }
             };
-            dial.addEventListener('pointerdown', (event: PointerEvent) =>
-            {
-                dial.classList.add(`${classPrefix}dial--dragging`);
-                handleSelection(event.clientX, event.clientY);
+            dial.addEventListener('pointerdown', (event: PointerEvent) => {
+                dial.classList.add(draggingClass);
+                handleSelection(event);
                 dial.setPointerCapture(event.pointerId);
             });
-            dial.addEventListener('pointermove', (event: PointerEvent) =>
-            {
-                if (dial.classList.contains(`${classPrefix}dial--dragging`)) {
-                    handleSelection(event.clientX, event.clientY);
-                }
+            dial.addEventListener('pointermove', (event: PointerEvent) => {
+                dial.classList.contains(draggingClass) && handleSelection(event);
             });
-            const stopDragging = (event: PointerEvent) =>
-            {
-                dial.classList.remove(`${classPrefix}dial--dragging`);
-                dial.releasePointerCapture(event.pointerId);
+            const stopDragging = (event: PointerEvent, advance?: boolean): void => {
+                const dragging = dial.classList.contains(draggingClass);
+
+                dial.classList.remove(draggingClass);
+                if (dial.hasPointerCapture(event.pointerId)) {
+                    dial.releasePointerCapture(event.pointerId);
+                }
+
+                if (advance && dragging && inputs[0].classList.contains(selectedClass)) {
+                    inputs[1].focus();
+                }
             };
-            dial.addEventListener('pointerup', stopDragging);
+            dial.addEventListener('pointerup', event => stopDragging(event, true));
             dial.addEventListener('pointercancel', stopDragging);
         }
 
-        dialog.addEventListener('beforetoggle', (event): void =>
-        {
-            if (event.oldState === 'open') {
+        dialog.addEventListener('beforetoggle', (event): void => {
+            if (event.newState !== 'open') {
                 return;
             }
+
+            if (dial) {
+                showDialMarks(dial, 'hour');
+            }
+            toggleSelection(inputs[1], false);
+            toggleSelection(inputs[0], true);
 
             let invoker = document.activeElement;
             if (
@@ -385,13 +385,12 @@ export default register(timepickerSelector, {
 
             const time = (invoker.value || invoker.textContent).split(':');
             if (time.length === 2) {
-                setInputValue(dialog, 'hour', time[0], true);
-                setInputValue(dialog, 'minute', time[1], false, false);
+                setInputValue(dialog, inputs[0], time[0], true);
+                setInputValue(dialog, inputs[1], time[1], false, false);
             }
         });
 
-        dialog.addEventListener('close', (): void =>
-        {
+        dialog.addEventListener('close', (): void => {
             if (!dialog.returnValue) {
                 return;
             }
@@ -404,23 +403,18 @@ export default register(timepickerSelector, {
                 return;
             }
 
-            const inputs = form.elements;
-            let h = parseInt((inputs.namedItem('hour') as HTMLInputElement)?.value || '0', 10);
-            if (isNaN(h)) {
+            let h     = toInt(inputs[0].value);
+            const m   = toInt(inputs[1].value);
+            if (isNaN(h) || isNaN(m)) {
                 return;
             }
-            if (uses12HourFormat) {
-                // 12 AM is midnight (0) and 12 PM stays noon (12).
+            if (h12) {
                 h %= 12;
-                if ((inputs.namedItem('period') as RadioNodeList)?.value === 'pm') {
+                if ((form.elements.namedItem('period') as RadioNodeList)?.value === 'pm') {
                     h += 12;
                 }
             }
-            const m = parseInt((inputs.namedItem('minute') as HTMLInputElement)?.value || '0', 10);
-            if (isNaN(m)) {
-                return;
-            }
-            const time = `${h}`.padStart(2, '0') + ':' + `${m}`.padStart(2, '0');
+            const time = `${pad(h)}:${pad(m)}`;
             invoker.value = time;
 
             if (invoker instanceof HTMLInputElement) {
@@ -428,7 +422,9 @@ export default register(timepickerSelector, {
                 invoker.dispatchEvent(new Event('input', { bubbles: true }));
             }
             else {
-                invoker.textContent = time;
+                invoker.textContent = intl.time
+                    ? intl.time.format(new Date(2024, 0, 1, h, m))
+                    : time;
             }
         });
     }
