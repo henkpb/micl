@@ -131,7 +131,7 @@ Adding the `popover` attribute renders the dialog as a popover instead of a moda
 ```
 
 > [!IMPORTANT]
-> A popover is not a modal. The browser does not trap focus inside it nor does it make the rest of the page inert. Review the [Accessibility](https://www.google.com/search?q=%23accessibility) guidelines before choosing this variant.
+> A popover is not a modal. The browser does not trap focus inside it nor does it make the rest of the page inert. Review the Accessibility guidelines before choosing this variant.
 
 Because a popover is governed by the Popover API rather than standard dialog behavior, two modal attributes have no effect here:
 
@@ -186,7 +186,7 @@ A full-screen dialog covers the entire viewport on compact windows (599px and na
 
 * In full-screen mode, `micl-dialog__fullscreen` buttons placed directly within the `micl-dialog__headline` become visible. The `micl-dialog__icon` and the standard `micl-dialog__actions` at the bottom are hidden.
 * On wider screens, the layout reverts: `micl-dialog__fullscreen` buttons are hidden, and the standard bottom actions (`micl-dialog__actions`) are displayed.
-* Scrolling within `micl-dialog__content` applies elevation to the header. This effect relies on scroll-driven animations; see [Compatibility](https://www.google.com/search?q=%23compatibility).
+* Scrolling within `micl-dialog__content` applies elevation to the header. This effect relies on scroll-driven animations.
 
 ## Accessibility
 
