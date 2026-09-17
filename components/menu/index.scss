@@ -139,12 +139,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 }
 
 .micl-menu[popover], select {
-    --md-comp-menu-motion-effects: #{motion.$md-sys-motion-expressive-fast-effects};
-    --md-comp-menu-motion-effects-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-comp-menu-motion-effects-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-comp-menu-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-comp-menu-motion-spatial-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-comp-menu-motion-spatial-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_menu-motion-effects: var(--md-comp-menu-motion-effects, #{motion.$md-sys-motion-expressive-fast-effects});
+    --_menu-motion-effects-duration: var(--md-comp-menu-motion-effects-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_menu-motion-effects-duration-reverse: var(--md-comp-menu-motion-effects-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_menu-motion-spatial: var(--md-comp-menu-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
+    --_menu-motion-spatial-duration: var(--md-comp-menu-motion-spatial-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_menu-motion-spatial-duration-reverse: var(--md-comp-menu-motion-spatial-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
     --md-comp-list-container-shape: var(--md-comp-menu-active-container-shape, var(--md-comp-menu-container-shape, var(--md-sys-shape-corner-large, 16px)));
 
@@ -212,7 +212,7 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     border: none;
     outline: none;
     background-color: transparent;
-    --micl-duration: var(--md-comp-menu-motion-spatial-duration-reverse);
+    --micl-duration: var(--_menu-motion-spatial-duration-reverse);
     --micl-easing: linear;
     --_group-shape: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
 
@@ -222,12 +222,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     transform-origin: center top;
     transition:
         opacity var(--micl-duration) var(--micl-easing),
-        transform var(--micl-duration) var(--md-comp-menu-motion-spatial),
+        transform var(--micl-duration) var(--_menu-motion-spatial),
         overlay var(--micl-duration) linear allow-discrete,
         display var(--micl-duration) linear allow-discrete;
 
     &:popover-open {
-        --micl-duration: var(--md-comp-menu-motion-spatial-duration);
+        --micl-duration: var(--_menu-motion-spatial-duration);
         --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
 
         display: flex;
@@ -249,9 +249,9 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            background-color var(--md-comp-menu-motion-effects-duration) linear,
-            overlay var(--md-comp-menu-motion-effects-duration) linear allow-discrete,
-            display var(--md-comp-menu-motion-effects-duration) linear allow-discrete;
+            background-color var(--_menu-motion-effects-duration) linear,
+            overlay var(--_menu-motion-effects-duration) linear allow-discrete,
+            display var(--_menu-motion-effects-duration) linear allow-discrete;
     }
 
     .micl-list {
@@ -259,7 +259,7 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         row-gap: 2px;
         background-color: var(--md-comp-menu-standard-container-color, var(--md-sys-color-surface-container-low));
         box-shadow: var(--md-comp-menu-container-elevation, var(--md-sys-elevation-level2));
-        transition: border-radius var(--md-comp-menu-motion-effects-duration-reverse) linear;
+        transition: border-radius var(--_menu-motion-effects-duration-reverse) linear;
 
         &+ .micl-list {
             border-start-start-radius: var(--_group-shape);

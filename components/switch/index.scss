@@ -37,10 +37,10 @@
 $switch: 'input[type=checkbox].micl-switch';
 
 #{$switch} {
-    --md-comp-switch-unselected-icon: "+";
-    --md-comp-switch-selected-icon: "\AC";
-    --md-comp-switch-motion-effects: #{motion.$md-sys-motion-expressive-slow-effects};
-    --md-comp-switch-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
+    --_unselected-icon: var(--md-comp-switch-unselected-icon, "+");
+    --_selected-icon: var(--md-comp-switch-selected-icon, "\AC");
+    --_motion-effects: var(--md-comp-switch-motion-effects, #{motion.$md-sys-motion-expressive-slow-effects});
+    --_motion-duration: var(--md-comp-switch-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
 
     --_track-width: var(--md-comp-switch-track-width, 52px);
     --_track-height: var(--md-comp-switch-track-height, 32px);
@@ -73,10 +73,10 @@ $switch: 'input[type=checkbox].micl-switch';
         border: var(--_track-outline-width) solid var(--md-comp-switch-unselected-track-outline-color, var(--md-sys-color-outline));
         border-radius: inherit;
         background-color: var(--md-comp-switch-unselected-track-color, var(--md-sys-color-surface-container-highest));
-        transition: background-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
+        transition: background-color var(--_motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &::after {
-        content: var(--md-comp-switch-unselected-icon);
+        content: var(--_unselected-icon);
         box-sizing: border-box;
         position: absolute;
         display: grid;
@@ -95,12 +95,12 @@ $switch: 'input[type=checkbox].micl-switch';
         border-radius: var(--md-sys-shape-corner-full);
         transform: rotate(135deg);
         transition:
-            inset-inline-start var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
-            border-width var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
-            grid-template-rows var(--md-comp-switch-motion-duration) var(--md-comp-switch-motion-effects),
-            color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
-            border-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized,
-            background-color var(--md-comp-switch-motion-duration) motion.$md-sys-motion-easing-emphasized;
+            inset-inline-start var(--_motion-duration) var(--_motion-effects),
+            border-width var(--_motion-duration) var(--_motion-effects),
+            grid-template-rows var(--_motion-duration) var(--_motion-effects),
+            color var(--_motion-duration) motion.$md-sys-motion-easing-emphasized,
+            border-color var(--_motion-duration) motion.$md-sys-motion-easing-emphasized,
+            background-color var(--_motion-duration) motion.$md-sys-motion-easing-emphasized;
     }
     &:checked {
         &::before {
@@ -108,7 +108,7 @@ $switch: 'input[type=checkbox].micl-switch';
             background-color: var(--md-comp-switch-selected-track-color, var(--md-sys-color-primary));
         }
         &::after {
-            content: var(--md-comp-switch-selected-icon);
+            content: var(--_selected-icon);
             grid-template-rows: auto 8px;
             inset-inline-start: calc(var(--_track-width) - ((var(--_layer) + var(--_track-height)) / 2));
             font-size: 32px;

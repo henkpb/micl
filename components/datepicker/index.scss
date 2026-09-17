@@ -41,7 +41,7 @@
 %view-transition-base {
     block-size: fit-content;
     opacity: 1;
-    transition-duration: var(--md-comp-date-picker-motion-spatial-duration);
+    transition-duration: var(--_datepicker-motion-spatial-duration);
 
     &.micl-datepicker__view-hidden {
         block-size: 0;
@@ -65,7 +65,7 @@
     background-repeat: no-repeat;
     background-size: 100%;
     background-clip: content-box;
-    transition: --statelayer-opacity var(--md-comp-date-picker-button-motion-duration) linear;
+    transition: --statelayer-opacity var(--_datepicker-button-motion-duration) linear;
 
     &:hover {
         --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
@@ -79,11 +79,11 @@
 }
 
 dialog.micl-dialog.micl-datepicker {
-    --md-comp-date-picker-motion-spatial: #{motion.$md-sys-motion-expressive-fast-effects};
-    --md-comp-date-picker-motion-spatial-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-comp-date-picker-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-comp-date-picker-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-effects-duration};
-    --md-comp-date-picker-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_datepicker-motion-spatial: var(--md-comp-date-picker-motion-spatial, #{motion.$md-sys-motion-expressive-fast-effects});
+    --_datepicker-motion-spatial-duration: var(--md-comp-date-picker-motion-spatial-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_datepicker-motion-duration: var(--md-comp-date-picker-motion-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_datepicker-motion-duration-reverse: var(--md-comp-date-picker-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-effects-duration});
+    --_datepicker-button-motion-duration: var(--md-comp-date-picker-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
     // Internal alias: the target size is referenced from many descendants.
     --_target: var(--md-sys-state-target-size, 48px);
@@ -153,7 +153,7 @@ dialog.micl-dialog.micl-datepicker {
         min-block-size: 330px;
         padding-inline: 0;
         overflow: hidden auto;
-        transition: min-block-size var(--md-comp-date-picker-motion-spatial-duration) var(--md-comp-date-picker-motion-spatial);
+        transition: min-block-size var(--_datepicker-motion-spatial-duration) var(--_datepicker-motion-spatial);
     }
 
     .micl-dialog__actions {
@@ -275,10 +275,10 @@ dialog.micl-dialog.micl-datepicker {
     overflow: hidden;
     transform: translateX(0);
     transition:
-        transform var(--md-comp-date-picker-motion-spatial-duration) var(--md-comp-date-picker-motion-spatial),
-        opacity var(--md-comp-date-picker-motion-duration-reverse) linear,
-        block-size var(--md-comp-date-picker-motion-duration-reverse) linear allow-discrete,
-        display var(--md-comp-date-picker-motion-duration-reverse) linear allow-discrete;
+        transform var(--_datepicker-motion-spatial-duration) var(--_datepicker-motion-spatial),
+        opacity var(--_datepicker-motion-duration-reverse) linear,
+        block-size var(--_datepicker-motion-duration-reverse) linear allow-discrete,
+        display var(--_datepicker-motion-duration-reverse) linear allow-discrete;
 
     &.micl-datepicker__view-hidden {
         block-size: 0%;

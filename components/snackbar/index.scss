@@ -37,10 +37,10 @@
 @include typography.scale('body-medium');
 
 .micl-snackbar {
-    --md-comp-snackbar-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
-    --md-comp-snackbar-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-comp-snackbar-motion-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --micl-duration: var(--md-comp-snackbar-motion-duration-reverse);
+    --_motion-spatial: var(--md-comp-snackbar-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
+    --_motion-duration: var(--md-comp-snackbar-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_motion-duration-reverse: var(--md-comp-snackbar-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --micl-duration: var(--_motion-duration-reverse);
     --statelayer-color: var(--md-sys-color-inverse-primary);
     --statelayer-opacity: 0%;
 
@@ -78,11 +78,11 @@
     overflow: clip;
 
     transition:
-        block-size var(--micl-duration) var(--md-comp-snackbar-motion-spatial),
-        opacity var(--md-comp-snackbar-motion-duration-reverse) linear,
-        display var(--md-comp-snackbar-motion-duration-reverse) linear allow-discrete,
-        overlay var(--md-comp-snackbar-motion-duration-reverse) linear allow-discrete,
-        --statelayer-opacity var(--md-comp-snackbar-motion-duration) linear;
+        block-size var(--micl-duration) var(--_motion-spatial),
+        opacity var(--_motion-duration-reverse) linear,
+        display var(--_motion-duration-reverse) linear allow-discrete,
+        overlay var(--_motion-duration-reverse) linear allow-discrete,
+        --statelayer-opacity var(--_motion-duration) linear;
 
     &:hover {
         --statelayer-color: var(--md-comp-snackbar-hover-state-layer-color, var(--md-sys-color-inverse-primary));
@@ -94,7 +94,7 @@
     }
 
     &:popover-open {
-        --micl-duration: var(--md-comp-snackbar-motion-duration);
+        --micl-duration: var(--_motion-duration);
 
         block-size: var(--md-comp-snackbar-with-single-line-container-height, 48px);
         opacity: 1;

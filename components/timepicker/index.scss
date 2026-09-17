@@ -49,7 +49,7 @@
     background-repeat: no-repeat;
     background-size: 100%;
     -webkit-tap-highlight-color: transparent;
-    transition: --statelayer-opacity var(--md-comp-time-picker-motion-duration) linear;
+    transition: --statelayer-opacity var(--_timepicker-motion-duration) linear;
 
     &:hover {
         --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
@@ -63,7 +63,7 @@
 }
 
 dialog.micl-dialog.micl-timepicker {
-    --md-comp-time-picker-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_timepicker-motion-duration: var(--md-comp-time-picker-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
     // Internal aliases: each public token is referenced from many descendants.
     // The keyboard-input mode uses the (smaller) time-input defaults; the
