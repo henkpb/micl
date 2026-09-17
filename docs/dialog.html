@@ -13,11 +13,6 @@
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
-    <style>
-        label {
-            color: var(--md-sys-color-on-surface);
-        }
-    </style>
 </head>
 <body class="micl-window light">
     <div class="docs-shell">
@@ -41,7 +36,7 @@
                 <li>Light-dismiss options</li>
             </ul>
             <div class="docs-hero__demo">
-                <button type="button" class="micl-button-filled-m" popovertarget="mydialog1">Open a dialog</button>
+                <button type="button" class="micl-button-filled-m" command="show-modal" commandfor="mydialog1">Open a dialog</button>
             </div>
         </section>
 
@@ -55,27 +50,28 @@
                 <div class="docs-stage docs-buttons">
                     <div class="docs-example">
                         <template>
-                            <dialog id="mydialog1" class="micl-dialog" style="width:300px" popover closedby="any" aria-labelledby="mytitle1">
+                            <dialog id="mydialog1" class="micl-dialog" style="width:300px" closedby="closerequest" aria-labelledby="mytitle1" aria-describedby="mydesc1">
                                 <div class="micl-dialog__headline">
                                     <h2 id="mytitle1">Basic dialog</h2>
-                                    <span class="micl-dialog__supporting-text">A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.</span>
+                                    <span id="mydesc1" class="micl-dialog__supporting-text">A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.</span>
                                 </div>
-                                <div class="micl-dialog__actions">
-                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog1" autofocus>OK</button>
-                                </div>
+                                <form method="dialog" class="micl-dialog__actions">
+                                    <button class="micl-button-text-s" value="ok" autofocus>OK</button>
+                                </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog1">Open Basic Dialog</button>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mydialog1">Open Basic Dialog</button>
                         </template>
                     </div>
                     <div class="docs-example">
                         <template>
-                            <dialog id="mydialog2" class="micl-dialog" style="width:400px" popover closedby="any" aria-labelledby="mytitle2" aria-describedby="mydesc2">
+                            <dialog id="mydialog2" class="micl-dialog" style="width:400px" closedby="closerequest" aria-labelledby="mytitle2" aria-describedby="mydesc2">
                                 <div class="micl-dialog__headline">
                                     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">restart_alt</span>
                                     <h2 id="mytitle2">Reset settings?</h2>
+                                    <span class="micl-dialog__subhead">Personal preferences</span>
                                     <span id="mydesc2" class="micl-dialog__supporting-text">This will reset your app preferences back to their default settings. The following people will receive a message about this:</span>
                                 </div>
-                                <div class="micl-dialog__content">
+                                <div class="micl-dialog__content" style="max-block-size:180px">
                                     <hr class="micl-divider">
                                     <ul class="micl-list" style="margin-block:8px">
                                         <li class="micl-list-item-one">
@@ -96,61 +92,87 @@
                                                 <span class="micl-list-item__headline">lucy.hong@gmail.com</span>
                                             </span>
                                         </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__avatar">MC</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">marie.curie@sorbonne.fr</span>
+                                            </span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__avatar">PB</span>
+                                            <span class="micl-list-item__text">
+                                                <span class="micl-list-item__headline">petter.berg@hermana.no</span>
+                                            </span>
+                                        </li>
                                     </ul>
                                     <hr class="micl-divider">
                                 </div>
-                                <div class="micl-dialog__actions">
-                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog2" autofocus>Cancel</button>
-                                    <button type="button" class="micl-button-text-s">Accept</button>
-                                </div>
+                                <form method="dialog" class="micl-dialog__actions">
+                                    <button class="micl-button-text-s" value="" autofocus>Cancel</button>
+                                    <button class="micl-button-text-s" value="doreset">Accept</button>
+                                </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog2">Open Dialog</button>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mydialog2">Open Scrolling Dialog</button>
                         </template>
                     </div>
                     <div class="docs-example">
                         <template>
-                            <dialog id="mydialog3" class="micl-dialog" style="width:350px" closedby="none" role="alertdialog" aria-labelledby="mytitle3" aria-describedby="mydesc3">
+                            <dialog id="mydialog3" class="micl-dialog" style="width:350px" closedby="closerequest" role="alertdialog" aria-labelledby="mytitle3" aria-describedby="mydesc3">
                                 <div class="micl-dialog__headline">
                                     <h2 id="mytitle3">Delete selected images?</h2>
                                     <span id="mydesc3" class="micl-dialog__supporting-text">Images will be permanently removed from the local folder and all synchronized devices.</span>
                                 </div>
                                 <form method="dialog" class="micl-dialog__actions">
-                                    <button class="micl-button-text-s" autofocus>Cancel</button>
+                                    <button class="micl-button-text-s" value="" autofocus>Cancel</button>
                                     <button class="micl-button-text-s" value="dodelete">Delete</button>
                                 </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" commandfor="mydialog3" command="show-modal">Open Modal Dialog</button>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mydialog3">Open Alert Dialog</button>
                         </template>
                     </div>
                     <div class="docs-example">
                         <template>
-                            <dialog id="mydialog4" class="micl-dialog micl-dialog--docked" style="position-anchor: --myanchor;width:350px" popover closedby="closerequest" aria-labelledby="mytitle4">
+                            <dialog id="mydialog4" class="micl-dialog" style="width:350px" popover aria-labelledby="mytitle4" aria-describedby="mydesc4">
                                 <div class="micl-dialog__headline">
-                                    <h2 id="mytitle4">Delete selected images?</h2>
-                                    <span class="micl-dialog__supporting-text">Images will be permanently removed from the local folder and all synchronized devices.</span>
+                                    <h2 id="mytitle4">Light-dismiss dialog</h2>
+                                    <span id="mydesc4" class="micl-dialog__supporting-text">Shown as a popover, so it scales out of the button and closes when you click outside it or press Esc.</span>
                                 </div>
                                 <div class="micl-dialog__actions">
-                                    <button class="micl-button-text-s" popovertarget="mydialog4" autofocus>Cancel</button>
-                                    <button class="micl-button-text-s">Delete</button>
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog4" popovertargetaction="hide" autofocus>OK</button>
                                 </div>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog4" style="anchor-name:--myanchor">Open Anchored Dialog</button>
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog4">Open Light-Dismiss Dialog</button>
                         </template>
                     </div>
                     <div class="docs-example">
                         <template>
-                            <dialog id="mydialog5" class="micl-dialog micl-dialog--fullscreen" closedby="none" aria-labelledby="mytitle5">
+                            <dialog id="mydialog5" class="micl-dialog micl-dialog--docked" style="position-anchor:--myanchor;width:350px" popover aria-labelledby="mytitle5" aria-describedby="mydesc5">
+                                <div class="micl-dialog__headline">
+                                    <h2 id="mytitle5">Delete selected images?</h2>
+                                    <span id="mydesc5" class="micl-dialog__supporting-text">Images will be permanently removed from the local folder and all synchronized devices.</span>
+                                </div>
+                                <div class="micl-dialog__actions">
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog5" popovertargetaction="hide" autofocus>Cancel</button>
+                                    <button type="button" class="micl-button-text-s" popovertarget="mydialog5" popovertargetaction="hide">Delete</button>
+                                </div>
+                            </dialog>
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mydialog5" style="anchor-name:--myanchor">Open Anchored Dialog</button>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <dialog id="mydialog6" class="micl-dialog micl-dialog--fullscreen" closedby="closerequest" aria-labelledby="mytitle6" aria-describedby="mydesc6">
                                 <form method="dialog" class="micl-dialog__headline">
                                     <button class="micl-dialog__fullscreen micl-iconbutton-standard-s material-symbols-outlined" aria-label="Close">close</button>
                                     <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
-                                    <h2 id="mytitle5">Employee info</h2>
+                                    <h2 id="mytitle6">Employee info</h2>
                                     <button class="micl-dialog__fullscreen micl-button-text-s" value="dosave">Save</button>
                                 </form>
                                 <div class="micl-dialog__content">
-                                    <p class="micl-dialog__supporting-text">Please specify details about the new employee.</p>
+                                    <p id="mydesc6" class="micl-dialog__supporting-text">Please specify details about the new employee.</p>
                                     <div class="micl-textfield-outlined" style="margin-block:24px">
                                         <label for="mytextfield1">Name</label>
-                                        <input type="text" id="mytextfield1" value="Marie Curie">
+                                        <input type="text" id="mytextfield1" value="Marie Curie" autofocus>
                                     </div>
                                     <div class="micl-textfield-outlined" style="margin-block:24px">
                                         <label for="mytextfield2">Address</label>
@@ -185,11 +207,11 @@
                                     </div>
                                 </div>
                                 <form method="dialog" class="micl-dialog__actions">
-                                    <button class="micl-button-text-s">Cancel</button>
+                                    <button class="micl-button-text-s" value="">Cancel</button>
                                     <button class="micl-button-text-s" value="dosave">Save</button>
                                 </form>
                             </dialog>
-                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mydialog5">Open Full-Screen Dialog</button>
+                            <button type="button" class="micl-button-outlined-m" command="show-modal" commandfor="mydialog6">Open Full-Screen Dialog</button>
                         </template>
                     </div>
                 </div>
