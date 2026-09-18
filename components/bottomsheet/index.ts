@@ -19,21 +19,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+
 import { register } from '../../foundations/runtime';
 
 export const bottomsheetSelector = 'dialog.micl-bottomsheet';
+
+const controllers = new WeakMap<HTMLDialogElement, AbortController>();
+
+const resetHeight = (dialog: HTMLDialogElement): void =>
+{
+    delete dialog.dataset.miclfitheight;
+    dialog.style.removeProperty('--md-comp-bottomsheet-height');
+};
+
+// A sheet that is grabbed mid-animation must not be measured at an intermediate height
+const settledHeight = (dialog: HTMLDialogElement): number =>
+{
+    dialog.getAnimations().forEach(animation => animation.finish());
+
+    return dialog.getBoundingClientRect().height;
+};
 
 const getSnapHeights = (dialog: HTMLDialogElement): number[] =>
 {
     let fitHeight = parseInt(dialog.dataset.miclfitheight || '0', 10);
 
     if (fitHeight < 1) {
-        fitHeight = dialog.getBoundingClientRect().height;
+        fitHeight = settledHeight(dialog);
         dialog.dataset.miclfitheight = `${fitHeight}`;
     }
 
     // data-miclfitheight is now set, so this resolves to the lifted resizing ceiling
-    let maxHeight   = parseInt(window.getComputedStyle(dialog).getPropertyValue('max-block-size'), 10),
+    let maxHeight   = parseInt(window.getComputedStyle(dialog).getPropertyValue('max-block-size'), 10) || Infinity,
         snapHeights = (dialog.dataset.miclsnapheights || '').split(',').map(Number).filter(
             n => !isNaN(n) && (n >= 0) && (n <= maxHeight)
         );
@@ -41,30 +58,30 @@ const getSnapHeights = (dialog: HTMLDialogElement): number[] =>
     return [...new Set(snapHeights.concat([Math.min(fitHeight, maxHeight)]).sort((a, b) => a - b))];
 };
 
-const getNextSnapHeight = (dialog: HTMLDialogElement, isResizing: boolean): number =>
+const getNextSnapHeight = (dialog: HTMLDialogElement): number =>
 {
-    let currentHeight = dialog.getBoundingClientRect().height,
+    let currentHeight = settledHeight(dialog),
         snapHeights   = getSnapHeights(dialog),
         largerSnaps   = snapHeights.filter(height => height > currentHeight + 4);
 
-    return largerSnaps[0] || snapHeights[isResizing ? snapHeights.length - 1 : 0];
+    return largerSnaps[0] || snapHeights[0];
 };
 
-const getPreviousSnapHeight = (dialog: HTMLDialogElement): number =>
+const getNearestSnapHeight = (dialog: HTMLDialogElement, height: number): number =>
 {
     // 0 (closing) is excluded: closing requires dragging below the 48px threshold
-    let currentHeight = dialog.getBoundingClientRect().height,
-        snapHeights   = getSnapHeights(dialog).filter(height => height > 0),
-        smallerSnaps  = snapHeights.filter(height => height < currentHeight - 4);
+    const snapHeights = getSnapHeights(dialog).filter(snapHeight => snapHeight > 0);
 
-    return smallerSnaps[smallerSnaps.length - 1] || snapHeights[0];
+    return snapHeights.reduce(
+        (nearest, snapHeight) => (Math.abs(snapHeight - height) < Math.abs(nearest - height)) ? snapHeight : nearest,
+        snapHeights[0] ?? height
+    );
 };
 
 const setHeight = (dialog: HTMLDialogElement, value: number): void =>
 {
     if (value < 1) {
-        delete dialog.dataset.miclfitheight;
-        dialog.style.removeProperty('--md-comp-bottomsheet-height');
+        resetHeight(dialog);
         dialog[!dialog.popover ? 'close' : 'hidePopover']();
     }
     else {
@@ -81,13 +98,18 @@ export default register(bottomsheetSelector, {
         ) {
             return;
         }
-        element.dataset.miclinitialized = '1';
 
         const headline = element.querySelector('.micl-bottomsheet__headline') as HTMLElement;
         if (!headline) {
             return;
         }
-        const draghandle = headline.querySelector('.micl-bottomsheet__draghandle') as HTMLElement;
+        element.dataset.miclinitialized = '1';
+
+        const draghandle = headline.querySelector('.micl-bottomsheet__draghandle') as HTMLElement,
+              controller = new AbortController(),
+              options    = { signal: controller.signal };
+
+        controllers.set(element, controller);
 
         let isPreparing = false,
             isResizing  = false,
@@ -95,13 +117,22 @@ export default register(bottomsheetSelector, {
             initialPointerY: number,
             initialHeight: number;
 
-        draghandle?.addEventListener('click', () =>
+        // Resizing lasts for one showing only
+        element.addEventListener('beforetoggle', (event: Event) =>
         {
-            if (wasResized) {
+            if ((event as ToggleEvent).newState === 'open') {
+                resetHeight(element);
+            }
+        }, options);
+
+        draghandle?.addEventListener('click', (event: Event) =>
+        {
+            // A drag ends in a click on the handle, a keyboard activation (detail 0) never does
+            if (wasResized && (event as PointerEvent).detail) {
                 return;
             }
-            setHeight(element, getNextSnapHeight(element, false));
-        });
+            setHeight(element, getNextSnapHeight(element));
+        }, options);
 
         headline.addEventListener('pointerdown', (event: Event) =>
         {
@@ -110,11 +141,12 @@ export default register(bottomsheetSelector, {
                 wasResized  = false;
                 event.preventDefault();
                 initialPointerY = (event as PointerEvent).clientY;
-                initialHeight = element.getBoundingClientRect().height;
-                document.addEventListener('pointermove', onPointerMove);
-                document.addEventListener('pointerup', onPointerUp);
+                initialHeight   = settledHeight(element);
+                document.addEventListener('pointermove', onPointerMove, options);
+                document.addEventListener('pointerup', stopResizing, options);
+                document.addEventListener('pointercancel', stopResizing, options);
             }
-        });
+        }, options);
 
         function onPointerMove(event: Event)
         {
@@ -132,35 +164,39 @@ export default register(bottomsheetSelector, {
                 setHeight(element, snapHeight || targetHeight);
             }
         }
-        function onPointerUp(event: Event)
+
+        function stopResizing(event: Event)
         {
+            const resized = isResizing;
+
             isPreparing = false;
+            isResizing  = false;
             element.classList.remove('micl-bottomsheet--resizing');
             document.removeEventListener('pointermove', onPointerMove);
-            document.removeEventListener('pointerup', onPointerUp);
-            if (isResizing) {
-                isResizing = false;
+            document.removeEventListener('pointerup', stopResizing);
+            document.removeEventListener('pointercancel', stopResizing);
+
+            if (resized) {
                 wasResized = true;
 
-                const currentPointerY = (event as PointerEvent).clientY;
-                if (currentPointerY < initialPointerY) {
-                    setHeight(element, getNextSnapHeight(element, true));
-                }
-                else if (element.getBoundingClientRect().height < 48) {
-                    setHeight(element, 0);
-                }
-                else {
-                    setHeight(element, getPreviousSnapHeight(element));
-                }
+                // a cancelled gesture settles, but never closes the bottom sheet
+                const currentHeight = element.getBoundingClientRect().height,
+                      isDismissed   = (currentHeight < 48) && (event.type === 'pointerup');
+
+                setHeight(element, isDismissed ? 0 : getNearestSnapHeight(element, currentHeight));
             }
         }
     },
     cleanup: (element: HTMLDialogElement) =>
     {
-        if (element.matches(bottomsheetSelector)) {
-            element.classList.remove('micl-bottomsheet--resizing');
-            delete element.dataset.miclinitialized;
-            delete element.dataset.miclfitheight;
+        const controller = controllers.get(element);
+
+        if (controller) {
+            controller.abort();
+            controllers.delete(element);
         }
+        element.classList.remove('micl-bottomsheet--resizing');
+        resetHeight(element);
+        delete element.dataset.miclinitialized;
     }
 }, HTMLDialogElement);

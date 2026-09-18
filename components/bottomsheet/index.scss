@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations/layout/tokens' as layout;
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -33,6 +34,13 @@
 @include statelayer.token('focus-indicator-outer-offset');
 @include statelayer.token('backdrop-opacity');
 
+// flipped one animation late, so the content does not scroll while the bottom sheet resizes
+@property --micl-bottomsheet-scroll {
+    syntax: '<custom-ident>';
+    inherits: true;
+    initial-value: hidden;
+}
+
 dialog.micl-bottomsheet {
     --_height: var(--md-comp-bottomsheet-height, max-content);
     --_margin: var(--md-comp-bottomsheet-margin, 56px);
@@ -46,34 +54,38 @@ dialog.micl-bottomsheet {
 
     --micl-duration: var(--_motion-duration-reverse);
     --micl-easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
+    --micl-bottomsheet-scroll: hidden;
+    --_settle-delay: 0s;
 
     box-sizing: border-box;
     position: fixed;
     inset-block: auto 0;
+    inset-inline: 0;
     block-size: 0;
-    max-block-size: 50vh;
+    max-block-size: 50dvb;
     inline-size: 100%;
-
-    &[data-miclfitheight] {
-        max-block-size: calc(100vh - var(--_margin-top));
-    }
-    min-inline-size: 100%;
-    margin: var(--_margin-top) 0 0 0 ;
+    margin: 0;
     padding: 0;
     border: none;
     border-radius: var(--md-comp-bottomsheet-container-shape, var(--md-sys-shape-corner-extra-large-top));
     background-color: var(--md-comp-bottomsheet-container-color, var(--md-sys-color-surface-container-low));
     box-shadow: var(--md-comp-bottomsheet-container-elevation, var(--md-sys-elevation-level1));
     opacity: 0;
-    overflow-y: hidden;
+    // both axes: a lone overflow-y would compute overflow-x to auto, which briefly
+    // lays out a horizontal scrollbar when the bottom sheet animates to a tiny height
+    overflow: hidden;
     interpolate-size: allow-keywords;
 
+    &[data-miclfitheight] {
+        max-block-size: calc(100dvb - var(--_margin-top));
+    }
     &:not(.micl-bottomsheet--resizing) {
         transition:
             opacity var(--micl-duration) var(--micl-easing),
             block-size var(--micl-duration) var(--_motion-spatial),
             overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete;
+            display var(--micl-duration) linear allow-discrete,
+            --micl-bottomsheet-scroll 0s var(--_settle-delay) allow-discrete;
     }
     .micl-bottomsheet__headline {
         box-sizing: border-box;
@@ -85,6 +97,7 @@ dialog.micl-bottomsheet {
         justify-content: center;
         cursor: grab;
         touch-action: none;
+        -webkit-tap-highlight-color: transparent;
 
         .micl-bottomsheet__draghandle {
             box-sizing: content-box;
@@ -110,14 +123,15 @@ dialog.micl-bottomsheet {
             }
         }
     }
-    &.micl-bottomsheet--resizing .micl-bottomsheet__headline {
-        cursor: grabbing;
-    }
-
     .micl-bottomsheet__content {
         flex: 1 1 auto;
         padding: 0 var(--_padding) var(--_padding) var(--_padding);
-        overflow: hidden auto;
+        overflow: hidden var(--micl-bottomsheet-scroll);
+
+        // without a headline above it, the content needs its own space below the top edge
+        &:first-child {
+            padding-block-start: var(--_padding);
+        }
     }
 
     &::backdrop {
@@ -131,15 +145,18 @@ dialog.micl-bottomsheet {
     &[open] {
         --micl-duration: var(--_motion-duration);
         --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+        --micl-bottomsheet-scroll: auto;
+        --_settle-delay: var(--_motion-duration);
 
         display: flex;
         flex-direction: column;
         block-size: var(--_height);
-        opacity: 100%;
+        opacity: 1;
 
         @starting-style {
             block-size: 0;
             opacity: 0;
+            --micl-bottomsheet-scroll: hidden;
         }
     }
     &[open]::backdrop {
@@ -149,15 +166,21 @@ dialog.micl-bottomsheet {
             background-color: rgba(0, 0, 0, 0);
         }
     }
-}
+    // after the opened state, whose --micl-bottomsheet-scroll it has to override
+    &.micl-bottomsheet--resizing {
+        --micl-bottomsheet-scroll: hidden;
 
-@media (min-width: 641px) {
-    dialog.micl-bottomsheet {
-        inline-size: min(100vw - (2 * var(--_margin)), 640px);
-        max-inline-size: 640px;
-        min-inline-size: min(100vw - (2 * var(--_margin)), 640px);
-        inset-inline-start: calc(((100vw - min(100vw - (2 * var(--_margin)), 640px)) / 2) - var(--_margin));
-        margin: var(--_margin);
-        margin-block-end: 0;
+        .micl-bottomsheet__headline {
+            cursor: grabbing;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --_motion-duration: 0ms;
+        --_motion-duration-reverse: 0ms;
+    }
+    @media (min-width: layout.$md-sys-breakpoint-medium-min) {
+        inline-size: min(100% - (2 * var(--_margin)), 640px);
+        margin-inline: auto;
     }
 }
