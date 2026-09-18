@@ -34,7 +34,6 @@
 @include statelayer.token('focus-indicator-outer-offset');
 @include statelayer.token('backdrop-opacity');
 
-// flipped one animation late, so the content does not scroll while the bottom sheet resizes
 @property --micl-bottomsheet-scroll {
     syntax: '<custom-ident>';
     inherits: true;
@@ -71,8 +70,6 @@ dialog.micl-bottomsheet {
     background-color: var(--md-comp-bottomsheet-container-color, var(--md-sys-color-surface-container-low));
     box-shadow: var(--md-comp-bottomsheet-container-elevation, var(--md-sys-elevation-level1));
     opacity: 0;
-    // both axes: a lone overflow-y would compute overflow-x to auto, which briefly
-    // lays out a horizontal scrollbar when the bottom sheet animates to a tiny height
     overflow: hidden;
     interpolate-size: allow-keywords;
 
@@ -105,7 +102,6 @@ dialog.micl-bottomsheet {
             block-size: var(--_drag-handle-height);
             padding: 16px calc((var(--md-sys-state-target-size, 48px) - var(--_drag-handle-width)) / 2);
             border: none;
-            // only shapes the focus ring; the visible handle is the ::before below
             border-radius: var(--md-sys-shape-corner-extra-large);
             background: none;
             cursor: pointer;
@@ -128,7 +124,6 @@ dialog.micl-bottomsheet {
         padding: 0 var(--_padding) var(--_padding) var(--_padding);
         overflow: hidden var(--micl-bottomsheet-scroll);
 
-        // without a headline above it, the content needs its own space below the top edge
         &:first-child {
             padding-block-start: var(--_padding);
         }
@@ -166,7 +161,6 @@ dialog.micl-bottomsheet {
             background-color: rgba(0, 0, 0, 0);
         }
     }
-    // after the opened state, whose --micl-bottomsheet-scroll it has to override
     &.micl-bottomsheet--resizing {
         --micl-bottomsheet-scroll: hidden;
 
