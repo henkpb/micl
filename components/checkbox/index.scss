@@ -44,9 +44,9 @@
 $checkbox: 'input[type=checkbox].micl-checkbox';
 
 #{$checkbox} {
-    --md-comp-checkbox-motion-duration: #{motion.$md-sys-motion-expressive-slow-effects-duration};
-    --md-comp-checkbox-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-effects-duration};
-    --md-comp-checkbox-motion-spatial: #{motion.$md-sys-motion-expressive-fast-spatial};
+    --_motion-duration: var(--md-comp-checkbox-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
+    --_motion-duration-reverse: var(--md-comp-checkbox-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_motion-spatial: var(--md-comp-checkbox-motion-spatial, #{motion.$md-sys-motion-expressive-fast-spatial});
 
     --_size: var(--md-comp-checkbox-container-size, 18px);
     --_outline-width: var(--md-comp-checkbox-outline-width, 2px);
@@ -119,8 +119,8 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         border-radius: var(--md-comp-checkbox-container-shape, 2px);
         background-color: var(--_container-color);
         transition:
-            background-color var(--md-comp-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-comp-checkbox-motion-duration-reverse),
-            border-color var(--md-comp-checkbox-motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--md-comp-checkbox-motion-duration-reverse);
+            background-color var(--_motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--_motion-duration-reverse),
+            border-color var(--_motion-duration-reverse) motion.$md-sys-motion-easing-emphasized var(--_motion-duration-reverse);
     }
     &:is(:checked, :indeterminate) {
         --statelayer-color: var(--md-sys-color-primary);
@@ -129,16 +129,16 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
             block-size: var(--_check-height);
             clip-path: rect(0 calc(var(--_check-width) - var(--_check-thickness)) var(--_size) 0);
             transition:
-                block-size var(--md-sys-motion-duration-short3) var(--md-comp-checkbox-motion-spatial),
-                clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--md-comp-checkbox-motion-spatial);
+                block-size var(--md-sys-motion-duration-short3) var(--_motion-spatial),
+                clip-path var(--md-sys-motion-duration-long4) var(--md-sys-motion-duration-short3) var(--_motion-spatial);
         }
         &::after {
             --_container-color: var(--md-comp-checkbox-selected-container-color, var(--md-sys-color-primary));
             --_outline-color: var(--md-comp-checkbox-selected-container-color, var(--md-sys-color-primary));
 
             transition:
-                background-color var(--md-comp-checkbox-motion-duration) linear,
-                border-color var(--md-comp-checkbox-motion-duration) motion.$md-sys-motion-easing-emphasized;
+                background-color var(--_motion-duration) linear,
+                border-color var(--_motion-duration) motion.$md-sys-motion-easing-emphasized;
         }
     }
     &:indeterminate::before {
@@ -194,7 +194,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         cursor: pointer;
         transition:
             background-size 0ms,
-            --statelayer-opacity var(--md-comp-checkbox-motion-duration) linear;
+            --statelayer-opacity var(--_motion-duration) linear;
 
         &:hover {
             --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);

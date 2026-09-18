@@ -41,8 +41,8 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     --_line-height: var(--md-comp-text-field-container-height, 56px);
 }
 #{$selects} {
-    --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --_list-motion-effects: var(--md-comp-list-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
+    --_list-motion-duration: var(--md-comp-list-motion-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
 
     appearance: base-select;
     line-height: var(--_line-height);
@@ -168,7 +168,7 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
             // the list transition is repeated here without it.
             transition:
                 background-size 0ms,
-                --statelayer-opacity var(--md-comp-list-motion-duration) linear;
+                --statelayer-opacity var(--_list-motion-duration) linear;
         }
     }
 }

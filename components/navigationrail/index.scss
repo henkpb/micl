@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations/layout/tokens' as layout;
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -44,13 +44,12 @@
 @include typography.scale('label-large');
 
 .micl-navigationrail {
-    --md-comp-nav-rail-spring-buffer: 100px;
-    --md-comp-nav-rail-divider-thickness: 0px;
-    --md-comp-nav-rail-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
-    --md-comp-nav-rail-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
-    --md-comp-nav-rail-motion-duration-reverse: #{motion.$md-sys-motion-expressive-default-spatial-duration};
-    --md-comp-nav-rail-morph-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
-    --md-comp-nav-rail-morph-duration-reverse: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_navigationrail-spring-buffer: var(--md-comp-nav-rail-spring-buffer, 100px);
+    --_navigationrail-motion-spatial: var(--md-comp-nav-rail-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
+    --_navigationrail-motion-duration: var(--md-comp-nav-rail-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
+    --_navigationrail-motion-duration-reverse: var(--md-comp-nav-rail-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_navigationrail-morph-duration: var(--md-comp-nav-rail-morph-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_navigationrail-morph-duration-reverse: var(--md-comp-nav-rail-morph-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
     --_navigationrail-current-max-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
     --_navigationrail-current-min-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
@@ -58,10 +57,10 @@
     --_navigationrail-item-width: var(--md-comp-nav-rail-item-vertical-active-indicator-width, 56px);
     --_navigationrail-item-target-height: var(--_navigationrail-item-base-height);
 
-    --micl-duration: var(--md-comp-nav-rail-motion-duration-reverse);
+    --micl-duration: var(--_navigationrail-motion-duration-reverse);
 
     --_navigationrail-content-gap: var(--md-comp-nav-rail-item-container-vertical-space, 6px);
-    --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
+    --_navigationrail-morph-speed: var(--_navigationrail-morph-duration-reverse);
     --_navigationrail-container-delay: calc(var(--_navigationrail-morph-speed) / 2);
     --_navigationrail-item-delay: 0ms;
     --_navigationrail-text-animation: none;
@@ -165,7 +164,7 @@
                 flex-direction 0s calc(var(--_navigationrail-morph-speed) / 2) linear allow-discrete,
                 background-color calc(var(--_navigationrail-morph-speed) / 2) linear,
                 background-size 0ms,
-                --statelayer-opacity var(--md-comp-nav-rail-motion-duration) linear;
+                --statelayer-opacity var(--_navigationrail-motion-duration) linear;
 
             .micl-navigationrail__icon {
                 @extend %micl-navitem-icon;
@@ -186,7 +185,7 @@
             }
 
             &:active {
-                transition-duration: 0ms, 0ms, 0ms, calc(var(--_navigationrail-morph-speed) / 2), 0ms, var(--md-comp-nav-rail-motion-duration);
+                transition-duration: 0ms, 0ms, 0ms, calc(var(--_navigationrail-morph-speed) / 2), 0ms, var(--_navigationrail-motion-duration);
             }
         }
 
@@ -203,7 +202,7 @@
     }
 
     &[open] {
-        --micl-duration: var(--md-comp-nav-rail-motion-duration);
+        --micl-duration: var(--_navigationrail-motion-duration);
 
         border-start-end-radius: var(--md-comp-nav-rail-expanded-modal-container-shape, var(--md-sys-shape-corner-large));
         border-end-end-radius: var(--md-comp-nav-rail-expanded-modal-container-shape, var(--md-sys-shape-corner-large));
@@ -237,7 +236,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     --_navigationrail-item-target-padding: 16px;
 
     --_navigationrail-content-gap: 0px;
-    --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration);
+    --_navigationrail-morph-speed: var(--_navigationrail-morph-duration);
     --_navigationrail-container-delay: 0ms;
     --_navigationrail-item-delay: calc(var(--_navigationrail-morph-speed) / 2);
     --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-expanded;
@@ -263,6 +262,12 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
             margin-inline-start: var(--_navigationrail-expanded-text-margin);
             padding-inline-end: 16px;
         }
+        .micl-navigationrail__text:has(+ .micl-badge--trailing) {
+            padding-inline-end: 0;
+        }
+        .micl-badge--trailing {
+            margin-inline-end: 16px;
+        }
 
         &:not(:has(.micl-navigationrail__icon)) .micl-navigationrail__text {
             margin-inline-start: 0px;
@@ -272,7 +277,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
 }
 
 nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not([aria-pressed="true"])) {
-    --_navigationrail-morph-speed: var(--md-comp-nav-rail-morph-duration-reverse);
+    --_navigationrail-morph-speed: var(--_navigationrail-morph-duration-reverse);
     --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-collapsed;
 }
 
@@ -287,25 +292,25 @@ nav.micl-navigationrail {
 
 dialog.micl-navigationrail {
     display: none;
-    min-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-minimum, 220px) + var(--md-comp-nav-rail-spring-buffer));
-    max-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--md-comp-nav-rail-spring-buffer));
-    margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--md-comp-nav-rail-spring-buffer)));
-    padding-inline: var(--md-comp-nav-rail-spring-buffer) 0;
+    min-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-minimum, 220px) + var(--_navigationrail-spring-buffer));
+    max-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_navigationrail-spring-buffer));
+    margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_navigationrail-spring-buffer)));
+    padding-inline: var(--_navigationrail-spring-buffer) 0;
     opacity: 0%;
 
     transition:
         opacity var(--micl-duration) linear,
-        margin-inline-start var(--micl-duration) var(--md-comp-nav-rail-motion-spatial),
+        margin-inline-start var(--micl-duration) var(--_navigationrail-motion-spatial),
         overlay var(--micl-duration) linear allow-discrete,
         display var(--micl-duration) linear allow-discrete;
 
     &[open] {
         display: flex;
-        margin-inline-start: calc(-1 * var(--md-comp-nav-rail-spring-buffer));
+        margin-inline-start: calc(-1 * var(--_navigationrail-spring-buffer));
         opacity: 100%;
 
         @starting-style {
-            margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--md-comp-nav-rail-spring-buffer)));
+            margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_navigationrail-spring-buffer)));
             opacity: 0%;
         }
     }

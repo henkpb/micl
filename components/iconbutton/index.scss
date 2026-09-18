@@ -65,8 +65,8 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
 }
 
 #{$iconbuttons} {
-    --md-comp-icon-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-comp-icon-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_motion-effects: var(--md-comp-icon-button-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
+    --_motion-duration: var(--md-comp-icon-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -96,10 +96,10 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     font-variation-settings: 'FILL' 0;
     cursor: pointer;
     transition:
-        border-radius var(--md-comp-icon-button-motion-duration) var(--md-comp-icon-button-motion-effects),
-        font-variation-settings var(--md-comp-icon-button-motion-duration) linear,
+        border-radius var(--_motion-duration) var(--_motion-effects),
+        font-variation-settings var(--_motion-duration) linear,
         background-size 0ms,
-        --statelayer-opacity var(--md-comp-icon-button-motion-duration) linear;
+        --statelayer-opacity var(--_motion-duration) linear;
 
     &:disabled {
         box-shadow: var(--md-sys-elevation-level0);

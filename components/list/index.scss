@@ -165,8 +165,8 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
 }
 
 .micl-list {
-    --md-comp-list-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-comp-list-motion-duration: #{motion.$md-sys-motion-expressive-default-effects-duration};
+    --_list-motion-effects: var(--md-comp-list-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
+    --_list-motion-duration: var(--md-comp-list-motion-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
     --md-comp-accordion-motion-spatial: #{motion.$md-sys-motion-expressive-default-spatial};
     --md-comp-accordion-motion-duration: #{motion.$md-sys-motion-expressive-default-spatial-duration};
     --md-comp-divider-space: 0.5px;
@@ -269,9 +269,9 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
     background-size: 0%, 100%;
     list-style: none;
     transition:
-        border-radius var(--md-comp-list-motion-duration) var(--md-comp-list-motion-effects),
+        border-radius var(--_list-motion-duration) var(--_list-motion-effects),
         background-size 0ms,
-        --statelayer-opacity var(--md-comp-list-motion-duration) linear;
+        --statelayer-opacity var(--_list-motion-duration) linear;
     -webkit-tap-highlight-color: transparent;
 
     &:first-of-type {
@@ -407,11 +407,11 @@ $unselected: ':not(:checked, :has(input[type=checkbox]:checked), #{$open-accordi
     font-size: var(--md-comp-list-item-leading-icon-expressive-size, 20px);
     font-variation-settings: 'FILL' 0;
     color: var(--_leading-icon-color);
-    transition: font-variation-settings var(--md-comp-list-motion-duration) linear;
+    transition: font-variation-settings var(--_list-motion-duration) linear;
 
     &.micl-list-item__icon--expander {
         transform: rotate(0deg);
-        transition: transform var(--md-comp-list-motion-duration) linear;
+        transition: transform var(--_list-motion-duration) linear;
     }
 }
 .micl-list-item__text ~ .micl-list-item__icon {

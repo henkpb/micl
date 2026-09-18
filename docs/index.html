@@ -31,19 +31,19 @@
             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
         </div>
         <div class="micl-navigationrail__content">
-            <a href="#" class="micl-navigationrail__item" tabindex="0">
+            <a href="#" class="micl-navigationrail__item" tabindex="0" aria-label="Inbox, 97 new messages">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox;--md-comp-badge-inline-offset:-16px">97</span>
+                <span class="micl-badge" style="position-anchor:--inbox" aria-hidden="true">97</span>
             </a>
             <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
             </a>
-            <a href="#" class="micl-navigationrail__item" tabindex="0">
+            <a href="#" class="micl-navigationrail__item" tabindex="0" aria-label="Favorites, new notification">
                 <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites;--md-comp-badge-inline-offset:-16px"></span>
+                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites" aria-hidden="true"></span>
             </a>
             <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
@@ -348,13 +348,13 @@
                 </div>
                 <div class="docs-stage" style="flex-direction:row;justify-content:space-between;flex-wrap:wrap">
                     <div style="display:flex;flex-direction:column;align-items:flex-start;row-gap:16px">
-                        <dialog id="mydialog" class="micl-dialog" popover closedby="none" aria-labelledby="mytitle">
+                        <dialog id="mydialog" class="micl-dialog" closedby="closerequest" aria-labelledby="mytitle" aria-describedby="mydesc">
                             <form method="dialog" class="micl-dialog__headline">
                                 <span class="micl-dialog__icon material-symbols-outlined" aria-hidden="true">person</span>
                                 <h2 id="mytitle">Employee info</h2>
                             </form>
                             <div class="micl-dialog__content">
-                                <p class="micl-dialog__supporting-text">Please specify details about the new employee.</p>
+                                <p id="mydesc" class="micl-dialog__supporting-text">Please specify details about the new employee.</p>
                                 <div class="micl-textfield-outlined" style="margin-block:24px">
                                     <label for="mytextfield2">Name</label>
                                     <input type="text" id="mytextfield2" value="Marie Curie">
@@ -392,22 +392,22 @@
                                 </div>
                             </div>
                             <form method="dialog" class="micl-dialog__actions">
-                                <button type="button" class="micl-button-text-s" popovertarget="mydialog">Cancel</button>
+                                <button class="micl-button-text-s" value="">Cancel</button>
                                 <button class="micl-button-text-s" value="dosave">Save</button>
                             </form>
                         </dialog>
-                        <button class="micl-button-elevated-s" popovertarget="mydialog">Open Dialog</button>
+                        <button type="button" class="micl-button-elevated-s" command="show-modal" commandfor="mydialog">Open Dialog</button>
 
                         <dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mysidesheettitle">
                             <div class="micl-sidesheet__headline">
                                 <h2 id="mysidesheettitle">Lorum ipsum</h2>
-                                <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet">close</button>
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet" aria-label="Close">close</button>
                             </div>
                             <div class="micl-sidesheet__content">
-                                <p style="color:var(--md-sys-color-on-surface)">Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
-                                <p style="color:var(--md-sys-color-on-surface)">Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
-                                <p style="color:var(--md-sys-color-on-surface)">Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
-                                <p style="color:var(--md-sys-color-on-surface)">Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
+                                <p>Potenti facilisis litora porta tincidunt semper vulputate himenaeos conubia ullamcorper, lacinia a consequat malesuada molestie pharetra interdum sed ut neque, sociosqu libero id montes rhoncus vestibulum suscipit fringilla. Dis sed est risus pulvinar eleifend, aliquet orci quis leo. Penatibus neque nibh cras nostra magnis vivamus, quis conubia sociis diam class, euismod et quisque metus fames. Feugiat donec magnis fusce elementum dis imperdiet velit convallis eget, maecenas sed sem lectus class facilisis posuere sociosqu, himenaeos taciti habitant orci senectus bibendum dignissim cursus.</p>
+                                <p>Per faucibus aliquet vivamus convallis curabitur massa habitasse aliquam ante pulvinar cubilia, nullam euismod vulputate nostra fermentum sagittis duis primis curae non viverra, cursus malesuada facilisi nisl blandit integer sem rhoncus odio nibh. Imperdiet eleifend bibendum lacinia non nec donec malesuada platea leo feugiat parturient, aptent duis sociis scelerisque natoque mus dui quam ullamcorper varius, mollis egestas velit nibh id quisque et ante sociosqu torquent. Pharetra placerat netus ligula nulla etiam ultricies, fames nibh varius massa orci ad, senectus penatibus quis leo semper. Aptent nisi auctor metus augue suspendisse commodo eu lacinia neque laoreet leo venenatis pharetra aliquet habitasse tellus, urna volutpat torquent accumsan sollicitudin lectus viverra nostra fusce primis maecenas sociis magnis netus porttitor.</p>
+                                <p>Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
                             </div>
                         </dialog>
                         <button type="button" class="micl-button-tonal-s" popovertarget="mysidesheet">Open Side Sheet</button>
@@ -459,9 +459,9 @@
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
     </div>
 
-    <div id="mysnackbar" class="micl-snackbar" popover data-micldelay="7000" role="status" aria-atomic="true">
-        <span class="micl-snackbar__supporting-text">This is the Snackbar component</span>
-        <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar" popovertargetaction="hide">close</button>
+    <div id="mysnackbar" class="micl-snackbar" popover data-micldelay="7000">
+        <span class="micl-snackbar__supporting-text" role="status" aria-atomic="true">This is the Snackbar component</span>
+        <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysnackbar" popovertargetaction="hide" aria-label="Close">close</button>
     </div>
 
     <script src="micl.js"></script>

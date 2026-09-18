@@ -1,0 +1,55 @@
+//
+// Copyright © 2025 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+$md-sys-breakpoint-compact-max: 599px;
+$md-sys-breakpoint-medium-min: 600px;
+$md-sys-breakpoint-medium-max: 839px;
+$md-sys-breakpoint-expanded-min: 840px;
+$md-sys-breakpoint-expanded-max: 1199px;
+$md-sys-breakpoint-large-min: 1200px;
+$md-sys-breakpoint-large-max: 1599px;
+$md-sys-breakpoint-extralarge-min: 1600px;
+
+$md-sys-window-margin-compact: 16px;
+$md-sys-window-margin: 24px; // medium and larger breakpoints
+
+$md-sys-pane-spacer: 24px;
+
+$md-sys-pane-fixed-width-expanded: 360px;
+$md-sys-pane-fixed-width-large: 412px;
+
+$md-sys-card-margin: 8px;
+
+:root {
+    --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
+    --md-sys-layout-window-margin: #{$md-sys-window-margin};
+    --md-sys-card-margin: #{$md-sys-card-margin};
+
+    @media (max-width: $md-sys-breakpoint-compact-max) {
+        --md-sys-layout-window-margin: #{$md-sys-window-margin-compact};
+    }
+    @media (min-width: $md-sys-breakpoint-expanded-min) and (max-width: $md-sys-breakpoint-expanded-max) {
+        --md-sys-layout-pane-fixed-width: #{$md-sys-pane-fixed-width-expanded};
+    }
+    @media (min-width: $md-sys-breakpoint-large-min) {
+        --md-sys-layout-pane-fixed-width: #{$md-sys-pane-fixed-width-large};
+    }
+}

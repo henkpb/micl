@@ -25,8 +25,8 @@
 @include statelayer.token('disabled-state-layer-opacity');
 
 .micl-stepper {
-    --md-comp-stepper-motion-spatial: #{motion.$md-sys-motion-expressive-slow-spatial};
-    --md-comp-stepper-motion-duration: #{motion.$md-sys-motion-expressive-slow-spatial-duration};
+    --_motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
+    --_motion-duration: var(--md-comp-stepper-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
 
     --_dot-size: var(--md-comp-stepper-dot-size, 12px);
 
@@ -105,8 +105,8 @@
             opacity: 0%;
             transform: translateX(100%);
             transition:
-                opacity var(--md-comp-stepper-motion-duration) linear,
-                transform var(--md-comp-stepper-motion-duration) var(--md-comp-stepper-motion-spatial);
+                opacity var(--_motion-duration) linear,
+                transform var(--_motion-duration) var(--_motion-spatial);
 
             &:has(~ .micl-stepper__step[aria-current=step]) {
                 transform: translateX(-100%);

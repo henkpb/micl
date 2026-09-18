@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../foundations/layout';
+@use '../../foundations/layout/tokens' as layout;
 @use '../../styles/elevation';
 @use '../../styles/statelayer';
 @use '../navigationrail/navitem';
@@ -114,6 +114,12 @@ nav.micl-navigationbar {
             .micl-navigationbar__text {
                 margin-block-start: 0;
                 padding-inline-end: var(--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space, 16px);
+            }
+            .micl-navigationbar__text:has(+ .micl-badge--trailing) {
+                padding-inline-end: 0;
+            }
+            .micl-badge--trailing {
+                margin-inline-end: var(--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space, 16px);
             }
         }
     }

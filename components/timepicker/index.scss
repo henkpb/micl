@@ -40,6 +40,12 @@
 @include typography.scale('body-small');
 @include typography.scale('label-medium');
 
+@property --micl-angle {
+    syntax: '<angle>';
+    inherits: true;
+    initial-value: 0deg;
+}
+
 // State layer background shared by the time fields and the AM/PM toggles.
 // The state layer color follows the label color of the current state.
 %statelayer-background {
@@ -49,7 +55,7 @@
     background-repeat: no-repeat;
     background-size: 100%;
     -webkit-tap-highlight-color: transparent;
-    transition: --statelayer-opacity var(--md-comp-time-picker-motion-duration) linear;
+    transition: --statelayer-opacity var(--_timepicker-motion-duration) linear;
 
     &:hover {
         --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
@@ -63,7 +69,7 @@
 }
 
 dialog.micl-dialog.micl-timepicker {
-    --md-comp-time-picker-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_timepicker-motion-duration: var(--md-comp-time-picker-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
     // Internal aliases: each public token is referenced from many descendants.
     // The keyboard-input mode uses the (smaller) time-input defaults; the
@@ -118,7 +124,7 @@ dialog.micl-dialog.micl-timepicker {
             }
             .micl-dialog__content {
                 grid-template-areas:
-                    "x x x dial"
+                    ". . . dial"
                     "hr sep min dial"
                     "per per per dial";
                 grid-template-rows: 72px var(--_input-height) auto;
@@ -154,6 +160,21 @@ dialog.micl-dialog.micl-timepicker {
             display: none;
         }
     }
+
+    // A clock face must never mirror, and a time is written hour-first in every
+    // locale, so the whole selector runs ltr and only the labels follow the page.
+    &:dir(rtl) .micl-dialog__content {
+        direction: ltr;
+
+        .micl-timepicker__supporting-text-hour,
+        .micl-timepicker__supporting-text-minute {
+            direction: rtl;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --_timepicker-motion-duration: 0ms;
+    }
 }
 
 .micl-timepicker {
@@ -173,16 +194,7 @@ dialog.micl-dialog.micl-timepicker {
         background-color: var(--md-comp-time-picker-time-selector-unselected-container-color, var(--md-sys-color-surface-container-highest));
         color: var(--md-comp-time-picker-time-selector-unselected-label-text-color, var(--md-sys-color-on-surface));
         text-align: center;
-        user-select: none;
-        -moz-appearance: textfield;
 
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-        }
-        &::selection {
-            background-color: transparent;
-        }
         &.micl-timepicker--selected {
             background-color: var(--md-comp-time-picker-time-selector-selected-container-color, var(--md-sys-color-primary-container));
             color: var(--md-comp-time-picker-time-selector-selected-label-text-color, var(--md-sys-color-on-primary-container));
@@ -191,11 +203,13 @@ dialog.micl-dialog.micl-timepicker {
     }
     input[name=hour] {
         grid-area: hr;
-        justify-self: flex-end;
+        justify-self: end;
     }
     input[name=minute] {
         grid-area: min;
     }
+    // In dial mode the fields are read-only read-outs: no caret, no selection.
+    // The keyboard mode needs both, so that the select-on-focus is visible.
     &:has(.micl-timepicker__dial:not(.micl-timepicker__dial--hidden)) {
         input[name=hour],
         input[name=minute] {
@@ -203,6 +217,11 @@ dialog.micl-dialog.micl-timepicker {
 
             border: none;
             cursor: pointer;
+            user-select: none;
+
+            &::selection {
+                background-color: transparent;
+            }
         }
     }
     &:not(:has(.micl-timepicker__am)):not(:has(.micl-timepicker__dial:not(.micl-timepicker__dial--hidden))) {
@@ -250,8 +269,10 @@ dialog.micl-dialog.micl-timepicker {
         background-color: transparent;
         cursor: pointer;
 
+        // The runtime names the radios with the day periods of the user's locale,
+        // so the accessible name is also the visible label.
         &::before {
-            content: "AM";
+            content: attr(aria-label);
             position: absolute;
             inline-size: 100%;
             text-align: center;
@@ -273,10 +294,6 @@ dialog.micl-dialog.micl-timepicker {
         border-block-start-width: 0px;
         border-end-start-radius: var(--md-sys-shape-corner-small);
         border-end-end-radius: var(--md-sys-shape-corner-small);
-
-        &::before {
-            content: "PM";
-        }
     }
 }
 
@@ -295,7 +312,7 @@ dialog.micl-dialog.micl-timepicker {
 .micl-timepicker .micl-timepicker__dial {
     --micl-dial-radius: calc((var(--_dial-size) - var(--_target)) / 2);
     --micl-hour-radius: var(--micl-dial-radius);
-    --micl-angle: 0deg;
+    --micl-track-radius: var(--micl-dial-radius);
 
     position: relative;
     grid-area: dial;
@@ -304,10 +321,8 @@ dialog.micl-dialog.micl-timepicker {
     inline-size: var(--_dial-size);
     margin-block: 36px 0;
     margin-inline: 0;
-    outline: none;
     border-radius: var(--md-sys-shape-corner-full);
     background-color: var(--md-comp-time-picker-clock-dial-color, var(--md-sys-color-surface-container-highest));
-    list-style-type: none;
     touch-action: none;
 
     data.micl-timepicker__dial-inner {
@@ -331,7 +346,6 @@ dialog.micl-dialog.micl-timepicker {
         inline-size: var(--_target);
         inset-inline-start: var(--micl-a);
         inset-block-start: var(--micl-b);
-        outline: none;
         border-radius: var(--md-sys-shape-corner-full);
         color: var(--md-comp-time-picker-clock-dial-unselected-label-text-color, var(--md-sys-color-on-surface));
         cursor: pointer;
@@ -357,7 +371,8 @@ dialog.micl-dialog.micl-timepicker {
     }
 
     .micl-timepicker__track {
-        --micl-track-length: 92px;
+        // Stops just inside the selected handle, on either ring.
+        --micl-track-length: calc(var(--micl-track-radius) - 12px);
 
         position: relative;
         display: block;
@@ -376,12 +391,18 @@ dialog.micl-dialog.micl-timepicker {
             display: block;
             block-size: var(--_center-size);
             inline-size: var(--_center-size);
-            inset-block-end: -3px;
-            inset-inline-start: -3px;
+            inset-block-end: calc((var(--_center-size) - var(--_track-width)) / -2);
+            inset-inline-start: calc((var(--_center-size) - var(--_track-width)) / -2);
             border-radius: var(--md-sys-shape-corner-full);
             background-color: var(--md-comp-time-picker-clock-dial-selector-center-container-color, var(--md-sys-color-primary));
         }
     }
+}
+
+// Only an open picker sweeps: the value the invoker seeds on beforetoggle lands
+// before the dialog opens, so it snaps into place instead of spinning from noon.
+.micl-timepicker[open] .micl-timepicker__dial {
+    transition: --micl-angle var(--_timepicker-motion-duration) motion.$md-sys-motion-easing-standard;
 }
 
 .micl-timepicker__dial--hidden {

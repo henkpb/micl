@@ -48,8 +48,8 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
 @include typography.scale('label-large');
 
 %micl-button-base {
-    --md-comp-button-motion-effects: #{motion.$md-sys-motion-expressive-fast-spatial};
-    --md-comp-button-motion-duration: #{motion.$md-sys-motion-expressive-fast-spatial-duration};
+    --_motion-effects: var(--md-comp-button-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
+    --_motion-duration: var(--md-comp-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -75,10 +75,10 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
-        border-radius var(--md-comp-button-motion-duration) var(--md-comp-button-motion-effects),
-        box-shadow var(--md-comp-button-motion-duration) var(--md-comp-button-motion-effects),
+        border-radius var(--_motion-duration) var(--_motion-effects),
+        box-shadow var(--_motion-duration) var(--_motion-effects),
         background-size 0ms,
-        --statelayer-opacity var(--md-comp-button-motion-duration) linear;
+        --statelayer-opacity var(--_motion-duration) linear;
 
     &#{$disabled} {
         cursor: default;
@@ -106,7 +106,7 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     }
     .micl-button__icon {
         font-variation-settings: 'FILL' 0;
-        transition: font-variation-settings var(--md-comp-button-motion-duration) linear;
+        transition: font-variation-settings var(--_motion-duration) linear;
     }
     &.micl-button--toggle:not([aria-pressed="true"]) .micl-button__icon::before {
         content: attr(data-miclicon);
