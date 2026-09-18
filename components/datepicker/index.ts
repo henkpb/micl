@@ -18,13 +18,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+//
 
 import { register } from '../../foundations/runtime';
 
 export const datepickerSelector = 'dialog.micl-dialog.micl-datepicker';
 
 const classPrefix  = 'micl-datepicker__';
-const noTransition = 'micl-no-transition';
+const noTransition = 'micl-datepicker__no-transition';
 
 type ValueElement = HTMLInputElement | HTMLButtonElement;
 
@@ -35,27 +36,78 @@ interface DatePickerState {
     selectedEnd: Date | null;
     range      : boolean;
     viewDate   : Date; // the month/year currently being viewed
+    focusDate  : Date; // the date owning the roving tabindex
     min        : Date;
     max        : Date;
 }
 
 const stateMap = new WeakMap<HTMLDialogElement, DatePickerState>();
+const slideMap = new WeakMap<HTMLElement, () => void>();
 const locale = new Intl.DateTimeFormat().resolvedOptions().locale;
 
 const formatters = {
     input: new Intl.DateTimeFormat(locale, { year: 'numeric', month: '2-digit', day: '2-digit' }),
     header: new Intl.DateTimeFormat(locale, { weekday: 'short', day: 'numeric', month: 'short' }),
-    monthLong: new Intl.DateTimeFormat(undefined, { month: 'long' }),
+    cell: new Intl.DateTimeFormat(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+    monthLong: new Intl.DateTimeFormat(locale, { month: 'long' }),
     monthShort: new Intl.DateTimeFormat(locale, { month: 'short' }),
     weekdayNarrow: new Intl.DateTimeFormat(locale, { weekday: 'narrow' }),
     weekdayLong: new Intl.DateTimeFormat(locale, { weekday: 'long' })
 };
 
-const toLocalMidnight = (date: Date): Date =>
+const isValidDate = (date: Date): boolean => !isNaN(date.getTime());
+
+const localDate = (year: number, month: number, day: number): Date =>
 {
-    const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
-    return d;
+    const date = new Date(year, month, day);
+    date.setFullYear(year, month, day);
+    return date;
+};
+
+const toLocalMidnight = (date: Date): Date =>
+    localDate(date.getFullYear(), date.getMonth(), date.getDate());
+
+const daysInMonth = (year: number, month: number): number => new Date(year, month + 1, 0).getDate();
+
+const monthIndex = (date: Date): number => date.getFullYear() * 12 + date.getMonth();
+
+const addMonths = (date: Date, amount: number): Date =>
+{
+    const first = localDate(date.getFullYear(), date.getMonth() + amount, 1);
+    const year  = first.getFullYear();
+    const month = first.getMonth();
+    return localDate(year, month, Math.min(date.getDate(), daysInMonth(year, month)));
+};
+
+const withMonth = (date: Date, year: number, month: number): Date =>
+    localDate(year, month, Math.min(date.getDate(), daysInMonth(year, month)));
+
+const clampToRange = (date: Date, min: Date, max: Date): Date =>
+    date < min ? new Date(min) : date > max ? new Date(max) : new Date(date);
+
+const clampToMonthRange = (date: Date, min: Date, max: Date): Date =>
+{
+    if (monthIndex(date) < monthIndex(min)) {
+        return withMonth(date, min.getFullYear(), min.getMonth());
+    }
+    if (monthIndex(date) > monthIndex(max)) {
+        return withMonth(date, max.getFullYear(), max.getMonth());
+    }
+    return new Date(date);
+};
+
+// A date-only string denotes a local calendar day; Date parsing would read it as UTC.
+const parseISODate = (value: string): Date | null =>
+{
+    const parts = /^(\d{4,6})-(\d{2})-(\d{2})/.exec(value.trim());
+    if (!parts) {
+        return null;
+    }
+    const month = parseInt(parts[2], 10) - 1;
+    const day   = parseInt(parts[3], 10);
+    const date  = localDate(parseInt(parts[1], 10), month, day);
+
+    return date.getMonth() === month && date.getDate() === day ? date : null;
 };
 
 const formatToInputDateValue = (d: Date): string =>
@@ -93,26 +145,19 @@ const getFirstDayOfWeek = (): number =>
 };
 
 const firstDayOfWeek = getFirstDayOfWeek();
-const isValidDate = (date: Date): boolean => !isNaN(date.getTime());
+const dateFormat = getDateFormat();
 
 const readInputDate = (el: HTMLInputElement): Date | null =>
 {
-    if (el.type === 'date' && el.valueAsDate) {
-        return el.valueAsDate;
+    const parsed = parseISODate(el.value);
+    if (parsed) {
+        return parsed;
     }
-    return el.value ? new Date(el.value) : null;
-};
-
-const commitValue = (el: ValueElement, value: string, text: string): void =>
-{
-    el.value = value;
-    if (el instanceof HTMLInputElement) {
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-        el.dispatchEvent(new Event('input', { bubbles: true }));
+    if (!el.value) {
+        return null;
     }
-    else {
-        el.textContent = text;
-    }
+    const loose = new Date(el.value);
+    return isValidDate(loose) ? toLocalMidnight(loose) : null;
 };
 
 const setText = (parent: Element | null, text: string): void =>
@@ -136,20 +181,29 @@ const setText = (parent: Element | null, text: string): void =>
     }
 };
 
+const commitValue = (el: ValueElement, value: string, text: string): void =>
+{
+    el.value = value;
+    if (el instanceof HTMLInputElement) {
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    else {
+        setText(el, text);
+    }
+};
+
 const getCalendarDays = (
     year : number,
     month: number
 ): Array<{ date: Date, val: string, isCurrentMonth: boolean }> => {
 
-    const firstOfMonth = new Date(year, month, 1);
-    const dayOfWeek    = firstOfMonth.getDay();
-    const offset       = (dayOfWeek - firstDayOfWeek + 7) % 7;
-
-    const startDate = new Date(year, month, 1 - offset);
+    const firstOfMonth = localDate(year, month, 1);
+    const offset       = (firstOfMonth.getDay() - firstDayOfWeek + 7) % 7;
+    const startDate    = localDate(year, month, 1 - offset);
 
     return Array.from({ length: 42 }, (_, i) => {
-        const current = new Date(startDate);
-        current.setDate(startDate.getDate() + i);
+        const current = localDate(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
         return {
             date          : current,
             val           : formatToInputDateValue(current),
@@ -158,23 +212,25 @@ const getCalendarDays = (
     });
 };
 
-const renderCalendarHeader = (): DocumentFragment =>
+const renderCalendarHeader = (): HTMLElement =>
 {
     const tempDate = new Date();
-    const startOffset = tempDate.getDay() - firstDayOfWeek;
-    tempDate.setDate(tempDate.getDate() - startOffset);
+    tempDate.setDate(tempDate.getDate() - ((tempDate.getDay() - firstDayOfWeek + 7) % 7));
 
-    const fragment = document.createDocumentFragment();
+    const row = document.createElement('div');
+    row.setAttribute('role', 'row');
 
     for (let i = 0; i < 7; i++) {
         const span = document.createElement('span');
-        span.style.gridArea = `1 / ${i + 1}`;
+        const long = formatters.weekdayLong.format(tempDate);
+        span.setAttribute('role', 'columnheader');
+        span.setAttribute('aria-label', long);
         span.textContent = formatters.weekdayNarrow.format(tempDate);
-        span.title = formatters.weekdayLong.format(tempDate);
-        fragment.appendChild(span);
+        span.title = long;
+        row.appendChild(span);
         tempDate.setDate(tempDate.getDate() + 1);
     }
-    return fragment;
+    return row;
 };
 
 const populateContainerWithDays = (
@@ -184,37 +240,66 @@ const populateContainerWithDays = (
     isEmpty  : boolean = false
 ): void => {
     if (isEmpty) {
-        const fragment = renderCalendarHeader();
+        container.setAttribute('role', 'grid');
+        container.appendChild(renderCalendarHeader());
 
-        days.forEach((_, index) => {
-            const time = document.createElement('time');
-            const row = Math.floor(index / 7) + 2;
-            const col = (index % 7) + 1;
-            time.style.gridArea = `${row} / ${col}`;
-            fragment.appendChild(time);
-        });
+        for (let row = 0; row < 6; row++) {
+            const week = document.createElement('div');
+            week.setAttribute('role', 'row');
 
-        container.appendChild(fragment);
+            for (let column = 0; column < 7; column++) {
+                const time = document.createElement('time');
+                time.setAttribute('role', 'gridcell');
+                week.appendChild(time);
+            }
+            container.appendChild(week);
+        }
     }
 
-    const today = toLocalMidnight(new Date());
+    const today = toLocalMidnight(new Date()).getTime();
     const start = state.selected.getTime();
     const end   = state.selectedEnd?.getTime();
+    const focus = state.focusDate.getTime();
+    const min   = state.min.getTime();
+    const max   = state.max.getTime();
+    let   roved = false;
 
     container.querySelectorAll('time').forEach((el, index) =>
     {
-        const day = days[index];
+        const day  = days[index];
+        const time = day.date.getTime();
+
         el.dateTime = day.val;
         el.textContent = day.date.getDate().toString();
+        el.setAttribute('aria-label', formatters.cell.format(day.date));
 
-        const time = day.date.getTime();
         const isSelected = time === start || time === end;
-        const isToday = time === today.getTime();
+        const isDisabled = !day.isCurrentMonth || time < min || time > max;
 
         el.className = '';
         if (!day.isCurrentMonth) el.classList.add(`${classPrefix}outside`);
         if (isSelected) el.classList.add(`${classPrefix}selected`);
-        if (isToday) el.classList.add(`${classPrefix}today`);
+        if (time === today) el.classList.add(`${classPrefix}today`);
+        if (isDisabled) el.classList.add(`${classPrefix}disabled`);
+
+        if (isDisabled) {
+            el.setAttribute('aria-disabled', 'true');
+            el.removeAttribute('aria-selected');
+        }
+        else {
+            el.removeAttribute('aria-disabled');
+            el.setAttribute('aria-selected', String(isSelected));
+        }
+        if (time === today) {
+            el.setAttribute('aria-current', 'date');
+        }
+        else {
+            el.removeAttribute('aria-current');
+        }
+
+        const isFocusCell = !isDisabled && !roved && time === focus;
+        el.tabIndex = isFocusCell ? 0 : -1;
+        roved = roved || isFocusCell;
 
         // A single-day range (end equals start) renders as a plain selection.
         if (end !== undefined && end !== start) {
@@ -229,6 +314,79 @@ const populateContainerWithDays = (
             }
         }
     });
+
+    if (!roved) {
+        const fallback = container.querySelector<HTMLElement>(`time:not(.${classPrefix}disabled)`);
+        if (fallback) fallback.tabIndex = 0;
+    }
+};
+
+const createCalendar = (state: DatePickerState): HTMLElement =>
+{
+    const calendar = document.createElement('div');
+    const inner    = document.createElement('div');
+    calendar.className = `${classPrefix}calendar`;
+    inner.className    = `${classPrefix}calendar-inner`;
+
+    populateContainerWithDays(
+        inner,
+        getCalendarDays(state.viewDate.getFullYear(), state.viewDate.getMonth()),
+        state,
+        true
+    );
+    calendar.appendChild(inner);
+    return calendar;
+};
+
+const finishSlide = (calendars: HTMLElement): void =>
+{
+    const done = slideMap.get(calendars);
+    if (done) {
+        slideMap.delete(calendars);
+        done();
+    }
+};
+
+const slideDuration = (element: HTMLElement): number =>
+{
+    const value = window.getComputedStyle(element).transitionDuration.split(',')[0].trim();
+    const milliseconds = parseFloat(value) * (value.endsWith('ms') ? 1 : 1000);
+
+    return isNaN(milliseconds) ? 500 : milliseconds;
+};
+
+const focusCell = (dialog: HTMLDialogElement): void =>
+{
+    dialog.querySelector<HTMLElement>(`.${classPrefix}calendar time[tabindex="0"]`)
+        ?.focus({ preventScroll: true });
+};
+
+// Fills an empty supporting text element of a date field with the format of
+// the locale, and keeps owning it from there on.
+const setFormatHint = (input: Element): void =>
+{
+    const hint = input.closest('[class*="micl-textfield"]')
+        ?.querySelector<HTMLElement>('.micl-textfield__supporting-text');
+
+    if (hint && (hint.dataset.miclhint || !hint.textContent?.trim())) {
+        hint.dataset.miclhint = '1';
+        hint.textContent = dateFormat;
+    }
+};
+
+const setFieldState = (input: HTMLInputElement, invalid: boolean): void =>
+{
+    input.closest<HTMLElement>('[class*="micl-textfield"]')
+        ?.classList.toggle('micl-textfield--error', invalid);
+
+    if (invalid) {
+        input.setAttribute('aria-invalid', 'true');
+        input.dataset.miclinvalid = '1';
+    }
+    else {
+        input.removeAttribute('aria-invalid');
+        delete input.dataset.miclinvalid;
+    }
 };
 
 const renderCalendar = (
@@ -248,28 +406,19 @@ const renderCalendar = (
     const moveLeftClass  = 'micl-moveleft';
     const moveRightClass = 'micl-moveright';
 
+    finishSlide(calendars);
     calendars.classList.remove(moveLeftClass, moveRightClass, startClass, endClass);
-    void calendars.offsetWidth;
 
-    if (amount !== 0) {
-        const oldCalendar = calendars.querySelector<HTMLElement>(`.${classPrefix}calendar`);
-        if (!oldCalendar) {
-            return;
-        }
+    const stale = Array.from(calendars.querySelectorAll<HTMLElement>(`.${classPrefix}calendar`));
+    stale.slice(1).forEach(calendar => calendar.remove());
 
-        const newCalendar      = document.createElement('div');
-        const newCalendarInner = document.createElement('div');
-        newCalendar.className      = `${classPrefix}calendar`;
-        newCalendarInner.className = `${classPrefix}calendar-inner`;
-
-        const days = getCalendarDays(state.viewDate.getFullYear(), state.viewDate.getMonth());
-        populateContainerWithDays(newCalendarInner, days, state, true);
-
+    if (amount !== 0 && stale.length) {
+        const oldCalendar = stale[0];
+        const newCalendar = createCalendar(state);
         const isNextMonth = amount > 0;
-        const startPositionClass = isNextMonth ? startClass : endClass;
-        const endTransformClass = isNextMonth ? moveLeftClass : moveRightClass;
 
-        newCalendar.appendChild(newCalendarInner);
+        oldCalendar.querySelectorAll('time').forEach(cell => { cell.tabIndex = -1; });
+
         if (isNextMonth) {
             calendars.appendChild(newCalendar);
         }
@@ -277,52 +426,82 @@ const renderCalendar = (
             calendars.prepend(newCalendar);
         }
 
+        const startPositionClass = isNextMonth ? startClass : endClass;
+        const endTransformClass  = isNextMonth ? moveLeftClass : moveRightClass;
+
+        // Read before the transitions are suppressed: the computed duration of
+        // an element carrying the no-transition class is zero.
+        const duration = slideDuration(calendars);
+
         calendars.classList.add(noTransition, startPositionClass);
         void calendars.offsetWidth;
 
-        requestAnimationFrame(() => {
+        let finished = false;
+        let timer    = 0;
+
+        const onTransitionEnd = (event: Event): void =>
+        {
+            if ((event as TransitionEvent).propertyName === 'transform') {
+                finishSlide(calendars);
+            }
+        };
+
+        slideMap.set(calendars, () =>
+        {
+            finished = true;
+            window.clearTimeout(timer);
+            calendars.removeEventListener('transitionend', onTransitionEnd);
+            calendars.removeEventListener('transitioncancel', onTransitionEnd);
+
+            calendars.classList.add(noTransition);
+            calendars.classList.remove(moveLeftClass, moveRightClass, startClass, endClass);
+            oldCalendar.remove();
+            void calendars.offsetWidth;
+            calendars.classList.remove(noTransition);
+        });
+
+        requestAnimationFrame(() =>
+        {
+            if (finished) {
+                return;
+            }
             calendars.classList.remove(noTransition, startPositionClass);
             calendars.classList.add(endTransformClass);
         });
 
-        const onTransitionEnd = () =>
-        {
-            calendars.removeEventListener('transitionend', onTransitionEnd);
-
-            setTimeout(() =>
-            {
-                calendars.classList.remove(endTransformClass);
-                if (oldCalendar.parentElement === calendars) {
-                    oldCalendar.remove();
-                }
-                calendars.classList.add(noTransition, startClass);
-                void calendars.offsetWidth;
-
-                calendars.classList.remove(noTransition, startClass);
-            }, 0);
-        };
         calendars.addEventListener('transitionend', onTransitionEnd);
+        calendars.addEventListener('transitioncancel', onTransitionEnd);
+        timer = window.setTimeout(() => finishSlide(calendars), duration + 100);
     }
     else {
-        let calendar = calendars.querySelector<HTMLElement>(`.${classPrefix}calendar`);
+        let calendar = stale[0];
         if (!calendar) {
-            calendar = document.createElement('div');
-            calendar.className = `${classPrefix}calendar`;
-            calendar = calendars.appendChild(calendar);
+            calendar = calendars.appendChild(createCalendar(state));
         }
-        let inner = calendar.querySelector<HTMLElement>(`.${classPrefix}calendar-inner`);
-        if (!inner) {
-            inner = document.createElement('div');
-            inner.className = `${classPrefix}calendar-inner`;
-            calendar.appendChild(inner);
+        else {
+            const inner = calendar.querySelector<HTMLElement>(`.${classPrefix}calendar-inner`);
+            if (inner) {
+                populateContainerWithDays(
+                    inner,
+                    getCalendarDays(state.viewDate.getFullYear(), state.viewDate.getMonth()),
+                    state,
+                    inner.querySelectorAll('time').length === 0
+                );
+            }
         }
-        const days = getCalendarDays(state.viewDate.getFullYear(), state.viewDate.getMonth());
-        populateContainerWithDays(inner, days, state, inner.querySelectorAll('time').length === 0);
     }
 
     // In range mode the input view holds two text fields: start and end.
     content?.querySelectorAll<HTMLInputElement>(`.${classPrefix}input input`).forEach((input, index) =>
     {
+        if (!input.dataset.micldateformat) {
+            input.dataset.micldateformat = dateFormat;
+        }
+        setFormatHint(input);
+
+        if (input.dataset.miclinvalid) {
+            return;
+        }
         const date = index === 0 ? state.selected : state.selectedEnd;
         input.value = date ? formatters.input.format(date) : '';
         if (input.value) {
@@ -330,9 +509,6 @@ const renderCalendar = (
         }
         else {
             delete input.dataset.miclvalue;
-        }
-        if (!input.dataset.micldateformat) {
-            input.dataset.micldateformat = getDateFormat();
         }
     });
 
@@ -349,17 +525,26 @@ const renderCalendar = (
         { year: 'numeric' } : { month: 'long', year: 'numeric' })
     );
 
-    const monthInput = dialog.querySelector<HTMLInputElement>(`.${classPrefix}months input[value="${state.viewDate.getMonth()}"]`);
-    if (monthInput) monthInput.checked = true;
+    const viewYear = state.viewDate.getFullYear();
 
-    const yearInput = dialog.querySelector<HTMLInputElement>(`.${classPrefix}years input[value="${state.viewDate.getFullYear()}"]`);
+    dialog.querySelectorAll<HTMLInputElement>(`.${classPrefix}months input`).forEach(input =>
+    {
+        const index = viewYear * 12 + parseInt(input.value, 10);
+        input.disabled = index < monthIndex(state.min) || index > monthIndex(state.max);
+        input.checked  = parseInt(input.value, 10) === state.viewDate.getMonth();
+    });
+
+    const yearInput = dialog.querySelector<HTMLInputElement>(`.${classPrefix}years input[value="${viewYear}"]`);
     if (yearInput) yearInput.checked = true;
 };
 
 const initPeriodPickers = (dialog: HTMLDialogElement, min: Date, max: Date): void =>
 {
-    const minYear  = min.getFullYear();
-    const maxYear  = max.getFullYear();
+    const signature = `${formatToInputDateValue(min)}/${formatToInputDateValue(max)}`;
+    if (dialog.dataset.miclperiods === signature) {
+        return;
+    }
+    dialog.dataset.miclperiods = signature;
 
     ['months', 'years'].forEach(period =>
     {
@@ -370,28 +555,15 @@ const initPeriodPickers = (dialog: HTMLDialogElement, min: Date, max: Date): voi
         container.innerHTML = '';
         const frag = document.createDocumentFragment();
 
-        const maxMonth = max.getMonth();
-
         if (period === 'months') {
-            const months: number[] = [];
-
-            let current = new Date(min.getFullYear(), min.getMonth(), 1);
-            while (
-                current <= max
-                || (current.getMonth() === maxMonth && current.getFullYear() === maxYear)
-            ) {
-                months.push(current.getMonth());
-                current.setMonth(current.getMonth() + 1);
-            }
-
-            [...new Set(months.sort((a, b) => a - b))].forEach(m => {
+            for (let m = 0; m < 12; m++) {
                 const label = document.createElement('label');
                 label.innerHTML = `<span class="material-symbols-outlined">check</span><input type="radio" name="miclmonth" value="${m}"> ${formatters.monthLong.format(new Date(2000, m, 1))}`;
                 frag.appendChild(label);
-            });
+            }
         }
         else {
-            for (let y = minYear; y <= maxYear; y++) {
+            for (let y = min.getFullYear(); y <= max.getFullYear(); y++) {
                 const label = document.createElement('label');
                 label.innerHTML = `<input type="radio" name="miclyear" value="${y}"> ${y}`;
                 frag.appendChild(label);
@@ -454,7 +626,7 @@ const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'y
 
                 const startTime = performance.now();
                 const animateScroll = (currentTime: number) => {
-                    const progress = Math.min((currentTime - startTime) / duration, 1);
+                    const progress = duration > 0 ? Math.min((currentTime - startTime) / duration, 1) : 1;
                     content.scrollTop = scrollDistance * progress;
                     if (progress < 1) {
                         requestAnimationFrame(animateScroll);
@@ -482,6 +654,24 @@ const toggleView = (dialog: HTMLDialogElement, view: 'calendars' | 'months' | 'y
     });
 };
 
+const nudge = (dialog: HTMLDialogElement, belowMin: boolean): void =>
+{
+    const calendars = dialog.querySelector<HTMLElement>(`.${classPrefix}calendars`);
+    if (!calendars) {
+        return;
+    }
+    const nudgeClass = `${classPrefix}nudge-${belowMin ? 'min' : 'max'}`;
+
+    calendars.classList.remove(`${classPrefix}nudge-min`, `${classPrefix}nudge-max`);
+    void calendars.offsetWidth;
+    calendars.classList.add(nudgeClass);
+    calendars.addEventListener(
+        'animationend',
+        () => calendars.classList.remove(nudgeClass),
+        { once: true }
+    );
+};
+
 const changePeriod = (dialog: HTMLDialogElement, amount: number, unit: 'month' | 'year'): void =>
 {
     const state = stateMap.get(dialog);
@@ -489,94 +679,114 @@ const changePeriod = (dialog: HTMLDialogElement, amount: number, unit: 'month' |
         return;
     }
 
-    const newDate = new Date(state.viewDate);
-    if (unit === 'month') {
-        newDate.setMonth(newDate.getMonth() + amount);
-    }
-    else {
-        newDate.setFullYear(newDate.getFullYear() + amount);
-    }
+    const months  = unit === 'month' ? amount : amount * 12;
+    const newDate = addMonths(state.viewDate, months);
+    const index   = monthIndex(newDate);
 
-    const belowMin = state.min && newDate < state.min;
-    const aboveMax = state.max && newDate > state.max;
+    const belowMin = index < monthIndex(state.min);
+    const aboveMax = index > monthIndex(state.max);
 
     if (belowMin || aboveMax) {
-        dialog.querySelector(`.${classPrefix}calendars`)?.animate([
-            { transform: 'translateX(0)' },
-            { transform: `translateX(${belowMin ? 8 : -8}px)` },
-            { transform: 'translateX(0)' }
-        ], { duration: 500, easing: 'ease-in-out' });
+        nudge(dialog, belowMin);
         return;
     }
 
-    state.viewDate = newDate;
+    state.viewDate  = newDate;
+    state.focusDate = clampToRange(addMonths(state.focusDate, months), state.min, state.max);
+
     renderCalendar(dialog, state, unit === 'month' ? amount : 0);
+};
+
+const setViewMonth = (dialog: HTMLDialogElement, year: number, month: number): void =>
+{
+    const state = stateMap.get(dialog);
+    if (!state) {
+        return;
+    }
+
+    state.viewDate  = clampToMonthRange(withMonth(state.viewDate, year, month), state.min, state.max);
+    state.focusDate = clampToRange(
+        withMonth(state.focusDate, state.viewDate.getFullYear(), state.viewDate.getMonth()),
+        state.min,
+        state.max
+    );
+
+    renderCalendar(dialog, state);
 };
 
 const parseLocaleDate = (dateStr: string): Date | null =>
 {
-    const dateformat = getDateFormat();
-    if (dateStr.length !== dateformat.length) {
+    if (dateStr.length !== dateFormat.length) {
         return null;
     }
 
     let d = '';
     let m = '';
     let y = '';
-    for (let i = 0; i < dateformat.length; i++) {
-        switch (dateformat[i]) {
+    for (let i = 0; i < dateFormat.length; i++) {
+        switch (dateFormat[i]) {
             case 'D': d += dateStr[i]; break;
             case 'M': m += dateStr[i]; break;
             case 'Y': y += dateStr[i]; break;
             default:
         }
     }
-    const date = new Date(parseInt(y, 10), parseInt(m, 10) - 1, parseInt(d, 10));
+    if (!/^\d+$/.test(d + m + y)) {
+        return null;
+    }
+    const month = parseInt(m, 10) - 1;
+    const day   = parseInt(d, 10);
+    const date  = localDate(parseInt(y, 10), month, day);
 
-    return isValidDate(date) ? date : null;
+    return date.getMonth() === month && date.getDate() === day ? date : null;
 };
 
 const selectDate = (dialog: HTMLDialogElement, dateStr: string): void =>
 {
-    const state = stateMap.get(dialog);
-    if (!state) {
+    const state  = stateMap.get(dialog);
+    const picked = parseISODate(dateStr);
+
+    if (!state || !picked || picked < state.min || picked > state.max) {
         return;
     }
 
-    const parts = dateStr.split('-').map(Number);
-    if (parts.length === 3) {
-        const picked = new Date(parts[0], parts[1] - 1, parts[2]);
-
-        if (state.range) {
-            if (state.selectedEnd || picked < state.selected) {
-                // Restart when a range is complete; move the start when the
-                // picked date lies before it.
-                state.selected    = picked;
-                state.selectedEnd = null;
-            }
-            else {
-                state.selectedEnd = picked;
-            }
+    if (state.range) {
+        if (state.selectedEnd || picked < state.selected) {
+            // Restart when a range is complete; move the start when the
+            // picked date lies before it.
+            state.selected    = picked;
+            state.selectedEnd = null;
         }
         else {
-            state.selected = picked;
+            state.selectedEnd = picked;
         }
-        state.viewDate = new Date(picked);
-
-        renderCalendar(dialog, state);
     }
+    else {
+        state.selected = picked;
+    }
+    state.viewDate  = new Date(picked);
+    state.focusDate = new Date(picked);
+
+    renderCalendar(dialog, state);
 };
 
 // Applies a manually entered date to the endpoint belonging to the edited
 // text field: index 0 is the start (and the only field in single mode).
-const setInputDate = (dialog: HTMLDialogElement, index: number, dateStr: string): void =>
+const setInputDate = (dialog: HTMLDialogElement, input: HTMLInputElement, index: number): void =>
 {
     const state = stateMap.get(dialog);
     if (!state) {
         return;
     }
 
-    const parsed = parseLocaleDate(dateStr);
+    const parsed = parseLocaleDate(input.value);
+
+    if (input.value.trim() && (!parsed || parsed < state.min || parsed > state.max)) {
+        setFieldState(input, true);
+        return;
+    }
+    setFieldState(input, false);
+
     if (parsed) {
         if (state.range && index > 0) {
             state.selectedEnd = parsed;
@@ -587,11 +797,66 @@ const setInputDate = (dialog: HTMLDialogElement, index: number, dateStr: string)
         if (state.selectedEnd && state.selectedEnd < state.selected) {
             [state.selected, state.selectedEnd] = [state.selectedEnd, state.selected];
         }
-        state.viewDate = new Date(state.selected);
+        state.viewDate  = new Date(state.selected);
+        state.focusDate = new Date(state.selected);
     }
 
     // An unparsable entry re-renders too: that restores the field's content.
     renderCalendar(dialog, state);
+};
+
+const moveFocus = (dialog: HTMLDialogElement, days: number): void =>
+{
+    const state = stateMap.get(dialog);
+    if (!state) {
+        return;
+    }
+    const target = localDate(
+        state.focusDate.getFullYear(),
+        state.focusDate.getMonth(),
+        state.focusDate.getDate() + days
+    );
+    if (target < state.min || target > state.max) {
+        return;
+    }
+
+    const steps = monthIndex(target) - monthIndex(state.viewDate);
+    state.focusDate = target;
+
+    if (steps !== 0) {
+        state.viewDate = withMonth(state.viewDate, target.getFullYear(), target.getMonth());
+        renderCalendar(dialog, state, steps > 0 ? 1 : -1);
+    }
+    else {
+        renderCalendar(dialog, state);
+    }
+    focusCell(dialog);
+};
+
+const commitSelection = (dialog: HTMLDialogElement): void =>
+{
+    const state = stateMap.get(dialog);
+    if (!state?.invoker) {
+        return;
+    }
+
+    // An incomplete range is committed as a single-day range.
+    const end = state.selectedEnd || state.selected;
+
+    if (state.range && !state.invokerEnd) {
+        // a single invoker holds the range as an ISO 8601 interval
+        commitValue(
+            state.invoker,
+            `${formatToInputDateValue(state.selected)}/${formatToInputDateValue(end)}`,
+            `${state.selected.toLocaleDateString(locale)} – ${end.toLocaleDateString(locale)}`
+        );
+    }
+    else {
+        commitValue(state.invoker, formatToInputDateValue(state.selected), state.selected.toLocaleDateString(locale));
+        if (state.invokerEnd) {
+            commitValue(state.invokerEnd, formatToInputDateValue(end), end.toLocaleDateString(locale));
+        }
+    }
 };
 
 export default register(datepickerSelector, {
@@ -605,6 +870,39 @@ export default register(datepickerSelector, {
         }
         const dialog = event.target.closest(datepickerSelector) as HTMLDialogElement;
         if (!dialog) {
+            return;
+        }
+
+        const cell = event.target.closest('time');
+
+        if (cell) {
+            const rtl  = window.getComputedStyle(dialog).direction === 'rtl';
+            const step = (days: number): void =>
+            {
+                event.preventDefault();
+                moveFocus(dialog, days);
+            };
+            const weekday = (parseISODate(cell.dateTime)?.getDay() ?? firstDayOfWeek);
+            const offset  = (weekday - firstDayOfWeek + 7) % 7;
+
+            switch (event.key) {
+                case 'ArrowLeft' : return step(rtl ? 1 : -1);
+                case 'ArrowRight': return step(rtl ? -1 : 1);
+                case 'ArrowUp'   : return step(-7);
+                case 'ArrowDown' : return step(7);
+                case 'Home'      : return step(-offset);
+                case 'End'       : return step(6 - offset);
+                case 'Enter':
+                case ' ':
+                    event.preventDefault();
+                    selectDate(dialog, cell.dateTime);
+                    focusCell(dialog);
+                    return;
+                default:
+            }
+        }
+
+        if (event.target.closest(`.${classPrefix}input`)) {
             return;
         }
 
@@ -641,6 +939,15 @@ export default register(datepickerSelector, {
             return;
         }
         dialog.dataset.miclinitialized = '1';
+
+        const headline = dialog.querySelector('h1, h2, h3, h4, h5, h6, .micl-heading');
+        if (headline) {
+            headline.setAttribute('aria-live', 'polite');
+            headline.setAttribute('aria-atomic', 'true');
+        }
+        if (dialog.id) {
+            document.querySelectorAll(`[data-datepicker="${dialog.id}"]`).forEach(setFormatHint);
+        }
 
         dialog.addEventListener('click', event =>
         {
@@ -680,19 +987,11 @@ export default register(datepickerSelector, {
                 const state = stateMap.get(dialog);
                 if (state) {
                     const value = parseInt(target.value, 10);
-                    if (target.name === 'miclmonth') {
-                        state.viewDate.setMonth(value);
-                    }
-                    else {
-                        state.viewDate.setFullYear(value);
-                    }
-                    if (state.viewDate < state.min) {
-                        state.viewDate = state.min;
-                    }
-                    else if (state.viewDate > state.max) {
-                        state.viewDate = state.max;
-                    }
-                    renderCalendar(dialog, state);
+                    setViewMonth(
+                        dialog,
+                        target.name === 'miclyear' ? value : state.viewDate.getFullYear(),
+                        target.name === 'miclmonth' ? value : state.viewDate.getMonth()
+                    );
                     toggleView(dialog, 'calendars');
                 }
             }
@@ -705,7 +1004,7 @@ export default register(datepickerSelector, {
                 return;
             }
             const inputs = dialog.querySelectorAll<HTMLInputElement>(`.${classPrefix}input input`);
-            setInputDate(dialog, Array.prototype.indexOf.call(inputs, input), input.value);
+            setInputDate(dialog, input, Array.prototype.indexOf.call(inputs, input));
         });
 
         dialog.addEventListener('beforetoggle', (event: any): void =>
@@ -749,37 +1048,33 @@ export default register(datepickerSelector, {
                 }
             }
 
-            let initialDate = new Date();
+            let initialDate = toLocalMidnight(new Date());
             let initialEnd: Date | null = null;
-            let min = new Date(1900, 0, 1);
-            let max = new Date(2099, 11, 31);
+            let min = localDate(1900, 0, 1);
+            let max = localDate(2099, 11, 31);
 
             if (invokerStart instanceof HTMLInputElement) {
                 initialDate = readInputDate(invokerStart) || initialDate;
-                if (invokerStart.min) min = new Date(invokerStart.min);
-                if (invokerStart.max) max = new Date(invokerStart.max);
+                min = parseISODate(invokerStart.min) || min;
+                max = parseISODate(invokerStart.max) || max;
             }
             else {
                 // a single range invoker holds an ISO 8601 interval (start/end)
                 const [startStr, endStr] = (invokerStart.value || invokerStart.textContent || '').split('/');
-                const parsed = new Date(startStr);
-                if (isValidDate(parsed)) {
-                    initialDate = parsed;
-                }
+                initialDate = parseISODate(startStr) || initialDate;
                 if (range && endStr) {
-                    initialEnd = new Date(endStr);
+                    initialEnd = parseISODate(endStr);
                 }
             }
             if (invokerEnd) {
                 initialEnd = readInputDate(invokerEnd);
-                if (invokerEnd.max) max = new Date(invokerEnd.max);
+                max = parseISODate(invokerEnd.max) || max;
             }
 
-            if (!isValidDate(initialDate)) initialDate = new Date();
-            initialDate = toLocalMidnight(initialDate);
-
-            if (initialEnd && isValidDate(initialEnd)) {
-                initialEnd = toLocalMidnight(initialEnd);
+            if (max < min) {
+                max = new Date(min);
+            }
+            if (initialEnd) {
                 if (initialEnd < initialDate) {
                     [initialDate, initialEnd] = [initialEnd, initialDate];
                 }
@@ -794,11 +1089,25 @@ export default register(datepickerSelector, {
                 selected   : initialDate,
                 selectedEnd: range ? initialEnd : null,
                 range,
-                viewDate   : new Date(initialDate),
+                viewDate   : clampToMonthRange(initialDate, min, max),
+                focusDate  : clampToRange(initialDate, min, max),
                 min,
                 max
             };
             stateMap.set(dialog, state);
+
+            setFormatHint(invokerStart);
+            if (invokerEnd) {
+                setFormatHint(invokerEnd);
+            }
+
+            const calendars = dialog.querySelector<HTMLElement>(`.${classPrefix}calendars`);
+            if (calendars) {
+                finishSlide(calendars);
+                calendars.replaceChildren();
+            }
+            dialog.querySelectorAll<HTMLInputElement>(`.${classPrefix}input input`)
+                .forEach(input => setFieldState(input, false));
 
             initPeriodPickers(dialog, min, max);
             toggleView(dialog, 'calendars');
@@ -807,27 +1116,12 @@ export default register(datepickerSelector, {
 
         dialog.addEventListener('close', (): void =>
         {
-            const state = stateMap.get(dialog);
-            if (!state?.invoker || dialog.returnValue === '') {
-                return;
+            const calendars = dialog.querySelector<HTMLElement>(`.${classPrefix}calendars`);
+            if (calendars) {
+                finishSlide(calendars);
             }
-
-            // An incomplete range is committed as a single-day range.
-            const end = state.selectedEnd || state.selected;
-
-            if (state.range && !state.invokerEnd) {
-                // a single invoker holds the range as an ISO 8601 interval
-                commitValue(
-                    state.invoker,
-                    `${formatToInputDateValue(state.selected)}/${formatToInputDateValue(end)}`,
-                    `${state.selected.toLocaleDateString()} – ${end.toLocaleDateString()}`
-                );
-            }
-            else {
-                commitValue(state.invoker, formatToInputDateValue(state.selected), state.selected.toLocaleDateString());
-                if (state.invokerEnd) {
-                    commitValue(state.invokerEnd, formatToInputDateValue(end), end.toLocaleDateString());
-                }
+            if (dialog.returnValue !== '') {
+                commitSelection(dialog);
             }
         });
     }

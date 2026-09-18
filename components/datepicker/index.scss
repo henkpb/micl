@@ -31,6 +31,7 @@
 @include statelayer.token('focus-state-layer-opacity');
 @include statelayer.token('pressed-state-layer-opacity');
 @include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('focus-indicator-thickness');
 @include statelayer.property;
 
 @include typography.scale('headline-large');
@@ -70,12 +71,17 @@
     &:hover {
         --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity);
     }
-    &:focus-visible {
+    &:is(:focus-visible, :has(input:focus-visible)) {
         --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity);
     }
     &:active {
         --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity);
     }
+}
+
+%focus-indicator {
+    outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-comp-date-picker-focus-indicator-color, var(--md-sys-color-secondary));
+    outline-offset: -1px;
 }
 
 dialog.micl-dialog.micl-datepicker {
@@ -178,6 +184,13 @@ dialog.micl-dialog.micl-datepicker {
         .micl-dialog__actions > button {
             margin-block: -2px;
         }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --_datepicker-motion-spatial-duration: 0ms;
+        --_datepicker-motion-duration: 0ms;
+        --_datepicker-motion-duration-reverse: 0ms;
+        --_datepicker-button-motion-duration: 0ms;
     }
 }
 
@@ -293,6 +306,38 @@ dialog.micl-dialog.micl-datepicker {
     &.micl-moveleft {
         transform: translateX(-50%);
     }
+    // The flex row is laid out from the inline start, so the off-screen half of
+    // the strip sits on the opposite side in a right-to-left context.
+    &:dir(rtl) {
+        &.micl-startright,
+        &.micl-moveleft {
+            transform: translateX(50%);
+        }
+    }
+    &.micl-datepicker__nudge-min,
+    &.micl-datepicker__nudge-max {
+        animation: micl-datepicker-nudge var(--_datepicker-motion-duration) ease-in-out;
+    }
+    &.micl-datepicker__nudge-min {
+        --_nudge: 8px;
+    }
+    &.micl-datepicker__nudge-max {
+        --_nudge: -8px;
+    }
+    &:dir(rtl) {
+        &.micl-datepicker__nudge-min {
+            --_nudge: -8px;
+        }
+        &.micl-datepicker__nudge-max {
+            --_nudge: 8px;
+        }
+    }
+}
+
+@keyframes micl-datepicker-nudge {
+    50% {
+        translate: var(--_nudge, 0) 0;
+    }
 }
 .micl-datepicker__calendar {
     flex-shrink: 0;
@@ -304,11 +349,15 @@ dialog.micl-dialog.micl-datepicker {
 
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(7, var(--_target));
     grid-template-rows: 40px repeat(6, var(--_target));
     block-size: 100%;
     inline-size: 100%;
     padding-inline: 12px;
+
+    > * {
+        display: grid;
+        grid-template-columns: repeat(7, var(--_target));
+    }
 
     span, time {
         box-sizing: border-box;
@@ -368,11 +417,15 @@ dialog.micl-dialog.micl-datepicker {
         &:is(.micl-datepicker__today, .micl-datepicker__selected):is(:hover, :focus-visible, :active) {
             --statelayer-color: currentColor;
         }
-        &.micl-datepicker__outside {
+        &.micl-datepicker__disabled {
             color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity));
+            pointer-events: none;
         }
-        &:not(.micl-datepicker__outside) {
+        &:not(.micl-datepicker__disabled) {
             cursor: pointer;
+        }
+        &:focus-visible {
+            @extend %focus-indicator;
         }
     }
 }
@@ -403,14 +456,22 @@ dialog.micl-dialog.micl-datepicker {
 
         span {
             visibility: hidden;
-            color: var(--md-sys-color-on-surface);
+            color: inherit;
         }
         &:has(input:checked) {
-            background-color: var(--md-sys-color-surface-variant);
+            color: var(--md-comp-date-picker-selection-month-selected-label-text-color, var(--md-sys-color-on-surface));
+            background-color: var(--md-comp-date-picker-selection-month-selected-container-color, var(--md-sys-color-surface-variant));
 
             span {
                 visibility: visible;
             }
+        }
+        &:has(input:disabled) {
+            color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity));
+            pointer-events: none;
+        }
+        &:has(input:focus-visible) {
+            @extend %focus-indicator;
         }
     }
 }
@@ -444,9 +505,12 @@ dialog.micl-dialog.micl-datepicker {
             background-color: var(--md-comp-date-picker-selection-year-selected-container-color, var(--md-sys-color-primary));
 
             // The state layer of the selected year follows its label color.
-            &:is(:hover, :focus-visible, :active) {
+            &:is(:hover, :active, :has(input:focus-visible)) {
                 --statelayer-color: currentColor;
             }
+        }
+        &:has(input:focus-visible) {
+            @extend %focus-indicator;
         }
     }
 }
@@ -475,6 +539,6 @@ dialog.micl-dialog.micl-datepicker {
     }
 }
 
-.micl-no-transition {
+.micl-datepicker__no-transition {
     transition: none !important;
 }
