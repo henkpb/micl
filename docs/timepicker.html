@@ -66,7 +66,7 @@
             <section class="docs-section" id="time-fields">
                 <div class="docs-section__head">
                     <h2>Time fields</h2>
-                    <p class="docs-section__use">The starting point: the browser's own time input, and the same input inside a MICL text field. Neither is wired to a picker yet.</p>
+                    <p class="docs-section__use">The browser's own time input, and the same input inside a MICL text field. Neither is wired to a picker yet.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -90,7 +90,7 @@
             <section class="docs-section" id="dial-picker">
                 <div class="docs-section__head">
                     <h2>Dial picker</h2>
-                    <p class="docs-section__use">Point the field's <code>data-timepicker</code> at the dialog's id. The clock follows the locale, so it shows a 24-hour face here and a 12-hour face with an AM/PM selector elsewhere.</p>
+                    <p class="docs-section__use">The clock follows the locale.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -130,7 +130,6 @@
             <section class="docs-section" id="twelve-hour">
                 <div class="docs-section__head">
                     <h2>12-hour clock</h2>
-                    <p class="docs-section__use"><code>data-miclhourcycle</code> pins the picker to a 12- or 24-hour clock instead of following the browser locale. The AM/PM labels come from the locale's own day-period names.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -170,7 +169,6 @@
             <section class="docs-section" id="horizontal">
                 <div class="docs-section__head">
                     <h2>Horizontal layout</h2>
-                    <p class="docs-section__use"><code>micl-timepicker--horizontal</code> puts the dial beside the time fields instead of below them — the landscape arrangement. It only differs from the vertical layout while the dial is showing.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -210,7 +208,6 @@
             <section class="docs-section" id="input-mode">
                 <div class="docs-section__head">
                     <h2>Keyboard input</h2>
-                    <p class="docs-section__use">Hiding the dial with <code>micl-timepicker__dial--hidden</code> opens the picker straight into the typing mode. The toggle button switches between the two, and the fields spin with <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> in either mode.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -250,7 +247,6 @@
             <section class="docs-section" id="button-trigger">
                 <div class="docs-section__head">
                     <h2>Opening from a button</h2>
-                    <p class="docs-section__use">Any button can open the picker with <code>command="show-modal"</code>. The button keeps the machine-readable time in its <code>value</code> and shows the time formatted for the user's locale.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -290,7 +286,6 @@
             <section class="docs-section" id="theming">
                 <div class="docs-section__head">
                     <h2>Theming</h2>
-                    <p class="docs-section__use">The <code>--md-comp-time-picker-*</code> custom properties can be set on the dialog or on any parent element.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example docs-theming">

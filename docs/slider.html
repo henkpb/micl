@@ -49,42 +49,53 @@
             </div>
         </section>
 
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#slider">Horizontal</a>
+            <a href="#vertical_slider">Vertical</a>
+            <a href="#slider-containers">Container horizontal</a>
+            <a href="#vertical-slider-container">Container vertical</a>
+        </nav>
+
         <main class="docs-content docs-content--columns">
-            <div class="docs-stage">
+            <section class="docs-section" id="slider">
                 <div class="docs-section__head">
                     <h2>Horizontal sliders</h2>
                 </div>
-                <div class="docs-example">
-                    <template>
-                        <input type="range" class="micl-slider-xs" min="1" max="10" value="6" style="inline-size:100%" aria-label="Extra small slider">
-                        <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="markers" style="inline-size:100%" aria-label="Small slider with stop indicators">
-                        <datalist id="markers">
-                            <option value="0"></option>
-                            <option value="25"></option>
-                            <option value="50"></option>
-                            <option value="75"></option>
-                            <option value="100"></option>
-                        </datalist>
-                        <div class="micl-slider__container">
-                            <span class="micl-slider__icon material-symbols-outlined" aria-hidden="true">volume_up</span>
-                            <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5" style="inline-size:100%" aria-label="Volume">
-                        </div>
-                        <input type="range" class="micl-slider-l" value="0" style="inline-size:100%" aria-label="Large slider">
-                        <input type="range" class="micl-slider-xl" disabled style="inline-size:100%" aria-label="Disabled extra large slider">
-                    </template>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <input type="range" class="micl-slider-xs" min="1" max="10" value="6" style="inline-size:100%" aria-label="Extra small slider">
+                            <input type="range" class="micl-slider-s" min="0" max="100" value="25" step="25" list="markers" style="inline-size:100%" aria-label="Small slider with stop indicators">
+                            <datalist id="markers">
+                                <option value="0"></option>
+                                <option value="25"></option>
+                                <option value="50"></option>
+                                <option value="75"></option>
+                                <option value="100"></option>
+                            </datalist>
+                            <div class="micl-slider__container">
+                                <span class="micl-slider__icon material-symbols-outlined" aria-hidden="true">volume_up</span>
+                                <input type="range" class="micl-slider-m" min="3.5" max="12.5" value="9.5" step="0.5" style="inline-size:100%" aria-label="Volume">
+                            </div>
+                            <input type="range" class="micl-slider-l" value="0" style="inline-size:100%" aria-label="Large slider">
+                            <input type="range" class="micl-slider-xl" disabled style="inline-size:100%" aria-label="Disabled extra large slider">
+                        </template>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="docs-stage">
+            <section class="docs-section" id="vertical_slider">
                 <div class="docs-section__head">
                     <h2>Vertical slider</h2>
                 </div>
-                <div class="docs-example docs-center">
-                    <template>
-                        <input type="range" class="micl-slider-xl micl-slider--vertical" style="inline-size:360px" aria-label="Vertical slider">
-                    </template>
+                <div class="docs-stage">
+                    <div class="docs-example docs-center">
+                        <template>
+                            <input type="range" class="micl-slider-xl micl-slider--vertical" style="inline-size:360px" aria-label="Vertical slider">
+                        </template>
+                    </div>
                 </div>
-            </div>
+            </section>
 
             <section class="docs-section" id="slider-containers">
                 <div class="docs-section__head">
