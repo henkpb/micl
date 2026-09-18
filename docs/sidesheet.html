@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        p {
-            color: var(--md-sys-color-on-surface);
-        }
         .switch {
             display: flex;
             width: 100%;
@@ -67,7 +64,7 @@
                             <dialog id="mysidesheet1" class="micl-sidesheet" popover aria-labelledby="title1">
                                 <div class="micl-sidesheet__headline">
                                     <h2 id="title1">Lorem Ipsum</h2>
-                                    <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet1">close</button>
+                                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet1" aria-label="Close">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">
                                     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
@@ -84,7 +81,7 @@
                             <dialog id="mysidesheet2" class="micl-sidesheet" style="--md-comp-sidesheet-divider-thickness:0" popover aria-labelledby="title2">
                                 <div class="micl-sidesheet__headline">
                                     <h2 id="title2">Lorem Ipsum</h2>
-                                    <button class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet2">close</button>
+                                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mysidesheet2" aria-label="Close">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">
                                     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, fringilla commodo proin natoque lobortis maecenas penatibus volutpat, dapibus erat tortor gravida augue torquent. Vitae tortor torquent suspendisse sem quisque etiam parturient eleifend, platea lacinia orci lacus pulvinar sociosqu habitasse accumsan, nisi inceptos ut tellus ornare gravida natoque. Velit fusce viverra cursus dignissim sollicitudin eros at bibendum tempus porta risus, torquent urna est mus euismod interdum enim gravida mattis.</p>
@@ -98,17 +95,17 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest" aria-labelledby="title1" tabindex="-1">
+                            <dialog id="mysidesheet3" class="micl-sidesheet" closedby="closerequest" aria-labelledby="title3">
                                 <div class="micl-sidesheet__headline">
-                                    <button class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Back">arrow_back</button>
+                                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" aria-label="Back">arrow_back</button>
                                     <h2 id="title3">Title</h2>
-                                    <button class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mysidesheet3">close</button>
+                                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mysidesheet3" aria-label="Close">close</button>
                                 </div>
                                 <div class="micl-sidesheet__content">
                                     <p class="md-sys-typescale-body-medium">Make your selection:</p>
                                     <div class="switch">
                                         <label for="cb01" class="md-sys-typescale-body-medium">Selection A</label>
-                                        <input type="checkbox" id="cb01" class="micl-switch">
+                                        <input type="checkbox" id="cb01" class="micl-switch" autofocus>
                                     </div>
                                     <div class="switch">
                                         <label for="cb02" class="md-sys-typescale-body-medium">Selection B</label>
