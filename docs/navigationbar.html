@@ -13,33 +13,27 @@
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
-    <style>
-        /* Room for the fixed navigation bar below the content */
-        .docs-shell {
-            padding-block-end: 120px;
-        }
-    </style>
 </head>
 <body class="micl-window light">
-    <nav id="mynavigationbar" class="micl-navigationbar">
+    <nav id="mynavigationbar" class="micl-navigationbar" aria-label="Main">
         <div class="micl-navigationbar__content">
             <a href="#" class="micl-navigationbar__item" aria-current="page" aria-label="Inbox, 97 new messages">
-                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">inbox</span>
                 <span class="micl-navigationbar__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox" aria-hidden="true">97</span>
+                <span class="micl-badge" aria-hidden="true">97</span>
             </a>
             <a href="#" class="micl-navigationbar__item">
                 <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationbar__text">Outbox</span>
             </a>
             <a href="#" class="micl-navigationbar__item" aria-label="Favorites, new notification">
-                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">favorite</span>
                 <span class="micl-navigationbar__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites" aria-hidden="true"></span>
+                <span class="micl-badge micl-badge--small" aria-hidden="true"></span>
             </a>
             <a href="#" class="micl-navigationbar__item">
                 <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">delete</span>
-                <span class="micl-navigationbar__text">Trash</span>
+                <span class="micl-navigationbar__text">Deleted items</span>
             </a>
         </div>
     </nav>
@@ -70,7 +64,7 @@
             <section class="docs-section" id="variants">
                 <div class="docs-section__head">
                     <h2>Variants</h2>
-                    <p class="docs-section__use">The selected variant is applied to the navigation bar at the bottom of this page. The adaptive variant turns into a navigation rail on windows wider than 840&thinsp;px.</p>
+                    <p class="docs-section__use">The selected variant is applied to the navigation bar at the bottom of this page. The adaptive variant turns into a navigation rail on windows wider than 840&thinsp;px. The last destination carries a label that is too long for an item, to show that it is truncated rather than allowed to run into its neighbour &mdash; narrow the window, or pick the horizontal items, to see it laid out differently.</p>
                 </div>
                 <div class="docs-stage md-sys-typescale-body-medium">
                     <div class="docs-flex--vcenter">

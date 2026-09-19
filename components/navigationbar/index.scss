@@ -36,6 +36,13 @@
 @include statelayer.keyframes;
 
 nav.micl-navigationbar {
+    --_navbar-container-height: var(--md-comp-nav-bar-container-height, 64px);
+    --_navbar-item-height: var(--md-comp-nav-bar-item-vertical-active-indicator-height, 32px);
+    --_navbar-item-offset: 6px;
+    --_navbar-badge-position: absolute;
+    --_navbar-badge-align: auto;
+    --_navbar-badge-margin: 0px;
+
     box-sizing: border-box;
     position: fixed;
     inset-block: auto 0;
@@ -51,26 +58,59 @@ nav.micl-navigationbar {
         display: flex;
         align-items: flex-start;
         justify-content: space-evenly;
-        block-size: var(--md-comp-nav-bar-container-height, 64px);
-        padding-block-start: 6px;
+        block-size: var(--_navbar-container-height);
+        column-gap: var(--md-comp-nav-bar-item-between-space, 0px);
+        padding-block-start: var(--_navbar-item-offset);
 
         &> a.micl-navigationbar__item {
             @extend %micl-navitem;
 
+            anchor-scope: --micl-navigationbar-icon;
+
+            --_navitem-state-layer-color: var(--md-comp-nav-bar-item-state-layer-color, var(--md-sys-color-on-secondary-container));
+            --_navitem-inactive-icon-color: var(--md-comp-nav-bar-item-inactive-icon-color, var(--md-sys-color-on-surface-variant));
+            --_navitem-inactive-label-color: var(--md-comp-nav-bar-item-inactive-label-text-color, var(--md-sys-color-on-surface-variant));
+            --_navitem-active-indicator-color: var(--md-comp-nav-bar-item-active-indicator-color, var(--md-sys-color-secondary-container));
+            --_navitem-active-icon-color: var(--md-comp-nav-bar-item-active-icon-color, var(--md-sys-color-on-secondary-container));
+            --_navitem-active-label-color: var(--md-comp-nav-bar-item-active-label-text-color, var(--md-sys-color-secondary));
+
             flex-direction: column;
             inline-size: var(--md-comp-nav-bar-item-vertical-active-indicator-width, 56px);
-            block-size: var(--md-comp-nav-bar-item-vertical-active-indicator-height, 32px);
-            border-radius: var(--md-comp-nav-bar-item-active-indicator-shape, calc(var(--md-comp-nav-bar-item-vertical-active-indicator-height, 32px) / 2));
+            block-size: var(--_navbar-item-height);
+            border-radius: var(--md-comp-nav-bar-item-active-indicator-shape, calc(var(--_navbar-item-height) / 2));
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset-inline: 0;
+                inset-block:
+                    calc(-1 * var(--_navbar-item-offset))
+                    calc(var(--_navbar-item-offset) + var(--_navbar-item-height) - var(--_navbar-container-height));
+                background-color: transparent;
+            }
+
+            .micl-badge {
+                position-anchor: --micl-navigationbar-icon;
+            }
+            .micl-badge--trailing {
+                position: var(--_navbar-badge-position);
+                flex-shrink: 0;
+                align-self: var(--_navbar-badge-align);
+                margin-inline-start: var(--_navbar-badge-margin);
+            }
 
             .micl-navigationbar__icon {
                 @extend %micl-navitem-icon;
+                anchor-name: --micl-navigationbar-icon;
                 font-size: var(--md-comp-nav-bar-item-icon-size, var(--md-sys-icon-size));
                 inline-size: var(--md-comp-nav-bar-item-icon-size, var(--md-sys-icon-size));
                 padding-inline: 16px;
             }
             .micl-navigationbar__text {
                 @extend %micl-navitem-text;
-                margin-block-start: var(--md-comp-nav-bar-item-active-indicator-icon-label-space, 4px);
+                min-inline-size: 0;
+                max-inline-size: 100%;
+                margin-block-start: var(--md-comp-nav-bar-item-vertical-active-indicator-icon-label-space, var(--md-comp-nav-bar-item-active-indicator-icon-label-space, 4px));
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
@@ -88,28 +128,35 @@ nav.micl-navigationbar {
         }
     }
 
-    // Tall bar (80px): the item stack is vertically centered
-    &.micl-navigationbar--tall > .micl-navigationbar__content {
-        block-size: var(--md-comp-nav-bar-tall-container-height, 80px);
-        padding-block-start: 14px;
+    &.micl-navigationbar--tall {
+        --_navbar-container-height: var(--md-comp-nav-bar-tall-container-height, 80px);
+        --_navbar-item-offset: 14px;
     }
 
-    // Horizontal items: icon and label side by side in a 40px pill
+    &.micl-navigationbar--horizontal {
+        --_navbar-item-height: var(--md-comp-nav-bar-item-horizontal-active-indicator-height, 40px);
+        --_navbar-item-offset: calc((var(--_navbar-container-height) - var(--_navbar-item-height)) / 2);
+        --_navbar-badge-position: static;
+        --_navbar-badge-align: center;
+        --_navbar-badge-margin: var(--md-comp-badge-trailing-space, 4px);
+    }
     &.micl-navigationbar--horizontal > .micl-navigationbar__content {
         align-items: center;
         padding-block-start: 0;
 
         &> a.micl-navigationbar__item {
             flex-direction: row;
+            min-inline-size: 0;
             inline-size: fit-content;
             max-inline-size: 100%;
-            block-size: var(--md-comp-nav-bar-item-horizontal-active-indicator-height, 40px);
-            border-radius: var(--md-comp-nav-bar-item-active-indicator-shape, calc(var(--md-comp-nav-bar-item-horizontal-active-indicator-height, 40px) / 2));
+            block-size: var(--_navbar-item-height);
+            border-radius: var(--md-comp-nav-bar-item-active-indicator-shape, calc(var(--_navbar-item-height) / 2));
 
             .micl-navigationbar__icon {
+                flex-shrink: 0;
                 padding-inline:
                     var(--md-comp-nav-bar-item-horizontal-active-indicator-leading-space, 16px)
-                    var(--md-comp-nav-bar-item-active-indicator-icon-label-space, 4px);
+                    var(--md-comp-nav-bar-item-horizontal-active-indicator-icon-label-space, var(--md-comp-nav-bar-item-active-indicator-icon-label-space, 4px));
             }
             .micl-navigationbar__text {
                 margin-block-start: 0;
@@ -125,8 +172,6 @@ nav.micl-navigationbar {
     }
 }
 
-// Reserve space at the bottom of the page for the fixed navigation bar
-// (higher specificity than the padding shorthand of body.micl-window)
 body:has(nav.micl-navigationbar) {
     padding-block-end: calc(var(--md-comp-nav-bar-container-height, 64px) + env(safe-area-inset-bottom));
 }
@@ -134,9 +179,6 @@ body:has(nav.micl-navigationbar--tall) {
     padding-block-end: calc(var(--md-comp-nav-bar-tall-container-height, 80px) + env(safe-area-inset-bottom));
 }
 
-// Adaptive navigation: a navigation bar below the named breakpoint and a
-// collapsed navigation rail (using the nav-rail tokens) at the breakpoint
-// and above. The item anatomy is shared, so only the container changes.
 $_breakpoints: (
     medium:   layout.$md-sys-breakpoint-medium-min,
     expanded: layout.$md-sys-breakpoint-expanded-min,
@@ -145,6 +187,9 @@ $_breakpoints: (
 @each $name, $min in $_breakpoints {
     @media (min-width: $min) {
         nav.micl-navigationbar--bar-to-#{$name} {
+            --_navbar-container-height: var(--md-comp-nav-rail-item-container-height, 64px);
+            --_navbar-item-offset: 0px;
+
             display: flex;
             flex-direction: column;
             position: sticky;
@@ -152,7 +197,7 @@ $_breakpoints: (
             inset: unset;
             inset-block-start: 0;
             inline-size: var(--md-comp-nav-rail-collapsed-container-width, 96px);
-            block-size: 100vh;
+            block-size: 100dvh;
             min-block-size: 100%;
             margin-inline: calc(-1 * var(--md-sys-layout-window-margin, 0px)) auto;
             padding-block: var(--md-comp-nav-rail-collapsed-top-space, 44px) 0;
@@ -168,19 +213,21 @@ $_breakpoints: (
                 justify-content: flex-start;
                 inline-size: 100%;
                 block-size: auto;
-                row-gap: var(--md-comp-nav-rail-item-container-vertical-space, 6px);
-                padding-block: var(--md-comp-nav-rail-item-header-space-minimum, 40px) 16px;
-                padding-inline: 20px;
+                row-gap: var(--md-comp-nav-rail-item-container-vertical-space, 4px);
+                padding-block: 0 16px;
+                padding-inline: calc((var(--md-comp-nav-rail-collapsed-container-width, 96px) - var(--md-comp-nav-bar-item-vertical-active-indicator-width, 56px)) / 2);
                 overflow: hidden auto;
 
                 &> a.micl-navigationbar__item {
-                    margin-block-end: 40px;
-                    row-gap: var(--md-comp-nav-rail-collapsed-item-vertical-space, 4px);
+                    margin-block-end: calc(var(--md-comp-nav-rail-item-container-height, 64px) - var(--md-comp-nav-bar-item-vertical-active-indicator-height, 32px));
+
+                    .micl-navigationbar__text {
+                        margin-block-start: var(--md-comp-nav-rail-collapsed-item-vertical-space, 4px);
+                    }
                 }
             }
         }
 
-        // in rail mode the bottom of the page no longer needs to be reserved
         body.micl-window:has(nav.micl-navigationbar--bar-to-#{$name}) {
             padding-block-end: var(--md-sys-layout-window-margin, 0px);
         }
