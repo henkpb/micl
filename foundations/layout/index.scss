@@ -55,7 +55,7 @@
             block-size: inherit;
             min-block-size: inherit;
             margin: 0;
-            padding-block-end: var(--md-sys-navigationrail-top-space, 0px);
+            padding-block-end: var(--md-comp-nav-rail-collapsed-top-space, 44px);
             border-radius: var(--md-sys-layout-spatial-radius);
         }
         .micl-panes {

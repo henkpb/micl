@@ -26,30 +26,30 @@
     </style>
 </head>
 <body class="micl-window light">
-    <dialog id="mynavigationrail" class="micl-navigationrail" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="closerequest">
+    <dialog id="mynavigationrail" class="micl-navigationrail" style="--md-comp-nav-rail-expanded-top-space:12px" closedby="any" aria-label="Navigation">
         <div class="micl-navigationrail__headline">
             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" command="close" commandfor="mynavigationrail" aria-label="Close navigation rail">menu_open</button>
         </div>
-        <div class="micl-navigationrail__content">
+        <nav class="micl-navigationrail__content" aria-label="Main">
             <a href="#" class="micl-navigationrail__item" tabindex="0" aria-label="Inbox, 97 new messages">
-                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">inbox</span>
                 <span class="micl-navigationrail__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox" aria-hidden="true">97</span>
+                <span class="micl-badge" aria-hidden="true">97</span>
             </a>
             <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationrail__text">Outbox</span>
             </a>
             <a href="#" class="micl-navigationrail__item" tabindex="0" aria-label="Favorites, new notification">
-                <span class="micl-navigationrail__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">favorite</span>
                 <span class="micl-navigationrail__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites" aria-hidden="true"></span>
+                <span class="micl-badge micl-badge--small" aria-hidden="true"></span>
             </a>
             <a href="#" class="micl-navigationrail__item" tabindex="0">
                 <span class="micl-navigationrail__icon material-symbols-outlined" aria-hidden="true">delete</span>
                 <span class="micl-navigationrail__text">Trash</span>
             </a>
-        </div>
+        </nav>
     </dialog>
 
     <div class="docs-shell">
