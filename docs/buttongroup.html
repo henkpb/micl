@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Button groups">
+    <title>MICL Button groups</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=call_end,check,close,content_copy,dark_mode,format_align_center,format_align_justify,format_align_left,format_align_right,format_bold,format_italic,format_underlined,front_hand,home,mic,mood,palette,videocam&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-sizes {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Button groups</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Button groups</h1>
+            <p class="docs-hero__lede">A button group gathers related buttons into a single unit. Press one of the icon buttons below and watch it widen while its neighbours make room — the group itself never changes size.</p>
+            <ul class="docs-hero__facts">
+                <li>2 variants</li>
+                <li>5 sizes · 32 to 136&thinsp;px</li>
+                <li>Single or multiple selection</li>
+            </ul>
+            <div class="docs-hero__collage" aria-label="A collage of live MICL button groups">
+                <div class="micl-buttongroup" role="group" aria-label="Call controls" style="inset-block-start:0;inset-inline-start:0">
+                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Camera">videocam</button>
+                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Microphone">mic</button>
+                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Reactions">mood</button>
+                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Raise hand">front_hand</button>
+                </div>
+                <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment" style="inset-block-start:150px;inset-inline-start:0">
+                    <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align left">
+                        <input type="radio" name="hero-align" value="left" checked>format_align_left</label>
+                    <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align centre">
+                        <input type="radio" name="hero-align" value="center">format_align_center</label>
+                    <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align right">
+                        <input type="radio" name="hero-align" value="right">format_align_right</label>
+                </fieldset>
+                <div class="micl-buttongroup" role="group" aria-label="Playback" style="inset-block-start:240px;inset-inline-start:0">
+                    <button type="button" class="micl-button-tonal-s">Previous</button>
+                    <button type="button" class="micl-button-tonal-s">Play</button>
+                    <button type="button" class="micl-button-tonal-s">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#standard">Standard</a>
+            <a href="#connected">Connected</a>
+        </nav>
+
+        <main class="docs-content">
+            <section class="docs-section" id="standard">
+                <div class="docs-section__head">
+                    <h2>Standard</h2>
+                    <p class="docs-section__use">Buttons of equal weight, spaced apart, each doing its own thing. Press one and it grows by 15&thinsp;% while its neighbours give back exactly that much, so the row never shifts.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-buttongroup" role="group" aria-label="Call controls">
+                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Camera">videocam</button>
+                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Microphone">mic</button>
+                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Reactions">mood</button>
+                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Raise hand">front_hand</button>
+                                <button type="button" class="micl-iconbutton-filled-l material-symbols-outlined" aria-label="End call">call_end</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Label buttons squeeze the same way</p>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-buttongroup" role="group" aria-label="Playback">
+                                <button type="button" class="micl-button-tonal-m">Previous</button>
+                                <button type="button" class="micl-button-tonal-m">Play</button>
+                                <button type="button" class="micl-button-tonal-m">Next</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="connected">
+                <div class="docs-section__head">
+                    <h2>Connected</h2>
+                    <p class="docs-section__use">Buttons pushed together into one control, separated by 2&thinsp;px. The outer corners stay round, the inner ones square off, and the selected button morphs back into a full pill.</p>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Single selection — a <code>&lt;label&gt;</code> around a radio button, no JavaScript</p>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment">
+                                <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align left">
+                                    <input type="radio" name="align" value="left" checked>format_align_left</label>
+                                <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align centre">
+                                    <input type="radio" name="align" value="center">format_align_center</label>
+                                <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align right">
+                                    <input type="radio" name="align" value="right">format_align_right</label>
+                                <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Justify">
+                                    <input type="radio" name="align" value="justify">format_align_justify</label>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Multiple selection — the same markup with checkboxes</p>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Text style">
+                                <label class="micl-button-outlined-s micl-button--toggle">
+                                    <input type="checkbox" name="style" value="bold" checked>
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">format_bold</span>
+                                    <span>Bold</span>
+                                </label>
+                                <label class="micl-button-outlined-s micl-button--toggle">
+                                    <input type="checkbox" name="style" value="italic">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">format_italic</span>
+                                    <span>Italic</span>
+                                </label>
+                                <label class="micl-button-outlined-s micl-button--toggle">
+                                    <input type="checkbox" name="style" value="underline">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">format_underlined</span>
+                                    <span>Underline</span>
+                                </label>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Toggle buttons — when there is no form to submit to</p>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-buttongroup micl-buttongroup--connected" role="group" aria-label="View">
+                                <button type="button" id="view-day" class="micl-button-tonal-s micl-button--toggle" commandfor="view-day" command="--micl-toggle" aria-pressed="true">Day</button>
+                                <button type="button" id="view-week" class="micl-button-tonal-s micl-button--toggle" commandfor="view-week" command="--micl-toggle" aria-pressed="false">Week</button>
+                                <button type="button" id="view-month" class="micl-button-tonal-s micl-button--toggle" commandfor="view-month" command="--micl-toggle" aria-pressed="false">Month</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">A disabled button keeps its place</p>
+                    <div class="docs-example">
+                        <template>
+                            <div class="docs-sizes">
+                                <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Extra small period">
+                                    <label class="micl-button-outlined-xs micl-button--toggle">
+                                        <input type="radio" name="period-xs" value="d" checked><span>Day</span></label>
+                                    <label class="micl-button-outlined-xs micl-button--toggle">
+                                        <input type="radio" name="period-xs" value="w"><span>Week</span></label>
+                                    <label class="micl-button-outlined-xs micl-button--toggle">
+                                        <input type="radio" name="period-xs" value="m"><span>Month</span></label>
+                                </fieldset>
+                                <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Medium period">
+                                    <label class="micl-button-outlined-m micl-button--toggle">
+                                        <input type="radio" name="period-m" value="d" checked><span>Day</span></label>
+                                    <label class="micl-button-outlined-m micl-button--toggle">
+                                        <input type="radio" name="period-m" value="w"><span>Week</span></label>
+                                    <label class="micl-button-outlined-m micl-button--toggle">
+                                        <input type="radio" name="period-m" value="m" disabled><span>Month</span></label>
+                                </fieldset>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

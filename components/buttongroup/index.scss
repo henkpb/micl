@@ -1,0 +1,120 @@
+//
+// Copyright © 2026 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+$children: '[class*="micl-"]';
+$enabled: ':not(:disabled, :has(> :disabled))';
+$selected: '.micl-button--toggle:is([aria-pressed="true"], :has(input:checked))';
+$standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
+
+.micl-buttongroup {
+    --_gap: var(--md-comp-button-group-standard-small-between-space, 12px);
+
+    box-sizing: border-box;
+    display: flex;
+    inline-size: fit-content;
+    column-gap: var(--_gap);
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#{$standard} {
+    &:has(> [class*="-xs "], > [class$="-xs"]) {
+        --_gap: var(--md-comp-button-group-standard-xsmall-between-space, 18px);
+    }
+    &:has(> [class*="-s "], > [class$="-s"]) {
+        --_gap: var(--md-comp-button-group-standard-small-between-space, 12px);
+    }
+    &:has(> [class*="-m "], > [class$="-m"]) {
+        --_gap: var(--md-comp-button-group-standard-medium-between-space, 8px);
+    }
+    &:has(> [class*="-l "], > [class$="-l"]) {
+        --_gap: var(--md-comp-button-group-standard-large-between-space, 8px);
+    }
+    &:has(> [class*="-xl "], > [class$="-xl"]) {
+        --_gap: var(--md-comp-button-group-standard-xlarge-between-space, 8px);
+    }
+}
+
+#{$standard} {
+    > #{$children} {
+        --_grow: calc(var(--micl-height) * var(--md-comp-button-group-standard-expanded-ratio, 0.15));
+        --_expand: 0px;
+    }
+    > [class*="micl-iconbutton-"] {
+        inline-size: calc(var(--micl-width) + var(--_expand) * 2);
+        min-inline-size: 0;
+    }
+    > #{$children}:not([class*="micl-iconbutton-"]) {
+        padding-inline: calc(var(--micl-pad) + var(--_expand));
+    }
+    > #{$children}#{$enabled} {
+        &:active {
+            --_expand: calc(var(--_grow) / 2);
+        }
+        &:active + *,
+        &:has(+ :active) {
+            --_expand: calc(var(--_grow) / -4);
+        }
+        &:first-child:active + *,
+        &:has(+ :last-child:active) {
+            --_expand: calc(var(--_grow) / -2);
+        }
+        &:only-child:active {
+            --_expand: 0px;
+        }
+    }
+}
+
+.micl-buttongroup--connected {
+    --_gap: var(--md-comp-button-group-connected-small-between-space, 2px);
+
+    > #{$children} {
+        --_outer: calc(var(--micl-height) / 2);
+        --_inner: var(--md-comp-button-group-connected-inner-corner-corner-size, var(--_shape-pressed));
+        --_inner-pressed: var(--md-comp-button-group-connected-pressed-inner-corner-corner-size, calc(var(--_shape-pressed) / 2));
+
+        border-radius: var(--_inner);
+    }
+    > #{$children}:first-child {
+        border-start-start-radius: var(--_outer);
+        border-end-start-radius: var(--_outer);
+    }
+    > #{$children}:last-child {
+        border-start-end-radius: var(--_outer);
+        border-end-end-radius: var(--_outer);
+    }
+    > #{$children}#{$selected} {
+        border-radius: var(--_outer);
+    }
+    > #{$children}#{$enabled}:active {
+        border-radius: var(--_inner-pressed);
+
+        &:first-child {
+            border-start-start-radius: var(--_outer);
+            border-end-start-radius: var(--_outer);
+        }
+        &:last-child {
+            border-start-end-radius: var(--_outer);
+            border-end-end-radius: var(--_outer);
+        }
+    }
+}

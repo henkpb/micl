@@ -66,6 +66,7 @@ Some components build on other MICL components; when importing them individually
 | Component | Also import |
 | --------- | ----------- |
 | appbar | iconbutton |
+| buttongroup | button, iconbutton |
 | datepicker | dialog, textfield, button, iconbutton, divider |
 | dialog | button, iconbutton |
 | menu | list |
@@ -176,6 +177,7 @@ The library currently consists of the following components:
 - [x] [Badge](components/badge/README.md)
 - [x] [Bottom sheet](components/bottomsheet/README.md)
 - [x] [Button](components/button/README.md)
+- [x] [Button group](components/buttongroup/README.md)
 - [x] [Card](components/card/README.md)
 - [x] [Checkbox](components/checkbox/README.md)
 - [x] [Chip](components/chip/README.md)
@@ -201,6 +203,10 @@ The library currently consists of the following components:
 - [x] [Time picker](components/timepicker/README.md)
 
 ## Change Log ↪️
+
+### 10.0.0 (20.09.2026)
+- **Button group**: New component.
+- **Button** and **Icon button**: Toggle buttons can now be built as a `<label>` wrapping a checkbox or radio button, without JavaScript.
 
 ### 9.1.0 (05.09.2026)
 - **Navigation rail**: Dropped the JavaScript.
