@@ -349,7 +349,7 @@ nav.micl-navigationrail {
     inset: unset;
     inset-block-start: env(safe-area-inset-top, 0px);
     inset-inline-start: 0;
-    border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color));
+    border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color, var(--md-sys-color-outline-variant, gray)));
 }
 
 dialog.micl-navigationrail {
@@ -399,7 +399,7 @@ $_breakpoints: (
             margin-inline: calc(-1 * var(--md-sys-layout-window-margin, 0px)) auto;
             padding-inline: 0;
             opacity: 100%;
-            border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color));
+            border-inline-end: var(--md-comp-nav-rail-divider-thickness, 0px) solid var(--md-comp-nav-rail-divider-color, var(--md-comp-divider-color, var(--md-sys-color-outline-variant, gray)));
         }
     }
 }

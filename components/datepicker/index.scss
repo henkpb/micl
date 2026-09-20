@@ -100,7 +100,7 @@ dialog.micl-dialog.micl-datepicker {
         inline-size: var(--md-comp-date-input-modal-container-width, 328px);
 
         .micl-divider {
-            margin-block: 9.5px;
+            margin-block: calc(10px - var(--md-comp-divider-thickness, 1px) / 2);
         }
         .micl-dialog__content {
             min-block-size: 85px;
@@ -138,7 +138,7 @@ dialog.micl-dialog.micl-datepicker {
         .micl-divider {
             grid-area: div;
             inline-size: calc(100% + 36px);
-            margin-block-start: 11.5px;
+            margin-block-start: calc(12px - var(--md-comp-divider-thickness, 1px) / 2);
             margin-inline: -24px;
         }
     }

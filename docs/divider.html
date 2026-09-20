@@ -14,19 +14,36 @@
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
-        .docs-example {
-            border: 3px solid var(--md-sys-color-primary-container)
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
         }
-        p {
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
+        .docs-row {
+            margin: 0;
+            padding-block: 10px;
             color: var(--md-sys-color-on-surface);
         }
-        p.md-sys-typescale-label-large {
-            margin: 2rem 2rem 1rem;
-        }
-        .verticalbox {
+        .docs-metrics {
             display: flex;
-            flex-wrap: nowrap;
-            block-size: 320px;
+            align-items: center;
+            text-align: center;
+        }
+        .docs-metrics > div {
+            flex: 1;
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-metrics strong {
+            display: block;
+            font-size: var(--md-sys-typescale-headline-medium-size);
+            font-weight: 480;
+        }
+        .docs-toolbar {
+            display: flex;
+            align-items: center;
+            column-gap: 4px;
         }
     </style>
 </head>
@@ -47,51 +64,169 @@
             <h1>Dividers</h1>
             <p class="docs-hero__lede">Dividers are thin lines that separate content into distinct sections.</p>
             <ul class="docs-hero__facts">
-                <li>Horizontal & vertical</li>
+                <li>Horizontal &amp; vertical</li>
                 <li>Inset variants</li>
-                <li>RTL ready</li>
+                <li>No JavaScript required</li>
             </ul>
             <div class="docs-hero__demo">
-                <div style="inline-size:250px">
-                    <p class="md-sys-typescale-label-large" style="margin:4px 0">Full width</p>
+                <div style="inline-size:260px">
+                    <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
                     <hr class="micl-divider">
-                    <p class="md-sys-typescale-label-large" style="margin:4px 0">Inset</p>
+                    <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
                     <hr class="micl-divider-inset">
+                    <p class="docs-row md-sys-typescale-body-large">Hotspot</p>
                 </div>
             </div>
         </section>
 
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#horizontal">Horizontal</a>
+            <a href="#vertical">Vertical</a>
+            <a href="#lists">In list</a>
+            <a href="#theming">Theming</a>
+        </nav>
 
         <main class="docs-content docs-content--columns">
-            <div class="docs-stage">
-                <div class="docs-example">
-                    <template>
-                        <p class="md-sys-typescale-label-large">Full width:</p>
-                        <hr class="micl-divider">
-                        <p class="md-sys-typescale-label-large">Inset:</p>
-                        <hr class="micl-divider-inset">
-                        <p class="md-sys-typescale-label-large">Inset start:</p>
-                        <hr class="micl-divider-inset-start">
-                        <p class="md-sys-typescale-label-large">Inset end:</p>
-                        <hr class="micl-divider-inset-end">
-                        <p class="md-sys-typescale-label-large">(end)</p>
-                    </template>
+            <section class="docs-section" id="horizontal">
+                <div class="docs-section__head">
+                    <h2>Horizontal</h2>
                 </div>
-            </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Full width</p>
+                        <template>
+                            <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                            <hr class="micl-divider">
+                            <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Inset</p>
+                        <template>
+                            <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                            <hr class="micl-divider-inset">
+                            <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Inset start</p>
+                        <template>
+                            <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                            <hr class="micl-divider-inset-start">
+                            <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Inset end</p>
+                        <template>
+                            <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                            <hr class="micl-divider-inset-end">
+                            <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                        </template>
+                    </div>
+                </div>
+            </section>
 
-            <div class="docs-stage">
-                <div class="docs-example">
-                    <template>
-                        <div class="verticalbox">
-                            <p class="md-sys-typescale-label-large">Full height:</p>
-                            <hr class="micl-divider-vertical">
-                        </div>
-                    </template>
+            <section class="docs-section" id="vertical">
+                <div class="docs-section__head">
+                    <h2>Vertical</h2>
+                    <p class="docs-section__use">A vertical divider stretches to the height of its siblings, so it needs a flex or grid parent.</p>
                 </div>
-            </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Stretching between flex items</p>
+                        <template>
+                            <div class="docs-metrics">
+                                <div><strong>18</strong>Sent</div>
+                                <hr class="micl-divider-vertical" aria-orientation="vertical">
+                                <div><strong>4</strong>Drafts</div>
+                                <hr class="micl-divider-vertical" aria-orientation="vertical">
+                                <div><strong>92</strong>Archived</div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Separating a group of actions</p>
+                        <template>
+                            <div class="docs-toolbar">
+                                <button type="button" class="micl-button-text-s">Undo</button>
+                                <button type="button" class="micl-button-text-s">Redo</button>
+                                <hr class="micl-divider-vertical" aria-orientation="vertical">
+                                <button type="button" class="micl-button-text-s">Publish</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="lists">
+                <div class="docs-section__head">
+                    <h2>Divider in list</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <ul class="micl-list">
+                                <li class="micl-list-item-one">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Inbox</span>
+                                    </span>
+                                </li>
+                                <li class="micl-list-item-one">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Starred</span>
+                                    </span>
+                                </li>
+                                <li role="separator" class="micl-divider-inset"></li>
+                                <li class="micl-list-item-one">
+                                    <span class="micl-list-item__text">
+                                        <span class="micl-list-item__headline">Trash</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Thickness and colour</p>
+                        <template>
+                            <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                            <hr class="micl-divider" style="--md-comp-divider-thickness:4px;--md-comp-divider-color:var(--md-sys-color-primary)">
+                            <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Inset margin</p>
+                        <template>
+                            <div style="--md-comp-divider-inset-margin:48px">
+                                <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                                <hr class="micl-divider-inset">
+                                <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Spacing</p>
+                        <template>
+                            <div style="--md-comp-divider-space:24px">
+                                <p class="docs-row md-sys-typescale-body-large">Wi-Fi</p>
+                                <hr class="micl-divider">
+                                <p class="docs-row md-sys-typescale-body-large">Bluetooth</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
         </main>
 
-        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+        <footer class="docs-foot">MICL &mdash; Material-Inspired Component Library</footer>
     </div>
 
     <script src="micl.js"></script>
