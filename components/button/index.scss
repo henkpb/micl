@@ -41,13 +41,13 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
 
-    &.micl-button--toggle[aria-pressed="true"] {
+    &#{$selected} {
         border-radius: var(--_shape-square);
     }
     &.micl-button--square {
         border-radius: var(--_shape-square);
 
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             border-radius: calc(var(--micl-height) / 2);
         }
     }
@@ -72,11 +72,12 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 40px;
     --micl-height: 40px;
+    --micl-pad: 16px;
     --_shape-square: var(--md-sys-shape-corner-medium);
     --_shape-pressed: var(--md-sys-shape-corner-small);
 
     column-gap: 8px;
-    padding-inline: 16px;
+    padding-inline: var(--micl-pad);
 
     .micl-button__icon {
         font-size: 20px;
@@ -89,11 +90,12 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 56px;
     --micl-height: 56px;
+    --micl-pad: 24px;
     --_shape-square: var(--md-sys-shape-corner-large);
     --_shape-pressed: var(--md-sys-shape-corner-medium);
 
     column-gap: 8px;
-    padding-inline: 24px;
+    padding-inline: var(--micl-pad);
 
     .micl-button__icon {
         font-size: var(--md-sys-icon-size, 24px);
@@ -106,11 +108,12 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 96px;
     --micl-height: 96px;
+    --micl-pad: 48px;
     --_shape-square: var(--md-sys-shape-corner-extra-large);
     --_shape-pressed: var(--md-sys-shape-corner-large);
 
     column-gap: 12px;
-    padding-inline: 48px;
+    padding-inline: var(--micl-pad);
 
     .micl-button__icon {
         font-size: 32px;
@@ -123,11 +126,12 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 136px;
     --micl-height: 136px;
+    --micl-pad: 64px;
     --_shape-square: var(--md-sys-shape-corner-extra-large);
     --_shape-pressed: var(--md-sys-shape-corner-large);
 
     column-gap: 16px;
-    padding-inline: 64px;
+    padding-inline: var(--micl-pad);
 
     .micl-button__icon {
         font-size: 40px;
@@ -166,12 +170,12 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
         &:hover:not(:active) {
             box-shadow: var(--md-sys-elevation-level1);
         }
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
-        &.micl-button--toggle:not([aria-pressed="true"]) {
+        &#{$unselected} {
             --statelayer-color: var(--md-sys-color-on-surface-variant);
 
             background-color: var(--md-comp-filled-button-unselected-container-color, var(--md-sys-color-surface-container));
@@ -194,7 +198,7 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
         &:hover:not(:active) {
             box-shadow: var(--md-sys-elevation-level1);
         }
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             --statelayer-color: var(--md-sys-color-on-secondary);
 
             background-color: var(--md-comp-filled-tonal-button-selected-container-color, var(--md-sys-color-secondary));

@@ -30,6 +30,8 @@
 $disabled: ':is(:disabled, :has(> :disabled))';
 $enabled: ':not(:disabled, :has(> :disabled))';
 $focused: ':is(:focus-visible, :has(input:focus-visible))';
+$selected: '.micl-button--toggle:is([aria-pressed="true"], :has(input:checked))';
+$unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked))';
 
 @include elevation.level(0);
 @include elevation.level(1);
@@ -76,6 +78,7 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     transition:
         border-radius var(--_motion-duration) var(--_motion-effects),
         box-shadow var(--_motion-duration) var(--_motion-effects),
+        padding-inline var(--_motion-duration) var(--_motion-effects),
         background-size 0ms,
         --statelayer-opacity var(--_motion-duration) linear;
 
@@ -107,10 +110,17 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
         font-variation-settings: 'FILL' 0;
         transition: font-variation-settings var(--_motion-duration) linear;
     }
-    &.micl-button--toggle:not([aria-pressed="true"]) .micl-button__icon::before {
+    &.micl-button--toggle > input {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: inherit;
+    }
+    &#{$unselected} .micl-button__icon::before {
         content: attr(data-miclicon);
     }
-    &.micl-button--toggle[aria-pressed="true"] .micl-button__icon::before {
+    &#{$selected} .micl-button__icon::before {
         content: attr(data-micliconselected);
     }
 }
@@ -133,12 +143,13 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
 
     --micl-width: 32px;
     --micl-height: 32px;
+    --micl-pad: 12px;
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
     column-gap: 4px;
-    padding-inline: 12px;
+    padding-inline: var(--micl-pad);
 
     .micl-button__icon {
         font-size: 20px;
@@ -162,7 +173,7 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
         &:hover:not(:active) {
             box-shadow: var(--md-sys-elevation-level2);
         }
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             --statelayer-color: var(--md-sys-color-on-primary);
 
             background-color: var(--md-comp-elevated-button-selected-container-color, var(--md-sys-color-primary));
@@ -186,16 +197,17 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
         background-color: transparent;
         color: var(--md-comp-outlined-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-outlined-button-disabled-label-text-opacity, 38%)));
 
-        &.micl-button--toggle[aria-pressed="true"] {
-            border: none;
+        &#{$selected} {
+            border-color: transparent;
             background-color: var(--md-comp-outlined-button-selected-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-button-selected-disabled-container-opacity, 10%)));
         }
     }
     &#{$enabled} {
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             --statelayer-color: var(--md-sys-color-inverse-on-surface);
 
-            border: none;
+            border-color: transparent;
+            background-origin: border-box;
             background-color: var(--md-comp-outlined-button-selected-container-color, var(--md-sys-color-inverse-surface));
             color: var(--md-comp-outlined-button-selected-label-text-color, var(--md-sys-color-inverse-on-surface));
 
