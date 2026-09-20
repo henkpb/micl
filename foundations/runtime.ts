@@ -23,6 +23,7 @@ interface ComponentEventHandlers {
     input?  : (event: Event) => void;
     keydown?: (event: Event) => void;
     change? : (event: Event) => void;
+    command?: (event: Event) => void;
 }
 
 export interface ComponentHandler<T extends HTMLElement> extends ComponentEventHandlers {
@@ -183,10 +184,12 @@ const activate = () => {
 
     initializeComponents(document);
 
-    // Delegated Event Handlers
+    // Delegated Event Handlers. A command event does not bubble, so it is delegated
+    // from the capture phase, where it still passes the document on its way down.
     document.addEventListener('change', handleEvent);
     document.addEventListener('input', handleEvent);
     document.addEventListener('keydown', handleEvent);
+    document.addEventListener('command', handleEvent, true);
 };
 
 //

@@ -23,10 +23,8 @@ import { register } from '../../foundations/runtime';
 
 export const buttonSelector = '.micl-button--toggle';
 
-const toggleIcon = (button: HTMLButtonElement): void =>
-{
+const toggleIcon = (button: HTMLButtonElement): void => {
     const element = button.querySelector<HTMLElement>('.micl-button__icon') ?? button;
-
     const selected = button.getAttribute('aria-pressed') === 'true';
     if (element.dataset.micliconselected) {
         element.classList.toggle(element.dataset.micliconselected, selected);
@@ -39,10 +37,10 @@ const toggleIcon = (button: HTMLButtonElement): void =>
 export default register(buttonSelector, {
     command: (event: Event): void =>
     {
-        const target = event.target as HTMLButtonElement;
+        const target = (event.target as Element)?.closest<HTMLButtonElement>(buttonSelector);
 
         if (
-            target.matches(buttonSelector)
+            target
             && !target.disabled
             && (event as any).command === '--micl-toggle'
         ) {
@@ -53,26 +51,5 @@ export default register(buttonSelector, {
         }
     },
 
-    initialize: function(element: HTMLButtonElement): void
-    {
-        if (
-            !element.matches(buttonSelector)
-            || element.dataset.miclinitialized
-        ) {
-            return;
-        }
-        element.dataset.miclinitialized = '1';
-
-        toggleIcon(element);
-
-        element.addEventListener('command', this.command);
-    },
-
-    cleanup: function(element: HTMLButtonElement): void
-    {
-        if (element.matches(buttonSelector)) {
-            element.removeEventListener('command', this.command);
-            delete element.dataset.miclinitialized;
-        }
-    }
+    initialize: toggleIcon
 }, HTMLButtonElement);

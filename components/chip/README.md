@@ -1,5 +1,5 @@
 # Chip
-This component implements the [Material Design 3 Chips](https://m3.material.io/components/chips/overview) design. Chips help people enter information, make selections, filter content, or trigger actions.
+This component implements the [Material Design 3 Chips](https://m3.material.io/components/chips/overview) specification. Chips help people enter information, make selections, filter content, or trigger actions.
 
 ## Basic Usage
 
@@ -20,7 +20,8 @@ Import the chip styles into your project:
 @use "material-inspired-component-library/dist/chip";
 ```
 
-Or import all MICL styles:
+Or import all MICL styles at once:
+
 ```CSS
 @use "material-inspired-component-library/styles";
 ```
@@ -35,11 +36,13 @@ A live example of the [Chip component](https://henkpb.github.io/micl/chip.html) 
 Material Design provides **four types** of chips, each with its own class:
 
 | Type | Class | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | Assist | `micl-chip-assist` | Trigger a smart or automated action |
 | Filter | `micl-chip-filter` | Select from a set of options |
 | Input | `micl-chip-input` | Represent discrete pieces of information entered by the user |
 | Suggestion | `micl-chip-suggestion` | Present dynamically generated suggestions |
+
+**Note on Spacing:** A chip is 32px tall, but its interactive area is extended to meet the 48px minimum touch target, reaching 8px above and below the visible chip. Keep this in mind when placing chips outside a `micl-chips` container, as the container's built-in spacing already accounts for this invisible interactive area.
 
 By default, chips have an **outlined** appearance. For an elevated appearance without an outline, add the `micl-chip--elevated` class:
 
@@ -47,10 +50,10 @@ By default, chips have an **outlined** appearance. For an elevated appearance wi
 <button type="button" class="micl-chip-assist micl-chip--elevated">Turn on lights</button>
 ```
 
-Adding the `disabled` boolean attribute causes the chip to be displayed in a disabled state. **Exceptions**: for filter chips, the attribute is placed on the nested `<input>` element instead, and for input chips on both nested `<button>` elements (see below).
+Adding the standard `disabled` boolean attribute displays the chip in a disabled state. *(Note: Filter chips and Input chips handle the disabled state differently due to their HTML structure. See their respective sections below.)*
 
 ### Filter Chip
-A filter chip is a `<label>` wrapping an `<input type="checkbox">` (multiple selection) or `<input type="radio">` (single selection), followed by the label text. The leading element with the checkmark icon is required; it is revealed with an animation when the chip is selected:
+A filter chip is a `<label>` wrapping an `<input type="checkbox">` (for multiple selection) or `<input type="radio">` (for single selection), followed by the label text. The leading element with the checkmark icon is required; it is revealed with an animation when the chip is selected.
 
 ```HTML
 <fieldset class="micl-chips">
@@ -67,9 +70,9 @@ A filter chip is a `<label>` wrapping an `<input type="checkbox">` (multiple sel
 </fieldset>
 ```
 
-The selected state follows the `:checked` state of the input, and the disabled state its `disabled` attribute.
+The selected and disabled states of the chip are driven entirely by the native `:checked` and `disabled` attributes of the nested `<input>` element.
 
-A filter chip may additionally carry a **leading icon**, placed before the checkmark icon. It is visible while the chip is unselected and hidden while it is selected.
+A filter chip may additionally carry a **leading icon**, placed before the checkmark icon. It is visible while the chip is unselected and hidden while it is selected:
 
 ```HTML
 <label class="micl-chip-filter">
@@ -81,7 +84,7 @@ A filter chip may additionally carry a **leading icon**, placed before the check
 ```
 
 ### Input Chip
-An input chip carries **two actions** — activating the chip and removing it. The chip itself is a non-interactive `<span>` container holding two sibling `<button>` elements: the primary action with the label, and the trailing remove action.
+An input chip carries **two actions**: activating the chip and removing it. The chip itself is a non-interactive `<span>` container holding two sibling `<button>` elements: the primary action (with the label) and the trailing remove action.
 
 ```HTML
 <span class="micl-chip-input">
@@ -91,9 +94,9 @@ An input chip carries **two actions** — activating the chip and removing it. T
 </span>
 ```
 
-To disable an input chip, place the `disabled` attribute on **both** buttons.
+To disable an input chip, you must place the `disabled` attribute on **both** nested buttons.
 
-An input chip may represent a person with a leading avatar — an `<img>`, or an element with a monogram — placed inside the primary action before the label.
+An input chip may represent a person with a leading avatar—such as an `<img>` or an element with a monogram—placed inside the primary action before the label:
 
 ```HTML
 <span class="micl-chip-input">
@@ -132,55 +135,66 @@ Each chip type can be themed with CSS custom properties that follow the Material
 
 ### Assist
 | Custom property | Meaning | Default |
-|---|---|---|
-| `--md-comp-assist-chip-label-text-color` | Label colour | `--md-sys-color-on-surface` |
-| `--md-comp-assist-chip-leading-icon-color` | Icon colour | `--md-sys-color-primary` |
-| `--md-comp-assist-chip-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
+| --- | --- | --- |
+| `--md-comp-assist-chip-label-text-color` | Label color | `--md-sys-color-on-surface` |
+| `--md-comp-assist-chip-leading-icon-color` | Icon color | `--md-sys-color-primary` |
+| `--md-comp-assist-chip-outline-color` | Outline (border) color | `--md-sys-color-outline-variant` |
 | `--md-comp-assist-chip-elevated-container-color` | Container background when elevated | `--md-sys-color-surface-container-low` |
-| `--md-comp-assist-chip-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` at `38%` |
-| `--md-comp-assist-chip-disabled-outline-color` | Outline colour when disabled | `--md-sys-color-on-surface` at `12%` |
+| `--md-comp-assist-chip-disabled-label-text-color` | Label & icon color when disabled | `--md-sys-color-on-surface` at `38%` |
+| `--md-comp-assist-chip-disabled-outline-color` | Outline color when disabled | `--md-sys-color-on-surface` at `12%` |
 
 ### Filter
 | Custom property | Meaning | Default |
-|---|---|---|
-| `--md-comp-filter-chip-label-text-color` | Label colour | `--md-sys-color-on-surface-variant` |
-| `--md-comp-filter-chip-leading-icon-color` | Icon colour | `--md-sys-color-primary` |
-| `--md-comp-filter-chip-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
+| --- | --- | --- |
+| `--md-comp-filter-chip-label-text-color` | Label color | `--md-sys-color-on-surface-variant` |
+| `--md-comp-filter-chip-leading-icon-color` | Icon color | `--md-sys-color-primary` |
+| `--md-comp-filter-chip-outline-color` | Outline (border) color | `--md-sys-color-outline-variant` |
 | `--md-comp-filter-chip-elevated-container-color` | Container background when elevated | `--md-sys-color-surface-container-low` |
 | `--md-comp-filter-chip-selected-container-color` | Container background when selected | `--md-sys-color-secondary-container` |
-| `--md-comp-filter-chip-selected-label-text-color` | Label colour when selected | `--md-sys-color-on-secondary-container` |
-| `--md-comp-filter-chip-selected-leading-icon-color` | Checkmark colour when selected | `--md-sys-color-on-secondary-container` |
-| `--md-comp-filter-chip-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` at `38%` |
-| `--md-comp-filter-chip-disabled-outline-color` | Outline colour when disabled | `--md-sys-color-on-surface` at `12%` |
+| `--md-comp-filter-chip-selected-label-text-color` | Label color when selected | `--md-sys-color-on-secondary-container` |
+| `--md-comp-filter-chip-selected-leading-icon-color` | Checkmark color when selected | `--md-sys-color-on-secondary-container` |
+| `--md-comp-filter-chip-disabled-label-text-color` | Label & icon color when disabled | `--md-sys-color-on-surface` at `38%` |
+| `--md-comp-filter-chip-disabled-outline-color` | Outline color when disabled | `--md-sys-color-on-surface` at `12%` |
 | `--md-comp-filter-chip-disabled-selected-container-color` | Container background when selected and disabled | `--md-sys-color-on-surface` |
 | `--md-comp-filter-chip-disabled-selected-container-opacity` | Container opacity when selected and disabled | `12%` |
 
 ### Input
 | Custom property | Meaning | Default |
-|---|---|---|
-| `--md-comp-input-chip-label-text-color` | Label colour | `--md-sys-color-on-surface-variant` |
-| `--md-comp-input-chip-leading-icon-color` | Icon colour | the label colour |
-| `--md-comp-input-chip-trailing-icon-color` | Trailing (remove) icon colour | the leading icon colour |
-| `--md-comp-input-chip-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
-| `--md-comp-input-chip-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` at `38%` |
-| `--md-comp-input-chip-disabled-outline-color` | Outline colour when disabled | `--md-sys-color-on-surface` at `12%` |
+| --- | --- | --- |
+| `--md-comp-input-chip-label-text-color` | Label color | `--md-sys-color-on-surface-variant` |
+| `--md-comp-input-chip-leading-icon-color` | Icon color | the label color |
+| `--md-comp-input-chip-trailing-icon-color` | Trailing (remove) icon color | the leading icon color |
+| `--md-comp-input-chip-outline-color` | Outline (border) color | `--md-sys-color-outline-variant` |
+| `--md-comp-input-chip-disabled-label-text-color` | Label & icon color when disabled | `--md-sys-color-on-surface` at `38%` |
+| `--md-comp-input-chip-disabled-outline-color` | Outline color when disabled | `--md-sys-color-on-surface` at `12%` |
 | `--md-comp-input-chip-avatar-size` | Avatar diameter | `24px` |
 | `--md-comp-input-chip-avatar-shape` | Avatar corner shape | `--md-sys-shape-corner-full` |
 | `--md-comp-input-chip-disabled-avatar-opacity` | Avatar opacity when disabled | `38%` |
-| `--md-comp-input-chip-avatar-color` | Monogram avatar background colour ¹ | `--md-sys-color-primary-container` |
-| `--md-comp-input-chip-avatar-label-color` | Monogram avatar text colour ¹ | `--md-sys-color-on-primary-container` |
+| `--md-comp-input-chip-avatar-color` | Monogram avatar background color ¹ | `--md-sys-color-primary-container` |
+| `--md-comp-input-chip-avatar-label-color` | Monogram avatar text color ¹ | `--md-sys-color-on-primary-container` |
+| `--md-comp-input-chip-field-outline-color` | Outline of the `micl-chips--input` container ¹ | `--md-sys-color-outline-variant` |
 
-¹ MICL extension: monogram avatars are not part of the Material Design token set, which only covers image avatars.
+¹ MICL extension: monogram avatars and the field-like container are not part of the Material Design token set, which only covers image avatars.
 
 ### Suggestion
 | Custom property | Meaning | Default |
-|---|---|---|
-| `--md-comp-suggestion-chip-label-text-color` | Label colour | `--md-sys-color-on-surface-variant` |
-| `--md-comp-suggestion-chip-leading-icon-color` | Icon colour | `--md-sys-color-primary` |
-| `--md-comp-suggestion-chip-outline-color` | Outline (border) colour | `--md-sys-color-outline-variant` |
+| --- | --- | --- |
+| `--md-comp-suggestion-chip-label-text-color` | Label color | `--md-sys-color-on-surface-variant` |
+| `--md-comp-suggestion-chip-leading-icon-color` | Icon color | `--md-sys-color-primary` |
+| `--md-comp-suggestion-chip-outline-color` | Outline (border) color | `--md-sys-color-outline-variant` |
 | `--md-comp-suggestion-chip-elevated-container-color` | Container background when elevated | `--md-sys-color-surface-container-low` |
-| `--md-comp-suggestion-chip-disabled-label-text-color` | Label & icon colour when disabled | `--md-sys-color-on-surface` at `38%` |
-| `--md-comp-suggestion-chip-disabled-outline-color` | Outline colour when disabled | `--md-sys-color-on-surface` at `12%` |
+| `--md-comp-suggestion-chip-disabled-label-text-color` | Label & icon color when disabled | `--md-sys-color-on-surface` at `38%` |
+| `--md-comp-suggestion-chip-disabled-outline-color` | Outline color when disabled | `--md-sys-color-on-surface` at `12%` |
+
+### Motion
+These properties govern the reveal of the checkmark in a filter chip.
+
+| Custom property | Meaning | Default |
+| --- | --- | --- |
+| `--md-comp-chip-motion-effects` | The easing function for the icon reveal | `--md-sys-motion-expressive-fast-effects` |
+| `--md-comp-chip-motion-duration` | The duration of the icon reveal | `--md-sys-motion-expressive-fast-effects-duration` |
+
+Because the Chip component extends the [Button](../button/README.md), the corner-shape and state-layer transitions of a chip follow the **button** motion properties: `--md-comp-button-motion-effects` and `--md-comp-button-motion-duration`.
 
 ## Compatibility
-This component utilizes relative RGB color values and the `:has()` pseudo-class, which may not be fully supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
+This component utilizes relative RGB color values and the `:has()` CSS pseudo-class, which may not be fully supported in all browser versions. Please check the compatibility tables for [CSS color values](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) and [:has()](https://www.google.com/search?q=https://developer.mozilla.org/en-US/docs/Web/CSS/:has%2523browser_compatibility) for details.

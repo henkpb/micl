@@ -19,34 +19,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 
-// Each selector group compiles to a single selector.
 $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutton-filled-"], [class*="micl-iconbutton-tonal-"], [class*="micl-iconbutton-outlined-"])';
-
-@include elevation.level(0);
 
 @include shape.corner('small');
 @include shape.corner('medium');
 @include shape.corner('large');
 @include shape.corner('extra-large');
-@include shape.corner('full');
 
 @include statelayer.token('hover-state-layer-opacity');
 @include statelayer.token('focus-state-layer-opacity');
 @include statelayer.token('pressed-state-layer-opacity');
-@include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 @include statelayer.token('ripple-opacity-factor');
 @include statelayer.token('ripple-duration');
 @include statelayer.property;
 @include statelayer.keyframes;
 
-// Icon buttons smaller than the minimum touch target extend their interactive area with
-// a transparent ::before overlay.
 %micl-iconbutton-target {
     position: relative;
 
@@ -76,9 +68,12 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     inline-size: var(--micl-width);
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
+
+    --_shape-round: calc(min(var(--micl-width), var(--micl-height)) / 2);
+
     padding: 0;
     border: none;
-    border-radius: var(--md-sys-shape-corner-full);
+    border-radius: var(--_shape-round);
     background-color: transparent;
     background-image:
         radial-gradient(
@@ -92,8 +87,8 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
     background-size: 0%, 100%;
     -webkit-tap-highlight-color: transparent;
-    color: var(--md-comp-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
     font-variation-settings: 'FILL' 0;
+    text-decoration: none;
     cursor: pointer;
     transition:
         border-radius var(--_motion-duration) var(--_motion-effects),
@@ -102,7 +97,6 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
         --statelayer-opacity var(--_motion-duration) linear;
 
     &:disabled {
-        box-shadow: var(--md-sys-elevation-level0);
         cursor: default;
     }
     &:not(:disabled) {
@@ -119,7 +113,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
         }
         &.micl-rippling {
-            animation: micl-ripple var(--md-sys-state-ripple-duration);
+            animation: micl-ripple calc(var(--md-sys-state-ripple-duration) * 1.333);
         }
     }
     &:hover:not(:disabled),
@@ -133,25 +127,20 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
         content: attr(data-micliconselected);
     }
 
-    // The corner rounding of the size modifiers resolves through the two --_shape-*
-    // custom properties that each size declares below, the narrow and wide widths
-    // through the two --_width-* custom properties.
     &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--_shape-toggle);
+        border-radius: var(--_shape-square);
     }
     &.micl-iconbutton--narrow {
         --micl-width: var(--_width-narrow);
-        border-radius: calc(var(--micl-width) / 2);
     }
     &.micl-iconbutton--wide {
         --micl-width: var(--_width-wide);
-        border-radius: calc(var(--micl-height) / 2);
     }
     &.micl-button--square {
-        border-radius: var(--_shape-toggle);
+        border-radius: var(--_shape-square);
 
         &.micl-button--toggle[aria-pressed="true"] {
-            border-radius: var(--md-sys-shape-corner-full);
+            border-radius: var(--_shape-round);
         }
     }
     &:not(:disabled):active {
@@ -169,7 +158,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     --micl-height: 32px;
     --_width-narrow: 28px;
     --_width-wide: 40px;
-    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-square: var(--md-sys-shape-corner-medium);
     --_shape-pressed: var(--md-sys-shape-corner-small);
 
     font-size: 20px;
@@ -182,7 +171,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     --micl-height: 40px;
     --_width-narrow: 32px;
     --_width-wide: 52px;
-    --_shape-toggle: var(--md-sys-shape-corner-medium);
+    --_shape-square: var(--md-sys-shape-corner-medium);
     --_shape-pressed: var(--md-sys-shape-corner-small);
 
     font-size: var(--md-sys-icon-size, 24px);
@@ -193,7 +182,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     --micl-height: 56px;
     --_width-narrow: 48px;
     --_width-wide: 72px;
-    --_shape-toggle: var(--md-sys-shape-corner-large);
+    --_shape-square: var(--md-sys-shape-corner-large);
     --_shape-pressed: var(--md-sys-shape-corner-medium);
 
     font-size: var(--md-sys-icon-size, 24px);
@@ -204,7 +193,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     --micl-height: 96px;
     --_width-narrow: 64px;
     --_width-wide: 128px;
-    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-square: var(--md-sys-shape-corner-extra-large);
     --_shape-pressed: var(--md-sys-shape-corner-large);
 
     font-size: 32px;
@@ -215,7 +204,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
     --micl-height: 136px;
     --_width-narrow: 104px;
     --_width-wide: 184px;
-    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
+    --_shape-square: var(--md-sys-shape-corner-extra-large);
     --_shape-pressed: var(--md-sys-shape-corner-large);
 
     font-size: 40px;
@@ -224,7 +213,7 @@ $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutto
 [class*="micl-iconbutton-standard-"] {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
 
-    text-decoration: none;
+    color: var(--md-comp-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
 
     &:disabled {
         background-color: transparent;

@@ -2,6 +2,7 @@ interface ComponentEventHandlers {
     input?: (event: Event) => void;
     keydown?: (event: Event) => void;
     change?: (event: Event) => void;
+    command?: (event: Event) => void;
 }
 export interface ComponentHandler<T extends HTMLElement> extends ComponentEventHandlers {
     initialize?: (element: T) => void;

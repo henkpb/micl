@@ -38,10 +38,6 @@
     padding: 0;
     border: none;
 
-    .micl-chips__headline {
-        padding-block-end: 4px;
-        color: var(--md-sys-color-on-surface-variant);
-    }
     .micl-chip-assist {
         --micl-chip-statelayer: var(--md-sys-color-on-surface);
         --micl-chip-label: var(--md-comp-assist-chip-label-text-color, var(--md-sys-color-on-surface));
@@ -91,7 +87,7 @@
             font-size: 18px;
             inline-size: 18px;
             overflow: hidden;
-            transition: inline-size #{motion.$md-sys-motion-expressive-fast-effects-duration} #{motion.$md-sys-motion-expressive-fast-effects};
+            transition: inline-size var(--md-comp-chip-motion-duration, #{motion.$md-sys-motion-expressive-fast-effects-duration}) var(--md-comp-chip-motion-effects, #{motion.$md-sys-motion-expressive-fast-effects});
         }
         &#{button.$enabled} .micl-button__icon {
             color: var(--micl-chip-icon, var(--md-sys-color-primary));
@@ -196,7 +192,7 @@
                 content: "";
                 position: absolute;
                 inset-block-start: calc((100% - var(--md-sys-state-target-size, 48px)) / 2);
-                inset-inline-start: calc((100% - var(--md-sys-state-target-size, 48px)) / 2);
+                inset-inline-start: 0;
                 block-size: var(--md-sys-state-target-size, 48px);
                 inline-size: var(--md-sys-state-target-size, 48px);
             }
@@ -227,9 +223,6 @@
         .micl-button__icon + .micl-button__icon {
             margin-inline-start: -8px;
         }
-        // If icons have direction:ltr (like Material Symbols), the collapsing margin above always
-        // lands on their physical left; in a RTL context it must sit on the right to keep
-        // cancelling the gap between the two icons.
         .micl-button__icon + .micl-button__icon:dir(rtl) {
             margin-inline: 0 -8px;
         }
@@ -247,7 +240,6 @@
             --micl-chip-statelayer: var(--md-sys-color-on-secondary-container);
             --micl-chip-label: var(--md-comp-filter-chip-selected-label-text-color, var(--md-sys-color-on-secondary-container));
             --micl-chip-icon: var(--md-comp-filter-chip-selected-leading-icon-color, var(--md-sys-color-on-secondary-container));
-            --micl-chip-outline: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
 
             border-color: transparent;
             background-color: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
@@ -268,18 +260,19 @@
     }
 }
 .micl-chips--input {
-    min-inline-size: 0;
     flex-wrap: nowrap;
     min-inline-size: 0;
     padding: 10px 16px 13px;
-    border: 1px solid var(--md-comp-outlined-button-outline-color, var(--md-sys-color-outline-variant));
+    border: 1px solid var(--md-comp-input-chip-field-outline-color, var(--md-sys-color-outline-variant));
     border-radius: var(--md-sys-shape-corner-small);
     overflow-x: auto;
     scrollbar-width: thin;
 }
 
-// If the remove button is direction:ltr (like Material Symbols), its margin-inline resolves
-// against LTR and does not flip with the page direction — mirror the outer margin explicitly.
 .micl-chips .micl-chip__remove:dir(rtl) {
     margin-inline: 5px 0;
+
+    &::before {
+        inset-inline: auto 0;
+    }
 }

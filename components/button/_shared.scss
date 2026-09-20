@@ -27,8 +27,8 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 
-$disabled: ':is(:disabled, :has(input:disabled, > button:disabled))';
-$enabled: ':not(:disabled, :has(input:disabled, > button:disabled))';
+$disabled: ':is(:disabled, :has(> :disabled))';
+$enabled: ':not(:disabled, :has(> :disabled))';
 $focused: ':is(:focus-visible, :has(input:focus-visible))';
 
 @include elevation.level(0);
@@ -38,7 +38,6 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
 @include statelayer.token('hover-state-layer-opacity');
 @include statelayer.token('focus-state-layer-opacity');
 @include statelayer.token('pressed-state-layer-opacity');
-@include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 @include statelayer.token('ripple-opacity-factor');
 @include statelayer.token('ripple-duration');
@@ -116,8 +115,6 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     }
 }
 
-// Buttons smaller than the minimum touch target extend their interactive area with a
-// transparent ::before overlay.
 %micl-button-target {
     &::before {
         content: "";

@@ -56,15 +56,15 @@
                     <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">arrow_forward</span>
                     Get started
                 </button>
-                <button type="button" class="micl-button-tonal-l" style="inset-block-start:140px;inset-inline-end:0">
+                <button type="button" class="micl-button-tonal-l" style="inset-block-start:148px;inset-inline-end:0">
                     <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">favorite</span>
                     Save
                 </button>
-                <button type="button" class="micl-button-elevated-m" style="inset-block-end:0px;inset-inline-start:24px">
+                <button type="button" class="micl-button-elevated-m" style="inset-block-start:150px;inset-inline-start:0">
                     <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">share</span>
                     Share
                 </button>
-                <button type="button" class="micl-button-outlined-s" style="inset-block-start:220px;inset-inline-end:120px">Learn more</button>
+                <button type="button" class="micl-button-outlined-s" style="inset-block-start:218px;inset-inline-start:0">Learn more</button>
             </div>
         </section>
 
@@ -231,35 +231,51 @@
             <section class="docs-section" id="toggle-buttons">
                 <div class="docs-section__head">
                     <h2>Toggle buttons</h2>
-                    <p class="docs-section__use">Every variant can hold a pressed state — these are live, try them. The icon can swap when selected.</p>
+                    <p class="docs-section__use">Filled, tonal, elevated and outlined buttons can hold a pressed state — these are live, try them. Selecting one swaps its shape, and the icon can swap too. Text buttons have no selected state.</p>
                 </div>
                 <div class="docs-stage">
+                    <p style="margin-block-start:0">Unselected and selected — a rounded toggle turns square when it is selected</p>
                     <div class="docs-example docs-togglebutton" style="flex-direction:column">
                         <template>
                             <div>
                                 <button type="button" id="btn1" class="micl-button-elevated-m micl-button--toggle" aria-pressed="false" commandfor="btn1" command="--micl-toggle">Click</button>
-                                <button type="button" id="btn4" class="micl-button-elevated-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn4" command="--micl-toggle">
+                                <button type="button" id="btn2" class="micl-button-elevated-m micl-button--toggle" aria-pressed="true" commandfor="btn2" command="--micl-toggle">Click</button>
+                            </div>
+                            <div>
+                                <button type="button" id="btn3" class="micl-button-filled-m micl-button--toggle" aria-pressed="false" commandfor="btn3" command="--micl-toggle">Click</button>
+                                <button type="button" id="btn4" class="micl-button-filled-m micl-button--toggle" aria-pressed="true" commandfor="btn4" command="--micl-toggle">Click</button>
+                            </div>
+                            <div>
+                                <button type="button" id="btn5" class="micl-button-tonal-m micl-button--toggle" aria-pressed="false" commandfor="btn5" command="--micl-toggle">Click</button>
+                                <button type="button" id="btn6" class="micl-button-tonal-m micl-button--toggle" aria-pressed="true" commandfor="btn6" command="--micl-toggle">Click</button>
+                            </div>
+                            <div>
+                                <button type="button" id="btn7" class="micl-button-outlined-m micl-button--toggle" aria-pressed="false" commandfor="btn7" command="--micl-toggle">Click</button>
+                                <button type="button" id="btn8" class="micl-button-outlined-m micl-button--toggle" aria-pressed="true" commandfor="btn8" command="--micl-toggle">Click</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Square corners — which turn rounded when selected — with a swapping icon, and disabled</p>
+                    <div class="docs-example docs-togglebutton" style="flex-direction:column">
+                        <template>
+                            <div>
+                                <button type="button" id="btn9" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn9" command="--micl-toggle">
+                                    <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
+                                    Click
+                                </button>
+                                <button type="button" id="btn10" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn10" command="--micl-toggle">
                                     <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
                                     Click
                                 </button>
                             </div>
                             <div>
-                                <button type="button" id="btn5" class="micl-button-filled-m micl-button--toggle" aria-pressed="false" commandfor="btn5" command="--micl-toggle">Click</button>
-                                <button type="button" id="btn8" class="micl-button-filled-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn8" command="--micl-toggle">
+                                <button type="button" id="btn11" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="false" commandfor="btn11" command="--micl-toggle" disabled>
                                     <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
                                     Click
                                 </button>
-                            </div>
-                            <div>
-                                <button type="button" id="btn9" class="micl-button-tonal-m micl-button--toggle" aria-pressed="false" commandfor="btn9" command="--micl-toggle">Click</button>
-                                <button type="button" id="btn12" class="micl-button-tonal-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn12" command="--micl-toggle">
-                                    <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
-                                    Click
-                                </button>
-                            </div>
-                            <div>
-                                <button type="button" id="btn13" class="micl-button-outlined-m micl-button--toggle" aria-pressed="false" commandfor="btn13" command="--micl-toggle">Click</button>
-                                <button type="button" id="btn16" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn16" command="--micl-toggle">
+                                <button type="button" id="btn12" class="micl-button-outlined-m micl-button--square micl-button--toggle" aria-pressed="true" commandfor="btn12" command="--micl-toggle" disabled>
                                     <span class="micl-button__icon material-symbols-outlined" data-miclicon="edit" data-micliconselected="draw" aria-hidden="true"></span>
                                     Click
                                 </button>
