@@ -1,0 +1,162 @@
+//
+// Copyright © 2026 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/shape';
+
+$half: '[class*="micl-button-"]';
+$leading: '> #{$half}:first-child';
+$trailing: '> #{$half}:first-child + #{$half}';
+$enabled: ':not(:disabled)';
+
+@include shape.corner('extra-small');
+@include shape.corner('small');
+@include shape.corner('medium');
+@include shape.corner('large-increased');
+
+.micl-splitbutton {
+    --_lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
+    --_trail-pad: 13px;
+    --_trail-icon: 22px;
+    --_inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+    --_inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+    --_inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+
+    box-sizing: border-box;
+    display: flex;
+    inline-size: fit-content;
+    column-gap: var(--md-comp-split-button-between-space, 2px);
+
+    // The leading half is always the first child, so it alone carries the size of the whole
+    // component. An open menu inside the container is in the top layer and a closed one is
+    // display:none, so neither ever takes part in the flex layout.
+    &:has(> :first-child[class$="-xs"], > :first-child[class*="-xs "]) {
+        --_lead-end: var(--md-comp-split-button-xsmall-leading-button-trailing-space, 10px);
+        --_trail-pad: 13px;
+        --_trail-icon: 22px;
+        --_inner: var(--md-comp-split-button-xsmall-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_inner-hover: var(--md-comp-split-button-xsmall-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_inner-press: var(--md-comp-split-button-xsmall-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-small));
+    }
+    &:has(> :first-child[class$="-s"], > :first-child[class*="-s "]) {
+        --_lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
+        --_trail-pad: 13px;
+        --_trail-icon: 22px;
+        --_inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+    }
+    &:has(> :first-child[class$="-m"], > :first-child[class*="-m "]) {
+        --_lead-end: var(--md-comp-split-button-medium-leading-button-trailing-space, 24px);
+        --_trail-pad: 15px;
+        --_trail-icon: 26px;
+        --_inner: var(--md-comp-split-button-medium-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_inner-hover: var(--md-comp-split-button-medium-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_inner-press: var(--md-comp-split-button-medium-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+    }
+    &:has(> :first-child[class$="-l"], > :first-child[class*="-l "]) {
+        --_lead-end: var(--md-comp-split-button-large-leading-button-trailing-space, 48px);
+        --_trail-pad: 29px;
+        --_trail-icon: 38px;
+        --_inner: var(--md-comp-split-button-large-inner-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_inner-hover: var(--md-comp-split-button-large-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_inner-press: var(--md-comp-split-button-large-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+    }
+    &:has(> :first-child[class$="-xl"], > :first-child[class*="-xl "]) {
+        --_lead-end: var(--md-comp-split-button-xlarge-leading-button-trailing-space, 64px);
+        --_trail-pad: 43px;
+        --_trail-icon: 50px;
+        --_inner: var(--md-comp-split-button-xlarge-inner-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_inner-hover: var(--md-comp-split-button-xlarge-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_inner-press: var(--md-comp-split-button-xlarge-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+    }
+
+    > #{$half} {
+        --_outer: calc(var(--micl-height) / 2);
+    }
+
+    // Logical corner longhands throughout, so the seam mirrors in RTL without a single override.
+    #{$leading} {
+        padding-inline: var(--micl-pad) var(--_lead-end);
+        border-start-start-radius: var(--_outer);
+        border-end-start-radius: var(--_outer);
+        border-start-end-radius: var(--_inner);
+        border-end-end-radius: var(--_inner);
+    }
+    #{$trailing} {
+        padding-inline: var(--_trail-pad);
+        border-start-start-radius: var(--_inner);
+        border-end-start-radius: var(--_inner);
+        border-start-end-radius: var(--_outer);
+        border-end-end-radius: var(--_outer);
+
+        .micl-button__icon {
+            font-size: var(--_trail-icon);
+            inline-size: var(--_trail-icon);
+            rotate: 0deg;
+            transition:
+                font-variation-settings var(--_motion-duration) linear,
+                rotate var(--_motion-duration) var(--_motion-effects);
+        }
+    }
+
+    #{$leading}#{$enabled}:hover {
+        border-start-end-radius: var(--_inner-hover);
+        border-end-end-radius: var(--_inner-hover);
+    }
+    #{$trailing}#{$enabled}:hover {
+        border-start-start-radius: var(--_inner-hover);
+        border-end-start-radius: var(--_inner-hover);
+    }
+
+    // While the menu is open the trailing half becomes a pill and holds a state layer at the
+    // pressed opacity, which is what the specification draws over the checked trailing button.
+    &:has(> [popover]:popover-open) {
+        #{$trailing} {
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+
+            border-start-start-radius: var(--_outer);
+            border-end-start-radius: var(--_outer);
+
+            .micl-button__icon {
+                rotate: 180deg;
+            }
+        }
+    }
+
+    // A press outranks the open state, matching shapeByInteraction in the specification. The outer
+    // corners are restated because the Button's own :active rule sets the border-radius shorthand.
+    #{$leading}#{$enabled}:active {
+        border-start-start-radius: var(--_outer);
+        border-end-start-radius: var(--_outer);
+        border-start-end-radius: var(--_inner-press);
+        border-end-end-radius: var(--_inner-press);
+    }
+    #{$trailing}#{$enabled}:active {
+        border-start-start-radius: var(--_inner-press);
+        border-end-start-radius: var(--_inner-press);
+        border-start-end-radius: var(--_outer);
+        border-end-end-radius: var(--_outer);
+    }
+}
+
+.micl-splitbutton:has(> [popover]:popover-open) #{$trailing} .micl-button__icon:dir(rtl) {
+    rotate: -180deg;
+}

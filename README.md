@@ -16,7 +16,7 @@ MICL picks up that torch with the opposite architecture. Where material-web wrap
 
 ## Highlights
 
-- **The M3 Expressive catalogue, on the web first.** 29 components, the Material shape library, adaptive pane layouts — and the signature Expressive details, like wavy progress indicators drawn and animated entirely in CSS, with the wave motion running on the compositor.
+- **The M3 Expressive catalogue, on the web first.** 31 components, the Material shape library, adaptive pane layouts — and the signature Expressive details, like wavy progress indicators drawn and animated entirely in CSS, with the wave motion running on the compositor.
 - **Native HTML first.** Components are your own markup plus a class. Forms post, dialogs trap focus, `<progress>` announces progress — because the platform does it, not a re-implementation.
 - **(Almost) no JavaScript.** Most components need none. All interactive behaviour for the entire library fits in one dependency-free ~11 kB minified and gzipped file — or import per-component slices and let your bundler tree-shake the rest.
 - **Theming per the spec.** Ready-made colour themes with light, dark and high-contrast variants, and every component themable through spec-named `--md-comp-*` custom properties.
@@ -74,6 +74,7 @@ Some components build on other MICL components; when importing them individually
 | select | textfield, menu, list |
 | sidesheet | button, iconbutton, divider |
 | snackbar | button, iconbutton |
+| splitbutton | button, menu, list |
 | stepper | button |
 | timepicker | dialog, button, iconbutton |
 
@@ -197,6 +198,7 @@ The library currently consists of the following components:
 - [x] [Side sheet](components/sidesheet/README.md)
 - [x] [Slider](components/slider/README.md)
 - [x] [Snackbar](components/snackbar/README.md)
+- [x] [Split button](components/splitbutton/README.md)
 - [x] [Stepper](components/stepper/README.md)
 - [x] [Switch](components/switch/README.md)
 - [x] [Text field](components/textfield/README.md)
@@ -206,6 +208,7 @@ The library currently consists of the following components:
 
 ### 10.0.0 (20.09.2026)
 - **Button group**: New component.
+- **Split button**: New component.
 - **Button** and **Icon button**: Toggle buttons can now be built as a `<label>` wrapping a checkbox or radio button, without JavaScript.
 
 ### 9.1.0 (05.09.2026)

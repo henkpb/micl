@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Split buttons">
+    <title>MICL Split buttons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,download,drive_file_move,edit,home,keyboard_arrow_down,palette,print,save&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-sizes {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .docs-example {
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Split buttons</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Split buttons</h1>
+            <p class="docs-hero__lede">One button doing two jobs: the wide half performs the obvious action, the narrow half opens a menu of the less obvious ones. Open the menu below and watch the seam round off.</p>
+            <ul class="docs-hero__facts">
+                <li>4 styles</li>
+                <li>5 sizes · 32 to 136&thinsp;px</li>
+                <li>No JavaScript</li>
+            </ul>
+            <div class="docs-hero__collage" aria-label="A collage of live MICL split buttons">
+                <div class="micl-splitbutton" role="group" aria-label="Save" style="inset-block-start:0;inset-inline-start:0">
+                    <button type="button" class="micl-button-filled-l">Save</button>
+                    <button type="button" class="micl-button-filled-l" popovertarget="hero-menu" aria-label="More save options">
+                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                    </button>
+                    <nav id="hero-menu" class="micl-menu" popover>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                            <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save a copy</span></span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="micl-splitbutton" role="group" aria-label="Export" style="inset-block-start:140px;inset-inline-start:0">
+                    <button type="button" class="micl-button-tonal-m">
+                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">download</span>
+                        Export
+                    </button>
+                    <button type="button" class="micl-button-tonal-m" popovertarget="hero-menu2" aria-label="More export options">
+                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                    </button>
+                    <nav id="hero-menu2" class="micl-menu" popover>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Export as PDF</span></span></li>
+                            <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Export as CSV</span></span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="micl-splitbutton" role="group" aria-label="Edit" style="inset-block-start:250px;inset-inline-start:0">
+                    <button type="button" class="micl-button-outlined-s">Edit</button>
+                    <button type="button" class="micl-button-outlined-s" popovertarget="hero-menu3" aria-label="More edit options">
+                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                    </button>
+                    <nav id="hero-menu3" class="micl-menu" popover>
+                        <ul class="micl-list">
+                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Rename</span></span></li>
+                            <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Duplicate</span></span></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#styles">Styles</a>
+            <a href="#sizes">Sizes</a>
+            <a href="#menu">The menu</a>
+        </nav>
+
+        <main class="docs-content">
+            <section class="docs-section" id="styles">
+                <div class="docs-section__head">
+                    <h2>Styles</h2>
+                    <p class="docs-section__use">Both halves take the same button style. Material Design defines four of them for a split button — the <code>text</code> style is not among them, as its seam would be invisible.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-splitbutton" role="group" aria-label="Filled">
+                                <button type="button" class="micl-button-filled-s">Save</button>
+                                <button type="button" class="micl-button-filled-s" popovertarget="menu-filled" aria-label="More options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-filled" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save a copy</span></span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="micl-splitbutton" role="group" aria-label="Tonal">
+                                <button type="button" class="micl-button-tonal-s">Save</button>
+                                <button type="button" class="micl-button-tonal-s" popovertarget="menu-tonal" aria-label="More options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-tonal" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save a copy</span></span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="micl-splitbutton" role="group" aria-label="Elevated">
+                                <button type="button" class="micl-button-elevated-s">Save</button>
+                                <button type="button" class="micl-button-elevated-s" popovertarget="menu-elevated" aria-label="More options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-elevated" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save a copy</span></span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="micl-splitbutton" role="group" aria-label="Outlined">
+                                <button type="button" class="micl-button-outlined-s">Save</button>
+                                <button type="button" class="micl-button-outlined-s" popovertarget="menu-outlined" aria-label="More options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-outlined" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save a copy</span></span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">The leading half takes a leading icon like any other button, and either half can be disabled on its own</p>
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-splitbutton" role="group" aria-label="Print">
+                                <button type="button" class="micl-button-tonal-m">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">print</span>
+                                    Print
+                                </button>
+                                <button type="button" class="micl-button-tonal-m" popovertarget="menu-print" aria-label="More print options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-print" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Print preview</span></span></li>
+                                        <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Page setup</span></span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="micl-splitbutton" role="group" aria-label="Move">
+                                <button type="button" class="micl-button-tonal-m">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">drive_file_move</span>
+                                    Move
+                                </button>
+                                <button type="button" class="micl-button-tonal-m" aria-label="More move options" disabled>
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="sizes">
+                <div class="docs-section__head">
+                    <h2>Sizes</h2>
+                    <p class="docs-section__use">Five sizes, matching the Button. The seam between the halves grows with them: nearly square at the small end, generously rounded at the large end.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="docs-sizes">
+                                <div class="micl-splitbutton" role="group" aria-label="Extra small">
+                                    <button type="button" class="micl-button-tonal-xs">Save</button>
+                                    <button type="button" class="micl-button-tonal-xs" popovertarget="menu-xs" aria-label="More options">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                    </button>
+                                    <nav id="menu-xs" class="micl-menu" popover>
+                                        <ul class="micl-list">
+                                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="micl-splitbutton" role="group" aria-label="Small">
+                                    <button type="button" class="micl-button-tonal-s">Save</button>
+                                    <button type="button" class="micl-button-tonal-s" popovertarget="menu-s" aria-label="More options">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                    </button>
+                                    <nav id="menu-s" class="micl-menu" popover>
+                                        <ul class="micl-list">
+                                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="micl-splitbutton" role="group" aria-label="Medium">
+                                    <button type="button" class="micl-button-tonal-m">Save</button>
+                                    <button type="button" class="micl-button-tonal-m" popovertarget="menu-m" aria-label="More options">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                    </button>
+                                    <nav id="menu-m" class="micl-menu" popover>
+                                        <ul class="micl-list">
+                                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="micl-splitbutton" role="group" aria-label="Large">
+                                    <button type="button" class="micl-button-tonal-l">Save</button>
+                                    <button type="button" class="micl-button-tonal-l" popovertarget="menu-l" aria-label="More options">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                    </button>
+                                    <nav id="menu-l" class="micl-menu" popover>
+                                        <ul class="micl-list">
+                                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="micl-splitbutton" role="group" aria-label="Extra large">
+                                    <button type="button" class="micl-button-tonal-xl">Save</button>
+                                    <button type="button" class="micl-button-tonal-xl" popovertarget="menu-xl" aria-label="More options">
+                                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                    </button>
+                                    <nav id="menu-xl" class="micl-menu" popover>
+                                        <ul class="micl-list">
+                                            <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="menu">
+                <div class="docs-section__head">
+                    <h2>The menu</h2>
+                    <p class="docs-section__use">The menu is an ordinary <a href="menu.html">Menu</a> placed inside the split button, opened by the native <code>popovertarget</code> attribute. While it is open the trailing half rounds into a pill, takes a state layer and turns its chevron over — all in CSS.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="micl-splitbutton" role="group" aria-label="Save document">
+                                <button type="button" class="micl-button-filled-m">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">save</span>
+                                    Save
+                                </button>
+                                <button type="button" class="micl-button-filled-m" popovertarget="menu-main" aria-label="More save options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-main" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0">
+                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                            <span class="micl-list-item__text"><span class="micl-list-item__headline">Save as&hellip;</span></span>
+                                        </li>
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">content_copy</span>
+                                            <span class="micl-list-item__text"><span class="micl-list-item__headline">Save a copy</span></span>
+                                        </li>
+                                        <li role="separator" class="micl-divider-inset"></li>
+                                        <li class="micl-list-item-one">
+                                            <span class="micl-list-item__icon material-symbols-outlined" aria-hidden="true">download</span>
+                                            <span class="micl-list-item__text"><span class="micl-list-item__headline">Download</span></span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>
