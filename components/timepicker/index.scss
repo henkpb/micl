@@ -46,8 +46,6 @@
     initial-value: 0deg;
 }
 
-// State layer background shared by the time fields and the AM/PM toggles.
-// The state layer color follows the label color of the current state.
 %statelayer-background {
     --statelayer-color: currentColor;
 
@@ -71,9 +69,6 @@
 dialog.micl-dialog.micl-timepicker {
     --_timepicker-motion-duration: var(--md-comp-time-picker-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
-    // Internal aliases: each public token is referenced from many descendants.
-    // The keyboard-input mode uses the (smaller) time-input defaults; the
-    // dial modes below re-declare the aliases with the time-picker defaults.
     --_input-height: var(--md-comp-time-picker-time-selector-container-height, 72px);
     --_input-width: var(--md-comp-time-picker-time-selector-container-width, 96px);
     --_separator-width: var(--md-comp-time-picker-separator-width, 24px);
@@ -161,8 +156,6 @@ dialog.micl-dialog.micl-timepicker {
         }
     }
 
-    // A clock face must never mirror, and a time is written hour-first in every
-    // locale, so the whole selector runs ltr and only the labels follow the page.
     &:dir(rtl) .micl-dialog__content {
         direction: ltr;
 
@@ -208,8 +201,6 @@ dialog.micl-dialog.micl-timepicker {
     input[name=minute] {
         grid-area: min;
     }
-    // In dial mode the fields are read-only read-outs: no caret, no selection.
-    // The keyboard mode needs both, so that the select-on-focus is visible.
     &:has(.micl-timepicker__dial:not(.micl-timepicker__dial--hidden)) {
         input[name=hour],
         input[name=minute] {
@@ -269,8 +260,6 @@ dialog.micl-dialog.micl-timepicker {
         background-color: transparent;
         cursor: pointer;
 
-        // The runtime names the radios with the day periods of the user's locale,
-        // so the accessible name is also the visible label.
         &::before {
             content: attr(aria-label);
             position: absolute;
@@ -371,7 +360,6 @@ dialog.micl-dialog.micl-timepicker {
     }
 
     .micl-timepicker__track {
-        // Stops just inside the selected handle, on either ring.
         --micl-track-length: calc(var(--micl-track-radius) - 12px);
 
         position: relative;
@@ -399,8 +387,6 @@ dialog.micl-dialog.micl-timepicker {
     }
 }
 
-// Only an open picker sweeps: the value the invoker seeds on beforetoggle lands
-// before the dialog opens, so it snaps into place instead of spinning from noon.
 .micl-timepicker[open] .micl-timepicker__dial {
     transition: --micl-angle var(--_timepicker-motion-duration) motion.$md-sys-motion-easing-standard;
 }

@@ -62,7 +62,6 @@ $switch: 'input[type=checkbox].micl-switch';
     outline: none;
     -webkit-tap-highlight-color: transparent;
 
-    // The track.
     &::before {
         content: "";
         box-sizing: border-box;

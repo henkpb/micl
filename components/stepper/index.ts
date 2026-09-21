@@ -186,8 +186,6 @@ export default register(stepperSelector, {
                 'button[role=tab][aria-controls]'
             ).forEach((button, index) =>
             {
-                // CSS cannot generate a unique anchor name per sibling, which the
-                // header's connector segments need to span adjacent buttons.
                 button.style.setProperty('--micl-stepper-anchor', `--micl-step-${index}`);
                 if (index > 0) {
                     button.style.setProperty('--micl-stepper-prev', `--micl-step-${index - 1}`);

@@ -48,17 +48,10 @@
         anchor-scope: all;
 
         button {
-            // The connector segments and the touch-target overlay are anchored
-            // pseudo-elements: an anchor is only acceptable when it is a
-            // descendant of the positioned element's containing block, so the
-            // buttons must stay static to make the header that containing block.
-            // The unique per-button anchor names are assigned by the stepper script.
             position: static;
             anchor-name: var(--micl-stepper-anchor);
             pointer-events: none;
 
-            // The shared touch-target overlay assumes a positioned button;
-            // re-anchor it to this button's box.
             &::before {
                 inset: auto;
                 inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - var(--md-sys-state-target-size, 48px) / 2);

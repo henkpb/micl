@@ -139,8 +139,6 @@
 
             &:has(.micl-navigationrail__text) {
                 --_navigationrail-item-base-height: var(--md-comp-nav-rail-item-vertical-active-indicator-height, 32px);
-                // the item box is the active indicator, so the rest of the 64px item
-                // container — the label and the padding around it — is reserved below it
                 --_navigationrail-item-margin-bottom: calc(var(--md-comp-nav-rail-item-container-height, 64px) - var(--md-comp-nav-rail-item-vertical-active-indicator-height, 32px));
                 --_navigationrail-item-padding-block: 0px;
             }

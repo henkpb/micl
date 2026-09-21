@@ -44,9 +44,6 @@ $enabled: ':not(:disabled)';
     inline-size: fit-content;
     column-gap: var(--md-comp-split-button-between-space, 2px);
 
-    // The leading half is always the first child, so it alone carries the size of the whole
-    // component. An open menu inside the container is in the top layer and a closed one is
-    // display:none, so neither ever takes part in the flex layout.
     &:has(> :first-child[class$="-xs"], > :first-child[class*="-xs "]) {
         --_lead-end: var(--md-comp-split-button-xsmall-leading-button-trailing-space, 10px);
         --_trail-pad: 13px;
@@ -92,7 +89,6 @@ $enabled: ':not(:disabled)';
         --_outer: calc(var(--micl-height) / 2);
     }
 
-    // Logical corner longhands throughout, so the seam mirrors in RTL without a single override.
     #{$leading} {
         padding-inline: var(--micl-pad) var(--_lead-end);
         border-start-start-radius: var(--_outer);
@@ -126,8 +122,6 @@ $enabled: ':not(:disabled)';
         border-end-start-radius: var(--_inner-hover);
     }
 
-    // While the menu is open the trailing half becomes a pill and holds a state layer at the
-    // pressed opacity, which is what the specification draws over the checked trailing button.
     &:has(> [popover]:popover-open) {
         #{$trailing} {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
@@ -141,8 +135,6 @@ $enabled: ':not(:disabled)';
         }
     }
 
-    // A press outranks the open state, matching shapeByInteraction in the specification. The outer
-    // corners are restated because the Button's own :active rule sets the border-radius shorthand.
     #{$leading}#{$enabled}:active {
         border-start-start-radius: var(--_outer);
         border-end-start-radius: var(--_outer);

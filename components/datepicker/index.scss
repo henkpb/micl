@@ -57,7 +57,6 @@
     }
 }
 
-// State layer background shared by the date cells and the year chips.
 %statelayer-background {
     --statelayer-color: var(--md-sys-color-on-surface-variant);
     --statelayer-opacity: 0%;
@@ -91,7 +90,6 @@ dialog.micl-dialog.micl-datepicker {
     --_datepicker-motion-duration-reverse: var(--md-comp-date-picker-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-effects-duration});
     --_datepicker-button-motion-duration: var(--md-comp-date-picker-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
 
-    // Internal alias: the target size is referenced from many descendants.
     --_target: var(--md-sys-state-target-size, 48px);
 
     inline-size: var(--md-comp-date-picker-modal-container-width, 360px);
@@ -142,8 +140,6 @@ dialog.micl-dialog.micl-datepicker {
             margin-inline: -24px;
         }
     }
-    // The range headline holds two dates, so the spec drops it to title-large.
-    // The larger margin keeps the divider below it in place.
     &.micl-datepicker--range .micl-dialog__headline :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
         @include typography.title-large;
 
@@ -306,8 +302,6 @@ dialog.micl-dialog.micl-datepicker {
     &.micl-moveleft {
         transform: translateX(-50%);
     }
-    // The flex row is laid out from the inline start, so the off-screen half of
-    // the strip sits on the opposite side in a right-to-left context.
     &:dir(rtl) {
         &.micl-startright,
         &.micl-moveleft {
@@ -386,11 +380,6 @@ dialog.micl-dialog.micl-datepicker {
             background-color: var(--md-comp-date-picker-date-selected-container-color, var(--md-sys-color-primary));
             color: var(--md-comp-date-picker-date-selected-label-text-color, var(--md-sys-color-on-primary));
         }
-        // The active-indicator band of a range is painted by a pseudo-element
-        // on a negative z-index: below the cell's own state layer, selection
-        // circle and today-outline, which stay clipped by the circular
-        // border-radius (an element background cannot escape it). The band
-        // bleeds into the 4px transparent borders to meet the neighbour cells.
         &:is(.micl-datepicker__inrange, .micl-datepicker__range-start, .micl-datepicker__range-end) {
             position: relative;
 
@@ -406,14 +395,12 @@ dialog.micl-dialog.micl-datepicker {
         &.micl-datepicker__inrange {
             color: var(--md-comp-date-picker-selection-date-in-range-label-text-color, var(--md-sys-color-on-secondary-container));
         }
-        // The endpoints only paint the half band facing the inside of the range.
         &.micl-datepicker__range-start::before {
             inset-inline: 50% -4px;
         }
         &.micl-datepicker__range-end::before {
             inset-inline: -4px 50%;
         }
-        // The state layer of a highlighted date follows its label color.
         &:is(.micl-datepicker__today, .micl-datepicker__selected):is(:hover, :focus-visible, :active) {
             --statelayer-color: currentColor;
         }
@@ -504,7 +491,6 @@ dialog.micl-dialog.micl-datepicker {
             color: var(--md-comp-date-picker-selection-year-selected-label-text-color, var(--md-sys-color-on-primary));
             background-color: var(--md-comp-date-picker-selection-year-selected-container-color, var(--md-sys-color-primary));
 
-            // The state layer of the selected year follows its label color.
             &:is(:hover, :active, :has(input:focus-visible)) {
                 --statelayer-color: currentColor;
             }
@@ -528,7 +514,6 @@ dialog.micl-dialog.micl-datepicker {
         display: none;
     }
 }
-// In range mode the input view holds the start and end field side by side.
 .micl-datepicker--range .micl-datepicker__input {
     display: flex;
     column-gap: 8px;

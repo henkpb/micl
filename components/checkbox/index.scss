@@ -73,9 +73,6 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         - ((var(--_target) - var(--_layer)) / 2)
     );
 
-    // The check mark: two currentColor borders rotated into a check, revealed by a
-    // combination of block-size and clip-path transitions. currentColor, so that the
-    // error and disabled states recolour it with a single color declaration.
     &::before {
         --_check-width: calc(var(--_size) * 5 / 6);
         --_check-height: calc(0.4667 * var(--_check-width));

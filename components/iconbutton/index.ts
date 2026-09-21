@@ -19,7 +19,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Icon buttons share the toggle behaviour of the Button component: its handler already
-// falls back to the button element itself when there is no .micl-button__icon child.
 export { buttonSelector } from '../button';
 export { default } from '../button';

@@ -227,7 +227,6 @@ dialog.micl-dialog.micl-dialog--fullscreen {
         timeline-scope: --headlineTimeline;
 
         .micl-dialog__headline {
-            // border-box: the 56px of the spec include the block padding
             box-sizing: border-box;
             block-size: 56px;
             flex-direction: row;

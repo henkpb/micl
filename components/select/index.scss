@@ -31,7 +31,6 @@
 
 @include statelayer.token('disabled-state-layer-opacity');
 
-// Each selector group compiles to a single selector.
 $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
 
 .micl-textfield-filled > select {
@@ -164,8 +163,6 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
                 linear-gradient(rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity)));
             -webkit-text-fill-color: var(--_headline-color);
 
-            // A timed border-radius transition also re-enables the native painting —
-            // the list transition is repeated here without it.
             transition:
                 background-size 0ms,
                 --statelayer-opacity var(--_list-motion-duration) linear;

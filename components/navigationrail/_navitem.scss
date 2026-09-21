@@ -19,11 +19,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Shared navigation item anatomy, used by the Navigation rail and the
-// Navigation bar components (placeholders only — emits no CSS on its own).
-// The two components share the MD3 item colors, state layers and ripple;
-// geometry and component tokens stay with each component.
-
 @use '../../styles/motion';
 @use '../../styles/statelayer';
 @use '../../styles/typography';

@@ -253,7 +253,6 @@ input[type=range][class*=micl-slider-] {
         &:is(:active, :focus)::after {
             @include slider-tip-visible;
         }
-        // The 4px wide handle narrows to 2px while focused or pressed.
         &:focus-visible {
             --_handle-inset: 1px;
             --_handle-outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
