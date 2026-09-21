@@ -96,6 +96,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
         &#{$focused} {
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
+            z-index: 1;
             outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: 2px;
         }
