@@ -43,7 +43,7 @@
             <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
             <p class="docs-hero__eyebrow">Component</p>
             <h1>Split buttons</h1>
-            <p class="docs-hero__lede">One button doing two jobs: the wide half performs the obvious action, the narrow half opens a menu of the less obvious ones. Open the menu below and watch the seam round off.</p>
+            <p class="docs-hero__lede">One button doing two jobs: the wide half performs the obvious action, the narrow half opens a menu of the less obvious ones.</p>
             <ul class="docs-hero__facts">
                 <li>4 styles</li>
                 <li>5 sizes · 32 to 136&thinsp;px</li>
@@ -77,8 +77,10 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="micl-splitbutton" role="group" aria-label="Edit" style="inset-block-start:250px;inset-inline-start:0">
-                    <button type="button" class="micl-button-outlined-s">Edit</button>
+                <div class="micl-splitbutton" role="group" aria-label="Edit" style="inset-block-start:210px;inset-inline-start:60px">
+                    <button type="button" class="micl-button-outlined-s">
+                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                    </button>
                     <button type="button" class="micl-button-outlined-s" popovertarget="hero-menu3" aria-label="More edit options">
                         <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
                     </button>
@@ -194,7 +196,6 @@
             <section class="docs-section" id="sizes">
                 <div class="docs-section__head">
                     <h2>Sizes</h2>
-                    <p class="docs-section__use">Five sizes, matching the Button. The seam between the halves grows with them: nearly square at the small end, generously rounded at the large end.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
@@ -264,7 +265,7 @@
             <section class="docs-section" id="menu">
                 <div class="docs-section__head">
                     <h2>The menu</h2>
-                    <p class="docs-section__use">The menu is an ordinary <a href="menu.html">Menu</a> placed inside the split button, opened by the native <code>popovertarget</code> attribute. While it is open the trailing half rounds into a pill, takes a state layer and turns its chevron over — all in CSS.</p>
+                    <p class="docs-section__use">The menu is a MICL Menu placed inside the split button, opened by the native <code>popovertarget</code> attribute.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">

@@ -35,6 +35,7 @@ $enabled: ':not(:disabled)';
     --_lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
     --_trail-pad: 13px;
     --_trail-icon: 22px;
+    --_nudge: 1px;
     --_inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
     --_inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
     --_inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
@@ -48,6 +49,7 @@ $enabled: ':not(:disabled)';
         --_lead-end: var(--md-comp-split-button-xsmall-leading-button-trailing-space, 10px);
         --_trail-pad: 13px;
         --_trail-icon: 22px;
+        --_nudge: 1px;
         --_inner: var(--md-comp-split-button-xsmall-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
         --_inner-hover: var(--md-comp-split-button-xsmall-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-small));
         --_inner-press: var(--md-comp-split-button-xsmall-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-small));
@@ -56,6 +58,7 @@ $enabled: ':not(:disabled)';
         --_lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
         --_trail-pad: 13px;
         --_trail-icon: 22px;
+        --_nudge: 1px;
         --_inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
         --_inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
         --_inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
@@ -64,6 +67,7 @@ $enabled: ':not(:disabled)';
         --_lead-end: var(--md-comp-split-button-medium-leading-button-trailing-space, 24px);
         --_trail-pad: 15px;
         --_trail-icon: 26px;
+        --_nudge: 2px;
         --_inner: var(--md-comp-split-button-medium-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
         --_inner-hover: var(--md-comp-split-button-medium-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
         --_inner-press: var(--md-comp-split-button-medium-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
@@ -72,6 +76,7 @@ $enabled: ':not(:disabled)';
         --_lead-end: var(--md-comp-split-button-large-leading-button-trailing-space, 48px);
         --_trail-pad: 29px;
         --_trail-icon: 38px;
+        --_nudge: 3px;
         --_inner: var(--md-comp-split-button-large-inner-corner-corner-size, var(--md-sys-shape-corner-small));
         --_inner-hover: var(--md-comp-split-button-large-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
         --_inner-press: var(--md-comp-split-button-large-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
@@ -80,6 +85,7 @@ $enabled: ':not(:disabled)';
         --_lead-end: var(--md-comp-split-button-xlarge-leading-button-trailing-space, 64px);
         --_trail-pad: 43px;
         --_trail-icon: 50px;
+        --_nudge: 6px;
         --_inner: var(--md-comp-split-button-xlarge-inner-corner-corner-size, var(--md-sys-shape-corner-medium));
         --_inner-hover: var(--md-comp-split-button-xlarge-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
         --_inner-press: var(--md-comp-split-button-xlarge-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
@@ -90,14 +96,14 @@ $enabled: ':not(:disabled)';
     }
 
     #{$leading} {
-        padding-inline: var(--micl-pad) var(--_lead-end);
+        padding-inline: calc(var(--micl-pad) + var(--_nudge)) calc(var(--_lead-end) - var(--_nudge));
         border-start-start-radius: var(--_outer);
         border-end-start-radius: var(--_outer);
         border-start-end-radius: var(--_inner);
         border-end-end-radius: var(--_inner);
     }
     #{$trailing} {
-        padding-inline: var(--_trail-pad);
+        padding-inline: calc(var(--_trail-pad) - var(--_nudge)) calc(var(--_trail-pad) + var(--_nudge));
         border-start-start-radius: var(--_inner);
         border-end-start-radius: var(--_inner);
         border-start-end-radius: var(--_outer);
@@ -124,6 +130,7 @@ $enabled: ':not(:disabled)';
 
     &:has(> [popover]:popover-open) {
         #{$trailing} {
+            --_nudge: 0px;
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
             border-start-start-radius: var(--_outer);

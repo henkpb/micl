@@ -74,7 +74,7 @@ Material Design defines split buttons in **four styles**: `filled`, `tonal`, `el
 The five sizes (`xs`, `s`, `m`, `l`, and `xl`) are dictated by the **leading half**, which is why both halves must carry the identical size suffix.
 
 ### The Open State
-While the menu is open, the trailing half **morphs into a pill**, applies a state layer at the pressed opacity, and rotates its chevron. All three visual changes follow directly from the menu's open state via CSS, requiring no script toggling.
+While the menu is open, the trailing half **morphs into a pill**, applies a state layer at the pressed opacity, rotates its chevron, and returns that chevron to the true centre. All four visual changes follow directly from the menu's open state via CSS, requiring no script toggling.
 
 The trailing half requires **no `aria-expanded` attribute**. The browser derives the expanded state natively from `popovertarget` and reports it to assistive technology. Do not add this attribute manually; a static `aria-expanded="false"` will not update and actively misleads users.
 
