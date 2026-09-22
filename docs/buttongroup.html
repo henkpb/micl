@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=call_end,check,close,content_copy,dark_mode,format_align_center,format_align_justify,format_align_left,format_align_right,format_bold,format_italic,format_underlined,front_hand,home,mic,mood,palette,videocam&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=call_end,check,close,content_copy,dark_mode,fast_forward,fast_rewind,format_align_center,format_align_justify,format_align_left,format_align_right,format_bold,format_italic,format_underlined,front_hand,home,mic,mood,next,palette,play_arrow,videocam&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
@@ -45,23 +45,26 @@
             </ul>
             <div class="docs-hero__collage" aria-label="A collage of live MICL button groups">
                 <div class="micl-buttongroup" role="group" aria-label="Call controls" style="inset-block-start:0;inset-inline-start:0">
-                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Camera">videocam</button>
-                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Microphone">mic</button>
-                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Reactions">mood</button>
-                    <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Raise hand">front_hand</button>
+                    <button type="button" class="micl-iconbutton-filled-s micl-iconbutton--wide material-symbols-outlined" aria-label="Camera">videocam</button>
+                    <button type="button" class="micl-iconbutton-filled-s micl-iconbutton--narrow material-symbols-outlined" aria-label="Microphone">mic</button>
+                    <button type="button" class="micl-iconbutton-filled-s material-symbols-outlined" aria-label="Reactions">mood</button>
+                    <button type="button" class="micl-iconbutton-filled-s micl-iconbutton--wide material-symbols-outlined" aria-label="Raise hand">front_hand</button>
                 </div>
-                <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment" style="inset-block-start:150px;inset-inline-start:0">
-                    <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align left">
+                <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment" style="inset-block-start:80px;inset-inline-start:32px">
+                    <label class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined" aria-label="Align left">
                         <input type="radio" name="hero-align" value="left" checked>format_align_left</label>
-                    <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align centre">
+                    <label class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined" aria-label="Align centre">
                         <input type="radio" name="hero-align" value="center">format_align_center</label>
-                    <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align right">
+                    <label class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined" aria-label="Align right">
                         <input type="radio" name="hero-align" value="right">format_align_right</label>
                 </fieldset>
-                <div class="micl-buttongroup" role="group" aria-label="Playback" style="inset-block-start:240px;inset-inline-start:0">
-                    <button type="button" class="micl-button-tonal-s">Previous</button>
-                    <button type="button" class="micl-button-tonal-s">Play</button>
-                    <button type="button" class="micl-button-tonal-s">Next</button>
+                <div class="micl-buttongroup" role="group" aria-label="Playback" style="inset-block-start:220px;inset-inline-start:0">
+                    <button type="button" class="micl-iconbutton-tonal-m material-symbols-outlined" aria-label="Fast rewind">fast_rewind</button>
+                    <button type="button" class="micl-button-tonal-m">
+                        <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">play_arrow</span>
+                        Play
+                    </button>
+                    <button type="button" class="micl-iconbutton-tonal-m material-symbols-outlined" aria-label="Fast forward">fast_forward</button>
                 </div>
             </div>
         </section>
@@ -75,17 +78,16 @@
             <section class="docs-section" id="standard">
                 <div class="docs-section__head">
                     <h2>Standard</h2>
-                    <p class="docs-section__use">Buttons of equal weight, spaced apart, each doing its own thing. Press one and it grows by 15&thinsp;% while its neighbours give back exactly that much, so the row never shifts.</p>
+                    <p class="docs-section__use">Buttons of equal weight, spaced apart, each doing its own thing.</p>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
                             <div class="micl-buttongroup" role="group" aria-label="Call controls">
-                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Camera">videocam</button>
-                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Microphone">mic</button>
-                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Reactions">mood</button>
-                                <button type="button" class="micl-iconbutton-tonal-l material-symbols-outlined" aria-label="Raise hand">front_hand</button>
-                                <button type="button" class="micl-iconbutton-filled-l material-symbols-outlined" aria-label="End call">call_end</button>
+                                <button type="button" class="micl-iconbutton-tonal-l micl-button--square material-symbols-outlined" aria-label="Camera">videocam</button>
+                                <button type="button" class="micl-iconbutton-tonal-l micl-button--square material-symbols-outlined" aria-label="Microphone">mic</button>
+                                <button type="button" class="micl-iconbutton-tonal-l micl-button--square material-symbols-outlined" aria-label="Raise hand">front_hand</button>
+                                <button type="button" class="micl-iconbutton-filled-l micl-button--square material-symbols-outlined" aria-label="End call">call_end</button>
                             </div>
                         </template>
                     </div>
@@ -102,12 +104,29 @@
                         </template>
                     </div>
                 </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Selection — every button toggles on its own, squaring off and filling its icon when selected</p>
+                    <div class="docs-example">
+                        <template>
+                            <fieldset class="micl-buttongroup" aria-label="Call controls">
+                                <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Camera">
+                                    <input type="checkbox" name="call-camera" checked>videocam</label>
+                                <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Microphone">
+                                    <input type="checkbox" name="call-mic" checked>mic</label>
+                                <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Reactions">
+                                    <input type="checkbox" name="call-reactions">mood</label>
+                                <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Raise hand">
+                                    <input type="checkbox" name="call-hand">front_hand</label>
+                            </fieldset>
+                        </template>
+                    </div>
+                </div>
             </section>
 
             <section class="docs-section" id="connected">
                 <div class="docs-section__head">
                     <h2>Connected</h2>
-                    <p class="docs-section__use">Buttons pushed together into one control, separated by 2&thinsp;px. The outer corners stay round, the inner ones square off, and the selected button morphs back into a full pill.</p>
+                    <p class="docs-section__use">Buttons pushed together into one control, separated by 2&thinsp;px.</p>
                 </div>
                 <div class="docs-stage">
                     <p style="margin-block-start:0">Single selection — a <code>&lt;label&gt;</code> around a radio button, no JavaScript</p>
@@ -154,16 +173,18 @@
                     <p style="margin-block-start:0">Toggle buttons — when there is no form to submit to</p>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-buttongroup micl-buttongroup--connected" role="group" aria-label="View">
-                                <button type="button" id="view-day" class="micl-button-tonal-s micl-button--toggle" commandfor="view-day" command="--micl-toggle" aria-pressed="true">Day</button>
-                                <button type="button" id="view-week" class="micl-button-tonal-s micl-button--toggle" commandfor="view-week" command="--micl-toggle" aria-pressed="false">Week</button>
-                                <button type="button" id="view-month" class="micl-button-tonal-s micl-button--toggle" commandfor="view-month" command="--micl-toggle" aria-pressed="false">Month</button>
+                            <div class="docs-sizes">
+                                <div class="micl-buttongroup micl-buttongroup--connected" role="group" aria-label="View">
+                                    <button type="button" id="view-day" class="micl-button-tonal-s micl-button--toggle" commandfor="view-day" command="--micl-toggle" aria-pressed="true">Day</button>
+                                    <button type="button" id="view-week" class="micl-button-tonal-s micl-button--toggle" commandfor="view-week" command="--micl-toggle" aria-pressed="false">Week</button>
+                                    <button type="button" id="view-month" class="micl-button-tonal-s micl-button--toggle" commandfor="view-month" command="--micl-toggle" aria-pressed="false">Month</button>
+                                </div>
                             </div>
                         </template>
                     </div>
                 </div>
                 <div class="docs-stage">
-                    <p style="margin-block-start:0">A disabled button keeps its place</p>
+                    <p style="margin-block-start:0">A disabled button keeps its place. Button group in a flex-container</p>
                     <div class="docs-example">
                         <template>
                             <div class="docs-sizes">

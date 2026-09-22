@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,delete,edit,error,favorite,globe,home,inbox,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,palette,person,schedule,share&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,delete,edit,error,favorite,globe,home,inbox,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,outbox,palette,person,print,schedule,share&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
@@ -102,6 +102,7 @@
                     <div style="display:flex;flex-direction:column">
                         <a href="accordion.html" class="md-sys-typescale-body-large">Accordions</a>
                         <a href="alert.html" class="md-sys-typescale-body-large">Alerts</a>
+                        <a href="appbar.html" class="md-sys-typescale-body-large">App bars</a>
                         <a href="bottomsheet.html" class="md-sys-typescale-body-large">Bottom sheets</a>
                         <a href="buttongroup.html" class="md-sys-typescale-body-large">Button groups</a>
                         <a href="button.html" class="md-sys-typescale-body-large">Buttons</a>
@@ -221,7 +222,21 @@
                             <button type="button" class="micl-chip-assist">Fourth assist chip</button>
                         </fieldset>
                         <div style="display:flex;justify-content:space-between;padding-block-start:16px">
-                            <button type="button" class="micl-button-filled-s">Action</button>
+                            <div class="micl-splitbutton" role="group" aria-label="Print">
+                                <button type="button" class="micl-button-tonal-s">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">print</span>
+                                    Print
+                                </button>
+                                <button type="button" class="micl-button-tonal-s" popovertarget="menu-print" aria-label="More print options">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">keyboard_arrow_down</span>
+                                </button>
+                                <nav id="menu-print" class="micl-menu" popover>
+                                    <ul class="micl-list">
+                                        <li class="micl-list-item-one" tabindex="0"><span class="micl-list-item__text"><span class="micl-list-item__headline">Print preview</span></span></li>
+                                        <li class="micl-list-item-one"><span class="micl-list-item__text"><span class="micl-list-item__headline">Page setup</span></span></li>
+                                    </ul>
+                                </nav>
+                            </div>
                             <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" popovertarget="mymenu" aria-label="Open Menu">more_vert</button>
                             <nav id="mymenu" class="micl-menu" popover>
                                 <ul class="micl-list">
@@ -399,8 +414,6 @@
                                 <button class="micl-button-text-s" value="dosave">Save</button>
                             </form>
                         </dialog>
-                        <button type="button" class="micl-button-elevated-s" command="show-modal" commandfor="mydialog">Open Dialog</button>
-
                         <dialog id="mysidesheet" class="micl-sidesheet" popover aria-labelledby="mysidesheettitle">
                             <div class="micl-sidesheet__headline">
                                 <h2 id="mysidesheettitle">Lorum ipsum</h2>
@@ -413,8 +426,6 @@
                                 <p>Mus phasellus nostra aliquet euismod faucibus per curae nec, montes rutrum cursus suscipit fames vivamus tincidunt, ullamcorper fermentum diam commodo arcu proin velit. Sociosqu mollis donec himenaeos eleifend ultricies id purus hac, dictum duis neque blandit ullamcorper condimentum sapien dis porttitor, mauris bibendum nostra vivamus faucibus orci metus. Facilisi bibendum himenaeos auctor tempor sed sociosqu nullam, ad class parturient odio enim ut tincidunt cras, in cum sapien inceptos consequat vitae.</p>
                             </div>
                         </dialog>
-                        <button type="button" class="micl-button-tonal-s" popovertarget="mysidesheet">Open Side Sheet</button>
-
                         <dialog id="mybottomsheet" class="micl-bottomsheet" popover data-snapheights="400">
                             <div class="micl-bottomsheet__headline">
                                 <button type="button" class="micl-bottomsheet__draghandle" aria-label="Drag handle"></button>
@@ -442,9 +453,13 @@
                                 </ul>
                             </div>
                         </dialog>
-                        <button type="button" class="micl-button-outlined-s" popovertarget="mybottomsheet">Open Bottom Sheet</button>
+                        <div class="micl-buttongroup" role="group" aria-label="Button actions">
+                            <button type="button" class="micl-button-elevated-m" command="show-modal" commandfor="mydialog">Dialog</button>
+                            <button type="button" class="micl-button-tonal-m" popovertarget="mysidesheet">Side Sheet</button>
+                            <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet">Bottom Sheet</button>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;margin-block:-24px -12px">
+                    <div style="display:flex;margin-block-start:24px">
                         <svg class="micl-shapes micl-shapes--arrow micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
                         <svg class="micl-shapes micl-shapes--soft-burst">
                             <defs>

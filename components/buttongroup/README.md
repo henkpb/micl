@@ -1,9 +1,7 @@
 # Button group
-A button group gathers a small set of related buttons into a single cohesive unit. Material Design 3 defines two variants: 
-* A **standard** group, where spaced buttons each trigger their own action. Pressing a button briefly widens it while its neighbors smoothly make room.
+A button group gathers a small set of related buttons into a single cohesive unit. The [Material Design 3 specification](https://m3.material.io/components/button-groups) defines two variants: 
+* A **standard** group, where spaced buttons each trigger their own action or toggle on and off. Pressing a button briefly widens it while its neighbors smoothly make room.
 * A **connected** group, where buttons are pushed together into a segmented control with a single selected state. 
-
-See the [Material Design 3 specification](https://m3.material.io/components/button-groups) for the design intent.
 
 The group acts purely as a container—its children are standard [Buttons](../button/README.md) and [Icon buttons](../iconbutton/README.md) utilizing all their respective styles and sizes.
 
@@ -38,7 +36,7 @@ Or import all MICL styles at once:
 ```
 
 ### JavaScript
-The button group itself carries no inherent behavior. JavaScript is only required if you are using the **toggle button** form of the connected group (described below). Importing the module initializes this logic automatically:
+The button group itself carries no inherent behavior. JavaScript is only required if you are using the `aria-pressed` **toggle button** form in either variant (described below). Importing the module initializes this logic automatically:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
@@ -50,7 +48,7 @@ A live example of the [Button group component](https://henkpb.github.io/micl/but
 ## Variants
 
 ### Standard
-This is the default variant. Buttons keep their own shapes, sit a fixed distance apart, and act independently (there is no shared selected state).
+This is the default variant. Buttons keep their own shapes, sit a fixed distance apart, and act independently. The group holds no shared selection of its own, but each button may be a toggle in its own right (see [Selection](#selection) below).
 
 ```HTML
 <div class="micl-buttongroup" role="group" aria-label="Call controls">
@@ -60,10 +58,41 @@ This is the default variant. Buttons keep their own shapes, sit a fixed distance
 </div>
 ```
 
-**Motion:** Pressing a button dynamically **widens it by 15%** of its height. Its neighbors simultaneously give back exactly as much space as the pressed button takes, ensuring the group's total width never changes. A button on either end takes space from its single neighbor, while a button in the middle takes half from each. This effect is capped by the neighbors' own padding. Set `--md-comp-button-group-standard-expanded-ratio` to `0` to disable this effect.
+Pressing a button dynamically **widens it by 15%** of its height. Its neighbors simultaneously give back exactly as much space as the pressed button takes, ensuring the group's total width never changes. A button on either end takes space from its single neighbor, while a button in the middle takes half from each. This effect is capped by the neighbors' own padding. Set `--md-comp-button-group-standard-expanded-ratio` to `0` to disable this effect.
+
+#### Selection
+Buttons in a standard group can be selected. Add the `micl-button--toggle` class to a child and you are done; the group contributes no styling of its own, and the widening effect keeps working on press.
+
+Each button carries its own on/off state, so the `<label>`-and-checkbox form is the natural fit:
+
+```HTML
+<fieldset class="micl-buttongroup">
+  <legend>Call controls</legend>
+  <label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Camera">
+    <input type="checkbox" name="camera" checked>
+    videocam
+  </label>
+  <label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Microphone">
+    <input type="checkbox" name="microphone" checked>
+    mic
+  </label>
+  <label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Raise hand">
+    <input type="checkbox" name="hand">
+    front_hand
+  </label>
+</fieldset>
+```
+
+The `aria-pressed` **toggle button** form works here as well and behaves identically—it simply needs JavaScript. Both forms are described in detail under [Connected](#connected) below.
+
+A round button squares off when selected, while a button with the `micl-button--square` class becomes round. For visual consistency, maintain a single morphing direction across the entire group. All unselected buttons should share the same base size and shape, reserving the alternate shape strictly to indicate selection.
+
+Radio buttons are possible too, but a standard group spaces its buttons apart and gives no visual hint that the options are mutually exclusive. For a one-of-N control, use a **connected** group instead.
 
 ### Connected
 To create a connected group, add the `micl-buttongroup--connected` class. The buttons are separated by a 2px hairline, the outer corners of the group stay fully round, and the inner corners square off.
+
+Unlike a standard group, a connected group acts as a fluid flex container that spans the full width of its parent surface, distributing extra space equally among its buttons. Set `--md-comp-button-group-connected-maximum-width` to stop it growing too wide in large windows; the group still shrinks below that cap when the surface is narrower. Dropping a connected group into a flex or grid container that sizes its items by content makes it hug its buttons instead.
 
 Connected groups do not use the widening effect; instead, pressing a button tightens its inner corners further, and the **selected button morphs back into a full pill**.
 
@@ -117,6 +146,19 @@ In this toggle format, each button acts independently. If you need strict single
 
 **Note on Text Buttons:** The Material Design `text` button style has no defined selected state and should not be used inside a connected group.
 
+## Adaptive design
+A button group moves through layouts **as a single line** and never wraps onto a second one. To keep it from pushing past the surface it sits on, the group is capped at the width of its container and its buttons give up space in a fixed order.
+
+**What yields, and in what order.** Buttons surrender their inline padding first. The text label itself is never truncated, meaning the label's width acts as the strict min-width for the button:
+
+* **Icon buttons** shrink from their default width down to the `narrow` width for their size, which is the same reduced padding that the `micl-iconbutton--narrow` class applies. The icon is never clipped or scaled.
+* **Buttons with a label** (`m`, `l` and `xl`) give up their inline padding down to zero, leaving the label and its icon gap.
+* **`xs` and `s` buttons with a label keep their padding.**
+
+Once every button has given up all it can, the group is still clamped to its container and the buttons overflow rather than wrap. Reach for a smaller button size, the `micl-iconbutton--narrow` class, or fewer buttons at that breakpoint.
+
+The press-widening effect is unaffected: a pressed button still takes 15% of its height from its neighbors, and the group's total width still never changes.
+
 ## Accessibility
 * A `<div class="micl-buttongroup">` requires `role="group"` and an `aria-label`. A `<fieldset class="micl-buttongroup">` is inherently a group and only needs a label (either an `aria-label` or a nested `<legend>`).
 * Radio buttons sharing a `name` attribute form **one tab stop**, and arrow keys move the selection within the group natively. This is the correct browser behavior for a single-select segmented control.
@@ -143,11 +185,12 @@ The button group can be themed with CSS custom properties following the Material
 | `--md-comp-button-group-connected-small-between-space` | Space between the buttons | `2px` |
 | `--md-comp-button-group-connected-inner-corner-corner-size` | Radius of the corners facing a neighbor | The button's pressed corner radius |
 | `--md-comp-button-group-connected-pressed-inner-corner-corner-size` | The inner radius while the button is pressed | Half of the above |
+| `--md-comp-button-group-connected-maximum-width` | Width the group stops growing at on wide surfaces | `100%` |
 
 ### Motion
 The widening effect and the corner morph both run on the standard Button and Icon button motion properties (`--md-comp-button-motion-duration` / `--md-comp-button-motion-effects` and their `--md-comp-icon-button-*` counterparts). This ensures the group container animates in perfect sync with the buttons it contains.
 
 ## Compatibility
-The Button group relies on the CSS `:has()` pseudo-class to read the size of its children and locate the neighbors of a pressed button. This is supported in Chrome 105, Safari 15.4, Firefox 121, and later. In older browsers, the buttons will still render correctly and remain functional, but they will fall back to the small (`s`) spacing and will neither widen nor compress on press.
+The Button group relies on the CSS [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) pseudo-class to read the size of its children and locate the neighbors of a pressed button. In browsers that do not support this, the buttons will still render correctly and remain functional, but they will fall back to the small (`s`) spacing and will neither widen nor compress on press.
 
-The toggle-button format of the connected group additionally depends on the `command` and `commandfor` attributes (Chrome 135, Firefox 144, Safari 26.2). The radio and checkbox `<label>` formats have no such requirement and are supported universally.
+The toggle-button format of the connected group additionally depends on [Invoker commands](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) (`command` / `commandfor`). The radio and checkbox `<label>` formats have no such requirement and are supported universally.

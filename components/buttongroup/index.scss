@@ -20,6 +20,9 @@
 // SOFTWARE.
 
 $children: '[class*="micl-"]';
+$icons: '[class*="micl-iconbutton-"]';
+$labels: '[class*="micl-button-"]:not([class*="micl-iconbutton-"])';
+$compact: ':is([class*="-xs "], [class$="-xs"], [class*="-s "], [class$="-s"])';
 $enabled: ':not(:disabled, :has(> :disabled))';
 $selected: '.micl-button--toggle:is([aria-pressed="true"], :has(input:checked))';
 $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
@@ -30,10 +33,39 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
     box-sizing: border-box;
     display: flex;
     inline-size: fit-content;
+    min-inline-size: 0;
+    max-inline-size: 100%;
     column-gap: var(--_gap);
     margin: 0;
     padding: 0;
     border: none;
+    white-space: nowrap;
+
+    > #{$children} {
+        --_pad: var(--micl-pad);
+
+        flex-shrink: 1;
+    }
+    > #{$icons} {
+        min-inline-size: var(--_width-narrow);
+    }
+    > #{$labels} {
+        min-inline-size: min-content;
+        padding-inline: var(--_pad);
+    }
+    > #{$labels}:not(#{$compact}) {
+        min-inline-size: 0;
+        padding-inline: 0;
+
+        &::before,
+        &::after {
+            content: "";
+            flex-shrink: 1;
+            inline-size: calc(var(--_pad) - var(--micl-gap));
+            min-inline-size: 0;
+            transition: inline-size var(--_motion-duration) var(--_motion-effects);
+        }
+    }
 }
 
 #{$standard} {
@@ -58,13 +90,10 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
     > #{$children} {
         --_grow: calc(var(--micl-height) * var(--md-comp-button-group-standard-expanded-ratio, 0.15));
         --_expand: 0px;
+        --_pad: calc(var(--micl-pad) + var(--_expand));
     }
-    > [class*="micl-iconbutton-"] {
+    > #{$icons} {
         inline-size: calc(var(--micl-width) + var(--_expand) * 2);
-        min-inline-size: 0;
-    }
-    > #{$children}:not([class*="micl-iconbutton-"]) {
-        padding-inline: calc(var(--micl-pad) + var(--_expand));
     }
     > #{$children}#{$enabled} {
         &:active {
@@ -87,11 +116,15 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
 .micl-buttongroup--connected {
     --_gap: var(--md-comp-button-group-connected-small-between-space, 2px);
 
+    inline-size: auto;
+    max-inline-size: min(100%, var(--md-comp-button-group-connected-maximum-width, 100%));
+
     > #{$children} {
         --_outer: calc(var(--micl-height) / 2);
         --_inner: var(--md-comp-button-group-connected-inner-corner-corner-size, var(--_shape-pressed));
         --_inner-pressed: var(--md-comp-button-group-connected-pressed-inner-corner-corner-size, calc(var(--_shape-pressed) / 2));
 
+        flex-grow: 1;
         border-radius: var(--_inner);
     }
     > #{$children}:first-child {
