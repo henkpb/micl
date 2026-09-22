@@ -24,6 +24,9 @@
 @use '../../styles/statelayer';
 
 $iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutton-filled-"], [class*="micl-iconbutton-tonal-"], [class*="micl-iconbutton-outlined-"])';
+$disabled: ':is(:disabled, :has(> :disabled))';
+$enabled: ':not(:disabled, :has(> :disabled))';
+$focused: ':is(:focus-visible, :has(input:focus-visible))';
 $selected: '.micl-button--toggle:is([aria-pressed="true"], :has(input:checked))';
 $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked))';
 
@@ -98,16 +101,17 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
         background-size 0ms,
         --statelayer-opacity var(--_motion-duration) linear;
 
-    &:disabled {
+    &#{$disabled} {
         cursor: default;
     }
-    &:not(:disabled) {
+    &#{$enabled} {
         &:hover {
             --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%);
         }
-        &:focus-visible {
+        &#{$focused} {
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
+            z-index: 1;
             outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
             outline-offset: 2px;
         }
@@ -125,7 +129,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
         opacity: 0;
         cursor: inherit;
     }
-    &:hover:not(:disabled),
+    &:hover#{$enabled},
     &#{$selected} {
         font-variation-settings: 'FILL' 1;
     }
@@ -152,7 +156,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
             border-radius: var(--_shape-round);
         }
     }
-    &:not(:disabled):active {
+    &#{$enabled}:active {
         &,
         &.micl-button--square {
             border-radius: var(--_shape-pressed);
@@ -224,11 +228,11 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 
     color: var(--md-comp-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
 
-    &:disabled {
+    &#{$disabled} {
         background-color: transparent;
         color: var(--md-comp-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-icon-button-disabled-icon-opacity, 38%)));
     }
-    &:not(:disabled) {
+    &#{$enabled} {
         &#{$selected} {
             --statelayer-color: var(--md-sys-color-primary);
 
@@ -243,11 +247,11 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     background-color: var(--md-comp-filled-icon-button-container-color, var(--md-sys-color-primary));
     color: var(--md-comp-filled-icon-button-icon-color, var(--md-sys-color-on-primary));
 
-    &:disabled {
+    &#{$disabled} {
         background-color: var(--md-comp-filled-icon-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-icon-button-disabled-container-opacity, 10%)));
         color: var(--md-comp-filled-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-icon-button-disabled-icon-opacity, 38%)));
     }
-    &:not(:disabled) {
+    &#{$enabled} {
         &#{$unselected} {
             --statelayer-color: var(--md-sys-color-on-surface-variant);
 
@@ -263,11 +267,11 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     background-color: var(--md-comp-filled-tonal-icon-button-container-color, var(--md-sys-color-secondary-container));
     color: var(--md-comp-filled-tonal-icon-button-icon-color, var(--md-sys-color-on-secondary-container));
 
-    &:disabled {
+    &#{$disabled} {
         background-color: var(--md-comp-filled-tonal-icon-button-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-tonal-icon-button-disabled-container-opacity, 10%)));
         color: var(--md-comp-filled-tonal-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-filled-tonal-icon-button-disabled-icon-opacity, 38%)));
     }
-    &:not(:disabled) {
+    &#{$enabled} {
         &#{$selected} {
             --statelayer-color: var(--md-sys-color-on-secondary);
 
@@ -283,7 +287,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     background-color: transparent;
     color: var(--md-comp-outlined-icon-button-icon-color, var(--md-sys-color-on-surface-variant));
 
-    &:disabled {
+    &#{$disabled} {
         background-color: transparent;
         color: var(--md-comp-outlined-icon-button-disabled-icon-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-disabled-icon-opacity, 38%)));
 
@@ -292,7 +296,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
             background-color: var(--md-comp-outlined-icon-button-selected-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-icon-button-selected-disabled-container-opacity, 10%)));
         }
     }
-    &:not(:disabled) {
+    &#{$enabled} {
         &#{$selected} {
             --statelayer-color: var(--md-sys-color-inverse-on-surface);
 
