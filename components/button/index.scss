@@ -73,10 +73,11 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
     --micl-width: 40px;
     --micl-height: 40px;
     --micl-pad: 16px;
+    --micl-gap: 8px;
     --_shape-square: var(--md-sys-shape-corner-medium);
     --_shape-pressed: var(--md-sys-shape-corner-small);
 
-    column-gap: 8px;
+    column-gap: var(--micl-gap);
     padding-inline: var(--micl-pad);
 
     .micl-button__icon {
@@ -91,10 +92,11 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
     --micl-width: 56px;
     --micl-height: 56px;
     --micl-pad: 24px;
+    --micl-gap: 8px;
     --_shape-square: var(--md-sys-shape-corner-large);
     --_shape-pressed: var(--md-sys-shape-corner-medium);
 
-    column-gap: 8px;
+    column-gap: var(--micl-gap);
     padding-inline: var(--micl-pad);
 
     .micl-button__icon {
@@ -109,10 +111,11 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
     --micl-width: 96px;
     --micl-height: 96px;
     --micl-pad: 48px;
+    --micl-gap: 12px;
     --_shape-square: var(--md-sys-shape-corner-extra-large);
     --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    column-gap: 12px;
+    column-gap: var(--micl-gap);
     padding-inline: var(--micl-pad);
 
     .micl-button__icon {
@@ -127,10 +130,11 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
     --micl-width: 136px;
     --micl-height: 136px;
     --micl-pad: 64px;
+    --micl-gap: 16px;
     --_shape-square: var(--md-sys-shape-corner-extra-large);
     --_shape-pressed: var(--md-sys-shape-corner-large);
 
-    column-gap: 16px;
+    column-gap: var(--micl-gap);
     padding-inline: var(--micl-pad);
 
     .micl-button__icon {

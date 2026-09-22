@@ -145,11 +145,12 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     --micl-width: 32px;
     --micl-height: 32px;
     --micl-pad: 12px;
+    --micl-gap: 4px;
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
-    column-gap: 4px;
+    column-gap: var(--micl-gap);
     padding-inline: var(--micl-pad);
 
     .micl-button__icon {
