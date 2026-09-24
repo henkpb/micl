@@ -123,8 +123,7 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
 
         &[rows] {
             padding-block-start: 0;
-            border-block-start: 8px solid transparent;
-            overflow: hidden;
+            border-block-start: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2) solid transparent;
         }
         &:not([rows]) {
             field-sizing: content;
@@ -137,17 +136,18 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
         grid-area: textfield;
         align-content: center;
         height: var(--_height);
-        color: var(--md-sys-color-on-surface-variant);
         opacity: 0;
         z-index: 1;
         transition: opacity var(--_duration-reverse) linear;
     }
     &> .micl-textfield__prefix {
         width: var(--md-comp-text-field-prefix-space, 1em);
+        color: var(--md-comp-text-field-input-prefix-color, var(--md-sys-color-on-surface-variant));
         padding-inline-start: calc(var(--_input-space) + var(--_icon-leading));
     }
     &> .micl-textfield__suffix {
         width: var(--md-comp-text-field-suffix-space, 1em);
+        color: var(--md-comp-text-field-input-suffix-color, var(--md-sys-color-on-surface-variant));
         padding-inline-end: calc(var(--_input-space) + var(--_icon-trailing));
         margin-inline: auto 0;
     }
@@ -162,6 +162,9 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     }
     &> .micl-textfield__icon-trailing {
         margin-inline: auto var(--_icon-space);
+    }
+    &> :is(.micl-textfield__icon-leading, .micl-textfield__icon-trailing, .micl-textfield__prefix, .micl-textfield__suffix):not(a, button) {
+        pointer-events: none;
     }
 
     &:has(> .micl-textfield__prefix) {
@@ -210,11 +213,17 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     &:has(> :is(input, textarea)[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) > .micl-textfield__supporting-text {
         padding-inline-end: 64px;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+        --_duration: 0ms;
+        --_duration-reverse: 0ms;
+    }
 }
 
 .micl-textfield-filled {
     --_outline-color: var(--md-comp-filled-text-field-active-indicator-color, var(--md-sys-color-on-surface-variant));
     --_focus-outline-color: var(--md-comp-filled-text-field-focus-active-indicator-color, var(--md-sys-color-primary));
+    --_input-top: 18px;
 
     &> label {
         margin-inline: 12px 4px;
@@ -225,7 +234,7 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     &> #{$fields} {
         --statelayer-color: var(--md-sys-color-on-surface);
 
-        padding-block-start: 18px;
+        padding-block-start: var(--_input-top);
         padding-block-end: calc(3px - var(--_outline-width));
         border-block-end: var(--_outline-width) solid var(--_outline-color);
         border-end-start-radius: 0;
@@ -241,20 +250,32 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     }
     &> textarea {
         padding-block-start: 24px;
+
+        &[rows] {
+            border-block-start-width: 24px;
+            background-origin: border-box;
+        }
+    }
+    &:not(:has(> label)) {
+        --_input-top: 3px;
+
+        &> textarea {
+            padding-block-start: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+
+            &[rows] {
+                border-block-start-width: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+            }
+        }
     }
     &:has(> .micl-textfield__icon-leading) > label {
-        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading));
+        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 4px);
     }
     &#{$populated} {
         &> label {
             margin-block-start: 8px;
-            margin-inline-start: 12px;
         }
-        &:has(> .micl-textfield__icon-leading) > label {
-            margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 4px);
-        }
-        &> .micl-textfield__prefix,
-        &> .micl-textfield__suffix {
+        &:has(> label) > .micl-textfield__prefix,
+        &:has(> label) > .micl-textfield__suffix {
             height: 40px;
             margin-block-start: 16px;
         }
@@ -272,7 +293,10 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
         "textfield textfield textfield"
         "supporting supporting supporting"
         / 12px fit-content(calc(100% - 24px)) 1fr;
-    margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height) / 2);
+
+    &:where(:has(> label)) {
+        margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height) / 2);
+    }
 
     // The outline's top edge is drawn by these two pseudo-elements. The label sits in the
     // middle grid column, so the notch for a floating label opens by retracting ::before
@@ -300,7 +324,7 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
         grid-column: 2;
     }
     &:has(> .micl-textfield__icon-leading) > label {
-        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 12px);
+        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 16px);
     }
     &> #{$fields} {
         border-block-end: var(--_border) solid var(--_outline-color);
@@ -348,6 +372,9 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
         &> label {
             @include typography.body-small;
         }
+    }
+    &#{$populated},
+    &:not(:has(> label)) {
         &> .micl-textfield__prefix,
         &> .micl-textfield__suffix {
             opacity: 1;
@@ -365,7 +392,7 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     }
 }
 
-.micl-textfield--error:not(:has(> :disabled)) {
+#{$textfields}:has(> [aria-invalid=true]:not(:disabled)) {
     --_outline-color: var(--md-sys-color-error);
     --_caret-color: var(--md-sys-color-error);
     --_label-color: var(--md-sys-color-error);

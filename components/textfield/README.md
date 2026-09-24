@@ -32,7 +32,7 @@ This component requires JavaScript for interactive features like the **character
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
-This will initialize any Text field component, including those that will be added to the DOM later on.
+This initializes all Text field components, including those added to the DOM dynamically.
 
 The label floats above the field when the field has a value. Values entered by the user, autofilled by the browser or restored by a form reset are detected automatically. When you change the value from a script, dispatch an `input` event so that the text field can update itself:
 
@@ -51,29 +51,38 @@ The following example shows a text field with every available feature. You can i
 <div class="micl-textfield-filled">
   <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
   <label for="mytextfield">Label text</label>
-  <span class="micl-textfield__prefix" aria-label="US dollars">$</span>
-  <input type="text" id="mytextfield" maxlength="20" aria-describedby="mysupport">
-  <span class="micl-textfield__suffix" aria-label="kilograms">kg</span>
+  <span id="myprefix" class="micl-textfield__prefix">$</span>
+  <input type="text" id="mytextfield" maxlength="20" aria-describedby="myprefix mysuffix mysupport mycounter">
+  <span id="mysuffix" class="micl-textfield__suffix">kg</span>
   <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
   <span id="mysupport" class="micl-textfield__supporting-text">Supporting text</span>
-  <span class="micl-textfield__character-counter"></span>
+  <span id="mycounter" class="micl-textfield__character-counter"></span>
 </div>
 ```
 
-The `<input>` element can have the following types: `text`, `date`, `datetime-local`, `email`, `month`, `number`, `password`, `tel`, `time`, `url` and `week`.
+The `<input>` element can have the following types: `text`, `date`, `datetime-local`, `email`, `month`, `number`, `password`, `search`, `tel`, `time`, `url` and `week`. Some browsers add their own controls to certain types, such as a clear button in a `search` field.
 
-Adding the `disabled` boolean attribute to the `<input>` element causes the text field to be displayed in a disabled state.
+Icons, prefixes, and suffixes pass pointer events through to the <input> element, meaning clicks will seamlessly focus the text field. (This does not apply to interactive icons wrapped in `<button>` or `<a>` tags).
 
-Adding the `micl-textfield--error` class to the text field displays it in an error state.
+Adding the `disabled` boolean attribute to the `<input>` element renders the text field in its disabled state.
+
+To mark a text field as required, add the `required` attribute to the `<input>` element and an asterisk to the label text. Screen readers already announce the field as required because of the attribute, so hide the asterisk from them:
+
+```HTML
+<label for="amount">Amount<span aria-hidden="true">*</span></label>
+<input type="text" id="amount" required>
+```
+
+Adding the `aria-invalid="true"` attribute to the `<input>` element displays the text field in an error state. The same attribute tells assistive technologies that the value is invalid; see [Accessibility](#accessibility) for how to connect the error message. The [Form foundation](../../foundations/form/README.md) can set and remove the attribute for you, based on the browser's own validation.
 
 ### Leading Content
-The data-input element can be preceded by various elements:
+The `<input>` element can be preceded by various elements:
 
 - **Icon**: Use `micl-textfield__icon-leading` with a (Material Symbols) icon. When using a different icon set, the icon element must have `direction: ltr` (Material Symbols sets this itself) for the icons to keep their positions in a right-to-left context.
 
-- **Prefix**: A prefix (e.g., "$", "NOK") can be included to provide additional context. You can customize the spacing by overriding CSS variables on the text field element:
+- **Prefix**: A prefix (e.g., "$", "NOK") can be included to provide additional context. Like the suffix, it is shown while the label floats above the field, which is when the field has focus or a value; in a text field without a label, it is always shown. The input text starts after the space reserved for the prefix, which is `1em` wide by default. For a prefix longer than a single character, widen that space by overriding a CSS variable on the text field element:
   ```HTML
-  <div class="micl-textfield-filled" style="--md-comp-text-field-prefix-space:20px">
+  <div class="micl-textfield-filled" style="--md-comp-text-field-prefix-space:2.5em">
     ...
     <span class="micl-textfield__prefix">USD</span>
     ...
@@ -81,11 +90,11 @@ The data-input element can be preceded by various elements:
   ```
 
 ### Trailing Content
-The data-input element may be followed by a trailing text or other element:
+The `<input>` element may be followed by various elements:
 
 - **Icon**: Use `micl-textfield__icon-trailing` with a (Material Symbols) icon.
 
-- **Suffix**: A suffix (e.g., "kg", "@gmail.com") can be included to provide additional context. You can customize the spacing by overriding CSS variables on the text field element:
+- **Suffix**: A suffix (e.g., "kg", "@gmail.com") can be included to provide additional context. As with the prefix, the space reserved for the suffix is `1em` wide by default, and can be widened by overriding a CSS variable on the text field element:
   ```HTML
   <div class="micl-textfield-outlined" style="--md-comp-text-field-suffix-space:10em">
     ...
@@ -99,6 +108,24 @@ Use an element with the `micl-textfield__supporting-text` class to add extra inf
 
 If the `<input>` element includes the `maxlength` attribute, the **character counter** will display automatically in the element with the `micl-textfield__character-counter` class.
 
+### Accessibility
+Screen readers announce the `<label>` as the name of the field. A text field without a `<label>` needs an `aria-label` attribute on the `<input>` element instead, and a `placeholder` or the surrounding content should make its purpose visible. Supplementary visual elements around the field are only announced if you explicitly connect them to the `<input>` element: give each element an `id` and list those ids in the `aria-describedby` attribute of the `<input>` element. They are read in the order listed, when the field receives focus.
+
+- **Supporting text**: Always connect it. A supporting text with the `micl-textfield__supporting-text--focus` class is announced as well, even while it is hidden.
+- **Prefix and suffix**: Connect them when they carry information that is not already in the label or the supporting text. Do not use `aria-label` on the prefix or suffix element; a `<span>` may not have an accessible name, and screen readers ignore it. A screen reader reads the text as written, so if an abbreviation or symbol might not be pronounced well, add the full wording to the label or the supporting text instead.
+- **Character counter**: Connect it to let users know how much text is allowed. The counter is announced when the field receives focus, not on every keystroke.
+- **Motion preferences**: All motion is automatically disabled if the user has requested reduced motion at the OS level. The label moves, and the prefix and suffix appear, instantly.
+- **Error state**: `aria-invalid="true"` on the `<input>` element both shows the error styling and announces the field as invalid. Put the error message in the connected supporting text:
+
+  ```HTML
+  <div class="micl-textfield-outlined">
+    <label for="weight">Weight</label>
+    <input type="number" id="weight" value="17800" aria-invalid="true" aria-describedby="weightunit weighterror">
+    <span id="weightunit" class="micl-textfield__suffix">kg</span>
+    <span id="weighterror" class="micl-textfield__supporting-text">Too heavy</span>
+  </div>
+  ```
+
 ### Multi-line Text Field
 Replace the `<input>` element with the `<textarea>` element to create a multi-line text field:
 
@@ -109,7 +136,7 @@ Replace the `<input>` element with the `<textarea>` element to create a multi-li
 </div>
 ```
 
-Add a value to the `rows` attribute of the `<textarea>` element to create a text field of fixed height:
+Add a value to the `rows` attribute of the `<textarea>` element to create a text field of fixed height. Text that does not fit scrolls vertically:
 
 ```HTML
 <div class="micl-textfield-outlined">
@@ -123,7 +150,7 @@ Each text field can be themed with CSS custom properties that follow the Materia
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-text-field-container-height` | The height of the text field (excluding supporting text) | `56px` |
+| `--md-comp-text-field-container-height` | The height of the text field's container, excluding the supporting text. An outlined text field with a label also reserves space above the container for the floating label (10px by default) | `56px` |
 | `--md-comp-text-field-icon-size` | The size of the leading and trailing icons | `24px` |
 | `--md-comp-text-field-icon-space` | The spacing between an icon and the text field's edge | `12px` |
 | `--md-comp-text-field-input-space` | The inline padding around the input text | `16px` |
@@ -131,6 +158,8 @@ Each text field can be themed with CSS custom properties that follow the Materia
 | `--md-comp-text-field-suffix-space` | The width reserved for the suffix | `1em` |
 | `--md-comp-text-field-input-color` | The text color of the input text | `--md-sys-color-on-surface` |
 | `--md-comp-text-field-input-placeholder-color` | The text color of the placeholder | `--md-sys-color-on-surface-variant` |
+| `--md-comp-text-field-input-prefix-color` | The text color of the prefix | `--md-sys-color-on-surface-variant` |
+| `--md-comp-text-field-input-suffix-color` | The text color of the suffix | `--md-sys-color-on-surface-variant` |
 | `--md-comp-text-field-caret-color` | The color of the text cursor | `--md-sys-color-primary` |
 | `--md-comp-text-field-label-color` | The text color of the label | `--md-sys-color-on-surface-variant` |
 | `--md-comp-text-field-focus-label-color` | The text color of the label when focused | `--md-sys-color-primary` |
@@ -141,6 +170,9 @@ Each text field can be themed with CSS custom properties that follow the Materia
 | `--md-comp-filled-text-field-focus-active-indicator-color` | The bottom line color of a filled text field when focused | `--md-sys-color-primary` |
 | `--md-comp-outlined-text-field-outline-color` | The outline color of an outlined text field | `--md-sys-color-outline` |
 | `--md-comp-outlined-text-field-focus-outline-color` | The outline color of an outlined text field when focused | `--md-sys-color-primary` |
+| `--md-comp-text-field-motion-effects` | The easing function for the floating label's movement | `--md-sys-motion-expressive-slow-effects` |
+| `--md-comp-text-field-motion-duration` | The duration of the floating label's movement and of the state-layer fade. Ignored when the user prefers reduced motion | `--md-sys-motion-expressive-slow-effects-duration` |
+| `--md-comp-text-field-motion-duration-reverse` | The duration of the prefix and suffix fading in and out. Ignored when the user prefers reduced motion | `--md-sys-motion-expressive-default-effects-duration` |
 
 **Example: Compact text fields with a brand-colored focus indicator**
 

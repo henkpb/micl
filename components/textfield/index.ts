@@ -35,7 +35,7 @@ const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaEl
     if (
         !input.parentElement
         || input instanceof HTMLSelectElement
-        || !input.maxLength
+        || input.maxLength < 0
     ) {
         return;
     }
@@ -156,7 +156,11 @@ const textfield = {
             });
         }
 
-        if (input instanceof HTMLSelectElement && !input.multiple) {
+        if (
+            input instanceof HTMLSelectElement
+            && !input.multiple
+            && CSS.supports('appearance', 'base-select')
+        ) {
             const setPickerOrigin = (): void =>
             {
                 const rect       = input.getBoundingClientRect();

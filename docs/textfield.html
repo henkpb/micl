@@ -92,10 +92,10 @@
                 </div>
                 <div class="docs-example">
                     <template>
-                        <div class="micl-textfield-outlined micl-textfield--error">
+                        <div class="micl-textfield-outlined">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield6">Label text</label>
-                            <input type="text" id="mytextfield6">
+                            <input type="text" id="mytextfield6" aria-invalid="true">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
                         </div>
                     </template>
@@ -106,7 +106,7 @@
                 <div class="docs-example">
                     <template>
                         <div class="micl-textfield-outlined">
-                            <input type="text" name="myname">
+                            <input type="text" name="myname" aria-label="Name" placeholder="Name">
                         </div>
                     </template>
                 </div>
@@ -115,17 +115,17 @@
                         <div class="micl-textfield-outlined">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield12">Text field</label>
-                            <input type="text" id="mytextfield12" value="Outlined">
-                            <span class="micl-textfield__supporting-text">Supporting text</span>
+                            <input type="text" id="mytextfield12" value="Outlined" aria-describedby="mytextfield12-support">
+                            <span id="mytextfield12-support" class="micl-textfield__supporting-text">Supporting text</span>
                         </div>
                     </template>
                 </div>
                 <div class="docs-example">
                     <template>
                         <div class="micl-textfield-outlined">
-                            <span class="micl-textfield__prefix" aria-label="Euro">€</span>
+                            <span id="mytextfield13-prefix" class="micl-textfield__prefix">€</span>
                             <label for="mytextfield13">Amount</label>
-                            <input type="text" id="mytextfield13" value="299.89">
+                            <input type="text" id="mytextfield13" value="299.89" aria-describedby="mytextfield13-prefix">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">credit_card</span>
                         </div>
                     </template>
@@ -135,9 +135,9 @@
                         <div class="micl-textfield-outlined">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield14">City</label>
-                            <input type="text" id="mytextfield14" disabled value="Paris">
+                            <input type="text" id="mytextfield14" disabled value="Paris" aria-describedby="mytextfield14-support">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
-                            <span class="micl-textfield__supporting-text">This input field is disabled</span>
+                            <span id="mytextfield14-support" class="micl-textfield__supporting-text">This input field is disabled</span>
                         </div>
                     </template>
                 </div>
@@ -151,22 +151,22 @@
                 </div>
                 <div class="docs-example">
                     <template>
-                        <div class="micl-textfield-outlined micl-textfield--error">
+                        <div class="micl-textfield-outlined">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield16">Label text</label>
-                            <input type="text" id="mytextfield16">
+                            <input type="text" id="mytextfield16" aria-invalid="true">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
                         </div>
                     </template>
                 </div>
                 <div class="docs-example">
                     <template>
-                        <div class="micl-textfield-outlined micl-textfield--error">
+                        <div class="micl-textfield-outlined">
                             <label for="mytextfield17">Weight</label>
-                            <input type="number" id="mytextfield17" value="17800">
-                            <span class="micl-textfield__suffix" aria-label="Kilograms">kg</span>
+                            <input type="number" id="mytextfield17" value="17800" aria-invalid="true" aria-describedby="mytextfield17-suffix mytextfield17-support">
+                            <span id="mytextfield17-suffix" class="micl-textfield__suffix">kg</span>
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1" aria-hidden="true">error</span>
-                            <span class="micl-textfield__supporting-text">Too heavy</span>
+                            <span id="mytextfield17-support" class="micl-textfield__supporting-text">Too heavy</span>
                         </div>
                     </template>
                 </div>
@@ -185,21 +185,21 @@
                     <template>
                         <div class="micl-textfield-filled" style="--md-comp-text-field-prefix-space:2.5em">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
-                            <span class="micl-textfield__prefix" aria-label="Norwegian kroner">NOK</span>
-                            <label for="mytextfield22">Amount*</label>
-                            <input type="text" id="mytextfield22" required value="">
-                            <span class="micl-textfield__supporting-text">In Norwegian kroner</span>
+                            <span class="micl-textfield__prefix">NOK</span>
+                            <label for="mytextfield22">Amount<span aria-hidden="true">*</span></label>
+                            <input type="text" id="mytextfield22" required value="" aria-describedby="mytextfield22-support">
+                            <span id="mytextfield22-support" class="micl-textfield__supporting-text">In Norwegian kroner</span>
                         </div>
                     </template>
                 </div>
                 <div class="docs-example">
                     <template>
                         <div class="micl-textfield-filled">
-                            <span class="micl-textfield__character-counter"></span>
-                            <span class="micl-textfield__supporting-text micl-textfield__supporting-text--focus">Enter at least twelve characters</span>
-                            <span class="micl-textfield__prefix" aria-label="Euro">€</span>
+                            <span id="mytextfield23-counter" class="micl-textfield__character-counter"></span>
+                            <span id="mytextfield23-support" class="micl-textfield__supporting-text micl-textfield__supporting-text--focus">Enter at least twelve characters</span>
+                            <span id="mytextfield23-prefix" class="micl-textfield__prefix">€</span>
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
-                            <input type="text" id="mytextfield23" maxlength="24">
+                            <input type="text" id="mytextfield23" maxlength="24" aria-describedby="mytextfield23-prefix mytextfield23-support mytextfield23-counter">
                             <label for="mytextfield23">Label text</label>
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                         </div>
@@ -210,9 +210,9 @@
                         <div class="micl-textfield-filled">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield24">City</label>
-                            <input type="text" id="mytextfield24" disabled value="Paris">
+                            <input type="text" id="mytextfield24" disabled value="Paris" aria-describedby="mytextfield24-support">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" aria-hidden="true">cancel</span>
-                            <span class="micl-textfield__supporting-text">This input field is disabled</span>
+                            <span id="mytextfield24-support" class="micl-textfield__supporting-text">This input field is disabled</span>
                         </div>
                     </template>
                 </div>
@@ -220,30 +220,30 @@
                     <template>
                         <div class="micl-textfield-filled">
                             <label for="mytextfield25">Multiline text field</label>
-                            <textarea id="mytextfield25" maxlength="100">Lorem ipsum dolor sit amet consectetur adipiscing elit</textarea>
-                            <span class="micl-textfield__character-counter"></span>
+                            <textarea id="mytextfield25" maxlength="100" aria-describedby="mytextfield25-counter">Lorem ipsum dolor sit amet consectetur adipiscing elit</textarea>
+                            <span id="mytextfield25-counter" class="micl-textfield__character-counter"></span>
                         </div>
                     </template>
                 </div>
                 <div class="docs-example">
                     <template>
-                        <div class="micl-textfield-filled micl-textfield--error">
+                        <div class="micl-textfield-filled">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield26">Label text</label>
-                            <input type="text" id="mytextfield26">
+                            <input type="text" id="mytextfield26" aria-invalid="true">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1" aria-hidden="true">error</span>
                         </div>
                     </template>
                 </div>
                 <div class="docs-example">
                     <template>
-                        <div class="micl-textfield-filled micl-textfield--error">
+                        <div class="micl-textfield-filled">
                             <span class="micl-textfield__icon-leading material-symbols-outlined" aria-hidden="true">search</span>
                             <label for="mytextfield27">City</label>
-                            <input type="text" id="mytextfield27" maxlength="20" value="Amsterdaaam">
+                            <input type="text" id="mytextfield27" maxlength="20" value="Amsterdaaam" aria-invalid="true" aria-describedby="mytextfield27-support mytextfield27-counter">
                             <span class="micl-textfield__icon-trailing material-symbols-outlined" style="font-variation-settings:'FILL' 1" aria-hidden="true">error</span>
-                            <span class="micl-textfield__supporting-text">Incorrect spelling</span>
-                            <span class="micl-textfield__character-counter"></span>
+                            <span id="mytextfield27-support" class="micl-textfield__supporting-text">Incorrect spelling</span>
+                            <span id="mytextfield27-counter" class="micl-textfield__character-counter"></span>
                         </div>
                     </template>
                 </div>
