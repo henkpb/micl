@@ -7,6 +7,7 @@ interface ComponentEventHandlers {
 export interface ComponentHandler<T extends HTMLElement> extends ComponentEventHandlers {
     initialize?: (element: T) => void;
     cleanup?: (element: T) => void;
+    reset?: (element: T) => void;
 }
 export declare const register: <T extends HTMLElement, C extends ComponentHandler<T>>(componentSelector: string, component: C, type: new () => T) => C;
 declare const _default: {
