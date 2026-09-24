@@ -44,9 +44,11 @@ Note that neither function is wired to any event. Nothing is validated until you
 ## Error presentation
 Validation messages come from the browser, so they are already localised. This foundation controls how and where those messages are displayed.
 
-**Checkboxes.** An `<input type="checkbox">` with the `micl-checkbox` class gets the `micl-checkbox--error` class while it has a validation message, and loses it again once it is valid. The browser's bubble is still used for the message itself.
+The error state of a control is marked with `aria-invalid="true"`, which both switches the component to its error styling and tells assistive technologies that the value is invalid. Once the foundation validates a control, it owns this attribute: a valid result removes it, including an `aria-invalid` that you set yourself.
 
-**Text fields.** An input inside a `micl-textfield-outlined` or `micl-textfield-filled` wrapper gets the `micl-textfield--error` class on that wrapper. If the wrapper also contains a `micl-textfield__supporting-text` element, the validation message replaces the supporting text — the original wording is stored in `data-micltext` and restored when the field becomes valid — and the browser's bubble is suppressed, because the message is already visible in place.
+**Checkboxes.** An `<input type="checkbox">` with the `micl-checkbox` class gets `aria-invalid="true"` while it has a validation message, and loses it again once it is valid. The browser's bubble is still used for the message itself.
+
+**Text fields.** An input inside a `micl-textfield-outlined` or `micl-textfield-filled` wrapper gets `aria-invalid="true"` while it has a validation message. If the wrapper also contains a `micl-textfield__supporting-text` element, the validation message replaces the supporting text — the original wording is stored in `data-micltext` and restored when the field becomes valid — and the browser's bubble is suppressed, because the message is already visible in place.
 
 **Everything else** is left to the browser's own reporting.
 

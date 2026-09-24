@@ -372,9 +372,6 @@ const setFormatHint = (input: Element): void =>
 
 const setFieldState = (input: HTMLInputElement, invalid: boolean): void =>
 {
-    input.closest<HTMLElement>('[class*="micl-textfield"]')
-        ?.classList.toggle('micl-textfield--error', invalid);
-
     if (invalid) {
         input.setAttribute('aria-invalid', 'true');
         input.dataset.miclinvalid = '1';

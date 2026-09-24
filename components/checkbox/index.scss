@@ -143,7 +143,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         border-inline-start-width: 0px;
         transform: rotate(0deg);
     }
-    &.micl-checkbox--error:not(:disabled) {
+    &[aria-invalid=true]:not(:disabled) {
         --statelayer-color: var(--md-sys-color-error);
 
         &::after {

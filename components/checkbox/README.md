@@ -40,7 +40,7 @@ A checkbox can be disabled by adding the `disabled` attribute to the `<input>` e
 
 The Checkbox component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute is set on the element itself or inherited from an ancestor.
 
-Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification. You only need to set the class yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
+Adding the `aria-invalid="true"` attribute to the `<input>` element will create an error-checkbox. The same attribute tells assistive technologies that the checkbox is in error. You only need to set it yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
 
 To vertically align a checkbox with its label, wrap both in an element with styling similar to the following:
 
@@ -106,7 +106,7 @@ Disabled checkboxes take no part in this. The parent neither changes them nor co
 A single checkbox is made mandatory with the standard `required` attribute. On top of that, the form foundation adds **count validation** for a set of related checkboxes, so you can express rules such as "pick at least two" or "pick exactly three".
 
 ### Error state
-Whenever the form foundation validates a checkbox, it adds the `micl-checkbox--error` class to any `<input type="checkbox">` carrying the `micl-checkbox` class that has a validation message, and removes the class again once the checkbox becomes valid. If you are using the form foundation, there is no need to toggle this class manually.
+Whenever the form foundation validates a checkbox, it sets `aria-invalid="true"` on any `<input type="checkbox">` carrying the `micl-checkbox` class that has a validation message, and removes the attribute again once the checkbox becomes valid. If you are using the form foundation, there is no need to set this attribute manually.
 
 ### Counting checkboxes in a fieldset
 Wrap the related checkboxes in a `<fieldset>` and describe the rule with data attributes:
