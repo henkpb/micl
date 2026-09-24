@@ -85,5 +85,6 @@ export default register(sliderSelector, {
         if (event.target instanceof HTMLInputElement && event.target.matches(sliderSelector)) {
             setValue(event.target);
         }
-    }
+    },
+    reset: setValue
 }, HTMLInputElement);
