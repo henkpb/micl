@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL App bars">
+    <title>MICL App bars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=arrow_back,check,close,content_copy,dark_mode,edit,favorite,home,menu,palette,search,settings,share&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-example {
+            gap: 20px;
+        }
+        .docs-example > .micl-appbar,
+        .docs-hero__collage > .micl-appbar {
+            border-radius: 20px;
+            outline: 1px solid var(--md-sys-color-outline-variant);
+            outline-offset: -1px;
+        }
+        .docs-hero__collage > .micl-appbar {
+            inline-size: 100%;
+            background-color: var(--md-sys-color-surface);
+            outline-color: rgb(from var(--md-sys-color-on-primary-container) r g b/0.2);
+        }
+        .docs-embed {
+            display: block;
+            inline-size: 100%;
+            block-size: 440px;
+            border: none;
+            border-radius: 0px;
+            background-color: var(--md-sys-color-surface);
+        }
+        .docs-table {
+            inline-size: 100%;
+            border-collapse: collapse;
+            font-size: var(--md-sys-typescale-body-medium-size);
+        }
+        .docs-table :is(th, td) {
+            padding: 12px 16px 12px 0;
+            border-block-end: 1px solid var(--md-sys-color-outline-variant);
+            text-align: start;
+            vertical-align: baseline;
+        }
+        .docs-table th {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 500;
+        }
+        .docs-table td {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-table code {
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>App bars</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>App bars</h1>
+            <p class="docs-hero__lede">The top container for a page: its title, its primary actions and the way back out.</p>
+            <ul class="docs-hero__facts">
+                <li>3 sizes</li>
+                <li>Sticky by default</li>
+                <li>No JavaScript</li>
+            </ul>
+            <div class="docs-hero__collage" aria-label="A collage of live MICL app bars">
+                <header class="micl-appbar" style="inset-block-start:0;inset-inline-start:0">
+                    <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Open navigation">menu</button>
+                    <div class="micl-appbar__headline">
+                        <span class="micl-heading">Inbox</span>
+                    </div>
+                    <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Search">search</button>
+                </header>
+                <header class="micl-appbar micl-appbar--medium" style="inset-block-start:96px;inset-inline-start:0">
+                    <div class="micl-appbar__headline">
+                        <span class="micl-heading">Settings</span>
+                        <p class="micl-appbar__subtitle">Theme, language and clock</p>
+                    </div>
+                    <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Edit">edit</button>
+                </header>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#sizes">Sizes</a>
+            <a href="#content">Leading &amp; trailing</a>
+            <a href="#alignment">Alignment</a>
+            <a href="#sticky">Sticky &amp; on scroll</a>
+            <a href="#theming">Theming</a>
+        </nav>
+
+        <main class="docs-content">
+            <section class="docs-section" id="sizes">
+                <div class="docs-section__head">
+                    <h2>Sizes</h2>
+                    <p class="docs-section__use">Three sizes, all built from the same markup — only the modifier class changes.</p>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">The bars on this page title themselves with <code>micl-heading</code> so that the page keeps a single heading outline. A real page puts an <code>h1</code> there instead.</p>
+                    <div class="docs-example">
+                        <template>
+                            <header class="micl-appbar">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Small</span>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                    <div class="docs-example" style="margin-block-start:20px">
+                        <template>
+                            <header class="micl-appbar micl-appbar--medium">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Medium</span>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                    <div class="docs-example" style="margin-block-start:20px">
+                        <template>
+                            <header class="micl-appbar micl-appbar--large">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Large</span>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">A <code>micl-appbar__subtitle</code> sits under the headline.</p>
+                    <div class="docs-example">
+                        <template>
+                            <header class="micl-appbar">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Small</span>
+                                    <p class="micl-appbar__subtitle">The subtitle</p>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                    <div class="docs-example" style="margin-block-start:20px">
+                        <template>
+                            <header class="micl-appbar micl-appbar--medium">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Medium</span>
+                                    <p class="micl-appbar__subtitle">A medium App Bar</p>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                    <div class="docs-example" style="margin-block-start:20px">
+                        <template>
+                            <header class="micl-appbar micl-appbar--large">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Large</span>
+                                    <p class="micl-appbar__subtitle">Growin to a large size</p>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="content">
+                <div class="docs-section__head">
+                    <h2>Leading &amp; trailing</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <header class="micl-appbar">
+                                <a href="#content" class="micl-appbar__leading-icon micl-iconbutton-standard-s" aria-label="Back">
+                                    <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                                </a>
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Leading icon</span>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                    <div class="docs-example" style="margin-block-start:20px">
+                        <template>
+                            <header class="micl-appbar">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">One action</span>
+                                </div>
+                                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Settings">settings</button>
+                            </header>
+                        </template>
+                    </div>
+                    <div class="docs-example" style="margin-block-start:20px">
+                        <template>
+                            <header class="micl-appbar">
+                                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Open navigation">menu</button>
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Three actions</span>
+                                </div>
+                                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Search">search</button>
+                                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Share">share</button>
+                                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Edit">edit</button>
+                            </header>
+                        </template>
+                    </div>
+                </div>
+                <div class="docs-stage">
+                    <p style="margin-block-start:0">Use <code>micl-appbar__leading</code> and <code>micl-appbar__trailing</code> — without the <code>-icon</code> suffix — for anything that is not an icon and should keep its own colour. On a medium or large bar the actions stay on the top row while the headline drops below them.</p>
+                    <div class="docs-example">
+                        <template>
+                            <header class="micl-appbar micl-appbar--medium">
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Drafts</span>
+                                    <p class="micl-appbar__subtitle">3 unsent</p>
+                                </div>
+                                <button type="button" class="micl-appbar__trailing micl-button-tonal-s">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                    Compose
+                                </button>
+                            </header>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="alignment">
+                <div class="docs-section__head">
+                    <h2>Alignment</h2>
+                    <p class="docs-section__use">Adding <code>micl-appbar__headline--center</code> centres the headline and its subtitle on the full width of the bar — not between the leading and trailing content — so a wide action on one side does not pull the title off centre.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <header class="micl-appbar">
+                                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Open navigation">menu</button>
+                                <div class="micl-appbar__headline micl-appbar__headline--center">
+                                    <span class="micl-heading">Centred</span>
+                                </div>
+                                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Favourite">favorite</button>
+                            </header>
+                            <header class="micl-appbar">
+                                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Open navigation">menu</button>
+                                <div class="micl-appbar__headline micl-appbar__headline--center">
+                                    <span class="micl-heading">Still centred</span>
+                                </div>
+                                <button type="button" class="micl-appbar__trailing micl-button-tonal-s">
+                                    <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
+                                    Compose
+                                </button>
+                            </header>
+                            <header class="micl-appbar micl-appbar--large">
+                                <div class="micl-appbar__headline micl-appbar__headline--center">
+                                    <span class="micl-heading">Centred</span>
+                                    <p class="micl-appbar__subtitle">Works on every size</p>
+                                </div>
+                            </header>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="sticky">
+                <div class="docs-section__head">
+                    <h2>Sticky &amp; on scroll</h2>
+                    <p class="docs-section__use">In a single-pane layout the app bar sticks to the top of the page on its own — no class needed — and swaps its container colour as soon as the page moves underneath it. A sticky medium or large bar also collapses to the height of a small one as you go.</p>
+                </div>
+                <div class="docs-stage">
+                    <iframe class="docs-embed" src="appbar-demo.html" title="A scrollable page with a sticky app bar" loading="lazy"></iframe>
+                    <p style="margin-block-end:0;color:var(--md-sys-color-on-surface)">The same page on its own: <a href="appbar-demo.html">open the sticky demo</a>.</p>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <header class="micl-appbar micl-appbar--medium" style="--md-comp-app-bar-container-color: var(--md-sys-color-primary-container); --md-comp-app-bar-title-color: var(--md-sys-color-on-primary-container); --md-comp-app-bar-subtitle-color: var(--md-sys-color-on-primary-container); --md-comp-app-bar-leading-icon-color: var(--md-sys-color-on-primary-container); --md-comp-app-bar-trailing-icon-color: var(--md-sys-color-on-primary-container)">
+                                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Open navigation">menu</button>
+                                <div class="micl-appbar__headline">
+                                    <span class="micl-heading">Primary container</span>
+                                    <p class="micl-appbar__subtitle">A themed app bar</p>
+                                </div>
+                                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Edit">edit</button>
+                            </header>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>
