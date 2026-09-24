@@ -34,6 +34,13 @@ import micl from "material-inspired-component-library/dist/micl";
 
 This will initialize any Text field component, including those that will be added to the DOM later on.
 
+The label floats above the field when the field has a value. Values entered by the user, autofilled by the browser or restored by a form reset are detected automatically. When you change the value from a script, dispatch an `input` event so that the text field can update itself:
+
+```JavaScript
+field.value = 'New value';
+field.dispatchEvent(new Event('input', { bubbles: true }));
+```
+
 ### Live Demo
 A live example of the [Text field component](https://henkpb.github.io/micl/textfield.html) is available to interact with.
 

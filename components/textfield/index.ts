@@ -31,8 +31,7 @@ const isTextFieldElement = (target: EventTarget | null): target is
     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
     (target as Element).matches(anyFieldSelector);
 
-const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
-{
+const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void => {
     if (
         !input.parentElement
         || input instanceof HTMLSelectElement
@@ -99,6 +98,17 @@ const formatAsDate = (input: HTMLInputElement, inputType: string | undefined): v
     }
 };
 
+const refresh = (field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void => {
+    if (field.value) {
+        field.dataset.miclvalue = '1';
+    }
+    else {
+        delete field.dataset.miclvalue;
+    }
+
+    setCounter(field);
+};
+
 const refreshTextField = (event: Event): void =>
 {
     if (
@@ -112,14 +122,8 @@ const refreshTextField = (event: Event): void =>
     if (event.target instanceof HTMLInputElement && event.target.dataset.micldateformat) {
         formatAsDate(event.target, (event as InputEvent).inputType);
     }
-    if (event.target.value) {
-        event.target.dataset.miclvalue = '1';
-    }
-    else {
-        delete event.target.dataset.miclvalue;
-    }
 
-    setCounter(event.target);
+    refresh(event.target);
 };
 
 const textfield = {
@@ -129,10 +133,6 @@ const textfield = {
             return;
         }
         input.dataset.miclinitialized = '1';
-
-        if (input.value) {
-            input.dataset.miclvalue = '1';
-        }
 
         // A legacy listbox replaces the whole selection on a plain click; a customizable
         // multiple select toggles the clicked option. Align the fallback with the latter,
@@ -191,9 +191,10 @@ const textfield = {
             }
         }
 
-        setCounter(input);
+        refresh(input);
     },
 
+    reset: refresh,
     change: refreshTextField,
     input: refreshTextField
 };
