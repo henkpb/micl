@@ -239,6 +239,6 @@ Each stepper can be themed using CSS custom properties. Apply them to any approp
 ```
 
 ## Compatibility
-The stepper header relies on [CSS anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning), specifically the [`anchor-scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-scope) property, to draw the connector lines and correctly position the state layers of the header buttons. In browsers without support, the connector lines will not render correctly. Check [MDN Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-scope#browser_compatibility) for up-to-date support details.
+The stepper header relies on [CSS anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning), specifically the [`anchor-scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/anchor-scope) property, to draw the connector lines and correctly position the state layers of the header buttons.
 
 Additionally, the component determines the direction of the sliding animation using the [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) and [`:dir()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) pseudo-classes.
