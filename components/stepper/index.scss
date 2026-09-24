@@ -20,13 +20,11 @@
 // SOFTWARE.
 
 @use '../../styles/motion';
-@use '../../styles/statelayer';
-
-@include statelayer.token('disabled-state-layer-opacity');
 
 .micl-stepper {
-    --_motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_motion-duration: var(--md-comp-stepper-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
+    --_motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-easing-emphasized});
+    --_motion-duration: var(--md-comp-stepper-motion-duration, #{motion.$md-sys-motion-duration-long2});
+    --_dir: 1;
 
     --_dot-size: var(--md-comp-stepper-dot-size, 12px);
 
@@ -36,6 +34,10 @@
     row-gap: var(--md-sys-padding-xl, 24px);
     margin: 0;
 
+    &:dir(rtl) {
+        --_dir: -1;
+    }
+
     .micl-stepper__header {
         --_dot-size: var(--md-comp-stepper-header-dot-size, 24px);
 
@@ -43,14 +45,16 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-inline: -10px;
+        margin-block: 0;
+        margin-inline: calc(-1 * var(--md-comp-stepper-header-outset, 12px));
+        padding: 0;
+        list-style: none;
         counter-reset: dotnumber;
         anchor-scope: all;
 
         button {
             position: static;
             anchor-name: var(--micl-stepper-anchor);
-            pointer-events: none;
 
             &::before {
                 inset: auto;
@@ -59,33 +63,25 @@
                 inset-inline-end: anchor(var(--micl-stepper-anchor) end);
                 inline-size: auto;
             }
-            // The connector line is drawn as one segment per step, spanning only
-            // the real gap between this button and the previous one.
-            &:not(:first-child)::after {
-                content: "";
-                position: absolute;
-                inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - 0.5px);
-                inset-inline-start: anchor(var(--micl-stepper-prev) end);
-                inset-inline-end: anchor(var(--micl-stepper-anchor) start);
-                block-size: 1px;
-                background-color: var(--md-comp-divider-color, var(--md-sys-color-outline-variant));
-                pointer-events: none;
-            }
-            &.micl-stepper__progress--done {
-                pointer-events: inherit;
-            }
+        }
+        li:not(:first-child) > button::after {
+            content: "";
+            position: absolute;
+            inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - 0.5px);
+            inset-inline-start: anchor(var(--micl-stepper-prev) end);
+            inset-inline-end: anchor(var(--micl-stepper-anchor) start);
+            block-size: 1px;
+            background-color: var(--md-comp-divider-color, var(--md-sys-color-outline-variant));
+            pointer-events: none;
         }
         .micl-stepper__progress-dot::before {
             content: counter(dotnumber, var(--md-comp-stepper-counter-style, decimal));
         }
     }
-    &.micl-stepper--nonlinear .micl-stepper__header button {
-        pointer-events: inherit;
-    }
     .micl-stepper__steps {
         display: grid;
         grid-template-areas: "stepper-steps";
-        overflow-x: hidden;
+        overflow-x: clip;
 
         .micl-stepper__step {
             grid-area: stepper-steps;
@@ -96,24 +92,21 @@
             padding: 0;
             border: none;
             opacity: 0%;
-            transform: translateX(100%);
+            transform: translateX(calc(var(--_dir) * 100%));
             transition:
+                visibility var(--_visibility-duration, var(--_motion-duration)) linear,
                 opacity var(--_motion-duration) linear,
                 transform var(--_motion-duration) var(--_motion-spatial);
 
             &:has(~ .micl-stepper__step[aria-current=step]) {
-                transform: translateX(-100%);
-            }
-            &.micl-stepper__step--toselected {
-                visibility: visible;
+                transform: translateX(calc(var(--_dir) * -100%));
             }
             &[aria-current=step] {
+                --_visibility-duration: 0s;
+
                 visibility: visible;
                 opacity: 100%;
-                transform: translateX(0%);
-            }
-            &.micl-stepper__step--fromselected {
-                visibility: visible;
+                transform: none;
             }
         }
     }
@@ -137,7 +130,7 @@
     .micl-stepper__progress-dots {
         display: flex;
         align-items: center;
-        column-gap: 4px;
+        column-gap: var(--md-comp-stepper-dot-space, 4px);
     }
     .micl-stepper__progress-dot {
         block-size: var(--_dot-size);
@@ -146,30 +139,22 @@
         line-height: var(--_dot-size);
         border-radius: calc(var(--_dot-size) / 2);
         text-align: center;
-        background-color: var(--md-comp-stepper-dot-color, var(--md-sys-color-on-surface));
-        color: var(--md-comp-stepper-dot-label-color, var(--md-sys-color-surface));
-        opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
+        background-color: var(--md-comp-stepper-dot-color, var(--md-sys-color-surface-container-highest));
+        color: var(--md-comp-stepper-dot-label-color, var(--md-sys-color-on-surface-variant));
         counter-increment: dotnumber 1;
     }
-    .micl-stepper__progress--done.micl-stepper__progress-dot,
-    .micl-stepper__progress--done .micl-stepper__progress-dot {
-        background-color: var(--md-comp-stepper-dot-done-color, var(--md-sys-color-tertiary-container));
-        color: var(--md-comp-stepper-dot-done-label-color, var(--md-sys-color-on-tertiary-container));
-        opacity: 100%;
+    @each $state, $color, $label in (done, tertiary-container, on-tertiary-container), (current, primary, on-primary) {
+        :is(.micl-stepper__progress--#{$state}.micl-stepper__progress-dot, .micl-stepper__progress--#{$state} .micl-stepper__progress-dot) {
+            background-color: var(--md-comp-stepper-dot-#{$state}-color, var(--md-sys-color-#{$color}));
+            color: var(--md-comp-stepper-dot-#{$state}-label-color, var(--md-sys-color-#{$label}));
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --_motion-duration: 0ms;
     }
 }
 
-.micl-stepper .micl-stepper__steps .micl-stepper__step:dir(rtl) {
-    transform: translateX(-100%);
-
-    &:has(~ .micl-stepper__step[aria-current=step]) {
-        transform: translateX(100%);
-    }
-    &[aria-current=step] {
-        transform: translateX(0%);
-    }
-}
-
-.micl-stepper__action--hidden, .micl-stepper__step--hidden {
+.micl-stepper__action--hidden, .micl-stepper--hidden {
     display: none !important;
 }
