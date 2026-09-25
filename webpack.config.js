@@ -43,6 +43,25 @@ const tsEntries = glob.sync('./foundations/**/*.ts').reduce((entries, filePath) 
     return entries;
 }, {});
 
+const cssOnlyEntries = Object.keys(scssEntries).filter(name => typeof scssEntries[name] === 'string');
+
+// A stylesheet-only entry still makes webpack emit an empty UMD script; drop it.
+class RemoveEmptyScripts {
+    constructor(names) {
+        this.names = names;
+    }
+    apply(compiler) {
+        compiler.hooks.thisCompilation.tap('RemoveEmptyScripts', compilation => {
+            compilation.hooks.processAssets.tap({
+                name : 'RemoveEmptyScripts',
+                stage: webpack.Compilation.PROCESS_ASSETS_STAGE_SUMMARIZE
+            }, () => {
+                this.names.forEach(name => compilation.deleteAsset(name + '.js'));
+            });
+        });
+    }
+}
+
 module.exports = [{
     // Standalone per-component / per-foundation files. Built first and on its own (clean: true)
     // so the micl bundle below can scope-hoist component modules instead of treating them as
@@ -83,7 +102,8 @@ module.exports = [{
     plugins: [
         new miniCss({
             filename: '[name].css'
-        })
+        }),
+        new RemoveEmptyScripts(cssOnlyEntries)
     ]
 }, {
     // Full dist bundle. Separate compilation (after 'parts', without cleaning)
@@ -163,6 +183,7 @@ module.exports = [{
     plugins: [
         new miniCss({
             filename: '[name].css'
-        })
+        }),
+        new RemoveEmptyScripts(['shapes'])
     ]
 }];
