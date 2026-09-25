@@ -30,6 +30,7 @@
 @include shape.corner('large');
 
 @include statelayer.token('disabled-state-layer-opacity');
+@include statelayer.token('ripple-opacity-factor');
 
 $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
 

@@ -48,6 +48,9 @@
 
 @include typography.scale('title-medium');
 @include typography.scale('body-smallmedium');
+@include typography.scale('headline-small');
+@include typography.scale('headline-medium');
+@include typography.scale('headline-large');
 
 @mixin card-variant(
     $name,
