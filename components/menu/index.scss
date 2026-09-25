@@ -19,6 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use '../../foundations/layout/tokens' as layout;
 @use '../../styles/elevation';
 @use '../../styles/motion';
 @use '../../styles/shape';
@@ -27,7 +28,9 @@
 
 @include elevation.level(2);
 
+@include shape.corner('extra-small');
 @include shape.corner('small');
+@include shape.corner('medium');
 @include shape.corner('large');
 
 @include statelayer.token('hover-state-layer-opacity');
@@ -36,13 +39,14 @@
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 @include statelayer.token('focus-indicator-inner-offset');
-@include statelayer.token('backdrop-opacity');
 
 @include typography.scale('label-large');
 @include typography.scale('label-small');
 @include typography.scale('body-small');
 
-$menu-padding-block: 4px;
+$menu-padding-inline: 4px;
+$menu-item-gap: 2px;
+$menu-viewport-margin: 8px;
 $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-three)';
 
 @mixin menu-color-set($variant) {
@@ -54,7 +58,7 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     $on-selected: var(--_menu-on-selected);
 
     --md-comp-list-item-container-color: var(--md-comp-menu-#{$variant}-menu-item-container-color, #{$container});
-    --md-comp-list-item-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-label-text-color, #{$on-container});
+    --md-comp-list-item-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-label-text-color, #{$on-container-strong});
     --md-comp-list-item-leading-icon-color: var(--md-comp-menu-#{$variant}-menu-item-leading-icon-color, #{$on-container});
     --md-comp-list-item-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-supporting-text-color, #{$on-container});
     --md-comp-list-item-trailing-icon-color: var(--md-comp-menu-#{$variant}-menu-item-trailing-icon-color, #{$on-container});
@@ -136,11 +140,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     --md-comp-list-item-selected-pressed-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-selected-pressed-supporting-text-color, #{$on-selected});
     --md-comp-list-item-selected-pressed-trailing-icon-color: var(--md-comp-menu-#{$variant}-menu-item-selected-pressed-trailing-icon-color, #{$on-selected});
     --md-comp-list-item-selected-pressed-trailing-supporting-text-color: var(--md-comp-menu-#{$variant}-menu-item-selected-pressed-trailing-supporting-text-color, #{$on-selected});
+
+    --_menu-active-color: var(--md-comp-menu-#{$variant}-menu-item-active-state-layer-color, #{$on-container-strong});
+    --_menu-active-opacity: var(--md-comp-menu-#{$variant}-menu-item-active-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity, 8%));
 }
 
-.micl-menu[popover], select {
-    --_menu-motion-effects: var(--md-comp-menu-motion-effects, #{motion.$md-sys-motion-expressive-fast-effects});
-    --_menu-motion-effects-duration: var(--md-comp-menu-motion-effects-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
+.micl-menu[popover], :where(.micl-textfield-filled, .micl-textfield-outlined) > select {
     --_menu-motion-effects-duration-reverse: var(--md-comp-menu-motion-effects-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
     --_menu-motion-spatial: var(--md-comp-menu-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
     --_menu-motion-spatial-duration: var(--md-comp-menu-motion-spatial-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
@@ -148,14 +153,16 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 
     --md-comp-list-container-shape: var(--md-comp-menu-active-container-shape, var(--md-comp-menu-container-shape, var(--md-sys-shape-corner-large, 16px)));
 
-    --md-comp-list-item-container-expressive-shape: var(--md-comp-menu-item-shape, var(--md-sys-shape-corner-small, 8px));
-    --md-comp-list-item-container-selected-expressive-shape: var(--md-comp-menu-item-selected-shape, var(--md-sys-shape-corner-large, 16px));
+    --md-comp-list-item-container-expressive-shape: var(--md-comp-menu-item-shape, var(--md-sys-shape-corner-extra-small, 4px));
+    --md-comp-list-item-container-disabled-expressive-shape: var(--md-comp-menu-item-shape, var(--md-sys-shape-corner-extra-small, 4px));
+    --md-comp-list-item-container-selected-expressive-shape: var(--md-comp-menu-item-selected-shape, var(--md-sys-shape-corner-medium, 12px));
+    --md-comp-list-item-container-selected-disabled-expressive-shape: var(--md-comp-menu-item-selected-shape, var(--md-sys-shape-corner-medium, 12px));
 
-    --md-comp-list-item-between-space: 12px;
-    --md-comp-list-item-leading-space: calc(var(--md-comp-menu-item-leading-space, 16px) - #{$menu-padding-block});
+    --md-comp-list-item-between-space: var(--md-comp-menu-item-between-space, 12px);
+    --md-comp-list-item-leading-space: calc(var(--md-comp-menu-item-leading-space, 16px) - #{$menu-padding-inline});
     --md-comp-list-item-leading-icon-expressive-size: var(--md-comp-menu-item-leading-icon-size, 20px);
     --md-comp-list-item-trailing-icon-expressive-size: var(--md-comp-menu-item-trailing-icon-size, 20px);
-    --md-comp-list-item-trailing-space: calc(var(--md-comp-menu-item-trailing-space, 16px) - #{$menu-padding-block});
+    --md-comp-list-item-trailing-space: calc(var(--md-comp-menu-item-trailing-space, 16px) - #{$menu-padding-inline});
     --md-comp-list-item-top-space: var(--md-comp-menu-item-top-space, 8px);
     --md-comp-list-item-bottom-space: var(--md-comp-menu-item-bottom-space, 8px);
     --md-comp-list-item-one-line-container-height: var(--md-comp-menu-item-height, 44px);
@@ -198,17 +205,33 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     }
 }
 
+@position-try --micl-menu-fill {
+    position-area: block-end;
+    margin-block: 0 $menu-viewport-margin;
+    margin-inline: $menu-viewport-margin;
+    min-block-size: calc(50dvh - anchor-size(block) / 2 - #{$menu-viewport-margin});
+    max-block-size: calc(100% - #{$menu-viewport-margin});
+}
+@position-try --micl-submenu-fill {
+    position-area: inline-end;
+    align-self: end;
+    margin-block: $menu-viewport-margin;
+}
+
 .micl-menu[popover] {
     flex-direction: column;
     position-anchor: auto;
-    inset: unset;
-    inset-block-start: anchor(end);
-    inset-inline-start: anchor(start);
-    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+    position-area: block-end span-inline-end;
+    inset: auto;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline, --micl-menu-fill, --micl-menu-fill flip-block;
     min-inline-size: var(--md-comp-menu-width-min, 112px);
-    max-inline-size: var(--md-comp-menu-width-max, 320px);
+    max-inline-size: min(var(--md-comp-menu-width-max, 320px), 100vw - #{2 * $menu-viewport-margin});
+    max-block-size: calc(100dvh - #{2 * $menu-viewport-margin});
     gap: var(--md-comp-menu-gap, 2px);
+    margin-block: 0 $menu-viewport-margin;
+    margin-inline: 0 $menu-viewport-margin;
     padding: 0;
+
     border: none;
     outline: none;
     background-color: transparent;
@@ -226,6 +249,17 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         overlay var(--micl-duration) linear allow-discrete,
         display var(--micl-duration) linear allow-discrete;
 
+    @media (max-width: layout.$md-sys-breakpoint-compact-max) {
+        position-area: block-end;
+        position-try-fallbacks: flip-block, --micl-menu-fill, --micl-menu-fill flip-block;
+        margin-inline: $menu-viewport-margin;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        --_menu-motion-effects-duration-reverse: 0ms;
+        --_menu-motion-spatial-duration: 0ms;
+        --_menu-motion-spatial-duration-reverse: 0ms;
+    }
+
     &:popover-open {
         --micl-duration: var(--_menu-motion-spatial-duration);
         --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
@@ -238,25 +272,13 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
             opacity: 0;
             transform: scaleY(0);
         }
-        &::backdrop {
-            background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
-
-            @starting-style {
-                background-color: rgba(0, 0, 0, 0);
-            }
-        }
-    }
-    &::backdrop {
-        background-color: rgba(0, 0, 0, 0);
-        transition:
-            background-color var(--_menu-motion-effects-duration) linear,
-            overlay var(--_menu-motion-effects-duration) linear allow-discrete,
-            display var(--_menu-motion-effects-duration) linear allow-discrete;
     }
 
     .micl-list {
-        padding: var(--md-comp-menu-group-padding, 4px) $menu-padding-block;
-        row-gap: 2px;
+        padding: calc(var(--md-comp-menu-group-padding, 2px) + #{$menu-item-gap}) $menu-padding-inline;
+        row-gap: $menu-item-gap;
+        overflow-y: auto;
+        overscroll-behavior: contain;
         background-color: var(--md-comp-menu-standard-container-color, var(--md-sys-color-surface-container-low));
         box-shadow: var(--md-comp-menu-container-elevation, var(--md-sys-elevation-level2));
         transition: border-radius var(--_menu-motion-effects-duration-reverse) linear;
@@ -271,6 +293,8 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         }
 
         #{$item-classes} > .micl-menu[popover] {
+            position-area: inline-end span-block-end;
+            position-try-fallbacks: flip-inline, flip-block, flip-block flip-inline, --micl-submenu-fill, --micl-submenu-fill flip-inline;
             transform: scaleX(0);
 
             &:popover-open {
@@ -279,9 +303,23 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
                 @starting-style {
                     transform: scaleX(0);
                 }
-                &::backdrop {
-                    background-color: rgba(0, 0, 0, 0);
-                }
+            }
+        }
+        > #{$item-classes} {
+            &:first-of-type {
+                border-start-start-radius: max(var(--_list-item-shape), var(--md-comp-menu-item-first-child-shape, var(--md-sys-shape-corner-medium, 12px)));
+                border-start-end-radius: max(var(--_list-item-shape), var(--md-comp-menu-item-first-child-shape, var(--md-sys-shape-corner-medium, 12px)));
+            }
+            &:last-of-type {
+                border-end-start-radius: max(var(--_list-item-shape), var(--md-comp-menu-item-last-child-shape, var(--md-sys-shape-corner-medium, 12px)));
+                border-end-end-radius: max(var(--_list-item-shape), var(--md-comp-menu-item-last-child-shape, var(--md-sys-shape-corner-medium, 12px)));
+            }
+            &:has(> .micl-menu:popover-open) {
+                --statelayer-color: var(--_menu-active-color);
+                --statelayer-opacity: var(--_menu-active-opacity);
+            }
+            > label:has(> input[type=checkbox][hidden]:not(:checked)) > .micl-list-item__icon:first-child {
+                visibility: hidden;
             }
         }
     }
