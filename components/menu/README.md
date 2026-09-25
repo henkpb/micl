@@ -206,6 +206,7 @@ The JavaScript applies the [WAI-ARIA menu pattern](https://www.w3.org/WAI/ARIA/a
 | Key | Action |
 | --- | --- |
 | ↓ / ↑ | Moves focus to the next or previous item, across groups |
+| Home / End | Moves focus to the first or last item of the menu, across groups |
 | Enter / Space | Activates the focused item |
 | → | Opens the submenu of the focused item and focuses its first item (← in right-to-left languages) |
 | ← | Closes the submenu and returns focus to its menu item (→ in right-to-left languages) |

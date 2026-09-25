@@ -146,6 +146,14 @@ export default register(menuSelector, {
             const target = event.target;
             if (!(target instanceof HTMLElement) || !items.includes(target)) return;
 
+            if (event.key === 'Home' || event.key === 'End') {
+                const focusable = lists.flatMap(navigableItems);
+                event.preventDefault();
+                event.stopPropagation();
+                (event.key === 'Home' ? focusable[0] : focusable[focusable.length - 1])?.focus();
+                return;
+            }
+
             const rtl = target.matches(':dir(rtl)');
             if (event.key === (rtl ? 'ArrowLeft' : 'ArrowRight') && target.hasAttribute('aria-haspopup')) {
                 event.preventDefault();
