@@ -1,5 +1,5 @@
 # Accordion
-This component implements the [Material Design 3 Expressive Expandable Lists](https://m3.material.io/components/lists/guidelines#b5697cef-6e9f-4699-ae10-c3f49649593e) design. Accordions are vertically stacked lists that allow you to show and hide sections of content.
+This component implements the [Material Design 3 Expressive Expandable Lists](https://m3.material.io/components/lists/guidelines#b5697cef-6e9f-4699-ae10-c3f49649593e) specification. Accordions are vertically stacked lists that allow you to show and hide sections of content.
 
 ## Basic Usage
 
@@ -23,7 +23,7 @@ The Accordion component is an extension of the [**List** component](../list/READ
 </div>
 ```
 
-- The `micl-list-item__content` class styles the collapsible area of the accordion item.
+The `micl-list-item__content` class styles the collapsible area. It automatically aligns the expanded content with the header text using the item's leading space token (`--md-comp-list-item-leading-space`). You are responsible for applying your own padding, typography, and colors to the content itself.
 
 ### CSS
 Import the list styles into your project:
@@ -44,13 +44,13 @@ This component requires JavaScript to support keyboard navigation:
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
-This will initialize any Accordion component, including those that will be added to the DOM later on.
+This initializes all Accordion components, including those added dynamically to the DOM.
 
 ### Live Demo
 A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available to interact with.
 
 ## Variants
-To ensure that only one accordion item within a group can be open at a time, add a matching `name` attribute to all the `<details>` elements you want to group together.
+To ensure only one item opens at a time, apply a matching `name` attribute across a group of `<details>` elements. This leverages native browser behavior to close previously opened items automatically—no JavaScript required.
 
 ```HTML
 <div class="micl-list">
@@ -86,7 +86,7 @@ To ensure that only one accordion item within a group can be open at a time, add
 </div>
 ```
 
-Add a trailing icon to an accordion item to indicate that the item can be expanded. If you add the `micl-list-item__icon--expander` class to the icon, the icon will rotate 180 degrees when the accordion panel is opened or closed.
+**Expander icon**: Add a trailing icon to visually indicate expandability. Applying the `micl-list-item__icon--expander` class places the icon in a round container that highlights and automatically rotates 180 degrees when toggled. An open accordion item keeps its normal colors; only the expander shows its state.
 
 ```HTML
 <div class="micl-list">
@@ -104,14 +104,21 @@ Add a trailing icon to an accordion item to indicate that the item can be expand
 </div>
 ```
 
-Adding the `micl-list-item--disabled` class to the `<summary>` element causes the accordion item to be displayed in a disabled state.
+**Disabled state**: Add the `micl-list-item--disabled` class to the `<summary>` element to visually disable the accordion item.
 
 Use a [Divider component](../divider/README.md) to separate neighbouring accordion items by a divider.
 
 Since the Accordion is based on the List component, you can use the same utility classes for content structure and styling. Refer to the [List component documentation](../list/README.md) for details on how to add icons, avatars, images, and other features to your accordion items.
 
 ## Keyboard
-Each `<summary>` is a tab stop in document order — `Tab` and `Shift+Tab` move focus through the accordion headers. While focus is on a header, `Enter` or `Space` toggles the panel open or closed. As an optional enhancement, `ArrowDown` and `ArrowUp` move focus to the next or previous header in the same group; focus wraps around at the ends.
+Each `<summary>` acts as a tab stop in document order. Disabled headers (`micl-list-item--disabled`) are skipped and receive `aria-disabled="true"`.
+
+| Key | Action |
+|---|---|
+| <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> | Moves focus through the accordion headers. |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Toggles the focused panel open or closed. |
+| <kbd>↓</kbd> / <kbd>↑</kbd> | Optional enhancement: Moves focus to the next or previous header within the same list, wrapping at the ends. |
+| <kbd>Home</kbd> / <kbd>End</kbd> | Optional enhancement: Moves focus to the first or last header. |
 
 ## Theming
 You can customize the appearance of the Accordion component by overriding its own CSS custom properties and those of the [List](../list/README.md) component. Set them on any appropriate parent element to affect its child accordions.
@@ -119,6 +126,14 @@ You can customize the appearance of the Accordion component by overriding its ow
 | Custom property | Meaning | Default |
 |---|---|---|
 | `--md-comp-accordion-item-space` | The space between an opened accordion item and its next neighbour. | `0px` |
+| `--md-comp-accordion-icon-container-size` | The size of the round container of the expander icon | `40px` |
+| `--md-comp-accordion-collapsed-icon-container-color` | The container color of the expander icon of a closed item | `--md-comp-list-item-container-color` (transparent) |
+| `--md-comp-accordion-expanded-icon-container-color` | The container color of the expander icon of an open item | `--md-sys-color-surface-container` |
+| `--md-comp-accordion-icon-color` | The color of the expander icon | `--md-sys-color-on-surface` |
+| `--md-comp-accordion-motion-spatial` | The easing function used when an accordion item opens or closes | `--md-sys-motion-expressive-default-spatial` |
+| `--md-comp-accordion-motion-duration` | The duration of opening or closing an accordion item | `500ms` |
+
+The opening and closing are not animated when the user prefers reduced motion.
 
 **Example: Changing the margin between an opened item and the next**
 
@@ -134,4 +149,4 @@ You can customize the appearance of the Accordion component by overriding its ow
 ```
 
 ## Compatibility
-The Accordion component uses the `interpolate-size` CSS property to smoothly open and close the detail area of a Details disclosure element, which might not be supported in your browser. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.
+The Accordion component animates the opening and closing of an item with the `::details-content` pseudo-element and the `interpolate-size` CSS property. In browsers lacking `interpolate-size` support, the accordion remains fully functional but instantly snaps open and closed without animation. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size#browser_compatibility) for details.

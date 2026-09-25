@@ -23,9 +23,11 @@ import { register } from '../../foundations/runtime';
 
 export const listSelector = '.micl-list';
 
+const itemSelector = '.micl-list-item-one,.micl-list-item-two,.micl-list-item-three';
+
 const isDisabled   = (item?: HTMLElement | null) => item?.classList.contains('micl-list-item--disabled');
-const isSelectable = (item?: HTMLElement | null) => item?.matches(':has(input[type=checkbox])');
-const isSelected   = (item?: HTMLElement | null) => item?.matches(':has(input[type=checkbox]:checked)');
+const isSelectable = (item?: HTMLElement | null) => item?.matches(':has(> label > input[type=checkbox], > input[type=checkbox])');
+const isSelected   = (item?: HTMLElement | null) => item?.matches(':has(> label > input[type=checkbox]:checked, > input[type=checkbox]:checked)');
 
 export default register(listSelector,
 {
@@ -35,7 +37,7 @@ export default register(listSelector,
 
         if (
             !(event instanceof KeyboardEvent)
-            || !target?.matches('.micl-list-item-one,.micl-list-item-two,.micl-list-item-three')
+            || !target?.matches(itemSelector)
         ) {
             return;
         }
@@ -53,7 +55,7 @@ export default register(listSelector,
         }
         else if (['UL', 'OL'].includes(parent.tagName)) {
             items = Array.from(parent.children).filter(child =>
-                child instanceof HTMLLIElement && child.getAttribute('role') !== 'separator'
+                child instanceof HTMLLIElement && child.matches(itemSelector)
                 ) as HTMLElement[];
         }
 
@@ -74,6 +76,11 @@ export default register(listSelector,
                 event.preventDefault();
                 nextIndex = (currentIndex - 1 + items.length) % items.length;
                 break;
+            case 'Home':
+            case 'End':
+                event.preventDefault();
+                nextIndex = event.key === 'Home' ? 0 : items.length - 1;
+                break;
             case 'Tab':
                 if (!isAccordion) {
                     const selectedIndex = items.findIndex(isSelected);
@@ -83,9 +90,7 @@ export default register(listSelector,
             case ' ':
             case 'Enter':
                 if (isAccordion) break;
-                if (event.key === ' ') {
-                    event.preventDefault();
-                }
+                event.preventDefault();
                 const el = target.querySelector<HTMLElement>(
                     'input[type=checkbox], a[href], button'
                 );
@@ -97,7 +102,7 @@ export default register(listSelector,
                     }));
                 }
                 else {
-                    el?.click();
+                    (el ?? target).click();
                 }
                 break;
             default:
@@ -119,9 +124,13 @@ export default register(listSelector,
 
         element.querySelectorAll<HTMLElement>(
             ':scope > details > summary.micl-list-item--disabled'
-        ).forEach(summary => summary.setAttribute('tabindex', '-1'));
+        ).forEach(summary =>
+        {
+            summary.setAttribute('tabindex', '-1');
+            summary.setAttribute('aria-disabled', 'true');
+        });
 
-        if (!element.querySelector('li[tabindex="0"]')) return;
+        if (!element.querySelector('li[tabindex="0"]') && !element.parentElement?.matches('[role=menu]')) return;
 
         element.querySelectorAll<HTMLLIElement>('li:not([role="separator"])').forEach(item =>
         {
@@ -130,11 +139,38 @@ export default register(listSelector,
             }
 
             item.querySelectorAll('a, button, input').forEach(link => link.setAttribute('tabindex', '-1'));
+            isDisabled(item) && item.setAttribute('aria-disabled', 'true');
 
-            if (isSelectable(item)) {
+            if (isSelectable(item) && !item.hasAttribute('role')) {
                 item.setAttribute('role', 'option');
-                item.parentElement?.setAttribute('role', 'listbox');
+                item.parentElement?.hasAttribute('role') || item.parentElement?.setAttribute('role', 'listbox');
             }
         });
+
+        element.addEventListener('focusin', (event: FocusEvent) =>
+        {
+            const item = (event.target as Element).closest<HTMLElement>(itemSelector);
+            if (!item || item.parentElement !== element || isDisabled(item)) return;
+            if (event.target !== item) {
+                item.focus();
+                return;
+            }
+            const menu = element.parentElement?.matches('[role=menu]') ? element.parentElement : null;
+            (menu ?? element).querySelectorAll<HTMLElement>(
+                menu ? ':scope > .micl-list > [tabindex="0"]' : ':scope > [tabindex="0"]'
+            ).forEach(other => other !== item && other.setAttribute('tabindex', '-1'));
+            item.setAttribute('tabindex', '0');
+        });
+
+        if (element.getAttribute('role') === 'listbox') {
+            element.hasAttribute('aria-multiselectable') || element.setAttribute('aria-multiselectable', 'true');
+            element.querySelectorAll(':scope > li[role=separator]').forEach(separator => separator.setAttribute('role', 'none'));
+
+            const syncSelection = () => element.querySelectorAll<HTMLElement>(':scope > li[role=option]').forEach(
+                option => option.setAttribute('aria-selected', String(!!isSelected(option)))
+            );
+            syncSelection();
+            element.addEventListener('change', syncSelection);
+        }
     }
 }, HTMLElement);

@@ -1,5 +1,5 @@
 # List
-This component implements the [Material Design 3 Expressive List](https://m3.material.io/components/lists/overview) design. Lists are continuous, vertical groups of text or images, representing a set of data.
+This component implements the [Material Design 3 Expressive List](https://m3.material.io/components/lists/overview). Lists are continuous, vertical groups of text or images, representing a set of data.
 
 ## Basic Usage
 
@@ -16,7 +16,7 @@ To create a standard list, use the `<ul>` element with the `micl-list` class and
 </ul>
 ```
 
-- `tabindex="0"` on the `<li>` makes the list item focusable and allows keyboard navigation. Only one item should be marked with a `tabindex="0"`.
+`tabindex="0"` on the `<li>` makes the list item focusable and allows keyboard navigation. Only one item should be marked with a `tabindex="0"`.
 
 ### CSS
 Import the list styles into your project:
@@ -37,14 +37,12 @@ This component requires JavaScript to support keyboard navigation:
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
-This will initialize any List component, including those that will be added to the DOM later on.
+This initializes all List components, including those added dynamically to the DOM.
 
 ### Live Demo
 A live example of the [List component](https://henkpb.github.io/micl/list.html) is available to interact with.
 
-## Variants
-Adding the `micl-list--segmented` class to the `<ul>` element gives the list a segmented style with a distinct visible background and physical gaps.
-
+## Anatomy
 The List component offers three CSS classes to control the height and content capacity of individual list items:
 
 | CSS class            | Description                                                    |
@@ -64,42 +62,10 @@ The List component offers three CSS classes to control the height and content ca
 </ul>
 ```
 
-Use the anchor element to convert a list item into a hyperlink:
-
-```HTML
-<ul class="micl-list">
-  <li class="micl-list-item-one" tabindex="0">
-    <a href="https://www.thetimes.com">
-      <span class="micl-list-item__text">
-        <span class="micl-list-item__headline">The Times</span>
-      </span>
-    </a>
-  </li>
-</ul>
-```
-
-Use the button element to convert a list item into an action item:
-
-```HTML
-<ul class="micl-list">
-  <li class="micl-list-item-one" tabindex="0">
-    <button type="button" onclick="alert('Hello World!')">
-      <span class="micl-list-item__text">
-        <span class="micl-list-item__headline">Show details</span>
-      </span>
-    </button>
-  </li>
-</ul>
-```
-
-Adding the `micl-list-item--disabled` class to the `<li>` element causes the list item to be displayed in a disabled state.
-
-Use a [Divider component](../divider/README.md) to separate neighbouring list items by a divider. Remember to add the role `separator` to the divider element.
-
 ### Leading Content
 The text content of a list item can be preceded by various media elements:
 
-- **Icon**: Use `micl-list-item__icon` with a (Material Symbols) icon.
+- **Icon**: Apply `micl-list-item__icon` to a (Material Symbols) icon element.
   ```HTML
   <li class="micl-list-item-two">
     <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">person</span>
@@ -110,7 +76,7 @@ The text content of a list item can be preceded by various media elements:
   </li>
   ```
 
-- **Avatar**: Use `micl-list-item__avatar` with a text.
+- **Avatar**: Apply `micl-list-item__avatar` to an element containing text initials.
   ```HTML
   <li class="micl-list-item-two">
     <span class="micl-list-item__avatar">BR</span>
@@ -121,7 +87,7 @@ The text content of a list item can be preceded by various media elements:
   </li>
   ```
 
-- **Image**: Use `micl-list-item__image` with a background image.
+- **Image**: Apply `micl-list-item__image` to an element with an inline background image.
   ```HTML
   <li class="micl-list-item-two">
     <span class="micl-list-item__image" style="background-image:url(https://...jpg)"></span>
@@ -142,6 +108,7 @@ The text content of a list item can be preceded by various media elements:
     </span>
   </li>
   ```
+  Add the `micl-list-item__thumbnail--large` class for a large thumbnail. A thumbnail never grows taller than the content area of its item, so a large thumbnail needs a three-line item to reach its full height.
 
 ### Trailing Content
 The text of a list item may be followed by a trailing text, imagery or other elements (like a checkbox).
@@ -167,12 +134,47 @@ The text of a list item may be followed by a trailing text, imagery or other ele
   </li>
   ```
 
+Use a [Divider component](../divider/README.md) to separate neighbouring list items by a divider. Remember to add the role `separator` to the divider element.
+
+## Variants
+To make a list item navigable, wrap its content in an `<a>` tag:
+
+```HTML
+<ul class="micl-list">
+  <li class="micl-list-item-one" tabindex="0">
+    <a href="https://www.thetimes.com">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">The Times</span>
+      </span>
+    </a>
+  </li>
+</ul>
+```
+
+To make a list item clickable, wrap its content in a `<button>` tag:
+
+```HTML
+<ul class="micl-list">
+  <li class="micl-list-item-one" tabindex="0">
+    <button type="button" onclick="alert('Hello World!')">
+      <span class="micl-list-item__text">
+        <span class="micl-list-item__headline">Show details</span>
+      </span>
+    </button>
+  </li>
+</ul>
+```
+
+**Disabled state**: Add the `micl-list-item--disabled` class to the `<li>` element to visually disable the item.
+
+Add the `micl-list--segmented` class to the `<ul>` element to apply a distinct visible background and physical gaps between items.
+
 ### Selecting List Items
 To enable selection of list items, integrate a Checkbox or Switch component within the `<li>` element.
 
 ```HTML
-<ul class="micl-list" role="listbox">
-  <li role="option" class="micl-list-item-two" tabindex="0" aria-selected="true">
+<ul class="micl-list">
+  <li class="micl-list-item-two" tabindex="0">
     <label>
       <span class="micl-list-item__text">
         <span class="micl-list-item__headline">Blue car</span>
@@ -189,7 +191,7 @@ To enable selection of list items, integrate a Checkbox or Switch component with
     </label>
   </li>
   <li role="separator" class="micl-divider-inset"></li>
-  <li role="option" class="micl-list-item-two">
+  <li class="micl-list-item-two">
     <label>
       <input
         type="checkbox"
@@ -207,10 +209,23 @@ To enable selection of list items, integrate a Checkbox or Switch component with
 </ul>
 ```
 
-- The `role="listbox"` and `role="option"` are used for accessibility, indicating a selectable list. They are added automatically when a list contains a selectable item (an item with `tabindex="0"`. The example above shows these roles for clarity.
+- If a focusable list (`tabindex="0"`) contains checkboxes or switches, the JavaScript automatically upgrades it to a selectable list. It applies `role="listbox"` to the container, `role="option"` to the items, and sets `aria-multiselectable`. It also automatically syncs the `aria-selected` state with each checkbox, so you don't need to manually manage these attributes.
+- A listbox may only contain options, so the JavaScript turns a divider inside it into a purely visual element (`role="none"`).
+
+## Keyboard and accessibility
+A list becomes interactive when one of its items has `tabindex="0"`. The list is then a single tab stop, and the JavaScript manages the `tabindex` of its items:
+
+| Key | Action |
+|---|---|
+| <kbd>↓</kbd> / <kbd>↑</kbd> | Moves focus to the next or previous item; focus wraps around at the ends |
+| <kbd>Home</kbd> / <kbd>End</kbd> | Moves focus to the first or last item |
+| <kbd>Enter</kbd> / <kbd>Space</kbd> | Toggles the checkbox or switch of the item, or activates its link or button; an item without any of these is clicked |
+| <kbd>Tab</kbd> | Leaves the list; returning to it focuses the first selected item, or the first item |
+
+Disabled items (`micl-list-item--disabled`) are skipped by the keyboard and get `aria-disabled="true"`.
 
 ## Theming
-Each list style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs). Set them on any appropriate parent element to affect its child lists.
+Each list style can be themed with CSS custom properties that follow the component-token naming convention, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs). Set them on any appropriate parent element to affect its child lists.
 
 ### Container
 
@@ -221,6 +236,11 @@ Each list style can be themed with CSS custom properties that follow the Materia
 | `--md-comp-list-container-space` | The vertical margin around the list | `0px` |
 | `--md-comp-list-segment-gap` | The gap between the items of a segmented list | `2px` |
 | `--md-comp-list-item-segmented-container-color` | The background color of the items of a segmented list | `--md-sys-color-surface` |
+| `--md-comp-list-divider-space` | The space above and below a [Divider](../divider/README.md) inside the list | `0px` |
+| `--md-comp-list-motion-effects` | The easing function of the state changes of an item | `--md-sys-motion-expressive-fast-spatial` |
+| `--md-comp-list-motion-duration` | The duration of the state changes of an item | `200ms` |
+
+The state changes are not animated when the user prefers reduced motion.
 
 ### Item layout
 
@@ -267,6 +287,8 @@ For selected items, every state also has its own token — `--md-comp-list-item-
 | `--md-comp-list-item-leading-image-expressive-shape` | The corner rounding of an image | `--md-sys-shape-corner-small` |
 | `--md-comp-list-item-leading-video-width` | The width of a video thumbnail | `100px` |
 | `--md-comp-list-item-leading-video-height` | The maximum height of a video thumbnail | `56px` |
+| `--md-comp-list-item-large-leading-video-width` | The width of a large video thumbnail | `114px` |
+| `--md-comp-list-item-large-leading-video-height` | The maximum height of a large video thumbnail | `64px` |
 | `--md-comp-list-item-leading-video-shape` | The corner rounding of a video thumbnail | `--md-sys-shape-corner-small` |
 
 ### Focus indicator
@@ -278,26 +300,28 @@ For selected items, every state also has its own token — `--md-comp-list-item-
 | `--md-comp-list-item-focus-indicator-offset` | The offset of the keyboard focus indicator | `-3px` |
 
 ### Item colors
-The colors of list items follow a naming pattern that combines the item's selection and interaction state with the colored part:
+List item colors follow a naming pattern combining the item's selection state, interaction state, and the specific UI part:
 
 ```
 --md-comp-list-item[-selected][-<state>]-<part>-color
 ```
 
-- `selected` targets items that are checked options, contain a checked checkbox or switch, or are the summary of an open accordion.
+- `selected` targets items that are checked options or contain a checked checkbox or switch.
 - `<state>` is one of `hover`, `focus`, `pressed`, `dragged` or `disabled`; omit it for the resting state.
 - `<part>` is one of `container`, `overline`, `label-text`, `supporting-text`, `leading-icon`, `trailing-icon`, `trailing-supporting-text` or `state-layer`.
 
-Every `state-layer` color has an `-opacity` companion (defaults: hover 8%, focus 10%, pressed 10%, dragged 16%, disabled 0%), and so does every color of a `disabled` state (default: --md-sys-state-disabled-state-layer-opacity, 38%). The `container` part exists for the resting, `selected` and `selected-disabled` combinations only, and the `overline` part has no interaction-state tokens. While an item is dragged, its elevation can be set with `--md-comp-list-item-dragged-container-elevation` and `--md-comp-list-item-selected-dragged-container-elevation` (default: --md-sys-elevation-level4). The defaults per part:
+Every `state-layer` color has an `-opacity` companion, and so does every color of a `disabled` state. The `container` part exists for the resting, `dragged`, `selected` and `selected-disabled` combinations only, and the `overline` part has no hover, focus or pressed tokens. Add the `micl-list-item--dragging` class to an item while it is being dragged (for example while reordering the list); its elevation can be set with `--md-comp-list-item-dragged-container-elevation` and `--md-comp-list-item-selected-dragged-container-elevation`. The defaults per part:
 
-| Part | Resting | Hover, focus, pressed, dragged | Selected | Selected + state | Disabled |
-|---|---|---|---|---|---|
-| container | transparent | | --md-sys-color-secondary-container | | selected: --md-sys-color-on-surface at 38% |
-| overline | --md-sys-color-on-surface-variant | | --md-sys-color-on-secondary-container | | --md-sys-color-on-surface at 38% |
-| label-text | --md-sys-color-on-surface | --md-sys-color-on-surface | --md-sys-color-on-secondary-container | --md-sys-color-on-secondary-container | --md-sys-color-on-surface at 38% |
-| supporting-text, trailing-supporting-text | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-secondary-container | --md-sys-color-on-surface | --md-sys-color-on-surface at 38% |
-| leading-icon, trailing-icon | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-secondary-container | --md-sys-color-on-surface | --md-sys-color-on-surface at 38% |
-| state-layer | | --md-sys-color-on-surface | | --md-sys-color-on-surface | --md-sys-color-on-surface at 0% |
+| Part | Resting | Hover, focus, pressed | Dragged | Selected | Selected + state | Disabled |
+|---|---|---|---|---|---|---|
+| container | transparent | | --md-sys-color-tertiary-container | --md-sys-color-secondary-container | | selected: --md-sys-color-on-surface at 38% |
+| overline | --md-sys-color-on-surface-variant | | --md-sys-color-on-tertiary-container | --md-sys-color-on-secondary-container | | --md-sys-color-on-surface at 38% |
+| label-text | --md-sys-color-on-surface | --md-sys-color-on-surface | --md-sys-color-on-tertiary-container | --md-sys-color-on-secondary-container | --md-sys-color-on-secondary-container | --md-sys-color-on-surface at 38% |
+| supporting-text, trailing-supporting-text | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-tertiary-container | --md-sys-color-on-secondary-container | --md-sys-color-on-surface | --md-sys-color-on-surface at 38% |
+| leading-icon, trailing-icon | --md-sys-color-on-surface-variant | --md-sys-color-on-surface-variant | --md-sys-color-on-tertiary-container | --md-sys-color-on-secondary-container | --md-sys-color-on-surface | --md-sys-color-on-surface at 38% |
+| state-layer | | --md-sys-color-on-surface | --md-sys-color-on-tertiary-container | | --md-sys-color-on-surface | --md-sys-color-on-surface at 0% |
+
+The M3 specification gives list items a `surface` container. MICL list items are transparent by default so that a list blends into the component it is placed in (a card, sheet or dialog); set `--md-comp-list-item-container-color` to `var(--md-sys-color-surface)` for the specification look.
 
 **Example: Changing the height of single-line list items**
 
