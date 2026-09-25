@@ -34,7 +34,7 @@
 $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
 
 .micl-textfield-filled > select {
-    --_line-height: calc(var(--md-comp-text-field-container-height, 56px) - 18px - 3px);
+    --_line-height: calc(var(--md-comp-text-field-container-height, 56px) - var(--_input-top, 18px) - 3px);
 }
 .micl-textfield-outlined > select {
     --_line-height: var(--md-comp-text-field-container-height, 56px);
@@ -47,15 +47,15 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     line-height: var(--_line-height);
 
     &::picker-icon {
-      color: var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant));
-      transition: motion.$md-sys-motion-duration-medium4 rotate;
-      transform-origin: 50% calc((var(--_line-height) / 2) - 1px);
+        color: var(--_icon-trailing-color, var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant)));
+        transition: rotate var(--_menu-motion-spatial-duration) var(--_menu-motion-spatial);
+        transform-origin: 50% calc((var(--_line-height) / 2) - 1px);
     }
     &:disabled::picker-icon {
         color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
     }
     &:open::picker-icon {
-      rotate: 180deg;
+        rotate: 180deg;
     }
 
     &::picker(select) {
@@ -63,7 +63,7 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
         --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
         --_list-item-background-opacity: 0%;
-        --micl-duration: var(--md-comp-menu-motion-spatial-duration-reverse);
+        --micl-duration: var(--_menu-motion-spatial-duration-reverse);
         --micl-easing: linear;
 
         appearance: base-select;
@@ -87,12 +87,12 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         transform-origin: var(--micl-select-picker-origin, top);
         transition:
             opacity var(--micl-duration) var(--micl-easing),
-            transform var(--micl-duration) var(--md-comp-menu-motion-spatial),
+            transform var(--micl-duration) var(--_menu-motion-spatial),
             overlay var(--micl-duration) linear allow-discrete,
             display var(--micl-duration) linear allow-discrete;
 
         &:popover-open {
-            --micl-duration: var(--md-comp-menu-motion-spatial-duration);
+            --micl-duration: var(--_menu-motion-spatial-duration);
             --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
 
             opacity: 1;
@@ -125,10 +125,12 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     }
 
     option {
+        --_option-description: attr(aria-description);
+
         line-height: normal;
 
         .micl-list-item__text::after {
-            content: attr(aria-description);
+            content: var(--_option-description);
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -136,10 +138,19 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
             color: var(--_trailing-icon-color);
         }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+        --_list-motion-duration: 0ms;
+        --_menu-motion-spatial-duration: 0ms;
+        --_menu-motion-spatial-duration-reverse: 0ms;
+    }
 }
 
 .micl-textfield-filled > select[multiple] {
     padding-block: 24px calc(5px - var(--_outline-width, 1px));
+}
+.micl-textfield-filled:not(:has(> label)) > select[multiple] {
+    padding-block-start: 5px;
 }
 
 @supports not (appearance: base-select) {
