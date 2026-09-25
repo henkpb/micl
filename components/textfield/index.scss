@@ -35,9 +35,8 @@
 
 $textfields: ':is(.micl-textfield-filled, .micl-textfield-outlined)';
 $fields: ':is(input, select, textarea)';
-
-// A text field is "populated" when its label floats.
-$populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select:not([data-miclinitialized]) option:checked:not([value=""]), > textarea:not(:empty, [data-miclinitialized]))';
+$focused: ':has(> :focus, > :where(select:open))';
+$populated: ':has(> :focus, > :where(select:open), > [data-miclvalue], > :autofill, > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select option:checked:is(:not(:empty), [label]:not([label=""])), > textarea:not(:empty, [data-miclinitialized]))';
 
 #{$textfields} {
     --_height: var(--md-comp-text-field-container-height, 56px);
@@ -162,6 +161,7 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     }
     &> .micl-textfield__icon-trailing {
         margin-inline: auto var(--_icon-space);
+        color: var(--_icon-trailing-color, var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant)));
     }
     &> :is(.micl-textfield__icon-leading, .micl-textfield__icon-trailing, .micl-textfield__prefix, .micl-textfield__suffix):not(a, button) {
         pointer-events: none;
@@ -180,16 +180,8 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
         --_icon-trailing: calc(var(--_icon-size) + var(--_icon-space));
     }
 
-    // While the label rests on top of the data element, hide the text that would shine
-    // through it: the input placeholder and the label of a selected empty-value option.
-    // A focused or populated text field moves the label out of the way and both return.
-    &:has(> label):not(#{$populated}) {
-        &> select {
-            color: transparent;
-        }
-        &> #{$fields}::placeholder {
-            color: transparent;
-        }
+    &:has(> label):not(#{$populated}) > #{$fields}::placeholder {
+        color: transparent;
     }
 
     &> .micl-textfield__supporting-text,
@@ -298,9 +290,6 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
         margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height) / 2);
     }
 
-    // The outline's top edge is drawn by these two pseudo-elements. The label sits in the
-    // middle grid column, so the notch for a floating label opens by retracting ::before
-    // to the first column.
     &::before,
     &::after {
         content: '';
@@ -354,12 +343,11 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     }
 }
 
-// Shared states. Rule order matters here — focus must follow hover, the disabled overrides must come last.
 #{$textfields} {
     &:hover {
         --_outline-color: var(--md-sys-color-on-surface);
     }
-    &:has(> :focus) {
+    &#{$focused} {
         --_outline-width: 3px;
         --_outline-color: var(--_focus-outline-color);
         --_label-color: var(--md-comp-text-field-focus-label-color, var(--md-sys-color-primary));
@@ -396,24 +384,19 @@ $populated: ':has(> :focus, > [data-miclvalue], > :autofill, > select[multiple],
     --_outline-color: var(--md-sys-color-error);
     --_caret-color: var(--md-sys-color-error);
     --_label-color: var(--md-sys-color-error);
+    --_icon-trailing-color: var(--md-sys-color-error);
 
-    &> .micl-textfield__icon-trailing,
     &> .micl-textfield__supporting-text,
     &> .micl-textfield__character-counter {
         color: var(--md-sys-color-error);
     }
-    &:hover:not(:has(> :focus)) {
+    &:hover:not(#{$focused}) {
         --_outline-color: var(--md-sys-color-on-error-container);
         --_label-color: var(--md-sys-color-on-error-container);
-
-        &> .micl-textfield__icon-trailing {
-            color: var(--md-sys-color-on-error-container);
-        }
+        --_icon-trailing-color: var(--md-sys-color-on-error-container);
     }
 }
 
-// If the icon elements are direction:ltr (like Material Symbols), their margin-inline resolves
-// against ltr and does not flip with the page direction — mirror them explicitly.
 #{$textfields}:dir(rtl) {
     &> .micl-textfield__icon-leading {
         margin-inline: auto var(--_icon-space);
