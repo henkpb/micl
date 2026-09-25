@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-effects-duration', 'expressive-default-spatial', 'expressive-default-spatial-duration', 'expressive-fast-spatial-duration');
 
 @include elevation.level(2);
 
@@ -146,10 +147,10 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 }
 
 .micl-menu[popover], :where(.micl-textfield-filled, .micl-textfield-outlined) > select {
-    --_menu-motion-effects-duration-reverse: var(--md-comp-menu-motion-effects-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
-    --_menu-motion-spatial: var(--md-comp-menu-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
-    --_menu-motion-spatial-duration: var(--md-comp-menu-motion-spatial-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
-    --_menu-motion-spatial-duration-reverse: var(--md-comp-menu-motion-spatial-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_menu-motion-effects-duration-reverse: var(--md-comp-menu-motion-effects-duration-reverse, var(--md-sys-motion-expressive-default-effects-duration));
+    --_menu-motion-spatial: var(--md-comp-menu-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
+    --_menu-motion-spatial-duration: var(--md-comp-menu-motion-spatial-duration, var(--md-sys-motion-expressive-default-spatial-duration));
+    --_menu-motion-spatial-duration-reverse: var(--md-comp-menu-motion-spatial-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
 
     --md-comp-list-container-shape: var(--md-comp-menu-active-container-shape, var(--md-comp-menu-container-shape, var(--md-sys-shape-corner-large, 16px)));
 
@@ -233,6 +234,7 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     padding: 0;
 
     border: none;
+@media (forced-colors: active) {        border: 1px solid CanvasText;    }
     outline: none;
     background-color: transparent;
     --micl-duration: var(--_menu-motion-spatial-duration-reverse);
@@ -254,12 +256,6 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         position-try-fallbacks: flip-block, --micl-menu-fill, --micl-menu-fill flip-block;
         margin-inline: $menu-viewport-margin;
     }
-    @media (prefers-reduced-motion: reduce) {
-        --_menu-motion-effects-duration-reverse: 0ms;
-        --_menu-motion-spatial-duration: 0ms;
-        --_menu-motion-spatial-duration-reverse: 0ms;
-    }
-
     &:popover-open {
         --micl-duration: var(--_menu-motion-spatial-duration);
         --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};

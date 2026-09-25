@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-spatial-duration', 'expressive-slow-spatial', 'expressive-slow-spatial-duration');
 
 @include elevation.level(0);
 @include elevation.level(1);
@@ -42,9 +43,9 @@ $container-max-width: 400px;
 dialog.micl-sidesheet {
     --_width: min(var(--md-comp-sidesheet-container-width, #{$container-width}), var(--md-comp-sidesheet-container-max-width, #{$container-max-width}));
     --_padding: var(--md-comp-sidesheet-padding, var(--md-sys-layout-window-margin, 24px));
-    --_motion-spatial: var(--md-comp-sidesheet-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_motion-duration: var(--md-comp-sidesheet-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-sidesheet-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_motion-spatial: var(--md-comp-sidesheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
+    --_motion-duration: var(--md-comp-sidesheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-sidesheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
 
     --micl-spring-buffer: 40px;
     --micl-duration: var(--_motion-duration-reverse);
@@ -64,6 +65,7 @@ dialog.micl-sidesheet {
     color: var(--md-comp-sidesheet-content-color, var(--md-sys-color-on-surface));
     background-color: var(--md-comp-sidesheet-standard-container-color, var(--md-sys-color-surface));
     border: none;
+@media (forced-colors: active) {        border: 1px solid CanvasText;    }
     border-radius: var(--md-comp-sidesheet-container-shape, var(--md-sys-shape-corner-none));
     box-shadow: var(--md-comp-sidesheet-standard-container-elevation, var(--md-sys-elevation-level0));
     opacity: 0;
@@ -142,17 +144,13 @@ dialog.micl-sidesheet {
         transition: background-color var(--micl-duration) linear;
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+        @extend %micl-backdrop;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_motion-duration: 0ms;
-        --_motion-duration-reverse: 0ms;
-    }
 }
 
 @media (min-width: tokens.$md-sys-breakpoint-medium-min) {
@@ -160,17 +158,11 @@ dialog.micl-sidesheet {
         box-sizing: border-box;
         max-inline-size: 100%;
         margin: 0;
-        transition: max-inline-size var(--md-comp-sidesheet-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+        transition: max-inline-size var(--md-comp-sidesheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
     }
     body:has(dialog.micl-sidesheet:popover-open) {
         max-inline-size: calc(100% - min(var(--md-comp-sidesheet-container-width, #{$container-width}), var(--md-comp-sidesheet-container-max-width, #{$container-max-width})));
-        transition: max-inline-size var(--md-comp-sidesheet-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration}) var(--md-comp-sidesheet-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
+        transition: max-inline-size var(--md-comp-sidesheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration)) var(--md-comp-sidesheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        body:has(dialog.micl-sidesheet[popover]),
-        body:has(dialog.micl-sidesheet:popover-open) {
-            transition-duration: 0s;
-        }
-    }
 }

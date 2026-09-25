@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-spatial', 'expressive-default-spatial-duration');
 
 @include elevation.level(0);
 @include elevation.level(1);
@@ -112,8 +113,8 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
 $headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__headline-l)';
 
 #{$cards} {
-    --_card-motion-spatial: var(--md-comp-card-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
-    --_card-motion-duration: var(--md-comp-card-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_card-motion-spatial: var(--md-comp-card-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
+    --_card-motion-duration: var(--md-comp-card-motion-duration, var(--md-sys-motion-expressive-default-spatial-duration));
     --_card-ripple-duration: var(--md-sys-state-ripple-duration);
 
     --_card-color: var(--md-sys-color-on-surface-variant);
@@ -229,11 +230,6 @@ $headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__hea
         &:not(.micl-card--compact) {
             row-gap: var(--md-comp-card-gap, 8px);
         }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        --_card-motion-duration: 0ms;
-        --_card-ripple-duration: 0ms;
     }
 }
 
@@ -418,4 +414,10 @@ $headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__hea
 summary.micl-card--compact {
     display: grid;
     padding-block-end: 0;
+}
+
+@media (forced-colors: active) {
+    :is(.micl-card-elevated, .micl-card-filled) {
+        --_card-border: 1px solid CanvasText;
+    }
 }

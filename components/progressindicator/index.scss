@@ -675,3 +675,12 @@ progress.micl-circular-progress {
         --micl-progress-crawl: 360deg;
     }
 }
+
+@media (forced-colors: active) {
+    :is(.micl-linear-progress, .micl-circular-progress) {
+        forced-color-adjust: none;
+        --md-comp-progress-indicator-active-indicator-color: Highlight;
+        --md-comp-progress-indicator-track-color: GrayText;
+        --md-comp-progress-indicator-stop-indicator-color: Highlight;
+    }
+}

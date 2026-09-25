@@ -24,6 +24,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-effects-duration', 'expressive-default-spatial', 'expressive-default-spatial-duration', 'expressive-fast-spatial');
 
 @include elevation.level(4);
 
@@ -116,6 +117,10 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
         }
     }
     &#{$selected} {
+        @media (forced-colors: active) {
+            outline: 2px solid CanvasText;
+            outline-offset: -2px;
+        }
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-selected-hovered-expressive-shape, var(--md-sys-shape-corner-large, 16px));
             --_headline-color: var(--md-comp-list-item-selected-hover-label-text-color, var(--md-sys-color-on-secondary-container));
@@ -165,10 +170,10 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
 }
 
 .micl-list {
-    --_list-motion-effects: var(--md-comp-list-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
-    --_list-motion-duration: var(--md-comp-list-motion-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
-    --_accordion-motion-spatial: var(--md-comp-accordion-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
-    --_accordion-motion-duration: var(--md-comp-accordion-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_list-motion-effects: var(--md-comp-list-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
+    --_list-motion-duration: var(--md-comp-list-motion-duration, var(--md-sys-motion-expressive-default-effects-duration));
+    --_accordion-motion-spatial: var(--md-comp-accordion-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
+    --_accordion-motion-duration: var(--md-comp-accordion-motion-duration, var(--md-sys-motion-expressive-default-spatial-duration));
     --md-comp-divider-space: calc(var(--md-comp-list-divider-space, 0px) + var(--md-comp-divider-thickness, 1px) / 2);
     --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
     --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
@@ -182,11 +187,6 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     interpolate-size: allow-keywords;
     list-style-type: none;
     background-color: var(--md-comp-list-container-color, transparent);
-
-    @media (prefers-reduced-motion: reduce) {
-        --_list-motion-duration: 0ms;
-        --_accordion-motion-duration: 0ms;
-    }
 
     &.micl-list--segmented {
         --_list-item-background-color: var(--md-comp-list-item-segmented-container-color, var(--md-sys-color-surface));

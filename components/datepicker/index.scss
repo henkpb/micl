@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-effects-duration', 'expressive-default-spatial-duration', 'expressive-fast-effects', 'expressive-fast-effects-duration', 'expressive-fast-spatial-duration');
 
 @include shape.corner('large');
 @include shape.corner('full');
@@ -84,11 +85,11 @@
 }
 
 dialog.micl-dialog.micl-datepicker {
-    --_datepicker-motion-spatial: var(--md-comp-date-picker-motion-spatial, #{motion.$md-sys-motion-expressive-fast-effects});
-    --_datepicker-motion-spatial-duration: var(--md-comp-date-picker-motion-spatial-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
-    --_datepicker-motion-duration: var(--md-comp-date-picker-motion-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
-    --_datepicker-motion-duration-reverse: var(--md-comp-date-picker-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-effects-duration});
-    --_datepicker-button-motion-duration: var(--md-comp-date-picker-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_datepicker-motion-spatial: var(--md-comp-date-picker-motion-spatial, var(--md-sys-motion-expressive-fast-effects));
+    --_datepicker-motion-spatial-duration: var(--md-comp-date-picker-motion-spatial-duration, var(--md-sys-motion-expressive-default-spatial-duration));
+    --_datepicker-motion-duration: var(--md-comp-date-picker-motion-duration, var(--md-sys-motion-expressive-default-effects-duration));
+    --_datepicker-motion-duration-reverse: var(--md-comp-date-picker-motion-duration-reverse, var(--md-sys-motion-expressive-fast-effects-duration));
+    --_datepicker-button-motion-duration: var(--md-comp-date-picker-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
 
     --_target: var(--md-sys-state-target-size, 48px);
 
@@ -182,12 +183,6 @@ dialog.micl-dialog.micl-datepicker {
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_datepicker-motion-spatial-duration: 0ms;
-        --_datepicker-motion-duration: 0ms;
-        --_datepicker-motion-duration-reverse: 0ms;
-        --_datepicker-button-motion-duration: 0ms;
-    }
 }
 
 .micl-datepicker__inputmode {

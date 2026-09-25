@@ -39,23 +39,33 @@ You can customize elevation levels by overriding their global CSS variables.
 Motion brings your UI to life, making it expressive and intuitive to use. The motion styles are based on the [Material Design 3 Motion](https://m3.material.io/styles/motion/overview/how-it-works) guidelines.
 
 ### CSS
-Import the motion styles into your project. To install all sixteen duration tokens at once, configure the module in master mode:
+Import the motion styles into your project. To install all sixteen duration tokens plus the twelve M3 Expressive motion schemes at once, configure the module in master mode:
 
-```CSS
+```SCSS
 @use "material-inspired-component-library/styles/motion" with ($master: true);
 ```
 
 To install only specific durations, use the `duration` mixin:
 
-```CSS
+```SCSS
 @use "material-inspired-component-library/styles/motion";
-@include motion.duration('short3');
-@include motion.duration('long4');
+@include motion.duration('short3', 'long4');
 ```
 
-The easing curves (`$md-sys-motion-easing-emphasized`, `$md-sys-motion-easing-standard` and its accelerate/decelerate variants, the expressive/standard fast-default-slow × spatial-effects curves, etc.) are exposed as **Sass variables**, not CSS custom properties. Reference them through interpolation in your transitions:
+The M3 Expressive motion schemes — `expressive` and `standard`, each in a `fast`, `default` and `slow` variant for `spatial` and `effects` motion — are exposed as custom properties too: one for the easing curve (for example `--md-sys-motion-expressive-fast-spatial`) and one for its duration (`--md-sys-motion-expressive-fast-spatial-duration`). Components read their motion from these tokens, so the defaults of a component's `--md-comp-*-motion-*` tokens are the scheme tokens named in its README. To install only the schemes you use, pass their names to the `token` mixin:
 
-```CSS
+```SCSS
+@use "material-inspired-component-library/styles/motion";
+@include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration');
+
+.my-component {
+    transition: translate var(--md-sys-motion-expressive-fast-spatial-duration) var(--md-sys-motion-expressive-fast-spatial);
+}
+```
+
+The classic easing curves (`$md-sys-motion-easing-emphasized`, `$md-sys-motion-easing-standard` and their accelerate/decelerate variants) remain **Sass variables**. Reference them through interpolation in your transitions:
+
+```SCSS
 @use "material-inspired-component-library/styles/motion";
 @include motion.duration('short3');
 
@@ -63,6 +73,9 @@ The easing curves (`$md-sys-motion-easing-emphasized`, `$md-sys-motion-easing-st
     transition: opacity var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard;
 }
 ```
+
+### Reduced motion
+Every duration token — the sixteen `--md-sys-motion-duration-*` tokens, the twelve scheme durations and the ripple's `--md-sys-state-ripple-duration` — is set to `0ms` when the user requests reduced motion (`prefers-reduced-motion: reduce`). Because all components derive their durations from these tokens, they all switch to instant state changes without handling the media query themselves. If you override a component's duration token with a literal value, wrap the override in the same media query, or point it at a scheme duration token so it follows the preference automatically.
 
 ### Customizations
 You can customize duration tokens by overriding their global CSS variables.

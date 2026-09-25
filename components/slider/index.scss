@@ -297,6 +297,25 @@ input[type=range][class*=micl-slider-] {
         --_inactive-clip: inset(0 calc(var(--_thumb-position) + 16px) 0 0 round var(--_track-shape) 2px 2px var(--_track-shape));
         --_active-clip: inset(0 0 0 calc(100% - var(--_thumb-position)) round 2px var(--_track-shape) var(--_track-shape) 2px);
     }
+
+    @media (forced-colors: active) {
+        forced-color-adjust: none;
+        --_active-track-color: Highlight;
+        --_inactive-track-color: GrayText;
+        --_handle-color: Highlight;
+        --_active-stop-color: HighlightText;
+        --_inactive-stop-color: Canvas;
+        --md-comp-slider-value-indicator-container-color: CanvasText;
+        --md-comp-slider-value-indicator-label-text-color: Canvas;
+
+        &:disabled {
+            --_active-track-color: GrayText;
+            --_inactive-track-color: GrayText;
+            --_handle-color: GrayText;
+            --_active-stop-color: Canvas;
+            --_inactive-stop-color: Canvas;
+        }
+    }
 }
 
 .micl-slider__container {

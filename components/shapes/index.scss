@@ -22,6 +22,7 @@
 @use 'sass:map';
 @use '../../styles/motion';
 @use 'paths.generated' as paths;
+@include motion.token('expressive-default-spatial', 'expressive-default-spatial-duration');
 
 $master: false !default;
 
@@ -29,18 +30,14 @@ $shadow-color: var(--md-sys-color-shadow, black);
 
 @mixin base {
     .micl-shapes {
-        --_shapes-motion-duration: var(--md-comp-shapes-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+        --_shapes-motion-duration: var(--md-comp-shapes-motion-duration, var(--md-sys-motion-expressive-default-spatial-duration));
         inline-size: var(--md-comp-shapes-size, 100px);
         block-size: var(--md-comp-shapes-size, 100px);
         fill: var(--md-comp-shapes-color, var(--md-sys-color-primary));
         overflow: visible;
-
-        @media (prefers-reduced-motion: reduce) {
-            --_shapes-motion-duration: 0ms;
-        }
     }
     .micl-shapes > path {
-        transition: d var(--_shapes-motion-duration) var(--md-comp-shapes-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
+        transition: d var(--_shapes-motion-duration) var(--md-comp-shapes-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
     }
     .micl-shapes--outlined {
         fill: none;

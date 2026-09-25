@@ -24,6 +24,7 @@
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
+@include motion.token('expressive-default-spatial-duration', 'expressive-slow-spatial', 'expressive-slow-spatial-duration');
 
 @include elevation.level(1);
 
@@ -47,9 +48,9 @@ dialog.micl-bottomsheet {
     --_padding: var(--md-comp-bottomsheet-padding, 24px);
     --_drag-handle-width: var(--md-comp-bottomsheet-drag-handle-width, 32px);
     --_drag-handle-height: var(--md-comp-bottomsheet-drag-handle-height, 4px);
-    --_motion-spatial: var(--md-comp-bottomsheet-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_motion-duration: var(--md-comp-bottomsheet-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-bottomsheet-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_motion-spatial: var(--md-comp-bottomsheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
+    --_motion-duration: var(--md-comp-bottomsheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-bottomsheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
 
     --micl-duration: var(--_motion-duration-reverse);
     --micl-easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
@@ -67,6 +68,7 @@ dialog.micl-bottomsheet {
     margin: 0;
     padding: 0;
     border: none;
+@media (forced-colors: active) {        border: 1px solid CanvasText;    }
     border-radius: var(--md-comp-bottomsheet-container-shape, var(--md-sys-shape-corner-extra-large-top));
     background-color: var(--md-comp-bottomsheet-container-color, var(--md-sys-color-surface-container-low));
     box-shadow: var(--md-comp-bottomsheet-container-elevation, var(--md-sys-elevation-level1));
@@ -156,7 +158,7 @@ dialog.micl-bottomsheet {
         }
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+        @extend %micl-backdrop;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
@@ -170,10 +172,6 @@ dialog.micl-bottomsheet {
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_motion-duration: 0ms;
-        --_motion-duration-reverse: 0ms;
-    }
     @media (min-width: layout.$md-sys-breakpoint-medium-min) {
         inline-size: min(100% - (2 * var(--_margin)), 640px);
         margin-inline: auto;

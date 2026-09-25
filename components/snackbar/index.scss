@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-spatial', 'expressive-default-spatial-duration', 'expressive-fast-spatial-duration');
 
 @include elevation.level(3);
 
@@ -37,9 +38,9 @@
 @include typography.scale('body-medium');
 
 .micl-snackbar {
-    --_motion-spatial: var(--md-comp-snackbar-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
-    --_motion-duration: var(--md-comp-snackbar-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-snackbar-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_motion-spatial: var(--md-comp-snackbar-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
+    --_motion-duration: var(--md-comp-snackbar-motion-duration, var(--md-sys-motion-expressive-default-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-snackbar-motion-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
     --micl-duration: var(--_motion-duration-reverse);
     --statelayer-color: var(--md-sys-color-inverse-primary);
     --statelayer-opacity: 0%;
@@ -65,6 +66,7 @@
     padding-inline: var(--md-comp-snackbar-padding, 16px);
 
     border: none;
+@media (forced-colors: active) {        border: 1px solid CanvasText;    }
     outline: none;
     border-radius: var(--md-comp-snackbar-container-shape, var(--md-sys-shape-corner-extra-small));
     box-shadow: var(--md-comp-snackbar-container-elevation, var(--md-sys-elevation-level3));

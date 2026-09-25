@@ -26,6 +26,7 @@
 @use '../../styles/motion';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration');
 
 $disabled: ':is(:disabled, :has(> :disabled))';
 $enabled: ':not(:disabled, :has(> :disabled))';
@@ -49,8 +50,8 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 @include typography.scale('label-large');
 
 %micl-button-base {
-    --_motion-effects: var(--md-comp-button-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
-    --_motion-duration: var(--md-comp-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_motion-effects: var(--md-comp-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
+    --_motion-duration: var(--md-comp-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -62,6 +63,9 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     padding: 0;
     border: none;
     border-radius: calc(var(--micl-height) / 2);
+    @media (forced-colors: active) {
+        border: 1px solid ButtonBorder;
+    }
     background-image:
         radial-gradient(
             circle at var(--micl-x, center) var(--micl-y, center),
@@ -217,5 +221,14 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
                 font-variation-settings: 'FILL' 1;
             }
         }
+    }
+}
+
+@media (forced-colors: active) {
+    #{$selected} {
+        forced-color-adjust: none;
+        color: HighlightText !important;
+        border-color: Highlight !important;
+        background-color: Highlight !important;
     }
 }

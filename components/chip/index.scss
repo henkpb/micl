@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/typography';
 @use '../button/shared' as button;
+@include motion.token('expressive-fast-effects', 'expressive-fast-effects-duration');
 
 @include shape.corner('small');
 @include shape.corner('full');
@@ -87,7 +88,7 @@
             font-size: 18px;
             inline-size: 18px;
             overflow: hidden;
-            transition: inline-size var(--md-comp-chip-motion-duration, #{motion.$md-sys-motion-expressive-fast-effects-duration}) var(--md-comp-chip-motion-effects, #{motion.$md-sys-motion-expressive-fast-effects});
+            transition: inline-size var(--md-comp-chip-motion-duration, var(--md-sys-motion-expressive-fast-effects-duration)) var(--md-comp-chip-motion-effects, var(--md-sys-motion-expressive-fast-effects));
         }
         &#{button.$enabled} .micl-button__icon {
             color: var(--micl-chip-icon, var(--md-sys-color-primary));
@@ -243,6 +244,13 @@
 
             border-color: transparent;
             background-color: var(--md-comp-filter-chip-selected-container-color, var(--md-sys-color-secondary-container));
+            @media (forced-colors: active) {
+                --micl-chip-label: HighlightText;
+                --micl-chip-icon: HighlightText;
+                forced-color-adjust: none;
+                border-color: Highlight;
+                background-color: Highlight;
+            }
 
             &:not(.micl-chip--elevated)#{button.$enabled}:hover:not(:active) {
                 box-shadow: var(--md-sys-elevation-level1);

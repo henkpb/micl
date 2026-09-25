@@ -24,6 +24,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-effects-duration', 'expressive-fast-spatial');
 
 @include elevation.level(2);
 
@@ -41,8 +42,8 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     --_line-height: var(--md-comp-text-field-container-height, 56px);
 }
 #{$selects} {
-    --_list-motion-effects: var(--md-comp-list-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
-    --_list-motion-duration: var(--md-comp-list-motion-duration, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_list-motion-effects: var(--md-comp-list-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
+    --_list-motion-duration: var(--md-comp-list-motion-duration, var(--md-sys-motion-expressive-default-effects-duration));
 
     appearance: base-select;
     line-height: var(--_line-height);
@@ -140,11 +141,6 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_list-motion-duration: 0ms;
-        --_menu-motion-spatial-duration: 0ms;
-        --_menu-motion-spatial-duration-reverse: 0ms;
-    }
 }
 
 .micl-textfield-filled > select[multiple] {

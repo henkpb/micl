@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/togglelabel';
+@include motion.token('expressive-default-effects-duration', 'expressive-slow-effects', 'expressive-slow-effects-duration');
 
 @include shape.corner('full');
 
@@ -41,9 +42,9 @@
 $radio: 'input[type=radio].micl-radio';
 
 #{$radio} {
-    --_motion-effects: var(--md-comp-radio-button-motion-effects, #{motion.$md-sys-motion-expressive-slow-effects});
-    --_motion-duration: var(--md-comp-radio-button-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
-    --_motion-duration-reverse: var(--md-comp-radio-button-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_motion-effects: var(--md-comp-radio-button-motion-effects, var(--md-sys-motion-expressive-slow-effects));
+    --_motion-duration: var(--md-comp-radio-button-motion-duration, var(--md-sys-motion-expressive-slow-effects-duration));
+    --_motion-duration-reverse: var(--md-comp-radio-button-motion-duration-reverse, var(--md-sys-motion-expressive-default-effects-duration));
 
     --_size: var(--md-comp-radio-button-icon-size, 20px);
     --_outline-width: var(--md-comp-radio-button-outline-width, 2px);
@@ -159,6 +160,22 @@ $radio: 'input[type=radio].micl-radio';
         }
         &:checked::after {
             background-color: var(--md-sys-color-on-surface);
+        }
+    }
+
+    @media (forced-colors: active) {
+        &::after {
+            --_outline-color: CanvasText;
+            forced-color-adjust: none;
+            background-color: CanvasText;
+        }
+        &:checked::after {
+            --_outline-color: Highlight;
+            background-color: Highlight;
+        }
+        &:disabled::after {
+            --_outline-color: GrayText;
+            background-color: GrayText;
         }
     }
 }

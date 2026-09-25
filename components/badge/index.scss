@@ -37,6 +37,9 @@
     overflow: clip;
     background-color: var(--md-comp-badge-color, var(--md-sys-color-error));
     color: var(--md-comp-badge-large-label-text-color, var(--md-sys-color-on-error));
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
 
     &.micl-badge--small {
         inline-size: var(--_size);

@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-fast-spatial-duration');
 
 @include shape.corner('small');
 @include shape.corner('full');
@@ -67,7 +68,7 @@
 }
 
 dialog.micl-dialog.micl-timepicker {
-    --_timepicker-motion-duration: var(--md-comp-time-picker-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_timepicker-motion-duration: var(--md-comp-time-picker-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
 
     --_input-height: var(--md-comp-time-picker-time-selector-container-height, 72px);
     --_input-width: var(--md-comp-time-picker-time-selector-container-width, 96px);
@@ -165,9 +166,6 @@ dialog.micl-dialog.micl-timepicker {
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_timepicker-motion-duration: 0ms;
-    }
 }
 
 .micl-timepicker {
@@ -269,6 +267,11 @@ dialog.micl-dialog.micl-timepicker {
         &:checked {
             color: var(--md-comp-time-picker-period-selector-selected-label-text-color, var(--md-sys-color-on-tertiary-container));
             background-color: var(--md-comp-time-picker-period-selector-selected-container-color, var(--md-sys-color-tertiary-container));
+            @media (forced-colors: active) {
+                forced-color-adjust: none;
+                color: HighlightText;
+                background-color: Highlight;
+            }
         }
         &:focus-visible {
             outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);

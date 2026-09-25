@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/togglelabel';
+@include motion.token('expressive-default-effects-duration', 'expressive-fast-spatial', 'expressive-slow-effects-duration');
 
 @include shape.corner('full');
 
@@ -44,9 +45,9 @@
 $checkbox: 'input[type=checkbox].micl-checkbox';
 
 #{$checkbox} {
-    --_motion-duration: var(--md-comp-checkbox-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
-    --_motion-duration-reverse: var(--md-comp-checkbox-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
-    --_motion-spatial: var(--md-comp-checkbox-motion-spatial, #{motion.$md-sys-motion-expressive-fast-spatial});
+    --_motion-duration: var(--md-comp-checkbox-motion-duration, var(--md-sys-motion-expressive-slow-effects-duration));
+    --_motion-duration-reverse: var(--md-comp-checkbox-motion-duration-reverse, var(--md-sys-motion-expressive-default-effects-duration));
+    --_motion-spatial: var(--md-comp-checkbox-motion-spatial, var(--md-sys-motion-expressive-fast-spatial));
 
     --_size: var(--md-comp-checkbox-container-size, 18px);
     --_outline-width: var(--md-comp-checkbox-outline-width, 2px);

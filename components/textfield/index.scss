@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-effects-duration', 'expressive-slow-effects', 'expressive-slow-effects-duration');
 
 @include shape.corner('extra-small');
 
@@ -50,9 +51,9 @@ $populated: ':has(> :focus, > :where(select:open), > [data-miclvalue], > :autofi
     --_suffix: 0px;
     --_outline-width: 1px;
     --_label-color: var(--md-comp-text-field-label-color, var(--md-sys-color-on-surface-variant));
-    --_effects: var(--md-comp-text-field-motion-effects, #{motion.$md-sys-motion-expressive-slow-effects});
-    --_duration: var(--md-comp-text-field-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
-    --_duration-reverse: var(--md-comp-text-field-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_effects: var(--md-comp-text-field-motion-effects, var(--md-sys-motion-expressive-slow-effects));
+    --_duration: var(--md-comp-text-field-motion-duration, var(--md-sys-motion-expressive-slow-effects-duration));
+    --_duration-reverse: var(--md-comp-text-field-motion-duration-reverse, var(--md-sys-motion-expressive-default-effects-duration));
 
     display: grid;
     grid-template-areas: "textfield" "supporting";
@@ -206,10 +207,6 @@ $populated: ':has(> :focus, > :where(select:open), > [data-miclvalue], > :autofi
         padding-inline-end: 64px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_duration: 0ms;
-        --_duration-reverse: 0ms;
-    }
 }
 
 .micl-textfield-filled {

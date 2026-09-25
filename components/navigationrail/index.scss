@@ -26,6 +26,7 @@
 @use '../../styles/statelayer';
 @use '../../styles/typography';
 @use 'navitem';
+@include motion.token('expressive-default-spatial-duration', 'expressive-fast-spatial-duration', 'expressive-slow-spatial', 'expressive-slow-spatial-duration');
 
 @include elevation.level(0);
 @include elevation.level(2);
@@ -45,11 +46,11 @@
 
 .micl-navigationrail {
     --_navigationrail-spring-buffer: var(--md-comp-nav-rail-spring-buffer, 100px);
-    --_navigationrail-motion-spatial: var(--md-comp-nav-rail-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_navigationrail-motion-duration: var(--md-comp-nav-rail-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_navigationrail-motion-duration-reverse: var(--md-comp-nav-rail-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
-    --_navigationrail-morph-duration: var(--md-comp-nav-rail-morph-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
-    --_navigationrail-morph-duration-reverse: var(--md-comp-nav-rail-morph-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_navigationrail-motion-spatial: var(--md-comp-nav-rail-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
+    --_navigationrail-motion-duration: var(--md-comp-nav-rail-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_navigationrail-motion-duration-reverse: var(--md-comp-nav-rail-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
+    --_navigationrail-morph-duration: var(--md-comp-nav-rail-morph-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
+    --_navigationrail-morph-duration-reverse: var(--md-comp-nav-rail-morph-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
 
     --_navigationrail-current-max-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
     --_navigationrail-current-min-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
@@ -258,7 +259,7 @@
         background-color: var(--md-comp-nav-rail-expanded-modal-container-color, var(--md-sys-color-surface-container));
 
         &::backdrop {
-            background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+            @extend %micl-backdrop;
             @starting-style { background-color: rgba(0, 0, 0, 0); }
         }
     }
@@ -271,12 +272,6 @@
             display var(--micl-duration) linear allow-discrete;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_navigationrail-motion-duration: 0ms;
-        --_navigationrail-motion-duration-reverse: 0ms;
-        --_navigationrail-morph-duration: 0ms;
-        --_navigationrail-morph-duration-reverse: 0ms;
-    }
 }
 
 dialog.micl-navigationrail,
@@ -285,6 +280,12 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     --_navigationrail-current-min-width: var(--md-comp-nav-rail-expanded-container-width-minimum, 220px);
     --_navigationrail-item-direction: row;
     --_navigationrail-item-width: fit-content;
+
+    .micl-navigationrail__content > a.micl-navigationrail__item[aria-current="page"] {
+        @media (forced-colors: active) {
+            --_navitem-active-label-color: HighlightText;
+        }
+    }
 
     --_navigationrail-item-target-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
     --_navigationrail-item-target-margin: 0px;

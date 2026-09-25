@@ -24,6 +24,7 @@
 @use '../../styles/statelayer';
 @use '../../styles/togglelabel';
 @use '../../styles/typography';
+@include motion.token('expressive-slow-effects', 'expressive-slow-effects-duration');
 
 @include shape.corner('full');
 
@@ -40,8 +41,8 @@ $switch: 'input[type=checkbox].micl-switch';
 #{$switch} {
     --_unselected-icon: var(--md-comp-switch-unselected-icon, "+");
     --_selected-icon: var(--md-comp-switch-selected-icon, "\AC");
-    --_motion-effects: var(--md-comp-switch-motion-effects, #{motion.$md-sys-motion-expressive-slow-effects});
-    --_motion-duration: var(--md-comp-switch-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
+    --_motion-effects: var(--md-comp-switch-motion-effects, var(--md-sys-motion-expressive-slow-effects));
+    --_motion-duration: var(--md-comp-switch-motion-duration, var(--md-sys-motion-expressive-slow-effects-duration));
 
     --_track-width: var(--md-comp-switch-track-width, 52px);
     --_track-height: var(--md-comp-switch-track-height, 32px);
@@ -182,6 +183,31 @@ $switch: 'input[type=checkbox].micl-switch';
             background-color: var(--md-comp-switch-disabled-selected-handle-color, var(--md-sys-color-surface));
             opacity: 100%;
         }
+    }
+
+    @media (forced-colors: active) {
+        forced-color-adjust: none;
+        --md-comp-switch-unselected-track-outline-color: ButtonText;
+        --md-comp-switch-unselected-track-color: Canvas;
+        --md-comp-switch-unselected-handle-color: ButtonText;
+        --md-comp-switch-unselected-hover-handle-color: ButtonText;
+        --md-comp-switch-unselected-focus-handle-color: ButtonText;
+        --md-comp-switch-unselected-pressed-handle-color: ButtonText;
+        --md-comp-switch-unselected-icon-color: Canvas;
+        --md-comp-switch-selected-track-color: Highlight;
+        --md-comp-switch-selected-handle-color: HighlightText;
+        --md-comp-switch-selected-hover-handle-color: HighlightText;
+        --md-comp-switch-selected-focus-handle-color: HighlightText;
+        --md-comp-switch-selected-pressed-handle-color: HighlightText;
+        --md-comp-switch-selected-icon-color: Highlight;
+        --md-comp-switch-disabled-unselected-track-outline-color: GrayText;
+        --md-comp-switch-disabled-unselected-track-color: Canvas;
+        --md-comp-switch-disabled-unselected-handle-color: GrayText;
+        --md-comp-switch-disabled-unselected-icon-color: Canvas;
+        --md-comp-switch-disabled-selected-track-color: GrayText;
+        --md-comp-switch-disabled-selected-handle-color: Canvas;
+        --md-comp-switch-disabled-selected-icon-color: GrayText;
+        --md-comp-switch-focus-indicator-color: CanvasText;
     }
 }
 

@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration', 'expressive-slow-spatial-duration');
 
 @include elevation.level(0);
 @include elevation.level(2);
@@ -41,9 +42,9 @@
 @include typography.scale('body-medium');
 
 dialog.micl-dialog {
-    --_motion-spatial: var(--md-comp-dialog-motion-spatial, #{motion.$md-sys-motion-expressive-fast-spatial});
-    --_motion-duration: var(--md-comp-dialog-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-dialog-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_motion-spatial: var(--md-comp-dialog-motion-spatial, var(--md-sys-motion-expressive-fast-spatial));
+    --_motion-duration: var(--md-comp-dialog-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-dialog-motion-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
 
     --micl-duration: var(--_motion-duration-reverse);
     --micl-spatial: #{motion.$md-sys-motion-easing-emphasized-accelerate};
@@ -69,6 +70,7 @@ dialog.micl-dialog {
     margin: 0;
     outline: none;
     border: none;
+@media (forced-colors: active) {        border: 1px solid CanvasText;    }
     border-radius: var(--md-comp-dialog-container-shape, var(--md-sys-shape-corner-extra-large));
     color: var(--md-comp-dialog-content-color, var(--md-sys-color-on-surface));
     background-color: var(--_dialog-background-color);
@@ -131,7 +133,7 @@ dialog.micl-dialog {
             display var(--micl-duration) linear allow-discrete;
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+        @extend %micl-backdrop;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
@@ -208,10 +210,6 @@ dialog.micl-dialog {
         padding: var(--_padding);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_motion-duration: 0ms;
-        --_motion-duration-reverse: 0ms;
-    }
 }
 
 dialog.micl-dialog.micl-dialog--fullscreen {

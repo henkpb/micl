@@ -47,10 +47,19 @@ $_tokens: (
     ripple-duration:               750ms,
 );
 
+%micl-backdrop {
+    background-color: rgb(from var(--md-sys-color-scrim, black) r g b / var(--md-sys-state-backdrop-opacity, 32%));
+}
+
 @if $master {
     :root {
         @each $name, $value in $_tokens {
             --md-sys-state-#{$name}: #{$value};
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        :root {
+            --md-sys-state-ripple-duration: 0ms;
         }
     }
 
@@ -85,6 +94,13 @@ $_tokens: (
         }
         :root {
             --md-sys-state-#{$name}: #{map.get($_tokens, $name)};
+        }
+        @if $name == 'ripple-duration' {
+            @media (prefers-reduced-motion: reduce) {
+                :root {
+                    --md-sys-state-ripple-duration: 0ms;
+                }
+            }
         }
     }
 }

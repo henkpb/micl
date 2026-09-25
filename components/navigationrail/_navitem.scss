@@ -69,10 +69,6 @@
     &.micl-rippling {
         animation: micl-ripple calc(var(--_navitem-ripple-duration) * 1.333);
     }
-
-    @media (prefers-reduced-motion: reduce) {
-        --_navitem-ripple-duration: 0ms;
-    }
 }
 
 %micl-navitem-icon {
@@ -92,6 +88,12 @@
 
 %micl-navitem-current {
     background-color: var(--_navitem-active-indicator-color, var(--md-sys-color-secondary-container));
+    @media (forced-colors: active) {
+        --_navitem-active-icon-color: HighlightText;
+        --_navitem-active-label-color: CanvasText;
+        forced-color-adjust: none;
+        background-color: Highlight;
+    }
 }
 %micl-navitem-current-icon {
     color: var(--_navitem-active-icon-color, var(--md-sys-color-on-secondary-container));
