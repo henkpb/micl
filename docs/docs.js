@@ -132,6 +132,19 @@
         }
     }
 
+    const SHAPES = [
+        'circle', 'square', 'slanted', 'arch', 'semicircle', 'oval', 'pill', 'triangle',
+        'arrow', 'fan', 'diamond', 'clamshell', 'pentagon', 'gem', 'very-sunny', 'sunny',
+        'cookie-4', 'cookie-6', 'cookie-7', 'cookie-9', 'cookie-12', 'clover-4', 'clover-8',
+        'burst', 'soft-burst', 'boom', 'soft-boom', 'flower', 'puffy', 'puffy-diamond',
+        'ghost-ish', 'pixel-circle', 'pixel-triangle', 'bun', 'heart',
+    ];
+
+    document.querySelectorAll('.docs-hero__shape').forEach(shape => {
+        const [name] = SHAPES.splice(Math.floor(Math.random() * SHAPES.length), 1);
+        shape.classList.add(`micl-shapes--${name}`);
+    });
+
     const examples = document.querySelectorAll('.docs-example');
     if (!examples.length) {
         return;

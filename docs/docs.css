@@ -91,23 +91,22 @@ h1 {
     font-size: var(--md-sys-typescale-label-large-size);
     font-weight: 500;
 }
-.docs-hero__sunny,
-.docs-hero__clover {
+.docs-hero__shape {
     position: absolute;
     pointer-events: none;
 }
-.docs-hero__sunny {
-    inset-inline-end: -40px;
-    inset-block-start: -48px;
-    inline-size: 210px;
-    block-size: 210px;
+.docs-hero__shape--corner {
+    inset-inline-end: -22px;
+    inset-block-start: -30px;
+    inline-size: 175px;
+    block-size: 175px;
     fill: var(--md-sys-color-tertiary-container);
 }
-.docs-hero__clover {
-    inset-inline-end: 110px;
-    inset-block-end: -64px;
-    inline-size: 170px;
-    block-size: 170px;
+.docs-hero__shape--edge {
+    inset-inline-end: 124px;
+    inset-block-end: -50px;
+    inline-size: 142px;
+    block-size: 142px;
     fill: var(--md-sys-color-secondary-fixed-dim);
     opacity: 0.6;
 }
