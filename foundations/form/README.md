@@ -19,12 +19,12 @@ document.getElementById("myform").addEventListener("submit", event => {
 });
 ```
 
-If you load the foundation directly via a `<script>` tag, the object is exposed as the `micl` global:
+If you load the foundation directly via a `<script>` tag, the object is exposed as the `miclForm` global:
 
 ```HTML
 <script src="path/to/dist/foundations/form/index.js"></script>
 <script>
-    micl.validateForm(document.getElementById("myform"), true);
+    miclForm.validateForm(document.getElementById("myform"), true);
 </script>
 ```
 

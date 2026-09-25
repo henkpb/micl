@@ -39,20 +39,17 @@ interface ComponentEntry<T extends HTMLElement> {
 
 interface Registry {
     map      : Record<string, ComponentEntry<any>>;
-    rippled  : WeakSet<HTMLElement>;
     activated: boolean;
 }
 
 type EventHandlerKey = keyof ComponentEventHandlers;
 
-// The registry lives on globalThis because every standalone component bundle carries its
-// own copy of this module: they must share one component map and one activation
-// (MutationObserver + delegated document listeners).
 const registry: Registry = ((globalThis as any).__miclRegistry ??= {
     map      : {},
-    rippled  : new WeakSet<HTMLElement>(),
     activated: false
 });
+
+const rippleSelector = '[class*="micl-"], [class*="micl-"] > summary';
 
 const selector = (): string => Object.keys(registry.map).join(',');
 
@@ -75,49 +72,53 @@ const initializeComponent = (element: HTMLElement): void => {
     }
 };
 
-const initializeComponents = (parent: HTMLDocument | HTMLElement): void => {
+const initializeComponents = (parent: Document | HTMLElement): void => {
     const s = selector();
     if (s) {
         parent.querySelectorAll<HTMLElement>(s).forEach(initializeComponent);
     }
-    parent.querySelectorAll<HTMLElement>('[class*="micl-"], [class*="micl-"] > summary').forEach(element => {
-        if (registry.rippled.has(element)) return;
-
-        if (window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1') {
-            element.addEventListener('pointerdown', (e: PointerEvent) => {
-                if ((e.currentTarget as Element).classList.contains('micl-card--nonactionable')) {
-                    return;
-                }
-                e.stopPropagation();
-
-                // Percentages, not lengths: the same value positions both the gradient box
-                // (background-position) and the circle within it, pinning the ripple origin
-                // to the touch point at every background-size.
-                const r = element.getBoundingClientRect();
-                element.style.setProperty('--micl-x', `${(e.clientX - r.left) / r.width * 100}%`);
-                element.style.setProperty('--micl-y', `${(e.clientY - r.top) / r.height * 100}%`);
-
-                element.classList.remove('micl-rippling');
-                void element.offsetWidth;
-                element.classList.add('micl-rippling');
-
-                const cleanup = (ev: AnimationEvent): void => {
-                    if (ev.animationName !== 'micl-ripple') return;
-
-                    element.classList.remove('micl-rippling');
-                    element.style.removeProperty('--micl-x');
-                    element.style.removeProperty('--micl-y');
-                    element.removeEventListener('animationend', cleanup);
-                };
-
-                element.addEventListener('animationend', cleanup);
-            });
-
-            registry.rippled.add(element);
-        }
-    });
 
     initializeScrollbars();
+};
+
+const rippleTarget = (target: EventTarget | null): HTMLElement | null => {
+    let element = target instanceof Element ? target.closest<HTMLElement>(rippleSelector) : null;
+
+    while (element) {
+        if (
+            !element.classList.contains('micl-card--nonactionable')
+            && window.getComputedStyle(element).getPropertyValue('--micl-ripple') === '1'
+        ) {
+            return element;
+        }
+        element = element.parentElement?.closest<HTMLElement>(rippleSelector) ?? null;
+    }
+
+    return null;
+};
+
+const handlePointerDown = (event: PointerEvent): void => {
+    const element = rippleTarget(event.target);
+    if (!element) return;
+
+    const r = element.getBoundingClientRect();
+    element.style.setProperty('--micl-x', `${(event.clientX - r.left) / r.width * 100}%`);
+    element.style.setProperty('--micl-y', `${(event.clientY - r.top) / r.height * 100}%`);
+
+    element.classList.remove('micl-rippling');
+    void element.offsetWidth;
+    element.classList.add('micl-rippling');
+
+    const cleanup = (ev: AnimationEvent): void => {
+        if (ev.animationName !== 'micl-ripple') return;
+
+        element.classList.remove('micl-rippling');
+        element.style.removeProperty('--micl-x');
+        element.style.removeProperty('--micl-y');
+        element.removeEventListener('animationend', cleanup);
+    };
+
+    element.addEventListener('animationend', cleanup);
 };
 
 const cleanupComponent = (element: HTMLElement): void => {
@@ -127,7 +128,7 @@ const cleanupComponent = (element: HTMLElement): void => {
     }
 };
 
-const cleanupComponents = (parent: HTMLDocument | HTMLElement): void => {
+const cleanupComponents = (parent: Document | HTMLElement): void => {
     const s = selector();
     if (s) {
         parent.querySelectorAll<HTMLElement>(s).forEach(cleanupComponent);
@@ -138,7 +139,9 @@ const handleEvent = (event: Event): void => {
     const s = selector();
     if (!s) return;
 
-    const target = (event.target as Element).closest(s);
+    if (!(event.target instanceof Element)) return;
+
+    const target = event.target.closest(s);
     if (!(target instanceof HTMLElement)) return;
 
     const entry = findEntry(target);
@@ -200,13 +203,12 @@ const activate = () => {
 
     initializeComponents(document);
 
-    // Delegated Event Handlers. A command event does not bubble, so it is delegated
-    // from the capture phase, where it still passes the document on its way down.
     document.addEventListener('change', handleEvent);
     document.addEventListener('input', handleEvent);
     document.addEventListener('keydown', handleEvent);
     document.addEventListener('command', handleEvent, true);
     document.addEventListener('reset', handleReset);
+    document.addEventListener('pointerdown', handlePointerDown);
 };
 
 //
