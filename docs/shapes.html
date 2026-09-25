@@ -14,23 +14,36 @@
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
     <style>
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
         .shapes {
             display: flex;
-            flex-direction: row;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-inline-end: 16px;
-            margin-block-end: 36px;
+            align-items: center;
+            gap: 24px;
         }
-        .buttons {
+        .shapes-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+            gap: 24px 8px;
+            --md-comp-shapes-size: 64px;
+        }
+        .shapes-gallery figure {
             display: flex;
-            align-content: flex-start;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             gap: 8px;
+            margin: 0;
         }
-        .micl-shapes {
-            block-size: 140px;
-            inline-size: 140px;
+        .shapes-gallery figcaption {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: var(--md-sys-typescale-label-medium-size);
+            text-align: center;
         }
     </style>
 </head>
@@ -45,82 +58,424 @@
         </header>
 
         <section class="docs-hero">
-            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
-            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
             <p class="docs-hero__eyebrow">Component</p>
             <h1>Shapes</h1>
-            <p class="docs-hero__lede">The Shapes component renders Material Design 3 Expressive Shapes as inline SVGs whose d attribute is supplied by CSS. Because the path data is set with d: rather than baked into the SVG markup, swapping a shape's class triggers a smooth transition: d morph between the old and new outline.</p>
+            <p class="docs-hero__lede">The Shapes component renders the Material Design 3 Expressive shape library as inline SVGs whose path is supplied by the CSS d property. Swapping a shape's class makes the browser morph smoothly from the old outline to the new one.</p>
             <ul class="docs-hero__facts">
                 <li>35 Material shapes</li>
-                <li>Smooth d: path morphing</li>
-                <li>Fill, outline & shadow</li>
+                <li>Smooth morphing</li>
+                <li>No JavaScript required</li>
             </ul>
             <div class="docs-hero__demo">
-                <div class="docs-hero__demo-row">
-                    <svg class="micl-shapes micl-shapes--heart" viewBox="-10 0 120 100" style="inline-size:72px;block-size:72px" aria-hidden="true"><path /></svg>
-                    <svg class="micl-shapes micl-shapes--very-sunny" viewBox="-10 0 120 100" style="inline-size:72px;block-size:72px;fill:var(--md-sys-color-tertiary)" aria-hidden="true"><path /></svg>
-                    <svg class="micl-shapes micl-shapes--flower" viewBox="-10 0 120 100" style="inline-size:72px;block-size:72px;fill:var(--md-sys-color-secondary)" aria-hidden="true"><path /></svg>
+                <div class="docs-hero__demo-row" style="--md-comp-shapes-size:72px">
+                    <svg class="micl-shapes micl-shapes--heart" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                    <svg class="micl-shapes micl-shapes--very-sunny" viewBox="0 0 100 100" style="--md-comp-shapes-color:var(--md-sys-color-tertiary)" aria-hidden="true"><path /></svg>
+                    <svg class="micl-shapes micl-shapes--flower" viewBox="0 0 100 100" style="--md-comp-shapes-color:var(--md-sys-color-secondary)" aria-hidden="true"><path /></svg>
                 </div>
             </div>
         </section>
 
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#morphing">Morphing</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#theming">Theming</a>
+        </nav>
+
         <main class="docs-content">
-            <div class="docs-stage" style="display:flex">
-                <div class="docs-example">
-                    <template>
-                        <div class="shapes">
-                            <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100"><path /></svg>
-                            <svg class="micl-shapes micl-shapes--square micl-shapes--outlined" viewBox="-10 0 120 100"><path /></svg>
-                            <svg class="micl-shapes micl-shapes--square" viewBox="-10 0 120 100">
-                                <defs>
-                                    <pattern id="photo-1" patternUnits="userSpaceOnUse" x="-10" y="0" width="120" height="100">
-                                        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="120" height="100" preserveAspectRatio="xMidYMid slice" />
-                                    </pattern>
-                                </defs>
-                                <path fill="url(#photo-1)" />
-                            </svg>
-                            <svg class="micl-shapes micl-shapes--square micl-shapes--shadowed" viewBox="-10 0 120 100" style="fill:var(--md-sys-color-tertiary)"><path /></svg>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" data-target="circle"         class="micl-button-outlined-s">Circle</button>
-                            <button type="button" data-target="square"         class="micl-button-outlined-s">Square</button>
-                            <button type="button" data-target="slanted"        class="micl-button-outlined-s">Slanted</button>
-                            <button type="button" data-target="arch"           class="micl-button-outlined-s">Arch</button>
-                            <button type="button" data-target="semicircle"     class="micl-button-outlined-s">Semi-circle</button>
-                            <button type="button" data-target="oval"           class="micl-button-outlined-s">Oval</button>
-                            <button type="button" data-target="pill"           class="micl-button-outlined-s">Pill</button>
-                            <button type="button" data-target="triangle"       class="micl-button-outlined-s">Triangle</button>
-                            <button type="button" data-target="arrow"          class="micl-button-outlined-s">Arrow</button>
-                            <button type="button" data-target="fan"            class="micl-button-outlined-s">Fan</button>
-                            <button type="button" data-target="diamond"        class="micl-button-outlined-s">Diamond</button>
-                            <button type="button" data-target="clamshell"      class="micl-button-outlined-s">Clamshell</button>
-                            <button type="button" data-target="pentagon"       class="micl-button-outlined-s">Pentagon</button>
-                            <button type="button" data-target="gem"            class="micl-button-outlined-s">Gem</button>
-                            <button type="button" data-target="very-sunny"     class="micl-button-outlined-s">Very-sunny</button>
-                            <button type="button" data-target="sunny"          class="micl-button-outlined-s">Sunny</button>
-                            <button type="button" data-target="cookie-4"       class="micl-button-outlined-s">4-cookie</button>
-                            <button type="button" data-target="cookie-6"       class="micl-button-outlined-s">6-cookie</button>
-                            <button type="button" data-target="cookie-7"       class="micl-button-outlined-s">7-cookie</button>
-                            <button type="button" data-target="cookie-9"       class="micl-button-outlined-s">9-cookie</button>
-                            <button type="button" data-target="cookie-12"      class="micl-button-outlined-s">12-cookie</button>
-                            <button type="button" data-target="clover-4"       class="micl-button-outlined-s">4-leaf clover</button>
-                            <button type="button" data-target="clover-8"       class="micl-button-outlined-s">8-leaf clover</button>
-                            <button type="button" data-target="burst"          class="micl-button-outlined-s">Burst</button>
-                            <button type="button" data-target="soft-burst"     class="micl-button-outlined-s">Soft-burst</button>
-                            <button type="button" data-target="boom"           class="micl-button-outlined-s">Boom</button>
-                            <button type="button" data-target="soft-boom"      class="micl-button-outlined-s">Soft-boom</button>
-                            <button type="button" data-target="flower"         class="micl-button-outlined-s">Flower</button>
-                            <button type="button" data-target="puffy"          class="micl-button-outlined-s">Puffy</button>
-                            <button type="button" data-target="puffy-diamond"  class="micl-button-outlined-s">Puffy-diamond</button>
-                            <button type="button" data-target="ghost-ish"      class="micl-button-outlined-s">Ghost-ish</button>
-                            <button type="button" data-target="pixel-circle"   class="micl-button-outlined-s">Pixel-circle</button>
-                            <button type="button" data-target="pixel-triangle" class="micl-button-outlined-s">Pixel-triangle</button>
-                            <button type="button" data-target="bun"            class="micl-button-outlined-s">Bun</button>
-                            <button type="button" data-target="heart"          class="micl-button-outlined-s">Heart</button>
-                        </div>
-                    </template>
+            <section class="docs-section" id="morphing">
+                <div class="docs-section__head">
+                    <h2>Morphing</h2>
+                    <p class="docs-section__use">Pick a shape to morph the examples: a filled shape, an outlined shape, a shape filled with an image and a shadowed shape. When reduced motion is requested, the shapes change instantly.</p>
                 </div>
-            </div>
+                <div class="docs-stage">
+                    <div class="docs-example" id="morph-examples">
+                        <template>
+                            <div class="shapes" style="--md-comp-shapes-size:140px">
+                                <svg class="micl-shapes micl-shapes--square" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--square micl-shapes--outlined" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--square" viewBox="0 0 100 100" role="img" aria-label="Siberian tiger">
+                                    <defs>
+                                        <pattern id="tiger" patternUnits="userSpaceOnUse" width="100" height="100">
+                                            <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Sibirischer_tiger_de_edit02.jpg/330px-Sibirischer_tiger_de_edit02.jpg" width="100" height="100" preserveAspectRatio="xMidYMid slice" />
+                                        </pattern>
+                                    </defs>
+                                    <path fill="url(#tiger)" />
+                                </svg>
+                                <svg class="micl-shapes micl-shapes--square micl-shapes--shadowed" viewBox="0 0 100 100" style="--md-comp-shapes-color:var(--md-sys-color-tertiary)" aria-hidden="true"><path /></svg>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <fieldset class="micl-chips" id="shape-picker" aria-label="Shape">
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="circle">
+                                <span>Circle</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="square" checked>
+                                <span>Square</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="slanted">
+                                <span>Slanted</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="arch">
+                                <span>Arch</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="semicircle">
+                                <span>Semicircle</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="oval">
+                                <span>Oval</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="pill">
+                                <span>Pill</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="triangle">
+                                <span>Triangle</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="arrow">
+                                <span>Arrow</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="fan">
+                                <span>Fan</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="diamond">
+                                <span>Diamond</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="clamshell">
+                                <span>Clamshell</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="pentagon">
+                                <span>Pentagon</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="gem">
+                                <span>Gem</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="very-sunny">
+                                <span>Very sunny</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="sunny">
+                                <span>Sunny</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="cookie-4">
+                                <span>4-sided cookie</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="cookie-6">
+                                <span>6-sided cookie</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="cookie-7">
+                                <span>7-sided cookie</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="cookie-9">
+                                <span>9-sided cookie</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="cookie-12">
+                                <span>12-sided cookie</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="clover-4">
+                                <span>4-leaf clover</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="clover-8">
+                                <span>8-leaf clover</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="burst">
+                                <span>Burst</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="soft-burst">
+                                <span>Soft burst</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="boom">
+                                <span>Boom</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="soft-boom">
+                                <span>Soft boom</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="flower">
+                                <span>Flower</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="puffy">
+                                <span>Puffy</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="puffy-diamond">
+                                <span>Puffy diamond</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="ghost-ish">
+                                <span>Ghost-ish</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="pixel-circle">
+                                <span>Pixel circle</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="pixel-triangle">
+                                <span>Pixel triangle</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="bun">
+                                <span>Bun</span>
+                            </label>
+                            <label class="micl-chip-filter">
+                                <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">check</span>
+                                <input type="radio" name="shape" value="heart">
+                                <span>Heart</span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="gallery">
+                <div class="docs-section__head">
+                    <h2>Gallery</h2>
+                    <p class="docs-section__use">The 35 shapes of the M3 shape library. Each one fills its 100 × 100 viewBox along its longer side.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="shapes-gallery">
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--circle" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Circle</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--square" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Square</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--slanted" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Slanted</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--arch" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Arch</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--semicircle" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Semicircle</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--oval" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Oval</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--pill" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Pill</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--triangle" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Triangle</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--arrow" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Arrow</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--fan" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Fan</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--diamond" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Diamond</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--clamshell" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Clamshell</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--pentagon" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Pentagon</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--gem" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Gem</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--very-sunny" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Very sunny</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--sunny" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Sunny</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--cookie-4" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>4-sided cookie</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--cookie-6" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>6-sided cookie</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--cookie-7" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>7-sided cookie</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--cookie-9" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>9-sided cookie</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--cookie-12" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>12-sided cookie</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--clover-4" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>4-leaf clover</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--clover-8" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>8-leaf clover</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--burst" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Burst</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--soft-burst" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Soft burst</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--boom" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Boom</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--soft-boom" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Soft boom</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--flower" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Flower</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--puffy" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Puffy</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--puffy-diamond" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Puffy diamond</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--ghost-ish" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Ghost-ish</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--pixel-circle" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Pixel circle</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--pixel-triangle" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Pixel triangle</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--bun" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Bun</figcaption>
+                            </figure>
+                            <figure>
+                                <svg class="micl-shapes micl-shapes--heart" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <figcaption>Heart</figcaption>
+                            </figure>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                    <p class="docs-section__use">Size, colors, outline, shadow and motion are component tokens, so they can be set on the shape or on any ancestor.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Size and color</p>
+                        <template>
+                            <div class="shapes">
+                                <svg class="micl-shapes micl-shapes--cookie-9" viewBox="0 0 100 100" style="--md-comp-shapes-size:48px" aria-hidden="true"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--cookie-9" viewBox="0 0 100 100" style="--md-comp-shapes-size:72px;--md-comp-shapes-color:var(--md-sys-color-secondary)" aria-hidden="true"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--cookie-9" viewBox="0 0 100 100" style="--md-comp-shapes-size:96px;--md-comp-shapes-color:var(--md-sys-color-tertiary)" aria-hidden="true"><path /></svg>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Outline</p>
+                        <template>
+                            <div class="shapes" style="--md-comp-shapes-outline-color:var(--md-sys-color-outline)">
+                                <svg class="micl-shapes micl-shapes--outlined micl-shapes--gem" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--outlined micl-shapes--gem" viewBox="0 0 100 100" style="--md-comp-shapes-outline-width:6" aria-hidden="true"><path /></svg>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Shadow</p>
+                        <template>
+                            <div class="shapes" style="--md-comp-shapes-color:var(--md-sys-color-primary-container)">
+                                <svg class="micl-shapes micl-shapes--shadowed micl-shapes--clover-4" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+                                <svg class="micl-shapes micl-shapes--shadowed micl-shapes--clover-4" viewBox="0 0 100 100" style="--md-comp-shapes-shadow:drop-shadow(0 4px 2px rgb(from var(--md-sys-color-shadow) r g b / 0.3)) drop-shadow(0 8px 6px rgb(from var(--md-sys-color-shadow) r g b / 0.15))" aria-hidden="true"><path /></svg>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
@@ -129,37 +484,13 @@
     <script src="micl.js"></script>
     <script src="docs.js"></script>
     <script>
-        const SHAPES = [
-            'circle', 'square', 'slanted', 'arch', 'semicircle', 'oval', 'pill', 'triangle',
-            'arrow', 'fan', 'diamond', 'clamshell', 'pentagon', 'gem', 'very-sunny', 'sunny',
-            'cookie-4', 'cookie-6', 'cookie-7', 'cookie-9', 'cookie-12', 'clover-4', 'clover-8',
-            'burst', 'soft-burst', 'boom', 'soft-boom', 'flower', 'puffy', 'puffy-diamond',
-            'ghost-ish', 'pixel-circle', 'pixel-triangle', 'bun', 'heart'
-        ];
+        const picker = document.getElementById('shape-picker');
+        const shapeClasses = [...picker.querySelectorAll('input')].map(input => `micl-shapes--${input.value}`);
 
-        document.querySelectorAll('.micl-shapes').forEach(el => {
-            el.addEventListener('morph', event => {
-                const target = event.currentTarget;
-                target.style.setProperty('--micl-shapes-morph-duration', `${event.detail.duration}ms`);
-                if (event.detail.easing) {
-                    target.style.setProperty('--micl-shapes-morph-easing', event.detail.easing);
-                }
-                SHAPES.forEach(shape => target.classList.remove(`micl-shapes--${shape}`));
-                target.classList.add(`micl-shapes--${event.detail.shape}`);
-            });
-        });
-
-        document.querySelectorAll('button[data-target]').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.micl-shapes').forEach(el => {
-                    el.dispatchEvent(new CustomEvent('morph', {
-                        detail: {
-                            shape   : button.dataset.target,
-                            duration: 2000,
-                            easing  : 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-                        }
-                    }));
-                });
+        picker.addEventListener('change', event => {
+            document.querySelectorAll('#morph-examples .micl-shapes').forEach(shape => {
+                shape.classList.remove(...shapeClasses);
+                shape.classList.add(`micl-shapes--${event.target.value}`);
             });
         });
     </script>

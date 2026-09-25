@@ -20,28 +20,38 @@
 // SOFTWARE.
 
 @use 'sass:map';
+@use '../../styles/motion';
 @use 'paths.generated' as paths;
 
 $master: false !default;
 
+$shadow-color: var(--md-sys-color-shadow, black);
+
 @mixin base {
     .micl-shapes {
-        inline-size: 100px;
-        block-size: 100px;
-        fill: var(--md-sys-color-primary);
-        overflow: visible; 
+        --_shapes-motion-duration: var(--md-comp-shapes-motion-duration, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+        inline-size: var(--md-comp-shapes-size, 100px);
+        block-size: var(--md-comp-shapes-size, 100px);
+        fill: var(--md-comp-shapes-color, var(--md-sys-color-primary));
+        overflow: visible;
+
+        @media (prefers-reduced-motion: reduce) {
+            --_shapes-motion-duration: 0ms;
+        }
     }
     .micl-shapes > path {
-        transition: d var(--micl-shapes-morph-duration, 0ms) var(--micl-shapes-morph-easing, ease-in-out);
+        transition: d var(--_shapes-motion-duration) var(--md-comp-shapes-motion-spatial, #{motion.$md-sys-motion-expressive-default-spatial});
     }
     .micl-shapes--outlined {
         fill: none;
-        stroke: var(--md-sys-color-primary);
-        stroke-width: 2;
+        stroke: var(--md-comp-shapes-outline-color, var(--md-sys-color-primary));
+        stroke-width: var(--md-comp-shapes-outline-width, 2);
         stroke-linejoin: round;
     }
     .micl-shapes--shadowed {
-        filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.25));
+        filter: var(--md-comp-shapes-shadow,
+            drop-shadow(0 1px 1px rgb(from #{$shadow-color} r g b / 0.3))
+            drop-shadow(0 2px 3px rgb(from #{$shadow-color} r g b / 0.15)));
     }
 }
 

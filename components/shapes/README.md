@@ -1,18 +1,19 @@
 # Shapes
-The Shapes component renders [Material Design 3 Expressive Shapes](https://m3.material.io/styles/shape/overview-principles) as inline SVGs whose `d` attribute is supplied by CSS. Because the path data is set with `d:` rather than baked into the SVG markup, swapping a shape's class triggers a smooth `transition: d` morph between the old and new outline.
+This component implements the [Material Design 3 Expressive shape library](https://m3.material.io/styles/shape/overview-principles) using inline SVGs powered by the CSS [`d` property](https://developer.mozilla.org/en-US/docs/Web/CSS/d). By storing path data in the stylesheet rather than the markup, swapping a shape's class triggers a smooth, native browser morph between outlines.
 
 ## Basic Usage
 
 ### HTML
-A shape is an empty `<svg>` with the base class `micl-shapes` plus one of the shape modifier classes:
+A shape is an `<svg>` with a `viewBox` of `0 0 100 100`, the base class `micl-shapes` plus one of the shape modifier classes, and exactly one `<path>` as its direct child:
 
 ```HTML
-<svg class="micl-shapes micl-shapes--diamond"><path /></svg>
+<svg class="micl-shapes micl-shapes--diamond" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
 ```
 
-### CSS
+Every shape is drawn in a 100 × 100 coordinate system and fills that square along its longer side, so the `viewBox` is what makes the shape scale with the size of the SVG.
 
-The Shapes component is **opt-in** — it is not included in the master `micl.css` bundle, because most apps don't need 35 decorative shapes. Pick one of three integration paths:
+### CSS
+To prevent bloating the master `micl.css` bundle, the Shapes component is **opt-in**. Choose one of three integration paths depending on how many shapes you need:
 
 **1. Import only the shapes you actually use:**
 
@@ -42,12 +43,11 @@ Equivalent to calling `shapes.base` plus `shapes.use(…)` with every shape.
 The prebuilt bundle contains all 35 shapes plus the base styles.
 
 ### JavaScript
-No JavaScript is required. Morphing between shapes is a pure CSS animation: when you replace `micl-shapes--diamond` with `micl-shapes--pill` on the element, the browser interpolates the `d:` value automatically. The morph timing can be customised via two CSS custom properties on the element:
+No JavaScript is required. Morphing between shapes is a pure CSS transition: when you replace `micl-shapes--diamond` with `micl-shapes--pill` on the element, the browser interpolates the `d` value. The morph uses the M3 expressive default spatial motion; see [Theming](#theming) to change it.
 
-| Custom property | Default | Description |
-| --------------- | ------- | ----------- |
-| `--micl-shapes-morph-duration` | `0ms` | Length of the morph transition |
-| `--micl-shapes-morph-easing` | `ease-in-out` | Easing curve of the transition |
+```JavaScript
+shape.classList.replace('micl-shapes--diamond', 'micl-shapes--pill');
+```
 
 ### Live Demo
 A live example of the [Shapes component](https://henkpb.github.io/micl/shapes.html) is available, with a button per shape that morphs the demo SVGs.
@@ -68,27 +68,61 @@ Optional modifier classes:
 
 | Class | Effect |
 | --- | --- |
-| `micl-shapes--outlined` | Renders the shape as a stroked outline instead of a filled fill |
-| `micl-shapes--shadowed` | Adds a soft drop-shadow filter |
+| `micl-shapes--outlined` | Renders the shape as a stroked outline instead of a filled shape |
+| `micl-shapes--shadowed` | Adds a soft drop shadow in the theme's shadow color |
 
-
-## Customizations
-The base styles size the SVG to 100 × 100 px, fill it with the application's primary color, and let it overflow its viewBox horizontally (so wide shapes like *pill* and *fan* are not clipped). Override these on the element or on a parent:
+**Image fills**: To display an image instead of a flat color (like a profile picture), fill the shape's path with an SVG `<pattern>`:
 
 ```HTML
-<svg class="micl-shapes micl-shapes--diamond"
-    viewBox="0 0 100 100"
-    style="inline-size:64px;block-size:64px;fill:var(--md-sys-color-secondary)">
+<svg class="micl-shapes micl-shapes--cookie-9" viewBox="0 0 100 100" role="img" aria-label="Profile picture">
+  <defs>
+    <pattern id="avatar" patternUnits="userSpaceOnUse" width="100" height="100">
+      <image href="avatar.jpg" width="100" height="100" preserveAspectRatio="xMidYMid slice" />
+    </pattern>
+  </defs>
+  <path fill="url(#avatar)" />
+</svg>
+```
+
+## Accessibility
+An SVG is exposed to assistive technology by default, so tell it what the shape means:
+
+* **Decorative shapes:** Apply `aria-hidden="true"` to shapes that are purely visual.
+* **Meaningful shapes:** Apply `role="img"` and a descriptive `aria-label` (e.g., for profile pictures or status indicators).
+* **Respect motion preferences:** The morphing animation automatically disables itself and snaps instantly to the new shape if the user has requested reduced motion at the OS level.
+
+## Theming
+The shapes can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. The tokens are resolved on the SVG itself, so they can be set on the element directly or inherited from any ancestor.
+
+| Custom property | Meaning | Default |
+| --- | --- | --- |
+| `--md-comp-shapes-size` | The width and height of the SVG | `100px` |
+| `--md-comp-shapes-color` | The fill color | `--md-sys-color-primary` |
+| `--md-comp-shapes-outline-color` | The stroke color of an outlined shape | `--md-sys-color-primary` |
+| `--md-comp-shapes-outline-width` | The stroke width of an outlined shape, in `viewBox` units | `2` |
+| `--md-comp-shapes-shadow` | The `filter` of a shadowed shape | Two drop shadows in `--md-sys-color-shadow` |
+| `--md-comp-shapes-motion-duration` | The duration of the morph | `500ms` |
+| `--md-comp-shapes-motion-spatial` | The easing curve of the morph | `cubic-bezier(0.38, 1.21, 0.22, 1)` |
+
+**Layout note (Overflow)**: The SVG's `overflow` property is set to `visible` by default. Because SVG strokes are drawn centered on the path, half of an outlined shape's stroke (and its drop shadow) extends beyond the `viewBox` boundary. This visible overflow prevents clipping.
+
+**Example: A small secondary shape that morphs faster**
+
+```HTML
+<svg class="micl-shapes micl-shapes--sunny" viewBox="0 0 100 100" aria-hidden="true"
+    style="--md-comp-shapes-size: 48px; --md-comp-shapes-color: var(--md-sys-color-secondary); --md-comp-shapes-motion-duration: 350ms;">
   <path />
 </svg>
 ```
 
-For `micl-shapes--outlined`, the stroke colour and width are controlled by the standard SVG `stroke` and `stroke-width` properties:
+**Example: An outlined shape**
 
 ```HTML
-<svg class="micl-shapes micl-shapes--outlined micl-shapes--pill"
-    viewBox="0 0 100 100"
-    style="stroke:var(--md-sys-color-outline);stroke-width:3">
+<svg class="micl-shapes micl-shapes--outlined micl-shapes--pill" viewBox="0 0 100 100" aria-hidden="true"
+    style="--md-comp-shapes-outline-color: var(--md-sys-color-outline); --md-comp-shapes-outline-width: 3;">
   <path />
 </svg>
 ```
+
+## Compatibility
+These shapes rely on the CSS [`d` property](https://developer.mozilla.org/en-US/docs/Web/CSS/d) property. While supported in Chromium and Firefox, browsers lacking support (like Safari) will render an empty SVG. Review the MDN browser compatibility table if you target a broad user base.
