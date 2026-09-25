@@ -99,13 +99,14 @@ $circ-cap-active: radial-gradient(circle closest-side,
 $circ-cap-track: radial-gradient(circle closest-side,
     var(--micl-progress-track-color) calc(100% - 0.75px), transparent);
 $circ-gap: "min(var(--micl-progress-sweep), var(--micl-progress-gap))";
+$progress-fraction: "clamp(0, attr(value type(<number>), 0) / max(attr(max type(<number>), 1), 0.001), 1)";
+$aria-fraction: "clamp(0, (attr(aria-valuenow type(<number>), 0) - attr(aria-valuemin type(<number>), 0)) / max(attr(aria-valuemax type(<number>), 100) - attr(aria-valuemin type(<number>), 0), 0.001), 1)";
 
 progress.micl-linear-progress {
     --_track-thickness: var(--md-comp-linear-progress-track-thickness, 4px);
     --_active-thickness: var(--md-comp-linear-progress-active-thickness, 4px);
-    --_gap-color: var(--_card-background-color, var(--md-sys-color-surface-container-low));
+    --_stop-trailing-space: var(--md-comp-linear-progress-stop-trailing-space, 0px);
     --_padding: calc((var(--_track-thickness) - var(--_active-thickness)) / 2);
-    --_space: var(--md-comp-linear-progress-track-active-space, 4px);
 
     appearance: none;
     box-sizing: border-box;
@@ -123,34 +124,26 @@ progress.micl-linear-progress {
     &:not(:indeterminate) {
         --_size: var(--md-comp-linear-progress-stop-size, 4px);
         background-image: $stop-dot, linear-gradient(#{$track-color}, #{$track-color});
-        background-position: calc(100% - var(--md-comp-linear-progress-stop-trailing-space, 0px)) center, 0 center;
+        background-position: calc(100% - var(--_stop-trailing-space)) center, 0 center;
         background-size: var(--_size) var(--_size), 100% var(--_track-thickness);
         background-repeat: no-repeat;
 
         &:dir(rtl) {
-            background-position-x: var(--md-comp-linear-progress-stop-trailing-space, 0px), 0;
-        }
-
-        &::-webkit-progress-value {
-            box-shadow: var(--_space) 0 0 0 var(--_gap-color), calc(-1 * var(--_space)) 0 0 0 var(--_gap-color);
-        }
-        &::-moz-progress-bar {
-            box-shadow: var(--_space) 0 0 0 var(--_gap-color), calc(-1 * var(--_space)) 0 0 0 var(--_gap-color);
+            background-position-x: var(--_stop-trailing-space), 0;
         }
 
         @supports (inline-size: attr(value type(<number>))) {
-            --_fraction: min(calc(attr(value type(<number>), 0) / max(attr(max type(<number>), 1), 0.001)), 1);
-            --micl-progress-tail: calc(var(--_fraction) * 100%);
+            --micl-progress-tail: calc(#{$progress-fraction} * 100%);
             --micl-progress-space: var(--md-comp-linear-progress-track-active-space, 4px);
             --micl-progress-thickness: var(--_active-thickness);
             --micl-progress-track-color: #{$track-color};
             --micl-progress-active-color: #{$active-color};
             --micl-progress-stop-color: var(--md-comp-linear-progress-stop-color, var(--md-sys-color-primary));
-            transition: --micl-progress-tail motion.$md-sys-motion-duration-long2 linear;
+            transition: --micl-progress-tail motion.$md-sys-motion-duration-long2 motion.$md-sys-motion-easing-standard;
             background-color: transparent;
             background-image: $det-dot, $det-bar-cap, $det-bar-body,
                 linear-gradient(to right, transparent #{$det-carve}, var(--micl-progress-track-color) #{$det-carve});
-            background-position: calc(100% - var(--md-comp-linear-progress-stop-trailing-space, 0px)) center,
+            background-position: calc(100% - var(--_stop-trailing-space)) center,
                 left center, left center, 0 center;
             background-size: var(--_size) var(--_size),
                 100% var(--micl-progress-thickness), 100% var(--micl-progress-thickness), 100% var(--_track-thickness);
@@ -158,15 +151,13 @@ progress.micl-linear-progress {
             &:dir(rtl) {
                 background-image: $det-dot, $det-bar-cap-rtl, $det-bar-body-rtl,
                     linear-gradient(to left, transparent #{$det-carve}, var(--micl-progress-track-color) #{$det-carve});
-                background-position: var(--md-comp-linear-progress-stop-trailing-space, 0px) center,
+                background-position: var(--_stop-trailing-space) center,
                     left center, left center, 0 center;
             }
             &::-webkit-progress-value {
-                box-shadow: none;
                 background: none;
             }
             &::-moz-progress-bar {
-                box-shadow: none;
                 background: none;
             }
         }
@@ -267,7 +258,7 @@ progress.micl-circular-progress {
     --_size: var(--md-comp-circular-progress-size, 40px);
     --_thickness: var(--md-comp-circular-progress-active-thickness, 4px);
     --_space: var(--md-comp-circular-progress-track-active-space, 4px);
-    --micl-progress-radius: calc((var(--_size) - var(--_thickness)) / 2);
+    --micl-progress-radius: calc((var(--_size) - var(--_thickness)) / 2 - 0.5px);
     --micl-progress-gap: atan2(calc(var(--_space) + var(--_thickness)), var(--micl-progress-radius));
     --micl-progress-active-color: #{$circ-active};
     --micl-progress-track-color: #{$circ-track};
@@ -299,18 +290,18 @@ progress.micl-circular-progress {
         100% 100%, var(--_thickness) var(--_thickness), var(--_thickness) var(--_thickness);
     background-repeat: no-repeat;
     mask-image: radial-gradient(circle closest-side,
-        transparent calc(100% - var(--_thickness) - 0.5px),
-        #fff calc(100% - var(--_thickness) + 0.5px) calc(100% - 0.5px),
-        transparent);
+        transparent calc(100% - var(--_thickness) - 1px),
+        #fff calc(100% - var(--_thickness)) calc(100% - 1px),
+        transparent calc(100% - 0.5px));
 
     @supports (clip-path: shape(from 0px 0px, arc to 1px 1px of 1px)) {
         mask-image: none;
-        clip-path: shape(evenodd from 50% 0%,
-            arc to 50% 100% of calc(var(--_size) / 2),
-            arc to 50% 0% of calc(var(--_size) / 2),
-            move to 50% var(--_thickness),
-            arc to 50% calc(100% - var(--_thickness)) of calc(var(--_size) / 2 - var(--_thickness)),
-            arc to 50% var(--_thickness) of calc(var(--_size) / 2 - var(--_thickness)),
+        clip-path: shape(evenodd from 50% 0.5px,
+            arc to 50% calc(100% - 0.5px) of calc(var(--_size) / 2 - 0.5px),
+            arc to 50% 0.5px of calc(var(--_size) / 2 - 0.5px),
+            move to 50% calc(var(--_thickness) + 0.5px),
+            arc to 50% calc(100% - var(--_thickness) - 0.5px) of calc(var(--_size) / 2 - var(--_thickness) - 0.5px),
+            arc to 50% calc(var(--_thickness) + 0.5px) of calc(var(--_size) / 2 - var(--_thickness) - 0.5px),
             close);
     }
 
@@ -326,7 +317,7 @@ progress.micl-circular-progress {
 
     @supports (inline-size: attr(value type(<number>))) {
         &:not(:indeterminate) {
-            --micl-progress-sweep: calc(min(calc(attr(value type(<number>), 0) / max(attr(max type(<number>), 1), 0.001)), 1) * 360deg);
+            --micl-progress-sweep: calc(#{$progress-fraction} * 360deg);
             transition: --micl-progress-sweep motion.$md-sys-motion-duration-long2 motion.$md-sys-motion-easing-standard;
         }
     }
@@ -413,12 +404,13 @@ progress.micl-circular-progress {
     --_max-amplitude: var(--md-comp-linear-progress-active-wave-amplitude, 3px);
     --_track-thickness: var(--md-comp-linear-progress-track-thickness, 4px);
     --_active-thickness: var(--md-comp-linear-progress-active-thickness, 4px);
-    --_fraction: min(calc(attr(aria-valuenow type(<number>), 0) / max(attr(aria-valuemax type(<number>), 1), 0.001)), 1);
+    --_stop-trailing-space: var(--md-comp-linear-progress-stop-trailing-space, 0px);
+    --_fraction: #{$aria-fraction};
     --micl-progress-fraction: var(--_fraction);
     --micl-progress-amplitude: clamp(0, min(calc(var(--micl-progress-fraction) / 0.1), calc((1 - var(--micl-progress-fraction)) / 0.05)), 1);
-    transition: --micl-progress-fraction motion.$md-sys-motion-duration-long2 linear;
+    transition: --micl-progress-fraction motion.$md-sys-motion-duration-long2 motion.$md-sys-motion-easing-standard;
 
-    --_wave-image: var(--md-comp-linear-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -30 6.283 60' preserveAspectRatio='none'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='4' stroke-linecap='round' fill='none' stroke='black' d='M0,0 C.512,.512 1.002,1 1.571,1 S2.629,.512 3.142,0 S4.144,-1 4.712,-1 S5.771,-.512 6.283,0'/%3E%3C/svg%3E"));
+    --_wave-image: var(--md-comp-linear-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -30 6.283 60' preserveAspectRatio='none'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='4' stroke-linecap='round' fill='none' stroke='black' d='M0,1 C.569,1 1.059,.512 1.571,0 S2.573,-1 3.142,-1 S4.2,-.512 4.712,0 S5.714,1 6.283,1'/%3E%3C/svg%3E"));
     --_amplitude: calc(var(--micl-progress-amplitude) * var(--_max-amplitude));
     --_wave-mask-size: var(--_wavelength) max(calc(var(--_active-thickness) + 1px), calc(var(--_amplitude) * 60));
 
@@ -441,7 +433,7 @@ progress.micl-circular-progress {
         border-radius: calc(var(--_track-thickness) / 2);
         background-image: $stop-dot,
             linear-gradient(to right, transparent #{$wave-carve}, $track-color 0);
-        background-position: calc(100% - var(--md-comp-linear-progress-stop-trailing-space, 0px)) center, 0 0;
+        background-position: calc(100% - var(--_stop-trailing-space)) center, 0 0;
         background-size: var(--_stop-size) var(--_stop-size), 100% 100%;
         background-repeat: no-repeat;
     }
@@ -467,7 +459,7 @@ progress.micl-circular-progress {
         &::before {
             background-image: $stop-dot,
                 linear-gradient(to left, transparent #{$wave-carve}, $track-color 0);
-            background-position: var(--md-comp-linear-progress-stop-trailing-space, 0px) center, 0 0;
+            background-position: var(--_stop-trailing-space) center, 0 0;
         }
         .micl-linear-progress__wave {
             mask-position: right center;
@@ -537,18 +529,20 @@ progress.micl-circular-progress {
 }
 
 .micl-circular-progress:not(progress) {
-    $wave-ring: var(--md-comp-circular-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='4' fill='none' stroke='black' d='M24,6C25.18,5.16 26.57,4.53 27.82,4.78C29.08,5.03 30.12,6.15 30.89,7.37C31.66,8.59 32.22,9.77 33.11,10.36C34,10.96 35.3,11.03 36.73,11.27C38.15,11.51 39.58,12.04 40.3,13.11C41.01,14.18 40.95,15.7 40.63,17.11C40.31,18.52 39.88,19.75 40.08,20.8C40.29,21.85 41.16,22.82 42,24C42.84,25.18 43.47,26.57 43.22,27.82C42.97,29.08 41.85,30.12 40.63,30.89C39.41,31.66 38.23,32.22 37.64,33.11C37.04,34 36.97,35.3 36.73,36.73C36.49,38.15 35.96,39.58 34.89,40.3C33.82,41.01 32.3,40.95 30.89,40.63C29.48,40.31 28.25,39.88 27.2,40.08C26.15,40.29 25.18,41.16 24,42C22.82,42.84 21.43,43.47 20.18,43.22C18.92,42.97 17.88,41.85 17.11,40.63C16.34,39.41 15.78,38.23 14.89,37.64C14,37.04 12.7,36.97 11.27,36.73C9.85,36.49 8.42,35.96 7.7,34.89C6.99,33.82 7.05,32.3 7.37,30.89C7.69,29.48 8.12,28.25 7.92,27.2C7.71,26.15 6.84,25.18 6,24C5.16,22.82 4.53,21.43 4.78,20.18C5.03,18.92 6.15,17.88 7.37,17.11C8.59,16.34 9.77,15.78 10.36,14.89C10.96,14 11.03,12.7 11.27,11.27C11.51,9.85 12.04,8.42 13.11,7.7C14.18,6.99 15.7,7.05 17.11,7.37C18.52,7.69 19.75,8.12 20.8,7.92C21.85,7.71 22.82,6.84 24,6Z'/%3E%3C/svg%3E"));
     $flat-ring: radial-gradient(circle closest-side,
         transparent calc(75% - var(--micl-progress-thickness) / 2 - 0.5px),
         #fff calc(75% - var(--micl-progress-thickness) / 2 + 0.5px) calc(75% + var(--micl-progress-thickness) / 2 - 0.5px),
         transparent calc(75% + var(--micl-progress-thickness) / 2 + 0.5px));
-    $wave-cap-r: "(var(--micl-progress-radius) + 1.6px * var(--micl-progress-amplitude) * sin(8 * (var(--micl-progress-sweep) + var(--micl-progress-crawl))))";
+    $wave-cap-r: "(var(--micl-progress-radius) + 1.6px * var(--micl-progress-amplitude) * cos(var(--_waves) * (var(--micl-progress-sweep) + var(--micl-progress-crawl))))";
+    $wave-start-r: "(var(--micl-progress-radius) + 1.6px * var(--micl-progress-amplitude) * cos(var(--_waves) * var(--micl-progress-crawl)))";
 
     --_size: var(--md-comp-circular-progress-size, 40px);
     --_thickness: var(--md-comp-circular-progress-active-thickness, 4px);
     --_space: var(--md-comp-circular-progress-track-active-space, 4px);
     --_box: calc(var(--_size) * 1.2);
-    --_fraction: min(calc(attr(aria-valuenow type(<number>), 0) / max(attr(aria-valuemax type(<number>), 1), 0.001)), 1);
+    --_waves: 8;
+    --_wave-ring: var(--md-comp-circular-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='4' fill='none' stroke='black' d='M24,4.4C25.28,4.4 26.52,5.29 27.51,6.35C28.5,7.4 29.28,8.44 30.28,8.85C31.27,9.26 32.56,9.08 34,9.03C35.45,8.99 36.95,9.23 37.86,10.14C38.77,11.05 39.01,12.55 38.97,14C38.92,15.44 38.74,16.73 39.15,17.72C39.56,18.72 40.6,19.5 41.65,20.49C42.71,21.48 43.6,22.72 43.6,24C43.6,25.28 42.71,26.52 41.65,27.51C40.6,28.5 39.56,29.28 39.15,30.28C38.74,31.27 38.92,32.56 38.97,34C39.01,35.45 38.77,36.95 37.86,37.86C36.95,38.77 35.45,39.01 34,38.97C32.56,38.92 31.27,38.74 30.28,39.15C29.28,39.56 28.5,40.6 27.51,41.65C26.52,42.71 25.28,43.6 24,43.6C22.72,43.6 21.48,42.71 20.49,41.65C19.5,40.6 18.72,39.56 17.72,39.15C16.73,38.74 15.44,38.92 14,38.97C12.55,39.01 11.05,38.77 10.14,37.86C9.23,36.95 8.99,35.45 9.03,34C9.08,32.56 9.26,31.27 8.85,30.28C8.44,29.28 7.4,28.5 6.35,27.51C5.29,26.52 4.4,25.28 4.4,24C4.4,22.72 5.29,21.48 6.35,20.49C7.4,19.5 8.44,18.72 8.85,17.72C9.26,16.73 9.08,15.44 9.03,14C8.99,12.55 9.23,11.05 10.14,10.14C11.05,9.23 12.55,8.99 14,9.03C15.44,9.08 16.73,9.26 17.72,8.85C18.72,8.44 19.5,7.4 20.49,6.35C21.48,5.29 22.72,4.4 24,4.4Z'/%3E%3C/svg%3E"));
+    --_fraction: #{$aria-fraction};
     --micl-progress-fraction: var(--_fraction);
     --micl-progress-amplitude: clamp(0, min(calc((var(--micl-progress-fraction) - 0.1) * 1000), calc((0.95 - var(--micl-progress-fraction)) * 1000)), 1);
     transition: --micl-progress-fraction motion.$md-sys-motion-duration-long2 motion.$md-sys-motion-easing-standard;
@@ -606,7 +600,7 @@ progress.micl-circular-progress {
         inset: 0;
         opacity: var(--micl-progress-amplitude);
         transition: opacity motion.$md-sys-motion-duration-long2 motion.$md-sys-motion-easing-standard;
-        mask-image: $wave-ring;
+        mask-image: var(--_wave-ring);
         mask-size: 100% 100%;
 
         &::before {
@@ -621,7 +615,7 @@ progress.micl-circular-progress {
             background-repeat: no-repeat;
             background-image: $circ-cap-active, $circ-cap-active,
                 conic-gradient(var(--micl-progress-active-color) 0 var(--micl-progress-sweep), transparent 0);
-            background-position: 50% calc(50% - var(--micl-progress-radius)),
+            background-position: 50% calc(50% - #{$wave-start-r}),
                 calc(50% + #{$wave-cap-r} * sin(var(--micl-progress-sweep)))
                     calc(50% - #{$wave-cap-r} * cos(var(--micl-progress-sweep))),
                 0 0;
@@ -641,11 +635,11 @@ progress.micl-circular-progress {
             animation: circsweep 6000ms infinite;
         }
         .micl-circular-progress__wave {
-            animation: circcrawl 8000ms linear infinite;
+            animation: circcrawl calc(var(--_waves) * 1000ms) linear infinite;
 
             &::before {
                 animation: circsweep 6000ms infinite,
-                    circcrawlcounter 8000ms linear infinite;
+                    circcrawlcounter calc(var(--_waves) * 1000ms) linear infinite;
             }
 
             @media (prefers-reduced-motion: reduce) {
@@ -658,6 +652,20 @@ progress.micl-circular-progress {
         }
     }
 }
+.micl-linear-progress.micl-linear-progress--thick {
+    --_track-thickness: var(--md-comp-linear-progress-track-thickness, 8px);
+    --_active-thickness: var(--md-comp-linear-progress-active-thickness, 8px);
+    --_stop-trailing-space: var(--md-comp-linear-progress-stop-trailing-space, 2px);
+    --_wave-image: var(--md-comp-linear-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -30 6.283 60' preserveAspectRatio='none'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='8' stroke-linecap='round' fill='none' stroke='black' d='M0,1 C.569,1 1.059,.512 1.571,0 S2.573,-1 3.142,-1 S4.2,-.512 4.712,0 S5.714,1 6.283,1'/%3E%3C/svg%3E"));
+}
+.micl-circular-progress.micl-circular-progress--thick {
+    --_size: var(--md-comp-circular-progress-size, 52px);
+    --_thickness: var(--md-comp-circular-progress-active-thickness, 8px);
+    --_box: calc((var(--_size) - var(--_thickness)) / 0.75);
+    --_waves: 9;
+    --_wave-ring: var(--md-comp-circular-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='8' fill='none' stroke='black' d='M24,4.69C25.12,4.69 26.21,5.42 27.13,6.27C28.04,7.13 28.8,7.98 29.71,8.32C30.62,8.65 31.75,8.48 33,8.41C34.25,8.34 35.55,8.49 36.41,9.21C37.27,9.93 37.64,11.19 37.79,12.43C37.94,13.67 37.97,14.81 38.45,15.65C38.94,16.5 39.91,17.09 40.91,17.84C41.92,18.59 42.82,19.54 43.02,20.65C43.21,21.75 42.69,22.95 42,24C41.31,25.05 40.61,25.94 40.44,26.9C40.27,27.85 40.63,28.94 40.91,30.16C41.2,31.37 41.28,32.68 40.72,33.65C40.16,34.63 38.99,35.21 37.79,35.57C36.59,35.93 35.47,36.16 34.73,36.79C33.98,37.41 33.56,38.47 33,39.59C32.44,40.71 31.66,41.76 30.6,42.14C29.55,42.53 28.28,42.22 27.13,41.73C25.98,41.23 24.97,40.69 24,40.69C23.03,40.69 22.02,41.23 20.87,41.73C19.72,42.22 18.45,42.53 17.4,42.14C16.34,41.76 15.56,40.71 15,39.59C14.44,38.47 14.02,37.41 13.27,36.79C12.53,36.16 11.41,35.93 10.21,35.57C9.01,35.21 7.84,34.63 7.28,33.65C6.72,32.68 6.8,31.37 7.09,30.16C7.37,28.94 7.73,27.85 7.56,26.9C7.39,25.94 6.69,25.05 6,24C5.31,22.95 4.79,21.75 4.98,20.65C5.18,19.54 6.08,18.59 7.09,17.84C8.09,17.09 9.06,16.5 9.55,15.65C10.03,14.81 10.06,13.67 10.21,12.43C10.36,11.19 10.73,9.93 11.59,9.21C12.45,8.49 13.75,8.34 15,8.41C16.25,8.48 17.38,8.65 18.29,8.32C19.2,7.98 19.96,7.13 20.87,6.27C21.79,5.42 22.88,4.69 24,4.69Z'/%3E%3C/svg%3E"));
+}
+
 @keyframes circcrawl {
     to { rotate: -360deg; }
 }
