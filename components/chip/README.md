@@ -197,4 +197,4 @@ These properties govern the reveal of the checkmark in a filter chip.
 Because the Chip component extends the [Button](../button/README.md), the corner-shape and state-layer transitions of a chip follow the **button** motion properties: `--md-comp-button-motion-effects` and `--md-comp-button-motion-duration`.
 
 ## Compatibility
-This component utilizes relative RGB color values and the `:has()` CSS pseudo-class, which may not be fully supported in all browser versions. Please check the compatibility tables for [CSS color values](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) and [:has()](https://www.google.com/search?q=https://developer.mozilla.org/en-US/docs/Web/CSS/:has%2523browser_compatibility) for details.
+This component utilizes relative RGB color values and the `:has()` CSS pseudo-class, which may not be fully supported in all browser versions. Please check the compatibility tables for [CSS color values](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) and [:has()](https://developer.mozilla.org/en-US/docs/Web/CSS/:has#browser_compatibility) for details.

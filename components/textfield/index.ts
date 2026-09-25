@@ -134,10 +134,6 @@ const textfield = {
         }
         input.dataset.miclinitialized = '1';
 
-        // A legacy listbox replaces the whole selection on a plain click; a customizable
-        // multiple select toggles the clicked option. Align the fallback with the latter,
-        // leaving shift-clicks to the native range selection. The event target is the
-        // content of the option, not the option itself.
         if (
             input instanceof HTMLSelectElement
             && input.multiple

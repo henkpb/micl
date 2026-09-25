@@ -114,9 +114,6 @@ progress.micl-linear-progress {
     padding-block: max(var(--_padding), 0px);
     border: none;
     border-radius: calc(max(var(--_track-thickness), var(--_active-thickness)) / 2);
-    // the track is a vertically centered BAND so the active bar may be the
-    // thicker of the two; when the track is thicker (or equal) the band fills
-    // the box and renders exactly like a plain background fill
     background-image: linear-gradient(#{$track-color}, #{$track-color});
     background-position: 0 center;
     background-size: 100% var(--_track-thickness);
@@ -541,9 +538,6 @@ progress.micl-circular-progress {
 
 .micl-circular-progress:not(progress) {
     $wave-ring: var(--md-comp-circular-progress-wave-image, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath vector-effect='non-scaling-stroke' stroke-width='4' fill='none' stroke='black' d='M24,6C25.18,5.16 26.57,4.53 27.82,4.78C29.08,5.03 30.12,6.15 30.89,7.37C31.66,8.59 32.22,9.77 33.11,10.36C34,10.96 35.3,11.03 36.73,11.27C38.15,11.51 39.58,12.04 40.3,13.11C41.01,14.18 40.95,15.7 40.63,17.11C40.31,18.52 39.88,19.75 40.08,20.8C40.29,21.85 41.16,22.82 42,24C42.84,25.18 43.47,26.57 43.22,27.82C42.97,29.08 41.85,30.12 40.63,30.89C39.41,31.66 38.23,32.22 37.64,33.11C37.04,34 36.97,35.3 36.73,36.73C36.49,38.15 35.96,39.58 34.89,40.3C33.82,41.01 32.3,40.95 30.89,40.63C29.48,40.31 28.25,39.88 27.2,40.08C26.15,40.29 25.18,41.16 24,42C22.82,42.84 21.43,43.47 20.18,43.22C18.92,42.97 17.88,41.85 17.11,40.63C16.34,39.41 15.78,38.23 14.89,37.64C14,37.04 12.7,36.97 11.27,36.73C9.85,36.49 8.42,35.96 7.7,34.89C6.99,33.82 7.05,32.3 7.37,30.89C7.69,29.48 8.12,28.25 7.92,27.2C7.71,26.15 6.84,25.18 6,24C5.16,22.82 4.53,21.43 4.78,20.18C5.03,18.92 6.15,17.88 7.37,17.11C8.59,16.34 9.77,15.78 10.36,14.89C10.96,14 11.03,12.7 11.27,11.27C11.51,9.85 12.04,8.42 13.11,7.7C14.18,6.99 15.7,7.05 17.11,7.37C18.52,7.69 19.75,8.12 20.8,7.92C21.85,7.71 22.82,6.84 24,6Z'/%3E%3C/svg%3E"));
-    // the flat-ring mask for the track and the zero-amplitude arc (0.5px ramps
-    // for full-pixel gradient antialiasing); 75% of closest-side = the 0.375 *
-    // box ring radius
     $flat-ring: radial-gradient(circle closest-side,
         transparent calc(75% - var(--micl-progress-thickness) / 2 - 0.5px),
         #fff calc(75% - var(--micl-progress-thickness) / 2 + 0.5px) calc(75% + var(--micl-progress-thickness) / 2 - 0.5px),

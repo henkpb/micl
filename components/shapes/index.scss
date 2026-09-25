@@ -22,10 +22,6 @@
 @use 'sass:map';
 @use 'paths.generated' as paths;
 
-//
-// Set $master: true to install the base styles + every shape in one go. When false (default),
-// consumers opt in via `@include shapes.base` and `@include shapes.use(<names>...)`.
-//
 $master: false !default;
 
 @mixin base {
