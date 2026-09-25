@@ -100,46 +100,61 @@ A `<progress>` element and a `progressbar`-role element are both announced as pr
   ```
 
 ## Theming
-Each progress indicator can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
+Each progress indicator can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention (`md.comp.progress-indicator.*`).
+
+### Colours (linear and circular)
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-progress-indicator-active-indicator-color` | Colour of the active indicator | `--md-sys-color-primary` |
+| `--md-comp-progress-indicator-track-color` | Colour of the remaining track | `--md-sys-color-secondary-container` |
+| `--md-comp-progress-indicator-stop-indicator-color` | Colour of the stop indicator dot (linear) | `--md-sys-color-primary` |
 
 ### Linear (flat and wavy)
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-linear-progress-active-indicator-color` | Colour of the active indicator | `--md-sys-color-primary` |
-| `--md-comp-linear-progress-track-color` | Colour of the remaining track | `--md-sys-color-secondary-container` |
-| `--md-comp-linear-progress-stop-color` | Colour of the stop indicator dot | `--md-sys-color-primary` |
-| `--md-comp-linear-progress-track-thickness` | Thickness of the track | `4px` |
-| `--md-comp-linear-progress-active-thickness` | Thickness of the active indicator (see the note below for the wavy bar) | `4px` |
-| `--md-comp-linear-progress-track-active-space` | Gap between the active indicator and the track | `4px` |
-| `--md-comp-linear-progress-stop-size` | Diameter of the stop indicator dot | `4px` |
-| `--md-comp-linear-progress-stop-trailing-space` | Inset of the stop dot from the trailing edge | `0px` |
+| `--md-comp-progress-indicator-linear-track-thickness` | Thickness of the track | `4px` |
+| `--md-comp-progress-indicator-linear-active-indicator-thickness` | Thickness of the active indicator | `4px` |
+| `--md-comp-progress-indicator-linear-track-active-indicator-space` | Gap between the active indicator and the track | `4px` |
+| `--md-comp-progress-indicator-linear-stop-indicator-size` | Diameter of the stop indicator dot | `4px` |
+| `--md-comp-progress-indicator-linear-stop-indicator-trailing-space` | Inset of the stop dot from the trailing edge | `0px` |
 
-### Wavy only
+### Wavy linear
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-linear-progress-active-wave-amplitude` | Maximum wave amplitude; set to `0px` for a flat (pre-Expressive) bar | `3px` |
-| `--md-comp-linear-progress-active-wave-wavelength` | Wavelength of the determinate wave | `40px` |
-| `--md-comp-linear-progress-indeterminate-active-wave-wavelength` | Wavelength of the indeterminate wave | `20px` |
-| `--md-comp-linear-progress-wave-image` | The repeating wave mask tile (advanced) | built-in |
+| `--md-comp-progress-indicator-linear-active-indicator-wave-amplitude` | Maximum wave amplitude; set to `0px` for a flat (pre-Expressive) bar | `3px` |
+| `--md-comp-progress-indicator-linear-active-indicator-wave-wavelength` | Wavelength of the determinate wave | `40px` |
+| `--md-comp-progress-indicator-linear-indeterminate-active-indicator-wave-wavelength` | Wavelength of the indeterminate wave | `20px` |
+| `--md-comp-progress-indicator-linear-wave-image` | The repeating wave mask tile (advanced, MICL-specific) | built-in |
 
-### Circular
+### Circular (flat and wavy)
 
 | Custom property | Meaning | Default |
 |---|---|---|
-| `--md-comp-circular-progress-active-indicator-color` | Colour of the active arc | `--md-sys-color-primary` |
-| `--md-comp-circular-progress-track-color` | Colour of the remaining track ring | `--md-sys-color-secondary-container` |
-| `--md-comp-circular-progress-size` | Diameter of the indicator | `40px` |
-| `--md-comp-circular-progress-active-thickness` | Stroke thickness of **both** the active arc and the track ring (see the note below for the wavy ring) | `4px` |
-| `--md-comp-circular-progress-track-active-space` | Arc-length gap between the active arc and the track | `4px` |
-| `--md-comp-circular-progress-wave-image` | The wavy ring mask (advanced, wavy variant) | built-in |
+| `--md-comp-progress-indicator-circular-size` | Diameter of the indicator | `40px` |
+| `--md-comp-progress-indicator-circular-active-indicator-thickness` | Stroke thickness of **both** the active arc and the track ring | `4px` |
+| `--md-comp-progress-indicator-circular-track-active-indicator-space` | Arc-length gap between the active arc and the track | `4px` |
+| `--md-comp-progress-indicator-circular-wave-image` | The wavy ring mask (advanced, MICL-specific) | built-in |
+
+### Thick
+
+The `--thick` modifiers read their own tokens, as in the M3 specification; the tokens not listed here are shared with the regular indicators.
+
+| Custom property | Meaning | Default |
+|---|---|---|
+| `--md-comp-progress-indicator-linear-thick-track-thickness` | Thickness of the track | `8px` |
+| `--md-comp-progress-indicator-linear-thick-active-indicator-thickness` | Thickness of the active indicator | `8px` |
+| `--md-comp-progress-indicator-linear-thick-stop-indicator-trailing-space` | Inset of the stop dot from the trailing edge | `2px` |
+| `--md-comp-progress-indicator-circular-thick-size` | Diameter of the indicator | `52px` |
+| `--md-comp-progress-indicator-circular-thick-active-indicator-thickness` | Stroke thickness of both the active arc and the track ring | `8px` |
 
 **Example: A calmer wavy indicator**
 
 ```HTML
 <div role="progressbar" class="micl-linear-progress" aria-label="Upload progress" aria-valuenow="0.4" aria-valuemax="1"
-     style="--md-comp-linear-progress-active-wave-amplitude:2px;--md-comp-linear-progress-active-wave-wavelength:60px">
+     style="--md-comp-progress-indicator-linear-active-indicator-wave-amplitude:2px;--md-comp-progress-indicator-linear-active-indicator-wave-wavelength:60px">
   <div class="micl-linear-progress__wave" aria-hidden="true"></div>
 </div>
 ```
