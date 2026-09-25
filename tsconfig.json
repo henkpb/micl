@@ -108,9 +108,13 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "./**/*"
+    "micl.ts",
+    "components/**/*.ts",
+    "foundations/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    "docs"
   ]
 }

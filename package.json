@@ -64,12 +64,15 @@
     "foundations/**/*.scss",
     "components/**/*.scss",
     "components/**/README.md",
+    "foundations/**/README.md",
+    "styles/README.md",
     "themes"
   ],
   "scripts": {
     "build": "webpack",
     "gen:shapes": "node tools/shapes/generate.mjs",
-    "check:shapes": "node tools/shapes/check.mjs"
+    "check:shapes": "node tools/shapes/check.mjs",
+    "check:tokens": "node tools/check-tokens.mjs"
   },
   "devDependencies": {
     "autoprefixer": "^10.5",

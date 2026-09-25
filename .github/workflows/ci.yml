@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run check:shapes
+
+      - run: npm run build
+
+      - run: npm run check:tokens
+
+      # dist/ and docs/ are committed; a difference here means a commit shipped stale build output.
+      - run: git diff --exit-code -- dist docs
