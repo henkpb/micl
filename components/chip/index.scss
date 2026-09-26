@@ -31,6 +31,8 @@
 
 @include typography.scale('title-medium');
 
+$chips: '[class*="micl-chip-"]';
+
 .micl-chips {
     display: flex;
     align-items: flex-start;
@@ -65,7 +67,7 @@
         --micl-chip-disabled-outline: var(--md-comp-suggestion-chip-disabled-outline-color);
         --micl-chip-elevated-container: var(--md-comp-suggestion-chip-elevated-container-color);
     }
-    .micl-chip-assist, .micl-chip-filter, .micl-chip-input, .micl-chip-suggestion {
+    #{$chips} {
         @extend %micl-button-base;
         @extend %micl-button-xs;
 
@@ -135,8 +137,7 @@
                 border-end-start-radius: calc(var(--micl-height) / 2 - 1px);
             }
         }
-        .micl-chip__primary,
-        .micl-chip__remove {
+        :is(.micl-chip__primary, .micl-chip__remove) {
             @extend %micl-button-base;
 
             --statelayer-color: var(--micl-chip-statelayer, var(--md-sys-color-on-surface-variant));
