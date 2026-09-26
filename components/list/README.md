@@ -224,6 +224,8 @@ A list becomes interactive when one of its items has `tabindex="0"`. The list is
 
 Disabled items (`micl-list-item--disabled`) are skipped by the keyboard and get `aria-disabled="true"`.
 
+An interactive list whose items carry a checkbox or switch becomes a `listbox` of `option`s. Any other interactive list keeps its native list semantics: screen readers announce it as a list and read its items in browse mode, while the keys above serve keyboard users. Name the list with `aria-label` or `aria-labelledby` when a page holds more than one.
+
 ## Theming
 Each list style can be themed with CSS custom properties that follow the component-token naming convention, as defined in the [Material Design 3 Expressive List Specification](https://m3.material.io/components/lists/specs). Set them on any appropriate parent element to affect its child lists.
 
