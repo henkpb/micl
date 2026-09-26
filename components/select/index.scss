@@ -161,13 +161,8 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
             background-position: var(--micl-x, center) var(--micl-y, center), 0 0, 0 0;
             background-size: 0%, 100%, 100%;
             background-image:
-                radial-gradient(
-                    circle at var(--micl-x, center) var(--micl-y, center),
-                    transparent 0%,
-                    rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-                    transparent 10%
-                ),
-                linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity))),
+                statelayer.$ripple-gradient,
+                statelayer.$layer-gradient,
                 linear-gradient(rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity)));
             -webkit-text-fill-color: var(--_headline-color);
 

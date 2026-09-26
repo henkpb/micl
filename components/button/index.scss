@@ -68,7 +68,7 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
 :is(.micl-button-text-s, .micl-button-elevated-s, .micl-button-filled-s, .micl-button-tonal-s, .micl-button-outlined-s) {
     @include typography.label-large;
-    @extend %micl-button-target;
+    @extend %micl-target;
 
     --micl-width: 40px;
     --micl-height: 40px;

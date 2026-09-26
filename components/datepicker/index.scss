@@ -80,8 +80,7 @@
 }
 
 %focus-indicator {
-    outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-comp-date-picker-focus-indicator-color, var(--md-sys-color-secondary));
-    outline-offset: -1px;
+    @include statelayer.focus-indicator('date-picker', -1px);
 }
 
 dialog.micl-dialog.micl-datepicker {

@@ -117,8 +117,7 @@ dialog.micl-bottomsheet {
                 background-color: var(--md-comp-bottomsheet-drag-handle-color, var(--md-sys-color-on-surface-variant));
             }
             &:focus-visible {
-                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-comp-bottomsheet-focus-indicator-color, var(--md-sys-color-secondary));
-                outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
+                @include statelayer.focus-indicator('bottomsheet');
             }
         }
     }

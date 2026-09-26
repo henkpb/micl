@@ -66,17 +66,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     @media (forced-colors: active) {
         border: 1px solid ButtonBorder;
     }
-    background-image:
-        radial-gradient(
-            circle at var(--micl-x, center) var(--micl-y, center),
-            transparent 0%,
-            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-            transparent 10%
-        ),
-        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-    background-repeat: no-repeat;
-    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
-    background-size: 0%, 100%;
+    @include statelayer.layer;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
@@ -101,8 +91,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
             z-index: 1;
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: 2px;
+            @include statelayer.focus-indicator;
         }
         &:active {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
@@ -130,21 +119,9 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     }
 }
 
-%micl-button-target {
-    &::before {
-        content: "";
-        position: absolute;
-        block-size: var(--md-sys-state-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-state-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-state-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-state-target-size, 48px)) - var(--md-sys-state-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
-}
-
 %micl-button-xs {
     @include typography.label-large;
-    @extend %micl-button-target;
+    @extend %micl-target;
 
     --micl-width: 32px;
     --micl-height: 32px;

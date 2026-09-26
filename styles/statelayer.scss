@@ -51,6 +51,50 @@ $_tokens: (
     background-color: rgb(from var(--md-sys-color-scrim, black) r g b / var(--md-sys-state-backdrop-opacity, 32%));
 }
 
+$ripple-gradient: radial-gradient(
+    circle at var(--micl-x, center) var(--micl-y, center),
+    transparent 0%,
+    rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
+    transparent 10%
+);
+$layer-gradient: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
+
+@mixin layer {
+    background-image: $ripple-gradient, $layer-gradient;
+    background-repeat: no-repeat;
+    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
+    background-size: 0%, 100%;
+}
+
+%micl-target {
+    &::before {
+        content: "";
+        position: absolute;
+        block-size: var(--md-sys-state-target-size, 48px);
+        inline-size: 100%;
+        min-inline-size: var(--md-sys-state-target-size, 48px);
+        inset: calc((var(--micl-height) - var(--md-sys-state-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-state-target-size, 48px)) - var(--md-sys-state-target-size, 48px)) / 2);
+        background-color: transparent;
+    }
+}
+
+@mixin focus-indicator($component: null, $offset: 'outer') {
+    $color: var(--md-sys-color-secondary);
+    @if $component {
+        $color: var(--md-comp-#{$component}-focus-indicator-color, var(--md-sys-color-secondary));
+    }
+    outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid #{$color};
+    @if $offset == 'outer' {
+        outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
+    }
+    @else if $offset == 'inner' {
+        outline-offset: var(--md-sys-state-focus-indicator-inner-offset, -3px);
+    }
+    @else if $offset != null {
+        outline-offset: $offset;
+    }
+}
+
 @if $master {
     :root {
         @each $name, $value in $_tokens {

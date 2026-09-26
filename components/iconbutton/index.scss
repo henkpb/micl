@@ -45,21 +45,6 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 @include statelayer.property;
 @include statelayer.keyframes;
 
-%micl-iconbutton-target {
-    &::before {
-        content: "";
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        block-size: var(--md-sys-state-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-state-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-state-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-state-target-size, 48px)) - var(--md-sys-state-target-size, 48px)) / 2);
-        background-color: transparent;
-    }
-}
-
 #{$iconbuttons} {
     --_motion-effects: var(--md-comp-icon-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
     --_motion-duration: var(--md-comp-icon-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
@@ -80,17 +65,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     border: none;
     border-radius: var(--_shape-round);
     background-color: transparent;
-    background-image:
-        radial-gradient(
-            circle at var(--micl-x, center) var(--micl-y, center),
-            transparent 0%,
-            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-            transparent 10%
-        ),
-        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-    background-repeat: no-repeat;
-    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
-    background-size: 0%, 100%;
+    @include statelayer.layer;
     -webkit-tap-highlight-color: transparent;
     font-variation-settings: 'FILL' 0;
     text-decoration: none;
@@ -113,8 +88,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
             z-index: 1;
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: 2px;
+            @include statelayer.focus-indicator;
         }
         &:active {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
@@ -166,7 +140,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 }
 
 :is(.micl-iconbutton-standard-xs, .micl-iconbutton-filled-xs, .micl-iconbutton-tonal-xs, .micl-iconbutton-outlined-xs) {
-    @extend %micl-iconbutton-target;
+    @extend %micl-target;
 
     --micl-width: 32px;
     --micl-height: 32px;
@@ -179,7 +153,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 }
 
 :is(.micl-iconbutton-standard-s, .micl-iconbutton-filled-s, .micl-iconbutton-tonal-s, .micl-iconbutton-outlined-s) {
-    @extend %micl-iconbutton-target;
+    @extend %micl-target;
 
     --micl-width: 40px;
     --micl-height: 40px;

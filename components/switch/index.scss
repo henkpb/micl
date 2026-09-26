@@ -137,8 +137,7 @@ $switch: 'input[type=checkbox].micl-switch';
                 border-color: color-mix(in srgb, var(--_unselected-layer-color) var(--md-sys-state-focus-state-layer-opacity, 10%), transparent);
             }
             &::before {
-                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-comp-switch-focus-indicator-color, var(--md-sys-color-secondary));
-                outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
+                @include statelayer.focus-indicator('switch');
             }
             &:checked::after {
                 border-color: color-mix(in srgb, var(--_selected-layer-color) var(--md-sys-state-focus-state-layer-opacity, 10%), transparent);

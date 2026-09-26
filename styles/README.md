@@ -143,6 +143,38 @@ To install only the parts you need, use the three opt-in mixins:
 @include statelayer.keyframes;   // ripple @keyframes (only needed for the spreading ripple effect)
 ```
 
+### Building your own interactive component
+The module also holds the pieces the MICL components share, so a component of your own can pick up the same state layer, ripple, touch target and focus ring:
+
+```SCSS
+@use "material-inspired-component-library/styles/statelayer";
+
+.my-control {
+    --micl-ripple: 1;
+    --micl-height: 40px;
+    --statelayer-color: var(--md-sys-color-on-surface);
+    position: relative;
+    @include statelayer.layer;       // state-layer tint + ripple circle as background layers
+    @extend %micl-target;            // a 48px touch target centred on the --micl-height box
+
+    &:hover { --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%); }
+    &:focus-visible {
+        @include statelayer.focus-indicator;
+    }
+    &.micl-rippling {
+        animation: micl-ripple var(--md-sys-state-ripple-duration);
+    }
+}
+```
+
+| Member | Description |
+|---|---|
+| `layer` mixin | Emits the two background layers of a state layer — the tint at `--statelayer-opacity` and the ripple circle at `--micl-x`/`--micl-y` — with their position, repeat and initial size. The runtime grows the circle by animating `background-size` on elements that set `--micl-ripple: 1`. |
+| `$ripple-gradient`, `$layer-gradient` | The two gradients on their own, for components that combine them with further background layers. |
+| `%micl-target` placeholder | A `::before` pseudo-element that extends the hit area to 48px, centred on an element whose visual height is `--micl-height`. |
+| `focus-indicator($component, $offset)` mixin | The focus ring: `--md-sys-state-focus-indicator-thickness` (3px) in `--md-sys-color-secondary`. Pass a component name to read `--md-comp-<component>-focus-indicator-color` first; `$offset` is `'outer'` (default, `--md-sys-state-focus-indicator-outer-offset`), `'inner'` (`--md-sys-state-focus-indicator-inner-offset`), a length, or `null` to leave `outline-offset` alone. |
+| `%micl-backdrop` placeholder | The scrim of a modal surface: `--md-sys-color-scrim` at `--md-sys-state-backdrop-opacity`. |
+
 ### Customizations
 Customize the appearance of state layers by overriding their global CSS variables, such as adjusting the opacity.
 

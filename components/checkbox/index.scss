@@ -178,17 +178,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
     &:not(:disabled) {
         --micl-ripple: 1;
 
-        background-image:
-            radial-gradient(
-                circle at var(--micl-x, center) var(--micl-y, center),
-                transparent 0%,
-                rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-                transparent 10%
-            ),
-            linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-        background-repeat: no-repeat;
-        background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
-        background-size: 0%, 100%;
+        @include statelayer.layer;
         cursor: pointer;
         transition:
             background-size 0ms,
@@ -204,7 +194,7 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         &:focus-visible {
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
+            @include statelayer.focus-indicator($offset: null);
 
             &:not(:checked, :indeterminate)::after {
                 --_outline-color: var(--md-sys-color-on-surface);

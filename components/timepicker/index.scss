@@ -274,8 +274,7 @@ dialog.micl-dialog.micl-timepicker {
             }
         }
         &:focus-visible {
-            outline: var(--md-sys-state-focus-indicator-thickness) solid var(--md-sys-color-secondary);
-            outline-offset: -2px;
+            @include statelayer.focus-indicator($offset: 'inner');
         }
     }
     .micl-timepicker__am {

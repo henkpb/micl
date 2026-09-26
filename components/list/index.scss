@@ -280,17 +280,7 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     border-radius: var(--_list-item-shape);
     outline: none;
     background-color: rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity));
-    background-image:
-        radial-gradient(
-            circle at var(--micl-x, center) var(--micl-y, center),
-            transparent 0%,
-            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-            transparent 10%
-        ),
-        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-    background-repeat: no-repeat;
-    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
-    background-size: 0%, 100%;
+    @include statelayer.layer;
     list-style: none;
     transition:
         border-radius var(--_list-motion-duration) var(--_list-motion-effects),
