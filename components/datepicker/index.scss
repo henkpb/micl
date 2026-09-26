@@ -90,7 +90,7 @@ dialog.micl-dialog.micl-datepicker {
     --_datepicker-motion-duration-reverse: var(--md-comp-date-picker-motion-duration-reverse, var(--md-sys-motion-expressive-fast-effects-duration));
     --_datepicker-button-motion-duration: var(--md-comp-date-picker-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
 
-    --_target: var(--md-sys-state-target-size, 48px);
+    --_datepicker-target: var(--md-sys-state-target-size, 48px);
 
     inline-size: var(--md-comp-date-picker-modal-container-width, 360px);
 
@@ -111,7 +111,7 @@ dialog.micl-dialog.micl-datepicker {
     .micl-dialog__headline {
         display: grid;
         gap: 0;
-        grid-template-columns: max-content 1fr var(--_target);
+        grid-template-columns: max-content 1fr var(--_datepicker-target);
         grid-template-areas:
             "sup sup sup"
             "close act act"
@@ -193,7 +193,7 @@ dialog.micl-dialog.micl-datepicker {
 .micl-datepicker__month-selector,
 .micl-datepicker__year-selector {
     display: grid;
-    grid-template-rows: var(--_target);
+    grid-template-rows: var(--_datepicker-target);
     align-items: center;
 
     &.micl-datepicker__view-hidden {
@@ -203,7 +203,7 @@ dialog.micl-dialog.micl-datepicker {
 .micl-datepicker__month-selector {
     grid-area: msel;
     grid-template-areas: "mprev mnext";
-    grid-template-columns: var(--_target) var(--_target);
+    grid-template-columns: var(--_datepicker-target) var(--_datepicker-target);
     justify-items: flex-end;
     justify-content: flex-end;
 
@@ -247,7 +247,7 @@ dialog.micl-dialog.micl-datepicker {
 
 .micl-dialog--docked {
     :is(.micl-datepicker__month-selector, .micl-datepicker__year-selector) {
-        grid-template-columns: var(--_target) 1fr var(--_target);
+        grid-template-columns: var(--_datepicker-target) 1fr var(--_datepicker-target);
     }
     .micl-datepicker__month-selector {
         grid-template-areas: "mprev mon mnext";
@@ -337,14 +337,14 @@ dialog.micl-dialog.micl-datepicker {
 
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: 40px repeat(6, var(--_target));
+    grid-template-rows: 40px repeat(6, var(--_datepicker-target));
     block-size: 100%;
     inline-size: 100%;
     padding-inline: 12px;
 
     > * {
         display: grid;
-        grid-template-columns: repeat(7, var(--_target));
+        grid-template-columns: repeat(7, var(--_datepicker-target));
     }
 
     span, time {
@@ -429,7 +429,7 @@ dialog.micl-dialog.micl-datepicker {
 
         display: flex;
         align-items: center;
-        block-size: var(--_target);
+        block-size: var(--_datepicker-target);
         gap: 8px;
         padding-inline-start: 16px;
         color: var(--md-sys-color-on-surface);
@@ -476,8 +476,8 @@ dialog.micl-dialog.micl-datepicker {
         block-size: 36px;
         inline-size: 72px;
         margin: 8px;
-        border: calc((var(--_target) - 36px) / 2) solid transparent;
-        border-radius: calc(var(--_target) / 2);
+        border: calc((var(--_datepicker-target) - 36px) / 2) solid transparent;
+        border-radius: calc(var(--_datepicker-target) / 2);
         color: var(--md-comp-date-picker-selection-year-unselected-label-text-color, var(--md-sys-color-on-surface-variant));
         cursor: pointer;
 

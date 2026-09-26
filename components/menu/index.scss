@@ -237,19 +237,19 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
 @media (forced-colors: active) {        border: 1px solid CanvasText;    }
     outline: none;
     background-color: transparent;
-    --micl-duration: var(--_menu-motion-spatial-duration-reverse);
-    --micl-easing: linear;
-    --_group-shape: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
+    --_duration: var(--_menu-motion-spatial-duration-reverse);
+    --_easing: linear;
+    --_menu-group-shape: var(--md-comp-menu-group-shape, var(--md-sys-shape-corner-small, 8px));
 
     opacity: 0;
     overflow: visible;
     transform: scaleY(0);
     transform-origin: center top;
     transition:
-        opacity var(--micl-duration) var(--micl-easing),
-        transform var(--micl-duration) var(--_menu-motion-spatial),
-        overlay var(--micl-duration) linear allow-discrete,
-        display var(--micl-duration) linear allow-discrete;
+        opacity var(--_duration) var(--_easing),
+        transform var(--_duration) var(--_menu-motion-spatial),
+        overlay var(--_duration) linear allow-discrete,
+        display var(--_duration) linear allow-discrete;
 
     @media (max-width: layout.$md-sys-breakpoint-compact-max) {
         position-area: block-end;
@@ -257,8 +257,8 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         margin-inline: $menu-viewport-margin;
     }
     &:popover-open {
-        --micl-duration: var(--_menu-motion-spatial-duration);
-        --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+        --_duration: var(--_menu-motion-spatial-duration);
+        --_easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
 
         display: flex;
         opacity: 1;
@@ -280,12 +280,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
         transition: border-radius var(--_menu-motion-effects-duration-reverse) linear;
 
         &+ .micl-list {
-            border-start-start-radius: var(--_group-shape);
-            border-start-end-radius: var(--_group-shape);
+            border-start-start-radius: var(--_menu-group-shape);
+            border-start-end-radius: var(--_menu-group-shape);
         }
         &:has(+ .micl-list) {
-            border-end-start-radius: var(--_group-shape);
-            border-end-end-radius: var(--_group-shape);
+            border-end-start-radius: var(--_menu-group-shape);
+            border-end-end-radius: var(--_menu-group-shape);
         }
 
         #{$item-classes} > .micl-menu[popover] {

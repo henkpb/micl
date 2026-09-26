@@ -32,13 +32,13 @@ $enabled: ':not(:disabled)';
 @include shape.corner('large-increased');
 
 .micl-splitbutton {
-    --_lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
-    --_trail-pad: 13px;
-    --_trail-icon: 22px;
-    --_nudge: 1px;
-    --_inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
-    --_inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
-    --_inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+    --_splitbutton-lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
+    --_splitbutton-trail-pad: 13px;
+    --_splitbutton-trail-icon: 22px;
+    --_splitbutton-nudge: 1px;
+    --_splitbutton-inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+    --_splitbutton-inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+    --_splitbutton-inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
 
     box-sizing: border-box;
     display: flex;
@@ -46,49 +46,49 @@ $enabled: ':not(:disabled)';
     column-gap: var(--md-comp-split-button-between-space, 2px);
 
     &:has(> :first-child[class$="-xs"], > :first-child[class*="-xs "]) {
-        --_lead-end: var(--md-comp-split-button-xsmall-leading-button-trailing-space, 10px);
-        --_trail-pad: 13px;
-        --_trail-icon: 22px;
-        --_nudge: 1px;
-        --_inner: var(--md-comp-split-button-xsmall-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
-        --_inner-hover: var(--md-comp-split-button-xsmall-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-small));
-        --_inner-press: var(--md-comp-split-button-xsmall-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_splitbutton-lead-end: var(--md-comp-split-button-xsmall-leading-button-trailing-space, 10px);
+        --_splitbutton-trail-pad: 13px;
+        --_splitbutton-trail-icon: 22px;
+        --_splitbutton-nudge: 1px;
+        --_splitbutton-inner: var(--md-comp-split-button-xsmall-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-xsmall-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_splitbutton-inner-press: var(--md-comp-split-button-xsmall-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-small));
     }
     &:has(> :first-child[class$="-s"], > :first-child[class*="-s "]) {
-        --_lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
-        --_trail-pad: 13px;
-        --_trail-icon: 22px;
-        --_nudge: 1px;
-        --_inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
-        --_inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
-        --_inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
+        --_splitbutton-trail-pad: 13px;
+        --_splitbutton-trail-icon: 22px;
+        --_splitbutton-nudge: 1px;
+        --_splitbutton-inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
     }
     &:has(> :first-child[class$="-m"], > :first-child[class*="-m "]) {
-        --_lead-end: var(--md-comp-split-button-medium-leading-button-trailing-space, 24px);
-        --_trail-pad: 15px;
-        --_trail-icon: 26px;
-        --_nudge: 2px;
-        --_inner: var(--md-comp-split-button-medium-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
-        --_inner-hover: var(--md-comp-split-button-medium-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
-        --_inner-press: var(--md-comp-split-button-medium-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-lead-end: var(--md-comp-split-button-medium-leading-button-trailing-space, 24px);
+        --_splitbutton-trail-pad: 15px;
+        --_splitbutton-trail-icon: 26px;
+        --_splitbutton-nudge: 2px;
+        --_splitbutton-inner: var(--md-comp-split-button-medium-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-medium-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-inner-press: var(--md-comp-split-button-medium-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
     }
     &:has(> :first-child[class$="-l"], > :first-child[class*="-l "]) {
-        --_lead-end: var(--md-comp-split-button-large-leading-button-trailing-space, 48px);
-        --_trail-pad: 29px;
-        --_trail-icon: 38px;
-        --_nudge: 3px;
-        --_inner: var(--md-comp-split-button-large-inner-corner-corner-size, var(--md-sys-shape-corner-small));
-        --_inner-hover: var(--md-comp-split-button-large-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
-        --_inner-press: var(--md-comp-split-button-large-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_splitbutton-lead-end: var(--md-comp-split-button-large-leading-button-trailing-space, 48px);
+        --_splitbutton-trail-pad: 29px;
+        --_splitbutton-trail-icon: 38px;
+        --_splitbutton-nudge: 3px;
+        --_splitbutton-inner: var(--md-comp-split-button-large-inner-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-large-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_splitbutton-inner-press: var(--md-comp-split-button-large-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
     }
     &:has(> :first-child[class$="-xl"], > :first-child[class*="-xl "]) {
-        --_lead-end: var(--md-comp-split-button-xlarge-leading-button-trailing-space, 64px);
-        --_trail-pad: 43px;
-        --_trail-icon: 50px;
-        --_nudge: 6px;
-        --_inner: var(--md-comp-split-button-xlarge-inner-corner-corner-size, var(--md-sys-shape-corner-medium));
-        --_inner-hover: var(--md-comp-split-button-xlarge-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
-        --_inner-press: var(--md-comp-split-button-xlarge-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_splitbutton-lead-end: var(--md-comp-split-button-xlarge-leading-button-trailing-space, 64px);
+        --_splitbutton-trail-pad: 43px;
+        --_splitbutton-trail-icon: 50px;
+        --_splitbutton-nudge: 6px;
+        --_splitbutton-inner: var(--md-comp-split-button-xlarge-inner-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-xlarge-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_splitbutton-inner-press: var(--md-comp-split-button-xlarge-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
     }
 
     > #{$half} {
@@ -96,41 +96,41 @@ $enabled: ':not(:disabled)';
     }
 
     #{$leading} {
-        padding-inline: calc(var(--micl-pad) + var(--_nudge)) calc(var(--_lead-end) - var(--_nudge));
+        padding-inline: calc(var(--_button-pad) + var(--_splitbutton-nudge)) calc(var(--_splitbutton-lead-end) - var(--_splitbutton-nudge));
         border-start-start-radius: var(--_outer);
         border-end-start-radius: var(--_outer);
-        border-start-end-radius: var(--_inner);
-        border-end-end-radius: var(--_inner);
+        border-start-end-radius: var(--_splitbutton-inner);
+        border-end-end-radius: var(--_splitbutton-inner);
     }
     #{$trailing} {
-        padding-inline: calc(var(--_trail-pad) - var(--_nudge)) calc(var(--_trail-pad) + var(--_nudge));
-        border-start-start-radius: var(--_inner);
-        border-end-start-radius: var(--_inner);
+        padding-inline: calc(var(--_splitbutton-trail-pad) - var(--_splitbutton-nudge)) calc(var(--_splitbutton-trail-pad) + var(--_splitbutton-nudge));
+        border-start-start-radius: var(--_splitbutton-inner);
+        border-end-start-radius: var(--_splitbutton-inner);
         border-start-end-radius: var(--_outer);
         border-end-end-radius: var(--_outer);
 
         .micl-button__icon {
-            font-size: var(--_trail-icon);
-            inline-size: var(--_trail-icon);
+            font-size: var(--_splitbutton-trail-icon);
+            inline-size: var(--_splitbutton-trail-icon);
             rotate: 0deg;
             transition:
-                font-variation-settings var(--_motion-duration) linear,
-                rotate var(--_motion-duration) var(--_motion-effects);
+                font-variation-settings var(--_button-motion-duration) linear,
+                rotate var(--_button-motion-duration) var(--_button-motion-effects);
         }
     }
 
     #{$leading}#{$enabled}:hover {
-        border-start-end-radius: var(--_inner-hover);
-        border-end-end-radius: var(--_inner-hover);
+        border-start-end-radius: var(--_splitbutton-inner-hover);
+        border-end-end-radius: var(--_splitbutton-inner-hover);
     }
     #{$trailing}#{$enabled}:hover {
-        border-start-start-radius: var(--_inner-hover);
-        border-end-start-radius: var(--_inner-hover);
+        border-start-start-radius: var(--_splitbutton-inner-hover);
+        border-end-start-radius: var(--_splitbutton-inner-hover);
     }
 
     &:has(> [popover]:popover-open) {
         #{$trailing} {
-            --_nudge: 0px;
+            --_splitbutton-nudge: 0px;
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
 
             border-start-start-radius: var(--_outer);
@@ -145,12 +145,12 @@ $enabled: ':not(:disabled)';
     #{$leading}#{$enabled}:active {
         border-start-start-radius: var(--_outer);
         border-end-start-radius: var(--_outer);
-        border-start-end-radius: var(--_inner-press);
-        border-end-end-radius: var(--_inner-press);
+        border-start-end-radius: var(--_splitbutton-inner-press);
+        border-end-end-radius: var(--_splitbutton-inner-press);
     }
     #{$trailing}#{$enabled}:active {
-        border-start-start-radius: var(--_inner-press);
-        border-end-start-radius: var(--_inner-press);
+        border-start-start-radius: var(--_splitbutton-inner-press);
+        border-end-start-radius: var(--_splitbutton-inner-press);
         border-start-end-radius: var(--_outer);
         border-end-end-radius: var(--_outer);
     }

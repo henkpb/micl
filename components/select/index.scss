@@ -36,7 +36,7 @@
 $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
 
 .micl-textfield-filled > select {
-    --_line-height: calc(var(--md-comp-text-field-container-height, 56px) - var(--_input-top, 18px) - 3px);
+    --_line-height: calc(var(--md-comp-text-field-container-height, 56px) - var(--_textfield-input-top, 18px) - 3px);
 }
 .micl-textfield-outlined > select {
     --_line-height: var(--md-comp-text-field-container-height, 56px);
@@ -49,7 +49,7 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     line-height: var(--_line-height);
 
     &::picker-icon {
-        color: var(--_icon-trailing-color, var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant)));
+        color: var(--_textfield-icon-trailing-color, var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant)));
         transition: rotate var(--_menu-motion-spatial-duration) var(--_menu-motion-spatial);
         transform-origin: 50% calc((var(--_line-height) / 2) - 1px);
     }
@@ -65,8 +65,8 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         --_list-shape: var(--md-comp-list-container-shape, var(--md-sys-shape-corner-large, 16px));
         --_list-item-background-color: var(--md-comp-list-item-container-color, transparent);
         --_list-item-background-opacity: 0%;
-        --micl-duration: var(--_menu-motion-spatial-duration-reverse);
-        --micl-easing: linear;
+        --_duration: var(--_menu-motion-spatial-duration-reverse);
+        --_easing: linear;
 
         appearance: base-select;
         display: flex;
@@ -88,14 +88,14 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         transform: scaleY(0);
         transform-origin: var(--micl-select-picker-origin, top);
         transition:
-            opacity var(--micl-duration) var(--micl-easing),
-            transform var(--micl-duration) var(--_menu-motion-spatial),
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete;
+            opacity var(--_duration) var(--_easing),
+            transform var(--_duration) var(--_menu-motion-spatial),
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete;
 
         &:popover-open {
-            --micl-duration: var(--_menu-motion-spatial-duration);
-            --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+            --_duration: var(--_menu-motion-spatial-duration);
+            --_easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
 
             opacity: 1;
             transform: scaleY(1);
@@ -116,9 +116,9 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
         flex-direction: column;
         gap: var(--md-comp-menu-gap, 2px);
         block-size: var(--md-comp-text-field-container-height, auto);
-        min-block-size: var(--_height);
-        padding-block: 6px calc(4px - var(--_outline-extra, 0px));
-        padding-inline: calc(4px - var(--_outline-extra, 0px));
+        min-block-size: var(--_textfield-height);
+        padding-block: 6px calc(4px - var(--_textfield-outline-extra, 0px));
+        padding-inline: calc(4px - var(--_textfield-outline-extra, 0px));
         overflow-y: auto;
 
         &::picker-icon {
@@ -127,24 +127,24 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
     }
 
     option {
-        --_option-description: attr(aria-description);
+        --_select-option-description: attr(aria-description);
 
         line-height: normal;
 
         .micl-list-item__text::after {
-            content: var(--_option-description);
+            content: var(--_select-option-description);
             overflow: hidden;
             text-overflow: ellipsis;
         }
         &::checkmark {
-            color: var(--_trailing-icon-color);
+            color: var(--_list-trailing-icon-color);
         }
     }
 
 }
 
 .micl-textfield-filled > select[multiple] {
-    padding-block: 24px calc(5px - var(--_outline-width, 1px));
+    padding-block: 24px calc(5px - var(--_textfield-outline-width, 1px));
 }
 .micl-textfield-filled:not(:has(> label)) > select[multiple] {
     padding-block-start: 5px;
@@ -164,7 +164,7 @@ $selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
                 statelayer.$ripple-gradient,
                 statelayer.$layer-gradient,
                 linear-gradient(rgb(from var(--_list-item-background-color) r g b / var(--_list-item-background-opacity)));
-            -webkit-text-fill-color: var(--_headline-color);
+            -webkit-text-fill-color: var(--_list-headline-color);
 
             transition:
                 background-size 0ms,

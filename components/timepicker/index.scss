@@ -70,15 +70,15 @@
 dialog.micl-dialog.micl-timepicker {
     --_timepicker-motion-duration: var(--md-comp-time-picker-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
 
-    --_input-height: var(--md-comp-time-picker-time-selector-container-height, 72px);
-    --_input-width: var(--md-comp-time-picker-time-selector-container-width, 96px);
-    --_separator-width: var(--md-comp-time-picker-separator-width, 24px);
-    --_period-height: var(--md-comp-time-picker-period-selector-container-height, 72px);
-    --_period-width: var(--md-comp-time-picker-period-selector-container-width, 52px);
-    --_dial-size: var(--md-comp-time-picker-clock-dial-container-size, 256px);
-    --_center-size: var(--md-comp-time-picker-clock-dial-selector-center-container-size, 8px);
-    --_track-width: var(--md-comp-time-picker-clock-dial-selector-track-container-width, 2px);
-    --_target: var(--md-sys-state-target-size, 48px);
+    --_timepicker-input-height: var(--md-comp-time-picker-time-selector-container-height, 72px);
+    --_timepicker-input-width: var(--md-comp-time-picker-time-selector-container-width, 96px);
+    --_timepicker-separator-width: var(--md-comp-time-picker-separator-width, 24px);
+    --_timepicker-period-height: var(--md-comp-time-picker-period-selector-container-height, 72px);
+    --_timepicker-period-width: var(--md-comp-time-picker-period-selector-container-width, 52px);
+    --_timepicker-dial-size: var(--md-comp-time-picker-clock-dial-container-size, 256px);
+    --_timepicker-center-size: var(--md-comp-time-picker-clock-dial-selector-center-container-size, 8px);
+    --_timepicker-track-width: var(--md-comp-time-picker-clock-dial-selector-track-container-width, 2px);
+    --_timepicker-target: var(--md-sys-state-target-size, 48px);
 
     .micl-dialog__headline {
         padding-block-end: 20px;
@@ -96,7 +96,7 @@ dialog.micl-dialog.micl-timepicker {
             "hr sep min per"
             "hsup hsup msup msup"
             "dial dial dial dial";
-        grid-template-columns: auto var(--_separator-width) var(--_input-width) auto;
+        grid-template-columns: auto var(--_timepicker-separator-width) var(--_timepicker-input-width) auto;
     }
     .micl-dialog__actions {
         &:has(.micl-timepicker__inputmode) {
@@ -109,11 +109,11 @@ dialog.micl-dialog.micl-timepicker {
     }
 
     &:has(.micl-timepicker__dial:not(.micl-timepicker__dial--hidden)) {
-        --_input-height: var(--md-comp-time-picker-time-selector-container-height, 80px);
-        --_period-height: var(--md-comp-time-picker-period-selector-container-height, 80px);
+        --_timepicker-input-height: var(--md-comp-time-picker-time-selector-container-height, 80px);
+        --_timepicker-period-height: var(--md-comp-time-picker-period-selector-container-height, 80px);
 
         &.micl-timepicker--horizontal {
-            --_period-height: var(--md-comp-time-picker-period-selector-container-height, 38px);
+            --_timepicker-period-height: var(--md-comp-time-picker-period-selector-container-height, 38px);
 
             .micl-dialog__headline {
                 padding-block-end: 0;
@@ -123,11 +123,11 @@ dialog.micl-dialog.micl-timepicker {
                     ". . . dial"
                     "hr sep min dial"
                     "per per per dial";
-                grid-template-rows: 72px var(--_input-height) auto;
+                grid-template-rows: 72px var(--_timepicker-input-height) auto;
 
                 .micl-timepicker__period {
-                    --_ampm-height: var(--_period-height);
-                    --_period-width: calc(2 * var(--_input-width) + var(--_separator-width));
+                    --_timepicker-ampm-height: var(--_timepicker-period-height);
+                    --_timepicker-period-width: calc(2 * var(--_timepicker-input-width) + var(--_timepicker-separator-width));
 
                     display: flex;
                     align-self: flex-start;
@@ -175,8 +175,8 @@ dialog.micl-dialog.micl-timepicker {
         @include typography.display-medium;
 
         box-sizing: border-box;
-        inline-size: var(--_input-width);
-        block-size: var(--_input-height);
+        inline-size: var(--_timepicker-input-width);
+        block-size: var(--_timepicker-input-height);
         margin: 0;
         padding: 0;
         border: none;
@@ -214,28 +214,28 @@ dialog.micl-dialog.micl-timepicker {
         }
     }
     &:not(:has(.micl-timepicker__am)):not(:has(.micl-timepicker__dial:not(.micl-timepicker__dial--hidden))) {
-        --_input-width: var(--md-comp-time-picker-time-selector-24h-container-width, 114px);
+        --_timepicker-input-width: var(--md-comp-time-picker-time-selector-24h-container-width, 114px);
     }
 }
 .micl-timepicker__separator {
     @include typography.display-large;
 
     grid-area: sep;
-    block-size: var(--_input-height);
-    line-height: var(--_input-height);
-    inline-size: var(--_separator-width);
+    block-size: var(--_timepicker-input-height);
+    line-height: var(--_timepicker-input-height);
+    inline-size: var(--_timepicker-separator-width);
     text-align: center;
     color: var(--md-comp-time-picker-separator-color, var(--md-sys-color-on-surface));
 }
 .micl-timepicker__period {
-    --_ampm-height: calc(var(--_period-height) / 2);
+    --_timepicker-ampm-height: calc(var(--_timepicker-period-height) / 2);
 
     grid-area: per;
-    block-size: var(--_period-height);
+    block-size: var(--_timepicker-period-height);
     inline-size: 0;
 
     &:has(.micl-timepicker__am) {
-        inline-size: var(--_period-width);
+        inline-size: var(--_timepicker-period-width);
         margin-inline: 12px 0;
     }
     .micl-timepicker__am,
@@ -248,9 +248,9 @@ dialog.micl-dialog.micl-timepicker {
         position: relative;
         display: flex;
         align-items: center;
-        inline-size: var(--_period-width);
-        block-size: var(--_ampm-height);
-        min-block-size: var(--_ampm-height);
+        inline-size: var(--_timepicker-period-width);
+        block-size: var(--_timepicker-ampm-height);
+        min-block-size: var(--_timepicker-ampm-height);
         margin: 0;
         border: 1px solid var(--md-comp-time-picker-period-selector-outline-color, var(--md-sys-color-outline));
         outline: none;
@@ -301,15 +301,15 @@ dialog.micl-dialog.micl-timepicker {
 }
 
 .micl-timepicker .micl-timepicker__dial {
-    --micl-dial-radius: calc((var(--_dial-size) - var(--_target)) / 2);
-    --micl-hour-radius: var(--micl-dial-radius);
-    --micl-track-radius: var(--micl-dial-radius);
+    --_timepicker-dial-radius: calc((var(--_timepicker-dial-size) - var(--_timepicker-target)) / 2);
+    --micl-hour-radius: var(--_timepicker-dial-radius);
+    --micl-track-radius: var(--_timepicker-dial-radius);
 
     position: relative;
     grid-area: dial;
     justify-self: center;
-    block-size: var(--_dial-size);
-    inline-size: var(--_dial-size);
+    block-size: var(--_timepicker-dial-size);
+    inline-size: var(--_timepicker-dial-size);
     margin-block: 36px 0;
     margin-inline: 0;
     border-radius: var(--md-sys-shape-corner-full);
@@ -317,7 +317,7 @@ dialog.micl-dialog.micl-timepicker {
     touch-action: none;
 
     data.micl-timepicker__dial-inner {
-        --micl-hour-radius: calc(var(--micl-dial-radius) - var(--_target) + 12px);
+        --micl-hour-radius: calc(var(--_timepicker-dial-radius) - var(--_timepicker-target) + 12px);
 
         z-index: 2;
         &::before {
@@ -325,18 +325,18 @@ dialog.micl-dialog.micl-timepicker {
         }
     }
     data {
-        --micl-a: calc(var(--micl-dial-radius) + (var(--micl-hour-radius) * cos(var(--micl-angle))));
-        --micl-b: calc(var(--micl-dial-radius) + (var(--micl-hour-radius) * sin(var(--micl-angle))));
+        --_a: calc(var(--_timepicker-dial-radius) + (var(--micl-hour-radius) * cos(var(--micl-angle))));
+        --_b: calc(var(--_timepicker-dial-radius) + (var(--micl-hour-radius) * sin(var(--micl-angle))));
 
         @include typography.body-large;
 
         position: absolute;
         display: grid;
         place-content: center;
-        block-size: var(--_target);
-        inline-size: var(--_target);
-        inset-inline-start: var(--micl-a);
-        inset-block-start: var(--micl-b);
+        block-size: var(--_timepicker-target);
+        inline-size: var(--_timepicker-target);
+        inset-inline-start: var(--_a);
+        inset-block-start: var(--_b);
         border-radius: var(--md-sys-shape-corner-full);
         color: var(--md-comp-time-picker-clock-dial-unselected-label-text-color, var(--md-sys-color-on-surface));
         cursor: pointer;
@@ -351,26 +351,26 @@ dialog.micl-dialog.micl-timepicker {
         &::before {
             content: "";
             position: absolute;
-            block-size: var(--_target);
-            inline-size: calc(2 * var(--_target));
+            block-size: var(--_timepicker-target);
+            inline-size: calc(2 * var(--_timepicker-target));
             inset-inline-start: 0;
             inset-block-end: 0;
-            transform: rotate(var(--micl-angle)) translate(calc(-1 * var(--_target)));
-            transform-origin: calc(var(--_target) / 2) center;
+            transform: rotate(var(--micl-angle)) translate(calc(-1 * var(--_timepicker-target)));
+            transform-origin: calc(var(--_timepicker-target) / 2) center;
             z-index: 1;
         }
     }
 
     .micl-timepicker__track {
-        --micl-track-length: calc(var(--micl-track-radius) - 12px);
+        --_track-length: calc(var(--micl-track-radius) - 12px);
 
         position: relative;
         display: block;
-        inline-size: var(--_track-width);
-        block-size: var(--micl-track-length);
-        inset-inline-start: calc((var(--_dial-size) - var(--_track-width)) / 2);
-        inset-block-start: calc((var(--_dial-size) / 2) - var(--micl-track-length));
-        border-radius: calc(var(--_track-width) * 2);
+        inline-size: var(--_timepicker-track-width);
+        block-size: var(--_track-length);
+        inset-inline-start: calc((var(--_timepicker-dial-size) - var(--_timepicker-track-width)) / 2);
+        inset-block-start: calc((var(--_timepicker-dial-size) / 2) - var(--_track-length));
+        border-radius: calc(var(--_timepicker-track-width) * 2);
         background-color: var(--md-comp-time-picker-clock-dial-selector-track-container-color, var(--md-sys-color-primary));
         transform: rotate(calc(90deg + var(--micl-angle)));
         transform-origin: bottom;
@@ -379,10 +379,10 @@ dialog.micl-dialog.micl-timepicker {
             content: "";
             position: absolute;
             display: block;
-            block-size: var(--_center-size);
-            inline-size: var(--_center-size);
-            inset-block-end: calc((var(--_center-size) - var(--_track-width)) / -2);
-            inset-inline-start: calc((var(--_center-size) - var(--_track-width)) / -2);
+            block-size: var(--_timepicker-center-size);
+            inline-size: var(--_timepicker-center-size);
+            inset-block-end: calc((var(--_timepicker-center-size) - var(--_timepicker-track-width)) / -2);
+            inset-inline-start: calc((var(--_timepicker-center-size) - var(--_timepicker-track-width)) / -2);
             border-radius: var(--md-sys-shape-corner-full);
             background-color: var(--md-comp-time-picker-clock-dial-selector-center-container-color, var(--md-sys-color-primary));
         }

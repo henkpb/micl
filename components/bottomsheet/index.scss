@@ -45,15 +45,15 @@ dialog.micl-bottomsheet {
     --_height: var(--md-comp-bottomsheet-height, max-content);
     --_margin: var(--md-comp-bottomsheet-margin, 56px);
     --_margin-top: var(--md-comp-bottomsheet-margin-top, 72px);
-    --_padding: var(--md-comp-bottomsheet-padding, 24px);
-    --_drag-handle-width: var(--md-comp-bottomsheet-drag-handle-width, 32px);
-    --_drag-handle-height: var(--md-comp-bottomsheet-drag-handle-height, 4px);
+    --_bottomsheet-padding: var(--md-comp-bottomsheet-padding, 24px);
+    --_bottomsheet-drag-handle-width: var(--md-comp-bottomsheet-drag-handle-width, 32px);
+    --_bottomsheet-drag-handle-height: var(--md-comp-bottomsheet-drag-handle-height, 4px);
     --_motion-spatial: var(--md-comp-bottomsheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
     --_motion-duration: var(--md-comp-bottomsheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
     --_motion-duration-reverse: var(--md-comp-bottomsheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
 
-    --micl-duration: var(--_motion-duration-reverse);
-    --micl-easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
+    --_duration: var(--_motion-duration-reverse);
+    --_easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
     --micl-bottomsheet-scroll: hidden;
     --_settle-delay: 0s;
 
@@ -81,10 +81,10 @@ dialog.micl-bottomsheet {
     }
     &:not(.micl-bottomsheet--resizing) {
         transition:
-            opacity var(--micl-duration) var(--micl-easing),
-            block-size var(--micl-duration) var(--_motion-spatial),
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete,
+            opacity var(--_duration) var(--_easing),
+            block-size var(--_duration) var(--_motion-spatial),
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete,
             --micl-bottomsheet-scroll 0s var(--_settle-delay) allow-discrete;
     }
     .micl-bottomsheet__headline {
@@ -101,9 +101,9 @@ dialog.micl-bottomsheet {
 
         .micl-bottomsheet__draghandle {
             box-sizing: content-box;
-            inline-size: var(--_drag-handle-width);
-            block-size: var(--_drag-handle-height);
-            padding: 16px calc((var(--md-sys-state-target-size, 48px) - var(--_drag-handle-width)) / 2);
+            inline-size: var(--_bottomsheet-drag-handle-width);
+            block-size: var(--_bottomsheet-drag-handle-height);
+            padding: 16px calc((var(--md-sys-state-target-size, 48px) - var(--_bottomsheet-drag-handle-width)) / 2);
             border: none;
             border-radius: var(--md-sys-shape-corner-extra-large);
             background: none;
@@ -113,7 +113,7 @@ dialog.micl-bottomsheet {
                 content: '';
                 display: block;
                 block-size: 100%;
-                border-radius: calc(var(--_drag-handle-height) / 2);
+                border-radius: calc(var(--_bottomsheet-drag-handle-height) / 2);
                 background-color: var(--md-comp-bottomsheet-drag-handle-color, var(--md-sys-color-on-surface-variant));
             }
             &:focus-visible {
@@ -123,25 +123,25 @@ dialog.micl-bottomsheet {
     }
     .micl-bottomsheet__content {
         flex: 1 1 auto;
-        padding: 0 var(--_padding) var(--_padding) var(--_padding);
+        padding: 0 var(--_bottomsheet-padding) var(--_bottomsheet-padding) var(--_bottomsheet-padding);
         overflow: hidden var(--micl-bottomsheet-scroll);
 
         &:first-child {
-            padding-block-start: var(--_padding);
+            padding-block-start: var(--_bottomsheet-padding);
         }
     }
 
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete,
-            background-color var(--micl-duration) linear;
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete,
+            background-color var(--_duration) linear;
     }
     &:popover-open,
     &[open] {
-        --micl-duration: var(--_motion-duration);
-        --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+        --_duration: var(--_motion-duration);
+        --_easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
         --micl-bottomsheet-scroll: auto;
         --_settle-delay: var(--_motion-duration);
 

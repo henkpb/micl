@@ -68,7 +68,7 @@
         --_navigationrail-header-space: var(--md-comp-nav-rail-item-header-space-minimum, 40px);
     }
 
-    --micl-duration: var(--_navigationrail-motion-duration-reverse);
+    --_duration: var(--_navigationrail-motion-duration-reverse);
 
     --_navigationrail-content-gap: var(--md-comp-nav-rail-item-container-vertical-space, 4px);
     --_navigationrail-morph-speed: var(--_navigationrail-morph-duration-reverse);
@@ -254,7 +254,7 @@
     }
 
     &[open] {
-        --micl-duration: var(--_navigationrail-motion-duration);
+        --_duration: var(--_navigationrail-motion-duration);
 
         border-start-end-radius: var(--md-comp-nav-rail-expanded-modal-container-shape, var(--md-sys-shape-corner-large));
         border-end-end-radius: var(--md-comp-nav-rail-expanded-modal-container-shape, var(--md-sys-shape-corner-large));
@@ -270,9 +270,9 @@
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            background-color var(--micl-duration) linear,
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete;
+            background-color var(--_duration) linear,
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete;
     }
 
 }
@@ -363,10 +363,10 @@ dialog.micl-navigationrail {
     opacity: 0%;
 
     transition:
-        opacity var(--micl-duration) linear,
-        margin-inline-start var(--micl-duration) var(--_navigationrail-motion-spatial),
-        overlay var(--micl-duration) linear allow-discrete,
-        display var(--micl-duration) linear allow-discrete;
+        opacity var(--_duration) linear,
+        margin-inline-start var(--_duration) var(--_navigationrail-motion-spatial),
+        overlay var(--_duration) linear allow-discrete,
+        display var(--_duration) linear allow-discrete;
 
     &[open] {
         display: flex;

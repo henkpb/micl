@@ -50,8 +50,8 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 @include typography.scale('label-large');
 
 %micl-button-base {
-    --_motion-effects: var(--md-comp-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
-    --_motion-duration: var(--md-comp-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
+    --_button-motion-effects: var(--md-comp-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
+    --_button-motion-duration: var(--md-comp-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -70,11 +70,11 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
-        border-radius var(--_motion-duration) var(--_motion-effects),
-        box-shadow var(--_motion-duration) var(--_motion-effects),
-        padding-inline var(--_motion-duration) var(--_motion-effects),
+        border-radius var(--_button-motion-duration) var(--_button-motion-effects),
+        box-shadow var(--_button-motion-duration) var(--_button-motion-effects),
+        padding-inline var(--_button-motion-duration) var(--_button-motion-effects),
         background-size 0ms,
-        --statelayer-opacity var(--_motion-duration) linear;
+        --statelayer-opacity var(--_button-motion-duration) linear;
 
     &#{$disabled} {
         cursor: default;
@@ -102,7 +102,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     }
     .micl-button__icon {
         font-variation-settings: 'FILL' 0;
-        transition: font-variation-settings var(--_motion-duration) linear;
+        transition: font-variation-settings var(--_button-motion-duration) linear;
     }
     &.micl-button--toggle > input {
         position: absolute;
@@ -125,14 +125,14 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 
     --micl-width: 32px;
     --micl-height: 32px;
-    --micl-pad: 12px;
-    --micl-gap: 4px;
+    --_button-pad: 12px;
+    --_button-gap: 4px;
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
-    column-gap: var(--micl-gap);
-    padding-inline: var(--micl-pad);
+    column-gap: var(--_button-gap);
+    padding-inline: var(--_button-pad);
 
     .micl-button__icon {
         font-size: 20px;

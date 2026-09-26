@@ -42,12 +42,12 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
     white-space: nowrap;
 
     > #{$children} {
-        --_pad: var(--micl-pad);
+        --_pad: var(--_button-pad);
 
         flex-shrink: 1;
     }
     > #{$icons} {
-        min-inline-size: var(--_width-narrow);
+        min-inline-size: var(--_iconbutton-width-narrow);
     }
     > #{$labels} {
         min-inline-size: min-content;
@@ -61,9 +61,9 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
         &::after {
             content: "";
             flex-shrink: 1;
-            inline-size: calc(var(--_pad) - var(--micl-gap));
+            inline-size: calc(var(--_pad) - var(--_button-gap));
             min-inline-size: 0;
-            transition: inline-size var(--_motion-duration) var(--_motion-effects);
+            transition: inline-size var(--_button-motion-duration) var(--_button-motion-effects);
         }
     }
 }
@@ -90,7 +90,7 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
     > #{$children} {
         --_grow: calc(var(--micl-height) * var(--md-comp-button-group-standard-expanded-ratio, 0.15));
         --_expand: 0px;
-        --_pad: calc(var(--micl-pad) + var(--_expand));
+        --_pad: calc(var(--_button-pad) + var(--_expand));
     }
     > #{$icons} {
         inline-size: calc(var(--micl-width) + var(--_expand) * 2);
@@ -121,8 +121,8 @@ $standard: '.micl-buttongroup:not(.micl-buttongroup--connected)';
 
     > #{$children} {
         --_outer: calc(var(--micl-height) / 2);
-        --_inner: var(--md-comp-button-group-connected-inner-corner-corner-size, var(--_shape-pressed));
-        --_inner-pressed: var(--md-comp-button-group-connected-pressed-inner-corner-corner-size, calc(var(--_shape-pressed) / 2));
+        --_inner: var(--md-comp-button-group-connected-inner-corner-corner-size, var(--_button-shape-pressed));
+        --_inner-pressed: var(--md-comp-button-group-connected-pressed-inner-corner-corner-size, calc(var(--_button-shape-pressed) / 2));
 
         flex-grow: 1;
         border-radius: var(--_inner);

@@ -71,31 +71,31 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     &#{$unselected} {
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-hovered-expressive-shape, var(--md-sys-shape-corner-medium, 12px));
-            --_headline-color: var(--md-comp-list-item-hover-label-text-color, var(--md-sys-color-on-surface));
-            --_leading-icon-color: var(--md-comp-list-item-hover-leading-icon-color, var(--md-sys-color-on-surface-variant));
-            --_supporting-text-color: var(--md-comp-list-item-hover-supporting-text-color, var(--md-sys-color-on-surface-variant));
-            --_trailing-icon-color: var(--md-comp-list-item-hover-trailing-icon-color, var(--md-sys-color-on-surface-variant));
-            --_trailing-text-color: var(--md-comp-list-item-hover-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_list-headline-color: var(--md-comp-list-item-hover-label-text-color, var(--md-sys-color-on-surface));
+            --_list-leading-icon-color: var(--md-comp-list-item-hover-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_list-supporting-text-color: var(--md-comp-list-item-hover-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_list-trailing-icon-color: var(--md-comp-list-item-hover-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_list-trailing-text-color: var(--md-comp-list-item-hover-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
             --statelayer-color: var(--md-comp-list-item-hover-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity, 8%));
         }
         &:focus-visible {
             --_list-item-shape: var(--md-comp-list-item-container-focused-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: var(--md-comp-list-item-focus-label-text-color, var(--md-sys-color-on-surface));
-            --_leading-icon-color: var(--md-comp-list-item-focus-leading-icon-color, var(--md-sys-color-on-surface-variant));
-            --_supporting-text-color: var(--md-comp-list-item-focus-supporting-text-color, var(--md-sys-color-on-surface-variant));
-            --_trailing-icon-color: var(--md-comp-list-item-focus-trailing-icon-color, var(--md-sys-color-on-surface-variant));
-            --_trailing-text-color: var(--md-comp-list-item-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_list-headline-color: var(--md-comp-list-item-focus-label-text-color, var(--md-sys-color-on-surface));
+            --_list-leading-icon-color: var(--md-comp-list-item-focus-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_list-supporting-text-color: var(--md-comp-list-item-focus-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_list-trailing-icon-color: var(--md-comp-list-item-focus-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_list-trailing-text-color: var(--md-comp-list-item-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
             --statelayer-color: var(--md-comp-list-item-focus-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity, 10%));
         }
         &:active {
             --_list-item-shape: var(--md-comp-list-item-container-pressed-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: var(--md-comp-list-item-pressed-label-text-color, var(--md-sys-color-on-surface));
-            --_leading-icon-color: var(--md-comp-list-item-pressed-leading-icon-color, var(--md-sys-color-on-surface-variant));
-            --_supporting-text-color: var(--md-comp-list-item-pressed-supporting-text-color, var(--md-sys-color-on-surface-variant));
-            --_trailing-icon-color: var(--md-comp-list-item-pressed-trailing-icon-color, var(--md-sys-color-on-surface-variant));
-            --_trailing-text-color: var(--md-comp-list-item-pressed-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_list-headline-color: var(--md-comp-list-item-pressed-label-text-color, var(--md-sys-color-on-surface));
+            --_list-leading-icon-color: var(--md-comp-list-item-pressed-leading-icon-color, var(--md-sys-color-on-surface-variant));
+            --_list-supporting-text-color: var(--md-comp-list-item-pressed-supporting-text-color, var(--md-sys-color-on-surface-variant));
+            --_list-trailing-icon-color: var(--md-comp-list-item-pressed-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+            --_list-trailing-text-color: var(--md-comp-list-item-pressed-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
             --statelayer-color: var(--md-comp-list-item-pressed-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
         }
@@ -103,12 +103,12 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
             --_list-item-background-color: var(--md-comp-list-item-dragged-container-color, var(--md-sys-color-tertiary-container));
             --_list-item-background-opacity: 100%;
             --_list-item-shape: var(--md-comp-list-item-container-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_overline-color: var(--md-comp-list-item-dragged-overline-color, var(--md-sys-color-on-tertiary-container));
-            --_headline-color: var(--md-comp-list-item-dragged-label-text-color, var(--md-sys-color-on-tertiary-container));
-            --_leading-icon-color: var(--md-comp-list-item-dragged-leading-icon-color, var(--md-sys-color-on-tertiary-container));
-            --_supporting-text-color: var(--md-comp-list-item-dragged-supporting-text-color, var(--md-sys-color-on-tertiary-container));
-            --_trailing-icon-color: var(--md-comp-list-item-dragged-trailing-icon-color, var(--md-sys-color-on-tertiary-container));
-            --_trailing-text-color: var(--md-comp-list-item-dragged-trailing-supporting-text-color, var(--md-sys-color-on-tertiary-container));
+            --_list-overline-color: var(--md-comp-list-item-dragged-overline-color, var(--md-sys-color-on-tertiary-container));
+            --_list-headline-color: var(--md-comp-list-item-dragged-label-text-color, var(--md-sys-color-on-tertiary-container));
+            --_list-leading-icon-color: var(--md-comp-list-item-dragged-leading-icon-color, var(--md-sys-color-on-tertiary-container));
+            --_list-supporting-text-color: var(--md-comp-list-item-dragged-supporting-text-color, var(--md-sys-color-on-tertiary-container));
+            --_list-trailing-icon-color: var(--md-comp-list-item-dragged-trailing-icon-color, var(--md-sys-color-on-tertiary-container));
+            --_list-trailing-text-color: var(--md-comp-list-item-dragged-trailing-supporting-text-color, var(--md-sys-color-on-tertiary-container));
             --statelayer-color: var(--md-comp-list-item-dragged-state-layer-color, var(--md-sys-color-on-tertiary-container));
             --statelayer-opacity: var(--md-comp-list-item-dragged-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
 
@@ -123,41 +123,41 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
         }
         &:hover {
             --_list-item-shape: var(--md-comp-list-item-container-selected-hovered-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: var(--md-comp-list-item-selected-hover-label-text-color, var(--md-sys-color-on-secondary-container));
-            --_leading-icon-color: var(--md-comp-list-item-selected-hover-leading-icon-color, var(--md-sys-color-on-surface));
-            --_supporting-text-color: var(--md-comp-list-item-selected-hover-supporting-text-color, var(--md-sys-color-on-surface));
-            --_trailing-icon-color: var(--md-comp-list-item-selected-hover-trailing-icon-color, var(--md-sys-color-on-surface));
-            --_trailing-text-color: var(--md-comp-list-item-selected-hover-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-headline-color: var(--md-comp-list-item-selected-hover-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_list-leading-icon-color: var(--md-comp-list-item-selected-hover-leading-icon-color, var(--md-sys-color-on-surface));
+            --_list-supporting-text-color: var(--md-comp-list-item-selected-hover-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-trailing-icon-color: var(--md-comp-list-item-selected-hover-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_list-trailing-text-color: var(--md-comp-list-item-selected-hover-trailing-supporting-text-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-hover-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-hover-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity, 8%));
         }
         &:focus-visible {
             --_list-item-shape: var(--md-comp-list-item-container-selected-focused-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: var(--md-comp-list-item-selected-focus-label-text-color, var(--md-sys-color-on-secondary-container));
-            --_leading-icon-color: var(--md-comp-list-item-selected-focus-leading-icon-color, var(--md-sys-color-on-surface));
-            --_supporting-text-color: var(--md-comp-list-item-selected-focus-supporting-text-color, var(--md-sys-color-on-surface));
-            --_trailing-icon-color: var(--md-comp-list-item-selected-focus-trailing-icon-color, var(--md-sys-color-on-surface));
-            --_trailing-text-color: var(--md-comp-list-item-selected-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-headline-color: var(--md-comp-list-item-selected-focus-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_list-leading-icon-color: var(--md-comp-list-item-selected-focus-leading-icon-color, var(--md-sys-color-on-surface));
+            --_list-supporting-text-color: var(--md-comp-list-item-selected-focus-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-trailing-icon-color: var(--md-comp-list-item-selected-focus-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_list-trailing-text-color: var(--md-comp-list-item-selected-focus-trailing-supporting-text-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-focus-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-focus-state-layer-opacity, var(--md-sys-state-focus-state-layer-opacity, 10%));
         }
         &:active {
             --_list-item-shape: var(--md-comp-list-item-container-selected-pressed-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: var(--md-comp-list-item-selected-pressed-label-text-color, var(--md-sys-color-on-secondary-container));
-            --_leading-icon-color: var(--md-comp-list-item-selected-pressed-leading-icon-color, var(--md-sys-color-on-surface));
-            --_supporting-text-color: var(--md-comp-list-item-selected-pressed-supporting-text-color, var(--md-sys-color-on-surface));
-            --_trailing-icon-color: var(--md-comp-list-item-selected-pressed-trailing-icon-color, var(--md-sys-color-on-surface));
-            --_trailing-text-color: var(--md-comp-list-item-selected-pressed-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-headline-color: var(--md-comp-list-item-selected-pressed-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_list-leading-icon-color: var(--md-comp-list-item-selected-pressed-leading-icon-color, var(--md-sys-color-on-surface));
+            --_list-supporting-text-color: var(--md-comp-list-item-selected-pressed-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-trailing-icon-color: var(--md-comp-list-item-selected-pressed-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_list-trailing-text-color: var(--md-comp-list-item-selected-pressed-trailing-supporting-text-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-pressed-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-pressed-state-layer-opacity, var(--md-sys-state-pressed-state-layer-opacity, 10%));
         }
         &.micl-list-item--dragging {
             --_list-item-shape: var(--md-comp-list-item-container-selected-dragged-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_headline-color: var(--md-comp-list-item-selected-dragged-label-text-color, var(--md-sys-color-on-secondary-container));
-            --_leading-icon-color: var(--md-comp-list-item-selected-dragged-leading-icon-color, var(--md-sys-color-on-surface));
-            --_supporting-text-color: var(--md-comp-list-item-selected-dragged-supporting-text-color, var(--md-sys-color-on-surface));
-            --_trailing-icon-color: var(--md-comp-list-item-selected-dragged-trailing-icon-color, var(--md-sys-color-on-surface));
-            --_trailing-text-color: var(--md-comp-list-item-selected-dragged-trailing-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-headline-color: var(--md-comp-list-item-selected-dragged-label-text-color, var(--md-sys-color-on-secondary-container));
+            --_list-leading-icon-color: var(--md-comp-list-item-selected-dragged-leading-icon-color, var(--md-sys-color-on-surface));
+            --_list-supporting-text-color: var(--md-comp-list-item-selected-dragged-supporting-text-color, var(--md-sys-color-on-surface));
+            --_list-trailing-icon-color: var(--md-comp-list-item-selected-dragged-trailing-icon-color, var(--md-sys-color-on-surface));
+            --_list-trailing-text-color: var(--md-comp-list-item-selected-dragged-trailing-supporting-text-color, var(--md-sys-color-on-surface));
             --statelayer-color: var(--md-comp-list-item-selected-dragged-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-dragged-state-layer-opacity, var(--md-sys-state-dragged-state-layer-opacity, 16%));
 
@@ -223,7 +223,7 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
                 background-color var(--_list-motion-duration) linear;
         }
         &> summary.micl-list-item--disabled .micl-list-item__icon--expander {
-            color: var(--_trailing-icon-color);
+            color: var(--_list-trailing-icon-color);
         }
         &[open] > summary .micl-list-item__icon--expander {
             background-color: var(--md-comp-accordion-expanded-icon-container-color, var(--md-sys-color-surface-container));
@@ -263,12 +263,12 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
 #{$items} {
     --statelayer-color: var(--md-sys-color-on-surface);
     --_list-item-shape: var(--md-comp-list-item-container-expressive-shape, var(--md-sys-shape-corner-extra-small, 4px));
-    --_overline-color: var(--md-comp-list-item-overline-color, var(--md-sys-color-on-surface-variant));
-    --_headline-color: var(--md-comp-list-item-label-text-color, var(--md-sys-color-on-surface));
-    --_leading-icon-color: var(--md-comp-list-item-leading-icon-color, var(--md-sys-color-on-surface-variant));
-    --_supporting-text-color: var(--md-comp-list-item-supporting-text-color, var(--md-sys-color-on-surface-variant));
-    --_trailing-text-color: var(--md-comp-list-item-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
-    --_trailing-icon-color: var(--md-comp-list-item-trailing-icon-color, var(--md-sys-color-on-surface-variant));
+    --_list-overline-color: var(--md-comp-list-item-overline-color, var(--md-sys-color-on-surface-variant));
+    --_list-headline-color: var(--md-comp-list-item-label-text-color, var(--md-sys-color-on-surface));
+    --_list-leading-icon-color: var(--md-comp-list-item-leading-icon-color, var(--md-sys-color-on-surface-variant));
+    --_list-supporting-text-color: var(--md-comp-list-item-supporting-text-color, var(--md-sys-color-on-surface-variant));
+    --_list-trailing-text-color: var(--md-comp-list-item-trailing-supporting-text-color, var(--md-sys-color-on-surface-variant));
+    --_list-trailing-icon-color: var(--md-comp-list-item-trailing-icon-color, var(--md-sys-color-on-surface-variant));
 
     box-sizing: border-box;
     display: flex;
@@ -320,12 +320,12 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     &:disabled,
     &.micl-list-item--disabled {
         --_list-item-shape: var(--md-comp-list-item-container-disabled-expressive-shape, var(--md-sys-shape-corner-extra-small, 4px));
-        --_overline-color: rgb(from var(--md-comp-list-item-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-        --_headline-color: rgb(from var(--md-comp-list-item-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-        --_leading-icon-color: rgb(from var(--md-comp-list-item-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-        --_supporting-text-color: rgb(from var(--md-comp-list-item-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-        --_trailing-icon-color: rgb(from var(--md-comp-list-item-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-        --_trailing-text-color: rgb(from var(--md-comp-list-item-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_list-overline-color: rgb(from var(--md-comp-list-item-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_list-headline-color: rgb(from var(--md-comp-list-item-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_list-leading-icon-color: rgb(from var(--md-comp-list-item-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_list-supporting-text-color: rgb(from var(--md-comp-list-item-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_list-trailing-icon-color: rgb(from var(--md-comp-list-item-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+        --_list-trailing-text-color: rgb(from var(--md-comp-list-item-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
         --statelayer-color: var(--md-comp-list-item-disabled-state-layer-color, var(--md-sys-color-on-surface));
         --statelayer-opacity: var(--md-comp-list-item-disabled-state-layer-opacity, 0%);
 
@@ -343,12 +343,12 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
             --_list-item-background-color: var(--md-comp-list-item-selected-disabled-container-color, var(--md-sys-color-on-surface));
             --_list-item-background-opacity: var(--md-comp-list-item-selected-disabled-container-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%));
             --_list-item-shape: var(--md-comp-list-item-container-selected-disabled-expressive-shape, var(--md-sys-shape-corner-large, 16px));
-            --_overline-color: rgb(from var(--md-comp-list-item-selected-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_headline-color: rgb(from var(--md-comp-list-item-selected-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_leading-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_supporting-text-color: rgb(from var(--md-comp-list-item-selected-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_trailing-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
-            --_trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_list-overline-color: rgb(from var(--md-comp-list-item-selected-disabled-overline-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-overline-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_list-headline-color: rgb(from var(--md-comp-list-item-selected-disabled-label-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-label-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_list-leading-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-leading-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-leading-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_list-supporting-text-color: rgb(from var(--md-comp-list-item-selected-disabled-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_list-trailing-icon-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-icon-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-icon-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
+            --_list-trailing-text-color: rgb(from var(--md-comp-list-item-selected-disabled-trailing-supporting-text-color, var(--md-sys-color-on-surface)) r g b / var(--md-comp-list-item-selected-disabled-trailing-supporting-text-opacity, var(--md-sys-state-disabled-state-layer-opacity, 38%)));
             --statelayer-color: var(--md-comp-list-item-selected-disabled-state-layer-color, var(--md-sys-color-on-surface));
             --statelayer-opacity: var(--md-comp-list-item-selected-disabled-state-layer-opacity, 0%);
         }
@@ -356,12 +356,12 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     &#{$selected} {
         --_list-item-background-color: var(--md-comp-list-item-selected-container-color, var(--md-sys-color-secondary-container));
         --_list-item-background-opacity: 100%;
-        --_overline-color: var(--md-comp-list-item-selected-overline-color, var(--md-sys-color-on-secondary-container));
-        --_headline-color: var(--md-comp-list-item-selected-label-text-color, var(--md-sys-color-on-secondary-container));
-        --_leading-icon-color: var(--md-comp-list-item-selected-leading-icon-color, var(--md-sys-color-on-secondary-container));
-        --_supporting-text-color: var(--md-comp-list-item-selected-supporting-text-color, var(--md-sys-color-on-secondary-container));
-        --_trailing-text-color: var(--md-comp-list-item-selected-trailing-supporting-text-color, var(--md-sys-color-on-secondary-container));
-        --_trailing-icon-color: var(--md-comp-list-item-selected-trailing-icon-color, var(--md-sys-color-on-secondary-container));
+        --_list-overline-color: var(--md-comp-list-item-selected-overline-color, var(--md-sys-color-on-secondary-container));
+        --_list-headline-color: var(--md-comp-list-item-selected-label-text-color, var(--md-sys-color-on-secondary-container));
+        --_list-leading-icon-color: var(--md-comp-list-item-selected-leading-icon-color, var(--md-sys-color-on-secondary-container));
+        --_list-supporting-text-color: var(--md-comp-list-item-selected-supporting-text-color, var(--md-sys-color-on-secondary-container));
+        --_list-trailing-text-color: var(--md-comp-list-item-selected-trailing-supporting-text-color, var(--md-sys-color-on-secondary-container));
+        --_list-trailing-icon-color: var(--md-comp-list-item-selected-trailing-icon-color, var(--md-sys-color-on-secondary-container));
     }
     &:not(:disabled, .micl-list-item--disabled) {
         &#{$selected} {
@@ -418,13 +418,13 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     min-inline-size: var(--md-comp-list-item-leading-icon-expressive-size, 20px);
     font-size: var(--md-comp-list-item-leading-icon-expressive-size, 20px);
     font-variation-settings: 'FILL' 0;
-    color: var(--_leading-icon-color);
+    color: var(--_list-leading-icon-color);
     transition: font-variation-settings var(--_list-motion-duration) linear;
 }
 .micl-list-item__text ~ .micl-list-item__icon {
     min-inline-size: var(--md-comp-list-item-trailing-icon-expressive-size, 20px);
     font-size: var(--md-comp-list-item-trailing-icon-expressive-size, 20px);
-    color: var(--_trailing-icon-color);
+    color: var(--_list-trailing-icon-color);
 }
 
 .micl-list-item__avatar {
@@ -479,24 +479,24 @@ $unselected: ':not(:checked, :has(> label > input[type=checkbox]:checked, > inpu
     flex-basis: 100%;
     min-inline-size: 0;
     text-align: start;
-    color: var(--_headline-color);
+    color: var(--_list-headline-color);
 
     .micl-list-item__overline {
         @include typography.label-small;
-        color: var(--_overline-color);
+        color: var(--_list-overline-color);
     }
     .micl-list-item__headline {
-        color: var(--_headline-color);
+        color: var(--_list-headline-color);
     }
     &::after, .micl-list-item__supporting-text {
         @include typography.body-medium;
-        color: var(--_supporting-text-color);
+        color: var(--_list-supporting-text-color);
     }
 }
 
 .micl-list-item__trailing-text {
     @include typography.label-small;
-    color: var(--_trailing-text-color);
+    color: var(--_list-trailing-text-color);
 }
 
 .micl-list > details[open] > summary .micl-list-item__icon--expander:dir(rtl) {

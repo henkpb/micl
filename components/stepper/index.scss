@@ -24,11 +24,11 @@
 @include motion.duration('long2');
 
 .micl-stepper {
-    --_motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-easing-emphasized});
-    --_motion-duration: var(--md-comp-stepper-motion-duration, var(--md-sys-motion-duration-long2));
-    --_dir: 1;
+    --_stepper-motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-easing-emphasized});
+    --_stepper-motion-duration: var(--md-comp-stepper-motion-duration, var(--md-sys-motion-duration-long2));
+    --_stepper-dir: 1;
 
-    --_dot-size: var(--md-comp-stepper-dot-size, 12px);
+    --_stepper-dot-size: var(--md-comp-stepper-dot-size, 12px);
 
     box-sizing: border-box;
     display: flex;
@@ -37,11 +37,11 @@
     margin: 0;
 
     &:dir(rtl) {
-        --_dir: -1;
+        --_stepper-dir: -1;
     }
 
     .micl-stepper__header {
-        --_dot-size: var(--md-comp-stepper-header-dot-size, 24px);
+        --_stepper-dot-size: var(--md-comp-stepper-header-dot-size, 24px);
 
         position: relative;
         display: flex;
@@ -94,14 +94,14 @@
             padding: 0;
             border: none;
             opacity: 0%;
-            transform: translateX(calc(var(--_dir) * 100%));
+            transform: translateX(calc(var(--_stepper-dir) * 100%));
             transition:
-                visibility var(--_visibility-duration, var(--_motion-duration)) linear,
-                opacity var(--_motion-duration) linear,
-                transform var(--_motion-duration) var(--_motion-spatial);
+                visibility var(--_visibility-duration, var(--_stepper-motion-duration)) linear,
+                opacity var(--_stepper-motion-duration) linear,
+                transform var(--_stepper-motion-duration) var(--_stepper-motion-spatial);
 
             &:has(~ .micl-stepper__step[aria-current=step]) {
-                transform: translateX(calc(var(--_dir) * -100%));
+                transform: translateX(calc(var(--_stepper-dir) * -100%));
             }
             &[aria-current=step] {
                 --_visibility-duration: 0s;
@@ -135,11 +135,11 @@
         column-gap: var(--md-comp-stepper-dot-space, 4px);
     }
     .micl-stepper__progress-dot {
-        block-size: var(--_dot-size);
-        inline-size: var(--_dot-size);
-        min-inline-size: var(--_dot-size);
-        line-height: var(--_dot-size);
-        border-radius: calc(var(--_dot-size) / 2);
+        block-size: var(--_stepper-dot-size);
+        inline-size: var(--_stepper-dot-size);
+        min-inline-size: var(--_stepper-dot-size);
+        line-height: var(--_stepper-dot-size);
+        border-radius: calc(var(--_stepper-dot-size) / 2);
         text-align: center;
         background-color: var(--md-comp-stepper-dot-color, var(--md-sys-color-surface-container-highest));
         color: var(--md-comp-stepper-dot-label-color, var(--md-sys-color-on-surface-variant));

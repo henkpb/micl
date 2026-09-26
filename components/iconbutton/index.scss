@@ -46,8 +46,8 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 @include statelayer.keyframes;
 
 #{$iconbuttons} {
-    --_motion-effects: var(--md-comp-icon-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
-    --_motion-duration: var(--md-comp-icon-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
+    --_button-motion-effects: var(--md-comp-icon-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
+    --_button-motion-duration: var(--md-comp-icon-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -71,11 +71,11 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     text-decoration: none;
     cursor: pointer;
     transition:
-        border-radius var(--_motion-duration) var(--_motion-effects),
-        inline-size var(--_motion-duration) var(--_motion-effects),
-        font-variation-settings var(--_motion-duration) linear,
+        border-radius var(--_button-motion-duration) var(--_button-motion-effects),
+        inline-size var(--_button-motion-duration) var(--_button-motion-effects),
+        font-variation-settings var(--_button-motion-duration) linear,
         background-size 0ms,
-        --statelayer-opacity var(--_motion-duration) linear;
+        --statelayer-opacity var(--_button-motion-duration) linear;
 
     &#{$disabled} {
         cursor: default;
@@ -119,7 +119,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
         border-radius: var(--_shape-square);
     }
     &.micl-iconbutton--narrow {
-        --micl-width: var(--_width-narrow);
+        --micl-width: var(--_iconbutton-width-narrow);
     }
     &.micl-iconbutton--wide {
         --micl-width: var(--_width-wide);
@@ -134,7 +134,7 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     &#{$enabled}:active {
         &,
         &.micl-button--square {
-            border-radius: var(--_shape-pressed);
+            border-radius: var(--_button-shape-pressed);
         }
     }
 }
@@ -144,10 +144,10 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 
     --micl-width: 32px;
     --micl-height: 32px;
-    --_width-narrow: 28px;
+    --_iconbutton-width-narrow: 28px;
     --_width-wide: 40px;
     --_shape-square: var(--md-sys-shape-corner-medium);
-    --_shape-pressed: var(--md-sys-shape-corner-small);
+    --_button-shape-pressed: var(--md-sys-shape-corner-small);
 
     font-size: 20px;
 }
@@ -157,10 +157,10 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 
     --micl-width: 40px;
     --micl-height: 40px;
-    --_width-narrow: 32px;
+    --_iconbutton-width-narrow: 32px;
     --_width-wide: 52px;
     --_shape-square: var(--md-sys-shape-corner-medium);
-    --_shape-pressed: var(--md-sys-shape-corner-small);
+    --_button-shape-pressed: var(--md-sys-shape-corner-small);
 
     font-size: var(--md-sys-icon-size, 24px);
 }
@@ -168,10 +168,10 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 :is(.micl-iconbutton-standard-m, .micl-iconbutton-filled-m, .micl-iconbutton-tonal-m, .micl-iconbutton-outlined-m) {
     --micl-width: 56px;
     --micl-height: 56px;
-    --_width-narrow: 48px;
+    --_iconbutton-width-narrow: 48px;
     --_width-wide: 72px;
     --_shape-square: var(--md-sys-shape-corner-large);
-    --_shape-pressed: var(--md-sys-shape-corner-medium);
+    --_button-shape-pressed: var(--md-sys-shape-corner-medium);
 
     font-size: var(--md-sys-icon-size, 24px);
 }
@@ -179,10 +179,10 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 :is(.micl-iconbutton-standard-l, .micl-iconbutton-filled-l, .micl-iconbutton-tonal-l, .micl-iconbutton-outlined-l) {
     --micl-width: 96px;
     --micl-height: 96px;
-    --_width-narrow: 64px;
+    --_iconbutton-width-narrow: 64px;
     --_width-wide: 128px;
     --_shape-square: var(--md-sys-shape-corner-extra-large);
-    --_shape-pressed: var(--md-sys-shape-corner-large);
+    --_button-shape-pressed: var(--md-sys-shape-corner-large);
 
     font-size: 32px;
 }
@@ -190,10 +190,10 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
 :is(.micl-iconbutton-standard-xl, .micl-iconbutton-filled-xl, .micl-iconbutton-tonal-xl, .micl-iconbutton-outlined-xl) {
     --micl-width: 136px;
     --micl-height: 136px;
-    --_width-narrow: 104px;
+    --_iconbutton-width-narrow: 104px;
     --_width-wide: 184px;
     --_shape-square: var(--md-sys-shape-corner-extra-large);
-    --_shape-pressed: var(--md-sys-shape-corner-large);
+    --_button-shape-pressed: var(--md-sys-shape-corner-large);
 
     font-size: 40px;
 }
