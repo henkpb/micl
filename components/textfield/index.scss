@@ -37,7 +37,7 @@
 $textfields: ':is(.micl-textfield-filled, .micl-textfield-outlined)';
 $fields: ':is(input, select, textarea)';
 $focused: ':has(> :focus, > :where(select:open))';
-$populated: ':has(> :focus, > :where(select:open), > [data-miclvalue], > :autofill, > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select option:checked:is(:not(:empty), [label]:not([label=""])), > textarea:not(:empty, [data-miclinitialized]))';
+$populated: ':has(> :focus, > :where(select:open), > [data-miclvalue="1"], > :autofill, > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclvalue]), > select option:checked:is(:not(:empty), [label]:not([label=""])), > textarea:not(:empty, [data-miclvalue]))';
 
 #{$textfields} {
     --_textfield-height: var(--md-comp-text-field-container-height, 56px);

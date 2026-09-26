@@ -179,4 +179,4 @@ export default register(bottomsheetSelector, {
         resetHeight(element);
         initialized.delete(element);
     }
-}, HTMLDialogElement);
+}, 'HTMLDialogElement');

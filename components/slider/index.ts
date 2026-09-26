@@ -87,4 +87,4 @@ export default register(sliderSelector, {
         }
     },
     reset: setValue
-}, HTMLInputElement);
+}, 'HTMLInputElement');

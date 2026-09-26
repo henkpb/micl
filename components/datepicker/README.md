@@ -300,8 +300,8 @@ Entering a start date that occurs after the end date will swap the two inputs. T
 | <kbd>↑</kbd> <kbd>↓</kbd> | Move to the same weekday of the previous or next week |
 | <kbd>Home</kbd> <kbd>End</kbd> | Move to the first or last day of the week |
 | <kbd>Enter</kbd> <kbd>Space</kbd> | Select the focused date |
-| <kbd>PageUp</kbd> <kbd>PageDown</kbd> | Show the next or previous month |
-| <kbd>Shift</kbd> + <kbd>PageUp</kbd> / <kbd>PageDown</kbd> | Show the next or previous year |
+| <kbd>PageUp</kbd> <kbd>PageDown</kbd> | Show the previous or next month |
+| <kbd>Shift</kbd> + <kbd>PageUp</kbd> / <kbd>PageDown</kbd> | Show the previous or next year |
 | <kbd>Shift</kbd> + <kbd>M</kbd> / <kbd>Y</kbd> | Open the month or year selection |
 | <kbd>Esc</kbd> | Close the picker without changing the invoker |
 

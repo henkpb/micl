@@ -173,4 +173,4 @@ export default register(listSelector,
             element.addEventListener('change', syncSelection);
         }
     }
-}, HTMLElement);
+}, 'HTMLElement');

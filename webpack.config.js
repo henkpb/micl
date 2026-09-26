@@ -79,6 +79,7 @@ module.exports = [{
     output: {
         path: distDir,
         filename: '[name].js',
+        globalObject: 'globalThis',
         clean: true,
         // Component scripts register themselves with the shared runtime; the global is only
         // the UMD fallback and must not shadow the `micl` runtime object of micl.js.
@@ -123,6 +124,7 @@ module.exports = [{
     output: {
         path: distDir,
         filename: '[name].js',
+        globalObject: 'globalThis',
         clean: false,
         library: {
             name: 'micl',
@@ -166,6 +168,7 @@ module.exports = [{
     output: {
         path: docsDir,
         filename: '[name].js',
+        globalObject: 'globalThis',
         library: {
             name: 'micl',
             type: 'umd',

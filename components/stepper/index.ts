@@ -218,4 +218,4 @@ export default register(stepperSelector, {
             }, true);
         }
     }
-}, HTMLElement);
+}, 'HTMLElement');

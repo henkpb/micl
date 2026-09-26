@@ -252,4 +252,4 @@ export default register(menuSelector, {
             }
         });
     }
-}, HTMLElement);
+}, 'HTMLElement');

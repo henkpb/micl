@@ -32,9 +32,20 @@ export interface ComponentHandler<T extends HTMLElement> extends ComponentEventH
     reset?     : (element: T) => void;
 }
 
+interface ElementTypes {
+    HTMLElement        : HTMLElement;
+    HTMLButtonElement  : HTMLButtonElement;
+    HTMLDialogElement  : HTMLDialogElement;
+    HTMLInputElement   : HTMLInputElement;
+    HTMLSelectElement  : HTMLSelectElement;
+    HTMLTextAreaElement: HTMLTextAreaElement;
+}
+
+type ElementType = keyof ElementTypes;
+
 interface ComponentEntry<T extends HTMLElement> {
     component: ComponentHandler<T>;
-    type: new () => T;
+    type: ElementType;
 }
 
 interface Registry {
@@ -59,7 +70,7 @@ const selector = (): string => Object.keys(registry.map).join(',');
 
 const findEntry = (element: HTMLElement): ComponentEntry<HTMLElement> | undefined =>
     Object.entries(registry.map)
-        .find(([selector, { type }]) => element.matches(selector) && element instanceof type)
+        .find(([selector, { type }]) => element.matches(selector) && element instanceof window[type])
         ?.[1];
 
 const initializeScrollbars = (): void => {
@@ -145,13 +156,16 @@ const handleEvent = (event: Event): void => {
 
     if (!(event.target instanceof Element)) return;
 
-    const target = event.target.closest(s);
-    if (!(target instanceof HTMLElement)) return;
+    const key = event.type as EventHandlerKey;
+    let target = event.target.closest<HTMLElement>(s);
 
-    const entry = findEntry(target);
-    const key   = event.type as EventHandlerKey;
-    if (entry && typeof entry.component[key] === 'function') {
-        entry.component[key]?.(event);
+    while (target) {
+        const handler = findEntry(target)?.component[key];
+        if (typeof handler === 'function') {
+            handler(event);
+            return;
+        }
+        target = target.parentElement?.closest<HTMLElement>(s) ?? null;
     }
 };
 
@@ -177,12 +191,22 @@ const activate = () => {
     }
     registry.activated = true;
 
+    const bodyObserver = new MutationObserver(initializeScrollbars);
+    const observeBody  = (): void => {
+        bodyObserver.disconnect();
+        bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
+    };
+
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
             if (mutation.type !== 'childList') {
                 return;
             }
             mutation.addedNodes.forEach(node => {
+                if (node === document.body) {
+                    observeBody();
+                    initializeScrollbars();
+                }
                 if (node instanceof HTMLElement) {
                     const s = selector();
                     if (s && node.matches(s)) {
@@ -204,7 +228,8 @@ const activate = () => {
             });
         });
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    observeBody();
 
     initializeComponents(document);
 
@@ -215,7 +240,6 @@ const activate = () => {
     document.addEventListener('reset', handleReset);
     document.addEventListener('pointerdown', handlePointerDown);
 
-    new MutationObserver(initializeScrollbars).observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', initializeScrollbars);
 };
 
@@ -223,13 +247,18 @@ const activate = () => {
 // Registers a component handler and returns it, so a component module can wrap its default export.
 // Registration alone activates nothing; the first module loaded activates the shared runtime once
 // the document is ready, and later registrations (bundles loaded after that) initialize their
-// elements here.
+// elements here. The first registration of a selector wins: every script bundles its own copy of
+// the component module, and module state (such as the date picker's) must stay with one copy.
 //
-export const register = <T extends HTMLElement, C extends ComponentHandler<T>>(
+export const register = <K extends ElementType, C extends ComponentHandler<ElementTypes[K]>>(
     componentSelector: string,
     component: C,
-    type: new () => T
+    type: K
 ): C => {
+    const registered = registry.map[componentSelector];
+    if (registered) {
+        return registered.component as C;
+    }
     registry.map[componentSelector] = { component, type };
     if (registry.activated) {
         document.querySelectorAll<HTMLElement>(componentSelector).forEach(initializeComponent);
@@ -242,11 +271,13 @@ const loaded = () => {
     activate();
 };
 
-if (document.readyState !== 'loading') {
-    activate();
-}
-else {
-    document.addEventListener('DOMContentLoaded', loaded);
+if (typeof document !== 'undefined') {
+    if (document.readyState !== 'loading') {
+        activate();
+    }
+    else {
+        document.addEventListener('DOMContentLoaded', loaded);
+    }
 }
 
 export default {

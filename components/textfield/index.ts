@@ -99,13 +99,7 @@ const formatAsDate = (input: HTMLInputElement, inputType: string | undefined): v
 };
 
 const refresh = (field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void => {
-    if (field.value) {
-        field.dataset.miclvalue = '1';
-    }
-    else {
-        delete field.dataset.miclvalue;
-    }
-
+    field.dataset.miclvalue = field.value ? '1' : '';
     setCounter(field);
 };
 
@@ -199,8 +193,8 @@ const textfield = {
     input: refreshTextField
 };
 
-register(textfieldSelector, textfield, HTMLInputElement);
-register(textareaSelector, textfield, HTMLTextAreaElement);
-register(selectSelector, textfield, HTMLSelectElement);
+register(textfieldSelector, textfield, 'HTMLInputElement');
+register(textareaSelector, textfield, 'HTMLTextAreaElement');
+register(selectSelector, textfield, 'HTMLSelectElement');
 
 export default textfield;

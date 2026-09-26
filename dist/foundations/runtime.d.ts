@@ -9,8 +9,17 @@ export interface ComponentHandler<T extends HTMLElement> extends ComponentEventH
     cleanup?: (element: T) => void;
     reset?: (element: T) => void;
 }
+interface ElementTypes {
+    HTMLElement: HTMLElement;
+    HTMLButtonElement: HTMLButtonElement;
+    HTMLDialogElement: HTMLDialogElement;
+    HTMLInputElement: HTMLInputElement;
+    HTMLSelectElement: HTMLSelectElement;
+    HTMLTextAreaElement: HTMLTextAreaElement;
+}
+type ElementType = keyof ElementTypes;
 export declare const initialized: WeakSet<HTMLElement>;
-export declare const register: <T extends HTMLElement, C extends ComponentHandler<T>>(componentSelector: string, component: C, type: new () => T) => C;
+export declare const register: <K extends ElementType, C extends ComponentHandler<ElementTypes[K]>>(componentSelector: string, component: C, type: K) => C;
 declare const _default: {
     initialize: () => void;
     cleanup: () => void;

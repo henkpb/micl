@@ -219,4 +219,4 @@ export default register(checkboxGroupSelector, {
             refreshCheckboxGroup(element, null);
         }
     }
-}, HTMLElement);
+}, 'HTMLElement');

@@ -428,4 +428,4 @@ export default register(timepickerSelector, {
             }
         });
     }
-}, HTMLDialogElement);
+}, 'HTMLDialogElement');

@@ -52,4 +52,4 @@ export default register(buttonSelector, {
     },
 
     initialize: toggleIcon
-}, HTMLButtonElement);
+}, 'HTMLButtonElement');

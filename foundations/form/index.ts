@@ -158,13 +158,12 @@ const validity = (container: HTMLFormElement | HTMLFieldSetElement, doReport?: b
     Array.from(container.elements).forEach(element =>
     {
         if (isCVElement(element) && element.willValidate) {
-            if (!element.checkValidity()) {
-                invalid = true;
+            const valid    = element.checkValidity();
+            const reported = setErrorState(element);
+            if (!valid && !invalid && doReport) {
+                reported ? element.focus() : element.reportValidity();
             }
-            let reported = setErrorState(element);
-            if (!reported && doReport) {
-                element.reportValidity();
-            }
+            invalid ||= !valid;
         }
     });
 

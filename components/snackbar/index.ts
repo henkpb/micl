@@ -104,4 +104,4 @@ export default register(snackbarSelector,
         }
         initialized.delete(element);
     }
-}, HTMLElement);
+}, 'HTMLElement');

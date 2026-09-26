@@ -37,7 +37,7 @@ This foundation is **not** part of `dist/micl.js`'s public API, so import it sep
 | `validateForm(form, doReport?)` | Validates every fieldset and every control in a `<form>`. Returns `true` when all of them are valid. `doReport` defaults to `false` when omitted. |
 | `validateFieldSet(fieldset, doReport?)` | The same for a single `<fieldset>`, so you can validate one step of a multi-step form on its own. `doReport` defaults to `false` when omitted. |
 
-Both apply the error styling described below. `doReport` additionally asks the browser to display its native validation bubble on the first offending control; omit it (or pass `false`) to apply the error styling silently — useful when you validate as the user types, or when the component shows the message inline itself.
+Both apply the error styling described below. `doReport` additionally moves focus to the first offending control and asks the browser to display its native validation bubble there (a text field that shows the message in its supporting text gets focus only); omit it (or pass `false`) to apply the error styling silently — useful when you validate as the user types, or when the component shows the message inline itself.
 
 Note that neither function is wired to any event. Nothing is validated until you call it, which leaves you free to decide when validation should begin.
 

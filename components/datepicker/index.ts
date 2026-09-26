@@ -494,12 +494,7 @@ const renderCalendar = (
         }
         const date = index === 0 ? state.selected : state.selectedEnd;
         input.value = date ? formatters.input.format(date) : '';
-        if (input.value) {
-            input.dataset.miclvalue = '1';
-        }
-        else {
-            delete input.dataset.miclvalue;
-        }
+        input.dataset.miclvalue = input.value ? '1' : '';
     });
 
     setText(
@@ -904,7 +899,11 @@ export default register(datepickerSelector, {
                 break;
             case 'PageUp':
             case 'PageDown':
-                changePeriod(dialog, event.key === 'PageUp' ? 1 : -1, event.shiftKey ? 'year' : 'month');
+                event.preventDefault();
+                changePeriod(dialog, event.key === 'PageDown' ? 1 : -1, event.shiftKey ? 'year' : 'month');
+                if (cell) {
+                    focusCell(dialog);
+                }
                 break;
             default:
         }
@@ -1106,4 +1105,4 @@ export default register(datepickerSelector, {
             }
         });
     }
-}, HTMLDialogElement);
+}, 'HTMLDialogElement');
