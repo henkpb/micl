@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const checkboxGroupSelector = '.micl-checkbox-group';
 
@@ -195,11 +195,11 @@ export default register(checkboxGroupSelector, {
     {
         if (
             !element.matches(checkboxGroupSelector)
-            || element.dataset.miclinitialized
+            || initialized.has(element)
         ) {
             return;
         }
-        element.dataset.miclinitialized = '1';
+        initialized.add(element);
 
         element.addEventListener('change', handleChange);
 
@@ -210,7 +210,13 @@ export default register(checkboxGroupSelector, {
     {
         if (element.matches(checkboxGroupSelector)) {
             element.removeEventListener('change', handleChange);
-            delete element.dataset.miclinitialized;
+            initialized.delete(element);
+        }
+    },
+    reset: (element: HTMLElement): void =>
+    {
+        if (element.matches(checkboxGroupSelector)) {
+            refreshCheckboxGroup(element, null);
         }
     }
 }, HTMLElement);

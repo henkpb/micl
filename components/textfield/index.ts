@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const textfieldSelector = '.micl-textfield-outlined > input,.micl-textfield-filled > input';
 export const textareaSelector  = '.micl-textfield-outlined > textarea,.micl-textfield-filled > textarea';
@@ -113,7 +113,7 @@ const refreshTextField = (event: Event): void =>
 {
     if (
         !isTextFieldElement(event.target)
-        || !event.target.dataset.miclinitialized
+        || !initialized.has(event.target)
         || event.target.disabled
     ) {
         return;
@@ -129,10 +129,10 @@ const refreshTextField = (event: Event): void =>
 const textfield = {
     initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
     {
-        if (input.dataset.miclinitialized) {
+        if (initialized.has(input)) {
             return;
         }
-        input.dataset.miclinitialized = '1';
+        initialized.add(input);
 
         if (
             input instanceof HTMLSelectElement

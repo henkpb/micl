@@ -20,7 +20,7 @@
 // SOFTWARE.
 //
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const datepickerSelector = 'dialog.micl-dialog.micl-datepicker';
 
@@ -912,7 +912,7 @@ export default register(datepickerSelector, {
 
     initialize: (dialog: HTMLDialogElement): void =>
     {
-        if (dialog.dataset.miclinitialized) {
+        if (initialized.has(dialog)) {
             return;
         }
 
@@ -921,7 +921,7 @@ export default register(datepickerSelector, {
         if (!form || !content) {
             return;
         }
-        dialog.dataset.miclinitialized = '1';
+        initialized.add(dialog);
 
         const headline = dialog.querySelector('h1, h2, h3, h4, h5, h6, .micl-heading');
         if (headline) {

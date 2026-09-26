@@ -9,6 +9,7 @@ export interface ComponentHandler<T extends HTMLElement> extends ComponentEventH
     cleanup?: (element: T) => void;
     reset?: (element: T) => void;
 }
+export declare const initialized: WeakSet<HTMLElement>;
 export declare const register: <T extends HTMLElement, C extends ComponentHandler<T>>(componentSelector: string, component: C, type: new () => T) => C;
 declare const _default: {
     initialize: () => void;

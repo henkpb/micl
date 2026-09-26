@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const menuSelector = '.micl-menu[popover]';
 
@@ -60,8 +60,8 @@ const rootMenu = (menu: HTMLElement): HTMLElement =>
 export default register(menuSelector, {
     initialize: (element: HTMLElement): void =>
     {
-        if (element.dataset.miclinitialized) return;
-        element.dataset.miclinitialized = '1';
+        if (initialized.has(element)) return;
+        initialized.add(element);
 
         const id = CSS.escape(element.id);
         const lists = Array.from(element.querySelectorAll<HTMLElement>(':scope > ul.micl-list'));

@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const snackbarSelector = '.micl-snackbar';
 
@@ -55,14 +55,14 @@ export default register(snackbarSelector,
 {
     initialize: (element: HTMLElement): void =>
     {
-        if (!element.matches(snackbarSelector) || element.dataset.miclinitialized) {
+        if (!element.matches(snackbarSelector) || initialized.has(element)) {
             return;
         }
 
         const delay = parseInt(element.dataset.micldelay ?? '', 10);
         if (!(delay > 0)) return;
 
-        element.dataset.miclinitialized = '1';
+        initialized.add(element);
 
         const state: SnackbarState = { delay, hovering: false, controller: new AbortController() };
         snackbarStates.set(element, state);
@@ -102,6 +102,6 @@ export default register(snackbarSelector,
             clearTimer(state);
             snackbarStates.delete(element);
         }
-        delete element.dataset.miclinitialized;
+        initialized.delete(element);
     }
 }, HTMLElement);

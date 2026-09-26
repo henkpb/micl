@@ -21,7 +21,7 @@
 
 import form from '../../foundations/form';
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const stepperSelector = '.micl-stepper';
 
@@ -165,10 +165,10 @@ const refresh = (stepper: HTMLElement, step: HTMLElement): void => {
 export default register(stepperSelector, {
     initialize: (stepper: HTMLElement): void =>
     {
-        if (!stepper.matches(stepperSelector) || stepper.dataset.miclinitialized) {
+        if (!stepper.matches(stepperSelector) || initialized.has(stepper)) {
             return;
         }
-        stepper.dataset.miclinitialized = '1';
+        initialized.add(stepper);
 
         getSteps(stepper).forEach(step => {
             if (!step.hasAttribute('tabindex')) {

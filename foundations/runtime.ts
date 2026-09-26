@@ -38,16 +38,20 @@ interface ComponentEntry<T extends HTMLElement> {
 }
 
 interface Registry {
-    map      : Record<string, ComponentEntry<any>>;
-    activated: boolean;
+    map        : Record<string, ComponentEntry<any>>;
+    activated  : boolean;
+    initialized: WeakSet<HTMLElement>;
 }
 
 type EventHandlerKey = keyof ComponentEventHandlers;
 
 const registry: Registry = ((globalThis as any).__miclRegistry ??= {
-    map      : {},
-    activated: false
+    map        : {},
+    activated  : false,
+    initialized: new WeakSet<HTMLElement>()
 });
+
+export const initialized: WeakSet<HTMLElement> = registry.initialized;
 
 const rippleSelector = '[class*="micl-"], [class*="micl-"] > summary';
 
@@ -158,7 +162,8 @@ const handleReset = (event: Event): void => {
     requestAnimationFrame(() => {
         if (event.defaultPrevented) return;
 
-        Array.from(form.elements).forEach(element => {
+        const s = selector();
+        new Set<Element>([...form.elements, ...(s ? form.querySelectorAll(s) : [])]).forEach(element => {
             if (element instanceof HTMLElement) {
                 findEntry(element)?.component.reset?.(element);
             }

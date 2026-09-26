@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const listSelector = '.micl-list';
 
@@ -119,8 +119,8 @@ export default register(listSelector,
 
     initialize(element: HTMLElement): void
     {
-        if (element.dataset.miclinitialized) return;
-        element.dataset.miclinitialized = '1';
+        if (initialized.has(element)) return;
+        initialized.add(element);
 
         element.querySelectorAll<HTMLElement>(
             ':scope > details > summary.micl-list-item--disabled'

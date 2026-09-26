@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const timepickerSelector = 'dialog.micl-dialog.micl-timepicker';
 
@@ -248,7 +248,7 @@ const handleSpinning = (dialog: HTMLElement, input: HTMLInputElement, event: Key
 export default register(timepickerSelector, {
     initialize: (dialog: HTMLDialogElement): void =>
     {
-        if (dialog.dataset.miclinitialized) {
+        if (initialized.has(dialog)) {
             return;
         }
 
@@ -264,7 +264,7 @@ export default register(timepickerSelector, {
         if (!form || inputs.length < 2) {
             return;
         }
-        dialog.dataset.miclinitialized = '1';
+        initialized.add(dialog);
 
         const h12 = uses12HourFormat(dialog);
 

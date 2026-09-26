@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const bottomsheetSelector = 'dialog.micl-bottomsheet';
 
@@ -81,7 +81,7 @@ export default register(bottomsheetSelector, {
     {
         if (
             !element.matches(bottomsheetSelector)
-            || element.dataset.miclinitialized
+            || initialized.has(element)
         ) {
             return;
         }
@@ -90,7 +90,7 @@ export default register(bottomsheetSelector, {
         if (!headline) {
             return;
         }
-        element.dataset.miclinitialized = '1';
+        initialized.add(element);
 
         const draghandle = headline.querySelector('.micl-bottomsheet__draghandle') as HTMLElement,
               controller = new AbortController(),
@@ -177,6 +177,6 @@ export default register(bottomsheetSelector, {
         }
         element.classList.remove('micl-bottomsheet--resizing');
         resetHeight(element);
-        delete element.dataset.miclinitialized;
+        initialized.delete(element);
     }
 }, HTMLDialogElement);
