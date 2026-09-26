@@ -225,13 +225,17 @@ const showDialMarks = (dial: HTMLElement, name: string): void => {
 };
 
 const handleSpinning = (dialog: HTMLElement, input: HTMLInputElement, event: KeyboardEvent): void => {
-    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
+    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
         return;
     }
     event.preventDefault();
 
     const h12 = uses12HourFormat(dialog);
     const [min, max] = getTimeLimits(input.name, h12);
+    if (event.key === 'Home' || event.key === 'End') {
+        setInputValue(dialog, input, `${event.key === 'Home' ? min : max}`);
+        return;
+    }
     let value = toInt(input.value) || 0;
 
     value += event.key === 'ArrowUp' ? 1 : -1;
