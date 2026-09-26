@@ -70,22 +70,28 @@
   ],
   "scripts": {
     "build": "webpack",
+    "postbuild": "node tools/typings.mjs",
     "gen:shapes": "node tools/shapes/generate.mjs",
     "check:shapes": "node tools/shapes/check.mjs",
     "check:tokens": "node tools/check-tokens.mjs"
   },
   "devDependencies": {
-    "autoprefixer": "^10.5",
     "css-loader": "^7.1",
     "glob": "^13.0",
     "mini-css-extract-plugin": "^2.10",
-    "postcss-loader": "^8.2",
     "sass": "^1.101",
     "sass-loader": "^17.0",
     "ts-loader": "^9.6",
     "typescript": "^6.0",
     "webpack": "^5.108",
     "webpack-cli": "^7.2"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22",
+      "onFail": "warn"
+    }
   },
   "allowScripts": {
     "@parcel/watcher@2.6.0": true

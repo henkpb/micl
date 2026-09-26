@@ -2,7 +2,15 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -23,5 +31,9 @@ jobs:
 
       - run: npm run check:tokens
 
-      # dist/ and docs/ are committed; a difference here means a commit shipped stale build output.
-      - run: git diff --exit-code -- dist docs
+      # dist/ and docs/ are committed; any change or new file here means a commit shipped stale build output.
+      - run: |
+          if [ -n "$(git status --porcelain -- dist docs)" ]; then
+            git status --porcelain -- dist docs
+            exit 1
+          fi

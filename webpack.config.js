@@ -94,7 +94,6 @@ module.exports = [{
             use : [
                 miniCss.loader,
                 'css-loader',
-                'postcss-loader',
                 'sass-loader'
             ]
         }, {
@@ -138,7 +137,6 @@ module.exports = [{
             use : [
                 miniCss.loader,
                 'css-loader',
-                'postcss-loader',
                 'sass-loader'
             ]
         }, {
@@ -160,7 +158,11 @@ module.exports = [{
     mode: 'production',
     entry: {
         micl: ['./styles.scss', './micl.ts'],
-        shapes: './components/shapes/master.scss'
+        shapes: './components/shapes/master.scss',
+        form: {
+            import : './foundations/form/index.ts',
+            library: { name: 'miclForm', type: 'umd', export: 'default' }
+        }
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
@@ -181,7 +183,6 @@ module.exports = [{
             use : [
                 miniCss.loader,
                 'css-loader',
-                'postcss-loader',
                 'sass-loader'
             ]
         }, {

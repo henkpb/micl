@@ -1,13 +1,2 @@
 import runtime from './foundations/runtime';
-import './components/bottomsheet';
-import './components/button';
-import './components/checkbox';
-import './components/datepicker';
-import './components/list';
-import './components/menu';
-import './components/slider';
-import './components/snackbar';
-import './components/stepper';
-import './components/textfield';
-import './components/timepicker';
-export default runtime;
+export = runtime;
