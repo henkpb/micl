@@ -216,7 +216,7 @@ Each stepper can be themed using CSS custom properties. Apply them to any approp
 | Custom property | Meaning | Default |
 | --- | --- | --- |
 | `--md-comp-stepper-motion-spatial` | The easing curve of the slide between steps | `cubic-bezier(0.2, 0, 0, 1)` (emphasized) |
-| `--md-comp-stepper-motion-duration` | The duration of the slide between steps. Ignored when the user prefers reduced motion | `500ms` |
+| `--md-comp-stepper-motion-duration` | The duration of the slide between steps. Ignored when the user prefers reduced motion | `--md-sys-motion-duration-long2` |
 | `--md-comp-stepper-counter-style` | The list-style used for the counter number inside the header dots | `decimal` |
 | `--md-comp-stepper-header-outset` | How far the header extends beyond the stepper's inline edges | `12px` |
 | `--md-comp-stepper-dot-size` | The size of each progress dot | `12px` |

@@ -14,6 +14,7 @@ To add a basic divider, use the `<hr>` element with the `micl-divider` class:
 Import the divider styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/divider";
 ```
 
@@ -125,3 +126,6 @@ Because these tokens are resolved on the divider itself, they can be set on the 
 ```HTML
 <hr class="micl-divider" style="--md-comp-divider-thickness: 4px; --md-comp-divider-color: var(--md-sys-color-primary); --md-comp-divider-space: 12px;">
 ```
+
+## Compatibility
+This component relies exclusively on widely supported CSS: custom properties, `calc()` and logical properties (`margin-block`, `border-block-start`, `border-inline-start`), which keep the inset and vertical dividers correct in right-to-left languages. Dividers render identically in Chromium and Firefox. Because the line is drawn as a border, it remains visible when an operating system enforces a high-contrast theme (such as Windows Contrast Themes).

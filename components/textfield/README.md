@@ -17,6 +17,7 @@ A basic text field can be either `filled` or `outlined`. To create one, use the 
 Import the text field styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/textfield";
 ```
 

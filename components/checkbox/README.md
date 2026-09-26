@@ -17,6 +17,7 @@ To add a basic checkbox, use the `<input type="checkbox">` element with the `mic
 Import the checkbox styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/checkbox";
 ```
 
@@ -157,6 +158,11 @@ The message is attached to the **first** checkbox of the named set — that is t
 
 Note that the counted set is defined by the `name` attribute, independently of the checkbox-group classes. If you combine count validation with a [checkbox group](#checkbox-group), give the `micl-checkbox__parent` checkbox a **different** `name` or none at all, otherwise it is counted alongside its children once they are all selected.
 
+## Accessibility
+* The component styles the native `<input type="checkbox">`, which provides the role, the checked state and the <kbd>Space</kbd> key. Always associate a `<label>` with it, either with `for`/`id` or by wrapping the input; clicking the label toggles the checkbox as well.
+* In a [checkbox group](#checkbox-group), the script sets the native `indeterminate` property of the parent checkbox, which assistive technologies announce as "mixed". Group the children with a `role="group"` or a `<fieldset>`, and name that group.
+* An error state is conveyed with `aria-invalid="true"`, which the [Form foundation](../../foundations/form/README.md) manages for you (see [Validation](#validation)).
+
 ## Theming
 Each checkbox can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child checkboxes.
 
@@ -169,6 +175,9 @@ Each checkbox can be themed with CSS custom properties that follow the Material 
 | `--md-comp-checkbox-unselected-outline-color` | The border color of an unselected checkbox | `--md-sys-color-on-surface-variant` |
 | `--md-comp-checkbox-selected-container-color` | The fill color of a selected checkbox | `--md-sys-color-primary` |
 | `--md-comp-checkbox-selected-icon-color` | The color of the check mark | `--md-sys-color-on-primary` |
+| `--md-comp-checkbox-motion-spatial` | The easing function for drawing the check mark | `--md-sys-motion-expressive-fast-spatial` |
+| `--md-comp-checkbox-motion-duration` | The duration of the fill and border change when the checkbox is selected, and of the state-layer fade | `--md-sys-motion-expressive-slow-effects-duration` |
+| `--md-comp-checkbox-motion-duration-reverse` | The duration of the fill and border change when the checkbox is deselected | `--md-sys-motion-expressive-default-effects-duration` |
 
 **Example: Changing the border width of a checkbox**
 

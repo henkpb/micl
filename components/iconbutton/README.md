@@ -17,6 +17,7 @@ To create a basic icon button, use the `<button>` element with a class that spec
 Import the icon button styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/iconbutton";
 ```
 
@@ -27,7 +28,7 @@ Or import all MICL styles at once:
 ```
 
 ### JavaScript
-This component requires JavaScript to handle **toggle logic**. Importing the module below automatically initializes all Icon button components, including those dynamically added to the DOM later:
+This component requires JavaScript to handle the **toggle logic** of the `aria-pressed` form (the [label form](#toggle-button-without-javascript) of a toggle button needs none). Importing the module below automatically initializes all Icon button components, including those dynamically added to the DOM later:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
@@ -94,7 +95,21 @@ To use different icons for the **on** and **off** states, remove the static icon
 ></button>
 ```
 
-**Icon Library Compatibility:** This swapping mechanism works by replacing the text content of the button (and updating its `class` attribute with the current icon name). Because it relies on text replacement, this feature only works with ligature-based icon fonts like Google Material Symbols. Class-based icon libraries, such as Bootstrap Icons, cannot swap icons this way and should be given a single, static icon.
+The swap is done in CSS: the button's `::before` pseudo-element shows `attr(data-miclicon)` while the button is off and `attr(data-micliconselected)` while it is on. The script additionally toggles a class named after the current icon on the button.
+
+**Icon Library Compatibility:** Because the icon name is rendered as text, this feature only works with ligature-based icon fonts like Google Material Symbols. Class-based icon libraries, such as Bootstrap Icons, cannot swap icons this way and should be given a single, static icon.
+
+#### Toggle Button without JavaScript
+A toggle icon button can also be built as a `<label>` that wraps a checkbox or a radio button. The `<input>` must be a direct child of the label; it is stretched invisibly over the whole button, and its `checked` state selects the button. The browser handles the state natively, so this form needs **no JavaScript** and posts its value with a surrounding form:
+
+```HTML
+<label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Microphone">
+  <input type="checkbox" name="microphone" checked>
+  <span aria-hidden="true">mic</span>
+</label>
+```
+
+The `aria-label` on the label names the checkbox; wrapping the icon name in an `aria-hidden` element keeps the ligature text out of the accessibility tree. To swap icons, put `data-miclicon` and `data-micliconselected` on the label instead of an icon element; the checked state drives the swap without JavaScript. To disable this form, place the `disabled` attribute on the `<input>`, not on the label. The [Button group](../buttongroup/README.md) component shows checkbox and radio examples in a group.
 
 ## Icons
 The examples above use [Google Material Symbols](https://fonts.google.com/icons). For buttons using these icons, a fill style of `1` is applied when the button is active or hovered. To enable this effect, ensure your `<link>` tag includes the `FILL@0..1` axis:
@@ -110,6 +125,11 @@ You can still use other icon libraries normally. For example, using the [Bootstr
   <i class="bi bi-gear"></i>
 </button>
 ```
+
+## Accessibility
+* An icon button has no visible text, so it always needs an `aria-label`. Without it, assistive technologies announce the ligature text (such as "settings") as the name.
+* An `aria-pressed` toggle button is announced as a toggle button with its pressed state, which the script keeps in sync. Keep the `aria-label` the same in both states; the icons set with `data-miclicon` and `data-micliconselected` are visual only.
+* In the [label form](#toggle-button-without-javascript), the input is announced as a checkbox or radio button with its checked state. An `aria-label` on the `<label>` names the input; wrap the icon name in an `aria-hidden="true"` element so that it is not read as text.
 
 ## Theming
 Each icon button style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Note that the `selected-*` and `unselected-*` properties only apply to [toggle buttons](#toggle-button).
@@ -169,4 +189,4 @@ These properties apply to every icon button style. They drive the corner-shape s
 ## Compatibility
 This component utilizes relative RGB color values, which may not be fully supported in all browser versions. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
 
-Toggle buttons are driven by the `command` and `commandfor` attributes, which require Chrome 135, Firefox 144, or Safari 26.2 and later. In an older browser, the button renders correctly but will not change state. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#browser_compatibility) for details.
+Toggle buttons are driven by the `command` and `commandfor` attributes, which require Chrome 135, Firefox 144, or Safari 26.2 and later. In an older browser, the button renders correctly but will not change state. The [label form](#toggle-button-without-javascript) has no such requirement. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#browser_compatibility) for details.

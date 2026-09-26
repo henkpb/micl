@@ -28,6 +28,7 @@ The `data-micldelay` attribute specifies the number of milliseconds the snackbar
 Import the snackbar styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/button";
 @use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/snackbar";
@@ -86,6 +87,12 @@ With `popover="manual"`, the snackbar is dismissed only by its timer, a close bu
 
 The Snackbar component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
 
+## Accessibility
+* The `role="status"` attribute makes the supporting text a polite live region: screen readers announce the notification without interrupting the user, and `aria-atomic="true"` makes them read the complete message.
+* Showing the snackbar does not move focus. Keyboard users reach its buttons in the tab order, so place the snackbar markup close to the control that shows it.
+* The auto-dismiss timer pauses while the pointer rests on the snackbar or a button inside it has keyboard focus. For a snackbar with an action, consider omitting `data-micldelay` and adding a close button, so that users have enough time to respond.
+* An icon-only close button needs an `aria-label`.
+
 ## Theming
 Each snackbar can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.
 
@@ -111,9 +118,12 @@ Each snackbar can be themed with CSS custom properties that follow the Material 
 | `--md-comp-snackbar-icon-focus-icon-color` | The color of the focused close icon | `--md-sys-color-inverse-on-surface` |
 | `--md-comp-snackbar-icon-pressed-icon-color` | The color of the pressed close icon | `--md-sys-color-inverse-on-surface` |
 | `--md-comp-snackbar-hover-state-layer-color` | The state layer tinting the snackbar while the pointer rests on it (the auto-dismiss timer pauses) | `--md-sys-color-inverse-primary` |
-| `--md-comp-snackbar-hover-state-layer-opacity` | The opacity of the hover state layer | `8%` |
+| `--md-comp-snackbar-hover-state-layer-opacity` | The opacity of the hover state layer | `--md-sys-state-hover-state-layer-opacity` |
 | `--md-comp-snackbar-pressed-state-layer-color` | The state layer tinting the snackbar while pressed | `--md-sys-color-inverse-primary` |
-| `--md-comp-snackbar-pressed-state-layer-opacity` | The opacity of the pressed state layer | `10%` |
+| `--md-comp-snackbar-pressed-state-layer-opacity` | The opacity of the pressed state layer | `--md-sys-state-pressed-state-layer-opacity` |
+| `--md-comp-snackbar-motion-spatial` | The easing function for the height change when the snackbar opens or closes | `--md-sys-motion-expressive-default-spatial` |
+| `--md-comp-snackbar-motion-duration` | The duration of the height change when the snackbar opens, and of the state-layer fade | `--md-sys-motion-expressive-default-spatial-duration` |
+| `--md-comp-snackbar-motion-duration-reverse` | The duration of the height change when the snackbar closes, and of the fade in and out | `--md-sys-motion-expressive-fast-spatial-duration` |
 
 The distance between the snackbar and the side edges of the viewport follows the [layout foundation](../../foundations/layout/README.md)'s `--md-sys-layout-window-margin`. On compact windows, the snackbar spans the full width between the window margins; on larger windows it is centered and sized to its content, within the minimum and maximum container widths above.
 

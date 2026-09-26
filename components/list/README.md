@@ -22,6 +22,7 @@ To create a standard list, use the `<ul>` element with the `micl-list` class and
 Import the list styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/list";
 ```
 
@@ -240,7 +241,7 @@ Each list style can be themed with CSS custom properties that follow the compone
 | `--md-comp-list-item-segmented-container-color` | The background color of the items of a segmented list | `--md-sys-color-surface` |
 | `--md-comp-list-divider-space` | The space above and below a [Divider](../divider/README.md) inside the list | `0px` |
 | `--md-comp-list-motion-effects` | The easing function of the state changes of an item | `--md-sys-motion-expressive-fast-spatial` |
-| `--md-comp-list-motion-duration` | The duration of the state changes of an item | `200ms` |
+| `--md-comp-list-motion-duration` | The duration of the state changes of an item | `--md-sys-motion-expressive-default-effects-duration` |
 
 The state changes are not animated when the user prefers reduced motion.
 
@@ -338,3 +339,15 @@ The M3 specification gives list items a `surface` container. MICL list items are
   </ul>
 </div>
 ```
+
+## Compatibility
+This component relies on a few recent CSS features, which may not be fully supported in your browser:
+
+| Feature | Used for | Without it |
+| --- | --- | --- |
+| [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) | The selected state of items with a checkbox or switch, the hover, focus and pressed states of items in an interactive list, and letting a link, button or label fill its item | Items lose these styles, and the JavaScript that detects selectable items fails |
+| [Relative RGB color values](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) | The state layer and the colors of disabled items | These colors are not applied |
+| [`::details-content`](https://developer.mozilla.org/en-US/docs/Web/CSS/::details-content) and [`interpolate-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size) | Animating an [Accordion](../accordion/README.md) item open and closed | The item snaps open and closed; Firefox 156 supports `::details-content` but not `interpolate-size` |
+| [`:dir()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) | Rotating the expander icon of an accordion item in right-to-left languages | The icon rotates the same way in both directions |
+
+Please check the linked browser-compatibility tables for details.

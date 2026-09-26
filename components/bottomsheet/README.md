@@ -19,6 +19,7 @@ To create a standard bottom sheet, use the `<dialog>` element with the `popover`
 Import the bottom sheet styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/bottomsheet";
 ```
 
@@ -124,8 +125,8 @@ Each bottom sheet style can be themed using CSS custom properties aligned with t
 | `--md-comp-bottomsheet-drag-handle-color` | The color of the drag handle | `--md-sys-color-on-surface-variant` |
 | `--md-comp-bottomsheet-focus-indicator-color` | The color of the drag handle's keyboard-focus outline | `--md-sys-color-secondary` |
 | `--md-comp-bottomsheet-motion-spatial` | The easing function for height changes (uses a spring animation that slightly overshoots before settling) | `--md-sys-motion-expressive-slow-spatial` |
-| `--md-comp-bottomsheet-motion-duration` | Animation duration for opening and resizing | `650ms` |
-| `--md-comp-bottomsheet-motion-duration-reverse` | Animation duration for closing | `500ms` |
+| `--md-comp-bottomsheet-motion-duration` | Animation duration for opening and resizing | `--md-sys-motion-expressive-slow-spatial-duration` |
+| `--md-comp-bottomsheet-motion-duration-reverse` | Animation duration for closing | `--md-sys-motion-expressive-default-spatial-duration` |
 
 **Example: Changing the background color of the bottom sheet**
 

@@ -46,6 +46,7 @@ The indeterminate wavy indicators take a modifier class and, per the ARIA `progr
 Import the progress indicator styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/progressindicator";
 ```
 

@@ -17,6 +17,7 @@ The Chip component is an extension of the [**Button** component](../button/READM
 Import the chip styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/chip";
 ```
 
@@ -129,6 +130,12 @@ To add a leading icon to a chip, include an element with the `micl-button__icon`
 ```
 
 These examples use [Google Material Symbols](https://fonts.google.com/icons), but other icon libraries can be used just as well.
+
+## Accessibility
+* Assist and suggestion chips are native `<button>` elements, named by their label text. Mark their icons with `aria-hidden="true"`.
+* A filter chip wraps a native checkbox or radio button, so it is announced with its checked state and named by its label text. Radio buttons sharing a `name` form a single tab stop, and the arrow keys move the selection.
+* The remove button of an input chip shows only an icon, so give it an `aria-label` that names the chip (such as "Remove Avocado"). Removing a chip is up to your code; move focus to a neighboring chip or to the related input field afterwards, so that keyboard focus is not lost.
+* Name a set of chips: give the `<fieldset class="micl-chips">` a `<legend>` or an `aria-label`.
 
 ## Theming
 Each chip type can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.

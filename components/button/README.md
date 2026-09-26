@@ -14,6 +14,7 @@ To create a basic button, use the `<button>` element with a class that specifies
 Import the button styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/button";
 ```
 
@@ -24,7 +25,7 @@ Or import all MICL styles at once:
 ```
 
 ### JavaScript
-This component requires JavaScript to handle **toggle logic**. Importing the module below automatically initializes all Button components, including those dynamically added to the DOM later:
+This component requires JavaScript to handle the **toggle logic** of the `aria-pressed` form (the [label form](#toggle-button-without-javascript) of a toggle button needs none). Importing the module below automatically initializes all Button components, including those dynamically added to the DOM later:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
@@ -80,6 +81,19 @@ Selecting a toggle button **swaps its shape**: a rounded button becomes square-l
 
 **Note:** Toggle buttons are **not available in the `text` style**. Material Design does not define a selected state for text buttons; adding `micl-button--toggle` to one will leave the user without any visual indication of its state.
 
+#### Toggle Button without JavaScript
+A toggle button can also be built as a `<label>` that wraps a checkbox or a radio button. The `<input>` must be a direct child of the label; it is stretched invisibly over the whole button, and its `checked` state selects the button. The browser handles the state natively, so this form needs **no JavaScript** and posts its value with a surrounding form:
+
+```HTML
+<label class="micl-button-tonal-s micl-button--toggle">
+  <input type="checkbox" name="bold" checked>
+  <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">format_bold</span>
+  Bold
+</label>
+```
+
+The label text becomes the accessible name of the checkbox. To disable this form, place the `disabled` attribute on the `<input>`, not on the label. Radio buttons sharing a `name` form a single-select set; the [Button group](../buttongroup/README.md) component shows both forms in a group.
+
 ## Icons
 To add a leading icon to a button, include an element with the `micl-button__icon` class inside the `<button>`:
 
@@ -103,7 +117,9 @@ To use different icons for the **on** and **off** states of a toggle button, rem
   ...
 ```
 
-**Icon Library Compatibility:** This swapping mechanism works by replacing the text content of the `micl-button__icon` element (and updating its `class` attribute with the current icon name). Because it relies on text replacement, this feature only works with ligature-based icon fonts like Google Material Symbols. Class-based icon libraries, such as Bootstrap Icons, cannot swap icons this way and should be given a single, static icon.
+The swap is done in CSS: the icon's `::before` pseudo-element shows `attr(data-miclicon)` while the button is off and `attr(data-micliconselected)` while it is on (`aria-pressed="true"`, or a checked `<input>` in the [label form](#toggle-button-without-javascript), which therefore swaps icons without JavaScript as well). The script of the `aria-pressed` form additionally toggles a class named after the current icon on the `micl-button__icon` element.
+
+**Icon Library Compatibility:** Because the icon name is rendered as text, this feature only works with ligature-based icon fonts like Google Material Symbols. Class-based icon libraries, such as Bootstrap Icons, cannot swap icons this way and should be given a single, static icon.
 
 For buttons using [Google Material Symbols](https://fonts.google.com/icons), a fill style of `1` is applied when the button is selected or hovered. To enable this effect, ensure your `<link>` tag includes the `FILL@0..1` axis:
 
@@ -119,6 +135,14 @@ You can still use other icon libraries normally. For example, using the [Bootstr
   Settings
 </button>
 ```
+
+## Accessibility
+* Use a native `<button>` element, which provides the role, focus and keyboard activation. The focus indicator appears on `:focus-visible`, so it shows for keyboard users without flashing on every click.
+* Mark icons with `aria-hidden="true"`; the label text names the button. For a button without a text label, use the [Icon button](../iconbutton/README.md) component and give it an `aria-label`.
+* An `aria-pressed` toggle button is announced as a toggle button with its pressed state, which the script keeps in sync. Keep its label the same in both states: the pressed state already conveys on and off, and a changing label would contradict it.
+* A [label-form](#toggle-button-without-javascript) toggle button is announced as a checkbox or radio button with its checked state, named by the label text.
+* The `disabled` attribute removes a button from the tab order. In the label form, place it on the `<input>`.
+* The extra small and small sizes extend their touch target to 48px (`--md-sys-state-target-size`) with an invisible pseudo-element, without changing their visible size.
 
 ## Theming
 Each button style can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Note that the `selected-*` and `unselected-*` properties only apply to toggle buttons.
@@ -190,4 +214,4 @@ These properties apply to every button style. They drive the corner-shape swap, 
 ## Compatibility
 This component utilizes relative RGB color values, which may not be fully supported in all browser versions. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#browser_compatibility) for details.
 
-**Toggle buttons** are driven by the `command` and `commandfor` attributes, which require Chrome 135, Firefox 144, or Safari 26.2 and later. In an older browser, the button renders correctly but will not change state. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#browser_compatibility) for details.
+**Toggle buttons** are driven by the `command` and `commandfor` attributes, which require Chrome 135, Firefox 144, or Safari 26.2 and later. In an older browser, the button renders correctly but will not change state. The [label form](#toggle-button-without-javascript) has no such requirement. Please check [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#browser_compatibility) for details.

@@ -82,6 +82,7 @@ The Date picker component is an extension of the [**Dialog** component](../dialo
 Import the required component styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/dialog";
 @use "material-inspired-component-library/dist/textfield";
 @use "material-inspired-component-library/dist/button";
@@ -106,7 +107,7 @@ import micl from "material-inspired-component-library/dist/micl";
 
 Importing the script initializes all Date picker components on the page, including those dynamically added to the DOM later.
 
-If you are loading individual JavaScript files, be sure to also load `dist/textfield` — it wires the input field that triggers the picker.
+If you are loading individual JavaScript files, be sure to also load `dist/textfield` (to wire the input field that triggers the picker) and `dist/button` (to manage the `aria-pressed` state and icon of the input mode toggle).
 
 ### Live Demo
 
@@ -177,10 +178,13 @@ You can trigger the Date picker component from standard input fields or buttons.
 
 ### Connecting to an Input Field
 
-To replace the browser's native date picker, add the `data-datepicker` attribute to an `<input>` element. The value of this attribute must match the `id` of your Date picker dialog.
+To replace the browser's native date picker, add the `data-datepicker` attribute to an `<input>` element inside a [Text field component](../textfield/README.md). The value of this attribute must match the `id` of your Date picker dialog. The Text field's JavaScript opens the picker, so an input outside a Text field keeps the browser's own picker.
 
 ```HTML
-<input type="date" data-datepicker="mydatepicker" value="2025-12-02">
+<div class="micl-textfield-outlined">
+  <label for="mydate">Date</label>
+  <input type="date" id="mydate" data-datepicker="mydatepicker" value="2025-12-02">
+</div>
 ```
 
 * **Behavior**: Clicking the input opens the picker, initialized with the input's current value.
@@ -248,8 +252,14 @@ The first selected date becomes the start of the range, and the second selection
 Connect two date input fields — both referencing the picker in their `data-datepicker` attributes — and identify the end-date field using the `data-miclrangeto` attribute on the start-date field:
 
 ```HTML
-<input type="date" id="from" data-datepicker="myrangepicker" data-miclrangeto="to">
-<input type="date" id="to" data-datepicker="myrangepicker">
+<div class="micl-textfield-outlined">
+  <label for="from">Start date</label>
+  <input type="date" id="from" data-datepicker="myrangepicker" data-miclrangeto="to">
+</div>
+<div class="micl-textfield-outlined">
+  <label for="to">End date</label>
+  <input type="date" id="to" data-datepicker="myrangepicker">
+</div>
 ```
 
 * **Behavior**: Clicking either field opens the picker with the range loaded from both fields. If the start date is after the end date, the values are automatically swapped. Confirming the selection updates both fields and fires their respective `change` events.
@@ -349,3 +359,14 @@ Each date picker can be themed with CSS custom properties that follow the Materi
   --md-comp-date-picker-modal-container-width: 400px;
 }
 ```
+
+## Compatibility
+
+This component relies on modern web platform features. Where support is missing, the date picker still opens and selects dates; what degrades is noted below.
+
+* **Open/Close Mechanisms:** Built on the modal [Dialog component](../dialog/README.md). The component loads the invoker's date on the dialog's [`beforetoggle`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event) event and writes it back on the `close` event. Buttons open the picker using the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) (`command` / `commandfor`); where this is unsupported, call `showModal()` manually.
+* **Input Mode Toggle:** The icon and `aria-pressed` state of the toggle button are driven by the custom `--micl-toggle` invoker command, handled by the [Button component](../button/README.md).
+* **View Transitions:** Switching between the calendar, month, year and input views animates the height of the view to `fit-content`, which requires [`interpolate-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size). Browsers without it (e.g., Firefox 156) still fade the views, but show them at their full height immediately.
+* **Docked Positioning:** A docked date picker is placed with [CSS anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning), as described for the docked [Dialog](../dialog/README.md#compatibility).
+* **Advanced Styling:** Utilizes [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has), [`:dir()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir), a registered [`@property`](https://developer.mozilla.org/en-US/docs/Web/CSS/@property) and the [relative color syntax](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors) for the input view width, the selected month and year, the right-to-left slide direction, and the state layers and disabled dates.
+* **Locale Data:** Dates, month names and weekday labels are formatted with [`Intl.DateTimeFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat). The first day of the week comes from [`Intl.Locale.prototype.getWeekInfo()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/getWeekInfo); where that is unavailable, weeks start on Sunday for the United States, Canada and Mexico, and on Monday elsewhere.

@@ -14,6 +14,7 @@ To add a basic slider, use the `<input type="range">` element with one of the pr
 Import the slider styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/slider";
 ```
 

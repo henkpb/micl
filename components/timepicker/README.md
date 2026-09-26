@@ -59,6 +59,7 @@ The Time picker component is an extension of the [**Dialog** component](../dialo
 Import the time picker, dialog, and button styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/dialog";
 @use "material-inspired-component-library/dist/button";
 @use "material-inspired-component-library/dist/iconbutton";
@@ -143,11 +144,13 @@ You can trigger the Time picker component from standard input fields or buttons.
 
 #### Connecting to an Input Field
 
-To replace the browser's native time picker, assign the `data-timepicker` attribute to an `<input>` element. The value of this attribute must match the `id` of your Time picker dialog.
+To replace the browser's native time picker, assign the `data-timepicker` attribute to an `<input>` element inside a [Text field component](../textfield/README.md). The value of this attribute must match the `id` of your Time picker dialog. The Text field's JavaScript opens the picker, so an input outside a Text field keeps the browser's own picker.
 
 ```HTML
-<input type="time" data-timepicker="mytimepicker" value="09:41">
-
+<div class="micl-textfield-outlined">
+  <label for="mytime">Time</label>
+  <input type="time" id="mytime" data-timepicker="mytimepicker" value="09:41">
+</div>
 ```
 
 * **Behavior**: Clicking the input opens the picker, initialized to the input's current value.

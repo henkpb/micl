@@ -27,6 +27,7 @@ Keep labels short. Labels are laid out on a single line; any overflowing text is
 Import the navigation rail styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/badge";
 @use "material-inspired-component-library/dist/navigationrail";
@@ -251,10 +252,10 @@ Each navigation rail can be themed with CSS custom properties that follow the Ma
 | `--md-comp-nav-rail-item-state-layer-color` | The color of an item's hover, focus and pressed state layer, and of its ripple | `--md-sys-color-on-secondary-container` |
 | `--md-comp-nav-rail-spring-buffer` | The width of the off-screen margin that hides the overshoot of a modal navigation rail's spring animation | `100px` |
 | `--md-comp-nav-rail-motion-spatial` | The easing function used when a modal navigation rail slides in (a spring animation that slightly overshoots before settling) | `--md-sys-motion-expressive-slow-spatial` |
-| `--md-comp-nav-rail-motion-duration` | Animation duration for opening a modal navigation rail | `650ms` |
-| `--md-comp-nav-rail-motion-duration-reverse` | Animation duration for closing a modal navigation rail | `500ms` |
-| `--md-comp-nav-rail-morph-duration` | Animation duration for morphing from the collapsed to the expanded view | `350ms` |
-| `--md-comp-nav-rail-morph-duration-reverse` | Animation duration for morphing back to the collapsed view | `350ms` |
+| `--md-comp-nav-rail-motion-duration` | Animation duration for opening a modal navigation rail | `--md-sys-motion-expressive-slow-spatial-duration` |
+| `--md-comp-nav-rail-motion-duration-reverse` | Animation duration for closing a modal navigation rail | `--md-sys-motion-expressive-default-spatial-duration` |
+| `--md-comp-nav-rail-morph-duration` | Animation duration for morphing from the collapsed to the expanded view | `--md-sys-motion-expressive-fast-spatial-duration` |
+| `--md-comp-nav-rail-morph-duration-reverse` | Animation duration for morphing back to the collapsed view | `--md-sys-motion-expressive-fast-spatial-duration` |
 
 **Example: Changing the width of the collapsed navigation rail**
 

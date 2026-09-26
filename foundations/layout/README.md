@@ -125,6 +125,8 @@ You can further divide the content within a pane into multiple columns by using 
 
 To evenly distribute space between columns, add the `micl-pane__columns--evenly` class to the `micl-pane__columns` container.
 
+By default, a column grows to fill the available space. Add the `micl-pane__column--fixed` class to a column that should keep the width of its content (or the width you give it) instead.
+
 Add one of these classes to the `micl-pane__columns` container to determine when columns should stack vertically instead of aligning horizontally.
 
 | CSS class | Description |

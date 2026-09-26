@@ -26,6 +26,7 @@ Add the `micl-list-item--disabled` class to display a menu item in a disabled st
 Import the styles for both the Menu and List components into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/list";
 @use "material-inspired-component-library/dist/menu";
 ```
@@ -302,9 +303,9 @@ Inside a menu these tokens take precedence over the item color tokens of the [Li
 | Custom property | Meaning | Default |
 | --- | --- | --- |
 | `--md-comp-menu-motion-spatial` | The easing function used when a menu opens or closes | `--md-sys-motion-expressive-default-spatial` |
-| `--md-comp-menu-motion-spatial-duration` | Animation duration for opening | `500ms` |
-| `--md-comp-menu-motion-spatial-duration-reverse` | Animation duration for closing | `350ms` |
-| `--md-comp-menu-motion-effects-duration-reverse` | Duration of the corner change when a submenu opens or closes | `200ms` |
+| `--md-comp-menu-motion-spatial-duration` | Animation duration for opening | `--md-sys-motion-expressive-default-spatial-duration` |
+| `--md-comp-menu-motion-spatial-duration-reverse` | Animation duration for closing | `--md-sys-motion-expressive-fast-spatial-duration` |
+| `--md-comp-menu-motion-effects-duration-reverse` | Duration of the corner change when a submenu opens or closes | `--md-sys-motion-expressive-default-effects-duration` |
 
 The animations are switched off when the user prefers reduced motion.
 
@@ -326,3 +327,18 @@ The animations are switched off when the user prefers reduced motion.
 
 ## Placement
 The menu uses [CSS anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning) to appear below its trigger element, aligned to the start edge. When there is not enough room, it opens above the trigger element and/or aligns with its end edge instead. In compact windows the menu is centered on its trigger element. A menu never grows larger than the window minus an 8px margin: when it fits neither below nor above its trigger element, it takes the larger side and its item groups become scrollable. A submenu opens next to its menu item, on the side with enough room.
+
+## Compatibility
+
+A menu relies on a number of recent CSS and HTML features. Where support is missing, what degrades is noted below.
+
+| Feature | Used for | Without it |
+| --- | --- | --- |
+| [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) and [`:popover-open`](https://developer.mozilla.org/en-US/docs/Web/CSS/:popover-open) | Opening the menu in the top layer, light dismiss, and the open-state styles | The menu cannot be opened |
+| [CSS anchor positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning), including [`position-try-fallbacks`](https://developer.mozilla.org/en-US/docs/Web/CSS/position-try-fallbacks), `@position-try` and `anchor-size()` | Placing the menu next to its trigger element, flipping it when room runs out, and placing submenus (see [Placement](#placement)) | The menu is not positioned next to its trigger element |
+| [`@starting-style`](https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style), [`transition-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior) and [`overlay`](https://developer.mozilla.org/en-US/docs/Web/CSS/overlay) | Animating the menu in and out of the top layer | Without `overlay` (e.g., Firefox 156) the menu still animates open, but closes instantly |
+| [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) | The shapes of item groups, and the active state of an item whose submenu is open | These styles are not applied |
+| [`:dir()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) | Mirroring the submenu arrow in right-to-left languages | The arrow points the same way in both directions |
+| [`dvh` units](https://developer.mozilla.org/en-US/docs/Web/CSS/length#dvh) | Limiting the menu height to the visible viewport | The height limit is dropped |
+
+The JavaScript reads the invoker of an opening menu from the [`source`](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent/source) property of the `beforetoggle` event; where that is unavailable, it falls back to the first element whose `popovertarget` or `commandfor` attribute points at the menu.

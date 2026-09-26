@@ -70,15 +70,15 @@ Each button carries its own on/off state, so the `<label>`-and-checkbox form is 
   <legend>Call controls</legend>
   <label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Camera">
     <input type="checkbox" name="camera" checked>
-    videocam
+    <span aria-hidden="true">videocam</span>
   </label>
   <label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Microphone">
     <input type="checkbox" name="microphone" checked>
-    mic
+    <span aria-hidden="true">mic</span>
   </label>
   <label class="micl-iconbutton-tonal-l micl-button--toggle material-symbols-outlined" aria-label="Raise hand">
     <input type="checkbox" name="hand">
-    front_hand
+    <span aria-hidden="true">front_hand</span>
   </label>
 </fieldset>
 ```
@@ -104,10 +104,10 @@ Uses a `<label>` wrapping a radio button. This requires no custom JavaScript, an
 ```HTML
 <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment">
   <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align left">
-    <input type="radio" name="align" value="left" checked>format_align_left
+    <input type="radio" name="align" value="left" checked><span aria-hidden="true">format_align_left</span>
   </label>
   <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align center">
-    <input type="radio" name="align" value="center">format_align_center
+    <input type="radio" name="align" value="center"><span aria-hidden="true">format_align_center</span>
   </label>
 </fieldset>
 ```

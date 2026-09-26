@@ -47,7 +47,13 @@ Or import all MICL styles at once:
 ```
 
 ### JavaScript
-No custom JavaScript is required for the core functionality of this component.
+The split button itself carries no behavior: the trailing half opens the menu natively through `popovertarget`. The embedded [Menu](../menu/README.md), however, needs JavaScript for its ARIA roles and keyboard navigation:
+
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
+```
+
+If you load individual JavaScript files instead of the main bundle, load `dist/menu` and `dist/list`.
 
 ### Live Demo
 A live example of the [Split button component](https://henkpb.github.io/micl/splitbutton.html) is available to interact with.

@@ -17,6 +17,7 @@ To add a basic switch, use the `<input type="checkbox">` element with the `micl-
 Import the switch styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/switch";
 ```
 
@@ -49,6 +50,12 @@ To remove the icon in the selected state:
 A switch can be disabled by adding the `disabled` attribute to the `<input>` element.
 
 The Switch component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute (including `dir="auto"`) is set on the element itself or inherited from an ancestor.
+
+## Accessibility
+* The component styles a native `<input type="checkbox">`. Add `role="switch"` to it, as in the examples, so that assistive technologies announce it as a switch that is on or off rather than as a checkbox.
+* Always associate a `<label>` with the switch, either with `for`/`id` or by wrapping the input; clicking the label toggles the switch as well.
+* The icons on the handle are decorative and are not announced.
+* The `disabled` attribute removes a switch from the tab order.
 
 ## Theming
 Each switch can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child switches.
@@ -85,6 +92,8 @@ Each switch can be themed with CSS custom properties that follow the Material De
 | `--md-comp-switch-disabled-selected-handle-color` | The handle color when the switch is disabled and "on" | `--md-sys-color-surface` |
 | `--md-comp-switch-disabled-selected-icon-color` | The icon color when the switch is disabled and "on" | `--md-sys-color-on-surface` |
 | `--md-comp-switch-disabled-track-opacity` | The opacity of the track when the switch is disabled | `12%` |
+| `--md-comp-switch-motion-effects` | The easing function for the handle moving and resizing | `--md-sys-motion-expressive-slow-effects` |
+| `--md-comp-switch-motion-duration` | The duration of the handle moving and resizing, and of the color changes | `--md-sys-motion-expressive-slow-effects-duration` |
 
 Because this component follows the Material Design 3 token set, the handle requires distinct colors for each interaction state. Modifying `--md-comp-switch-selected-handle-color` only changes the *resting* state. To ensure a consistent theme, remember to also override the matching `-hover-`, `-focus-`, and `-pressed-` properties.
 

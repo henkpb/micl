@@ -26,9 +26,10 @@ The Accordion component is an extension of the [**List** component](../list/READ
 The `micl-list-item__content` class styles the collapsible area. It automatically aligns the expanded content with the header text using the item's leading space token (`--md-comp-list-item-leading-space`). You are responsible for applying your own padding, typography, and colors to the content itself.
 
 ### CSS
-Import the list styles into your project:
+The accordion styles are part of the List component, so import the list styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/list";
 ```
 
@@ -38,13 +39,15 @@ Or import all MICL styles:
 ```
 
 ### JavaScript
-This component requires JavaScript to support keyboard navigation:
+This component requires JavaScript to support arrow-key navigation and to take disabled headers out of the tab order:
 
 ```JavaScript
 import micl from "material-inspired-component-library/dist/micl";
 ```
 
 This initializes all Accordion components, including those added dynamically to the DOM.
+
+The accordion behavior is part of the List component. If you load individual JavaScript files instead of the main bundle, load `dist/list`.
 
 ### Live Demo
 A live example of the [Accordion component](https://henkpb.github.io/micl/accordion.html) is available to interact with.
@@ -110,7 +113,11 @@ Use a [Divider component](../divider/README.md) to separate neighbouring accordi
 
 Since the Accordion is based on the List component, you can use the same utility classes for content structure and styling. Refer to the [List component documentation](../list/README.md) for details on how to add icons, avatars, images, and other features to your accordion items.
 
-## Keyboard
+## Accessibility
+* Each `<summary>` is a native disclosure control: the browser exposes its expanded or collapsed state to assistive technologies, so no ARIA attributes are required. Its text serves as the accessible name.
+* Keep `aria-hidden="true"` on the expander icon; it is purely decorative.
+* Items sharing a `name` form an exclusive accordion natively; opening one closes the others without JavaScript.
+
 Each `<summary>` acts as a tab stop in document order. Disabled headers (`micl-list-item--disabled`) are skipped and receive `aria-disabled="true"`.
 
 | Key | Action |
@@ -131,7 +138,7 @@ You can customize the appearance of the Accordion component by overriding its ow
 | `--md-comp-accordion-expanded-icon-container-color` | The container color of the expander icon of an open item | `--md-sys-color-surface-container` |
 | `--md-comp-accordion-icon-color` | The color of the expander icon | `--md-sys-color-on-surface` |
 | `--md-comp-accordion-motion-spatial` | The easing function used when an accordion item opens or closes | `--md-sys-motion-expressive-default-spatial` |
-| `--md-comp-accordion-motion-duration` | The duration of opening or closing an accordion item | `500ms` |
+| `--md-comp-accordion-motion-duration` | The duration of opening or closing an accordion item | `--md-sys-motion-expressive-default-spatial-duration` |
 
 The opening and closing are not animated when the user prefers reduced motion.
 

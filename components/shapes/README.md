@@ -37,7 +37,7 @@ Equivalent to calling `shapes.base` plus `shapes.use(…)` with every shape.
 **3. Drop in the prebuilt CSS:**
 
 ```HTML
-<link rel="stylesheet" href="material-inspired-component-library/dist/shapes.css">
+<link rel="stylesheet" href="path/to/dist/shapes.css">
 ```
 
 The prebuilt bundle contains all 35 shapes plus the base styles.
@@ -101,8 +101,8 @@ The shapes can be themed with CSS custom properties that follow the Material Des
 | `--md-comp-shapes-outline-color` | The stroke color of an outlined shape | `--md-sys-color-primary` |
 | `--md-comp-shapes-outline-width` | The stroke width of an outlined shape, in `viewBox` units | `2` |
 | `--md-comp-shapes-shadow` | The `filter` of a shadowed shape | Two drop shadows in `--md-sys-color-shadow` |
-| `--md-comp-shapes-motion-duration` | The duration of the morph | `500ms` |
-| `--md-comp-shapes-motion-spatial` | The easing curve of the morph | `cubic-bezier(0.38, 1.21, 0.22, 1)` |
+| `--md-comp-shapes-motion-duration` | The duration of the morph | `--md-sys-motion-expressive-default-spatial-duration` |
+| `--md-comp-shapes-motion-spatial` | The easing curve of the morph | `--md-sys-motion-expressive-default-spatial` |
 
 **Layout note (Overflow)**: The SVG's `overflow` property is set to `visible` by default. Because SVG strokes are drawn centered on the path, half of an outlined shape's stroke (and its drop shadow) extends beyond the `viewBox` boundary. This visible overflow prevents clipping.
 

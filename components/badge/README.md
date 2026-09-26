@@ -16,6 +16,7 @@ To add a large badge, use a `<span>` element with the `micl-badge` class and add
 Import the badge styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/badge";
 ```
 

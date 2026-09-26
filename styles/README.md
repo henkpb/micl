@@ -96,15 +96,15 @@ Shape tokens define the corner radii used across every component, following the 
 Each component opts into the corner tokens it actually uses, so when you `@use` a component, the matching corner tokens come along automatically — typically there is nothing to opt into yourself. To install **all** corner tokens at once (useful when you build your own subset bundle), configure the module in master mode:
 
 ```CSS
-@use "material-inspired-component-library/styles/shapes" with ($master: true);
+@use "material-inspired-component-library/styles/shape" with ($master: true);
 ```
 
 To install only specific corner tokens, use the `corner` mixin:
 
 ```CSS
-@use "material-inspired-component-library/styles/shapes";
-@include shapes.corner('medium');
-@include shapes.corner('full');
+@use "material-inspired-component-library/styles/shape";
+@include shape.corner('medium');
+@include shape.corner('full');
 ```
 
 ### Customizations
@@ -148,6 +148,11 @@ The module also holds the pieces the MICL components share, so a component of yo
 
 ```SCSS
 @use "material-inspired-component-library/styles/statelayer";
+
+@include statelayer.property;                    // animatable --statelayer-color and --statelayer-opacity
+@include statelayer.keyframes;                   // the micl-ripple animation
+@include statelayer.token('ripple-duration');
+@include statelayer.token('ripple-opacity-factor');
 
 .my-control {
     --micl-ripple: 1;

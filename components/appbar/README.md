@@ -133,6 +133,12 @@ A sticky medium or large app bar collapses to the height of a small app bar as t
 > [!NOTE]
 > Collapsing is part of the same scroll-driven effect as the background color change. Browsers without support for this feature (see [Compatibility](#compatibility)) will simply maintain the app bar at its expanded height.
 
+## Accessibility
+* The `<header>` element is exposed as the page's `banner` landmark, as long as it is not nested inside `<main>`, `<article>`, `<aside>`, `<nav>` or `<section>`. Use a single banner per page.
+* Use a real heading element for the headline, at the level that fits your document outline; the app bar styles every level the same way.
+* A truncated headline is still read in full by assistive technologies, but sighted users only see the part that fits. Keep headlines short, especially in a small or collapsing app bar.
+* Every icon button in the leading and trailing areas needs an `aria-label` (see the note under [Trailing content](#trailing-content)).
+
 ## Theming
 Each app bar can be themed using CSS custom properties that follow the Material Design 3 component-token naming convention. Apply them to any appropriate parent element to affect its child app bars.
 

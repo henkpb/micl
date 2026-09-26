@@ -32,6 +32,7 @@ Use three to five items. The navigation bar is fixed to the bottom of the screen
 Import the navigation bar styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/badge";
 @use "material-inspired-component-library/dist/navigationbar";
 ```
