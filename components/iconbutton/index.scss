@@ -108,11 +108,11 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
     &#{$selected} {
         font-variation-settings: 'FILL' 1;
     }
-    &#{$unselected}::before {
-        content: attr(data-miclicon);
+    &#{$unselected}::after {
+        content: attr(data-miclicon) / "";
     }
-    &#{$selected}::before {
-        content: attr(data-micliconselected);
+    &#{$selected}::after {
+        content: attr(data-micliconselected) / "";
     }
 
     &#{$selected} {

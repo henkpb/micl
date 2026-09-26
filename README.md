@@ -12,16 +12,16 @@
 
 When Google wound down [material-web](https://github.com/material-components/material-web), the web platform lost its reference implementation of Material Design 3 — and the design system's newest chapter, **M3 Expressive**, never reached the open web at all.
 
-MICL picks up that torch with the opposite architecture. Where material-web wrapped every component in a JavaScript custom element, MICL styles the HTML you already write: a progress bar is a `<progress>`, a dialog is a `<dialog>`, a menu is a popover, a navigation rail is a `<nav>`. The heavy lifting is done by modern CSS — registered custom properties, container style queries, typed `attr()`, `clip-path: shape()`, anchor positioning — so components render on first paint, keep their native semantics and accessibility, and never fight your framework (or your decision not to use one).
+MICL picks up that torch with the opposite architecture. Where material-web wrapped every component in a JavaScript custom element, MICL styles the HTML you already write: a progress bar is a `<progress>`, a dialog is a `<dialog>`, a menu is a popover, a navigation rail is a `<nav>`. The heavy lifting is done by modern CSS — registered custom properties, container style queries, typed `attr()`, `clip-path: shape()`, anchor positioning — so components render on first paint, keep their native semantics and accessibility, and never fight your framework—or your decision to skip one entirely.
 
 ## Highlights
 
-- **The M3 Expressive catalogue, on the web first.** 31 components, the Material shape library, adaptive pane layouts — and the signature Expressive details, like wavy progress indicators drawn and animated entirely in CSS, with the wave motion running on the compositor.
-- **Native HTML first.** Components are your own markup plus a class. Forms post, dialogs trap focus, `<progress>` announces progress — because the platform does it, not a re-implementation.
-- **(Almost) no JavaScript.** Most components need none. All interactive behaviour for the entire library fits in one dependency-free ~11 kB minified and gzipped file — or import per-component slices and let your bundler tree-shake the rest.
-- **Theming per the spec.** Ready-made colour themes with light, dark and high-contrast variants, and every component themable through spec-named `--md-comp-*` custom properties.
+- **The M3 Expressive catalog, first to the web.** 31 components, the Material shape library, adaptive pane layouts — and the signature Expressive details, like wavy progress indicators drawn and animated entirely in CSS, with the wave motion running on the compositor.
+- **Native HTML first.** Components are your own markup plus a class. Forms post, dialogs trap focus, `<progress>` announces its state automatically. The platform handles the heavy lifting, not a JavaScript abstraction.
+- **(Almost) no JavaScript.** Most components need none. All interactive behaviour for the entire library fits in one dependency-free ~14 kB minified and gzipped file — or import per-component slices and let your bundler tree-shake the rest.
+- **Theming per the spec.** Ready-made colour themes with light and dark variants in standard, medium and high contrast, and every component themeable through spec-named `--md-comp-*` custom properties.
 - **À la carte delivery.** Full bundle or per-component CSS/JS pairs, npm or CDN ([jsDelivr](https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.css)).
-- **International by default.** Right-to-left layouts mirror automatically, and `prefers-reduced-motion` is respected throughout.
+- **International and accessible by default.** Right-to-left layouts mirror automatically, `prefers-reduced-motion` is respected throughout, and every component stays legible in Windows High Contrast (`forced-colors`).
 
 ## How MICL compares
 
@@ -35,11 +35,11 @@ MICL picks up that torch with the opposite architecture. Where material-web wrap
 | Runtime dependencies | **0** | Lit | 0 | several | Angular |
 | Server-side rendering | plain HTML + CSS, nothing to hydrate | needs SSR shims | ✅ | hydration | hydration |
 
-<sup>Comparison reflects the situation at the time of writing (July 2026); corrections welcome.</sup>
+<sup>Comparison reflects the situation at the time of writing (September 2026); corrections welcome.</sup>
 
 ## Trade-offs — when MICL might not fit
 
-- **Modern browsers only.** MICL leans on current CSS. Chromium-based browsers get the full experience today; Firefox degrades gracefully where a feature hasn't shipped yet (e.g. determinate progress values wait on typed `attr()`, available behind a preview-setting). Legacy browser support is a non-goal.
+- **Modern browsers only.** MICL leans on current CSS. Chromium-based browsers get the full experience today; Firefox degrades gracefully where a feature hasn't shipped yet (e.g. accordions open without animation until `interpolate-size` arrives, and a wavy progress indicator at 100 % keeps a square end without container style queries). Legacy browser support is a non-goal.
 - **CSS-first philosophy.** If your team expects components as framework objects with props and events, MICL's markup-plus-classes approach will feel different — that difference is the point, but it is a real difference.
 - **Not a Bootstrap look-alike.** MICL implements Material Design 3 faithfully rather than offering a neutral, endlessly re-skinnable base.
 
@@ -65,13 +65,15 @@ Some components build on other MICL components; when importing them individually
 
 | Component | Also import |
 | --------- | ----------- |
+| accordion | list (the accordion has no files of its own) |
 | appbar | iconbutton |
 | buttongroup | button, iconbutton |
 | datepicker | dialog, textfield, button, iconbutton, divider |
 | dialog | button, iconbutton |
 | menu | list |
-| navigationrail | iconbutton |
-| select | textfield, menu, list |
+| navigationbar | badge |
+| navigationrail | button, iconbutton, badge |
+| select | textfield, menu, list, divider |
 | sidesheet | button, iconbutton, divider |
 | snackbar | button, iconbutton |
 | splitbutton | button, menu, list |
@@ -83,16 +85,16 @@ To import all MICL styles:
 @use "material-inspired-component-library/styles";
 ```
 
-Remember to import your [theme file](themes/README.md) as well:
+Remember to import a [theme](themes/README.md) as well, either one of the themes in the package or your own:
 ```SCSS
-@use "path/to/mytheme";
+@use "material-inspired-component-library/themes/olivegreen/theme.css";
 ```
 
 **Plain CSS**
 
-Copy the main `micl.css` file to your distribution folder and include it in your application. Include your [theme file](themes/README.md) as well:
+Copy the main `micl.css` file to your distribution folder and include it in your application. Include a [theme](themes/README.md) as well:
 ```HTML
-<link rel="stylesheet" type="text/css" href="path/to/dist/mytheme.css">
+<link rel="stylesheet" type="text/css" href="path/to/themes/olivegreen/theme.css">
 <link rel="stylesheet" type="text/css" href="path/to/dist/micl.css">
 ```
 
@@ -100,7 +102,13 @@ The per-component stylesheets can be included the same way; include `base.css` o
 
 The main MICL CSS file can also be found on CDN networks, like on jsDelivr: `https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.css`
 
-### 3. Add the HTML & JavaScript
+### 3. Add the HTML
+The theme's colours apply inside an element that carries one of its scheme classes — `light`, `dark`, or a medium- or high-contrast variant such as `dark-high-contrast`. Put the class on the `<body>`:
+
+```HTML
+<body class="light">
+```
+
 Here is a simple example of a [Card component](components/card/README.md).
 
 ```HTML
@@ -119,7 +127,8 @@ And here is the Expressive circular progress indicator — note that updating `v
 <progress class="micl-circular-progress" value="0.6"></progress>
 ```
 
-Some components, like the [List](components/list/README.md), require a small amount of JavaScript to handle interactive behaviour. Because the JavaScript footprint in MICL is so small, you can import the code for all components at once.
+### 4. Add the JavaScript
+Some components, like the [List](components/list/README.md), require a small amount of JavaScript to handle interactive behaviour. Because MICL's JavaScript footprint is so small, you can safely import the entire library at once.
 ```JavaScript
 import "material-inspired-component-library/dist/micl";
 ```
@@ -137,11 +146,11 @@ Copy the main `micl.js` file to your distribution folder and include it in your 
 ```HTML
 <script src="path/to/dist/micl.js"></script>
 ```
-The per-component files can be included the same way (`<script src="path/to/dist/list.js"></script>`).
+The per-component files can be included the same way (`<script src="path/to/dist/list.js"></script>`). Components that need no JavaScript, such as the Divider, only have a stylesheet.
 
 The main MICL JavaScript file can also be found on CDN networks, like on jsDelivr: `https://cdn.jsdelivr.net/npm/material-inspired-component-library/dist/micl.js`
 
-### 4. Add a font
+### 5. Add a font
 MICL uses the [**Google Sans**](https://fonts.google.com/specimen/Google+Sans) as its default font. Include a reference to this font in your application.
 
 ```HTML
@@ -149,6 +158,27 @@ MICL uses the [**Google Sans**](https://fonts.google.com/specimen/Google+Sans) a
 ```
 
 The [Styles guide](styles/README.md) describes how to change the default font.
+
+## JavaScript API 🧩
+MICL requires no manual setup. Upon loading, it initializes every component on the page and sets up a mutation observer. Components added dynamically later—even when the entire `<body>` is replaced by tools like Turbo or htmx—are initialized automatically, and removed components are garbage-collected. Every script shares one runtime, so `micl.js` and any combination of per-component scripts can be loaded together.
+
+The main file exposes a small runtime object — the default export of `dist/micl`, or the `micl` global when loaded with a `<script>` tag:
+
+| Member | Description |
+| --- | --- |
+| `micl.initialize()` | Initializes every component in the document that has not been initialized yet. Call it after changing an existing element in a way that turns it into a component, such as adding a `micl-slider-m` class to an `<input type="range">`: the page is watched for added and removed elements, not for changed attributes. |
+| `micl.cleanup()` | Cleans up the components in the document, as if they were removed: the bottom sheets, snackbars and checkbox groups release their event listeners. The page is still watched afterwards. |
+
+```JavaScript
+import micl from "material-inspired-component-library/dist/micl";
+
+document.querySelector("input[type=range]").classList.add("micl-slider-m");
+micl.initialize();
+```
+
+The per-component scripts register their component as `miclComponents.<name>` (for example `miclComponents.list`) when loaded with a `<script>` tag, and the [Form foundation](foundations/form/README.md) is exposed as `miclForm`.
+
+The JavaScript works in the main document only: components inside a shadow root are not initialized. The scripts can be imported outside a browser, for example during server-side rendering or in tests, where they do nothing.
 
 ## Under the hood 🔬
 
@@ -164,11 +194,12 @@ MICL doubles as a working tour of what production CSS can do in 2026. A few of t
 Each component's README documents its approach and its graceful-degradation story.
 
 ## Foundations 🪟
-Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/layout-overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **rail region** and **panes** that adapt to the available screen space, ensuring your layout follows Material Design's adaptive design guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column. The **Form** foundation ships no CSS: it validates a form with the browser's own Constraint Validation API and renders the result as MICL error styling.
+Separate CSS files, based on the [Material Design Layout Foundation](https://m3.material.io/foundations/layout/layout-overview), provide foundational styles that are not tied to a single component. The **Layout** foundation includes styles for the **window frame**, **rail region** and **panes** that adapt to the available screen space, ensuring your layout follows Material Design's adaptive design guidelines. The **Field** foundation arranges form fields in a grid with the standard Material vertical rhythm, optionally led by an icon column. The **Form** foundation ships no CSS: it validates a form with the browser's own Constraint Validation API and renders the result as MICL error styling. The **Scrollbar** foundation gives every scrollbar a thin, theme-colored appearance.
 
 - [x] [Field](foundations/field/README.md)
 - [x] [Form](foundations/form/README.md)
 - [x] [Layout](foundations/layout/README.md)
+- [x] [Scrollbar](foundations/scrollbar/README.md)
 
 ## Available components ✅
 The library currently consists of the following components:
@@ -206,10 +237,22 @@ The library currently consists of the following components:
 
 ## Change Log ↪️
 
-### 10.0.0 (20.09.2026)
+### 10.0.0 (26.09.2026)
+**Breaking changes**
+- **BREAKING**: Removed the `micl-textfield--error` and `micl-checkbox--error` classes; set `aria-invalid="true"` on the input instead.
+- **BREAKING**: Set `aria-description` on the `<option>` element of a Select instead of its `micl-list-item__text` element.
+- **BREAKING**: Renamed the theming tokens for the Progress Indicator to the `md.comp.progress-indicator.*` scheme.
+- **BREAKING**: The wavy Progress Indicators take `aria-valuemin` into account and, as ARIA specifies, default `aria-valuemax` to 100 instead of 1; a wavy indicator whose value runs from 0 to 1 needs `aria-valuemax="1"`.
+- **BREAKING**: The `micl-scrollbar` opt-in class is gone; every scrollbar gets the MICL appearance.
+- **BREAKING**: When loaded with a `<script>` tag, `dist/micl.js` exposes the runtime object itself as the `micl` global (previously `micl.default`), the Form foundation is exposed as `miclForm` instead of overwriting `micl`, and the per-component scripts register under `miclComponents.<name>`.
 - **Button group**: New component.
 - **Split button**: New component.
-- **Button** and **Icon button**: Toggle buttons can now be built as a `<label>` wrapping a checkbox or radio button, without JavaScript.
+- **Menu**: <kbd>Home</kbd>/<kbd>End</kbd> move to the first or last item.
+- **Time picker**: <kbd>Home</kbd> and <kbd>End</kbd> set the hour or minute field to its lowest or highest value.
+- **Progress indicator**: New `micl-linear-progress--thick` and `micl-circular-progress--thick` modifiers for the M3 thick style, for both the flat and the wavy indicators.
+- **Reduced motion**: Supported by all components
+- **Forced colors**: Support for Windows High Contrast and other forced-colors modes.
+- Major accessibility improvements.
 
 ### 9.1.0 (05.09.2026)
 - **Navigation rail**: Dropped the JavaScript.

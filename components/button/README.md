@@ -117,7 +117,7 @@ To use different icons for the **on** and **off** states of a toggle button, rem
   ...
 ```
 
-The swap is done in CSS: the icon's `::before` pseudo-element shows `attr(data-miclicon)` while the button is off and `attr(data-micliconselected)` while it is on (`aria-pressed="true"`, or a checked `<input>` in the [label form](#toggle-button-without-javascript), which therefore swaps icons without JavaScript as well). The script of the `aria-pressed` form additionally toggles a class named after the current icon on the `micl-button__icon` element.
+The swap is done in CSS: the icon's `::before` pseudo-element shows `attr(data-miclicon)` while the button is off and `attr(data-micliconselected)` while it is on (`aria-pressed="true"`, or a checked `<input>` in the [label form](#toggle-button-without-javascript), which therefore swaps icons without JavaScript as well). The script of the `aria-pressed` form additionally toggles a class named after the current icon on the `micl-button__icon` element. The icon name is not exposed to assistive technology.
 
 **Icon Library Compatibility:** Because the icon name is rendered as text, this feature only works with ligature-based icon fonts like Google Material Symbols. Class-based icon libraries, such as Bootstrap Icons, cannot swap icons this way and should be given a single, static icon.
 

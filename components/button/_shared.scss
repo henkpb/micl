@@ -112,10 +112,10 @@ $unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked
         cursor: inherit;
     }
     &#{$unselected} .micl-button__icon::before {
-        content: attr(data-miclicon);
+        content: attr(data-miclicon) / "";
     }
     &#{$selected} .micl-button__icon::before {
-        content: attr(data-micliconselected);
+        content: attr(data-micliconselected) / "";
     }
 }
 

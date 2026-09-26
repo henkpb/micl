@@ -81,8 +81,6 @@ module.exports = [{
         filename: '[name].js',
         globalObject: 'globalThis',
         clean: true,
-        // Component scripts register themselves with the shared runtime; the global is only
-        // the UMD fallback and must not shadow the `micl` runtime object of micl.js.
         library: {
             name: ['miclComponents', '[name]'],
             type: 'umd'

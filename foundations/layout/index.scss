@@ -121,12 +121,12 @@
             &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
                 row-gap: var(--md-sys-card-margin);
             }
-            &.micl-pane__column--fixed {
-                flex: 0 0 auto;
-            }
         }
         &.micl-pane__columns--evenly > .micl-pane__column {
             flex: 1 1 0;
+        }
+        &> .micl-pane__column.micl-pane__column--fixed {
+            flex: 0 0 auto;
         }
     }
 }

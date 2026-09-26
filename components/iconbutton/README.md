@@ -95,7 +95,7 @@ To use different icons for the **on** and **off** states, remove the static icon
 ></button>
 ```
 
-The swap is done in CSS: the button's `::before` pseudo-element shows `attr(data-miclicon)` while the button is off and `attr(data-micliconselected)` while it is on. The script additionally toggles a class named after the current icon on the button.
+The swap is done in CSS: the button's `::after` pseudo-element shows `attr(data-miclicon)` while the button is off and `attr(data-micliconselected)` while it is on. The icon name is not exposed to assistive technology, so give the button an `aria-label`. The script additionally toggles a class named after the current icon on the button.
 
 **Icon Library Compatibility:** Because the icon name is rendered as text, this feature only works with ligature-based icon fonts like Google Material Symbols. Class-based icon libraries, such as Bootstrap Icons, cannot swap icons this way and should be given a single, static icon.
 

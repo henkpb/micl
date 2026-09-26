@@ -32,5 +32,18 @@ A live example of the [Scrollbar foundation](https://henkpb.github.io/micl/scrol
 
 Scrollable elements inherit the thumb color from their ancestors; set `--md-sys-scrollbar-thumb-color` on any scroll container to change it locally. Note that setting the standard `scrollbar-width` or `scrollbar-color` property on an element switches that element's scrollbar to the browser's native rendering in Chromium.
 
+In Firefox, the fallback resolves the thumb color on `<html>` and `<body>`, and scroll containers inherit the resulting color rather than the custom property, so a local `--md-sys-scrollbar-thumb-color` has no effect there. To recolor one container in Firefox as well, set `scrollbar-color` on it for browsers without the `::-webkit-scrollbar` pseudo-elements only, so that Chromium keeps the styled scrollbar:
+
+```CSS
+.my-panel {
+  --md-sys-scrollbar-thumb-color: var(--md-sys-color-primary);
+}
+@supports not selector(::-webkit-scrollbar) {
+  .my-panel {
+    scrollbar-color: var(--md-sys-scrollbar-thumb-color) transparent;
+  }
+}
+```
+
 ## Compatibility
 Chromium and Safari render the styled scrollbar through the `::-webkit-scrollbar` pseudo-elements. Firefox renders the `scrollbar-width: thin` fallback. Browsers that support neither show their default scrollbars.
