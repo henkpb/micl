@@ -24,13 +24,15 @@ $md-sys-scrollbar-margin: 2px;
 $md-sys-scrollbar-size: calc(#{$md-sys-scrollbar-width} + 2 * #{$md-sys-scrollbar-margin});
 $md-sys-scrollbar-thumb-color: grey;
 
+$thumb-color: var(--md-sys-scrollbar-thumb-color, var(--md-sys-color-outline, #{$md-sys-scrollbar-thumb-color}));
+
 ::-webkit-scrollbar {
     width: #{$md-sys-scrollbar-size};
     height: #{$md-sys-scrollbar-size};
 }
 ::-webkit-scrollbar-thumb {
     border-radius: calc(#{$md-sys-scrollbar-size} / 2);
-    background-color: var(--md-sys-scrollbar-thumb-color, #{$md-sys-scrollbar-thumb-color});
+    background-color: #{$thumb-color};
     background-clip: content-box;
     border: #{$md-sys-scrollbar-margin} solid transparent;
 }
@@ -39,8 +41,11 @@ $md-sys-scrollbar-thumb-color: grey;
 }
 
 @supports not selector(::-webkit-scrollbar) {
-    .micl-scrollbar {
-        scrollbar-width: auto;
-        scrollbar-color: var(--md-sys-scrollbar-thumb-color, #{$md-sys-scrollbar-thumb-color}) transparent;
+    :root {
+        scrollbar-width: thin;
+        scrollbar-color: #{$thumb-color} transparent;
+    }
+    body {
+        scrollbar-color: var(--md-sys-color-outline, #{$md-sys-scrollbar-thumb-color}) transparent;
     }
 }

@@ -209,6 +209,9 @@ const activate = () => {
     document.addEventListener('command', handleEvent, true);
     document.addEventListener('reset', handleReset);
     document.addEventListener('pointerdown', handlePointerDown);
+
+    new MutationObserver(initializeScrollbars).observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', initializeScrollbars);
 };
 
 //
