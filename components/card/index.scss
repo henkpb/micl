@@ -113,7 +113,7 @@ $cards: ':is(.micl-card-elevated, .micl-card-filled, .micl-card-outlined)';
 $headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__headline-l)';
 
 #{$cards} {
-    --_card-motion-spatial: var(--md-comp-card-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
+    --_motion-spatial: var(--md-comp-card-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
     --_card-motion-duration: var(--md-comp-card-motion-duration, var(--md-sys-motion-expressive-default-spatial-duration));
     --_card-ripple-duration: var(--md-sys-state-ripple-duration);
 
@@ -203,7 +203,7 @@ $headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__hea
         block-size: 0;
         overflow: hidden;
         transition:
-            block-size var(--_card-motion-duration) var(--_card-motion-spatial),
+            block-size var(--_card-motion-duration) var(--_motion-spatial),
             content-visibility var(--_card-motion-duration) linear allow-discrete;
     }
     &[open]::details-content {
@@ -267,8 +267,8 @@ $headlines: ':is(.micl-card__headline-s, .micl-card__headline-m, .micl-card__hea
     );
     @include card-focus-outline('outlined');
 
-    --_card-border-width: var(--md-comp-outlined-card-outline-width, 1px);
-    --_card-border: var(--_card-border-width) solid var(--_card-border-color, var(--md-comp-outlined-card-outline-color, var(--md-sys-color-outline-variant)));
+    --_border-width: var(--md-comp-outlined-card-outline-width, 1px);
+    --_card-border: var(--_border-width) solid var(--_card-border-color, var(--md-comp-outlined-card-outline-color, var(--md-sys-color-outline-variant)));
     --_card-hover-border-color: var(--md-comp-outlined-card-hover-outline-color, var(--md-sys-color-outline-variant));
     --_card-focus-border-color: var(--md-comp-outlined-card-focus-outline-color, var(--md-sys-color-on-surface));
     --_card-pressed-border-color: var(--md-comp-outlined-card-pressed-outline-color, var(--md-sys-color-outline-variant));

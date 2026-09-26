@@ -34,7 +34,7 @@
 @include typography.scale('body-large');
 @include typography.scale('body-small');
 
-$textfields: ':is(.micl-textfield-filled, .micl-textfield-outlined)';
+$textfields: '[class*="micl-textfield-"]';
 $fields: ':is(input, select, textarea)';
 $focused: ':has(> :focus, > :where(select:open))';
 $populated: ':has(> :focus, > :where(select:open), > [data-miclvalue="1"], > :autofill, > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclvalue]), > select option:checked:is(:not(:empty), [label]:not([label=""])), > textarea:not(:empty, [data-miclvalue]))';

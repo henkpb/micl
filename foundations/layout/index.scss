@@ -76,13 +76,13 @@
 
     &.micl-panes--split > .micl-pane + .micl-pane {
         // The physical safety inset on the trailing pane's side of the screen.
-        --_layout-safe-inline-end: env(safe-area-inset-right, 0px);
+        --_safe-inline-end: env(safe-area-inset-right, 0px);
 
         box-sizing: border-box;
-        flex: 0 1 var(--_layout-stacked-pane-size, calc(50vw - var(--md-sys-layout-window-margin, 0px) - var(--_layout-safe-inline-end) - var(--md-sys-layout-pane-spacer) / 2));
+        flex: 0 1 var(--_layout-stacked-pane-size, calc(50vw - var(--md-sys-layout-window-margin, 0px) - var(--_safe-inline-end) - var(--md-sys-layout-pane-spacer) / 2));
 
         &:dir(rtl) {
-            --_layout-safe-inline-end: env(safe-area-inset-left, 0px);
+            --_safe-inline-end: env(safe-area-inset-left, 0px);
         }
     }
     &.micl-panes--evenly .micl-pane {

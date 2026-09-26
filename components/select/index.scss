@@ -33,7 +33,7 @@
 @include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('ripple-opacity-factor');
 
-$selects: ':is(.micl-textfield-filled, .micl-textfield-outlined) > select';
+$selects: '[class*="micl-textfield-"] > select';
 
 .micl-textfield-filled > select {
     --_line-height: calc(var(--md-comp-text-field-container-height, 56px) - var(--_textfield-input-top, 18px) - 3px);

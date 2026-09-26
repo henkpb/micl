@@ -45,12 +45,12 @@
 @include typography.scale('label-large');
 
 .micl-navigationrail {
-    --_navigationrail-spring-buffer: var(--md-comp-nav-rail-spring-buffer, 100px);
-    --_navigationrail-motion-spatial: var(--md-comp-nav-rail-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
+    --_spring-buffer: var(--md-comp-nav-rail-spring-buffer, 100px);
+    --_motion-spatial: var(--md-comp-nav-rail-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
     --_navigationrail-motion-duration: var(--md-comp-nav-rail-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
-    --_navigationrail-motion-duration-reverse: var(--md-comp-nav-rail-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
-    --_navigationrail-morph-duration: var(--md-comp-nav-rail-morph-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
-    --_navigationrail-morph-duration-reverse: var(--md-comp-nav-rail-morph-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-nav-rail-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
+    --_morph-duration: var(--md-comp-nav-rail-morph-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
+    --_morph-duration-reverse: var(--md-comp-nav-rail-morph-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
 
     --_navigationrail-current-max-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
     --_navigationrail-current-min-width: var(--md-comp-nav-rail-collapsed-container-width, 96px);
@@ -68,11 +68,11 @@
         --_navigationrail-header-space: var(--md-comp-nav-rail-item-header-space-minimum, 40px);
     }
 
-    --_duration: var(--_navigationrail-motion-duration-reverse);
+    --_duration: var(--_motion-duration-reverse);
 
     --_navigationrail-content-gap: var(--md-comp-nav-rail-item-container-vertical-space, 4px);
-    --_navigationrail-morph-speed: var(--_navigationrail-morph-duration-reverse);
-    --_navigationrail-container-delay: calc(var(--_navigationrail-morph-speed) / 2);
+    --_navigationrail-morph-speed: var(--_morph-duration-reverse);
+    --_container-delay: calc(var(--_navigationrail-morph-speed) / 2);
     --_navigationrail-item-delay: 0ms;
     --_navigationrail-text-animation: none;
     --_navigationrail-expanded-text-margin: calc(var(--md-comp-nav-rail-item-active-indicator-icon-label-space, 8px) - 16px);
@@ -99,9 +99,9 @@
     interpolate-size: allow-keywords;
 
     transition:
-        min-inline-size var(--_navigationrail-morph-speed) var(--_navigationrail-container-delay) linear,
-        max-inline-size var(--_navigationrail-morph-speed) var(--_navigationrail-container-delay) linear,
-        padding-block-start var(--_navigationrail-morph-speed) var(--_navigationrail-container-delay) linear;
+        min-inline-size var(--_navigationrail-morph-speed) var(--_container-delay) linear,
+        max-inline-size var(--_navigationrail-morph-speed) var(--_container-delay) linear,
+        padding-block-start var(--_navigationrail-morph-speed) var(--_container-delay) linear;
     min-inline-size: var(--_navigationrail-current-min-width);
     max-inline-size: var(--_navigationrail-current-max-width);
 
@@ -130,12 +130,12 @@
 
             anchor-scope: --micl-navigationrail-icon;
 
-            --_navitem-state-layer-color: var(--md-comp-nav-rail-item-state-layer-color, var(--md-sys-color-on-secondary-container));
-            --_navitem-inactive-icon-color: var(--md-comp-nav-rail-item-inactive-icon-color, var(--md-sys-color-on-surface-variant));
-            --_navitem-inactive-label-color: var(--md-comp-nav-rail-item-inactive-label-text-color, var(--md-sys-color-on-surface-variant));
-            --_navitem-active-indicator-color: var(--md-comp-nav-rail-item-active-indicator-color, var(--md-sys-color-secondary-container));
-            --_navitem-active-icon-color: var(--md-comp-nav-rail-item-active-icon-color, var(--md-sys-color-on-secondary-container));
-            --_navitem-active-label-color: var(--md-comp-nav-rail-item-active-label-text-color, var(--md-sys-color-secondary));
+            --_navigationrail-state-layer-color: var(--md-comp-nav-rail-item-state-layer-color, var(--md-sys-color-on-secondary-container));
+            --_navigationrail-inactive-icon-color: var(--md-comp-nav-rail-item-inactive-icon-color, var(--md-sys-color-on-surface-variant));
+            --_navigationrail-inactive-label-color: var(--md-comp-nav-rail-item-inactive-label-text-color, var(--md-sys-color-on-surface-variant));
+            --_navigationrail-active-indicator-color: var(--md-comp-nav-rail-item-active-indicator-color, var(--md-sys-color-secondary-container));
+            --_navigationrail-active-icon-color: var(--md-comp-nav-rail-item-active-icon-color, var(--md-sys-color-on-secondary-container));
+            --_navigationrail-active-label-color: var(--md-comp-nav-rail-item-active-label-text-color, var(--md-sys-color-secondary));
 
             --_navigationrail-item-base-height: var(--md-comp-nav-rail-item-short-container-height, 56px);
             --_navigationrail-item-margin-bottom: 0px;
@@ -286,7 +286,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
 
     .micl-navigationrail__content > a.micl-navigationrail__item[aria-current="page"] {
         @media (forced-colors: active) {
-            --_navitem-active-label-color: HighlightText;
+            --_navigationrail-active-label-color: HighlightText;
         }
     }
 
@@ -300,8 +300,8 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
     --_navigationrail-badge-margin: var(--md-comp-badge-trailing-space, 4px);
 
     --_navigationrail-content-gap: 0px;
-    --_navigationrail-morph-speed: var(--_navigationrail-morph-duration);
-    --_navigationrail-container-delay: 0ms;
+    --_navigationrail-morph-speed: var(--_morph-duration);
+    --_container-delay: 0ms;
     --_navigationrail-item-delay: calc(var(--_navigationrail-morph-speed) / 2);
     --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-expanded;
 
@@ -341,7 +341,7 @@ nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggl
 }
 
 nav.micl-navigationrail:has(> .micl-navigationrail__headline .micl-button--toggle.micl-button--toggled:not([aria-pressed="true"])) {
-    --_navigationrail-morph-speed: var(--_navigationrail-morph-duration-reverse);
+    --_navigationrail-morph-speed: var(--_morph-duration-reverse);
     --_navigationrail-text-animation: var(--_navigationrail-morph-speed) linear forwards navigationrail-text-to-collapsed;
 }
 
@@ -356,25 +356,25 @@ nav.micl-navigationrail {
 
 dialog.micl-navigationrail {
     display: none;
-    min-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-minimum, 220px) + var(--_navigationrail-spring-buffer));
-    max-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_navigationrail-spring-buffer));
-    margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_navigationrail-spring-buffer)));
-    padding-inline: var(--_navigationrail-spring-buffer) 0;
+    min-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-minimum, 220px) + var(--_spring-buffer));
+    max-inline-size: calc(var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_spring-buffer));
+    margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_spring-buffer)));
+    padding-inline: var(--_spring-buffer) 0;
     opacity: 0%;
 
     transition:
         opacity var(--_duration) linear,
-        margin-inline-start var(--_duration) var(--_navigationrail-motion-spatial),
+        margin-inline-start var(--_duration) var(--_motion-spatial),
         overlay var(--_duration) linear allow-discrete,
         display var(--_duration) linear allow-discrete;
 
     &[open] {
         display: flex;
-        margin-inline-start: calc(-1 * var(--_navigationrail-spring-buffer));
+        margin-inline-start: calc(-1 * var(--_spring-buffer));
         opacity: 100%;
 
         @starting-style {
-            margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_navigationrail-spring-buffer)));
+            margin-inline-start: calc(-1 * (var(--md-comp-nav-rail-expanded-container-width-maximum, 360px) + var(--_spring-buffer)));
             opacity: 0%;
         }
     }

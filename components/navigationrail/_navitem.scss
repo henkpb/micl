@@ -30,8 +30,8 @@
 
 %micl-navitem {
     --micl-ripple: 1;
-    --statelayer-color: var(--_navitem-state-layer-color, var(--md-sys-color-on-secondary-container));
-    --_navitem-ripple-duration: var(--md-sys-state-ripple-duration, 750ms);
+    --statelayer-color: var(--_navigationrail-state-layer-color, var(--md-sys-color-on-secondary-container));
+    --_navigationrail-ripple-duration: var(--md-sys-state-ripple-duration, 750ms);
 
     box-sizing: border-box;
     display: flex;
@@ -56,14 +56,14 @@
         --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
     }
     &.micl-rippling {
-        animation: micl-ripple calc(var(--_navitem-ripple-duration) * 1.333);
+        animation: micl-ripple calc(var(--_navigationrail-ripple-duration) * 1.333);
     }
 }
 
 %micl-navitem-icon {
     margin: 0;
     padding-block: 4px;
-    color: var(--_navitem-inactive-icon-color, var(--md-sys-color-on-surface-variant));
+    color: var(--_navigationrail-inactive-icon-color, var(--md-sys-color-on-surface-variant));
     font-variation-settings: 'FILL' 0;
 }
 
@@ -71,23 +71,23 @@
     @include typography.label-medium;
     min-block-size: var(--md-sys-typescale-label-medium-line-height);
     margin: 4px 0px 0px 0px;
-    color: var(--_navitem-inactive-label-color, var(--md-sys-color-on-surface-variant));
+    color: var(--_navigationrail-inactive-label-color, var(--md-sys-color-on-surface-variant));
     overflow: hidden;
 }
 
 %micl-navitem-current {
-    background-color: var(--_navitem-active-indicator-color, var(--md-sys-color-secondary-container));
+    background-color: var(--_navigationrail-active-indicator-color, var(--md-sys-color-secondary-container));
     @media (forced-colors: active) {
-        --_navitem-active-icon-color: HighlightText;
-        --_navitem-active-label-color: CanvasText;
+        --_navigationrail-active-icon-color: HighlightText;
+        --_navigationrail-active-label-color: CanvasText;
         forced-color-adjust: none;
         background-color: Highlight;
     }
 }
 %micl-navitem-current-icon {
-    color: var(--_navitem-active-icon-color, var(--md-sys-color-on-secondary-container));
+    color: var(--_navigationrail-active-icon-color, var(--md-sys-color-on-secondary-container));
     font-variation-settings: 'FILL' 1;
 }
 %micl-navitem-current-text {
-    color: var(--_navitem-active-label-color, var(--md-sys-color-secondary));
+    color: var(--_navigationrail-active-label-color, var(--md-sys-color-secondary));
 }

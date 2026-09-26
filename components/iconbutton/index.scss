@@ -24,7 +24,7 @@
 @use '../../styles/statelayer';
 @include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration');
 
-$iconbuttons: ':is([class*="micl-iconbutton-standard-"], [class*="micl-iconbutton-filled-"], [class*="micl-iconbutton-tonal-"], [class*="micl-iconbutton-outlined-"])';
+$iconbuttons: '[class*="micl-iconbutton-"]';
 $disabled: ':is(:disabled, :has(> :disabled))';
 $enabled: ':not(:disabled, :has(> :disabled))';
 $focused: ':is(:focus-visible, :has(input:focus-visible))';

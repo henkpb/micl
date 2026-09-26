@@ -168,8 +168,8 @@ input[type=range][class*=micl-slider-] {
     --_corner-position: left var(--_corner-offset) center, left var(--_corner-offset) top 0, left var(--_corner-offset) bottom 0;
     --_inactive-clip: inset(0 0 0 calc(var(--_thumb-position) + 16px) round 2px var(--_track-shape) var(--_track-shape) 2px);
     --_active-clip: inset(0 calc(100% - var(--_thumb-position)) 0 0 round var(--_track-shape) 2px 2px var(--_track-shape));
-    --_progress-inset: calc(16px * var(--_fraction));
-    --_progress-radius: calc(2px + 16px * var(--_fraction)) 2px;
+    --_inset: calc(16px * var(--_fraction));
+    --_radius: calc(2px + 16px * var(--_fraction)) 2px;
 
     appearance: none;
     position: relative;
@@ -216,7 +216,7 @@ input[type=range][class*=micl-slider-] {
     &::-moz-range-progress {
         box-sizing: border-box;
         block-size: var(--_track-height);
-        border-inline-end: var(--_progress-inset) solid transparent;
+        border-inline-end: var(--_inset) solid transparent;
         color: var(--_active-stop-color);
         background-clip: padding-box;
         background-color: transparent;
@@ -244,8 +244,8 @@ input[type=range][class*=micl-slider-] {
         &::-moz-range-progress {
             border-start-start-radius: var(--_track-shape);
             border-end-start-radius: var(--_track-shape);
-            border-start-end-radius: var(--_progress-radius);
-            border-end-end-radius: var(--_progress-radius);
+            border-start-end-radius: var(--_radius);
+            border-end-end-radius: var(--_radius);
             background-color: var(--_active-track-color);
         }
     }
@@ -277,7 +277,7 @@ input[type=range][class*=micl-slider-] {
         --_corner-position: center bottom var(--_corner-offset), left 0 bottom var(--_corner-offset), right 0 bottom var(--_corner-offset);
         --_inactive-clip: inset(0 0 calc(var(--_thumb-position) + 16px) 0 round var(--_track-shape) var(--_track-shape) 2px 2px);
         --_active-clip: inset(calc(100% - var(--_thumb-position)) 0 0 0 round 2px 2px var(--_track-shape) var(--_track-shape));
-        --_progress-radius: 2px calc(2px + 16px * var(--_fraction));
+        --_radius: 2px calc(2px + 16px * var(--_fraction));
 
         writing-mode: sideways-lr;
 

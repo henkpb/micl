@@ -48,15 +48,15 @@
 $menu-padding-inline: 4px;
 $menu-item-gap: 2px;
 $menu-viewport-margin: 8px;
-$item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-three)';
+$item-classes: '[class*="micl-list-item-"]';
 
 @mixin menu-color-set($variant) {
-    $container: var(--_menu-item-bg);
-    $on-container: var(--_menu-on);
-    $on-container-strong: var(--_menu-on-strong);
-    $on-icon-active: var(--_menu-icon-active);
-    $selected-container: var(--_menu-selected-bg);
-    $on-selected: var(--_menu-on-selected);
+    $container: var(--_item-bg);
+    $on-container: var(--_on);
+    $on-container-strong: var(--_on-strong);
+    $on-icon-active: var(--_icon-active);
+    $selected-container: var(--_selected-bg);
+    $on-selected: var(--_on-selected);
 
     --md-comp-list-item-container-color: var(--md-comp-menu-#{$variant}-menu-item-container-color, #{$container});
     --md-comp-list-item-label-text-color: var(--md-comp-menu-#{$variant}-menu-item-label-text-color, #{$on-container-strong});
@@ -146,7 +146,7 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     --_menu-active-opacity: var(--md-comp-menu-#{$variant}-menu-item-active-state-layer-opacity, var(--md-sys-state-hover-state-layer-opacity, 8%));
 }
 
-.micl-menu[popover], :where(.micl-textfield-filled, .micl-textfield-outlined) > select {
+.micl-menu[popover], :where([class*="micl-textfield-"]) > select {
     --_menu-motion-effects-duration-reverse: var(--md-comp-menu-motion-effects-duration-reverse, var(--md-sys-motion-expressive-default-effects-duration));
     --_menu-motion-spatial: var(--md-comp-menu-motion-spatial, var(--md-sys-motion-expressive-default-spatial));
     --_menu-motion-spatial-duration: var(--md-comp-menu-motion-spatial-duration, var(--md-sys-motion-expressive-default-spatial-duration));
@@ -174,12 +174,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     --md-comp-list-item-focus-indicator-offset: var(--md-comp-menu-item-focus-indicator-offset, var(--md-sys-state-focus-indicator-inner-offset, -3px));
     --md-comp-list-item-focus-indicator-thickness: var(--md-comp-menu-item-focus-indicator-thickness, var(--md-sys-state-focus-indicator-thickness, 3px));
 
-    --_menu-item-bg: var(--md-sys-color-surface-container-low);
-    --_menu-on: var(--md-sys-color-on-surface-variant);
-    --_menu-on-strong: var(--md-sys-color-on-surface);
-    --_menu-icon-active: var(--md-sys-color-on-surface-variant);
-    --_menu-selected-bg: var(--md-sys-color-tertiary-container);
-    --_menu-on-selected: var(--md-sys-color-on-tertiary-container);
+    --_item-bg: var(--md-sys-color-surface-container-low);
+    --_on: var(--md-sys-color-on-surface-variant);
+    --_on-strong: var(--md-sys-color-on-surface);
+    --_icon-active: var(--md-sys-color-on-surface-variant);
+    --_selected-bg: var(--md-sys-color-tertiary-container);
+    --_on-selected: var(--md-sys-color-on-tertiary-container);
     --_menu-do: var(--md-sys-state-disabled-state-layer-opacity, 38%);
 
     @include menu-color-set('standard');
@@ -324,12 +324,12 @@ $item-classes: ':is(.micl-list-item-one, .micl-list-item-two, .micl-list-item-th
     }
 
     &.micl-menu--vibrant > .micl-list {
-        --_menu-item-bg: var(--md-sys-color-tertiary-container);
-        --_menu-on: var(--md-sys-color-on-tertiary-container);
-        --_menu-on-strong: var(--md-sys-color-on-tertiary-container);
-        --_menu-icon-active: var(--md-sys-color-tertiary);
-        --_menu-selected-bg: var(--md-sys-color-tertiary);
-        --_menu-on-selected: var(--md-sys-color-on-tertiary);
+        --_item-bg: var(--md-sys-color-tertiary-container);
+        --_on: var(--md-sys-color-on-tertiary-container);
+        --_on-strong: var(--md-sys-color-on-tertiary-container);
+        --_icon-active: var(--md-sys-color-tertiary);
+        --_selected-bg: var(--md-sys-color-tertiary);
+        --_on-selected: var(--md-sys-color-on-tertiary);
 
         @include menu-color-set('vibrant');
 

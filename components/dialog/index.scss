@@ -50,11 +50,11 @@ dialog.micl-dialog {
     --_spatial: #{motion.$md-sys-motion-easing-emphasized-accelerate};
     --_easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
 
-    --_dialog-dir-factor: 1;
-    --_dialog-background-color: var(--md-comp-dialog-container-color, var(--md-sys-color-surface-container-high));
+    --_dir-factor: 1;
+    --_background-color: var(--md-comp-dialog-container-color, var(--md-sys-color-surface-container-high));
     --_margin: var(--md-comp-dialog-margin, 48px);
     --_dialog-padding: var(--md-comp-dialog-padding, 24px);
-    --_translate: translate(calc(var(--_dialog-dir-factor, 1) * -50%), -50%);
+    --_translate: translate(calc(var(--_dir-factor, 1) * -50%), -50%);
 
     box-sizing: border-box;
     display: none;
@@ -73,7 +73,7 @@ dialog.micl-dialog {
 @media (forced-colors: active) {        border: 1px solid CanvasText;    }
     border-radius: var(--md-comp-dialog-container-shape, var(--md-sys-shape-corner-extra-large));
     color: var(--md-comp-dialog-content-color, var(--md-sys-color-on-surface));
-    background-color: var(--_dialog-background-color);
+    background-color: var(--_background-color);
     box-shadow: var(--md-comp-dialog-container-elevation, var(--md-sys-elevation-level3));
     opacity: 0;
     overflow: hidden;
@@ -94,7 +94,7 @@ dialog.micl-dialog {
     }
 
     &:dir(rtl) {
-        --_dialog-dir-factor: -1;
+        --_dir-factor: -1;
     }
     &:popover-open,
     &[open] {
@@ -214,7 +214,7 @@ dialog.micl-dialog {
 
 dialog.micl-dialog.micl-dialog--fullscreen {
     @media (max-width: layout.$md-sys-breakpoint-compact-max) {
-        --_dialog-background-color: var(--md-comp-full-screen-dialog-container-color, var(--md-sys-color-surface));
+        --_background-color: var(--md-comp-full-screen-dialog-container-color, var(--md-sys-color-surface));
 
         inline-size: 100%;
         block-size: 100dvb;
