@@ -36,6 +36,9 @@ Or import all MICL styles:
 @use "material-inspired-component-library/styles";
 ```
 
+### Live Demo
+A live example of the [Layout foundation](https://henkpb.github.io/micl/layout.html) is available to interact with.
+
 ## Layout Components Explained
 
 ### Window

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Badges">
+    <title>MICL Badges</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=chat,check,close,content_copy,dark_mode,favorite,home,inbox,mail,notifications,palette,shopping_cart&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
+        .docs-badges {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 24px;
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-badges > .material-symbols-outlined {
+            padding: 8px;
+        }
+        .docs-section__use a {
+            color: var(--md-sys-color-primary);
+        }
+        .docs-label {
+            display: inline-flex;
+            align-items: center;
+            color: var(--md-sys-color-on-surface);
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Badges</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <main>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Component</p>
+            <h1>Badges</h1>
+            <p class="docs-hero__lede">Badges are small status indicators that can show a count or simply signal new information.</p>
+            <ul class="docs-hero__facts">
+                <li>Small &amp; large</li>
+                <li>Anchor positioned</li>
+                <li>Trailing placement</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="docs-hero__demo-row">
+                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--hero-inbox" aria-label="Inbox, 8 new messages">inbox</button>
+                    <span class="micl-badge" style="position-anchor:--hero-inbox" aria-hidden="true">8</span>
+                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--hero-chat" aria-label="Chat, 999+ new messages">chat</button>
+                    <span class="micl-badge" style="position-anchor:--hero-chat" aria-hidden="true">999+</span>
+                    <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--hero-notifications" aria-label="Notifications, new notification">notifications</button>
+                    <span class="micl-badge micl-badge--small" style="position-anchor:--hero-notifications" aria-hidden="true"></span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#anchored">Anchored</a>
+            <a href="#trailing">Trailing</a>
+            <a href="#navigation">In navigation</a>
+            <a href="#theming">Theming</a>
+        </nav>
+
+        <div class="docs-content docs-content--columns">
+            <section class="docs-section" id="anchored">
+                <div class="docs-section__head">
+                    <h2>Anchored</h2>
+                    <p class="docs-section__use">Give the element the badge belongs to an <code>anchor-name</code> and point the badge at it with <code>position-anchor</code>. The badge is hidden from assistive technology, so the element's accessible name carries its information.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Large badge on an icon button</p>
+                        <template>
+                            <div class="docs-badges">
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--mail" aria-label="Mail, 3 unread messages">mail</button>
+                                <span class="micl-badge" style="position-anchor:--mail" aria-hidden="true">3</span>
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--chat" aria-label="Chat, 57 new messages">chat</button>
+                                <span class="micl-badge" style="position-anchor:--chat" aria-hidden="true">57</span>
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--cart" aria-label="Shopping cart, 999+ items">shopping_cart</button>
+                                <span class="micl-badge" style="position-anchor:--cart" aria-hidden="true">999+</span>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Small badge on an icon button</p>
+                        <template>
+                            <div class="docs-badges">
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--notifications" aria-label="Notifications, new notification">notifications</button>
+                                <span class="micl-badge micl-badge--small" style="position-anchor:--notifications" aria-hidden="true"></span>
+                                <button type="button" class="micl-iconbutton-filled-s material-symbols-outlined" style="anchor-name:--favorite" aria-label="Favorites, new notification">favorite</button>
+                                <span class="micl-badge micl-badge--small" style="position-anchor:--favorite" aria-hidden="true"></span>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">On a plain icon</p>
+                        <template>
+                            <div class="docs-badges">
+                                <span class="material-symbols-outlined" style="anchor-name:--inbox" role="img" aria-label="Inbox, 12 new messages">inbox</span>
+                                <span class="micl-badge" style="position-anchor:--inbox" aria-hidden="true">12</span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="trailing">
+                <div class="docs-section__head">
+                    <h2>Trailing</h2>
+                    <p class="docs-section__use">A trailing badge needs no anchor: it is laid out in the flow, vertically centered, with a small gap after the label.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="docs-badges">
+                                <span class="docs-label md-sys-typescale-label-large">Updates<span class="micl-badge micl-badge--trailing" aria-hidden="true">4</span></span>
+                                <span class="docs-label md-sys-typescale-label-large">Messages<span class="micl-badge micl-badge--trailing" aria-hidden="true">999+</span></span>
+                                <span class="docs-label md-sys-typescale-label-large">Drafts<span class="micl-badge micl-badge--small micl-badge--trailing" aria-hidden="true"></span></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="navigation">
+                <div class="docs-section__head">
+                    <h2>In navigation</h2>
+                    <p class="docs-section__use">Navigation items anchor their badges automatically. See them on the <a href="navigationbar.html">navigation bar</a> and <a href="navigationrail.html">navigation rail</a> pages, where an expanded rail moves large badges behind the label.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-badges">
+                        <a href="navigationbar.html" class="micl-button-tonal-s">Navigation bars</a>
+                        <a href="navigationrail.html" class="micl-button-tonal-s">Navigation rails</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Colour</p>
+                        <template>
+                            <div class="docs-badges" style="--md-comp-badge-color:var(--md-sys-color-primary);--md-comp-badge-large-label-text-color:var(--md-sys-color-on-primary)">
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--mail-themed" aria-label="Mail, 24 unread messages">mail</button>
+                                <span class="micl-badge" style="position-anchor:--mail-themed" aria-hidden="true">24</span>
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--notifications-themed" aria-label="Notifications, new notification">notifications</button>
+                                <span class="micl-badge micl-badge--small" style="position-anchor:--notifications-themed" aria-hidden="true"></span>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Size</p>
+                        <template>
+                            <div class="docs-badges" style="--md-comp-badge-size:10px;--md-comp-badge-large-size:20px;--md-comp-badge-large-padding:6px">
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--chat-sized" aria-label="Chat, 7 new messages">chat</button>
+                                <span class="micl-badge" style="position-anchor:--chat-sized" aria-hidden="true">7</span>
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--favorite-sized" aria-label="Favorites, new notification">favorite</button>
+                                <span class="micl-badge micl-badge--small" style="position-anchor:--favorite-sized" aria-hidden="true"></span>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Position offset</p>
+                        <template>
+                            <div class="docs-badges" style="--md-comp-badge-inline-offset:4px;--md-comp-badge-block-offset:-4px">
+                                <button type="button" class="micl-iconbutton-standard-s material-symbols-outlined" style="anchor-name:--cart-offset" aria-label="Shopping cart, 2 items">shopping_cart</button>
+                                <span class="micl-badge" style="position-anchor:--cart-offset" aria-hidden="true">2</span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </main>
+
+        <footer class="docs-foot">MICL &mdash; Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

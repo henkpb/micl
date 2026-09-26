@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Field">
+    <title>MICL Field</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=call,check,close,content_copy,dark_mode,home,location_on,mail,palette,person&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
+        .docs-hero__demo .micl-grid-iconfield {
+            inline-size: min(100%, 300px);
+        }
+        .docs-hero__demo .micl-grid-iconfield__icon {
+            color: var(--md-sys-color-on-primary-container);
+        }
+        .micl-grid-iconfield__icon {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#foundations">Foundations</a><span aria-hidden="true">/</span><strong>Field</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <main>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Foundation</p>
+            <h1>Field</h1>
+            <p class="docs-hero__lede">The classic Material Design form layout: form fields stacked in a grid with a consistent vertical rhythm, optionally with a leading icon column that labels a group of related fields.</p>
+            <ul class="docs-hero__facts">
+                <li>Consistent row gap</li>
+                <li>48px icon column</li>
+                <li>CSS only</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="micl-grid-iconfield">
+                    <span class="micl-grid-iconfield__icon material-symbols-outlined" aria-hidden="true">person</span>
+                    <div class="micl-grid-iconfield__field micl-textfield-filled">
+                        <label for="herofield1">Name</label>
+                        <input type="text" id="herofield1" value="Ada Lovelace">
+                    </div>
+                    <span class="micl-grid-iconfield__icon material-symbols-outlined" aria-hidden="true">mail</span>
+                    <div class="micl-grid-iconfield__field micl-textfield-filled">
+                        <label for="herofield2">Email</label>
+                        <input type="email" id="herofield2">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#field-grid">Field grid</a>
+            <a href="#icon-field-grid">Icon field grid</a>
+            <a href="#theming">Theming</a>
+        </nav>
+
+        <div class="docs-content docs-content--columns">
+            <section class="docs-section" id="field-grid">
+                <div class="docs-section__head">
+                    <h2>Field grid</h2>
+                    <p class="docs-section__use">Wrap form fields in <code>micl-grid-field</code> to stack them with the standard Material row gap.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Outlined fields</p>
+                        <template>
+                            <div class="micl-grid-field">
+                                <div class="micl-textfield-outlined">
+                                    <label for="myfield1">Name</label>
+                                    <input type="text" id="myfield1" autocomplete="name">
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myfield2">Email</label>
+                                    <input type="email" id="myfield2" autocomplete="email">
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myfield3">Country</label>
+                                    <select id="myfield3">
+                                        <option class="micl-list-item-one" value="" aria-label="None"></option>
+                                        <option class="micl-list-item-one" value="DK">
+                                            <span class="micl-list-item__text">Denmark</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="NO">
+                                            <span class="micl-list-item__text">Norway</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="SE">
+                                            <span class="micl-list-item__text">Sweden</span>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myfield4">Message</label>
+                                    <textarea id="myfield4"></textarea>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="icon-field-grid">
+                <div class="docs-section__head">
+                    <h2>Icon field grid</h2>
+                    <p class="docs-section__use">With <code>micl-grid-iconfield</code>, icons sit in a fixed 48px start column and label the group of fields that follows them. Fields without an icon of their own continue the group.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Filled fields with icons</p>
+                        <template>
+                            <div class="micl-grid-iconfield">
+                                <span class="micl-grid-iconfield__icon material-symbols-outlined" aria-hidden="true">person</span>
+                                <div class="micl-grid-iconfield__field micl-textfield-filled">
+                                    <label for="myfield5">First name</label>
+                                    <input type="text" id="myfield5" autocomplete="given-name">
+                                </div>
+                                <div class="micl-grid-iconfield__field micl-textfield-filled">
+                                    <label for="myfield6">Last name</label>
+                                    <input type="text" id="myfield6" autocomplete="family-name">
+                                </div>
+                                <span class="micl-grid-iconfield__icon material-symbols-outlined" aria-hidden="true">call</span>
+                                <div class="micl-grid-iconfield__field micl-textfield-filled">
+                                    <label for="myfield7">Phone</label>
+                                    <input type="tel" id="myfield7" autocomplete="tel">
+                                </div>
+                                <span class="micl-grid-iconfield__icon material-symbols-outlined" aria-hidden="true">mail</span>
+                                <div class="micl-grid-iconfield__field micl-textfield-filled">
+                                    <label for="myfield8">Email</label>
+                                    <input type="email" id="myfield8" autocomplete="email">
+                                </div>
+                                <span class="micl-grid-iconfield__icon material-symbols-outlined" aria-hidden="true">location_on</span>
+                                <div class="micl-grid-iconfield__field micl-textfield-filled">
+                                    <label for="myfield9">Street address</label>
+                                    <input type="text" id="myfield9" autocomplete="street-address">
+                                </div>
+                                <div class="micl-grid-iconfield__field micl-textfield-filled">
+                                    <label for="myfield10">Country</label>
+                                    <select id="myfield10">
+                                        <option class="micl-list-item-one" value="" aria-label="None"></option>
+                                        <option class="micl-list-item-one" value="DK">
+                                            <span class="micl-list-item__text">Denmark</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="NO">
+                                            <span class="micl-list-item__text">Norway</span>
+                                        </option>
+                                        <option class="micl-list-item-one" value="SE">
+                                            <span class="micl-list-item__text">Sweden</span>
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                    <p class="docs-section__use">The row gap follows the <code>--md-sys-padding-xl</code> design token (24px by default).</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">A tighter 12px row gap</p>
+                        <template>
+                            <div class="micl-grid-field" style="--md-sys-padding-xl:12px">
+                                <div class="micl-textfield-outlined">
+                                    <label for="myfield11">Username</label>
+                                    <input type="text" id="myfield11" autocomplete="username">
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myfield12">Password</label>
+                                    <input type="password" id="myfield12" autocomplete="current-password">
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </main>
+
+        <footer class="docs-foot">MICL &mdash; Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

@@ -23,13 +23,29 @@ h1 {
     display: flex;
     align-items: center;
     gap: 8px;
+    min-inline-size: 0;
+    white-space: nowrap;
     color: var(--md-sys-color-on-surface-variant);
     font-size: var(--md-sys-typescale-title-small-size);
     font-weight: var(--md-sys-typescale-title-small-weight);
 }
 .docs-top__crumbs strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--md-sys-color-on-surface);
     font-weight: 500;
+}
+.docs-top__crumbs a {
+    color: inherit;
+    text-decoration: none;
+}
+.docs-top__crumbs a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 599px) {
+    .docs-top__crumbs > :not(strong) {
+        display: none;
+    }
 }
 .docs-top__actions {
     display: flex;
@@ -54,7 +70,6 @@ h1 {
     text-transform: uppercase;
     font-size: var(--md-sys-typescale-label-large-size);
     font-weight: 500;
-    opacity: 0.75;
 }
 .docs-hero h1 {
     margin: 0 0 16px;
@@ -288,11 +303,11 @@ h1 {
 .docs-swatch:hover {
     background-color: var(--md-sys-color-surface-container-high);
 }
-.docs-swatch[aria-current="true"] {
+.docs-swatch[aria-pressed="true"] {
     color: var(--md-sys-color-on-surface);
     font-weight: 500;
 }
-.docs-swatch[aria-current="true"]::before {
+.docs-swatch[aria-pressed="true"]::before {
     outline-color: var(--md-sys-color-primary);
 }
 .docs-seg {
@@ -339,6 +354,10 @@ h1 {
     color: var(--md-sys-color-on-surface-variant);
     z-index: 9;
 }
+.docs-example__copy:dir(rtl) {
+    right: auto;
+    left: -16px;
+}
 .docs-example__copy--done {
     color: var(--md-sys-color-primary);
 }
@@ -355,6 +374,10 @@ h1 {
     align-items: flex-start;
     padding-block: 16px;
     row-gap: 16px;
+}
+.docs-stage.docs-scroll {
+    overflow-x: auto;
+    padding-block: 4px;
 }
 .docs-hidden {
     display: none !important;
@@ -414,5 +437,29 @@ h1 {
     }
     .docs-content > .docs-stage {
         padding: 24px 20px;
+    }
+}
+@media (max-width: 599px) {
+    .docs-hero {
+        padding: 32px 20px;
+        border-radius: 28px;
+    }
+    .docs-section,
+    .docs-content > .docs-stage {
+        padding: 24px 16px;
+    }
+    .docs-stage {
+        padding: 20px 16px;
+    }
+    .docs-hero__collage {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        min-block-size: 0;
+        zoom: 0.7;
+    }
+    .docs-hero__collage > * {
+        position: static;
     }
 }

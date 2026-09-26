@@ -21,6 +21,9 @@ Or with plain CSS:
 ### JavaScript
 None is required when the [theme](../../themes/README.md) class sits on the `<html>` element. A theme applied to `<body>` cannot color the viewport's scrollbar by itself, because that scrollbar reads its colors from `<html>`; the MICL runtime (`dist/micl.js` or any per-component script) closes that gap by copying the body's outline color to `<html>`, and keeps it current when the body's `class` or `style` attribute changes or the color scheme preference flips.
 
+### Live Demo
+A live example of the [Scrollbar foundation](https://henkpb.github.io/micl/scrollbar.html) is available to interact with.
+
 ## Theming
 
 | Variable name | Description | Default value |

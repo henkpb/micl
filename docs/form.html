@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Form">
+    <title>MICL Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
+        .docs-section__use a {
+            color: var(--md-sys-color-primary);
+        }
+        .docs-form fieldset {
+            min-inline-size: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        .docs-form legend {
+            padding: 0;
+            margin-block-end: 4px;
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-form label {
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-form .docs-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .docs-hero__demo .docs-form {
+            inline-size: min(100%, 300px);
+        }
+        .docs-hero__demo .docs-form label,
+        .docs-hero__demo .docs-form legend {
+            color: inherit;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#foundations">Foundations</a><span aria-hidden="true">/</span><strong>Form</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <main>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Foundation</p>
+            <h1>Form</h1>
+            <p class="docs-hero__lede">This foundation validates HTML forms and maps the results to MICL's specific error styling. It builds on the browser's native Constraint Validation API rather than replacing it: the standard attributes keep working exactly as they do without MICL, and this foundation adds component-aware error presentation and count rules for a set of related checkboxes.</p>
+            <ul class="docs-hero__facts">
+                <li>Native validation messages</li>
+                <li>Checkbox count rules</li>
+                <li>You decide when</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <form class="docs-form micl-grid-field" novalidate aria-label="Newsletter sign-up" onsubmit="event.preventDefault(); miclForm.validateForm(this, true)">
+                    <div class="micl-textfield-filled">
+                        <label for="heroform1">Email</label>
+                        <input type="email" id="heroform1" required aria-describedby="heroform1-support">
+                        <span id="heroform1-support" class="micl-textfield__supporting-text">For the newsletter</span>
+                    </div>
+                    <div class="docs-actions">
+                        <button type="submit" class="micl-button-filled-s">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#validate-form">Validate a form</a>
+            <a href="#count-rules">Count rules</a>
+            <a href="#validate-fieldset">Validate a fieldset</a>
+            <a href="#silent">Silent validation</a>
+        </nav>
+
+        <div class="docs-content docs-content--columns">
+            <section class="docs-section" id="validate-form">
+                <div class="docs-section__head">
+                    <h2>Validate a form</h2>
+                    <p class="docs-section__use">Call <code>miclForm.validateForm(form, true)</code> from a submit handler. Text fields with supporting text show the browser's message in place; other controls get the native bubble. <code>novalidate</code> lets the submit event reach your handler.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Required fields and a required checkbox</p>
+                        <template>
+                            <form class="docs-form micl-grid-field" novalidate aria-label="Create account" onsubmit="event.preventDefault(); miclForm.validateForm(this, true)">
+                                <div class="micl-textfield-outlined">
+                                    <label for="myform1">Name</label>
+                                    <input type="text" id="myform1" required autocomplete="name" aria-describedby="myform1-support">
+                                    <span id="myform1-support" class="micl-textfield__supporting-text">Required</span>
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myform2">Email</label>
+                                    <input type="email" id="myform2" required autocomplete="email" aria-describedby="myform2-support">
+                                    <span id="myform2-support" class="micl-textfield__supporting-text">We never share your address</span>
+                                </div>
+                                <div class="micl-textfield-outlined">
+                                    <label for="myform3">Year of birth</label>
+                                    <input type="number" id="myform3" min="1900" max="2026" aria-describedby="myform3-support">
+                                    <span id="myform3-support" class="micl-textfield__supporting-text">Optional</span>
+                                </div>
+                                <div class="docs-flex--vcenter">
+                                    <input type="checkbox" id="myform4" class="micl-checkbox" name="terms" required>
+                                    <label for="myform4" class="md-sys-typescale-body-medium">I accept the terms</label>
+                                </div>
+                                <div class="docs-actions">
+                                    <button type="submit" class="micl-button-filled-s">Validate</button>
+                                </div>
+                            </form>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="count-rules">
+                <div class="docs-section__head">
+                    <h2>Checkbox count rules</h2>
+                    <p class="docs-section__use">Describe a rule such as &ldquo;two or three of these&rdquo; with <code>data-miclvalidate-*</code> attributes on the <code>&lt;fieldset&gt;</code>. The message is shown on the first checkbox of the set.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <form class="docs-form micl-grid-field" novalidate aria-label="Pizza order" onsubmit="event.preventDefault(); miclForm.validateForm(this, true)">
+                                <fieldset
+                                    data-miclvalidate-checkboxes-name="topping"
+                                    data-miclvalidate-checkboxes-count-min="2"
+                                    data-miclvalidate-checkboxes-count-max="3"
+                                    data-miclvalidate-message="Please choose two or three toppings.">
+                                    <legend class="md-sys-typescale-title-small">Toppings</legend>
+                                    <div class="docs-flex--vcenter">
+                                        <input type="checkbox" id="mytopping1" class="micl-checkbox" name="topping" value="olives">
+                                        <label for="mytopping1" class="md-sys-typescale-body-medium">Olives</label>
+                                    </div>
+                                    <div class="docs-flex--vcenter">
+                                        <input type="checkbox" id="mytopping2" class="micl-checkbox" name="topping" value="capers">
+                                        <label for="mytopping2" class="md-sys-typescale-body-medium">Capers</label>
+                                    </div>
+                                    <div class="docs-flex--vcenter">
+                                        <input type="checkbox" id="mytopping3" class="micl-checkbox" name="topping" value="mushrooms">
+                                        <label for="mytopping3" class="md-sys-typescale-body-medium">Mushrooms</label>
+                                    </div>
+                                    <div class="docs-flex--vcenter">
+                                        <input type="checkbox" id="mytopping4" class="micl-checkbox" name="topping" value="artichokes">
+                                        <label for="mytopping4" class="md-sys-typescale-body-medium">Artichokes</label>
+                                    </div>
+                                </fieldset>
+                                <div class="docs-actions">
+                                    <button type="submit" class="micl-button-filled-s">Order</button>
+                                </div>
+                            </form>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="validate-fieldset">
+                <div class="docs-section__head">
+                    <h2>Validate a fieldset</h2>
+                    <p class="docs-section__use"><code>miclForm.validateFieldSet(fieldset, true)</code> checks one step of a multi-step form on its own.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <form class="docs-form micl-grid-field" novalidate aria-label="Delivery">
+                                <fieldset class="micl-grid-field">
+                                    <legend class="md-sys-typescale-title-small">Step 1: Address</legend>
+                                    <div class="micl-textfield-filled">
+                                        <label for="myform5">Street address</label>
+                                        <input type="text" id="myform5" required autocomplete="street-address" aria-describedby="myform5-support">
+                                        <span id="myform5-support" class="micl-textfield__supporting-text">Required</span>
+                                    </div>
+                                    <div class="micl-textfield-filled">
+                                        <label for="myform6">Postal code</label>
+                                        <input type="text" id="myform6" required inputmode="numeric" pattern="[0-9]{4}" autocomplete="postal-code" aria-describedby="myform6-support">
+                                        <span id="myform6-support" class="micl-textfield__supporting-text">Four digits</span>
+                                    </div>
+                                    <div class="docs-actions">
+                                        <button type="button" class="micl-button-tonal-s" onclick="miclForm.validateFieldSet(this.closest('fieldset'), true)">Next</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="silent">
+                <div class="docs-section__head">
+                    <h2>Silent validation</h2>
+                    <p class="docs-section__use">Leave out <code>doReport</code> to apply the error styling without moving focus or showing a bubble, for example while the user types.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Validated on every keystroke</p>
+                        <template>
+                            <form class="docs-form micl-grid-field" novalidate aria-label="Username" oninput="miclForm.validateForm(this)">
+                                <div class="micl-textfield-outlined">
+                                    <label for="myform7">Username</label>
+                                    <input type="text" id="myform7" required minlength="4" maxlength="16" pattern="[a-z0-9]+" autocomplete="username" aria-describedby="myform7-support">
+                                    <span id="myform7-support" class="micl-textfield__supporting-text">4&ndash;16 lowercase letters or digits</span>
+                                </div>
+                            </form>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="loading">
+                <div class="docs-section__head">
+                    <h2>Loading the foundation</h2>
+                    <p class="docs-section__use">The form foundation is not part of <code>micl.js</code>. Import it from <code>dist/foundations/form</code>, or load <code>dist/foundations/form/index.js</code> with a <code>&lt;script&gt;</code> tag to get the <code>miclForm</code> global. This page loads it the same way, after <code>micl.js</code>. See the <a href="https://github.com/henkpb/micl/blob/main/foundations/form/README.md">Form README</a> for the full API.</p>
+                </div>
+            </section>
+        </div>
+        </main>
+
+        <footer class="docs-foot">MICL &mdash; Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="form.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Demonstrating MICL Time Pickers">
-    <title>MICL Time Pickers</title>
+    <meta name="description" content="Demonstrating MICL Time pickers">
+    <title>MICL Time pickers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
@@ -29,15 +29,17 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Time Pickers</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Time pickers</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
+
+        <main>
 
         <section class="docs-hero">
             <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
             <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
             <p class="docs-hero__eyebrow">Component</p>
-            <h1>Time Pickers</h1>
+            <h1>Time pickers</h1>
             <p class="docs-hero__lede">It allows users to select a specific time of day using either a text input or an analog dial interface.</p>
             <ul class="docs-hero__facts">
                 <li>Dial &amp; keyboard input</li>
@@ -62,7 +64,7 @@
             <a href="#theming">Theming</a>
         </nav>
 
-        <main class="docs-content docs-content--columns">
+        <div class="docs-content docs-content--columns">
             <section class="docs-section" id="time-fields">
                 <div class="docs-section__head">
                     <h2>Time fields</h2>
@@ -71,7 +73,7 @@
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
-                            <input type="time" name="t0" value="08:40">
+                            <input type="time" name="t0" value="08:40" aria-label="Time">
                         </template>
                     </div>
                 </div>
@@ -323,6 +325,7 @@
                     </div>
                 </div>
             </section>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>

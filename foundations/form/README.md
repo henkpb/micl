@@ -30,6 +30,9 @@ If you load the foundation directly via a `<script>` tag, the object is exposed 
 
 This foundation is **not** part of `dist/micl.js`'s public API, so import it separately even if you already load the full bundle.
 
+### Live Demo
+A live example of the [Form foundation](https://henkpb.github.io/micl/form.html) is available to interact with.
+
 ## API
 
 | Function | Description |

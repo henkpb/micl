@@ -28,9 +28,11 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Button groups</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Button groups</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
+
+        <main>
 
         <section class="docs-hero">
             <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
@@ -52,11 +54,11 @@
                 </div>
                 <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment" style="inset-block-start:80px;inset-inline-start:32px">
                     <label class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined" aria-label="Align left">
-                        <input type="radio" name="hero-align" value="left" checked>format_align_left</label>
+                        <input type="radio" name="hero-align" value="left" checked><span aria-hidden="true">format_align_left</span></label>
                     <label class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined" aria-label="Align centre">
-                        <input type="radio" name="hero-align" value="center">format_align_center</label>
+                        <input type="radio" name="hero-align" value="center"><span aria-hidden="true">format_align_center</span></label>
                     <label class="micl-iconbutton-outlined-l micl-button--toggle material-symbols-outlined" aria-label="Align right">
-                        <input type="radio" name="hero-align" value="right">format_align_right</label>
+                        <input type="radio" name="hero-align" value="right"><span aria-hidden="true">format_align_right</span></label>
                 </fieldset>
                 <div class="micl-buttongroup" role="group" aria-label="Playback" style="inset-block-start:220px;inset-inline-start:0">
                     <button type="button" class="micl-iconbutton-tonal-m material-symbols-outlined" aria-label="Fast rewind">fast_rewind</button>
@@ -74,7 +76,7 @@
             <a href="#connected">Connected</a>
         </nav>
 
-        <main class="docs-content">
+        <div class="docs-content">
             <section class="docs-section" id="standard">
                 <div class="docs-section__head">
                     <h2>Standard</h2>
@@ -110,13 +112,13 @@
                         <template>
                             <fieldset class="micl-buttongroup" aria-label="Call controls">
                                 <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Camera">
-                                    <input type="checkbox" name="call-camera" checked>videocam</label>
+                                    <input type="checkbox" name="call-camera" checked><span aria-hidden="true">videocam</span></label>
                                 <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Microphone">
-                                    <input type="checkbox" name="call-mic" checked>mic</label>
+                                    <input type="checkbox" name="call-mic" checked><span aria-hidden="true">mic</span></label>
                                 <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Reactions">
-                                    <input type="checkbox" name="call-reactions">mood</label>
+                                    <input type="checkbox" name="call-reactions"><span aria-hidden="true">mood</span></label>
                                 <label class="micl-iconbutton-tonal-m micl-button--toggle material-symbols-outlined" aria-label="Raise hand">
-                                    <input type="checkbox" name="call-hand">front_hand</label>
+                                    <input type="checkbox" name="call-hand"><span aria-hidden="true">front_hand</span></label>
                             </fieldset>
                         </template>
                     </div>
@@ -134,18 +136,18 @@
                         <template>
                             <fieldset class="micl-buttongroup micl-buttongroup--connected" aria-label="Alignment">
                                 <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align left">
-                                    <input type="radio" name="align" value="left" checked>format_align_left</label>
+                                    <input type="radio" name="align" value="left" checked><span aria-hidden="true">format_align_left</span></label>
                                 <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align centre">
-                                    <input type="radio" name="align" value="center">format_align_center</label>
+                                    <input type="radio" name="align" value="center"><span aria-hidden="true">format_align_center</span></label>
                                 <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Align right">
-                                    <input type="radio" name="align" value="right">format_align_right</label>
+                                    <input type="radio" name="align" value="right"><span aria-hidden="true">format_align_right</span></label>
                                 <label class="micl-iconbutton-outlined-m micl-button--toggle material-symbols-outlined" aria-label="Justify">
-                                    <input type="radio" name="align" value="justify">format_align_justify</label>
+                                    <input type="radio" name="align" value="justify"><span aria-hidden="true">format_align_justify</span></label>
                             </fieldset>
                         </template>
                     </div>
                 </div>
-                <div class="docs-stage">
+                <div class="docs-stage docs-scroll">
                     <p style="margin-block-start:0">Multiple selection — the same markup with checkboxes</p>
                     <div class="docs-example">
                         <template>
@@ -209,6 +211,7 @@
                     </div>
                 </div>
             </section>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>

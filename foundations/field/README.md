@@ -50,6 +50,9 @@ Or import all MICL styles:
 ### JavaScript
 No custom JavaScript is required for this foundation.
 
+### Live Demo
+A live example of the [Field foundation](https://henkpb.github.io/micl/field.html) is available to interact with.
+
 ## Variants
 
 | CSS class | Description |

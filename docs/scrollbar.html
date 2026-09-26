@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Scrollbar">
+    <title>MICL Scrollbar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
+        .docs-scroller {
+            max-block-size: 200px;
+            overflow: auto;
+            border-radius: 12px;
+            background-color: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-scroller p {
+            margin: 0;
+            padding: 12px 16px;
+        }
+        .docs-scroller--row {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+        }
+        .docs-scroller--row > div {
+            flex: 0 0 120px;
+            block-size: 80px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+        .docs-hero__demo .docs-scroller {
+            inline-size: min(100%, 260px);
+            max-block-size: 160px;
+            background-color: var(--md-sys-color-surface);
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#foundations">Foundations</a><span aria-hidden="true">/</span><strong>Scrollbar</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <main>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Foundation</p>
+            <h1>Scrollbar</h1>
+            <p class="docs-hero__lede">This foundation gives every scrollbar on the page — the viewport's and those of scrollable components such as menus, sheets and panes — a slim, button-less appearance: an 8px rounded thumb in the theme's outline color role, set in a 2px transparent gutter.</p>
+            <ul class="docs-hero__facts">
+                <li>8px rounded thumb</li>
+                <li>Follows the theme</li>
+                <li>Firefox fallback</li>
+            </ul>
+            <div class="docs-hero__demo">
+                <div class="docs-scroller md-sys-typescale-body-medium" tabindex="0" role="region" aria-label="Scrollable sample text">
+                    <p>Scroll me.</p>
+                    <p>The thumb uses the outline colour of the current theme.</p>
+                    <p>There are no arrow buttons.</p>
+                    <p>A 2px transparent gutter surrounds the thumb.</p>
+                    <p>Switch the theme to watch it change.</p>
+                </div>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#vertical">Vertical</a>
+            <a href="#horizontal">Horizontal</a>
+            <a href="#theming">Theming</a>
+            <a href="#compatibility">Compatibility</a>
+        </nav>
+
+        <div class="docs-content docs-content--columns">
+            <section class="docs-section" id="vertical">
+                <div class="docs-section__head">
+                    <h2>Vertical</h2>
+                    <p class="docs-section__use">Every scroll container gets the slim scrollbar; no class is needed. Make a scrollable region focusable so keyboard users can scroll it.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="docs-scroller md-sys-typescale-body-large" tabindex="0" role="region" aria-label="Planets">
+                                <p>Mercury</p>
+                                <p>Venus</p>
+                                <p>Earth</p>
+                                <p>Mars</p>
+                                <p>Jupiter</p>
+                                <p>Saturn</p>
+                                <p>Uranus</p>
+                                <p>Neptune</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="horizontal">
+                <div class="docs-section__head">
+                    <h2>Horizontal</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div class="docs-scroller docs-scroller--row md-sys-typescale-title-medium" tabindex="0" role="region" aria-label="Weekdays">
+                                <div>Monday</div>
+                                <div>Tuesday</div>
+                                <div>Wednesday</div>
+                                <div>Thursday</div>
+                                <div>Friday</div>
+                                <div>Saturday</div>
+                                <div>Sunday</div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                    <p class="docs-section__use">Set <code>--md-sys-scrollbar-thumb-color</code> on <code>&lt;html&gt;</code> to change every thumb, or on a scroll container to change it locally.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Primary thumb</p>
+                        <template>
+                            <div class="docs-scroller md-sys-typescale-body-large" style="--md-sys-scrollbar-thumb-color:var(--md-sys-color-primary)" tabindex="0" role="region" aria-label="Primary thumb sample">
+                                <p>This container sets its own thumb colour.</p>
+                                <p>Its descendants inherit it.</p>
+                                <p>Other scrollbars keep the theme's outline colour.</p>
+                                <p>Keep scrolling.</p>
+                                <p>Almost there.</p>
+                                <p>The end.</p>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Native rendering</p>
+                        <template>
+                            <div class="docs-scroller md-sys-typescale-body-large" style="scrollbar-width:thin" tabindex="0" role="region" aria-label="Native scrollbar sample">
+                                <p>Setting the standard <code>scrollbar-width</code> or <code>scrollbar-color</code> property on an element switches its scrollbar back to the browser's native rendering in Chromium.</p>
+                                <p>Use it to opt a single container out.</p>
+                                <p>Keep scrolling.</p>
+                                <p>The end.</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="compatibility">
+                <div class="docs-section__head">
+                    <h2>Compatibility</h2>
+                    <p class="docs-section__use">Chromium and Safari render the styled scrollbar through the <code>::-webkit-scrollbar</code> pseudo-elements. Firefox, which lacks them, gets the closest standard equivalent: <code>scrollbar-width: thin</code> with the same thumb colour through <code>scrollbar-color</code>. Because Firefox resolves that colour on <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code>, a local <code>--md-sys-scrollbar-thumb-color</code> does not reach it there; set <code>scrollbar-color</code> on the container instead. Browsers that support neither show their default scrollbars.</p>
+                </div>
+            </section>
+        </div>
+        </main>
+
+        <footer class="docs-foot">MICL &mdash; Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

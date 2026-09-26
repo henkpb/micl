@@ -34,9 +34,11 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Split buttons</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Split buttons</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
+
+        <main>
 
         <section class="docs-hero">
             <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
@@ -78,7 +80,7 @@
                     </nav>
                 </div>
                 <div class="micl-splitbutton" role="group" aria-label="Edit" style="inset-block-start:210px;inset-inline-start:60px">
-                    <button type="button" class="micl-button-outlined-s">
+                    <button type="button" class="micl-button-outlined-s" aria-label="Edit">
                         <span class="micl-button__icon material-symbols-outlined" aria-hidden="true">edit</span>
                     </button>
                     <button type="button" class="micl-button-outlined-s" popovertarget="hero-menu3" aria-label="More edit options">
@@ -100,7 +102,7 @@
             <a href="#menu">The menu</a>
         </nav>
 
-        <main class="docs-content">
+        <div class="docs-content">
             <section class="docs-section" id="styles">
                 <div class="docs-section__head">
                     <h2>Styles</h2>
@@ -197,7 +199,7 @@
                 <div class="docs-section__head">
                     <h2>Sizes</h2>
                 </div>
-                <div class="docs-stage">
+                <div class="docs-stage docs-scroll">
                     <div class="docs-example">
                         <template>
                             <div class="docs-sizes">
@@ -300,6 +302,7 @@
                     </div>
                 </div>
             </section>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>

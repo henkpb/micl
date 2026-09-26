@@ -38,7 +38,7 @@
 
     const sync = () => {
         document.querySelectorAll('[data-theme]').forEach(el =>
-            el.setAttribute('aria-current', String(el.dataset.theme === state.theme)));
+            el.setAttribute('aria-pressed', String(el.dataset.theme === state.theme)));
         document.querySelectorAll('[data-scheme]').forEach(el =>
             el.setAttribute('aria-pressed', String(el.dataset.scheme === state.scheme)));
         document.querySelectorAll('[data-contrast]').forEach(el =>

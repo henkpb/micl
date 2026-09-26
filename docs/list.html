@@ -29,9 +29,11 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Lists</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Lists</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
+
+        <main>
 
         <section class="docs-hero">
             <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
@@ -52,7 +54,7 @@
             </div>
         </section>
 
-        <main class="docs-content docs-content--columns">
+        <div class="docs-content docs-content--columns">
             <div class="docs-stage">
                 <div class="docs-example">
                     <template>
@@ -125,7 +127,7 @@
                 </div>
                 <div class="docs-example">
                     <template>
-                        <ul class="micl-list micl-list--segmented">
+                        <ul class="micl-list micl-list--segmented" aria-label="Selectable items">
                             <li class="micl-list-item-three" tabindex="0">
                                 <label>
                                     <span class="material-symbols-outlined micl-list-item__icon" aria-hidden="true">search</span>
@@ -211,7 +213,7 @@
                 </div>
                 <div class="docs-example">
                     <template>
-                        <ul class="micl-list">
+                        <ul class="micl-list" aria-label="Items with switches">
                             <li class="micl-list-item-two" tabindex="0">
                                 <label>
                                     <span class="micl-list-item__image" style="background-image:url(card-holiday.webp)"></span>
@@ -258,7 +260,7 @@
                                 </span>
                             </li>
                         </ul>
-                        <ul class="micl-list">
+                        <ul class="micl-list" aria-label="Items with checkboxes">
                             <li class="micl-list-item-two" tabindex="0">
                                 <label>
                                     <span class="micl-list-item__thumbnail" style="background-image:url(card-holiday.webp)"></span>
@@ -295,7 +297,7 @@
                 </div>
                 <div class="docs-example">
                     <template>
-                        <ul class="micl-list">
+                        <ul class="micl-list" aria-label="Selectable items with trailing checkboxes">
                             <li class="micl-list-item-three" tabindex="0">
                                 <label>
                                     <span class="micl-list-item__text">
@@ -320,6 +322,7 @@
                     </template>
                 </div>
             </div>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
