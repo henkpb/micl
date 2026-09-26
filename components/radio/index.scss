@@ -154,6 +154,8 @@ $radio: 'input[type=radio].micl-radio';
     }
 
     @media (forced-colors: active) {
+        border-color: Canvas;
+
         &::after {
             --_outline-color: CanvasText;
             forced-color-adjust: none;

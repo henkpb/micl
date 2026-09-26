@@ -110,6 +110,9 @@
                 opacity: 100%;
                 transform: none;
             }
+            &:focus-visible {
+                outline: none;
+            }
         }
     }
     .micl-stepper__actions {
@@ -149,6 +152,24 @@
         :is(.micl-stepper__progress--#{$state}.micl-stepper__progress-dot, .micl-stepper__progress--#{$state} .micl-stepper__progress-dot) {
             background-color: var(--md-comp-stepper-dot-#{$state}-color, var(--md-sys-color-#{$color}));
             color: var(--md-comp-stepper-dot-#{$state}-label-color, var(--md-sys-color-#{$label}));
+        }
+    }
+
+    @media (forced-colors: active) {
+        .micl-stepper__header li:not(:first-child) > button::after {
+            background-color: CanvasText;
+        }
+        .micl-stepper__progress-dot {
+            outline: 1px solid CanvasText;
+            outline-offset: -1px;
+        }
+        @each $state, $color, $label in (done, CanvasText, Canvas), (current, Highlight, HighlightText) {
+            :is(.micl-stepper__progress--#{$state}.micl-stepper__progress-dot, .micl-stepper__progress--#{$state} .micl-stepper__progress-dot) {
+                forced-color-adjust: none;
+                outline-color: $color;
+                background-color: $color;
+                color: $label;
+            }
         }
     }
 

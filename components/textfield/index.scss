@@ -124,6 +124,10 @@ $populated: ':has(> :focus, > :where(select:open), > [data-miclvalue="1"], > :au
         &[rows] {
             padding-block-start: 0;
             border-block-start: calc((var(--_textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2) solid transparent;
+
+            @media (forced-colors: active) {
+                border-block-start-color: Canvas;
+            }
         }
         &:not([rows]) {
             field-sizing: content;

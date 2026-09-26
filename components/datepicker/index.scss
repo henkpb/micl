@@ -518,6 +518,44 @@ dialog.micl-dialog.micl-datepicker {
     }
 }
 
+@media (forced-colors: active) {
+    .micl-datepicker__calendar-inner time,
+    .micl-datepicker__years label {
+        border-color: Canvas;
+    }
+    .micl-datepicker__calendar-inner time:is(.micl-datepicker__selected, .micl-datepicker__inrange),
+    .micl-datepicker__years label:has(input:checked) {
+        forced-color-adjust: none;
+        border-color: transparent;
+        background-color: Highlight;
+        color: HighlightText;
+    }
+    .micl-datepicker__years label:has(input:focus-visible) {
+        outline-color: CanvasText;
+    }
+    .micl-datepicker__calendar-inner time {
+        &.micl-datepicker__today {
+            outline-color: CanvasText;
+        }
+        &.micl-datepicker__selected.micl-datepicker__today {
+            outline-color: HighlightText;
+        }
+        &:is(.micl-datepicker__range-start, .micl-datepicker__range-end):not(:focus-visible) {
+            outline: 2px solid HighlightText;
+            outline-offset: -6px;
+        }
+        &:focus-visible {
+            outline-color: CanvasText;
+        }
+        &:is(.micl-datepicker__inrange, .micl-datepicker__range-start, .micl-datepicker__range-end)::before {
+            background-color: Highlight;
+        }
+        &.micl-datepicker__disabled {
+            color: GrayText;
+        }
+    }
+}
+
 .micl-datepicker__no-transition {
     transition: none !important;
 }

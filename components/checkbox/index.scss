@@ -74,6 +74,10 @@ $checkbox: 'input[type=checkbox].micl-checkbox';
         - ((var(--_target) - var(--_layer)) / 2)
     );
 
+    @media (forced-colors: active) {
+        border-color: Canvas;
+    }
+
     &::before {
         --_check-width: calc(var(--_size) * 5 / 6);
         --_check-height: calc(0.4667 * var(--_check-width));

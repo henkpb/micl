@@ -207,6 +207,14 @@ $switch: 'input[type=checkbox].micl-switch';
         --md-comp-switch-disabled-selected-handle-color: Canvas;
         --md-comp-switch-disabled-selected-icon-color: GrayText;
         --md-comp-switch-focus-indicator-color: CanvasText;
+        --md-comp-switch-disabled-track-opacity: 100%;
+
+        &:disabled::after {
+            opacity: 100%;
+        }
+        &:disabled:checked::after {
+            color: GrayText;
+        }
     }
 }
 
