@@ -55,7 +55,6 @@
             block-size: inherit;
             min-block-size: inherit;
             margin: 0;
-            padding-block-end: var(--md-comp-nav-rail-collapsed-top-space, 44px);
             border-radius: var(--md-sys-layout-spatial-radius);
         }
         .micl-panes {
@@ -72,7 +71,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    gap: var(--md-sys-comp-margin, 8px) var(--md-sys-layout-pane-spacer);
+    gap: var(--md-sys-layout-pane-stacked-spacer) var(--md-sys-layout-pane-spacer);
     background-color: inherit;
 
     &.micl-panes--split > .micl-pane + .micl-pane {

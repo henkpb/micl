@@ -42,6 +42,7 @@ h1 {
     position: relative;
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
+    border: 1px solid var(--md-sys-color-primary-container);
     border-radius: 36px;
     padding: 56px;
     overflow: hidden;
@@ -194,6 +195,7 @@ h1 {
 }
 .docs-section {
     background-color: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-surface-container-low);
     border-radius: 28px;
     padding: 36px 40px 40px;
     margin-block-end: 20px;

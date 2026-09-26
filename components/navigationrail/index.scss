@@ -87,6 +87,9 @@
     margin-inline: calc(-1 * var(--md-sys-layout-window-margin, 0px)) auto;
     padding-block: var(--md-comp-nav-rail-collapsed-top-space, 44px) 0;
     padding-inline: 0;
+    .micl-window--spatial & {
+        padding-block-end: var(--md-comp-nav-rail-collapsed-top-space, 44px);
+    }
     background-color: var(--md-comp-nav-rail-collapsed-container-color, var(--md-sys-color-surface));
     border: none;
     border-radius: var(--md-comp-nav-rail-collapsed-container-shape, 0px);

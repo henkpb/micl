@@ -137,9 +137,10 @@ Add one of these classes to the `micl-pane__columns` container to determine when
 ## Theming
 You can customize the layout settings by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| `--md-sys-layout-pane-spacer` | The space between two panes. | `24px` |
+| Variable name | Description | Default value |
+| ------------- | ----------- | ------------- |
+| `--md-sys-layout-pane-spacer` | The space between two panes that sit side by side. | `24px` |
+| `--md-sys-layout-pane-stacked-spacer` | The space between two panes that are stacked vertically. | `8px` |
 | `--md-sys-layout-pane-fixed-width` | The width of `micl-pane--fixed` panes at the expanded (360px) and larger (412px) breakpoints. Unset at smaller breakpoints, where fixed panes are sized by their content. | `360px` / `412px` |
 | `--md-sys-card-margin` | The space between adjacent [cards](../../components/card/README.md) inside a pane, a pane column, or a `micl-pane__columns` container. | `8px` |
 
