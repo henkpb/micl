@@ -35,6 +35,7 @@
     inset: auto;
     margin: 0;
     overflow: clip;
+    z-index: 1;
     background-color: var(--md-comp-badge-color, var(--md-sys-color-error));
     color: var(--md-comp-badge-large-label-text-color, var(--md-sys-color-on-error));
     @media (forced-colors: active) {
