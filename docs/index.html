@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,code,content_copy,dark_mode,edit,error,foundation,globe,home,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,palette,person,print,schedule,share,widgets&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=bottom_panel_open,check,close,code,content_copy,dark_mode,edit,error,foundation,globe,home,info,keyboard,keyboard_arrow_down,link,menu,menu_open,more_vert,newspaper,palette,person,print,right_panel_open,select_window,share,widgets&display=block">
     <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
@@ -87,8 +87,8 @@
         <nav class="docs-chipnav" aria-label="Sections on this page">
             <a href="#components">Components</a>
             <a href="#foundations">Foundations</a>
-            <a href="#data-entry">Data entry</a>
             <a href="#cards">Cards</a>
+            <a href="#data-entry">Data entry</a>
             <a href="#lists">Lists</a>
             <a href="#actions">Actions</a>
         </nav>
@@ -116,10 +116,9 @@
                         <a href="divider.html" class="md-sys-typescale-body-large">Dividers</a>
                         <a href="iconbutton.html" class="md-sys-typescale-body-large">Icon buttons</a>
                         <a href="list.html" class="md-sys-typescale-body-large">Lists</a>
-                        <a href="menu.html" class="md-sys-typescale-body-large">Menus</a>
                     </div>
                     <div style="display:flex;flex-direction:column">
-
+                        <a href="menu.html" class="md-sys-typescale-body-large">Menus</a>
                         <a href="navigationbar.html" class="md-sys-typescale-body-large">Navigation bars</a>
                         <a href="navigationrail.html" class="md-sys-typescale-body-large">Navigation rails</a>
                         <a href="progressindicator.html" class="md-sys-typescale-body-large">Progress indicators</a>
@@ -150,67 +149,6 @@
                         <a href="layout.html" class="md-sys-typescale-body-large">Layout</a>
                         <a href="scrollbar.html" class="md-sys-typescale-body-large">Scrollbar</a>
                     </div>
-                </div>
-            </section>
-
-            <section class="docs-section" id="data-entry">
-                <div class="docs-section__head">
-                    <h2>Data entry</h2>
-                </div>
-                <div class="docs-stage docs-democol">
-                    <div class="micl-textfield-outlined">
-                        <label for="mytextfield1">Text field</label>
-                        <input type="text" id="mytextfield1">
-                    </div>
-                    <div class="micl-textfield-outlined">
-                        <label for="myselect1">Select</label>
-                        <select id="myselect1">
-                            <option class="micl-list-item-one" value="AR">
-                                <span class="micl-list-item__text">Argentina</span>
-                            </option>
-                            <option class="micl-list-item-one" value="BO">
-                                <span class="micl-list-item__text">Bolivia</span>
-                            </option>
-                            <option class="micl-list-item-one" value="BR" disabled>
-                                <span class="micl-list-item__text">Brazil</span>
-                            </option>
-                            <option class="micl-list-item-one" value="CL">
-                                <span class="micl-list-item__text">Chile</span>
-                            </option>
-                            <option class="micl-list-item-one" value="CO">
-                                <span class="micl-list-item__text">Colombia</span>
-                            </option>
-                            <option class="micl-list-item-one" value="EC">
-                                <span class="micl-list-item__text">Ecuador</span>
-                            </option>
-                        </select>
-                    </div>
-                    <div>
-                        <div class="docs-flex--vcenter">
-                            <input type="radio" id="myradio1" class="micl-radio" name="foo" value="bar" checked>
-                            <label for="myradio1" class="md-sys-typescale-body-medium">First radio button</label>
-                        </div>
-                        <div class="docs-flex--vcenter">
-                            <input type="radio" id="myradio2" class="micl-radio" name="foo" value="baz">
-                            <label for="myradio2" class="md-sys-typescale-body-medium">Second radio button</label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="docs-flex--vcenter">
-                            <input type="checkbox" id="mycheckbox1" class="micl-checkbox" checked>
-                            <label for="mycheckbox1" class="md-sys-typescale-body-medium">First checkbox</label>
-                        </div>
-                        <div class="docs-flex--vcenter">
-                            <input type="checkbox" id="mycheckbox2" class="micl-checkbox">
-                            <label for="mycheckbox2" class="md-sys-typescale-body-medium">Second checkbox</label>
-                        </div>
-                    </div>
-                    <div class="docs-flex--vcenter" style="column-gap:16px">
-                        <input type="checkbox" class="micl-switch" id="myswitch" checked value="c1" role="switch">
-                        <label for="myswitch" class="md-sys-typescale-body-medium">First switch</label>
-                    </div>
-                    <hr class="micl-divider">
-                    <input type="range" class="micl-slider-xs" style="width:100%;margin-block:16px" min="1" max="10" value="6" aria-label="Slider component">
                 </div>
             </section>
 
@@ -287,6 +225,67 @@
                             </nav>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="data-entry">
+                <div class="docs-section__head">
+                    <h2>Data entry</h2>
+                </div>
+                <div class="docs-stage docs-democol">
+                    <div class="micl-textfield-outlined">
+                        <label for="mytextfield1">Text field</label>
+                        <input type="text" id="mytextfield1">
+                    </div>
+                    <div class="micl-textfield-outlined">
+                        <label for="myselect1">Select</label>
+                        <select id="myselect1">
+                            <option class="micl-list-item-one" value="AR">
+                                <span class="micl-list-item__text">Argentina</span>
+                            </option>
+                            <option class="micl-list-item-one" value="BO">
+                                <span class="micl-list-item__text">Bolivia</span>
+                            </option>
+                            <option class="micl-list-item-one" value="BR" disabled>
+                                <span class="micl-list-item__text">Brazil</span>
+                            </option>
+                            <option class="micl-list-item-one" value="CL">
+                                <span class="micl-list-item__text">Chile</span>
+                            </option>
+                            <option class="micl-list-item-one" value="CO">
+                                <span class="micl-list-item__text">Colombia</span>
+                            </option>
+                            <option class="micl-list-item-one" value="EC">
+                                <span class="micl-list-item__text">Ecuador</span>
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="docs-flex--vcenter">
+                            <input type="radio" id="myradio1" class="micl-radio" name="foo" value="bar" checked>
+                            <label for="myradio1" class="md-sys-typescale-body-medium">First radio button</label>
+                        </div>
+                        <div class="docs-flex--vcenter">
+                            <input type="radio" id="myradio2" class="micl-radio" name="foo" value="baz">
+                            <label for="myradio2" class="md-sys-typescale-body-medium">Second radio button</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="docs-flex--vcenter">
+                            <input type="checkbox" id="mycheckbox1" class="micl-checkbox" checked>
+                            <label for="mycheckbox1" class="md-sys-typescale-body-medium">First checkbox</label>
+                        </div>
+                        <div class="docs-flex--vcenter">
+                            <input type="checkbox" id="mycheckbox2" class="micl-checkbox">
+                            <label for="mycheckbox2" class="md-sys-typescale-body-medium">Second checkbox</label>
+                        </div>
+                    </div>
+                    <div class="docs-flex--vcenter" style="column-gap:16px">
+                        <input type="checkbox" class="micl-switch" id="myswitch" checked value="c1" role="switch">
+                        <label for="myswitch" class="md-sys-typescale-body-medium">First switch</label>
+                    </div>
+                    <hr class="micl-divider">
+                    <input type="range" class="micl-slider-xs" style="width:100%;margin-block:16px" min="1" max="10" value="6" aria-label="Slider component">
                 </div>
             </section>
 
@@ -471,10 +470,10 @@
                             </div>
                         </dialog>
                         <div class="micl-buttongroup" role="group" aria-label="Button actions" style="flex-wrap:wrap;row-gap:8px">
-                            <button type="button" class="micl-button-elevated-m" command="show-modal" commandfor="mydialog">Dialog</button>
-                            <button type="button" class="micl-button-tonal-m" popovertarget="mysidesheet">Side Sheet</button>
-                            <button type="button" class="micl-button-outlined-m" popovertarget="mybottomsheet">Bottom Sheet</button>
-                            <button type="button" class="micl-button-text-m" popovertarget="mysnackbar">Snackbar</button>
+                            <button type="button" class="micl-iconbutton-filled-m material-symbols-outlined" command="show-modal" commandfor="mydialog">select_window</button>
+                            <button type="button" class="micl-iconbutton-tonal-m material-symbols-outlined" popovertarget="mysidesheet">right_panel_open</button>
+                            <button type="button" class="micl-iconbutton-outlined-m material-symbols-outlined" popovertarget="mybottomsheet">bottom_panel_open</button>
+                            <button type="button" class="micl-iconbutton-tonal-m material-symbols-outlined" popovertarget="mysnackbar">info</button>
                         </div>
                     </div>
                     <div style="display:flex;margin-block-start:24px">
