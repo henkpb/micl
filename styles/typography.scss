@@ -20,6 +20,7 @@
 // SOFTWARE.
 
 @use 'sass:map';
+@use 'sass:string';
 
 //
 // Set $master: true (@use 'styles/typography' with ($master: true)) to install every typescale
@@ -118,9 +119,17 @@ $_narrow-tracking: (
     }
 }
 
+@function font($name) {
+    @return string.unquote('var(--md-sys-typescale-#{$name}-weight) var(--md-sys-typescale-#{$name}-size)/var(--md-sys-typescale-#{$name}-line-height) var(--md-sys-typescale-#{$name}-font)');
+}
+
+@function tracking($name) {
+    @return string.unquote('var(--md-sys-typescale-#{$name}-tracking)');
+}
+
 @mixin _apply($name) {
-    font: var(--md-sys-typescale-#{$name}-weight) var(--md-sys-typescale-#{$name}-size)/var(--md-sys-typescale-#{$name}-line-height) var(--md-sys-typescale-#{$name}-font);
-    letter-spacing: var(--md-sys-typescale-#{$name}-tracking);
+    font: font($name);
+    letter-spacing: tracking($name);
 }
 
 @mixin display-large              { @include _apply(display-large); }

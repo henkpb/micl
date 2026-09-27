@@ -20,15 +20,15 @@
 // SOFTWARE.
 
 @use '../../styles/motion';
-@use '../../styles/statelayer';
 
-@include statelayer.token('disabled-state-layer-opacity');
+@include motion.duration('long2');
 
 .micl-stepper {
-    --_motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_motion-duration: var(--md-comp-stepper-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
+    --_stepper-motion-spatial: var(--md-comp-stepper-motion-spatial, #{motion.$md-sys-motion-easing-emphasized});
+    --_stepper-motion-duration: var(--md-comp-stepper-motion-duration, var(--md-sys-motion-duration-long2));
+    --_stepper-dir: 1;
 
-    --_dot-size: var(--md-comp-stepper-dot-size, 12px);
+    --_stepper-dot-size: var(--md-comp-stepper-dot-size, 12px);
 
     box-sizing: border-box;
     display: flex;
@@ -36,29 +36,28 @@
     row-gap: var(--md-sys-padding-xl, 24px);
     margin: 0;
 
+    &:dir(rtl) {
+        --_stepper-dir: -1;
+    }
+
     .micl-stepper__header {
-        --_dot-size: var(--md-comp-stepper-header-dot-size, 24px);
+        --_stepper-dot-size: var(--md-comp-stepper-header-dot-size, 24px);
 
         position: relative;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-inline: -10px;
+        margin-block: 0;
+        margin-inline: calc(-1 * var(--md-comp-stepper-header-outset, 12px));
+        padding: 0;
+        list-style: none;
         counter-reset: dotnumber;
         anchor-scope: all;
 
         button {
-            // The connector segments and the touch-target overlay are anchored
-            // pseudo-elements: an anchor is only acceptable when it is a
-            // descendant of the positioned element's containing block, so the
-            // buttons must stay static to make the header that containing block.
-            // The unique per-button anchor names are assigned by the stepper script.
             position: static;
             anchor-name: var(--micl-stepper-anchor);
-            pointer-events: none;
 
-            // The shared touch-target overlay assumes a positioned button;
-            // re-anchor it to this button's box.
             &::before {
                 inset: auto;
                 inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - var(--md-sys-state-target-size, 48px) / 2);
@@ -66,33 +65,25 @@
                 inset-inline-end: anchor(var(--micl-stepper-anchor) end);
                 inline-size: auto;
             }
-            // The connector line is drawn as one segment per step, spanning only
-            // the real gap between this button and the previous one.
-            &:not(:first-child)::after {
-                content: "";
-                position: absolute;
-                inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - 0.5px);
-                inset-inline-start: anchor(var(--micl-stepper-prev) end);
-                inset-inline-end: anchor(var(--micl-stepper-anchor) start);
-                block-size: 1px;
-                background-color: var(--md-comp-divider-color, var(--md-sys-color-outline-variant));
-                pointer-events: none;
-            }
-            &.micl-stepper__progress--done {
-                pointer-events: inherit;
-            }
+        }
+        li:not(:first-child) > button::after {
+            content: "";
+            position: absolute;
+            inset-block-start: calc(anchor(var(--micl-stepper-anchor) center) - 0.5px);
+            inset-inline-start: anchor(var(--micl-stepper-prev) end);
+            inset-inline-end: anchor(var(--micl-stepper-anchor) start);
+            block-size: 1px;
+            background-color: var(--md-comp-divider-color, var(--md-sys-color-outline-variant));
+            pointer-events: none;
         }
         .micl-stepper__progress-dot::before {
             content: counter(dotnumber, var(--md-comp-stepper-counter-style, decimal));
         }
     }
-    &.micl-stepper--nonlinear .micl-stepper__header button {
-        pointer-events: inherit;
-    }
     .micl-stepper__steps {
         display: grid;
         grid-template-areas: "stepper-steps";
-        overflow-x: hidden;
+        overflow-x: clip;
 
         .micl-stepper__step {
             grid-area: stepper-steps;
@@ -103,24 +94,24 @@
             padding: 0;
             border: none;
             opacity: 0%;
-            transform: translateX(100%);
+            transform: translateX(calc(var(--_stepper-dir) * 100%));
             transition:
-                opacity var(--_motion-duration) linear,
-                transform var(--_motion-duration) var(--_motion-spatial);
+                visibility var(--_visibility-duration, var(--_stepper-motion-duration)) linear,
+                opacity var(--_stepper-motion-duration) linear,
+                transform var(--_stepper-motion-duration) var(--_stepper-motion-spatial);
 
             &:has(~ .micl-stepper__step[aria-current=step]) {
-                transform: translateX(-100%);
-            }
-            &.micl-stepper__step--toselected {
-                visibility: visible;
+                transform: translateX(calc(var(--_stepper-dir) * -100%));
             }
             &[aria-current=step] {
+                --_visibility-duration: 0s;
+
                 visibility: visible;
                 opacity: 100%;
-                transform: translateX(0%);
+                transform: none;
             }
-            &.micl-stepper__step--fromselected {
-                visibility: visible;
+            &:focus-visible {
+                outline: none;
             }
         }
     }
@@ -144,39 +135,46 @@
     .micl-stepper__progress-dots {
         display: flex;
         align-items: center;
-        column-gap: 4px;
+        column-gap: var(--md-comp-stepper-dot-space, 4px);
     }
     .micl-stepper__progress-dot {
-        block-size: var(--_dot-size);
-        inline-size: var(--_dot-size);
-        min-inline-size: var(--_dot-size);
-        line-height: var(--_dot-size);
-        border-radius: calc(var(--_dot-size) / 2);
+        block-size: var(--_stepper-dot-size);
+        inline-size: var(--_stepper-dot-size);
+        min-inline-size: var(--_stepper-dot-size);
+        line-height: var(--_stepper-dot-size);
+        border-radius: calc(var(--_stepper-dot-size) / 2);
         text-align: center;
-        background-color: var(--md-comp-stepper-dot-color, var(--md-sys-color-on-surface));
-        color: var(--md-comp-stepper-dot-label-color, var(--md-sys-color-surface));
-        opacity: var(--md-sys-state-disabled-state-layer-opacity, 38%);
+        background-color: var(--md-comp-stepper-dot-color, var(--md-sys-color-surface-container-highest));
+        color: var(--md-comp-stepper-dot-label-color, var(--md-sys-color-on-surface-variant));
         counter-increment: dotnumber 1;
     }
-    .micl-stepper__progress--done.micl-stepper__progress-dot,
-    .micl-stepper__progress--done .micl-stepper__progress-dot {
-        background-color: var(--md-comp-stepper-dot-done-color, var(--md-sys-color-tertiary-container));
-        color: var(--md-comp-stepper-dot-done-label-color, var(--md-sys-color-on-tertiary-container));
-        opacity: 100%;
+    @each $state, $color, $label in (done, tertiary-container, on-tertiary-container), (current, primary, on-primary) {
+        :is(.micl-stepper__progress--#{$state}.micl-stepper__progress-dot, .micl-stepper__progress--#{$state} .micl-stepper__progress-dot) {
+            background-color: var(--md-comp-stepper-dot-#{$state}-color, var(--md-sys-color-#{$color}));
+            color: var(--md-comp-stepper-dot-#{$state}-label-color, var(--md-sys-color-#{$label}));
+        }
     }
+
+    @media (forced-colors: active) {
+        .micl-stepper__header li:not(:first-child) > button::after {
+            background-color: CanvasText;
+        }
+        .micl-stepper__progress-dot {
+            outline: 1px solid CanvasText;
+            outline-offset: -1px;
+        }
+        @each $state, $color, $label in (done, CanvasText, Canvas), (current, Highlight, HighlightText) {
+            :is(.micl-stepper__progress--#{$state}.micl-stepper__progress-dot, .micl-stepper__progress--#{$state} .micl-stepper__progress-dot) {
+                forced-color-adjust: none;
+                outline-color: $color;
+                background-color: $color;
+                color: $label;
+            }
+        }
+    }
+
 }
 
-.micl-stepper .micl-stepper__steps .micl-stepper__step:dir(rtl) {
-    transform: translateX(-100%);
-
-    &:has(~ .micl-stepper__step[aria-current=step]) {
-        transform: translateX(100%);
-    }
-    &[aria-current=step] {
-        transform: translateX(0%);
-    }
-}
-
-.micl-stepper__action--hidden, .micl-stepper__step--hidden {
+.micl-stepper__action--hidden, .micl-stepper--hidden {
     display: none !important;
 }

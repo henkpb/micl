@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Demonstrating MICL Navigation Bars">
-    <title>MICL Navigation Bar</title>
+    <meta name="description" content="Demonstrating MICL Navigation bars">
+    <title>MICL Navigation bars</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
@@ -13,33 +13,27 @@
     <link rel="stylesheet" href="micl.css">
     <link rel="stylesheet" href="shapes.css">
     <link rel="stylesheet" href="docs.css">
-    <style>
-        /* Room for the fixed navigation bar below the content */
-        .docs-shell {
-            padding-block-end: 120px;
-        }
-    </style>
 </head>
 <body class="micl-window light">
-    <nav id="mynavigationbar" class="micl-navigationbar">
+    <nav id="mynavigationbar" class="micl-navigationbar" aria-label="Main">
         <div class="micl-navigationbar__content">
             <a href="#" class="micl-navigationbar__item" aria-current="page" aria-label="Inbox, 97 new messages">
-                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--inbox" aria-hidden="true">inbox</span>
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">inbox</span>
                 <span class="micl-navigationbar__text">Inbox</span>
-                <span class="micl-badge" style="position-anchor:--inbox" aria-hidden="true">97</span>
+                <span class="micl-badge" aria-hidden="true">97</span>
             </a>
             <a href="#" class="micl-navigationbar__item">
                 <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">outbox</span>
                 <span class="micl-navigationbar__text">Outbox</span>
             </a>
             <a href="#" class="micl-navigationbar__item" aria-label="Favorites, new notification">
-                <span class="micl-navigationbar__icon material-symbols-outlined" style="anchor-name:--favorites" aria-hidden="true">favorite</span>
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">favorite</span>
                 <span class="micl-navigationbar__text">Favorites</span>
-                <span class="micl-badge micl-badge--small" style="position-anchor:--favorites" aria-hidden="true"></span>
+                <span class="micl-badge micl-badge--small" aria-hidden="true"></span>
             </a>
             <a href="#" class="micl-navigationbar__item">
                 <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">delete</span>
-                <span class="micl-navigationbar__text">Trash</span>
+                <span class="micl-navigationbar__text">Deleted items</span>
             </a>
         </div>
     </nav>
@@ -49,13 +43,15 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Navigation bars</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Navigation bars</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
 
+        <main>
+
         <section class="docs-hero">
-            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
-            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
             <p class="docs-hero__eyebrow">Component</p>
             <h1>Navigation bars</h1>
             <p class="docs-hero__lede">A navigation bar lets people switch between UI views on smaller devices, anchored to the bottom of the screen. The bar below is live — pick a variant and try it.</p>
@@ -66,11 +62,11 @@
             </ul>
         </section>
 
-        <main class="docs-content">
+        <div class="docs-content">
             <section class="docs-section" id="variants">
                 <div class="docs-section__head">
                     <h2>Variants</h2>
-                    <p class="docs-section__use">The selected variant is applied to the navigation bar at the bottom of this page. The adaptive variant turns into a navigation rail on windows wider than 840&thinsp;px.</p>
+                    <p class="docs-section__use">The selected variant is applied to the navigation bar at the bottom of this page. The adaptive variant turns into a navigation rail on windows wider than 840&thinsp;px. The last destination carries a label that is too long for an item, to show that it is truncated rather than allowed to run into its neighbour &mdash; narrow the window, or pick the horizontal items, to see it laid out differently.</p>
                 </div>
                 <div class="docs-stage md-sys-typescale-body-medium">
                     <div class="docs-flex--vcenter">
@@ -91,6 +87,7 @@
                     </div>
                 </div>
             </section>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>

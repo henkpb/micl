@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A scrollable page with a sticky MICL app bar that collapses as it scrolls">
+    <title>MICL App bar — sticky demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=menu,more_vert,search&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <style>
+        body {
+            font-family: var(--md-ref-typeface-plain);
+        }
+        .demo-item {
+            padding-block: 16px;
+            border-block-end: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .demo-item strong {
+            display: block;
+            color: var(--md-sys-color-on-surface);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="micl-panes">
+        <div class="micl-pane">
+            <header class="micl-appbar micl-appbar--medium">
+                <button type="button" class="micl-appbar__leading-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Open navigation">menu</button>
+                <div class="micl-appbar__headline">
+                    <h1>Inbox</h1>
+                    <p class="micl-appbar__subtitle">32 unread messages</p>
+                </div>
+                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Search">search</button>
+                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="More options">more_vert</button>
+            </header>
+
+            <main id="demo-list"></main>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            'use strict';
+
+            const senders = [
+                ['Marte Kirkerud', 'Re: the pane spacer'],
+                ['Ola Nordmann', 'Lunch on Thursday?'],
+                ['Kari Nordmann', 'Signed contract attached'],
+                ['Peder Ås', 'Deploy went out at 14:20'],
+                ['Lars Holm', 'Notes from the review'],
+                ['Ingrid Dahl', 'Photos from the trip'],
+                ['Jonas Berg', 'Invoice #4471'],
+                ['Sofie Lund', 'Re: Re: the pane spacer'],
+            ];
+
+            document.getElementById('demo-list').innerHTML = Array.from({ length: 4 }, (_, round) =>
+                senders.map(([name, subject]) =>
+                    `<div class="demo-item"><strong>${name}</strong>${subject} — message ${round + 1}</div>`
+                ).join('')
+            ).join('');
+
+            const themelink = document.getElementById('theme-link');
+            const apply = () => {
+                try {
+                    themelink.href = `themes/${localStorage.getItem('theme') || 'airblue'}/theme.css`;
+                    document.body.className = `micl-window ${localStorage.getItem('mode') || 'light'}`;
+                    document.documentElement.dir = localStorage.getItem('dir') || 'ltr';
+                }
+                catch (e) {}
+            };
+
+            apply();
+            addEventListener('storage', apply);
+        })();
+    </script>
+</body>
+</html>

@@ -20,7 +20,7 @@
 // SOFTWARE.
 //
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const datepickerSelector = 'dialog.micl-dialog.micl-datepicker';
 
@@ -96,7 +96,6 @@ const clampToMonthRange = (date: Date, min: Date, max: Date): Date =>
     return new Date(date);
 };
 
-// A date-only string denotes a local calendar day; Date parsing would read it as UTC.
 const parseISODate = (value: string): Date | null =>
 {
     const parts = /^(\d{4,6})-(\d{2})-(\d{2})/.exec(value.trim());
@@ -301,7 +300,6 @@ const populateContainerWithDays = (
         el.tabIndex = isFocusCell ? 0 : -1;
         roved = roved || isFocusCell;
 
-        // A single-day range (end equals start) renders as a plain selection.
         if (end !== undefined && end !== start) {
             if (time === start) {
                 el.classList.add(`${classPrefix}range-start`);
@@ -361,8 +359,6 @@ const focusCell = (dialog: HTMLDialogElement): void =>
         ?.focus({ preventScroll: true });
 };
 
-// Fills an empty supporting text element of a date field with the format of
-// the locale, and keeps owning it from there on.
 const setFormatHint = (input: Element): void =>
 {
     const hint = input.closest('[class*="micl-textfield"]')
@@ -376,9 +372,6 @@ const setFormatHint = (input: Element): void =>
 
 const setFieldState = (input: HTMLInputElement, invalid: boolean): void =>
 {
-    input.closest<HTMLElement>('[class*="micl-textfield"]')
-        ?.classList.toggle('micl-textfield--error', invalid);
-
     if (invalid) {
         input.setAttribute('aria-invalid', 'true');
         input.dataset.miclinvalid = '1';
@@ -429,8 +422,6 @@ const renderCalendar = (
         const startPositionClass = isNextMonth ? startClass : endClass;
         const endTransformClass  = isNextMonth ? moveLeftClass : moveRightClass;
 
-        // Read before the transitions are suppressed: the computed duration of
-        // an element carrying the no-transition class is zero.
         const duration = slideDuration(calendars);
 
         calendars.classList.add(noTransition, startPositionClass);
@@ -491,7 +482,6 @@ const renderCalendar = (
         }
     }
 
-    // In range mode the input view holds two text fields: start and end.
     content?.querySelectorAll<HTMLInputElement>(`.${classPrefix}input input`).forEach((input, index) =>
     {
         if (!input.dataset.micldateformat) {
@@ -504,12 +494,7 @@ const renderCalendar = (
         }
         const date = index === 0 ? state.selected : state.selectedEnd;
         input.value = date ? formatters.input.format(date) : '';
-        if (input.value) {
-            input.dataset.miclvalue = '1';
-        }
-        else {
-            delete input.dataset.miclvalue;
-        }
+        input.dataset.miclvalue = input.value ? '1' : '';
     });
 
     setText(
@@ -752,8 +737,6 @@ const selectDate = (dialog: HTMLDialogElement, dateStr: string): void =>
 
     if (state.range) {
         if (state.selectedEnd || picked < state.selected) {
-            // Restart when a range is complete; move the start when the
-            // picked date lies before it.
             state.selected    = picked;
             state.selectedEnd = null;
         }
@@ -770,8 +753,6 @@ const selectDate = (dialog: HTMLDialogElement, dateStr: string): void =>
     renderCalendar(dialog, state);
 };
 
-// Applies a manually entered date to the endpoint belonging to the edited
-// text field: index 0 is the start (and the only field in single mode).
 const setInputDate = (dialog: HTMLDialogElement, input: HTMLInputElement, index: number): void =>
 {
     const state = stateMap.get(dialog);
@@ -801,7 +782,6 @@ const setInputDate = (dialog: HTMLDialogElement, input: HTMLInputElement, index:
         state.focusDate = new Date(state.selected);
     }
 
-    // An unparsable entry re-renders too: that restores the field's content.
     renderCalendar(dialog, state);
 };
 
@@ -840,11 +820,9 @@ const commitSelection = (dialog: HTMLDialogElement): void =>
         return;
     }
 
-    // An incomplete range is committed as a single-day range.
     const end = state.selectedEnd || state.selected;
 
     if (state.range && !state.invokerEnd) {
-        // a single invoker holds the range as an ISO 8601 interval
         commitValue(
             state.invoker,
             `${formatToInputDateValue(state.selected)}/${formatToInputDateValue(end)}`,
@@ -921,7 +899,11 @@ export default register(datepickerSelector, {
                 break;
             case 'PageUp':
             case 'PageDown':
-                changePeriod(dialog, event.key === 'PageUp' ? 1 : -1, event.shiftKey ? 'year' : 'month');
+                event.preventDefault();
+                changePeriod(dialog, event.key === 'PageDown' ? 1 : -1, event.shiftKey ? 'year' : 'month');
+                if (cell) {
+                    focusCell(dialog);
+                }
                 break;
             default:
         }
@@ -929,7 +911,7 @@ export default register(datepickerSelector, {
 
     initialize: (dialog: HTMLDialogElement): void =>
     {
-        if (dialog.dataset.miclinitialized) {
+        if (initialized.has(dialog)) {
             return;
         }
 
@@ -938,7 +920,7 @@ export default register(datepickerSelector, {
         if (!form || !content) {
             return;
         }
-        dialog.dataset.miclinitialized = '1';
+        initialized.add(dialog);
 
         const headline = dialog.querySelector('h1, h2, h3, h4, h5, h6, .micl-heading');
         if (headline) {
@@ -1039,7 +1021,6 @@ export default register(datepickerSelector, {
                     invokerEnd = end instanceof HTMLInputElement ? end : null;
                 }
                 else if (invoker.id) {
-                    // the picker was invoked by the end input of a pair
                     const start = document.querySelector<HTMLInputElement>(`input[data-miclrangeto="${invoker.id}"]`);
                     if (start) {
                         invokerEnd   = invoker;
@@ -1059,7 +1040,6 @@ export default register(datepickerSelector, {
                 max = parseISODate(invokerStart.max) || max;
             }
             else {
-                // a single range invoker holds an ISO 8601 interval (start/end)
                 const [startStr, endStr] = (invokerStart.value || invokerStart.textContent || '').split('/');
                 initialDate = parseISODate(startStr) || initialDate;
                 if (range && endStr) {
@@ -1125,4 +1105,4 @@ export default register(datepickerSelector, {
             }
         });
     }
-}, HTMLDialogElement);
+}, 'HTMLDialogElement');

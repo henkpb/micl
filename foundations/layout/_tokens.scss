@@ -32,6 +32,7 @@ $md-sys-window-margin-compact: 16px;
 $md-sys-window-margin: 24px; // medium and larger breakpoints
 
 $md-sys-pane-spacer: 24px;
+$md-sys-pane-stacked-spacer: 8px;
 
 $md-sys-pane-fixed-width-expanded: 360px;
 $md-sys-pane-fixed-width-large: 412px;
@@ -40,6 +41,7 @@ $md-sys-card-margin: 8px;
 
 :root {
     --md-sys-layout-pane-spacer: #{$md-sys-pane-spacer};
+    --md-sys-layout-pane-stacked-spacer: #{$md-sys-pane-stacked-spacer};
     --md-sys-layout-window-margin: #{$md-sys-window-margin};
     --md-sys-card-margin: #{$md-sys-card-margin};
 

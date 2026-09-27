@@ -28,6 +28,7 @@ To create a standard side sheet, use the `<dialog>` element with the `popover` a
 Import the side sheet styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/button";
 @use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/divider";
@@ -148,8 +149,8 @@ Each side sheet can be themed using CSS custom properties formatted to match the
 | `--md-comp-sidesheet-modal-container-elevation` | The shadow depth (elevation) of the modal side sheet | `--md-sys-elevation-level1` |
 | `--md-comp-sidesheet-modal-container-shape` | The corner rounding of the modal side sheet (applied to the two corners facing the main content) | `--md-sys-shape-corner-large` |
 | `--md-comp-sidesheet-motion-spatial` | The easing function for sliding the side sheet (uses a spring animation that slightly overshoots before settling) | `--md-sys-motion-expressive-slow-spatial` |
-| `--md-comp-sidesheet-motion-duration` | Animation duration for opening | `650ms` |
-| `--md-comp-sidesheet-motion-duration-reverse` | Animation duration for closing | `500ms` |
+| `--md-comp-sidesheet-motion-duration` | Animation duration for opening | `--md-sys-motion-expressive-slow-spatial-duration` |
+| `--md-comp-sidesheet-motion-duration-reverse` | Animation duration for closing | `--md-sys-motion-expressive-default-spatial-duration` |
 
 **Example: Changing the width of the side sheet**
 

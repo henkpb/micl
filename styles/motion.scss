@@ -19,12 +19,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@use 'sass:list';
 @use 'sass:map';
+@use 'sass:string';
 
 //
 // Set $master: true (via @use 'styles/motion' with ($master: true)) to install every duration
-// token + path on :root — used by the master bundle. When false (default), components opt into
-// individual duration tokens via @include duration('medium2').
+// token, the expressive/standard easing and duration tokens, and the path on :root — used by
+// the master bundle. When false (default), components opt into individual tokens via
+// @include duration('medium2') and @include token('expressive-fast-spatial', 'expressive-fast-spatial-duration').
+// Every duration token is zeroed under prefers-reduced-motion, so components that derive their
+// durations from these tokens need no reduced-motion handling of their own.
 //
 $master: false !default;
 
@@ -103,22 +108,118 @@ $_durations: (
     extra-long4:  $md-sys-motion-duration-extra-long4,
 );
 
+$_easings: (
+    expressive-fast-spatial:    $md-sys-motion-expressive-fast-spatial,
+    expressive-fast-effects:    $md-sys-motion-expressive-fast-effects,
+    expressive-default-spatial: $md-sys-motion-expressive-default-spatial,
+    expressive-default-effects: $md-sys-motion-expressive-default-effects,
+    expressive-slow-spatial:    $md-sys-motion-expressive-slow-spatial,
+    expressive-slow-effects:    $md-sys-motion-expressive-slow-effects,
+    standard-fast-spatial:      $md-sys-motion-standard-fast-spatial,
+    standard-fast-effects:      $md-sys-motion-standard-fast-effects,
+    standard-default-spatial:   $md-sys-motion-standard-default-spatial,
+    standard-default-effects:   $md-sys-motion-standard-default-effects,
+    standard-slow-spatial:      $md-sys-motion-standard-slow-spatial,
+    standard-slow-effects:      $md-sys-motion-standard-slow-effects,
+);
+
+$_easing-durations: (
+    expressive-fast-spatial:    $md-sys-motion-expressive-fast-spatial-duration,
+    expressive-fast-effects:    $md-sys-motion-expressive-fast-effects-duration,
+    expressive-default-spatial: $md-sys-motion-expressive-default-spatial-duration,
+    expressive-default-effects: $md-sys-motion-expressive-default-effects-duration,
+    expressive-slow-spatial:    $md-sys-motion-expressive-slow-spatial-duration,
+    expressive-slow-effects:    $md-sys-motion-expressive-slow-effects-duration,
+    standard-fast-spatial:      $md-sys-motion-standard-fast-spatial-duration,
+    standard-fast-effects:      $md-sys-motion-standard-fast-effects-duration,
+    standard-default-spatial:   $md-sys-motion-standard-default-spatial-duration,
+    standard-default-effects:   $md-sys-motion-standard-default-effects-duration,
+    standard-slow-spatial:      $md-sys-motion-standard-slow-spatial-duration,
+    standard-slow-effects:      $md-sys-motion-standard-slow-effects-duration,
+);
+
+@function _is-duration($name) {
+    @return string.slice($name, -9) == '-duration';
+}
+
+@function _token($name) {
+    @if map.has-key($_easings, $name) {
+        @return map.get($_easings, $name);
+    }
+    @if _is-duration($name) and map.has-key($_easing-durations, string.slice($name, 1, -10)) {
+        @return map.get($_easing-durations, string.slice($name, 1, -10));
+    }
+    @error "Unknown motion token '#{$name}'. Available: #{map.keys($_easings)}, each also with a '-duration' suffix.";
+}
+
 @if $master {
     :root {
         @each $name, $value in $_durations {
             --md-sys-motion-duration-#{$name}: #{$value};
         }
+        @each $name, $value in $_easings {
+            --md-sys-motion-#{$name}: #{$value};
+        }
+        @each $name, $value in $_easing-durations {
+            --md-sys-motion-#{$name}-duration: #{$value};
+        }
         --md-sys-motion-path: #{$md-sys-motion-path};
+    }
+    @media (prefers-reduced-motion: reduce) {
+        :root {
+            @each $name, $value in $_durations {
+                --md-sys-motion-duration-#{$name}: 0ms;
+            }
+            @each $name, $value in $_easing-durations {
+                --md-sys-motion-#{$name}-duration: 0ms;
+            }
+        }
     }
 }
 
-@mixin duration($name) {
+@mixin duration($names...) {
     @if not $master {
-        @if not map.has-key($_durations, $name) {
-            @error "Unknown duration '#{$name}'. Available: #{map.keys($_durations)}.";
+        @each $name in $names {
+            @if not map.has-key($_durations, $name) {
+                @error "Unknown duration '#{$name}'. Available: #{map.keys($_durations)}.";
+            }
         }
         :root {
-            --md-sys-motion-duration-#{$name}: #{map.get($_durations, $name)};
+            @each $name in $names {
+                --md-sys-motion-duration-#{$name}: #{map.get($_durations, $name)};
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                @each $name in $names {
+                    --md-sys-motion-duration-#{$name}: 0ms;
+                }
+            }
+        }
+    }
+}
+
+@mixin token($names...) {
+    @if not $master {
+        $durations: ();
+        @each $name in $names {
+            @if _is-duration($name) {
+                $durations: list.append($durations, $name);
+            }
+        }
+        :root {
+            @each $name in $names {
+                --md-sys-motion-#{$name}: #{_token($name)};
+            }
+        }
+        @if list.length($durations) > 0 {
+            @media (prefers-reduced-motion: reduce) {
+                :root {
+                    @each $name in $durations {
+                        --md-sys-motion-#{$name}: 0ms;
+                    }
+                }
+            }
         }
     }
 }

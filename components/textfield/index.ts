@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { register } from '../../foundations/runtime';
+import { initialized, register } from '../../foundations/runtime';
 
 export const textfieldSelector = '.micl-textfield-outlined > input,.micl-textfield-filled > input';
 export const textareaSelector  = '.micl-textfield-outlined > textarea,.micl-textfield-filled > textarea';
@@ -31,12 +31,11 @@ const isTextFieldElement = (target: EventTarget | null): target is
     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
     (target as Element).matches(anyFieldSelector);
 
-const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
-{
+const setCounter = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void => {
     if (
         !input.parentElement
         || input instanceof HTMLSelectElement
-        || !input.maxLength
+        || input.maxLength < 0
     ) {
         return;
     }
@@ -99,11 +98,16 @@ const formatAsDate = (input: HTMLInputElement, inputType: string | undefined): v
     }
 };
 
+const refresh = (field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void => {
+    field.dataset.miclvalue = field.value ? '1' : '';
+    setCounter(field);
+};
+
 const refreshTextField = (event: Event): void =>
 {
     if (
         !isTextFieldElement(event.target)
-        || !event.target.dataset.miclinitialized
+        || !initialized.has(event.target)
         || event.target.disabled
     ) {
         return;
@@ -112,32 +116,18 @@ const refreshTextField = (event: Event): void =>
     if (event.target instanceof HTMLInputElement && event.target.dataset.micldateformat) {
         formatAsDate(event.target, (event as InputEvent).inputType);
     }
-    if (event.target.value) {
-        event.target.dataset.miclvalue = '1';
-    }
-    else {
-        delete event.target.dataset.miclvalue;
-    }
 
-    setCounter(event.target);
+    refresh(event.target);
 };
 
 const textfield = {
     initialize: (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): void =>
     {
-        if (input.dataset.miclinitialized) {
+        if (initialized.has(input)) {
             return;
         }
-        input.dataset.miclinitialized = '1';
+        initialized.add(input);
 
-        if (input.value) {
-            input.dataset.miclvalue = '1';
-        }
-
-        // A legacy listbox replaces the whole selection on a plain click; a customizable
-        // multiple select toggles the clicked option. Align the fallback with the latter,
-        // leaving shift-clicks to the native range selection. The event target is the
-        // content of the option, not the option itself.
         if (
             input instanceof HTMLSelectElement
             && input.multiple
@@ -156,7 +146,11 @@ const textfield = {
             });
         }
 
-        if (input instanceof HTMLSelectElement && !input.multiple) {
+        if (
+            input instanceof HTMLSelectElement
+            && !input.multiple
+            && CSS.supports('appearance', 'base-select')
+        ) {
             const setPickerOrigin = (): void =>
             {
                 const rect       = input.getBoundingClientRect();
@@ -191,15 +185,16 @@ const textfield = {
             }
         }
 
-        setCounter(input);
+        refresh(input);
     },
 
+    reset: refresh,
     change: refreshTextField,
     input: refreshTextField
 };
 
-register(textfieldSelector, textfield, HTMLInputElement);
-register(textareaSelector, textfield, HTMLTextAreaElement);
-register(selectSelector, textfield, HTMLSelectElement);
+register(textfieldSelector, textfield, 'HTMLInputElement');
+register(textareaSelector, textfield, 'HTMLTextAreaElement');
+register(selectSelector, textfield, 'HTMLSelectElement');
 
 export default textfield;

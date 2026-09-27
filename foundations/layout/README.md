@@ -36,6 +36,9 @@ Or import all MICL styles:
 @use "material-inspired-component-library/styles";
 ```
 
+### Live Demo
+A live example of the [Layout foundation](https://henkpb.github.io/micl/layout.html) is available to interact with.
+
 ## Layout Components Explained
 
 ### Window
@@ -125,6 +128,8 @@ You can further divide the content within a pane into multiple columns by using 
 
 To evenly distribute space between columns, add the `micl-pane__columns--evenly` class to the `micl-pane__columns` container.
 
+By default, a column grows to fill the available space. Add the `micl-pane__column--fixed` class to a column that should keep the width of its content (or the width you give it) instead. This also works in an evenly distributed container: the other columns share the remaining space.
+
 Add one of these classes to the `micl-pane__columns` container to determine when columns should stack vertically instead of aligning horizontally.
 
 | CSS class | Description |
@@ -137,9 +142,10 @@ Add one of these classes to the `micl-pane__columns` container to determine when
 ## Theming
 You can customize the layout settings by overriding its global CSS variables. These variables are declared on the `:root` pseudo-class.
 
-| Variable name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| `--md-sys-layout-pane-spacer` | The space between two panes. | `24px` |
+| Variable name | Description | Default value |
+| ------------- | ----------- | ------------- |
+| `--md-sys-layout-pane-spacer` | The space between two panes that sit side by side. | `24px` |
+| `--md-sys-layout-pane-stacked-spacer` | The space between two panes that are stacked vertically. | `8px` |
 | `--md-sys-layout-pane-fixed-width` | The width of `micl-pane--fixed` panes at the expanded (360px) and larger (412px) breakpoints. Unset at smaller breakpoints, where fixed panes are sized by their content. | `360px` / `412px` |
 | `--md-sys-card-margin` | The space between adjacent [cards](../../components/card/README.md) inside a pane, a pane column, or a `micl-pane__columns` container. | `8px` |
 

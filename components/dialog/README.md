@@ -34,6 +34,7 @@ To create a dialog, use the `<dialog>` element with the `micl-dialog` class and 
 Import the dialog styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/button";
 @use "material-inspired-component-library/dist/iconbutton";
 @use "material-inspired-component-library/dist/dialog";
@@ -219,8 +220,8 @@ Dialogs can be themed using CSS custom properties following the Material Design 
 | `--md-comp-dialog-icon-color` | Color of the header icon | `--md-sys-color-secondary` |
 | `--md-comp-dialog-icon-size` | Size of the header icon | `--md-sys-icon-size` |
 | `--md-comp-dialog-motion-spatial` | The easing function used when the dialog opens. Uses a spring animation that slightly overshoots the final size before settling | `--md-sys-motion-expressive-fast-spatial` |
-| `--md-comp-dialog-motion-duration` | Animation duration for opening | `650ms` |
-| `--md-comp-dialog-motion-duration-reverse` | Animation duration for closing | `350ms` |
+| `--md-comp-dialog-motion-duration` | Animation duration for opening | `--md-sys-motion-expressive-slow-spatial-duration` |
+| `--md-comp-dialog-motion-duration-reverse` | Animation duration for closing | `--md-sys-motion-expressive-fast-spatial-duration` |
 | `--md-comp-full-screen-dialog-container-color` | Background color of a full-screen dialog | `--md-sys-color-surface` |
 
 **Example: Changing the dialog padding**

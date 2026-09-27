@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-spatial-duration', 'expressive-slow-spatial', 'expressive-slow-spatial-duration');
 
 @include elevation.level(0);
 @include elevation.level(1);
@@ -41,44 +42,47 @@ $container-max-width: 400px;
 
 dialog.micl-sidesheet {
     --_width: min(var(--md-comp-sidesheet-container-width, #{$container-width}), var(--md-comp-sidesheet-container-max-width, #{$container-max-width}));
-    --_padding: var(--md-comp-sidesheet-padding, var(--md-sys-layout-window-margin, 24px));
-    --_motion-spatial: var(--md-comp-sidesheet-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_motion-duration: var(--md-comp-sidesheet-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-sidesheet-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_sidesheet-padding: var(--md-comp-sidesheet-padding, var(--md-sys-layout-window-margin, 24px));
+    --_motion-spatial: var(--md-comp-sidesheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
+    --_motion-duration: var(--md-comp-sidesheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-sidesheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
 
-    --micl-spring-buffer: 40px;
-    --micl-duration: var(--_motion-duration-reverse);
+    --_spring-buffer: 40px;
+    --_duration: var(--_motion-duration-reverse);
 
     box-sizing: border-box;
     display: none;
     flex-direction: column;
-    inline-size: calc(var(--_width) + var(--micl-spring-buffer));
+    inline-size: calc(var(--_width) + var(--_spring-buffer));
     max-inline-size: none;
     block-size: 100dvb;
     max-block-size: none;
     margin-block: 0;
     margin-inline-start: auto;
-    margin-inline-end: calc(-1 * (var(--_width) + var(--micl-spring-buffer)));
-    padding-block: var(--_padding) 0;
-    padding-inline: 0 var(--micl-spring-buffer);
+    margin-inline-end: calc(-1 * (var(--_width) + var(--_spring-buffer)));
+    padding-block: var(--_sidesheet-padding) 0;
+    padding-inline: 0 var(--_spring-buffer);
     color: var(--md-comp-sidesheet-content-color, var(--md-sys-color-on-surface));
     background-color: var(--md-comp-sidesheet-standard-container-color, var(--md-sys-color-surface));
     border: none;
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     border-radius: var(--md-comp-sidesheet-container-shape, var(--md-sys-shape-corner-none));
     box-shadow: var(--md-comp-sidesheet-standard-container-elevation, var(--md-sys-elevation-level0));
     opacity: 0;
     overflow: hidden;
     transition:
-        opacity var(--micl-duration) linear,
-        margin-inline-end var(--micl-duration) var(--_motion-spatial),
-        overlay var(--micl-duration) linear allow-discrete,
-        display var(--micl-duration) linear allow-discrete;
+        opacity var(--_duration) linear,
+        margin-inline-end var(--_duration) var(--_motion-spatial),
+        overlay var(--_duration) linear allow-discrete,
+        display var(--_duration) linear allow-discrete;
 
     .micl-sidesheet__headline {
         display: flex;
         align-items: center;
         min-block-size: var(--md-comp-sidesheet-headline-height, 40px);
-        padding-inline: var(--_padding);
+        padding-inline: var(--_sidesheet-padding);
         margin-block-end: 16px;
         column-gap: 12px;
         color: var(--md-sys-color-on-surface-variant);
@@ -99,8 +103,8 @@ dialog.micl-sidesheet {
     .micl-sidesheet__content {
         box-sizing: border-box;
         flex: 1 1 auto;
-        padding-block-end: var(--_padding);
-        padding-inline: var(--_padding);
+        padding-block-end: var(--_sidesheet-padding);
+        padding-inline: var(--_sidesheet-padding);
         overflow: hidden auto;
     }
     .micl-sidesheet__actions {
@@ -109,8 +113,8 @@ dialog.micl-sidesheet {
         flex-shrink: 0;
         align-items: center;
         justify-content: start;
-        padding-block: 16px var(--_padding);
-        padding-inline: var(--_padding);
+        padding-block: 16px var(--_sidesheet-padding);
+        padding-inline: var(--_sidesheet-padding);
         column-gap: 8px;
         overflow: hidden;
     }
@@ -126,33 +130,29 @@ dialog.micl-sidesheet {
     }
     &:popover-open,
     &[open] {
-        --micl-duration: var(--_motion-duration);
+        --_duration: var(--_motion-duration);
 
         display: flex;
-        margin-inline-end: calc(-1 * var(--micl-spring-buffer));
+        margin-inline-end: calc(-1 * var(--_spring-buffer));
         opacity: 100%;
 
         @starting-style {
-            margin-inline-end: calc(-1 * (var(--_width) + var(--micl-spring-buffer)));
+            margin-inline-end: calc(-1 * (var(--_width) + var(--_spring-buffer)));
             opacity: 0;
         }
     }
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
-        transition: background-color var(--micl-duration) linear;
+        transition: background-color var(--_duration) linear;
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+        @extend %micl-backdrop;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_motion-duration: 0ms;
-        --_motion-duration-reverse: 0ms;
-    }
 }
 
 @media (min-width: tokens.$md-sys-breakpoint-medium-min) {
@@ -160,17 +160,11 @@ dialog.micl-sidesheet {
         box-sizing: border-box;
         max-inline-size: 100%;
         margin: 0;
-        transition: max-inline-size var(--md-comp-sidesheet-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+        transition: max-inline-size var(--md-comp-sidesheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
     }
     body:has(dialog.micl-sidesheet:popover-open) {
         max-inline-size: calc(100% - min(var(--md-comp-sidesheet-container-width, #{$container-width}), var(--md-comp-sidesheet-container-max-width, #{$container-max-width})));
-        transition: max-inline-size var(--md-comp-sidesheet-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration}) var(--md-comp-sidesheet-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
+        transition: max-inline-size var(--md-comp-sidesheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration)) var(--md-comp-sidesheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        body:has(dialog.micl-sidesheet[popover]),
-        body:has(dialog.micl-sidesheet:popover-open) {
-            transition-duration: 0s;
-        }
-    }
 }

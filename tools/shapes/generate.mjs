@@ -35,7 +35,7 @@ const targetPath = path.resolve(__dirname, '../../components/shapes/_paths.gener
 
 // 3 decimal places (1/1000 of the 100-unit viewBox) is sub-pixel at any
 // realistic render size and roughly halves the generated file. Strip
-// trailing zeros so e.g. 50.000 → 50, 3.140 → 3.14.
+// trailing zeros and leading zeros so e.g. 50.000 → 50, 0.140 → .14.
 function toCss(n) {
     if (Number.isInteger(n)) return String(n);
     let s = n.toFixed(3);
@@ -43,7 +43,7 @@ function toCss(n) {
     s = s.replace(/\.$/, '');
     // Sass renders -0 as 0 — match that to avoid spurious diffs.
     if (s === '-0') return '0';
-    return s;
+    return s.replace(/^(-?)0./, '$1.');
 }
 
 function segmentsLength(segments) {
@@ -76,7 +76,10 @@ function pointAt(segments, total, t) {
         }
         acc += s.len;
     }
-    return [0, 0];
+    const s = segments[segments.length - 1];
+    if (s.type === 'line')  return [s.x2, s.y2];
+    if (s.type === 'arc')   return [s.cx + s.r * Math.cos(s.a2), s.cy + s.r * Math.sin(s.a2)];
+    return [s.p3x, s.p3y];
 }
 
 // Emits a closed SVG path string from N (x, y) sample points (assumed CW).
@@ -98,27 +101,72 @@ function emitAlignedPath(points, n) {
         const dist = dx * dx + dy * dy;
         if (dist < bestD - EPS) { bestD = dist; bestI = i; }
     }
-    let d = '';
+    // Compact path syntax: the coordinates after the first pair are implicit
+    // line-to commands, and no separator is needed before a minus sign or
+    // before a decimal point that follows a number that already has one.
+    let d = 'M', prev = 'M';
     for (let j = 0; j < n; j++) {
-        const idx = (bestI + j) % n;
-        const p = points[idx];
-        d += (j === 0 ? 'M' : 'L') + ' ' + toCss(p[0]) + ' ' + toCss(p[1]) + ' ';
+        const p = points[(bestI + j) % n];
+        for (const v of [toCss(p[0]), toCss(p[1])]) {
+            const joined = v[0] === '-' || prev === 'M' || (v[0] === '.' && prev.includes('.'));
+            d += (joined ? '' : ' ') + v;
+            prev = v;
+        }
     }
     return d + 'Z';
 }
 
-function buildPath(segments, n) {
+// Samples n points along the outline. `features` holds the arc-length
+// positions of sharp corners: each one gets a sample of its own, so tips and
+// pixel steps are not chamfered, and the remaining samples are spread over
+// the gaps between features in proportion to their length.
+function sampleOutline(segments, features, n) {
     const total = segmentsLength(segments);
-    const points = [];
-    for (let i = 0; i < n; i++) {
-        points.push(pointAt(segments, total, i / n));
+    const k = features.length;
+    if (k === 0 || k > n) {
+        return Array.from({ length: n }, (_, i) => pointAt(segments, total, i / n));
     }
-    return emitAlignedPath(points, n);
+    const gaps   = features.map((s, i) => (i + 1 < k ? features[i + 1] : features[0] + total) - s);
+    const extra  = n - k;
+    const shares = gaps.map(g => g / total * extra);
+    const counts = shares.map(Math.floor);
+    const rest   = extra - counts.reduce((a, b) => a + b, 0);
+    shares.map((s, i) => [s - counts[i], i])
+          .sort((a, b) => b[0] - a[0] || a[1] - b[1])
+          .slice(0, rest)
+          .forEach(([, i]) => counts[i]++);
+    const points = [];
+    features.forEach((s, i) => {
+        const m = counts[i] + 1;
+        for (let j = 0; j < m; j++) {
+            points.push(pointAt(segments, total, ((s + gaps[i] * j / m) % total) / total));
+        }
+    });
+    return points;
+}
+
+// Scales and centres the points so the longer side spans exactly 0..100,
+// like RoundedPolygon.normalized() in AndroidX.
+function normalizePoints(points) {
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const [x, y] of points) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+    }
+    const w = maxX - minX, h = maxY - minY;
+    const scale   = 100 / Math.max(w, h);
+    const offsetX = (100 - w * scale) / 2 - minX * scale;
+    const offsetY = (100 - h * scale) / 2 - minY * scale;
+    return points.map(([x, y]) => [x * scale + offsetX, y * scale + offsetY]);
 }
 
 // --- generic M3 rounded polygon --------------------------------------------
 
-function roundedPolygonPath(n, vertices, normalize = true) {
+const SHARP_RADIUS = 2;
+
+function roundedPolygonPath(n, vertices, scaleY = 1) {
     // Step 0: deduplicate consecutive identical vertices.
     let dedup = [];
     for (const curr of vertices) {
@@ -153,7 +201,35 @@ function roundedPolygonPath(n, vertices, normalize = true) {
     vertices = straight;
     const count = vertices.length;
 
-    // Step 1: per-vertex flanking-curve geometry (port of M3's
+    // Step 1: split every side between its two corners in proportion to the
+    // cut each corner wants (port of the cutAdjusts in AndroidX's
+    // RoundedPolygon), so a rounded corner next to an unrounded one may use
+    // the whole side.
+    const expected = vertices.map((vc, i) => {
+        const vp = vertices[(i - 1 + count) % count];
+        const vn = vertices[(i + 1) % count];
+        const d1x = vp[0] - vc[0], d1y = vp[1] - vc[1], d1Len = Math.hypot(d1x, d1y);
+        const d2x = vn[0] - vc[0], d2y = vn[1] - vc[1], d2Len = Math.hypot(d2x, d2y);
+        const cosAngle = Math.max(-1, Math.min(1, (d1x * d2x + d1y * d2y) / (d1Len * d2Len)));
+        const sinAngle = Math.sqrt(Math.max(0, 1 - cosAngle * cosAngle));
+        const roundCut = sinAngle > 0.001 ? vc[2] * (1 + cosAngle) / sinAngle : 0;
+        return { roundCut, cut: (1 + (vc.length >= 4 ? vc[3] : 0)) * roundCut };
+    });
+    const cutAdjusts = vertices.map((vc, i) => {
+        const j    = (i + 1) % count;
+        const side = Math.hypot(vertices[j][0] - vc[0], vertices[j][1] - vc[1]);
+        const roundCut = expected[i].roundCut + expected[j].roundCut;
+        const cut      = expected[i].cut + expected[j].cut;
+        if (roundCut > side) return [side / roundCut, 0];
+        if (cut > side)      return [1, (side - roundCut) / (cut - roundCut)];
+        return [1, 1];
+    });
+    const cutFor = (i, side) => {
+        const [roundCutRatio, cutRatio] = cutAdjusts[side];
+        return expected[i].roundCut * roundCutRatio + (expected[i].cut - expected[i].roundCut) * cutRatio;
+    };
+
+    // Step 2: per-vertex flanking-curve geometry (port of M3's
     // _RoundedCorner.getCubics from AndroidX).
     const corners = [];
     for (let i = 0; i < count; i++) {
@@ -186,8 +262,8 @@ function roundedPolygonPath(n, vertices, normalize = true) {
         }
         const expectedCut = (1 + smoothingSpec) * expectedRoundCut;
 
-        const allowed0   = d1Len / 2;
-        const allowed1   = d2Len / 2;
+        const allowed0   = cutFor(i, (i - 1 + count) % count);
+        const allowed1   = cutFor(i, i);
         const allowedCut = Math.min(allowed0, allowed1);
 
         let sm0 = 0;
@@ -282,8 +358,10 @@ function roundedPolygonPath(n, vertices, normalize = true) {
         });
     }
 
-    // Step 2: emit segments per corner.
+    // Step 3: emit segments per corner and note where the sharp corners are.
     const segments = [];
+    const features = [];
+    let length = 0;
     for (let i = 0; i < count; i++) {
         const cprev = corners[(i - 1 + count) % count];
         const c     = corners[i];
@@ -305,6 +383,7 @@ function roundedPolygonPath(n, vertices, normalize = true) {
         const arcLen = Math.abs(c.a2 - c.a1) * c.actualR;
         segments.push({ len: arcLen, type: 'arc',
             cx: c.cx, cy: c.cy, r: c.actualR, a1: c.a1, a2: c.a2 });
+        if (c.actualR < SHARP_RADIUS) features.push(length + edgeLen + c1Len + arcLen / 2);
 
         const c2Len = (
             Math.sqrt((c.ae2x - c.ce2x) ** 2 + (c.ae2y - c.ce2y) ** 2) +
@@ -315,37 +394,11 @@ function roundedPolygonPath(n, vertices, normalize = true) {
         segments.push({ len: c2Len, type: 'cubic',
             p0x: c.ce2x, p0y: c.ce2y, p1x: c.ae2x, p1y: c.ae2y,
             p2x: c.as2x, p2y: c.as2y, p3x: c.cs2x, p3y: c.cs2y });
+        length += edgeLen + c1Len + arcLen + c2Len;
     }
 
-    // Step 3: optionally normalize bounds to fit 100×100. Collect samples
-    // during the bounds-finding pass and reuse them for the rescale, so each
-    // parameter t is only sampled once (was: twice per shape).
-    if (normalize) {
-        const total = segmentsLength(segments);
-        const samples = new Array(n);
-        let minX =  9999, maxX = -9999, minY =  9999, maxY = -9999;
-        for (let i = 0; i < n; i++) {
-            const p = pointAt(segments, total, i / n);
-            samples[i] = p;
-            const x = p[0], y = p[1];
-            if (x < minX) minX = x;
-            if (x > maxX) maxX = x;
-            if (y < minY) minY = y;
-            if (y > maxY) maxY = y;
-        }
-        const w = maxX - minX, h = maxY - minY;
-        const larger = Math.max(w, h);
-        const scale  = 100 / larger;
-        const offsetX = (100 - w * scale) / 2 - minX * scale;
-        const offsetY = (100 - h * scale) / 2 - minY * scale;
-        const points = new Array(n);
-        for (let i = 0; i < n; i++) {
-            const [x, y] = samples[i];
-            points[i] = [x * scale + offsetX, y * scale + offsetY];
-        }
-        return emitAlignedPath(points, n);
-    }
-    return buildPath(segments, n);
+    const points = sampleOutline(segments, features, n).map(([x, y]) => [x, 50 + (y - 50) * scaleY]);
+    return emitAlignedPath(normalizePoints(points), n);
 }
 
 // Faithful port of MaterialShapes._doRepeat. Polar coordinates so the
@@ -453,15 +506,15 @@ function heartPath(n) {
 
 function cookie4Path(n) {
     return roundedPolygonPath(n, repeatedPattern([
-        [123.7, 123.6, 50.0],
-        [ 50.0,  91.8, 35.0],
+        [123.7, 123.6, 25.8],
+        [ 50.0,  91.8, 23.3],
     ], 4));
 }
 
 function cookie6Path(n) {
     return roundedPolygonPath(n, repeatedPattern([
-        [ 72.3,  88.4, 55.0],
-        [ 50.0, 109.9, 55.0],
+        [ 72.3,  88.4, 39.4],
+        [ 50.0, 109.9, 39.8],
     ], 6));
 }
 
@@ -479,36 +532,17 @@ function verySunnyPath(n) {
 }
 
 function clover4Path(n) {
-    const hpi     = Math.PI / 2;
-    const quarter = Math.PI / 4;
-    const D = 25, L = 25;
-    const arcLen = L * Math.PI;
-
-    const segments = [];
-    for (let i = 0; i < 4; i++) {
-        const theta = i * hpi - hpi + quarter;
-        const cxL = 50 + D * Math.cos(theta);
-        const cyL = 50 + D * Math.sin(theta);
-        segments.push({ len: arcLen, type: 'arc', cx: cxL, cy: cyL, r: L, a1: theta - hpi, a2: theta + hpi });
-    }
-    return buildPath(segments, n);
+    return roundedPolygonPath(n, repeatedPattern([
+        [50.0,  7.4,  0.0],
+        [72.5, -9.9, 47.6],
+    ], 4, true));
 }
 
 function clover8Path(n) {
-    const hpi     = Math.PI / 2;
-    const section = Math.PI / 4;
-    const D = 35;
-    const L = D * Math.tan(Math.PI / 8);
-    const arcLen = L * Math.PI;
-
-    const segments = [];
-    for (let i = 0; i < 8; i++) {
-        const theta = i * section - hpi;
-        const cxL = 50 + D * Math.cos(theta);
-        const cyL = 50 + D * Math.sin(theta);
-        segments.push({ len: arcLen, type: 'arc', cx: cxL, cy: cyL, r: L, a1: theta - hpi, a2: theta + hpi });
-    }
-    return buildPath(segments, n);
+    return roundedPolygonPath(n, repeatedPattern([
+        [50.0,   3.6,  0.0],
+        [75.8, -10.1, 20.9],
+    ], 8));
 }
 
 function softBurstPath(n) {
@@ -557,25 +591,18 @@ function diamondPath(n) {
 }
 
 function puffyDiamondPath(n) {
-    const hpi    = Math.PI / 2;
-    const D = 35, L = 35;
-    const arcLen = L * Math.PI;
-
-    const segments = [];
-    for (let i = 0; i < 4; i++) {
-        const theta = i * hpi - Math.PI / 4;
-        const cxL = 50 + D * Math.cos(theta);
-        const cyL = 50 + D * Math.sin(theta);
-        segments.push({ len: arcLen, type: 'arc', cx: cxL, cy: cyL, r: L, a1: theta - hpi, a2: theta + hpi });
-    }
-    return buildPath(segments, n);
+    return roundedPolygonPath(n, repeatedPattern([
+        [ 87.0, 13.0, 14.6],
+        [ 81.8, 35.7,  0.0],
+        [100.0, 33.2, 85.3],
+    ], 4, true));
 }
 
 function ghostIshPath(n) {
     return roundedPolygonPath(n, repeatedPattern([
         [ 50.0,   0.0, 100.0],
         [100.0,   0.0, 100.0],
-        [100.0, 114.0,  25.4],
+        [100.0, 114.0,  25.4, 0.106],
         [ 57.5,  90.6,  25.3],
     ], 1, true));
 }
@@ -607,12 +634,11 @@ function gemPath(n) {
 }
 
 function pillPath(n) {
-    return roundedPolygonPath(n, [
-        [90, 75, 50],
-        [10, 75, 50],
-        [10, 25, 50],
-        [90, 25, 50],
-    ]);
+    return roundedPolygonPath(n, repeatedPattern([
+        [ 96.1,  3.9,  42.6],
+        [100.1, 42.8,   0.0],
+        [100.0, 60.9, 100.0],
+    ], 2, true));
 }
 
 function slantedPath(n) {
@@ -676,7 +702,7 @@ function ovalPath(n) {
         const ry = x * sin45 + y * cos45;
         points.push([50 + rx, 50 + ry]);
     }
-    return emitAlignedPath(points, n);
+    return emitAlignedPath(normalizePoints(points), n);
 }
 
 function pixelCirclePath(n) {
@@ -711,49 +737,25 @@ function pixelTrianglePath(n) {
 }
 
 function puffyPath(n) {
-    const puffs   = 6;
-    const hpi     = Math.PI / 2;
-    const section = 2 * Math.PI / puffs;
-    const tanH    = Math.tan(Math.PI / puffs);
-    const D = 50 / (1 + tanH);
-    const L = D * tanH;
-    const arcLen = L * Math.PI;
-
-    const segments = [];
-    for (let i = 0; i < puffs; i++) {
-        const theta = i * section - hpi;
-        const cxL = 50 + D * Math.cos(theta);
-        const cyL = 50 + D * Math.sin(theta);
-        segments.push({ len: arcLen, type: 'arc', cx: cxL, cy: cyL, r: L, a1: theta - hpi, a2: theta + hpi });
-    }
-
-    const total = segmentsLength(segments);
-    const points = [];
-    for (let i = 0; i < n; i++) {
-        const [x, y] = pointAt(segments, total, i / n);
-        points.push([x, 50 + (y - 50) * 0.742]);
-    }
-    return emitAlignedPath(points, n);
+    return roundedPolygonPath(n, repeatedPattern([
+        [ 50.0,  5.3,  0.0],
+        [ 54.5, -4.0, 40.5],
+        [ 67.0, -3.5, 42.6],
+        [ 71.7,  6.6, 57.4],
+        [ 72.2, 12.8,  0.0],
+        [ 77.7,  0.2, 36.0],
+        [ 91.4, 14.9, 66.0],
+        [ 92.6, 28.9, 66.0],
+        [ 88.1, 34.6,  0.0],
+        [ 94.0, 34.4, 12.6],
+        [100.3, 43.7, 25.5],
+    ], 2, true), 0.742);
 }
 
 function semicirclePath(n) {
-    const hpi  = Math.PI / 2;
-    const r    = 16;
-    const bot  = 75 + r / 2;
-    const cy   = bot - r;
-    const R    = 50;
-    const halfArc   = hpi * R;
-    const arcFillet = hpi * r;
-    const flat      = 100 - 2 * r;
-
-    const segments = [
-        { len: halfArc,   type: 'arc',  cx: 50,        cy, r: R, a1: -hpi,        a2: 0 },
-        { len: arcFillet, type: 'arc',  cx: 100 - r,   cy, r,    a1: 0,           a2: hpi },
-        { len: flat,      type: 'line', x1: 100 - r,   y1: bot, x2: r, y2: bot },
-        { len: arcFillet, type: 'arc',  cx: r,         cy, r,    a1: hpi,         a2: Math.PI },
-        { len: halfArc,   type: 'arc',  cx: 50,        cy, r: R, a1: Math.PI,     a2: Math.PI + hpi },
-    ];
-    return buildPath(segments, n);
+    return roundedPolygonPath(n, [
+        [130, 100,  20], [-30, 100,  20], [-30,   0, 100], [130,   0, 100],
+    ]);
 }
 
 // --- entry point ----------------------------------------------------------
@@ -804,8 +806,8 @@ export function generatePathsScss(vertexCount = DEFAULT_VERTEX_COUNT) {
         '//',
         '// GENERATED by tools/shapes/generate.mjs — do not edit by hand.',
         '// Regenerate with `npm run gen:shapes` after changing the generator',
-        '// or any shape parameter. CI fails (`npm run check:shapes`) if this',
-        '// file is out of date.',
+        '// or any shape parameter; `npm run check:shapes` reports whether',
+        '// this file is out of date.',
         '//',
         '',
         '$paths: (',

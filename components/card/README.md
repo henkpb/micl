@@ -16,6 +16,7 @@ To add a basic card, use a `<div>` element with one of the primary card style cl
 Import the card styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/card";
 ```
 
@@ -71,7 +72,7 @@ While the card container is the only required element, the Card component provid
 
 - `micl-card__content`: A flexible container for the main body of your card's content.
 
-- `micl-card__actions`: A flexible container for any action buttons.
+- `micl-card__actions`: A flexible container for any action buttons. Add `micl-card__actions--outset-start` or `micl-card__actions--outset-end` to reduce the padding at the start or end of the row by 16px, moving the outer button closer to the edge of the card. This is useful for text buttons, whose label already has space around it.
 
 ## Variants
 Cards are available in **three distinct styles**:
@@ -128,6 +129,14 @@ Add the `micl-card--compact` class to the main `<div>` element (or, the `<summar
 - **Disabled Cards**: To visually indicate a disabled card (e.g., non-interactive), add the `inert` attribute to the card container.
 
 - **Dragging State**: When implementing drag-and-drop functionality for cards, apply the `micl-card--dragging` class to the card container to provide visual feedback during the drag operation.
+
+## Accessibility
+* A card container has no role of its own. Mark its headline up as a real heading so that screen-reader users can navigate between cards.
+* The accessible name of an [actionable card](#actionable-cards) built from an `<a>` is its entire text content, so keep that content concise. Do not nest buttons or links inside it: HTML does not allow interactive content inside a link.
+* A card with `tabindex="0"` needs a `role` and your own `click` and <kbd>Enter</kbd>/<kbd>Space</kbd> handling, as described under [Actionable Cards](#actionable-cards).
+* The `<summary>` of an [expandable card](#expandable-cards) is a native disclosure control; the browser exposes its expanded or collapsed state.
+* A disabled card uses the `inert` attribute, which makes the card and its content unfocusable and non-interactive.
+* Give every image an `alt` text, or `alt=""` when it is purely decorative.
 
 ## Theming
 Each card can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention.

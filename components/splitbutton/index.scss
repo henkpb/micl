@@ -1,0 +1,161 @@
+//
+// Copyright © 2026 Hermana AS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+@use '../../styles/shape';
+
+$half: '[class*="micl-button-"]';
+$leading: '> #{$half}:first-child';
+$trailing: '> #{$half}:first-child + #{$half}';
+$enabled: ':not(:disabled)';
+
+@include shape.corner('extra-small');
+@include shape.corner('small');
+@include shape.corner('medium');
+@include shape.corner('large-increased');
+
+.micl-splitbutton {
+    --_splitbutton-lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
+    --_splitbutton-trail-pad: 13px;
+    --_splitbutton-trail-icon: 22px;
+    --_splitbutton-nudge: 1px;
+    --_splitbutton-inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+    --_splitbutton-inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+    --_splitbutton-inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+
+    box-sizing: border-box;
+    display: flex;
+    inline-size: fit-content;
+    column-gap: var(--md-comp-split-button-between-space, 2px);
+
+    &:has(> :first-child[class$="-xs"], > :first-child[class*="-xs "]) {
+        --_splitbutton-lead-end: var(--md-comp-split-button-xsmall-leading-button-trailing-space, 10px);
+        --_splitbutton-trail-pad: 13px;
+        --_splitbutton-trail-icon: 22px;
+        --_splitbutton-nudge: 1px;
+        --_splitbutton-inner: var(--md-comp-split-button-xsmall-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-xsmall-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_splitbutton-inner-press: var(--md-comp-split-button-xsmall-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-small));
+    }
+    &:has(> :first-child[class$="-s"], > :first-child[class*="-s "]) {
+        --_splitbutton-lead-end: var(--md-comp-split-button-small-leading-button-trailing-space, 12px);
+        --_splitbutton-trail-pad: 13px;
+        --_splitbutton-trail-icon: 22px;
+        --_splitbutton-nudge: 1px;
+        --_splitbutton-inner: var(--md-comp-split-button-small-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-small-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-inner-press: var(--md-comp-split-button-small-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+    }
+    &:has(> :first-child[class$="-m"], > :first-child[class*="-m "]) {
+        --_splitbutton-lead-end: var(--md-comp-split-button-medium-leading-button-trailing-space, 24px);
+        --_splitbutton-trail-pad: 15px;
+        --_splitbutton-trail-icon: 26px;
+        --_splitbutton-nudge: 2px;
+        --_splitbutton-inner: var(--md-comp-split-button-medium-inner-corner-corner-size, var(--md-sys-shape-corner-extra-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-medium-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-inner-press: var(--md-comp-split-button-medium-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-medium));
+    }
+    &:has(> :first-child[class$="-l"], > :first-child[class*="-l "]) {
+        --_splitbutton-lead-end: var(--md-comp-split-button-large-leading-button-trailing-space, 48px);
+        --_splitbutton-trail-pad: 29px;
+        --_splitbutton-trail-icon: 38px;
+        --_splitbutton-nudge: 3px;
+        --_splitbutton-inner: var(--md-comp-split-button-large-inner-corner-corner-size, var(--md-sys-shape-corner-small));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-large-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_splitbutton-inner-press: var(--md-comp-split-button-large-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+    }
+    &:has(> :first-child[class$="-xl"], > :first-child[class*="-xl "]) {
+        --_splitbutton-lead-end: var(--md-comp-split-button-xlarge-leading-button-trailing-space, 64px);
+        --_splitbutton-trail-pad: 43px;
+        --_splitbutton-trail-icon: 50px;
+        --_splitbutton-nudge: 6px;
+        --_splitbutton-inner: var(--md-comp-split-button-xlarge-inner-corner-corner-size, var(--md-sys-shape-corner-medium));
+        --_splitbutton-inner-hover: var(--md-comp-split-button-xlarge-inner-hovered-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+        --_splitbutton-inner-press: var(--md-comp-split-button-xlarge-inner-pressed-corner-corner-size, var(--md-sys-shape-corner-large-increased));
+    }
+
+    > #{$half} {
+        --_outer: calc(var(--micl-height) / 2);
+    }
+
+    #{$leading} {
+        padding-inline: calc(var(--_button-pad) + var(--_splitbutton-nudge)) calc(var(--_splitbutton-lead-end) - var(--_splitbutton-nudge));
+        border-start-start-radius: var(--_outer);
+        border-end-start-radius: var(--_outer);
+        border-start-end-radius: var(--_splitbutton-inner);
+        border-end-end-radius: var(--_splitbutton-inner);
+    }
+    #{$trailing} {
+        padding-inline: calc(var(--_splitbutton-trail-pad) - var(--_splitbutton-nudge)) calc(var(--_splitbutton-trail-pad) + var(--_splitbutton-nudge));
+        border-start-start-radius: var(--_splitbutton-inner);
+        border-end-start-radius: var(--_splitbutton-inner);
+        border-start-end-radius: var(--_outer);
+        border-end-end-radius: var(--_outer);
+
+        .micl-button__icon {
+            font-size: var(--_splitbutton-trail-icon);
+            inline-size: var(--_splitbutton-trail-icon);
+            rotate: 0deg;
+            transition:
+                font-variation-settings var(--_button-motion-duration) linear,
+                rotate var(--_button-motion-duration) var(--_button-motion-effects);
+        }
+    }
+
+    #{$leading}#{$enabled}:hover {
+        border-start-end-radius: var(--_splitbutton-inner-hover);
+        border-end-end-radius: var(--_splitbutton-inner-hover);
+    }
+    #{$trailing}#{$enabled}:hover {
+        border-start-start-radius: var(--_splitbutton-inner-hover);
+        border-end-start-radius: var(--_splitbutton-inner-hover);
+    }
+
+    &:has(> [popover]:popover-open) {
+        #{$trailing} {
+            --_splitbutton-nudge: 0px;
+            --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
+
+            border-start-start-radius: var(--_outer);
+            border-end-start-radius: var(--_outer);
+
+            .micl-button__icon {
+                rotate: 180deg;
+            }
+        }
+    }
+
+    #{$leading}#{$enabled}:active {
+        border-start-start-radius: var(--_outer);
+        border-end-start-radius: var(--_outer);
+        border-start-end-radius: var(--_splitbutton-inner-press);
+        border-end-end-radius: var(--_splitbutton-inner-press);
+    }
+    #{$trailing}#{$enabled}:active {
+        border-start-start-radius: var(--_splitbutton-inner-press);
+        border-end-start-radius: var(--_splitbutton-inner-press);
+        border-start-end-radius: var(--_outer);
+        border-end-end-radius: var(--_outer);
+    }
+}
+
+.micl-splitbutton:has(> [popover]:popover-open) #{$trailing} .micl-button__icon:dir(rtl) {
+    rotate: -180deg;
+}

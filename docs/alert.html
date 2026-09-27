@@ -25,22 +25,24 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Alerts</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Alerts</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
 
+        <main>
+
         <section class="docs-hero">
-            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
-            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
             <p class="docs-hero__eyebrow">Component</p>
             <h1>Alerts</h1>
             <p class="docs-hero__lede">Alerts are used to inform the user of important changes in a prominent way. This component is inspired by Material Design 3 Expressive.</p>
             <ul class="docs-hero__facts">
                 <li>Filled, tonal & outlined styles</li>
-                <li>ARIA alert semantics</li>
+                <li>Live-region accessibility guidance</li>
             </ul>
             <div class="docs-hero__demo">
-                <div class="micl-alert-filled" role="alert" style="max-inline-size:300px">
+                <div class="micl-alert-filled" style="max-inline-size:300px">
                     <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
                     <div class="micl-alert__text">
                         <h2>An error has occurred</h2>
@@ -57,7 +59,7 @@
             <a href="#tertiary-colors">Tertiary colors</a>
         </nav>
 
-        <main class="docs-content docs-content--columns">
+        <div class="docs-content docs-content--columns">
             <section class="docs-section" id="error-colors">
                 <div class="docs-section__head">
                     <h2>Error colors</h2>
@@ -65,7 +67,7 @@
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-tonal" role="alert">
+                            <div class="micl-alert-tonal">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
                                 <div class="micl-alert__text">
                                     <h3>An error has occurred</h3>
@@ -76,7 +78,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-filled" role="alert">
+                            <div class="micl-alert-filled">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
                                 <div class="micl-alert__text">
                                     <h3>An error has occurred</h3>
@@ -87,7 +89,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-outlined" role="alert">
+                            <div class="micl-alert-outlined">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">error</span>
                                 <div class="micl-alert__text">
                                     <h3>An error has occurred</h3>
@@ -106,7 +108,7 @@
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-tonal micl-alert--primary" role="alert">
+                            <div class="micl-alert-tonal micl-alert--primary">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
                                 <div class="micl-alert__text">
                                     <h3>Your file has been saved</h3>
@@ -117,7 +119,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-filled micl-alert--primary" role="alert">
+                            <div class="micl-alert-filled micl-alert--primary">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
                                 <div class="micl-alert__text">
                                     <h3>Your file has been saved</h3>
@@ -128,7 +130,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-outlined micl-alert--primary" role="alert">
+                            <div class="micl-alert-outlined micl-alert--primary">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">check</span>
                                 <div class="micl-alert__text">
                                     <h3>Your file has been saved</h3>
@@ -146,7 +148,7 @@
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-tonal micl-alert--secondary" role="alert">
+                            <div class="micl-alert-tonal micl-alert--secondary">
                                 <div class="micl-alert__text">
                                     <h3>Your efforts have been rewarded</h3>
                                     <span class="micl-alert__supporting-text">Click the button below to retrieve your prize.</span>
@@ -156,7 +158,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-filled micl-alert--secondary" role="alert">
+                            <div class="micl-alert-filled micl-alert--secondary">
                                 <div class="micl-alert__text">
                                     <h3>Your efforts have been rewarded</h3>
                                     <span class="micl-alert__supporting-text">Click the button below to retrieve your prize.</span>
@@ -166,7 +168,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-outlined micl-alert--secondary" role="alert">
+                            <div class="micl-alert-outlined micl-alert--secondary">
                                 <div class="micl-alert__text">
                                     <h3>Your efforts have been rewarded</h3>
                                 </div>
@@ -183,7 +185,7 @@
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-tonal micl-alert--tertiary" role="alert">
+                            <div class="micl-alert-tonal micl-alert--tertiary">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
                                 <div class="micl-alert__text">
                                     <h3>Checking your progress</h3>
@@ -194,7 +196,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-filled micl-alert--tertiary" role="alert">
+                            <div class="micl-alert-filled micl-alert--tertiary">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
                                 <div class="micl-alert__text">
                                     <h3>Checking your progress</h3>
@@ -205,7 +207,7 @@
                     </div>
                     <div class="docs-example">
                         <template>
-                            <div class="micl-alert-outlined micl-alert--tertiary" role="alert">
+                            <div class="micl-alert-outlined micl-alert--tertiary">
                                 <span class="micl-alert__icon material-symbols-outlined" aria-hidden="true">question_mark</span>
                                 <div class="micl-alert__text">
                                     <h3>Checking your progress</h3>
@@ -216,6 +218,7 @@
                     </div>
                 </div>
             </section>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>

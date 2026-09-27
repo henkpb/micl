@@ -24,6 +24,7 @@
 @use '../../styles/motion';
 @use '../../styles/shape';
 @use '../../styles/statelayer';
+@include motion.token('expressive-default-spatial-duration', 'expressive-slow-spatial', 'expressive-slow-spatial-duration');
 
 @include elevation.level(1);
 
@@ -44,15 +45,15 @@ dialog.micl-bottomsheet {
     --_height: var(--md-comp-bottomsheet-height, max-content);
     --_margin: var(--md-comp-bottomsheet-margin, 56px);
     --_margin-top: var(--md-comp-bottomsheet-margin-top, 72px);
-    --_padding: var(--md-comp-bottomsheet-padding, 24px);
-    --_drag-handle-width: var(--md-comp-bottomsheet-drag-handle-width, 32px);
-    --_drag-handle-height: var(--md-comp-bottomsheet-drag-handle-height, 4px);
-    --_motion-spatial: var(--md-comp-bottomsheet-motion-spatial, #{motion.$md-sys-motion-expressive-slow-spatial});
-    --_motion-duration: var(--md-comp-bottomsheet-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-bottomsheet-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-spatial-duration});
+    --_bottomsheet-padding: var(--md-comp-bottomsheet-padding, 24px);
+    --_bottomsheet-drag-handle-width: var(--md-comp-bottomsheet-drag-handle-width, 32px);
+    --_bottomsheet-drag-handle-height: var(--md-comp-bottomsheet-drag-handle-height, 4px);
+    --_motion-spatial: var(--md-comp-bottomsheet-motion-spatial, var(--md-sys-motion-expressive-slow-spatial));
+    --_motion-duration: var(--md-comp-bottomsheet-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-bottomsheet-motion-duration-reverse, var(--md-sys-motion-expressive-default-spatial-duration));
 
-    --micl-duration: var(--_motion-duration-reverse);
-    --micl-easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
+    --_duration: var(--_motion-duration-reverse);
+    --_easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
     --micl-bottomsheet-scroll: hidden;
     --_settle-delay: 0s;
 
@@ -63,9 +64,13 @@ dialog.micl-bottomsheet {
     block-size: 0;
     max-block-size: 50dvb;
     inline-size: 100%;
+    max-inline-size: 100%;
     margin: 0;
     padding: 0;
     border: none;
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     border-radius: var(--md-comp-bottomsheet-container-shape, var(--md-sys-shape-corner-extra-large-top));
     background-color: var(--md-comp-bottomsheet-container-color, var(--md-sys-color-surface-container-low));
     box-shadow: var(--md-comp-bottomsheet-container-elevation, var(--md-sys-elevation-level1));
@@ -78,10 +83,10 @@ dialog.micl-bottomsheet {
     }
     &:not(.micl-bottomsheet--resizing) {
         transition:
-            opacity var(--micl-duration) var(--micl-easing),
-            block-size var(--micl-duration) var(--_motion-spatial),
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete,
+            opacity var(--_duration) var(--_easing),
+            block-size var(--_duration) var(--_motion-spatial),
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete,
             --micl-bottomsheet-scroll 0s var(--_settle-delay) allow-discrete;
     }
     .micl-bottomsheet__headline {
@@ -98,9 +103,9 @@ dialog.micl-bottomsheet {
 
         .micl-bottomsheet__draghandle {
             box-sizing: content-box;
-            inline-size: var(--_drag-handle-width);
-            block-size: var(--_drag-handle-height);
-            padding: 16px calc((var(--md-sys-state-target-size, 48px) - var(--_drag-handle-width)) / 2);
+            inline-size: var(--_bottomsheet-drag-handle-width);
+            block-size: var(--_bottomsheet-drag-handle-height);
+            padding: 16px calc((var(--md-sys-state-target-size, 48px) - var(--_bottomsheet-drag-handle-width)) / 2);
             border: none;
             border-radius: var(--md-sys-shape-corner-extra-large);
             background: none;
@@ -110,36 +115,40 @@ dialog.micl-bottomsheet {
                 content: '';
                 display: block;
                 block-size: 100%;
-                border-radius: calc(var(--_drag-handle-height) / 2);
+                border-radius: calc(var(--_bottomsheet-drag-handle-height) / 2);
                 background-color: var(--md-comp-bottomsheet-drag-handle-color, var(--md-sys-color-on-surface-variant));
+
+                @media (forced-colors: active) {
+                    forced-color-adjust: none;
+                    background-color: CanvasText;
+                }
             }
             &:focus-visible {
-                outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-comp-bottomsheet-focus-indicator-color, var(--md-sys-color-secondary));
-                outline-offset: var(--md-sys-state-focus-indicator-outer-offset, 2px);
+                @include statelayer.focus-indicator('bottomsheet');
             }
         }
     }
     .micl-bottomsheet__content {
         flex: 1 1 auto;
-        padding: 0 var(--_padding) var(--_padding) var(--_padding);
+        padding: 0 var(--_bottomsheet-padding) var(--_bottomsheet-padding) var(--_bottomsheet-padding);
         overflow: hidden var(--micl-bottomsheet-scroll);
 
         &:first-child {
-            padding-block-start: var(--_padding);
+            padding-block-start: var(--_bottomsheet-padding);
         }
     }
 
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete,
-            background-color var(--micl-duration) linear;
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete,
+            background-color var(--_duration) linear;
     }
     &:popover-open,
     &[open] {
-        --micl-duration: var(--_motion-duration);
-        --micl-easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
+        --_duration: var(--_motion-duration);
+        --_easing: #{motion.$md-sys-motion-easing-emphasized-decelerate};
         --micl-bottomsheet-scroll: auto;
         --_settle-delay: var(--_motion-duration);
 
@@ -155,7 +164,7 @@ dialog.micl-bottomsheet {
         }
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+        @extend %micl-backdrop;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
@@ -169,10 +178,6 @@ dialog.micl-bottomsheet {
         }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_motion-duration: 0ms;
-        --_motion-duration-reverse: 0ms;
-    }
     @media (min-width: layout.$md-sys-breakpoint-medium-min) {
         inline-size: min(100% - (2 * var(--_margin)), 640px);
         margin-inline: auto;

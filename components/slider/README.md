@@ -14,6 +14,7 @@ To add a basic slider, use the `<input type="range">` element with one of the pr
 Import the slider styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/slider";
 ```
 
@@ -60,7 +61,7 @@ Every slider shows a **stop indicator** at the end of its track. Add a `<datalis
 
 > [!NOTE]
 > The listed values are suggestions, not stopping points: browsers move the value by `step` and do not snap to the datalist. Give the slider a `step` that matches the listed values if users should only be able to select those.
-> The datalist is read once, when the slider is initialized. The script mirrors the slider's value on every `input` event. When a slider's value is changed programmatically or via a form reset, you must manually dispatch an `input` event so the track and value indicator update to reflect the new value:
+> The datalist is read once, when the slider is initialized. The script mirrors the slider's value on every `input` event and after a form reset. When a slider's value is changed programmatically, you must manually dispatch an `input` event so the track and value indicator update to reflect the new value:
 >
 > ```JavaScript
 > slider.value = 40;

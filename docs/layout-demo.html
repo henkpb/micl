@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A full-window MICL layout with adaptive navigation and three panes that stack and hide at the Material breakpoints">
+    <title>MICL Layout — window demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=delete,favorite,inbox,more_vert,outbox,search&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <style>
+        body {
+            font-family: var(--md-ref-typeface-plain);
+            color: var(--md-sys-color-on-surface);
+        }
+        .demo-breakpoint {
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background-color: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+        }
+        .demo-breakpoint span {
+            display: none;
+        }
+        @media (max-width: 599px) { .demo-breakpoint .demo-compact { display: inline; } }
+        @media (min-width: 600px) and (max-width: 839px) { .demo-breakpoint .demo-medium { display: inline; } }
+        @media (min-width: 840px) and (max-width: 1199px) { .demo-breakpoint .demo-expanded { display: inline; } }
+        @media (min-width: 1200px) and (max-width: 1599px) { .demo-breakpoint .demo-large { display: inline; } }
+        @media (min-width: 1600px) { .demo-breakpoint .demo-extralarge { display: inline; } }
+        .micl-card-filled,
+        .micl-card-outlined {
+            padding-block-end: 16px;
+        }
+        .micl-card__content p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <nav class="micl-navigationbar micl-navigationbar--bar-to-medium" aria-label="Main">
+        <div class="micl-navigationbar__content">
+            <a href="#" class="micl-navigationbar__item" aria-current="page" aria-label="Inbox, 4 new messages">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">inbox</span>
+                <span class="micl-navigationbar__text">Inbox</span>
+                <span class="micl-badge" aria-hidden="true">4</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">outbox</span>
+                <span class="micl-navigationbar__text">Outbox</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">favorite</span>
+                <span class="micl-navigationbar__text">Favorites</span>
+            </a>
+            <a href="#" class="micl-navigationbar__item">
+                <span class="micl-navigationbar__icon material-symbols-outlined" aria-hidden="true">delete</span>
+                <span class="micl-navigationbar__text">Trash</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="micl-panes micl-panes--stacked-to-expanded">
+        <section class="micl-pane micl-pane--fixed" aria-labelledby="demo-list-title">
+            <header class="micl-appbar">
+                <div class="micl-appbar__headline">
+                    <h1 id="demo-list-title">Inbox</h1>
+                </div>
+                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="Search">search</button>
+            </header>
+            <p class="demo-breakpoint md-sys-typescale-label-large">Window size class: <span class="demo-compact">compact</span><span class="demo-medium">medium</span><span class="demo-expanded">expanded</span><span class="demo-large">large</span><span class="demo-extralarge">extra-large</span></p>
+            <ul class="micl-list">
+                <li class="micl-list-item-two"><span class="micl-list-item__text"><span class="micl-list-item__headline">Marte Kirkerud</span><span class="micl-list-item__supporting-text">Re: the pane spacer</span></span></li>
+                <li class="micl-list-item-two"><span class="micl-list-item__text"><span class="micl-list-item__headline">Ola Nordmann</span><span class="micl-list-item__supporting-text">Lunch on Thursday?</span></span></li>
+                <li class="micl-list-item-two"><span class="micl-list-item__text"><span class="micl-list-item__headline">Kari Nordmann</span><span class="micl-list-item__supporting-text">Signed contract attached</span></span></li>
+                <li class="micl-list-item-two"><span class="micl-list-item__text"><span class="micl-list-item__headline">Peder Ås</span><span class="micl-list-item__supporting-text">Deploy went out at 14:20</span></span></li>
+            </ul>
+        </section>
+
+        <section class="micl-pane" aria-labelledby="demo-detail-title">
+            <header class="micl-appbar">
+                <div class="micl-appbar__headline">
+                    <h2 id="demo-detail-title">Re: the pane spacer</h2>
+                </div>
+                <button type="button" class="micl-appbar__trailing-icon micl-iconbutton-standard-s material-symbols-outlined" aria-label="More options">more_vert</button>
+            </header>
+            <div class="micl-pane__columns micl-pane__columns--stacked-to-large">
+                <div class="micl-pane__column">
+                    <div class="micl-card-filled">
+                        <div class="micl-card__headline-s"><h3>Flexible pane</h3></div>
+                        <div class="micl-card__content">
+                            <p class="md-sys-typescale-body-medium">This pane grows to fill the space the fixed list pane leaves. Below the expanded breakpoint the panes stack vertically.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="micl-pane__column">
+                    <div class="micl-card-filled">
+                        <div class="micl-card__headline-s"><h3>Pane columns</h3></div>
+                        <div class="micl-card__content">
+                            <p class="md-sys-typescale-body-medium">These two columns sit side by side from the large breakpoint and stack below it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="micl-pane micl-pane--fixed micl-pane--hidden-to-extralarge" aria-labelledby="demo-support-title">
+            <header class="micl-appbar">
+                <div class="micl-appbar__headline">
+                    <h2 id="demo-support-title">Details</h2>
+                </div>
+            </header>
+            <div class="micl-card-outlined">
+                <div class="micl-card__headline-s"><h3>Supporting pane</h3></div>
+                <div class="micl-card__content">
+                    <p class="md-sys-typescale-body-medium">A third, fixed pane that is hidden below the extra-large breakpoint.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="micl.js"></script>
+    <script>
+        (() => {
+            'use strict';
+
+            const themelink = document.getElementById('theme-link');
+            const apply = () => {
+                try {
+                    themelink.href = `themes/${localStorage.getItem('theme') || 'airblue'}/theme.css`;
+                    document.body.className = `micl-window ${localStorage.getItem('mode') || 'light'}`;
+                    document.documentElement.dir = localStorage.getItem('dir') || 'ltr';
+                }
+                catch (e) {}
+            };
+
+            apply();
+            addEventListener('storage', apply);
+        })();
+    </script>
+</body>
+</html>

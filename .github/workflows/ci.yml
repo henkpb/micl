@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run check:shapes
+
+      - run: npm run build
+
+      - run: npm run check:tokens
+
+      # dist/ and docs/ are committed; any change or new file here means a commit shipped stale build output.
+      - run: |
+          if [ -n "$(git status --porcelain -- dist docs)" ]; then
+            git status --porcelain -- dist docs
+            exit 1
+          fi

@@ -55,7 +55,6 @@
             block-size: inherit;
             min-block-size: inherit;
             margin: 0;
-            padding-block-end: var(--md-sys-navigationrail-top-space, 0px);
             border-radius: var(--md-sys-layout-spatial-radius);
         }
         .micl-panes {
@@ -72,18 +71,18 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    gap: var(--md-sys-comp-margin, 8px) var(--md-sys-layout-pane-spacer);
+    gap: var(--md-sys-layout-pane-stacked-spacer) var(--md-sys-layout-pane-spacer);
     background-color: inherit;
 
     &.micl-panes--split > .micl-pane + .micl-pane {
         // The physical safety inset on the trailing pane's side of the screen.
-        --_layout-safe-inline-end: env(safe-area-inset-right, 0px);
+        --_safe-inline-end: env(safe-area-inset-right, 0px);
 
         box-sizing: border-box;
-        flex: 0 1 var(--_layout-stacked-pane-size, calc(50vw - var(--md-sys-layout-window-margin, 0px) - var(--_layout-safe-inline-end) - var(--md-sys-layout-pane-spacer) / 2));
+        flex: 0 1 var(--_layout-stacked-pane-size, calc(50vw - var(--md-sys-layout-window-margin, 0px) - var(--_safe-inline-end) - var(--md-sys-layout-pane-spacer) / 2));
 
         &:dir(rtl) {
-            --_layout-safe-inline-end: env(safe-area-inset-left, 0px);
+            --_safe-inline-end: env(safe-area-inset-left, 0px);
         }
     }
     &.micl-panes--evenly .micl-pane {
@@ -122,12 +121,12 @@
             &:has(> .micl-card-elevated, > .micl-card-filled, > .micl-card-outlined) {
                 row-gap: var(--md-sys-card-margin);
             }
-            &.micl-pane__column--fixed {
-                flex: 0 0 auto;
-            }
         }
         &.micl-pane__columns--evenly > .micl-pane__column {
             flex: 1 1 0;
+        }
+        &> .micl-pane__column.micl-pane__column--fixed {
+            flex: 0 0 auto;
         }
     }
 }

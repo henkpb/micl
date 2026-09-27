@@ -1,6 +1,6 @@
 {
   "name": "material-inspired-component-library",
-  "version": "9.1.1",
+  "version": "10.0.0",
   "description": "The Material-Inspired Component Library (MICL) offers a collection of beautifully crafted components leveraging native HTML markup, designed to align with the Material Design 3 guidelines.",
   "author": "MICL Hermana <micl.hermana@proton.me> (https://github.com/henkpb/micl)",
   "license": "MIT",
@@ -19,6 +19,7 @@
     "badge",
     "bottomsheet",
     "button",
+    "buttongroup",
     "card",
     "checkbox",
     "chip",
@@ -40,6 +41,7 @@
     "sidesheet",
     "slider",
     "snackbar",
+    "splitbutton",
     "stepper",
     "switch",
     "textfield",
@@ -62,25 +64,34 @@
     "foundations/**/*.scss",
     "components/**/*.scss",
     "components/**/README.md",
+    "foundations/**/README.md",
+    "styles/README.md",
     "themes"
   ],
   "scripts": {
     "build": "webpack",
+    "postbuild": "node tools/typings.mjs",
     "gen:shapes": "node tools/shapes/generate.mjs",
-    "check:shapes": "node tools/shapes/check.mjs"
+    "check:shapes": "node tools/shapes/check.mjs",
+    "check:tokens": "node tools/check-tokens.mjs"
   },
   "devDependencies": {
-    "autoprefixer": "^10.5",
     "css-loader": "^7.1",
     "glob": "^13.0",
     "mini-css-extract-plugin": "^2.10",
-    "postcss-loader": "^8.2",
     "sass": "^1.101",
     "sass-loader": "^17.0",
     "ts-loader": "^9.6",
     "typescript": "^6.0",
     "webpack": "^5.108",
     "webpack-cli": "^7.2"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22",
+      "onFail": "warn"
+    }
   },
   "allowScripts": {
     "@parcel/watcher@2.6.0": true

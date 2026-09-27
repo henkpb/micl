@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Demonstrating MICL Progress Indicators">
-    <title>MICL Progress Indicators</title>
+    <meta name="description" content="Demonstrating MICL Progress indicators">
+    <title>MICL Progress indicators</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
@@ -17,10 +17,14 @@
         .docs-stage {
             row-gap: 24px;
         }
-        label {
+        label,
+        .docs-label {
             display: inline-block;
             min-inline-size: 148px;
             color: var(--md-sys-color-on-surface);
+        }
+        .docs-label + .micl-linear-progress {
+            margin-block-start: 8px;
         }
     </style>
 </head>
@@ -30,15 +34,17 @@
             <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
                 <span class="material-symbols-outlined" aria-hidden="true">home</span>
             </a>
-            <div class="docs-top__crumbs"><span>MICL</span><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><strong>Progress Indicators</strong></div>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#components">Components</a><span aria-hidden="true">/</span><strong>Progress indicators</strong></div>
             <div id="settings-placeholder" class="docs-top__actions"></div>
         </header>
 
+        <main>
+
         <section class="docs-hero">
-            <svg class="micl-shapes micl-shapes--sunny docs-hero__sunny" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
-            <svg class="micl-shapes micl-shapes--clover-4 docs-hero__clover" viewBox="-10 0 120 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
             <p class="docs-hero__eyebrow">Component</p>
-            <h1>Progress Indicators</h1>
+            <h1>Progress indicators</h1>
             <p class="docs-hero__lede">Progress indicators show the status of a process in real time, either as a determinate value or as an indeterminate, looping animation.</p>
             <ul class="docs-hero__facts">
                 <li>Linear & circular</li>
@@ -46,9 +52,21 @@
                 <li>Pure CSS animation</li>
             </ul>
             <div class="docs-hero__demo">
-                <div style="display:flex;flex-direction:column;gap:16px;inline-size:230px">
-                    <progress class="micl-linear-progress" value="0.6"></progress>
-                    <progress class="micl-linear-progress"></progress>
+                <div style="display:flex;flex-direction:column;gap:20px;inline-size:230px">
+                    <div role="progressbar" class="micl-linear-progress" aria-label="Download progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.6">
+                        <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                    </div>
+                    <div role="progressbar" class="micl-linear-progress micl-linear-progress--indeterminate" aria-label="Loading">
+                        <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                    </div>
+                    <div style="display:flex;gap:16px;align-items:center">
+                        <div role="progressbar" class="micl-circular-progress" aria-label="Upload progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.6">
+                            <div class="micl-circular-progress__wave" aria-hidden="true"></div>
+                        </div>
+                        <div role="progressbar" class="micl-circular-progress micl-circular-progress--indeterminate" aria-label="Loading">
+                            <div class="micl-circular-progress__wave" aria-hidden="true"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -56,11 +74,12 @@
         <nav class="docs-chipnav" aria-label="Sections on this page">
             <a href="#linear">Linear</a>
             <a href="#circular">Circular</a>
-            <a href="#linear-2">Wavy linear</a>
-            <a href="#circular-2">Wavy circular</a>
+            <a href="#wavy-linear">Wavy linear</a>
+            <a href="#wavy-circular">Wavy circular</a>
+            <a href="#theming">Theming</a>
         </nav>
 
-        <main class="docs-content docs-content--columns">
+        <div class="docs-content docs-content--columns">
             <section class="docs-section" id="linear">
                 <div class="docs-section__head">
                     <h2>Linear</h2>
@@ -141,39 +160,39 @@
                 </div>
             </section>
 
-            <section class="docs-section" id="linear-2">
+            <section class="docs-section" id="wavy-linear">
                 <div class="docs-section__head">
                     <h2>Wavy linear</h2>
                 </div>
                 <div class="docs-stage">
                     <div class="docs-example">
                         <template>
-                            <label for="linear5" class="md-sys-typescale-body-medium">Downloading&hellip; 0%</label>
-                            <div role="progressbar" id="linear5" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+                            <span id="linear5-label" class="docs-label md-sys-typescale-body-medium">Downloading&hellip; 0%</span>
+                            <div role="progressbar" id="linear5" aria-labelledby="linear5-label" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
                                 <div class="micl-linear-progress__wave" aria-hidden="true"></div>
                             </div>
                         </template>
                     </div>
                     <div class="docs-example">
                         <template>
-                            <label for="linear6" class="md-sys-typescale-body-medium">Downloading&hellip;63%</label>
-                            <div role="progressbar" id="linear6" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                            <span id="linear6-label" class="docs-label md-sys-typescale-body-medium">Downloading&hellip; 63%</span>
+                            <div role="progressbar" id="linear6" aria-labelledby="linear6-label" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
                                 <div class="micl-linear-progress__wave" aria-hidden="true"></div>
                             </div>
                         </template>
                     </div>
                     <div class="docs-example docs-animate">
                         <template>
-                            <label for="linear7" class="md-sys-typescale-body-medium">Downloading&hellip;</label>
-                            <div role="progressbar" id="linear7" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+                            <span id="linear7-label" class="docs-label md-sys-typescale-body-medium">Downloading&hellip;</span>
+                            <div role="progressbar" id="linear7" aria-labelledby="linear7-label" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
                                 <div class="micl-linear-progress__wave" aria-hidden="true"></div>
                             </div>
                         </template>
                     </div>
                     <div class="docs-example">
                         <template>
-                            <label for="linear8" class="md-sys-typescale-body-medium">Indeterminate</label>
-                            <div role="progressbar" id="linear8" class="micl-linear-progress micl-linear-progress--indeterminate">
+                            <span id="linear8-label" class="docs-label md-sys-typescale-body-medium">Indeterminate</span>
+                            <div role="progressbar" id="linear8" aria-labelledby="linear8-label" class="micl-linear-progress micl-linear-progress--indeterminate">
                                 <div class="micl-linear-progress__wave" aria-hidden="true"></div>
                             </div>
                         </template>
@@ -181,7 +200,7 @@
                 </div>
             </section>
 
-            <section class="docs-section" id="circular-2">
+            <section class="docs-section" id="wavy-circular">
                 <div class="docs-section__head">
                     <h2>Wavy circular</h2>
                 </div>
@@ -189,8 +208,8 @@
                     <div class="docs-example">
                         <template>
                             <div>
-                                <label for="circular5" class="md-sys-typescale-body-medium">Downloading&hellip; 0%</label>
-                                <div role="progressbar" id="circular5" class="micl-circular-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+                                <span id="circular5-label" class="docs-label md-sys-typescale-body-medium">Downloading&hellip; 0%</span>
+                                <div role="progressbar" id="circular5" aria-labelledby="circular5-label" class="micl-circular-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
                                     <div class="micl-circular-progress__wave" aria-hidden="true"></div>
                                 </div>
                             </div>
@@ -199,8 +218,8 @@
                     <div class="docs-example">
                         <template>
                             <div>
-                                <label for="circular6" class="md-sys-typescale-body-medium">Downloading&hellip; 63%</label>
-                                <div role="progressbar" id="circular6" class="micl-circular-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                                <span id="circular6-label" class="docs-label md-sys-typescale-body-medium">Downloading&hellip; 63%</span>
+                                <div role="progressbar" id="circular6" aria-labelledby="circular6-label" class="micl-circular-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
                                     <div class="micl-circular-progress__wave" aria-hidden="true"></div>
                                 </div>
                             </div>
@@ -209,8 +228,8 @@
                     <div class="docs-example docs-animate">
                         <template>
                             <div>
-                                <label for="circular7" class="md-sys-typescale-body-medium">Downloading&hellip;</label>
-                                <div role="progressbar" id="circular7" class="micl-circular-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+                                <span id="circular7-label" class="docs-label md-sys-typescale-body-medium">Downloading&hellip;</span>
+                                <div role="progressbar" id="circular7" aria-labelledby="circular7-label" class="micl-circular-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
                                     <div class="micl-circular-progress__wave" aria-hidden="true"></div>
                                 </div>
                             </div>
@@ -219,8 +238,8 @@
                     <div class="docs-example">
                         <template>
                             <div>
-                                <label for="circular8" class="md-sys-typescale-body-medium">Indeterminate</label>
-                                <div role="progressbar" id="circular8" class="micl-circular-progress micl-circular-progress--indeterminate">
+                                <span id="circular8-label" class="docs-label md-sys-typescale-body-medium">Indeterminate</span>
+                                <div role="progressbar" id="circular8" aria-labelledby="circular8-label" class="micl-circular-progress micl-circular-progress--indeterminate">
                                     <div class="micl-circular-progress__wave" aria-hidden="true"></div>
                                 </div>
                             </div>
@@ -228,6 +247,70 @@
                     </div>
                 </div>
             </section>
+            <section class="docs-section" id="theming" style="column-span:all">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <div>
+                                <label for="linear9" class="md-sys-typescale-body-medium">Thick</label>
+                                <progress id="linear9" class="micl-linear-progress micl-linear-progress--thick" value="0.63"></progress>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div>
+                                <label for="circular9" class="md-sys-typescale-body-medium">Thick</label>
+                                <progress id="circular9" class="micl-circular-progress micl-circular-progress--thick" value="0.63"></progress>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div>
+                                <span id="linear12-label" class="docs-label md-sys-typescale-body-medium">Thick wavy</span>
+                                <div role="progressbar" id="linear12" aria-labelledby="linear12-label" class="micl-linear-progress micl-linear-progress--thick" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                                    <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div>
+                                <span id="circular12-label" class="docs-label md-sys-typescale-body-medium">Thick wavy</span>
+                                <div role="progressbar" id="circular12" aria-labelledby="circular12-label" class="micl-circular-progress micl-circular-progress--thick" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                                    <div class="micl-circular-progress__wave" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div style="--md-comp-progress-indicator-active-indicator-color:var(--md-sys-color-tertiary);--md-comp-progress-indicator-track-color:var(--md-sys-color-tertiary-container);--md-comp-progress-indicator-stop-indicator-color:var(--md-sys-color-tertiary)">
+                                <span id="linear10-label" class="docs-label md-sys-typescale-body-medium">Tertiary colours</span>
+                                <div role="progressbar" id="linear10" aria-labelledby="linear10-label" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                                    <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <template>
+                            <div style="--md-comp-progress-indicator-linear-active-indicator-wave-amplitude:2px;--md-comp-progress-indicator-linear-active-indicator-wave-wavelength:60px">
+                                <span id="linear11-label" class="docs-label md-sys-typescale-body-medium">Calmer wave</span>
+                                <div role="progressbar" id="linear11" aria-labelledby="linear11-label" class="micl-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.63">
+                                    <div class="micl-linear-progress__wave" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </div>
         </main>
 
         <footer class="docs-foot">MICL — Material-Inspired Component Library</footer>
@@ -239,15 +322,20 @@
         const sleep = ms => new Promise(r => setTimeout(r, ms));
         const animate = () => {
             document.querySelectorAll('.docs-animate .micl-linear-progress,.docs-animate .micl-circular-progress').forEach(async (el) => {
-                let attribute = el instanceof HTMLProgressElement ? 'value' : 'aria-valuenow';
+                const attribute = el instanceof HTMLProgressElement ? 'value' : 'aria-valuenow';
+                const caption = el.labels?.[0] ?? document.getElementById(el.getAttribute('aria-labelledby'));
+                const show = v => {
+                    el.setAttribute(attribute, v);
+                    caption.textContent = `Downloading… ${Math.round(v * 100)}%`;
+                };
                 for (;;) {
                     for (let v = 0; v < 1;) {
                         v = Math.min(1, +(v + 0.01 + Math.random() * 0.3).toFixed(1));
-                        el.setAttribute(attribute, v);
+                        show(v);
                         await sleep(500);
                     }
                     await sleep(2000);
-                    el.setAttribute(attribute, 0);
+                    show(0);
                     await sleep(1500);
                 }
             });

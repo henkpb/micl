@@ -35,9 +35,8 @@ $alerts: ':is(.micl-alert-filled, .micl-alert-tonal, .micl-alert-outlined)';
     inline-size: 100%;
     padding: var(--md-comp-alert-padding, 16px);
     column-gap: var(--md-comp-alert-space, 16px);
-    border: none;
-    outline: none;
-    border-radius: var(--md-sys-shape-corner-small, 8px);
+    border: var(--md-comp-alert-outline-width, 1px) solid var(--_border-color, transparent);
+    border-radius: var(--md-comp-alert-container-shape, var(--md-sys-shape-corner-small, 8px));
     background-color: var(--_background-color, transparent);
     color: var(--_color, inherit);
 
@@ -45,11 +44,18 @@ $alerts: ':is(.micl-alert-filled, .micl-alert-tonal, .micl-alert-outlined)';
         block-size: var(--md-sys-icon-size, 24px);
         inline-size: var(--md-sys-icon-size, 24px);
         font-size: var(--md-sys-icon-size, 24px);
+        flex-shrink: 0;
     }
     .micl-alert__text {
         display: flex;
+        flex: 1;
         flex-direction: column;
-        row-gap: 8px;
+        row-gap: var(--md-comp-alert-text-space, 8px);
+        overflow-wrap: anywhere;
+
+        a {
+            color: inherit;
+        }
 
         :is(h1, h2, h3, h4, h5, h6, .micl-heading) {
             @include typography.title-medium;
@@ -90,8 +96,7 @@ $alerts: ':is(.micl-alert-filled, .micl-alert-tonal, .micl-alert-outlined)';
 
 .micl-alert-outlined {
     --_color: var(--md-sys-color-error);
-
-    border: 1px solid var(--_color);
+    --_border-color: var(--_color);
 
     @each $scheme in primary, secondary, tertiary {
         &.micl-alert--#{$scheme} {

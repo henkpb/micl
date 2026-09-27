@@ -41,22 +41,20 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
 
-    // The corner rounding of the size modifiers resolves through the two --_shape-*
-    // custom properties that each size declares below.
-    &.micl-button--toggle[aria-pressed="true"] {
-        border-radius: var(--_shape-toggle);
+    &#{$selected} {
+        border-radius: var(--_shape-square);
     }
     &.micl-button--square {
-        border-radius: var(--_shape-toggle);
+        border-radius: var(--_shape-square);
 
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             border-radius: calc(var(--micl-height) / 2);
         }
     }
     &#{$enabled}:active {
         &,
         &.micl-button--square {
-            border-radius: var(--_shape-pressed);
+            border-radius: var(--_button-shape-pressed);
         }
     }
 }
@@ -64,21 +62,23 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 :is(.micl-button-text-xs, .micl-button-elevated-xs, .micl-button-filled-xs, .micl-button-tonal-xs, .micl-button-outlined-xs) {
     @extend %micl-button-xs;
 
-    --_shape-toggle: var(--md-sys-shape-corner-medium);
-    --_shape-pressed: var(--md-sys-shape-corner-small);
+    --_shape-square: var(--md-sys-shape-corner-medium);
+    --_button-shape-pressed: var(--md-sys-shape-corner-small);
 }
 
 :is(.micl-button-text-s, .micl-button-elevated-s, .micl-button-filled-s, .micl-button-tonal-s, .micl-button-outlined-s) {
     @include typography.label-large;
-    @extend %micl-button-target;
+    @extend %micl-target;
 
     --micl-width: 40px;
     --micl-height: 40px;
-    --_shape-toggle: var(--md-sys-shape-corner-medium);
-    --_shape-pressed: var(--md-sys-shape-corner-small);
+    --_button-pad: 16px;
+    --_button-gap: 8px;
+    --_shape-square: var(--md-sys-shape-corner-medium);
+    --_button-shape-pressed: var(--md-sys-shape-corner-small);
 
-    column-gap: 8px;
-    padding-inline: 16px;
+    column-gap: var(--_button-gap);
+    padding-inline: var(--_button-pad);
 
     .micl-button__icon {
         font-size: 20px;
@@ -91,11 +91,13 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 56px;
     --micl-height: 56px;
-    --_shape-toggle: var(--md-sys-shape-corner-large);
-    --_shape-pressed: var(--md-sys-shape-corner-medium);
+    --_button-pad: 24px;
+    --_button-gap: 8px;
+    --_shape-square: var(--md-sys-shape-corner-large);
+    --_button-shape-pressed: var(--md-sys-shape-corner-medium);
 
-    column-gap: 8px;
-    padding-inline: 24px;
+    column-gap: var(--_button-gap);
+    padding-inline: var(--_button-pad);
 
     .micl-button__icon {
         font-size: var(--md-sys-icon-size, 24px);
@@ -108,11 +110,13 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 96px;
     --micl-height: 96px;
-    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
-    --_shape-pressed: var(--md-sys-shape-corner-large);
+    --_button-pad: 48px;
+    --_button-gap: 12px;
+    --_shape-square: var(--md-sys-shape-corner-extra-large);
+    --_button-shape-pressed: var(--md-sys-shape-corner-large);
 
-    column-gap: 12px;
-    padding-inline: 48px;
+    column-gap: var(--_button-gap);
+    padding-inline: var(--_button-pad);
 
     .micl-button__icon {
         font-size: 32px;
@@ -125,11 +129,13 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
 
     --micl-width: 136px;
     --micl-height: 136px;
-    --_shape-toggle: var(--md-sys-shape-corner-extra-large);
-    --_shape-pressed: var(--md-sys-shape-corner-large);
+    --_button-pad: 64px;
+    --_button-gap: 16px;
+    --_shape-square: var(--md-sys-shape-corner-extra-large);
+    --_button-shape-pressed: var(--md-sys-shape-corner-large);
 
-    column-gap: 16px;
-    padding-inline: 64px;
+    column-gap: var(--_button-gap);
+    padding-inline: var(--_button-pad);
 
     .micl-button__icon {
         font-size: 40px;
@@ -168,12 +174,12 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
         &:hover:not(:active) {
             box-shadow: var(--md-sys-elevation-level1);
         }
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             .micl-button__icon {
                 font-variation-settings: 'FILL' 1;
             }
         }
-        &.micl-button--toggle:not([aria-pressed="true"]) {
+        &#{$unselected} {
             --statelayer-color: var(--md-sys-color-on-surface-variant);
 
             background-color: var(--md-comp-filled-button-unselected-container-color, var(--md-sys-color-surface-container));
@@ -196,7 +202,7 @@ $buttons: ':is([class*="micl-button-text-"], [class*="micl-button-elevated-"], [
         &:hover:not(:active) {
             box-shadow: var(--md-sys-elevation-level1);
         }
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             --statelayer-color: var(--md-sys-color-on-secondary);
 
             background-color: var(--md-comp-filled-tonal-button-selected-container-color, var(--md-sys-color-secondary));

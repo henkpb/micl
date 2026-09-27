@@ -17,6 +17,7 @@ To add a basic radio button, use the `<input type="radio">` element with the `mi
 Import the radio button styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/radio";
 ```
 
@@ -78,6 +79,10 @@ Always mark one option as `checked`, unless leaving the question unanswered is a
 
 Adding the `required` attribute to a radio button makes the whole group mandatory — the browser will not submit the form until one of the buttons carrying that `name` is selected. The [Form foundation](../../foundations/form/README.md) leaves radio buttons to the browser's own reporting, so no MICL-specific error class is involved.
 
+## Accessibility
+* The component styles the native `<input type="radio">`, which provides the role, the checked state and the keyboard behavior. Always associate a `<label>` with each radio button, either with `for`/`id` or by wrapping the input.
+* Radio buttons sharing a `name` form a single tab stop, and the arrow keys move the selection. Wrap them in a `<fieldset>` with a `<legend>` so the question is announced with each option (see [Radio group](#radio-group)).
+
 ## Theming
 Each radio button can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child radio buttons.
 
@@ -87,6 +92,9 @@ Each radio button can be themed with CSS custom properties that follow the Mater
 | `--md-comp-radio-button-outline-width` | The thickness of the radio button's ring | `2px` |
 | `--md-comp-radio-button-unselected-icon-color` | The ring color of an unselected radio button | `--md-sys-color-on-surface-variant` |
 | `--md-comp-radio-button-selected-icon-color` | The ring and dot color of a selected radio button | `--md-sys-color-primary` |
+| `--md-comp-radio-button-motion-effects` | The easing function for the dot growing and shrinking | `--md-sys-motion-expressive-slow-effects` |
+| `--md-comp-radio-button-motion-duration` | The duration of the dot growing when the radio button is selected, and of the state-layer fade | `--md-sys-motion-expressive-slow-effects-duration` |
+| `--md-comp-radio-button-motion-duration-reverse` | The duration of the dot shrinking when the radio button is deselected | `--md-sys-motion-expressive-default-effects-duration` |
 
 **Example: Changing the size of the radio button**
 

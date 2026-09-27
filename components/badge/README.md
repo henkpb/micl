@@ -16,6 +16,7 @@ To add a large badge, use a `<span>` element with the `micl-badge` class and add
 Import the badge styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/badge";
 ```
 
@@ -28,7 +29,7 @@ Or import all MICL styles:
 No custom JavaScript is required for the core functionality of this component.
 
 ### Live Demo
-Badges are shown on the navigation items of the [Navigation bar](https://henkpb.github.io/micl/navigationbar.html) and [Navigation rail](https://henkpb.github.io/micl/navigationrail.html) pages, and on the [MICL home page](https://henkpb.github.io/micl/index.html).
+A live example of the [Badge component](https://henkpb.github.io/micl/badge.html) is available to interact with. Badges are also shown on the navigation items of the [Navigation bar](https://henkpb.github.io/micl/navigationbar.html) and [Navigation rail](https://henkpb.github.io/micl/navigationrail.html) pages, and on the [MICL home page](https://henkpb.github.io/micl/index.html).
 
 ## Anchoring
 Badges are placed on top of other elements, typically icons, using CSS anchor positioning:

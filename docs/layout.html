@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demonstrating MICL Layout">
+    <title>MICL Layout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&icon_names=check,close,content_copy,dark_mode,home,palette&display=block">
+    <link rel="stylesheet" href="themes/airblue/theme.css" id="theme-link">
+    <link rel="stylesheet" href="micl.css">
+    <link rel="stylesheet" href="shapes.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+        .docs-caption {
+            margin: 0 0 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .docs-example + .docs-example {
+            margin-block-start: 28px;
+        }
+        .docs-section__use a,
+        .docs-stage > p a {
+            color: var(--md-sys-color-primary);
+        }
+        .docs-embed {
+            display: block;
+            inline-size: 100%;
+            block-size: 560px;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 12px;
+            background-color: var(--md-sys-color-surface);
+        }
+        .docs-example .micl-card-filled,
+        .docs-example .micl-card-outlined {
+            padding: 16px;
+            color: var(--md-sys-color-on-surface);
+        }
+        .docs-example .micl-card-filled p,
+        .docs-example .micl-card-outlined p {
+            margin: 0;
+        }
+        .docs-classes {
+            margin: 0;
+            padding-inline-start: 20px;
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.8;
+        }
+        .docs-hero__demo .micl-panes {
+            inline-size: min(100%, 320px);
+            block-size: 160px;
+            background: transparent;
+        }
+        .docs-hero__demo .micl-pane {
+            border-radius: 16px;
+            background-color: var(--md-sys-color-surface);
+        }
+        .docs-hero__demo .micl-pane--fixed {
+            inline-size: 96px;
+            background-color: var(--md-sys-color-surface-container-highest);
+        }
+    </style>
+</head>
+<body class="micl-window light">
+    <div class="docs-shell">
+        <header class="docs-top">
+            <a href="index.html" class="micl-iconbutton-standard-s docs-link" aria-label="Back to the MICL Showcase">
+                <span class="material-symbols-outlined" aria-hidden="true">home</span>
+            </a>
+            <div class="docs-top__crumbs"><a href="index.html">MICL</a><span aria-hidden="true">/</span><a href="index.html#foundations">Foundations</a><span aria-hidden="true">/</span><strong>Layout</strong></div>
+            <div id="settings-placeholder" class="docs-top__actions"></div>
+        </header>
+
+        <main>
+
+        <section class="docs-hero">
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--corner" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <svg class="micl-shapes docs-hero__shape docs-hero__shape--edge" viewBox="0 0 100 100" aria-hidden="true"><path /></svg>
+            <p class="docs-hero__eyebrow">Foundation</p>
+            <h1>Layout</h1>
+            <p class="docs-hero__lede">CSS classes that implement the Material Design 3 layout guidelines: a window with safe margins, a rail region for navigation, and a pane area divided into one to three panes that stack or hide at the Material breakpoints.</p>
+            <ul class="docs-hero__facts">
+                <li>Fixed &amp; flexible panes</li>
+                <li>Split-pane layout</li>
+                <li>Adaptive breakpoints</li>
+            </ul>
+            <div class="docs-hero__demo" aria-hidden="true">
+                <div class="micl-panes">
+                    <div class="micl-pane micl-pane--fixed"></div>
+                    <div class="micl-pane"></div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="docs-chipnav" aria-label="Sections on this page">
+            <a href="#window">Window</a>
+            <a href="#panes">Panes</a>
+            <a href="#columns">Columns</a>
+            <a href="#adaptive">Adaptive</a>
+            <a href="#theming">Theming</a>
+        </nav>
+
+        <div class="docs-content">
+            <section class="docs-section" id="window">
+                <div class="docs-section__head">
+                    <h2>Window</h2>
+                    <p class="docs-section__use">Add <code>micl-window</code> to the <code>&lt;body&gt;</code>, put the navigation in the rail region and the content in a <code>&lt;main class="micl-panes"&gt;</code>. The frame below is a window of its own, so its panes respond to the frame's width.</p>
+                </div>
+                <div class="docs-stage">
+                    <iframe class="docs-embed" src="layout-demo.html" title="A window with adaptive navigation and three panes" loading="lazy"></iframe>
+                    <p style="margin-block-end:0;color:var(--md-sys-color-on-surface)">Resize the browser to see the panes stack and hide: <a href="layout-demo.html">open the window demo</a>.</p>
+                </div>
+            </section>
+
+            <section class="docs-section" id="panes">
+                <div class="docs-section__head">
+                    <h2>Panes</h2>
+                    <p class="docs-section__use">A <code>micl-pane</code> is flexible and adapts to its content; <code>micl-pane--fixed</code> is 360px wide at the expanded breakpoint and 412px from the large breakpoint, and sized by its content below that.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Fixed and flexible</p>
+                        <template>
+                            <div class="micl-panes">
+                                <section class="micl-pane micl-pane--fixed" aria-label="List">
+                                    <div class="micl-card-outlined"><p>Fixed pane</p></div>
+                                </section>
+                                <section class="micl-pane" aria-label="Detail">
+                                    <div class="micl-card-filled"><p>Flexible pane</p></div>
+                                </section>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Flexible panes shared evenly</p>
+                        <template>
+                            <div class="micl-panes micl-panes--evenly">
+                                <section class="micl-pane" aria-label="First">
+                                    <div class="micl-card-filled"><p>One</p></div>
+                                </section>
+                                <section class="micl-pane" aria-label="Second">
+                                    <div class="micl-card-filled"><p>Two, with a little more content</p></div>
+                                </section>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="columns">
+                <div class="docs-section__head">
+                    <h2>Columns within a pane</h2>
+                    <p class="docs-section__use">Divide a pane with <code>micl-pane__columns</code> and <code>micl-pane__column</code>. A column grows by default; <code>micl-pane__column--fixed</code> keeps the width of its content.</p>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <template>
+                            <section class="micl-pane" aria-label="Article">
+                                <div class="micl-pane__columns">
+                                    <div class="micl-pane__column micl-pane__column--fixed">
+                                        <div class="micl-card-outlined"><p>Fixed</p></div>
+                                    </div>
+                                    <div class="micl-pane__column">
+                                        <div class="micl-card-filled"><p>Growing column</p></div>
+                                        <div class="micl-card-filled"><p>Cards are spaced by <code>--md-sys-card-margin</code></p></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <section class="docs-section" id="adaptive">
+                <div class="docs-section__head">
+                    <h2>Adaptive panes</h2>
+                    <p class="docs-section__use">These classes follow the window's width, not the width of their container, so try them in the <a href="layout-demo.html">window demo</a>. <code>micl-panes--split</code> makes two flexible panes meet at the horizontal centre of the window, keeping the spacer over a foldable's hinge.</p>
+                </div>
+                <div class="docs-stage">
+                    <ul class="docs-classes md-sys-typescale-body-large">
+                        <li><code>micl-panes--stacked-to-medium</code>, <code>-expanded</code>, <code>-large</code>, <code>-extralarge</code>: stack the panes below that breakpoint</li>
+                        <li><code>micl-pane--hidden-to-medium</code>, <code>-expanded</code>, <code>-large</code>, <code>-extralarge</code>: hide a pane below that breakpoint</li>
+                        <li><code>micl-pane__columns--stacked-to-medium</code>, <code>-expanded</code>, <code>-large</code>, <code>-extralarge</code>: stack columns below that breakpoint</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="docs-section" id="theming">
+                <div class="docs-section__head">
+                    <h2>Theming</h2>
+                </div>
+                <div class="docs-stage">
+                    <div class="docs-example">
+                        <p class="docs-caption md-sys-typescale-label-large">Wider spacer and card margin</p>
+                        <template>
+                            <div class="micl-panes" style="--md-sys-layout-pane-spacer:48px;--md-sys-card-margin:16px">
+                                <section class="micl-pane" aria-label="Start">
+                                    <div class="micl-card-filled"><p>48px between panes</p></div>
+                                    <div class="micl-card-filled"><p>16px between cards</p></div>
+                                </section>
+                                <section class="micl-pane" aria-label="End">
+                                    <div class="micl-card-filled"><p>Second pane</p></div>
+                                </section>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </main>
+
+        <footer class="docs-foot">MICL &mdash; Material-Inspired Component Library</footer>
+    </div>
+
+    <script src="micl.js"></script>
+    <script src="docs.js"></script>
+</body>
+</html>

@@ -23,6 +23,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-default-effects-duration', 'expressive-slow-effects', 'expressive-slow-effects-duration');
 
 @include shape.corner('extra-small');
 
@@ -33,27 +34,26 @@
 @include typography.scale('body-large');
 @include typography.scale('body-small');
 
-$textfields: ':is(.micl-textfield-filled, .micl-textfield-outlined)';
+$textfields: '[class*="micl-textfield-"]';
 $fields: ':is(input, select, textarea)';
-
-// A text field is "populated" when its label floats.
-$populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclinitialized]), > select:not([data-miclinitialized]) option:checked:not([value=""]), > textarea:not(:empty, [data-miclinitialized]))';
+$focused: ':has(> :focus, > :where(select:open))';
+$populated: ':has(> :focus, > :where(select:open), > [data-miclvalue="1"], > :autofill, > select[multiple], > :is([type=date], [type=datetime-local], [type=month], [type=time], [type=week]), > input[value]:not([value=""], [data-miclvalue]), > select option:checked:is(:not(:empty), [label]:not([label=""])), > textarea:not(:empty, [data-miclvalue]))';
 
 #{$textfields} {
-    --_height: var(--md-comp-text-field-container-height, 56px);
-    --_shape: var(--md-sys-shape-corner-extra-small);
-    --_icon-size: var(--md-comp-text-field-icon-size, 24px);
-    --_icon-space: var(--md-comp-text-field-icon-space, 12px);
-    --_input-space: var(--md-comp-text-field-input-space, 16px);
-    --_icon-leading: 0px;
-    --_icon-trailing: 0px;
-    --_prefix: 0px;
-    --_suffix: 0px;
-    --_outline-width: 1px;
-    --_label-color: var(--md-comp-text-field-label-color, var(--md-sys-color-on-surface-variant));
-    --_effects: var(--md-comp-text-field-motion-effects, #{motion.$md-sys-motion-expressive-slow-effects});
-    --_duration: var(--md-comp-text-field-motion-duration, #{motion.$md-sys-motion-expressive-slow-effects-duration});
-    --_duration-reverse: var(--md-comp-text-field-motion-duration-reverse, #{motion.$md-sys-motion-expressive-default-effects-duration});
+    --_textfield-height: var(--md-comp-text-field-container-height, 56px);
+    --_textfield-shape: var(--md-sys-shape-corner-extra-small);
+    --_textfield-icon-size: var(--md-comp-text-field-icon-size, 24px);
+    --_textfield-icon-space: var(--md-comp-text-field-icon-space, 12px);
+    --_textfield-input-space: var(--md-comp-text-field-input-space, 16px);
+    --_textfield-icon-leading: 0px;
+    --_textfield-icon-trailing: 0px;
+    --_textfield-prefix: 0px;
+    --_textfield-suffix: 0px;
+    --_textfield-outline-width: 1px;
+    --_textfield-label-color: var(--md-comp-text-field-label-color, var(--md-sys-color-on-surface-variant));
+    --_textfield-effects: var(--md-comp-text-field-motion-effects, var(--md-sys-motion-expressive-slow-effects));
+    --_textfield-duration: var(--md-comp-text-field-motion-duration, var(--md-sys-motion-expressive-slow-effects-duration));
+    --_textfield-duration-reverse: var(--md-comp-text-field-motion-duration-reverse, var(--md-sys-motion-expressive-default-effects-duration));
 
     display: grid;
     grid-template-areas: "textfield" "supporting";
@@ -67,13 +67,13 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
         align-self: flex-start;
         width: fit-content;
         padding-inline: 4px;
-        margin-block-start: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2);
-        color: var(--_label-color);
+        margin-block-start: calc((var(--_textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+        color: var(--_textfield-label-color);
         z-index: 1;
         transition:
-            margin var(--_duration) var(--_effects),
-            font-size var(--_duration) linear,
-            letter-spacing var(--_duration) linear;
+            margin var(--_textfield-duration) var(--_textfield-effects),
+            font-size var(--_textfield-duration) linear,
+            letter-spacing var(--_textfield-duration) linear;
     }
     &> #{$fields} {
         @include typography.body-large;
@@ -81,17 +81,18 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
         box-sizing: border-box;
         grid-area: textfield;
         inline-size: auto;
+        min-inline-size: 0;
         margin: 0;
         padding-inline:
-            calc(var(--_input-space) - var(--_border, 0px) + var(--_icon-leading) + var(--_prefix))
-            calc(var(--_input-space) - var(--_border, 0px) + var(--_icon-trailing) + var(--_suffix));
+            calc(var(--_textfield-input-space) - var(--_textfield-border, 0px) + var(--_textfield-icon-leading) + var(--_textfield-prefix))
+            calc(var(--_textfield-input-space) - var(--_textfield-border, 0px) + var(--_textfield-icon-trailing) + var(--_textfield-suffix));
         border: none;
-        border-radius: var(--_shape);
+        border-radius: var(--_textfield-shape);
         outline: none;
         color: var(--md-comp-text-field-input-color, var(--md-sys-color-on-surface));
         background-color: transparent;
         text-overflow: ellipsis;
-        caret-color: var(--_caret-color, var(--md-comp-text-field-caret-color, var(--md-sys-color-primary)));
+        caret-color: var(--_textfield-caret-color, var(--md-comp-text-field-caret-color, var(--md-sys-color-primary)));
 
         &:disabled {
             color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
@@ -113,18 +114,21 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
         }
     }
     &> :is(input, select) {
-        height: var(--_height);
+        height: var(--_textfield-height);
         padding-block: 0;
     }
     &> textarea {
-        min-height: var(--_height);
-        padding-block: calc((var(--_height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+        min-height: var(--_textfield-height);
+        padding-block: calc((var(--_textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
         resize: none;
 
         &[rows] {
             padding-block-start: 0;
-            border-block-start: 8px solid transparent;
-            overflow: hidden;
+            border-block-start: calc((var(--_textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2) solid transparent;
+
+            @media (forced-colors: active) {
+                border-block-start-color: Canvas;
+            }
         }
         &:not([rows]) {
             field-sizing: content;
@@ -136,57 +140,54 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
 
         grid-area: textfield;
         align-content: center;
-        height: var(--_height);
-        color: var(--md-sys-color-on-surface-variant);
+        height: var(--_textfield-height);
         opacity: 0;
         z-index: 1;
-        transition: opacity var(--_duration-reverse) linear;
+        transition: opacity var(--_textfield-duration-reverse) linear;
     }
     &> .micl-textfield__prefix {
         width: var(--md-comp-text-field-prefix-space, 1em);
-        padding-inline-start: calc(var(--_input-space) + var(--_icon-leading));
+        color: var(--md-comp-text-field-input-prefix-color, var(--md-sys-color-on-surface-variant));
+        padding-inline-start: calc(var(--_textfield-input-space) + var(--_textfield-icon-leading));
     }
     &> .micl-textfield__suffix {
         width: var(--md-comp-text-field-suffix-space, 1em);
-        padding-inline-end: calc(var(--_input-space) + var(--_icon-trailing));
+        color: var(--md-comp-text-field-input-suffix-color, var(--md-sys-color-on-surface-variant));
+        padding-inline-end: calc(var(--_textfield-input-space) + var(--_textfield-icon-trailing));
         margin-inline: auto 0;
     }
     &> .micl-textfield__icon-leading,
     &> .micl-textfield__icon-trailing {
         grid-area: textfield;
         width: 1em;
-        margin-inline: var(--_icon-space) auto;
-        font-size: var(--_icon-size);
+        margin-inline: var(--_textfield-icon-space) auto;
+        font-size: var(--_textfield-icon-size);
         color: var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant));
         z-index: 1;
     }
     &> .micl-textfield__icon-trailing {
-        margin-inline: auto var(--_icon-space);
+        margin-inline: auto var(--_textfield-icon-space);
+        color: var(--_textfield-icon-trailing-color, var(--md-comp-text-field-icon-color, var(--md-sys-color-on-surface-variant)));
+    }
+    &> :is(.micl-textfield__icon-leading, .micl-textfield__icon-trailing, .micl-textfield__prefix, .micl-textfield__suffix):not(a, button) {
+        pointer-events: none;
     }
 
     &:has(> .micl-textfield__prefix) {
-        --_prefix: var(--md-comp-text-field-prefix-space, 1em);
+        --_textfield-prefix: var(--md-comp-text-field-prefix-space, 1em);
     }
     &:has(> .micl-textfield__suffix) {
-        --_suffix: var(--md-comp-text-field-suffix-space, 1em);
+        --_textfield-suffix: var(--md-comp-text-field-suffix-space, 1em);
     }
     &:has(> .micl-textfield__icon-leading) {
-        --_icon-leading: calc(var(--_icon-size) + var(--_icon-space));
+        --_textfield-icon-leading: calc(var(--_textfield-icon-size) + var(--_textfield-icon-space));
     }
     &:has(> .micl-textfield__icon-trailing) {
-        --_icon-trailing: calc(var(--_icon-size) + var(--_icon-space));
+        --_textfield-icon-trailing: calc(var(--_textfield-icon-size) + var(--_textfield-icon-space));
     }
 
-    // While the label rests on top of the data element, hide the text that would shine
-    // through it: the input placeholder and the label of a selected empty-value option.
-    // A focused or populated text field moves the label out of the way and both return.
-    &:has(> label):not(#{$populated}) {
-        &> select {
-            color: transparent;
-        }
-        &> #{$fields}::placeholder {
-            color: transparent;
-        }
+    &:has(> label):not(#{$populated}) > #{$fields}::placeholder {
+        color: transparent;
     }
 
     &> .micl-textfield__supporting-text,
@@ -210,11 +211,13 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
     &:has(> :is(input, textarea)[maxlength]:not(:disabled)):has(> .micl-textfield__character-counter) > .micl-textfield__supporting-text {
         padding-inline-end: 64px;
     }
+
 }
 
 .micl-textfield-filled {
-    --_outline-color: var(--md-comp-filled-text-field-active-indicator-color, var(--md-sys-color-on-surface-variant));
+    --_textfield-outline-color: var(--md-comp-filled-text-field-active-indicator-color, var(--md-sys-color-on-surface-variant));
     --_focus-outline-color: var(--md-comp-filled-text-field-focus-active-indicator-color, var(--md-sys-color-primary));
+    --_textfield-input-top: 18px;
 
     &> label {
         margin-inline: 12px 4px;
@@ -225,15 +228,15 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
     &> #{$fields} {
         --statelayer-color: var(--md-sys-color-on-surface);
 
-        padding-block-start: 18px;
-        padding-block-end: calc(3px - var(--_outline-width));
-        border-block-end: var(--_outline-width) solid var(--_outline-color);
+        padding-block-start: var(--_textfield-input-top);
+        padding-block-end: calc(3px - var(--_textfield-outline-width));
+        border-block-end: var(--_textfield-outline-width) solid var(--_textfield-outline-color);
         border-end-start-radius: 0;
         border-end-end-radius: 0;
         background-color: var(--md-comp-filled-text-field-container-color, var(--md-sys-color-surface-container-highest));
         background-image: linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
         background-repeat: no-repeat;
-        transition: --statelayer-opacity var(--_duration) linear;
+        transition: --statelayer-opacity var(--_textfield-duration) linear;
 
         &:disabled {
             background-color: rgb(from var(--md-sys-color-on-surface) r g b / 4%);
@@ -241,20 +244,32 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
     }
     &> textarea {
         padding-block-start: 24px;
+
+        &[rows] {
+            border-block-start-width: 24px;
+            background-origin: border-box;
+        }
+    }
+    &:not(:has(> label)) {
+        --_textfield-input-top: 3px;
+
+        &> textarea {
+            padding-block-start: calc((var(--_textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+
+            &[rows] {
+                border-block-start-width: calc((var(--_textfield-height) - var(--md-sys-typescale-body-large-line-height)) / 2);
+            }
+        }
     }
     &:has(> .micl-textfield__icon-leading) > label {
-        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading));
+        margin-inline-start: calc(var(--_textfield-input-space) + var(--_textfield-icon-leading) - 4px);
     }
     &#{$populated} {
         &> label {
             margin-block-start: 8px;
-            margin-inline-start: 12px;
         }
-        &:has(> .micl-textfield__icon-leading) > label {
-            margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 4px);
-        }
-        &> .micl-textfield__prefix,
-        &> .micl-textfield__suffix {
+        &:has(> label) > .micl-textfield__prefix,
+        &:has(> label) > .micl-textfield__suffix {
             height: 40px;
             margin-block-start: 16px;
         }
@@ -262,62 +277,62 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
 }
 
 .micl-textfield-outlined {
-    --_outline-color: var(--md-comp-outlined-text-field-outline-color, var(--md-sys-color-outline));
+    --_textfield-outline-color: var(--md-comp-outlined-text-field-outline-color, var(--md-sys-color-outline));
     --_focus-outline-color: var(--md-comp-outlined-text-field-focus-outline-color, var(--md-sys-color-primary));
     --_disabled-outline-opacity: 12%;
-    --_border: var(--_outline-width);
-    --_outline-extra: calc(var(--_outline-width) - 1px);
+    --_textfield-border: var(--_textfield-outline-width);
+    --_textfield-outline-extra: calc(var(--_textfield-outline-width) - 1px);
 
     grid-template:
         "textfield textfield textfield"
         "supporting supporting supporting"
         / 12px fit-content(calc(100% - 24px)) 1fr;
-    margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height) / 2);
 
-    // The outline's top edge is drawn by these two pseudo-elements. The label sits in the
-    // middle grid column, so the notch for a floating label opens by retracting ::before
-    // to the first column.
+    &:where(:has(> label)) {
+        margin-block-start: calc(2px + var(--md-sys-typescale-body-small-line-height) / 2);
+    }
+
     &::before,
     &::after {
         content: '';
         grid-area: textfield;
         align-self: start;
-        height: var(--_shape);
-        border-block-start: var(--_outline-width) solid var(--_outline-color);
+        height: var(--_textfield-shape);
+        border-block-start: var(--_textfield-outline-width) solid var(--_textfield-outline-color);
     }
     &::before {
         grid-column: 1 / 3;
-        border-start-start-radius: var(--_shape);
+        border-start-start-radius: var(--_textfield-shape);
     }
     &::after {
         grid-column: 3;
-        border-start-end-radius: var(--_shape);
+        border-start-end-radius: var(--_textfield-shape);
     }
     &:hover {
-        --_label-color: var(--md-sys-color-on-surface);
+        --_textfield-label-color: var(--md-sys-color-on-surface);
     }
     &> label {
         grid-column: 2;
     }
     &:has(> .micl-textfield__icon-leading) > label {
-        margin-inline-start: calc(var(--_input-space) + var(--_icon-leading) - 12px);
+        margin-inline-start: calc(var(--_textfield-input-space) + var(--_textfield-icon-leading) - 16px);
     }
     &> #{$fields} {
-        border-block-end: var(--_border) solid var(--_outline-color);
-        border-inline: var(--_border) solid var(--_outline-color);
+        border-block-end: var(--_textfield-border) solid var(--_textfield-outline-color);
+        border-inline: var(--_textfield-border) solid var(--_textfield-outline-color);
     }
 
     &> input {
-        padding-block-start: calc(var(--_border) - 1px);
+        padding-block-start: calc(var(--_textfield-border) - 1px);
     }
 
     &> textarea {
-        --_border: 1px;
+        --_textfield-border: 1px;
 
         box-shadow:
-            inset var(--_outline-extra) 0 var(--_outline-color),
-            inset calc(0px - var(--_outline-extra)) 0 var(--_outline-color),
-            inset 0 calc(0px - var(--_outline-extra)) var(--_outline-color);
+            inset var(--_textfield-outline-extra) 0 var(--_textfield-outline-color),
+            inset calc(0px - var(--_textfield-outline-extra)) 0 var(--_textfield-outline-color),
+            inset 0 calc(0px - var(--_textfield-outline-extra)) var(--_textfield-outline-color);
     }
     &#{$populated} {
         &::before {
@@ -330,15 +345,14 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
     }
 }
 
-// Shared states. Rule order matters here — focus must follow hover, the disabled overrides must come last.
 #{$textfields} {
     &:hover {
-        --_outline-color: var(--md-sys-color-on-surface);
+        --_textfield-outline-color: var(--md-sys-color-on-surface);
     }
-    &:has(> :focus) {
-        --_outline-width: 3px;
-        --_outline-color: var(--_focus-outline-color);
-        --_label-color: var(--md-comp-text-field-focus-label-color, var(--md-sys-color-primary));
+    &#{$focused} {
+        --_textfield-outline-width: 3px;
+        --_textfield-outline-color: var(--_focus-outline-color);
+        --_textfield-label-color: var(--md-comp-text-field-focus-label-color, var(--md-sys-color-primary));
 
         &> .micl-textfield__supporting-text--focus {
             visibility: visible;
@@ -348,13 +362,16 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
         &> label {
             @include typography.body-small;
         }
+    }
+    &#{$populated},
+    &:not(:has(> label)) {
         &> .micl-textfield__prefix,
         &> .micl-textfield__suffix {
             opacity: 1;
         }
     }
     &:has(> :disabled) {
-        --_outline-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--_disabled-outline-opacity, 38%));
+        --_textfield-outline-color: rgb(from var(--md-sys-color-on-surface) r g b / var(--_disabled-outline-opacity, 38%));
 
         &> :is(label, [class*=micl-textfield__]:not(.micl-textfield__character-counter)) {
             color: rgb(from var(--md-sys-color-on-surface) r g b / var(--md-sys-state-disabled-state-layer-opacity, 38%));
@@ -365,33 +382,28 @@ $populated: ':has(> :focus, > [data-miclvalue], > select[multiple], > :is([type=
     }
 }
 
-.micl-textfield--error:not(:has(> :disabled)) {
-    --_outline-color: var(--md-sys-color-error);
-    --_caret-color: var(--md-sys-color-error);
-    --_label-color: var(--md-sys-color-error);
+#{$textfields}:has(> [aria-invalid=true]:not(:disabled)) {
+    --_textfield-outline-color: var(--md-sys-color-error);
+    --_textfield-caret-color: var(--md-sys-color-error);
+    --_textfield-label-color: var(--md-sys-color-error);
+    --_textfield-icon-trailing-color: var(--md-sys-color-error);
 
-    &> .micl-textfield__icon-trailing,
     &> .micl-textfield__supporting-text,
     &> .micl-textfield__character-counter {
         color: var(--md-sys-color-error);
     }
-    &:hover:not(:has(> :focus)) {
-        --_outline-color: var(--md-sys-color-on-error-container);
-        --_label-color: var(--md-sys-color-on-error-container);
-
-        &> .micl-textfield__icon-trailing {
-            color: var(--md-sys-color-on-error-container);
-        }
+    &:hover:not(#{$focused}) {
+        --_textfield-outline-color: var(--md-sys-color-on-error-container);
+        --_textfield-label-color: var(--md-sys-color-on-error-container);
+        --_textfield-icon-trailing-color: var(--md-sys-color-on-error-container);
     }
 }
 
-// If the icon elements are direction:ltr (like Material Symbols), their margin-inline resolves
-// against ltr and does not flip with the page direction — mirror them explicitly.
 #{$textfields}:dir(rtl) {
     &> .micl-textfield__icon-leading {
-        margin-inline: auto var(--_icon-space);
+        margin-inline: auto var(--_textfield-icon-space);
     }
     &> .micl-textfield__icon-trailing {
-        margin-inline: var(--_icon-space) auto;
+        margin-inline: var(--_textfield-icon-space) auto;
     }
 }

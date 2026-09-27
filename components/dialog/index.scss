@@ -25,6 +25,7 @@
 @use '../../styles/shape';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration', 'expressive-slow-spatial-duration');
 
 @include elevation.level(0);
 @include elevation.level(2);
@@ -41,19 +42,19 @@
 @include typography.scale('body-medium');
 
 dialog.micl-dialog {
-    --_motion-spatial: var(--md-comp-dialog-motion-spatial, #{motion.$md-sys-motion-expressive-fast-spatial});
-    --_motion-duration: var(--md-comp-dialog-motion-duration, #{motion.$md-sys-motion-expressive-slow-spatial-duration});
-    --_motion-duration-reverse: var(--md-comp-dialog-motion-duration-reverse, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_motion-spatial: var(--md-comp-dialog-motion-spatial, var(--md-sys-motion-expressive-fast-spatial));
+    --_motion-duration: var(--md-comp-dialog-motion-duration, var(--md-sys-motion-expressive-slow-spatial-duration));
+    --_motion-duration-reverse: var(--md-comp-dialog-motion-duration-reverse, var(--md-sys-motion-expressive-fast-spatial-duration));
 
-    --micl-duration: var(--_motion-duration-reverse);
-    --micl-spatial: #{motion.$md-sys-motion-easing-emphasized-accelerate};
-    --micl-easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
+    --_duration: var(--_motion-duration-reverse);
+    --_spatial: #{motion.$md-sys-motion-easing-emphasized-accelerate};
+    --_easing: #{motion.$md-sys-motion-easing-emphasized-accelerate};
 
-    --_dialog-dir-factor: 1;
-    --_dialog-background-color: var(--md-comp-dialog-container-color, var(--md-sys-color-surface-container-high));
+    --_dir-factor: 1;
+    --_background-color: var(--md-comp-dialog-container-color, var(--md-sys-color-surface-container-high));
     --_margin: var(--md-comp-dialog-margin, 48px);
-    --_padding: var(--md-comp-dialog-padding, 24px);
-    --_translate: translate(calc(var(--_dialog-dir-factor, 1) * -50%), -50%);
+    --_dialog-padding: var(--md-comp-dialog-padding, 24px);
+    --_translate: translate(calc(var(--_dir-factor, 1) * -50%), -50%);
 
     box-sizing: border-box;
     display: none;
@@ -69,22 +70,25 @@ dialog.micl-dialog {
     margin: 0;
     outline: none;
     border: none;
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     border-radius: var(--md-comp-dialog-container-shape, var(--md-sys-shape-corner-extra-large));
     color: var(--md-comp-dialog-content-color, var(--md-sys-color-on-surface));
-    background-color: var(--_dialog-background-color);
+    background-color: var(--_background-color);
     box-shadow: var(--md-comp-dialog-container-elevation, var(--md-sys-elevation-level3));
     opacity: 0;
     overflow: hidden;
     interpolate-size: allow-keywords;
     transition:
-        inset-block-start var(--micl-duration) var(--micl-easing),
-        inset-inline-start var(--micl-duration) var(--micl-easing),
-        inline-size var(--micl-duration) var(--micl-spatial),
-        block-size var(--micl-duration) var(--micl-spatial),
-        transform var(--micl-duration) var(--micl-spatial),
-        opacity var(--micl-duration) linear,
-        overlay var(--micl-duration) linear allow-discrete,
-        display var(--micl-duration) linear allow-discrete;
+        inset-block-start var(--_duration) var(--_easing),
+        inset-inline-start var(--_duration) var(--_easing),
+        inline-size var(--_duration) var(--_spatial),
+        block-size var(--_duration) var(--_spatial),
+        transform var(--_duration) var(--_spatial),
+        opacity var(--_duration) linear,
+        overlay var(--_duration) linear allow-discrete,
+        display var(--_duration) linear allow-discrete;
 
     @starting-style {
         block-size: fit-content;
@@ -92,13 +96,13 @@ dialog.micl-dialog {
     }
 
     &:dir(rtl) {
-        --_dialog-dir-factor: -1;
+        --_dir-factor: -1;
     }
     &:popover-open,
     &[open] {
-        --micl-duration: var(--_motion-duration);
-        --micl-spatial: var(--_motion-spatial);
-        --micl-easing: #{motion.$md-sys-motion-easing-emphasized};
+        --_duration: var(--_motion-duration);
+        --_spatial: var(--_motion-spatial);
+        --_easing: #{motion.$md-sys-motion-easing-emphasized};
 
         display: flex;
         inset-block-start: 50%;
@@ -126,12 +130,12 @@ dialog.micl-dialog {
     &::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition:
-            background-color var(--micl-duration) linear,
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete;
+            background-color var(--_duration) linear,
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete;
     }
     &[open]::backdrop {
-        background-color: rgba(0, 0, 0, var(--md-sys-state-backdrop-opacity, 32%));
+        @extend %micl-backdrop;
 
         @starting-style {
             background-color: rgba(0, 0, 0, 0);
@@ -143,9 +147,9 @@ dialog.micl-dialog {
         inset-inline: anchor(start) auto;
         transform: none;
         transition:
-            opacity var(--micl-duration) linear,
-            overlay var(--micl-duration) linear allow-discrete,
-            display var(--micl-duration) linear allow-discrete;
+            opacity var(--_duration) linear,
+            overlay var(--_duration) linear allow-discrete,
+            display var(--_duration) linear allow-discrete;
         position-try-fallbacks: flip-block;
     }
 
@@ -155,8 +159,8 @@ dialog.micl-dialog {
         flex-shrink: 0;
         align-items: flex-start;
         gap: 16px;
-        padding-block: var(--_padding) var(--md-comp-dialog-headline-space, 16px);
-        padding-inline: var(--_padding);
+        padding-block: var(--_dialog-padding) var(--md-comp-dialog-headline-space, 16px);
+        padding-inline: var(--_dialog-padding);
         background-color: transparent;
 
         &:has(> .micl-dialog__icon) {
@@ -197,7 +201,7 @@ dialog.micl-dialog {
     }
     .micl-dialog__content {
         flex-shrink: 1;
-        padding-inline: var(--_padding);
+        padding-inline: var(--_dialog-padding);
         overflow-y: auto;
     }
     .micl-dialog__actions {
@@ -205,18 +209,14 @@ dialog.micl-dialog {
         flex-shrink: 0;
         justify-content: flex-end;
         column-gap: 8px;
-        padding: var(--_padding);
+        padding: var(--_dialog-padding);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        --_motion-duration: 0ms;
-        --_motion-duration-reverse: 0ms;
-    }
 }
 
 dialog.micl-dialog.micl-dialog--fullscreen {
     @media (max-width: layout.$md-sys-breakpoint-compact-max) {
-        --_dialog-background-color: var(--md-comp-full-screen-dialog-container-color, var(--md-sys-color-surface));
+        --_background-color: var(--md-comp-full-screen-dialog-container-color, var(--md-sys-color-surface));
 
         inline-size: 100%;
         block-size: 100dvb;
@@ -227,7 +227,6 @@ dialog.micl-dialog.micl-dialog--fullscreen {
         timeline-scope: --headlineTimeline;
 
         .micl-dialog__headline {
-            // border-box: the 56px of the spec include the block padding
             box-sizing: border-box;
             block-size: 56px;
             flex-direction: row;

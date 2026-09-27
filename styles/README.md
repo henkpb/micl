@@ -39,23 +39,33 @@ You can customize elevation levels by overriding their global CSS variables.
 Motion brings your UI to life, making it expressive and intuitive to use. The motion styles are based on the [Material Design 3 Motion](https://m3.material.io/styles/motion/overview/how-it-works) guidelines.
 
 ### CSS
-Import the motion styles into your project. To install all sixteen duration tokens at once, configure the module in master mode:
+Import the motion styles into your project. To install all sixteen duration tokens plus the twelve M3 Expressive motion schemes at once, configure the module in master mode:
 
-```CSS
+```SCSS
 @use "material-inspired-component-library/styles/motion" with ($master: true);
 ```
 
 To install only specific durations, use the `duration` mixin:
 
-```CSS
+```SCSS
 @use "material-inspired-component-library/styles/motion";
-@include motion.duration('short3');
-@include motion.duration('long4');
+@include motion.duration('short3', 'long4');
 ```
 
-The easing curves (`$md-sys-motion-easing-emphasized`, `$md-sys-motion-easing-standard` and its accelerate/decelerate variants, the expressive/standard fast-default-slow × spatial-effects curves, etc.) are exposed as **Sass variables**, not CSS custom properties. Reference them through interpolation in your transitions:
+The M3 Expressive motion schemes — `expressive` and `standard`, each in a `fast`, `default` and `slow` variant for `spatial` and `effects` motion — are exposed as custom properties too: one for the easing curve (for example `--md-sys-motion-expressive-fast-spatial`) and one for its duration (`--md-sys-motion-expressive-fast-spatial-duration`). Components read their motion from these tokens, so the defaults of a component's `--md-comp-*-motion-*` tokens are the scheme tokens named in its README. To install only the schemes you use, pass their names to the `token` mixin:
 
-```CSS
+```SCSS
+@use "material-inspired-component-library/styles/motion";
+@include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration');
+
+.my-component {
+    transition: translate var(--md-sys-motion-expressive-fast-spatial-duration) var(--md-sys-motion-expressive-fast-spatial);
+}
+```
+
+The classic easing curves (`$md-sys-motion-easing-emphasized`, `$md-sys-motion-easing-standard` and their accelerate/decelerate variants) remain **Sass variables**. Reference them through interpolation in your transitions:
+
+```SCSS
 @use "material-inspired-component-library/styles/motion";
 @include motion.duration('short3');
 
@@ -63,6 +73,9 @@ The easing curves (`$md-sys-motion-easing-emphasized`, `$md-sys-motion-easing-st
     transition: opacity var(--md-sys-motion-duration-short3) motion.$md-sys-motion-easing-standard;
 }
 ```
+
+### Reduced motion
+Every duration token — the sixteen `--md-sys-motion-duration-*` tokens, the twelve scheme durations and the ripple's `--md-sys-state-ripple-duration` — is set to `0ms` when the user requests reduced motion (`prefers-reduced-motion: reduce`). Because all components derive their durations from these tokens, they all switch to instant state changes without handling the media query themselves. If you override a component's duration token with a literal value, wrap the override in the same media query, or point it at a scheme duration token so it follows the preference automatically.
 
 ### Customizations
 You can customize duration tokens by overriding their global CSS variables.
@@ -83,15 +96,15 @@ Shape tokens define the corner radii used across every component, following the 
 Each component opts into the corner tokens it actually uses, so when you `@use` a component, the matching corner tokens come along automatically — typically there is nothing to opt into yourself. To install **all** corner tokens at once (useful when you build your own subset bundle), configure the module in master mode:
 
 ```CSS
-@use "material-inspired-component-library/styles/shapes" with ($master: true);
+@use "material-inspired-component-library/styles/shape" with ($master: true);
 ```
 
 To install only specific corner tokens, use the `corner` mixin:
 
 ```CSS
-@use "material-inspired-component-library/styles/shapes";
-@include shapes.corner('medium');
-@include shapes.corner('full');
+@use "material-inspired-component-library/styles/shape";
+@include shape.corner('medium');
+@include shape.corner('full');
 ```
 
 ### Customizations
@@ -129,6 +142,43 @@ To install only the parts you need, use the three opt-in mixins:
 @include statelayer.property;    // typed-property registrations for animatable color/opacity
 @include statelayer.keyframes;   // ripple @keyframes (only needed for the spreading ripple effect)
 ```
+
+### Building your own interactive component
+The module also holds the pieces the MICL components share, so a component of your own can pick up the same state layer, ripple, touch target and focus ring:
+
+```SCSS
+@use "material-inspired-component-library/styles/statelayer";
+
+@include statelayer.property;                    // animatable --statelayer-color and --statelayer-opacity
+@include statelayer.keyframes;                   // the micl-ripple animation
+@include statelayer.token('ripple-duration');
+@include statelayer.token('ripple-opacity-factor');
+
+.my-control {
+    --micl-ripple: 1;
+    --micl-height: 40px;
+    --statelayer-color: var(--md-sys-color-on-surface);
+    position: relative;
+    @include statelayer.layer;       // state-layer tint + ripple circle as background layers
+    @extend %micl-target;            // a 48px touch target centred on the --micl-height box
+
+    &:hover { --statelayer-opacity: var(--md-sys-state-hover-state-layer-opacity, 8%); }
+    &:focus-visible {
+        @include statelayer.focus-indicator;
+    }
+    &.micl-rippling {
+        animation: micl-ripple var(--md-sys-state-ripple-duration);
+    }
+}
+```
+
+| Member | Description |
+|---|---|
+| `layer` mixin | Emits the two background layers of a state layer — the tint at `--statelayer-opacity` and the ripple circle at `--micl-x`/`--micl-y` — with their position, repeat and initial size. The runtime grows the circle by animating `background-size` on elements that set `--micl-ripple: 1`. |
+| `$ripple-gradient`, `$layer-gradient` | The two gradients on their own, for components that combine them with further background layers. |
+| `%micl-target` placeholder | A `::before` pseudo-element that extends the hit area to 48px, centred on an element whose visual height is `--micl-height`. |
+| `focus-indicator($component, $offset)` mixin | The focus ring: `--md-sys-state-focus-indicator-thickness` (3px) in `--md-sys-color-secondary`. Pass a component name to read `--md-comp-<component>-focus-indicator-color` first; `$offset` is `'outer'` (default, `--md-sys-state-focus-indicator-outer-offset`), `'inner'` (`--md-sys-state-focus-indicator-inner-offset`), a length, or `null` to leave `outline-offset` alone. |
+| `%micl-backdrop` placeholder | The scrim of a modal surface: `--md-sys-color-scrim` at `--md-sys-state-backdrop-opacity`. |
 
 ### Customizations
 Customize the appearance of state layers by overriding their global CSS variables, such as adjusting the opacity.

@@ -17,6 +17,7 @@ To add a basic checkbox, use the `<input type="checkbox">` element with the `mic
 Import the checkbox styles into your project:
 
 ```CSS
+@use "material-inspired-component-library/dist/base";
 @use "material-inspired-component-library/dist/checkbox";
 ```
 
@@ -40,7 +41,7 @@ A checkbox can be disabled by adding the `disabled` attribute to the `<input>` e
 
 The Checkbox component respects the element's computed direction, automatically adjusting its layout for right-to-left (RTL) languages — whether the `dir` attribute is set on the element itself or inherited from an ancestor.
 
-Adding the `micl-checkbox--error` CSS class to the `<input>` element will create an error-checkbox as specified by the Material Design 3 specification. You only need to set the class yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
+Adding the `aria-invalid="true"` attribute to the `<input>` element will create an error-checkbox. The same attribute tells assistive technologies that the checkbox is in error. You only need to set it yourself when you drive the error state by hand — see [Validation](#validation) for letting the form foundation add and remove it from the checkbox's own validity.
 
 To vertically align a checkbox with its label, wrap both in an element with styling similar to the following:
 
@@ -106,7 +107,7 @@ Disabled checkboxes take no part in this. The parent neither changes them nor co
 A single checkbox is made mandatory with the standard `required` attribute. On top of that, the form foundation adds **count validation** for a set of related checkboxes, so you can express rules such as "pick at least two" or "pick exactly three".
 
 ### Error state
-Whenever the form foundation validates a checkbox, it adds the `micl-checkbox--error` class to any `<input type="checkbox">` carrying the `micl-checkbox` class that has a validation message, and removes the class again once the checkbox becomes valid. If you are using the form foundation, there is no need to toggle this class manually.
+Whenever the form foundation validates a checkbox, it sets `aria-invalid="true"` on any `<input type="checkbox">` carrying the `micl-checkbox` class that has a validation message, and removes the attribute again once the checkbox becomes valid. If you are using the form foundation, there is no need to set this attribute manually.
 
 ### Counting checkboxes in a fieldset
 Wrap the related checkboxes in a `<fieldset>` and describe the rule with data attributes:
@@ -157,6 +158,11 @@ The message is attached to the **first** checkbox of the named set — that is t
 
 Note that the counted set is defined by the `name` attribute, independently of the checkbox-group classes. If you combine count validation with a [checkbox group](#checkbox-group), give the `micl-checkbox__parent` checkbox a **different** `name` or none at all, otherwise it is counted alongside its children once they are all selected.
 
+## Accessibility
+* The component styles the native `<input type="checkbox">`, which provides the role, the checked state and the <kbd>Space</kbd> key. Always associate a `<label>` with it, either with `for`/`id` or by wrapping the input; clicking the label toggles the checkbox as well.
+* In a [checkbox group](#checkbox-group), the script sets the native `indeterminate` property of the parent checkbox, which assistive technologies announce as "mixed". Group the children with a `role="group"` or a `<fieldset>`, and name that group.
+* An error state is conveyed with `aria-invalid="true"`, which the [Form foundation](../../foundations/form/README.md) manages for you (see [Validation](#validation)).
+
 ## Theming
 Each checkbox can be themed with CSS custom properties that follow the Material Design 3 component-token naming convention. Set them on any appropriate parent element to affect its child checkboxes.
 
@@ -169,6 +175,9 @@ Each checkbox can be themed with CSS custom properties that follow the Material 
 | `--md-comp-checkbox-unselected-outline-color` | The border color of an unselected checkbox | `--md-sys-color-on-surface-variant` |
 | `--md-comp-checkbox-selected-container-color` | The fill color of a selected checkbox | `--md-sys-color-primary` |
 | `--md-comp-checkbox-selected-icon-color` | The color of the check mark | `--md-sys-color-on-primary` |
+| `--md-comp-checkbox-motion-spatial` | The easing function for drawing the check mark | `--md-sys-motion-expressive-fast-spatial` |
+| `--md-comp-checkbox-motion-duration` | The duration of the fill and border change when the checkbox is selected, and of the state-layer fade | `--md-sys-motion-expressive-slow-effects-duration` |
+| `--md-comp-checkbox-motion-duration-reverse` | The duration of the fill and border change when the checkbox is deselected | `--md-sys-motion-expressive-default-effects-duration` |
 
 **Example: Changing the border width of a checkbox**
 

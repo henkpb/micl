@@ -19,16 +19,19 @@ document.getElementById("myform").addEventListener("submit", event => {
 });
 ```
 
-If you load the foundation directly via a `<script>` tag, the object is exposed as the `micl` global:
+If you load the foundation directly via a `<script>` tag, the object is exposed as the `miclForm` global:
 
 ```HTML
 <script src="path/to/dist/foundations/form/index.js"></script>
 <script>
-    micl.validateForm(document.getElementById("myform"), true);
+    miclForm.validateForm(document.getElementById("myform"), true);
 </script>
 ```
 
 This foundation is **not** part of `dist/micl.js`'s public API, so import it separately even if you already load the full bundle.
+
+### Live Demo
+A live example of the [Form foundation](https://henkpb.github.io/micl/form.html) is available to interact with.
 
 ## API
 
@@ -37,16 +40,18 @@ This foundation is **not** part of `dist/micl.js`'s public API, so import it sep
 | `validateForm(form, doReport?)` | Validates every fieldset and every control in a `<form>`. Returns `true` when all of them are valid. `doReport` defaults to `false` when omitted. |
 | `validateFieldSet(fieldset, doReport?)` | The same for a single `<fieldset>`, so you can validate one step of a multi-step form on its own. `doReport` defaults to `false` when omitted. |
 
-Both apply the error styling described below. `doReport` additionally asks the browser to display its native validation bubble on the first offending control; omit it (or pass `false`) to apply the error styling silently — useful when you validate as the user types, or when the component shows the message inline itself.
+Both apply the error styling described below. `doReport` additionally moves focus to the first offending control and asks the browser to display its native validation bubble there (a text field that shows the message in its supporting text gets focus only); omit it (or pass `false`) to apply the error styling silently — useful when you validate as the user types, or when the component shows the message inline itself.
 
 Note that neither function is wired to any event. Nothing is validated until you call it, which leaves you free to decide when validation should begin.
 
 ## Error presentation
 Validation messages come from the browser, so they are already localised. This foundation controls how and where those messages are displayed.
 
-**Checkboxes.** An `<input type="checkbox">` with the `micl-checkbox` class gets the `micl-checkbox--error` class while it has a validation message, and loses it again once it is valid. The browser's bubble is still used for the message itself.
+The error state of a control is marked with `aria-invalid="true"`, which both switches the component to its error styling and tells assistive technologies that the value is invalid. Once the foundation validates a control, it owns this attribute: a valid result removes it, including an `aria-invalid` that you set yourself.
 
-**Text fields.** An input inside a `micl-textfield-outlined` or `micl-textfield-filled` wrapper gets the `micl-textfield--error` class on that wrapper. If the wrapper also contains a `micl-textfield__supporting-text` element, the validation message replaces the supporting text — the original wording is stored in `data-micltext` and restored when the field becomes valid — and the browser's bubble is suppressed, because the message is already visible in place.
+**Checkboxes.** An `<input type="checkbox">` with the `micl-checkbox` class gets `aria-invalid="true"` while it has a validation message, and loses it again once it is valid. The browser's bubble is still used for the message itself.
+
+**Text fields.** An input inside a `micl-textfield-outlined` or `micl-textfield-filled` wrapper gets `aria-invalid="true"` while it has a validation message. If the wrapper also contains a `micl-textfield__supporting-text` element, the validation message replaces the supporting text — the original wording is stored in `data-micltext` and restored when the field becomes valid — and the browser's bubble is suppressed, because the message is already visible in place.
 
 **Everything else** is left to the browser's own reporting.
 

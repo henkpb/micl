@@ -23,16 +23,30 @@ const isCVElement = (element: Element): element is
     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLFieldSetElement =>
     'willValidate' in element;
 
+const setInvalid = (element: HTMLElement, invalid: boolean): void =>
+{
+    if (invalid) {
+        element.setAttribute('aria-invalid', 'true');
+    }
+    else {
+        element.removeAttribute('aria-invalid');
+    }
+};
+
 const setErrorStateCheckbox = (element: HTMLInputElement): boolean =>
 {
-    element.classList.toggle('micl-checkbox--error', !!element.validationMessage);
+    setInvalid(element, !!element.validationMessage);
 
     return false;
 };
 
-const setErrorStateTextField = (textField: HTMLElement, message: string): boolean =>
+const setErrorStateTextField = (
+    element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLFieldSetElement,
+    textField: HTMLElement
+): boolean =>
 {
-    textField.classList.toggle('micl-textfield--error', !!message);
+    const message = element.validationMessage;
+    setInvalid(element, !!message);
 
     const supporting = textField.querySelector(
         '.micl-textfield__supporting-text'
@@ -76,7 +90,7 @@ const setErrorState = (element: HTMLElement): boolean =>
         element.parentElement.classList.contains('micl-textfield-outlined')
         || element.parentElement.classList.contains('micl-textfield-filled')
     ) {
-        reported = setErrorStateTextField(element.parentElement, element.validationMessage);
+        reported = setErrorStateTextField(element, element.parentElement);
     }
 
     return reported;
@@ -144,13 +158,12 @@ const validity = (container: HTMLFormElement | HTMLFieldSetElement, doReport?: b
     Array.from(container.elements).forEach(element =>
     {
         if (isCVElement(element) && element.willValidate) {
-            if (!element.checkValidity()) {
-                invalid = true;
+            const valid    = element.checkValidity();
+            const reported = setErrorState(element);
+            if (!valid && !invalid && doReport) {
+                reported ? element.focus() : element.reportValidity();
             }
-            let reported = setErrorState(element);
-            if (!reported && doReport) {
-                element.reportValidity();
-            }
+            invalid ||= !valid;
         }
     });
 

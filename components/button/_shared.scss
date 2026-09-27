@@ -26,10 +26,13 @@
 @use '../../styles/motion';
 @use '../../styles/statelayer';
 @use '../../styles/typography';
+@include motion.token('expressive-fast-spatial', 'expressive-fast-spatial-duration');
 
-$disabled: ':is(:disabled, :has(input:disabled, > button:disabled))';
-$enabled: ':not(:disabled, :has(input:disabled, > button:disabled))';
+$disabled: ':is(:disabled, :has(> :disabled))';
+$enabled: ':not(:disabled, :has(> :disabled))';
 $focused: ':is(:focus-visible, :has(input:focus-visible))';
+$selected: '.micl-button--toggle:is([aria-pressed="true"], :has(input:checked))';
+$unselected: '.micl-button--toggle:not([aria-pressed="true"], :has(input:checked))';
 
 @include elevation.level(0);
 @include elevation.level(1);
@@ -38,7 +41,6 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
 @include statelayer.token('hover-state-layer-opacity');
 @include statelayer.token('focus-state-layer-opacity');
 @include statelayer.token('pressed-state-layer-opacity');
-@include statelayer.token('disabled-state-layer-opacity');
 @include statelayer.token('focus-indicator-thickness');
 @include statelayer.token('ripple-opacity-factor');
 @include statelayer.token('ripple-duration');
@@ -48,8 +50,8 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
 @include typography.scale('label-large');
 
 %micl-button-base {
-    --_motion-effects: var(--md-comp-button-motion-effects, #{motion.$md-sys-motion-expressive-fast-spatial});
-    --_motion-duration: var(--md-comp-button-motion-duration, #{motion.$md-sys-motion-expressive-fast-spatial-duration});
+    --_button-motion-effects: var(--md-comp-button-motion-effects, var(--md-sys-motion-expressive-fast-spatial));
+    --_button-motion-duration: var(--md-comp-button-motion-duration, var(--md-sys-motion-expressive-fast-spatial-duration));
     --micl-ripple: 1;
 
     box-sizing: border-box;
@@ -61,24 +63,18 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     padding: 0;
     border: none;
     border-radius: calc(var(--micl-height) / 2);
-    background-image:
-        radial-gradient(
-            circle at var(--micl-x, center) var(--micl-y, center),
-            transparent 0%,
-            rgb(from var(--statelayer-color) r g b / calc(var(--statelayer-opacity) * var(--md-sys-state-ripple-opacity-factor))) 10%,
-            transparent 10%
-        ),
-        linear-gradient(rgb(from var(--statelayer-color) r g b / var(--statelayer-opacity)));
-    background-repeat: no-repeat;
-    background-position: var(--micl-x, center) var(--micl-y, center), 0 0;
-    background-size: 0%, 100%;
+    @media (forced-colors: active) {
+        border: 1px solid ButtonBorder;
+    }
+    @include statelayer.layer;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     transition:
-        border-radius var(--_motion-duration) var(--_motion-effects),
-        box-shadow var(--_motion-duration) var(--_motion-effects),
+        border-radius var(--_button-motion-duration) var(--_button-motion-effects),
+        box-shadow var(--_button-motion-duration) var(--_button-motion-effects),
+        padding-inline var(--_button-motion-duration) var(--_button-motion-effects),
         background-size 0ms,
-        --statelayer-opacity var(--_motion-duration) linear;
+        --statelayer-opacity var(--_button-motion-duration) linear;
 
     &#{$disabled} {
         cursor: default;
@@ -94,8 +90,8 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
         &#{$focused} {
             --statelayer-opacity: var(--md-sys-state-focus-state-layer-opacity, 10%);
 
-            outline: var(--md-sys-state-focus-indicator-thickness, 3px) solid var(--md-sys-color-secondary);
-            outline-offset: 2px;
+            z-index: 1;
+            @include statelayer.focus-indicator;
         }
         &:active {
             --statelayer-opacity: var(--md-sys-state-pressed-state-layer-opacity, 10%);
@@ -106,42 +102,37 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
     }
     .micl-button__icon {
         font-variation-settings: 'FILL' 0;
-        transition: font-variation-settings var(--_motion-duration) linear;
+        transition: font-variation-settings var(--_button-motion-duration) linear;
     }
-    &.micl-button--toggle:not([aria-pressed="true"]) .micl-button__icon::before {
-        content: attr(data-miclicon);
-    }
-    &.micl-button--toggle[aria-pressed="true"] .micl-button__icon::before {
-        content: attr(data-micliconselected);
-    }
-}
-
-// Buttons smaller than the minimum touch target extend their interactive area with a
-// transparent ::before overlay.
-%micl-button-target {
-    &::before {
-        content: "";
+    &.micl-button--toggle > input {
         position: absolute;
-        block-size: var(--md-sys-state-target-size, 48px);
-        inline-size: 100%;
-        min-inline-size: var(--md-sys-state-target-size, 48px);
-        inset: calc((var(--micl-height) - var(--md-sys-state-target-size, 48px)) / 2) 0 0 calc((min(100%, var(--md-sys-state-target-size, 48px)) - var(--md-sys-state-target-size, 48px)) / 2);
-        background-color: transparent;
+        inset: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: inherit;
+    }
+    &#{$unselected} .micl-button__icon::before {
+        content: attr(data-miclicon) / "";
+    }
+    &#{$selected} .micl-button__icon::before {
+        content: attr(data-micliconselected) / "";
     }
 }
 
 %micl-button-xs {
     @include typography.label-large;
-    @extend %micl-button-target;
+    @extend %micl-target;
 
     --micl-width: 32px;
     --micl-height: 32px;
+    --_button-pad: 12px;
+    --_button-gap: 4px;
 
     min-inline-size: var(--micl-width);
     block-size: var(--micl-height);
     min-block-size: var(--micl-height);
-    column-gap: 4px;
-    padding-inline: 12px;
+    column-gap: var(--_button-gap);
+    padding-inline: var(--_button-pad);
 
     .micl-button__icon {
         font-size: 20px;
@@ -165,7 +156,7 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
         &:hover:not(:active) {
             box-shadow: var(--md-sys-elevation-level2);
         }
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             --statelayer-color: var(--md-sys-color-on-primary);
 
             background-color: var(--md-comp-elevated-button-selected-container-color, var(--md-sys-color-primary));
@@ -189,16 +180,17 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
         background-color: transparent;
         color: var(--md-comp-outlined-button-disabled-label-text-color, rgb(from var(--md-sys-color-on-surface-variant) r g b / var(--md-comp-outlined-button-disabled-label-text-opacity, 38%)));
 
-        &.micl-button--toggle[aria-pressed="true"] {
-            border: none;
+        &#{$selected} {
+            border-color: transparent;
             background-color: var(--md-comp-outlined-button-selected-disabled-container-color, rgb(from var(--md-sys-color-on-surface) r g b / var(--md-comp-outlined-button-selected-disabled-container-opacity, 10%)));
         }
     }
     &#{$enabled} {
-        &.micl-button--toggle[aria-pressed="true"] {
+        &#{$selected} {
             --statelayer-color: var(--md-sys-color-inverse-on-surface);
 
-            border: none;
+            border-color: transparent;
+            background-origin: border-box;
             background-color: var(--md-comp-outlined-button-selected-container-color, var(--md-sys-color-inverse-surface));
             color: var(--md-comp-outlined-button-selected-label-text-color, var(--md-sys-color-inverse-on-surface));
 
@@ -206,5 +198,14 @@ $focused: ':is(:focus-visible, :has(input:focus-visible))';
                 font-variation-settings: 'FILL' 1;
             }
         }
+    }
+}
+
+@media (forced-colors: active) {
+    #{$selected} {
+        forced-color-adjust: none;
+        color: HighlightText !important;
+        border-color: Highlight !important;
+        background-color: Highlight !important;
     }
 }

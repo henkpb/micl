@@ -15,7 +15,7 @@ const scssEntries = scssFiles.reduce((entries, filePath) => {
     if (normalized.endsWith('components/shapes/index.scss')) return entries;
     // Sass partials (leading underscore) are shared modules, not entry points.
     if (path.basename(normalized).startsWith('_')) return entries;
-    const componentName = path.dirname(filePath).split('\\').pop();
+    const componentName = path.basename(path.dirname(normalized));
 
     // Pair each component's stylesheet with its sibling TypeScript handler (if present) so the
     // standalone <component>.js contains the component logic instead of an empty UMD stub.
@@ -31,17 +31,37 @@ const scssEntries = scssFiles.reduce((entries, filePath) => {
 
 const tsEntries = glob.sync('./foundations/**/*.ts').reduce((entries, filePath) => {
     const normalized = filePath.replace(/\\/g, '/').replace(/^\.\//, '');
-    if (normalized.endsWith('.d.ts')) return entries;
+    // The shared runtime is embedded in every component script; it has no standalone use.
+    if (normalized.endsWith('.d.ts') || normalized === 'foundations/runtime.ts') return entries;
     const name = normalized.replace(/\.ts$/, '');
 
     entries[name] = (name === 'foundations/form/index')
         ? {
             import : './' + normalized,
-            library: { name: 'micl', type: 'umd', export: 'default' }
+            library: { name: 'miclForm', type: 'umd', export: 'default' }
         }
         : './' + normalized;
     return entries;
 }, {});
+
+const cssOnlyEntries = Object.keys(scssEntries).filter(name => typeof scssEntries[name] === 'string');
+
+// A stylesheet-only entry still makes webpack emit an empty UMD script; drop it.
+class RemoveEmptyScripts {
+    constructor(names) {
+        this.names = names;
+    }
+    apply(compiler) {
+        compiler.hooks.thisCompilation.tap('RemoveEmptyScripts', compilation => {
+            compilation.hooks.processAssets.tap({
+                name : 'RemoveEmptyScripts',
+                stage: webpack.Compilation.PROCESS_ASSETS_STAGE_SUMMARIZE
+            }, () => {
+                this.names.forEach(name => compilation.deleteAsset(name + '.js'));
+            });
+        });
+    }
+}
 
 module.exports = [{
     // Standalone per-component / per-foundation files. Built first and on its own (clean: true)
@@ -59,9 +79,10 @@ module.exports = [{
     output: {
         path: distDir,
         filename: '[name].js',
+        globalObject: 'globalThis',
         clean: true,
         library: {
-            name: 'micl',
+            name: ['miclComponents', '[name]'],
             type: 'umd'
         }
     },
@@ -71,7 +92,6 @@ module.exports = [{
             use : [
                 miniCss.loader,
                 'css-loader',
-                'postcss-loader',
                 'sass-loader'
             ]
         }, {
@@ -83,7 +103,8 @@ module.exports = [{
     plugins: [
         new miniCss({
             filename: '[name].css'
-        })
+        }),
+        new RemoveEmptyScripts(cssOnlyEntries)
     ]
 }, {
     // Full dist bundle. Separate compilation (after 'parts', without cleaning)
@@ -100,10 +121,12 @@ module.exports = [{
     output: {
         path: distDir,
         filename: '[name].js',
+        globalObject: 'globalThis',
         clean: false,
         library: {
             name: 'micl',
-            type: 'umd'
+            type: 'umd',
+            export: 'default'
         }
     },
     module: {
@@ -112,7 +135,6 @@ module.exports = [{
             use : [
                 miniCss.loader,
                 'css-loader',
-                'postcss-loader',
                 'sass-loader'
             ]
         }, {
@@ -127,12 +149,18 @@ module.exports = [{
         })
     ]
 }, {
-    // Full bundle for the MICL Showcase
+    // Full bundle for the MICL Showcase. Runs after 'bundle' so its declaration output
+    // (tsconfig declarationDir) cannot race the 'parts' clean step.
     name: 'docs',
+    dependencies: ['bundle'],
     mode: 'production',
     entry: {
         micl: ['./styles.scss', './micl.ts'],
-        shapes: './components/shapes/master.scss'
+        shapes: './components/shapes/master.scss',
+        form: {
+            import : './foundations/form/index.ts',
+            library: { name: 'miclForm', type: 'umd', export: 'default' }
+        }
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
@@ -140,9 +168,11 @@ module.exports = [{
     output: {
         path: docsDir,
         filename: '[name].js',
+        globalObject: 'globalThis',
         library: {
             name: 'micl',
-            type: 'umd'
+            type: 'umd',
+            export: 'default'
         }
     },
     module: {
@@ -151,7 +181,6 @@ module.exports = [{
             use : [
                 miniCss.loader,
                 'css-loader',
-                'postcss-loader',
                 'sass-loader'
             ]
         }, {
@@ -163,6 +192,7 @@ module.exports = [{
     plugins: [
         new miniCss({
             filename: '[name].css'
-        })
+        }),
+        new RemoveEmptyScripts(['shapes'])
     ]
 }];
