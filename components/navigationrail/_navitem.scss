@@ -42,6 +42,7 @@
 
     overflow: visible;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     @include statelayer.layer;
 
     &:focus-visible {

@@ -66,6 +66,7 @@
     outline: var(--_handle-outline);
     background-color: var(--_handle-color);
     background-clip: content-box;
+    -webkit-tap-highlight-color: transparent;
     cursor: var(--_cursor);
     z-index: 2;
 }
