@@ -68,7 +68,9 @@ dialog.micl-bottomsheet {
     margin: 0;
     padding: 0;
     border: none;
-@media (forced-colors: active) {        border: 1px solid CanvasText;    }
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     border-radius: var(--md-comp-bottomsheet-container-shape, var(--md-sys-shape-corner-extra-large-top));
     background-color: var(--md-comp-bottomsheet-container-color, var(--md-sys-color-surface-container-low));
     box-shadow: var(--md-comp-bottomsheet-container-elevation, var(--md-sys-elevation-level1));
@@ -115,6 +117,11 @@ dialog.micl-bottomsheet {
                 block-size: 100%;
                 border-radius: calc(var(--_bottomsheet-drag-handle-height) / 2);
                 background-color: var(--md-comp-bottomsheet-drag-handle-color, var(--md-sys-color-on-surface-variant));
+
+                @media (forced-colors: active) {
+                    forced-color-adjust: none;
+                    background-color: CanvasText;
+                }
             }
             &:focus-visible {
                 @include statelayer.focus-indicator('bottomsheet');

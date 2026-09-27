@@ -70,7 +70,9 @@ dialog.micl-dialog {
     margin: 0;
     outline: none;
     border: none;
-@media (forced-colors: active) {        border: 1px solid CanvasText;    }
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     border-radius: var(--md-comp-dialog-container-shape, var(--md-sys-shape-corner-extra-large));
     color: var(--md-comp-dialog-content-color, var(--md-sys-color-on-surface));
     background-color: var(--_background-color);

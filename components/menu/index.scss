@@ -234,7 +234,9 @@ $item-classes: '[class*="micl-list-item-"]';
     padding: 0;
 
     border: none;
-@media (forced-colors: active) {        border: 1px solid CanvasText;    }
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     outline: none;
     background-color: transparent;
     --_duration: var(--_menu-motion-spatial-duration-reverse);

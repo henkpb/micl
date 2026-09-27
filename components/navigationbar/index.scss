@@ -169,6 +169,11 @@ nav.micl-navigationbar {
                 margin-inline-end: var(--md-comp-nav-bar-item-horizontal-active-indicator-trailing-space, 16px);
             }
         }
+        &> a.micl-navigationbar__item[aria-current="page"] {
+            @media (forced-colors: active) {
+                --_navigationrail-active-label-color: HighlightText;
+            }
+        }
     }
 }
 

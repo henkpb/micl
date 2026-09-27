@@ -107,6 +107,11 @@ h1 {
     font-size: var(--md-sys-typescale-label-large-size);
     font-weight: 500;
 }
+@media (forced-colors: active) {
+    .docs-hero__facts li {
+        border: 1px solid CanvasText;
+    }
+}
 .docs-hero__shape {
     position: absolute;
     pointer-events: none;
@@ -183,12 +188,16 @@ h1 {
     font-size: var(--md-sys-typescale-label-large-size);
     font-weight: 500;
     transition: background-color 120ms ease;
+    -webkit-tap-highlight-color: transparent;
 }
 .docs-chipnav a:hover {
     background-color: var(--md-sys-color-secondary-container);
     border-color: transparent;
 }
 
+.docs-content {
+    display: flow-root;
+}
 .docs-hero + .docs-content {
     margin-block-start: 20px;
 }
@@ -377,7 +386,6 @@ h1 {
 }
 .docs-stage.docs-scroll {
     overflow-x: auto;
-    padding-block: 4px;
 }
 .docs-hidden {
     display: none !important;

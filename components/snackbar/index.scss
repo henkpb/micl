@@ -66,7 +66,9 @@
     padding-inline: var(--md-comp-snackbar-padding, 16px);
 
     border: none;
-@media (forced-colors: active) {        border: 1px solid CanvasText;    }
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+    }
     outline: none;
     border-radius: var(--md-comp-snackbar-container-shape, var(--md-sys-shape-corner-extra-small));
     box-shadow: var(--md-comp-snackbar-container-elevation, var(--md-sys-elevation-level3));

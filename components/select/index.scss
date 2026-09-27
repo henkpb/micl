@@ -79,6 +79,9 @@ $selects: '[class*="micl-textfield-"] > select';
         padding: 4px;
         border-radius: var(--_list-shape);
         border: none;
+        @media (forced-colors: active) {
+            border: 1px solid CanvasText;
+        }
         outline: none;
         background-color: var(--md-comp-menu-standard-container-color, var(--md-sys-color-surface-container-low));
         box-shadow: var(--md-comp-menu-container-elevation, var(--md-sys-elevation-level2));
